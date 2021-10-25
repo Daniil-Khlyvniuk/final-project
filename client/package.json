@@ -10,17 +10,35 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "npm-run-all": "^4.1.1",
+    "npm-watch": "^0.3.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
     "react-scripts": "4.0.3",
+    "stylelint": "^14.0.0",
+    "stylelint-config-rational-order": "^0.1.2",
+    "stylelint-order": "^5.0.0",
     "web-vitals": "^1.0.1"
   },
+  "watch": {
+    "stylelint-dev": {
+      "patterns": [
+        "/src/**/*.scss"
+      ],
+      "extensions": "scss"
+    }
+  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "npm-run-all -p watch-sass-js start-js",
+    "start-js": "react-scripts start",
+    "build": "npm run stylelint-build && react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "stylelint-dev": "stylelint 'src/**/*.scss' --cache --cache-location './.stylelintcache'; exit 0",
+    "stylelint-build": "stylelint 'src/**/*.scss'",
+    "watch-sass-js": "npm-watch",
+    "stylelint-fix-sass": "stylelint --fix 'src/**/*.scss'"
   },
   "eslintConfig": {
     "extends": [
