@@ -4,6 +4,8 @@
 /node_modules
 /.pnp
 .pnp.js
+.idea
+.vscode
 
 package-lock.json
 yarn.lock
