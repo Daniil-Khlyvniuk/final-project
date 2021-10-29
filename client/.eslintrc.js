@@ -25,7 +25,7 @@ module.exports = {
 		'no-use-before-define': [ 'error' ],
 		'func-style': ['error', 'expression'],
 		'require-await': 'error',
-		'max-len': [ 'error', 80 ],
+		'max-len': ['error', {'code': 80, 'ignoreUrls': true}],
 		'no-console': [
 			'warn',
 		],
