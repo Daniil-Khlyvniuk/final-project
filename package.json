@@ -6,8 +6,10 @@
   "scripts": {
     "start": "npm-run-all -p start:client  start:server",
     "start:client": "npm start --prefix client",
+    "lint:client": "npm run lint --fix --prefix client",
     "start:server": "npm run server --prefix server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",

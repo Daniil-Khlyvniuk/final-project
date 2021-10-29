@@ -12,25 +12,33 @@ module.exports = {
 		'ecmaFeatures': {
 			'jsx': true
 		},
-		'ecmaVersion': 12,
+		'ecmaVersion': 6,
 		'sourceType': 'module'
 	},
 	'plugins': [
 		'react'
 	],
 	'rules': {
+		// 'react/jsx-uses-react': ['error'],
+		// 'react/jsx-uses-vars': ['error'],
+		'no-duplicate-imports': [ 'error' ],
+		'no-use-before-define': [ 'error' ],
+		'func-style': ['error', 'expression'],
+		'require-await': 'error',
+		'max-len': [ 'error', 80 ],
+		'no-console': [
+			'warn',
+		],
 		'indent': [
 			'error',
 			'tab'
 		],
 		'linebreak-style': [
 			'error',
-			'windows'
+			// eslint-disable-next-line no-undef
+			(process.platform === 'win32' ? 'windows' : 'unix')
 		],
-		'quotes': [
-			'error',
-			'single'
-		],
+		'quotes': ['error', 'single'],
 		'semi': [
 			'error',
 			'never'
