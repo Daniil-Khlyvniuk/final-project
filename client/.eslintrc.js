@@ -27,7 +27,7 @@ module.exports = {
 		'require-await': 'error',
 		'max-len': ['error', {'code': 80, 'ignoreUrls': true}],
 		'no-console': [
-			'warn',
+			'error',
 		],
 		'indent': [
 			'error',
