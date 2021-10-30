@@ -3,6 +3,7 @@ import NavBar from './components/NavBar/NavBar'
 import { Typography } from '@mui/material'
 
 
+
 const App = () => {
 	return (
 		<div className={ 'App' }>
