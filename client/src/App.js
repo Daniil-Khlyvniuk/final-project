@@ -1,9 +1,15 @@
 import React from 'react'
+import { Typography } from '@mui/material'
 
 const App = () => {
 	return (
 		<div className={ 'App' }>
-			<h1>F I N A L P R O J E C T</h1>
+			<Typography
+				variant={'h2'}
+				sx={{color: 'primary', fontSize:'primary'}}
+			>
+				F I N A L P R O J E C T
+			</Typography>
 		</div>
 	)
 }
