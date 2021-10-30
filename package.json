@@ -1,6 +1,6 @@
 {
-  "name": "final-proejct",
-  "version": "1.0.0",
+  "name": "final-project",
+  "version": "1.0.1",
   "description": "Final Project - Online shop \"Postil' bedding\"",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Daniil-Khlyvniuk/final-proejct.git"
+    "url": "git+https://github.com/Daniil-Khlyvniuk/final-project.git"
   },
   "author": "",
   "license": "ISC",
