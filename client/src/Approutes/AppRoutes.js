@@ -44,7 +44,7 @@ const AppRoutes = () => {
       <Route exact path='/aboutus'><AboutUs /></Route>
       <Route exact path='/reviews'><Reviews /></Route>
       <Route exact path='/blog'><Blog /></Route>
-      <Route exact path='/error404'><Error404 /></Route>
+      <Route exact path='*'><Error404 /></Route>
     </Switch>
   )
 }
