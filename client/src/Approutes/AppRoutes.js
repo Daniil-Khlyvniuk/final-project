@@ -12,6 +12,7 @@ import PrivacyPolicy from '../staticPages/PrivacyPolicy/PrivacyPolicy'
 import AboutUs from '../staticPages/AboutUs/AboutUs'
 import Reviews from '../staticPages/Reviews/Reviews'
 import Blog from '../staticPages/Blog/Blog'
+import Login from '../pages/Login/Login'
 
 
 // get isLoggedIn from Redux
@@ -22,6 +23,7 @@ const AppRoutes = () => {
       <Route exact path='/'><Main /></Route>
       <Route exact path='/about'><About /></Route>
       <Route exact path='/contact'><Contact /></Route>
+      <Route exact path='/login'><Login /></Route>
       <ProtectedRoute exact path='productslist' isLoggedIn={isLoggedIn}> 
         <ProductsList />
       </ProtectedRoute>
