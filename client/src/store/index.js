@@ -8,7 +8,7 @@ const customMiddleware = () => {
 	return applyMiddleware(thunk)
 }
 
-export function configureStore(){
+export const configureStore = () => {
 	return createStore(
 		rootReducer,
 		composeWithDevTools(customMiddleware())

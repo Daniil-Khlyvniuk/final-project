@@ -1,6 +1,6 @@
 import React from 'react'
 import CardList from './components/CardList/CardList'
-import Catalog from "./components/Catalog/Catalog";
+import Catalog from './components/Catalog/Catalog'
 
 const App = () => {
 	return (

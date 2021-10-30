@@ -1,8 +1,8 @@
 import * as PRODUCTS from '../constants/products'
 import axios from 'axios'
 
-export function getAllProducts() {
-	return async function (dispatch) {
+export const getAllProducts = () => {
+	return async (dispatch) => {
 		return dispatch({
 			type: PRODUCTS.GET_ALL,
 			data: await axios.get('/products.json')
