@@ -9,8 +9,8 @@ const PHONE_REGEX = /^(\+)?(\(\d{2,3}\) ?\d|\d)(([-]?\d)|( ?\(\d{2,3}\) ?)){5,12
 
 export {
 	STR_REGEX, 
-	GMAIL_REGEX, 
-	IS_REQUIRED, 
-	NAME_REGEX, 
+	GMAIL_REGEX,
+	IS_REQUIRED,
+	NAME_REGEX,
 	PHONE_REGEX
 }

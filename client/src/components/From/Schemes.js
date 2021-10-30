@@ -12,7 +12,7 @@ export const SING_UP_SCHEMA = yup.object().shape({
 		.min(8, 'Password should be bigger then 8 characters')
 		.required(regex.IS_REQUIRED),
 	confirmPass: yup.string()
-		.oneOf(yup.ref('password'), 'Passwords must match')
+		// .oneOf(yup.ref('password'), 'Passwords must match')
 		.required(regex.IS_REQUIRED),
 })
 
