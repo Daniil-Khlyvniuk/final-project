@@ -1,4 +1,5 @@
 import React from 'react'
+import NavBar from './components/NavBar/NavBar'
 import { Typography } from '@mui/material'
 
 import Footer from './components/Footer'
@@ -6,6 +7,7 @@ import Footer from './components/Footer'
 const App = () => {
 	return (
 		<div className={ 'App' }>
+			<NavBar />
 			<Typography
 				variant={'h2'}
 				sx={{color: 'primary', fontSize:'primary'}}
