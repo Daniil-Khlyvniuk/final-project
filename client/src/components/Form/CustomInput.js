@@ -1,3 +1,4 @@
+
 import {styled} from '@mui/material'
 import Input from '@mui/material/Input'
 import theme from '../../utils/Theme'
@@ -10,7 +11,8 @@ const CustomInput = styled(Input)({
 	fontStyle: 'normal',
 	fontWeight: 300,
 	fontSize: 20,
-	lineHeight: 24,
+	lineHeight: 24
 })
+
 
 export default CustomInput

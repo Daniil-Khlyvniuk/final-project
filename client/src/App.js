@@ -1,6 +1,6 @@
 import React from 'react'
 import {Typography} from '@mui/material'
-import Form from './components/From/From'
+import AppRoutes from './components/routes/AppRoutes'
 
 
 const App = () => {
@@ -10,7 +10,7 @@ const App = () => {
 				variant={'h2'}
 				sx={{color: 'primary', fontSize: 'primary'}}>
         F I N A L P R O J E C T
-				<Form/>
+				<AppRoutes/>
 			</Typography>
 		</div>
 	)
