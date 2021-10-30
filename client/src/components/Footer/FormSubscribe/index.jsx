@@ -1,7 +1,16 @@
 import React from 'react'
 import {Formik, Form} from 'formik'
-import {Box, Button, TextField, Alert} from '@mui/material'
+import {Button, TextField, Alert} from '@mui/material'
 import * as yup from 'yup'
+
+import { makeStyles } from '@mui/styles'
+
+const useStyles = makeStyles(() => ({
+	formStyle: {
+		display: 'flex',
+		width: '100%',
+	}
+}))
 
 const isRequiredError = 'This field is required'
 const userFormSchema = yup.object().shape({
@@ -13,6 +22,8 @@ const FormSibscribe = () => {
   
 	}
 
+	const {formStyle} = useStyles()
+
 	return (
 		<Formik
 			initialValues={{}}
@@ -22,25 +33,26 @@ const FormSibscribe = () => {
 			{(formikProps) => (
 				<>
 					<Form noValidate 
-						style={{
-							display: 'flex',
-							width: '100%',
-						}}
+						className={formStyle}
+						// style={{
+						// 	display: 'flex',
+						// 	width: '100%',
+						// }}
 					>
-						<Box>
-							<TextField 
-								type="email" 
-								placeholder="e-mail"
-								name="email"
-								onBlur={formikProps.handleBlur}
-								onChange={formikProps.handleChange}
-								error={true}
-							/>
-						</Box>
+
+						<TextField 
+							type="email" 
+							placeholder="e-mail"
+							name="email"
+							onBlur={formikProps.handleBlur}
+							onChange={formikProps.handleChange}
+							error={true}
+						/>
+
 						<Button 
-							type={'submit'}
+							type='submit'
 							variant="contained"
-							color="inherit"
+							color="primary"
 							disabled={
 								!formikProps.isValid ||
                 formikProps.isSubmitting

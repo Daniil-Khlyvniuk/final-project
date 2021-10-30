@@ -1,59 +1,136 @@
 import React from 'react'
-import { Box, Grid, List, ListItem, Link, Typography } from '@mui/material'
+import { makeStyles } from '@mui/styles'
+import { Link } from 'react-router-dom'
+import { Box, Grid, List, ListItem, Typography,
+	Link as LinkMui } from '@mui/material'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import FacebookIcon from '@mui/icons-material/Facebook'
 import InstagramIcon from '@mui/icons-material/Instagram'
 
 import FormSubscribe from './FormSubscribe'
 
+const useStyles = makeStyles(() => ({
+	blockStyle: {
+		borderTop: '1px solid #373F41',
+		padding: '80px 60px 40px',
+	},
+	subBlockStyle: {
+		borderTop: '1px solid #373F41',
+		padding: '25px 60px 20px',
+		display: 'flex',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+	},
+	boldText: {
+		textTransform: 'capitalize',
+		textDecoration: 'none',
+		color: '#373F41',
+		fontFamily: 'Mulish',
+		fontWeight: 700,
+		fontSize: '16px',
+		lineHeight: 'normal'
+	},
+	notBoldText: {
+		textTransform: 'capitalize',
+		textDecoration: 'none',
+		color: '#373F41',
+		fontFamily: 'Mulish',
+		fontWeight: 400,
+		fontSize: '16px',
+		lineHeight: 'normal'
+	},
+	outerLink: {
+		color: '#373F41',
+		fontFamily: 'Mulish',
+		fontWeight: 400,
+		fontSize: '16px',
+		lineHeight: 'normal'
+	},
+
+	subscribe: {
+		flexDirection: 'row',
+		flexWrap: 'wrap',
+		justifyContent: 'flex-start',
+	},
+	socialList: {
+		display: 'flex',
+		flexDirection: 'row',
+	},
+	logoBottom: {
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	logoBottomLeft: {
+		marginRight: 10
+	}
+}))
+
 const Footer = () => {
+
+	const {
+		blockStyle,
+		subBlockStyle,
+		boldText,
+		notBoldText,
+		outerLink,
+		subscribe,
+		socialList,
+		logoBottom,
+		logoBottomLeft
+	} = useStyles()
+
 	return (
 		<Box>
-			<Grid container columns={12} sx={{
-				borderTop: '1px solid #373F41',
-			}}>
+			<Grid container columns={12} 
+				className={blockStyle}
+			>
 				<Grid item xs={12} sm={3}>
 					<List>
 						<ListItem>
 							<Link 
-								href="/Shop" 
-								underline="none"
+								to="/Shop" 
+								className={boldText}
 							>
 									shop
 							</Link>
 						</ListItem>
 						<ListItem>
 							<Link 
-								href="/catalog"
-								underline="none"
-							>catalog</Link>
-						</ListItem>
-						<ListItem>
-							<Link 
-								href="/paymentAndDelivery" 
-								underline="none"
+								to="/catalog"
+								className={notBoldText}
 							>
-									payment & Delivery
+									catalog
 							</Link>
 						</ListItem>
 						<ListItem>
 							<Link 
-								href="/returns" 
-								underline="none"
-							>returns</Link>
+								to="/paymentAndDelivery"
+								className={notBoldText}
+							>
+									payment & delivery
+							</Link>
 						</ListItem>
 						<ListItem>
 							<Link 
-								href="/privacyAndPolicy"
-								underline="none"
+								to="/returns" 
+								className={notBoldText}
+							>
+								returns
+							</Link>
+						</ListItem>
+						<ListItem>
+							<Link 
+								to="/privacyAndPolicy"
+								className={notBoldText}
 							>
 									privacy Policy
 							</Link>
 						</ListItem>
 						<ListItem>
 							<Link 
-								href="/termsOfService"
-								underline="none"
+								to="/termsOfService"
+								className={notBoldText}
 							>
 									terms of service
 							</Link>
@@ -64,32 +141,32 @@ const Footer = () => {
 					<List>
 						<ListItem>
 							<Link 
-								href="/about" 
-								underline="none"
+								to="/about" 
+								className={boldText}
 							>
-									about
+								about
 							</Link>
 						</ListItem>
 						<ListItem>
 							<Link 
-								href="/about_us" 
-								underline="none"
+								to="/about_us"
+								className={notBoldText}
 							>
 									about us
 							</Link>
 						</ListItem>
 						<ListItem>
 							<Link 
-								href="/reviews" 
-								underline="none"
+								to="/reviews" 
+								className={notBoldText}
 							>
 									reviews
 							</Link>
 						</ListItem>
 						<ListItem>
 							<Link 
-								href="/blog" 
-								underline="none"
+								to="/blog"
+								className={notBoldText}
 							>
 									blog
 							</Link>
@@ -100,25 +177,40 @@ const Footer = () => {
 					<List>
 						<ListItem>
 							<Link
-								href="/contactUs" 
-								underline="none"
+								to="/contactUs" 
+								className={boldText}
 							>
 								contact us
 							</Link>
 						</ListItem>
 						<ListItem>
-							<Typography variant="subtitle1">
+							<LinkMui
+								href="tel:380938759922"
+								target="_blank"
+								className={outerLink}
+								underline='none'
+							>
+									hello@gmail.com
+							</LinkMui>
+						
+						</ListItem>
+						<ListItem>
+							<Typography 
+								variant='footerTextMedium'
+							>
 							Studio M, 4th Floor8 Lower 
 								Manchester street, M1 5QF
 							</Typography>
 						</ListItem>
 						<ListItem>
-							<Link
-								href="tel:+380938759922" 
-								underline="none"
+							<LinkMui
+								href="tel:380938759922"
+								target="_blank"
+								className={outerLink}
+								underline={'none'}
 							>
 								+38 093 875 9922
-							</Link>
+							</LinkMui>
 						</ListItem>
 					</List>
 				</Grid>
@@ -126,88 +218,71 @@ const Footer = () => {
 					<List>
 						<ListItem>
 							<Typography
-								comonent={Link}
-								variant={'subLink'}
+								variant="menuBold"
 							>
-								{/* <Link
-									href="/subscribe" 
-									underline="none"
-								>
-								subscribe
-								</Link> */}
+									subscribe
 							</Typography>
 						</ListItem>
 						<ListItem>
-							<Typography variant="subtitle2">
+							<Typography variant='footerTextLight'>
 								Subscribe now and get 15% off
 								on your first order
 							</Typography>
 						</ListItem>
 						<ListItem 
-							sx={{
-								flexDirection: 'row',
-								flexWrap: 'wrap',
-								justifyContent: 'flex-start',
-							}}>
+							className={subscribe}>
 							<FormSubscribe />
 						</ListItem>
 						<ListItem>
-							<Typography>
+							<Typography variant="menuBold">
 								Follow us
 							</Typography>
-							<List sx={{
-								display: 'flex',
-								flexDirection: 'row',
-							}}
-							disablePadding={true}
+							<List 
+								className={socialList}
+								disablePadding={true}
 							>
 								<ListItem>
-									<Link
+									<LinkMui
 										href="https://facebook.com" 
-										underline="none"
 										target="_blank"
 									>
 										<FacebookIcon />
-									</Link>
+									</LinkMui>
 								</ListItem>
 								<ListItem>
-									<Link
+									<LinkMui
 										href="https://twitter.com" 
-										underline="none"
 										target="_blank"
 									>
 										<TwitterIcon />
-									</Link>
+									</LinkMui>
 								</ListItem>
 								<ListItem>
-									<Link
+									<LinkMui
 										href="https://instagram.com" 
-										underline="none"
 										target="_blank"
 									>
 										<InstagramIcon />
-									</Link>
+									</LinkMui>
 								</ListItem>
 							</List>
 						</ListItem>
 					</List>
 				</Grid>
 			</Grid>
-			<Grid container columns={12} sx={{
-				borderTop: '1px solid #373F41',
-				display: 'flex',
-				justifyContent: 'center',
-				alignItems: 'center',
-				paddingTop: '25px',
-				paddingBottom: '25px',
-			}}>
-				<Typography>
-					<img src="./img/bottom_logo1.png" alt="Company" />
+			<Grid container columns={12}
+				className={subBlockStyle}
+			>
+				<Typography className={logoBottom}>
+					<img 
+						className={logoBottomLeft} 
+						src="./img/bottom_logo1.png" alt="Company" />
 					<img src="./img/bottom_logo2.png" alt="Postil logo" />
 				</Typography>
-				<Typography>
-				© 2010 — 2020  Simple Studio 
+				<Typography variant='footerTextMedium'>
+					© 2010 — 2020  Simple Studio 
 				</Typography>
+				<Typography></Typography>
 			</Grid>
 		</Box>
 	)
