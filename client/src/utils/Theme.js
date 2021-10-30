@@ -20,7 +20,7 @@ const theme = createTheme({
 
 	typography: {
 		fontFamily: 'Mulish, Montserrat, sans-serif',
-		fontSize: '16px',
+		fontSize: 16,
 		h2: {
 			fontFamily: 'Abel'
 		},
