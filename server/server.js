@@ -34,14 +34,11 @@ app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// DB Config
-const db = require('./config/keys').mongoURI;
-
 // Connect to MongoDB
 mongoose
-  .connect(db, { useNewUrlParser: true, useFindAndModify: false })
+  .connect(process.env.MONGO_URI, { useNewUrlParser: true, useFindAndModify: true })
   .then(() => console.log('MongoDB Connected'))
-  .catch((err) => console.log(err));
+  .catch((err) => console.log('sssss --> ', err));
 
 // Passport middleware
 app.use(passport.initialize());
