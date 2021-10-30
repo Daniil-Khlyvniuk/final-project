@@ -1,18 +1,16 @@
 import React from 'react'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
-import styles from './Page404.scss'
+import Button from '@mui/material/Button'
+import './Page404.scss'
 
 const Error404 = () => {
 	return (
-		<Grid container direction={'column'} alignItems='center' >
+		<Grid container direction={'column'} alignItems='center' className={ 'errorPage' } spacing={{ md: 10 }}>
 			<Grid item>
 				<Typography variant={'h1'}>
         404
 				</Typography>
-			</Grid>
-			<Grid item className={styles.containerImg}>
-				<img className={styles.image} src='https://telegra.ph/file/85aa1a70cdc9762a46894.jpg' alt='error 404 image' />
 			</Grid>
 			<Grid item>
 				<Typography variant={'h2'}>
@@ -23,6 +21,9 @@ const Error404 = () => {
 				<Typography variant={'body1'}>
 					You may have mistyped the address or the page may have moved.
 				</Typography>
+			</Grid>
+			<Grid item>
+				<Button className={ 'submit' } variant="contained">Home Page</Button>
 			</Grid>
 		</Grid>
 	)
