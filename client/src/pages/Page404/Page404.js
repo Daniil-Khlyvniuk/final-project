@@ -11,7 +11,7 @@ const Error404 = () => {
         404
 				</Typography>
 			</Grid>
-			<Grid item>
+			<Grid item className={styles.containerImg}>
 				<img className={styles.image} src='https://telegra.ph/file/85aa1a70cdc9762a46894.jpg' alt='error 404 image' />
 			</Grid>
 			<Grid item>
