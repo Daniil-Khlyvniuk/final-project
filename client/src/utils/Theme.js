@@ -20,7 +20,7 @@ const theme = createTheme({
 
 	typography: {
 		fontFamily: 'Mulish, Montserrat, sans-serif',
-		fontSize: '16px',
+		fontSize: 16,
 		h2: {
 			fontFamily: 'Abel'
 		},
@@ -28,6 +28,12 @@ const theme = createTheme({
 		h4: {},
 		p: {
 			fontFamily: 'Mulish,',
+		},
+		subtitle2:{
+			color: '#4bcaff',
+		},
+		subLink:{
+			
 		}
 	},
 })
