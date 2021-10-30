@@ -1,7 +1,7 @@
 
 import {styled} from '@mui/material'
 import Input from '@mui/material/Input'
-import theme from '../../utils/Theme'
+import theme from '../../../utils/Theme'
 
 const CustomInput = styled(Input)({
 	width: 448.69,

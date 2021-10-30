@@ -44,5 +44,38 @@ export const useFormStyle = makeStyles({
 		lineHeight: '36px',
 		color: '#8C8C8C',
 		textAlign: 'left'
+	},
+	switchForm:{
+		display: 'flex',
+		justifyContent: 'center',
+		alignContent: 'center',
+		alignItems: 'center'
+	},
+	login:{
+		cursor: 'pointer',
+		fontFamily: theme.typography.fontFamily,
+		fontStyle: 'normal',
+		fontWeight: 'normal',
+		fontSize: 16,
+		lineHeight: '48px',
+		letterSpacing: '0.04em',
+		color: '#373F41',
+		textDecoration: 'none',
+		padding: '5px 77px',
+		borderBottom: '1px solid #000'
+	},
+	signin:{
+		cursor: 'pointer',
+		fontFamily: theme.typography.fontFamily,
+		fontStyle: 'normal',
+		fontWeight: 'normal',
+		fontSize: 16,
+		lineHeight: '48px',
+		letterSpacing: '0.04em',
+		color: '#373F41',
+		textDecoration: 'none',
+		padding: '5px 77px',
+		border: '1px solid #000',
+		borderBottom: 'none'
 	}
 })

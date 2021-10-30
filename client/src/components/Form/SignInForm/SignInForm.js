@@ -1,7 +1,7 @@
 import React from 'react'
 import { Formik, Form, Field } from 'formik'
-import * as schema from '../Schemes'
-import CustomInput from '../CustomInput'
+import * as schema from '../setting/Schemes'
+import CustomInput from '../setting/CustomInput'
 import { useFormStyle } from '../hooks/useFormStyle'
 import { Checkbox } from '@mui/material'
 // import {InstagramIcon, FacebookIcon, TwitterIcon} from '@mui/icons-material'
@@ -30,7 +30,6 @@ const SignInForm = () => {
 					<Form noValidate
 						onSubmit={formikProps.handleSubmit}
 						className={classes.form}>
-
 						<div>
 							<Field
 								data-testid="name"
