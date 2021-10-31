@@ -12,20 +12,20 @@ module.exports = {
 		'ecmaFeatures': {
 			'jsx': true
 		},
-		'ecmaVersion': 6,
+		'ecmaVersion': 8,
 		'sourceType': 'module'
 	},
 	'plugins': [
 		'react'
 	],
 	'rules': {
-		// 'react/jsx-uses-react': ['error'],
-		// 'react/jsx-uses-vars': ['error'],
-		'no-duplicate-imports': [ 'error' ],
-		'no-use-before-define': [ 'error' ],
+		'react/jsx-uses-react': ['error'],
+		'react/jsx-uses-vars': ['error'],
+		'no-duplicate-imports': ['error'],
+		'no-use-before-define': ['error'],
 		'func-style': ['error', 'expression'],
 		'require-await': 'error',
-		'max-len': ['error', {'code': 80, 'ignoreUrls': true}],
+		'max-len': ['error', { 'code': 80, 'ignoreUrls': true }],
 		'no-console': [
 			'error',
 		],
