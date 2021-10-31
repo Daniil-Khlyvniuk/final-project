@@ -27,8 +27,32 @@ const theme = createTheme({
 		h3: {},
 		h4: {},
 		p: {
-			// fontFamily: 'Mulish,',
-		}
+			fontFamily: 'Mulish',
+		},
+		menuBold: {
+			textTransform: 'capitalize',
+			color: '#373F41',
+			fontFamily: 'Mulish',
+			fontWeight: 700,
+			fontSize: '16px',
+			lineHeight: 'normal'
+		},
+		footerTextMedium: {
+			textTransform: 'capitalize',
+			color: '#373F41',
+			fontFamily: 'Mulish',
+			fontWeight: 400,
+			fontSize: '16px',
+			lineHeight: 'normal'
+		},
+		footerTextLight: {
+			textTransform: 'capitalize',
+			color: '#8A9394',
+			fontFamily: 'Mulish',
+			fontWeight: 200,
+			fontSize: '14px',
+			lineHeight: 'normal'
+		},
 	},
 })
 export default theme
