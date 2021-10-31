@@ -1,18 +1,16 @@
 
-const NAME_REGEX = /^(([A-Za-z]+[-']?)*([A-Za-z]+)?\s)+([A-Za-z]+[-']?)*([A-Za-z]+)?$/
 const IS_REQUIRED = 'This field is required'
 
 
 // eslint-disable-next-line max-len
-const GMAIL_REGEX =	/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+const GMAIL_REGEX =	''
 
 const STR_REGEX = /[A-Za-z]/
-const PHONE_REGEX =	/^(\+)?(\(\d{2,3}\) ?\d|\d)(([-]?\d)|( ?\(\d{2,3}\) ?)){5,12}\d$/
+const PHONE_REGEX =	/\+38\([\d]{3}\)\s[\d]{3}-[\d]{2}-[\d]{2}/
 
 export {
 	STR_REGEX, 
 	GMAIL_REGEX,
 	IS_REQUIRED,
-	NAME_REGEX,
 	PHONE_REGEX
 }

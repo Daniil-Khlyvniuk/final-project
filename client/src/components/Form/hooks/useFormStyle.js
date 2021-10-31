@@ -100,5 +100,9 @@ export const useFormStyle = makeStyles({
 		lineHeight: '24px',
 		textDecorationLine: 'underline',
 		'& a':{color: '#373F41'}
+	},
+	error:{
+		color: 'red',
+		fontSize: 10
 	}
 })

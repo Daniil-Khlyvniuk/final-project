@@ -1,23 +1,27 @@
 import React from 'react'
-import {NavLink } from 'react-router-dom'
 import { useFormStyle } from './hooks/useFormStyle'
+import Tabs from '@mui/material/Tabs'
+import Tab from '@mui/material/Tab'
 
 const Form = () => {
 	const classes = useFormStyle()
 	return (
-		<div className={classes.switchForm}>
-			<NavLink
+		<Tabs
+			className={classes.switchForm}
+			centered>
+			<Tab
 				className={classes.signin}
-				exact to='/signup'
-				activeClassName='selected'
-			>SIGN UP</NavLink>
-			<NavLink
+				value="one"
+				label="SIGN UP"
+				href="/signup"
+			/>
+			<Tab
 				className={classes.login}
-				onFocus={classes.active}
-				exact to='/login'
-				activeClassName='selected'
-			>LOG IN</NavLink>
-		</div>
+				value="two"
+				label="LOG IN"
+				href="/login"
+			/>
+		</Tabs>
 	)
 }
 

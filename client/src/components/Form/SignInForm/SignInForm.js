@@ -16,47 +16,77 @@ const SignInForm = () => {
 			password: '',
 			confirmPass: ''
 		}}
-		validationSchema={schema.SING_UP_SCHEMA}
-
 		onSubmit={(values, { setSubmitting }) => {
-			// eslint-disable-next-line no-console
-			console.log(JSON.stringify(values, null, 2))
+			alert('sbmt')
 			setSubmitting(false)
 		}}
+		validationSchema={schema.SING_UP_SCHEMA}
 		>
 			{(formikProps) => {
 				return (
 					<Form noValidate
 						onSubmit={formikProps.handleSubmit}
 						className={classes.form}>
-						<Field
-							data-testid="name"
-							component={CustomInput}
-							name="name"
-							type="text"
-							placeholder="Name"
-						/>
-						<Field
-							data-testid="email"
-							component={CustomInput}
-							name="email"
-							type="text"
-							placeholder="Email"
-						/>
-						<Field
-							data-testid="password"
-							component={CustomInput}
-							name="password"
-							type="password"
-							placeholder="Password"
-						/>
-						<Field
-							data-testid="confirmPass"
-							component={CustomInput}
-							name="confirmPass"
-							type="password"
-							placeholder="Confirm Password"
-						/>
+						<div>
+							<Field
+								data-testid="name"
+								component={CustomInput}
+								name="name"
+								type="text"
+								placeholder="Name"
+							/>
+							{formikProps.touched.name &&
+              formikProps.errors.name && (
+								<p className={classes.error}>
+									{formikProps.errors.name}
+								</p>
+							)}
+						</div>
+						<div>
+							<Field
+								data-testid="email"
+								component={CustomInput}
+								name="email"
+								type="text"
+								placeholder="Email"
+							/>
+							{formikProps.touched.name &&
+              formikProps.errors.name && (
+								<p className={classes.error}>
+									{formikProps.errors.name}
+								</p>
+							)}
+						</div>
+						<div>
+							<Field
+								data-testid="password"
+								component={CustomInput}
+								name="password"
+								type="password"
+								placeholder="Password"
+							/>
+							{formikProps.touched.name &&
+              formikProps.errors.name && (
+								<p className={classes.error}>
+									{formikProps.errors.name}
+								</p>
+							)}
+						</div>
+						<div>
+							<Field
+								data-testid="confirmPass"
+								component={CustomInput}
+								name="confirmPass"
+								type="password"
+								placeholder="Confirm Password"
+							/>
+							{formikProps.touched.name &&
+              formikProps.errors.name && (
+								<p className={classes.error}>
+									{formikProps.errors.name}
+								</p>
+							)}
+						</div>
 						<div className={classes.ads}>
 							<Checkbox style={{
 								width: 20,
@@ -84,7 +114,7 @@ const SignInForm = () => {
 							<Link to="#"><Google/></Link>
 							<Link to="#"><Facebook/></Link>
 						</div>
-						<p className= {classes.alreadyIn}>
+						<p className={classes.alreadyIn}>
 							<Link to="/login">I HAVE AN ACCOUNT</Link>
 						</p>
 					</Form>

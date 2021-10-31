@@ -55,7 +55,8 @@ const LoginForm = () => {
 							}}/>
 							<p>
 								Let`s get personal!
-								We`ll send you only the good stuff: Exclusive early
+								We`ll send you only the good stuff:
+								Exclusive early
 								access to Sale, new arrivals and promotions.
 								No nasties.
 							</p>
