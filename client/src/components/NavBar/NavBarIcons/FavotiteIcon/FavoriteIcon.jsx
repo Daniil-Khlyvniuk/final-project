@@ -1,21 +1,15 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { makeStyles } from '@mui/styles'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import { IconButton } from '@mui/material'
-
-const useStyles = makeStyles(() => ({
-	navbarLink: {
-		color: '#373F41',
-	}
-}))
+import { useStyles } from './styles'
 
 const Favoriteicon = () => {
-	const { navbarLink } = useStyles()
+	const classes = useStyles()
 
 	return (
 		<IconButton aria-label="favorites" sx={{ padding: 0 }}>
-			<NavLink exact to='/favorites' className={navbarLink}>
+			<NavLink exact to='/favorites' className={classes.navbarLink}>
 				<FavoriteBorderIcon />
 			</NavLink>
 		</IconButton>

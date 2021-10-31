@@ -3,13 +3,23 @@ import {Formik, Form} from 'formik'
 import {Button, TextField, Alert} from '@mui/material'
 import * as yup from 'yup'
 
-import { makeStyles } from '@mui/styles'
+import { styled } from '@mui/material/styles'
 
-const useStyles = makeStyles(() => ({
-	formStyle: {
-		display: 'flex',
-		width: '100%',
-	}
+const StyledForm = styled(Form)(() => ({
+	display: 'flex',
+	width: '100%',
+}))
+
+const StyledTextField = styled(TextField)(() => ({
+	'& .MuiOutlinedInput-root': {
+		borderTopRightRadius: 0,
+		borderBottomRightRadius: 0
+	},
+}))
+
+const StyledButton = styled(Button)(() => ({
+	borderTopLeftRadius: 0,
+	borderBottomLeftRadius: 0
 }))
 
 const isRequiredError = 'This field is required'
@@ -22,7 +32,7 @@ const FormSibscribe = () => {
   
 	}
 
-	const {formStyle} = useStyles()
+
 
 	return (
 		<Formik
@@ -32,15 +42,8 @@ const FormSibscribe = () => {
 		>
 			{(formikProps) => (
 				<>
-					<Form noValidate 
-						className={formStyle}
-						// style={{
-						// 	display: 'flex',
-						// 	width: '100%',
-						// }}
-					>
-
-						<TextField 
+					<StyledForm noValidate>
+						<StyledTextField 
 							type="email" 
 							placeholder="e-mail"
 							name="email"
@@ -48,8 +51,7 @@ const FormSibscribe = () => {
 							onChange={formikProps.handleChange}
 							error={true}
 						/>
-
-						<Button 
+						<StyledButton 
 							type='submit'
 							variant="contained"
 							color="primary"
@@ -59,8 +61,8 @@ const FormSibscribe = () => {
 							}
 						>
             sent
-						</Button>
-					</Form>
+						</StyledButton>
+					</StyledForm>
 
 					{!formikProps.isValid && (
 						<Alert severity="error"
