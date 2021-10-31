@@ -10,19 +10,24 @@ module.exports = {
 	],
 	'parserOptions': {
 		'ecmaFeatures': {
-			'jsx': true
+			'jsx': true,
+			'js': true
 		},
-		'ecmaVersion': 8,
-		'sourceType': 'module'
+		'ecmaVersion': 2018,
+		'sourceType': 'module',
+		'parser': 'babel-eslint',
 	},
 	'plugins': [
-		'react'
+		'react',
+		'react-hooks'
 	],
 	'rules': {
-		'react/jsx-uses-react': ['error'],
-		'react/jsx-uses-vars': ['error'],
-		'no-duplicate-imports': ['error'],
-		'no-use-before-define': ['error'],
+		// 'react/jsx-uses-react': ['error'],
+		// 'react/jsx-uses-vars': ['error'],
+		'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
+		'react-hooks/exhaustive-deps': 'warn', // Checks effect dependencies
+		'no-duplicate-imports': [ 'error' ],
+		'no-use-before-define': [ 'error' ],
 		'func-style': ['error', 'expression'],
 		'require-await': 'error',
 		'max-len': ['error', { 'code': 80, 'ignoreUrls': true }],
