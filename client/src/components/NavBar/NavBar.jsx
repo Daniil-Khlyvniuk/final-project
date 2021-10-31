@@ -8,8 +8,8 @@ import LoginIcon from './NavBarIcons/LoginIcon/LoginIcon'
 import FavoriteIcon from './NavBarIcons/FavotiteIcon/FavoriteIcon'
 import CartIcon from './NavBarIcons/CartIcon/CartIcon'
 import NavBarSearch from './NavBarSearch/NavBarSearch'
-import Navbarlist from './NavBarList/NavBarList'
-import NavBarLanguages from './NavBarLanguages/NavBarLanguages'
+// import Navbarlist from './NavBarList/NavBarList'
+// import NavBarLanguages from './NavBarLanguages/NavBarLanguages'
 
 const useStyles = makeStyles(() => ({
 	header: {
@@ -19,10 +19,11 @@ const useStyles = makeStyles(() => ({
 		alignItems: 'center',
 	},
 	iconsWrapper: {
-		width: 90,
+		width: 135,
 		display: 'flex',
 		justifyContent: 'space-between',
 		alignItems: 'center',
+		gap: 30
 	}
 }))
 
@@ -35,14 +36,14 @@ const Navbar = () => {
 				<Toolbar className={header}>
 					<NavBarLogo />
 					<NavbarMenu />
-					<Navbarlist />
+					{/* <Navbarlist /> */}
 					<NavBarSearch />
 					<div className={iconsWrapper}>
 						<LoginIcon />
 						<FavoriteIcon />
 						<CartIcon />
 					</div>
-					<NavBarLanguages />
+					{/* <NavBarLanguages /> */}
 				</Toolbar>
 			</AppBar>
 		</Box>

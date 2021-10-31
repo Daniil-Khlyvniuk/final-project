@@ -15,14 +15,14 @@ const theme = createTheme({
 		primary: { main: '#373F41' },
 		secondary: { main: '#5C5E60' },
 		error: { main: '#8C8C8C' },
-		success: { main: '# ' },
+		success: { main: '#388e3c' },
 	},
 
 	typography: {
-		fontFamily: 'Mulish, Montserrat, sans-serif',
+		// fontFamily: 'Mulish, Montserrat, sans-serif',
 		fontSize: 16,
 		h2: {
-			fontFamily: 'Abel'
+			// fontFamily: 'Abel'
 		},
 		h3: {},
 		h4: {},
