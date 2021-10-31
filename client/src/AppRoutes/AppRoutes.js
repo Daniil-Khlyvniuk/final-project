@@ -18,6 +18,7 @@ import Login from '../pages/Login/Login'
 import Cart from '../pages/Cart/Cart'
 import Contact from '../staticPages/Contact/Contact'
 import Error404 from '../pages/Error404/Error404'
+import Favorites from '../pages/Favorites/Favorites'
 
 // get isLoggedIn from Redux
 
@@ -29,20 +30,21 @@ const AppRoutes = () => {
 			<Route exact path='/about'><About /></Route>
 			<Route exact path='/contact'><Contact /></Route>
 			<Route exact path='/login'><Login /></Route>
-			<ProtectedRoute exact path='productslist' isLoggedIn={false}>
+			<Route exact path='/favorites'><Favorites /></Route>
+			<ProtectedRoute exact path='/productslist' isLoggedIn={false}>
 				<ProductsList />
 			</ProtectedRoute>
-			<ProtectedRoute exact path='productdetails' isLoggedIn={false}>
+			<ProtectedRoute exact path='/productdetails' isLoggedIn={false}>
 				<ProductDetails />
 			</ProtectedRoute>
-			<ProtectedRoute exact path='cart' isLoggedIn={false}>
+			<ProtectedRoute exact path='/cart' isLoggedIn={false}>
 				<Cart />
 			</ProtectedRoute>
-			<ProtectedRoute exact path='catalog' isLoggedIn={false}>
+			<ProtectedRoute exact path='/catalog' isLoggedIn={false}>
 				<Catalog />
 			</ProtectedRoute>
 			<Route exact path='/paymentanddelivery'><PaymentAndDelivery /></Route>
-			<ProtectedRoute exact path='returns' isLoggedIn={false}>
+			<ProtectedRoute exact path='/returns' isLoggedIn={false}>
 				<Returns />
 			</ProtectedRoute>
 			<Route exact path='/privacypolicy'><PrivacyPolicy /></Route>
