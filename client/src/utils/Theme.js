@@ -1,4 +1,5 @@
-import {createTheme} from '@mui/material/styles'
+
+import { createTheme } from '@mui/material/styles'
 
 const theme = createTheme({
 	breakpoints: {
@@ -12,22 +13,23 @@ const theme = createTheme({
 		},
 	},
 	palette: {
-		primary: {main: '#373F41'},
-		secondary: {main: '#5C5E60'},
-		error: {main: '#8C8C8C'},
-		success: {main: '# '},
+
+		primary: { main: '#373F41' },
+		secondary: { main: '#5C5E60' },
+		error: { main: '#8C8C8C' },
+		success: { main: '#388e3c' },
 	},
 
 	typography: {
-		fontFamily: 'Mulish, Montserrat, sans-serif',
-		fontSize: '16px',
+		// fontFamily: 'Mulish, Montserrat, sans-serif',
+		fontSize: 16,
 		h2: {
-			fontFamily: 'Abel'
+			// fontFamily: 'Abel'
 		},
 		h3: {},
 		h4: {},
 		p: {
-			fontFamily: 'Mulish,',
+			// fontFamily: 'Mulish,',
 		}
 	},
 })
