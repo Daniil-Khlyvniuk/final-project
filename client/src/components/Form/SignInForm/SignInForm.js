@@ -4,9 +4,8 @@ import * as schema from '../setting/Schemes'
 import CustomInput from '../setting/CustomInput'
 import { useFormStyle } from '../hooks/useFormStyle'
 import { Checkbox } from '@mui/material'
-// import {InstagramIcon, FacebookIcon, TwitterIcon} from '@mui/icons-material'
-// import  from '@mui/icons-material/Facebook'
-// import  from '@mui/icons-material/Instagram'
+import { Link } from 'react-router-dom'
+import { Facebook, Google } from '../setting/SocialIcons'
 
 const SignInForm = () => {
 	const classes = useFormStyle()
@@ -30,43 +29,34 @@ const SignInForm = () => {
 					<Form noValidate
 						onSubmit={formikProps.handleSubmit}
 						className={classes.form}>
-						<div>
-							<Field
-								data-testid="name"
-								component={CustomInput}
-								name="name"
-								type="text"
-								placeholder="Name"
-							/>
-
-						</div>
-						<div>
-							<Field
-								data-testid="email"
-								component={CustomInput}
-								name="email"
-								type="text"
-								placeholder="Email"
-							/>
-						</div>
-						<div>
-							<Field
-								data-testid="password"
-								component={CustomInput}
-								name="password"
-								type="password"
-								placeholder="Password"
-							/>
-						</div>
-						<div>
-							<Field
-								data-testid="confirmPass"
-								component={CustomInput}
-								name="confirmPass"
-								type="password"
-								placeholder="Confirm Password"
-							/>
-						</div>
+						<Field
+							data-testid="name"
+							component={CustomInput}
+							name="name"
+							type="text"
+							placeholder="Name"
+						/>
+						<Field
+							data-testid="email"
+							component={CustomInput}
+							name="email"
+							type="text"
+							placeholder="Email"
+						/>
+						<Field
+							data-testid="password"
+							component={CustomInput}
+							name="password"
+							type="password"
+							placeholder="Password"
+						/>
+						<Field
+							data-testid="confirmPass"
+							component={CustomInput}
+							name="confirmPass"
+							type="password"
+							placeholder="Confirm Password"
+						/>
 						<div className={classes.ads}>
 							<Checkbox style={{
 								width: 20,
@@ -75,20 +65,28 @@ const SignInForm = () => {
 								color: '#6FB7AC',
 							}}/>
 							<p>
-							Let`s get personal!
-							We`ll send you only the good stuff: Exclusive early
-							access to Sale, new arrivals and promotions.
-							No nasties.
+                Let`s get personal!
+                We`ll send you only the good stuff: Exclusive early
+                access to Sale, new arrivals and promotions.
+                No nasties.
 							</p>
 						</div>
 						<p className={classes.policy}>By signing up you agree to
-						Terms of Service and Privacy Policy
+							<Link to="/policy"> Terms of Service </Link>
+              and <Link to="/policy"> Privacy Policy </Link>
 						</p>
 						<button
 							className={classes.submit}
 							type="submit">
-						SIGN UP
+              SIGN UP
 						</button>
+						<div className={classes.socialBox}>
+							<Link to="#"><Google/></Link>
+							<Link to="#"><Facebook/></Link>
+						</div>
+						<p className= {classes.alreadyIn}>
+							<Link to="/login">I HAVE AN ACCOUNT</Link>
+						</p>
 					</Form>
 				)
 			}}

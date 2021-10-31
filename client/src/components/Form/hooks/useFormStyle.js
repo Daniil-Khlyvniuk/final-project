@@ -17,7 +17,7 @@ export const useFormStyle = makeStyles({
 		fontWeight: 300,
 		fontSize: '14px',
 		lineHeight: '20px',
-		marginBottom: 30
+		marginBottom: 5
 	},
 	submit: {
 		width: 240,
@@ -43,10 +43,14 @@ export const useFormStyle = makeStyles({
 		fontSize: '14px',
 		lineHeight: '36px',
 		color: '#8C8C8C',
-		textAlign: 'left'
+		textAlign: 'left',
+		'& a': {
+			color: '#000'
+		}
 	},
 	switchForm:{
 		display: 'flex',
+		marginTop: 20,  //optional style, remove before build
 		justifyContent: 'center',
 		alignContent: 'center',
 		alignItems: 'center'
@@ -64,6 +68,7 @@ export const useFormStyle = makeStyles({
 		padding: '5px 77px',
 		borderBottom: '1px solid #000'
 	},
+
 	signin:{
 		cursor: 'pointer',
 		fontFamily: theme.typography.fontFamily,
@@ -77,5 +82,23 @@ export const useFormStyle = makeStyles({
 		padding: '5px 77px',
 		border: '1px solid #000',
 		borderBottom: 'none'
+	},
+	active:{
+		background: '#000'
+	},
+	socialBox:{
+		marginTop: '30px',
+		display: 'flex',
+		justifyContent: 'center',
+		gap: 30
+	},
+	alreadyIn:{
+		fontFamily: 'Mulish',
+		fontStyle: 'normal',
+		fontWeight: 300,
+		fontSize: 14,
+		lineHeight: '24px',
+		textDecorationLine: 'underline',
+		'& a':{color: '#373F41'}
 	}
 })

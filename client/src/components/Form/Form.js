@@ -13,6 +13,7 @@ const Form = () => {
 			>SIGN UP</NavLink>
 			<NavLink
 				className={classes.login}
+				onFocus={classes.active}
 				exact to='/login'
 				activeClassName='selected'
 			>LOG IN</NavLink>
