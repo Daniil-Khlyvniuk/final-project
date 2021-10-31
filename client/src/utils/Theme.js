@@ -19,20 +19,20 @@ const theme = createTheme({
 	},
 
 	typography: {
-		// fontFamily: 'Mulish, Montserrat, sans-serif',
+		fontFamily: 'Mulish, sans-serif',
 		fontSize: 16,
 		h2: {
-			// fontFamily: 'Abel'
+			fontFamily: 'Abel, sans-serif'
 		},
 		h3: {},
 		h4: {},
 		p: {
-			fontFamily: 'Mulish',
+			fontFamily: 'Mulish, sans-serif',
 		},
 		menuBold: {
 			textTransform: 'capitalize',
 			color: '#373F41',
-			fontFamily: 'Mulish',
+			fontFamily: 'Mulish, sans-serif',
 			fontWeight: 700,
 			fontSize: '16px',
 			lineHeight: 'normal'
@@ -40,7 +40,7 @@ const theme = createTheme({
 		footerTextMedium: {
 			textTransform: 'capitalize',
 			color: '#373F41',
-			fontFamily: 'Mulish',
+			fontFamily: 'Mulish, sans-serif',
 			fontWeight: 400,
 			fontSize: '16px',
 			lineHeight: 'normal'
@@ -48,7 +48,7 @@ const theme = createTheme({
 		footerTextLight: {
 			textTransform: 'capitalize',
 			color: '#8A9394',
-			fontFamily: 'Mulish',
+			fontFamily: 'Mulish, sans-serif',
 			fontWeight: 200,
 			fontSize: '14px',
 			lineHeight: 'normal'

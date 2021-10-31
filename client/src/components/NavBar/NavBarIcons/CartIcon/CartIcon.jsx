@@ -1,23 +1,17 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { makeStyles } from '@mui/styles'
 import Badge from '@mui/material/Badge'
 import IconButton from '@mui/material/IconButton'
 import LocalMallIcon from '@mui/icons-material/LocalMall'
-
-const useStyles = makeStyles(() => ({ 
-	navbarLink: {
-		color: '#373F41',
-	}
-}))
+import { useStyles } from './styles'
 
 const Carticon = () => {
-	const { navbarLink } = useStyles()
+	const classes = useStyles()
 
 	return (
 		<IconButton aria-label="cart" sx={{ padding: 0 }}>
 			<Badge badgeContent={4} color="success">
-				<NavLink exact to='/cart' className={navbarLink}>
+				<NavLink exact to='/cart' className={classes.navbarLink}>
 					<LocalMallIcon />
 				</NavLink>
 			</Badge>
