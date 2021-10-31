@@ -12,8 +12,6 @@ const useStyles = makeStyles(() => ({
 	}
 }))
 
-
-
 const isRequiredError = 'This field is required'
 const userFormSchema = yup.object().shape({
 	email: yup.string().required(isRequiredError).email('Enter correct email'),
