@@ -12,6 +12,8 @@ const useStyles = makeStyles(() => ({
 	}
 }))
 
+
+
 const isRequiredError = 'This field is required'
 const userFormSchema = yup.object().shape({
 	email: yup.string().required(isRequiredError).email('Enter correct email'),
@@ -34,10 +36,6 @@ const FormSibscribe = () => {
 				<>
 					<Form noValidate 
 						className={formStyle}
-						// style={{
-						// 	display: 'flex',
-						// 	width: '100%',
-						// }}
 					>
 
 						<TextField 
@@ -47,6 +45,11 @@ const FormSibscribe = () => {
 							onBlur={formikProps.handleBlur}
 							onChange={formikProps.handleChange}
 							error={true}
+							sx={{
+
+								outline: 'none',
+								borderRadius: '0px',
+							}}
 						/>
 
 						<Button 
