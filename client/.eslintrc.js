@@ -37,9 +37,10 @@ module.exports = {
 				'tabWidth': 2,
 				'ignoreUrls': true,
 				'ignoreComments': true,
+				'ignoreStrings': true,
 				'ignoreTrailingComments': true,
 				'ignoreRegExpLiterals': true,
-				'ignorePattern': '^\\s*import\\s.+\\sfrom\\s.+;$'
+				'ignorePattern': '^import .*'
 			}
 		],
 		'no-console': [
