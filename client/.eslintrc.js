@@ -26,11 +26,22 @@ module.exports = {
 		// 'react/jsx-uses-vars': ['error'],
 		'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
 		'react-hooks/exhaustive-deps': 'warn', // Checks effect dependencies
-		'no-duplicate-imports': [ 'error' ],
-		'no-use-before-define': [ 'error' ],
+		'no-duplicate-imports': ['error'],
+		'no-use-before-define': ['error'],
 		'func-style': ['error', 'expression'],
 		'require-await': 'error',
-		'max-len': ['error', {'code': 80, 'ignoreUrls': true}],
+		'max-len': [
+			'error',
+			{
+				'code': 80,
+				'tabWidth': 2,
+				'ignoreUrls': true,
+				'ignoreComments': true,
+				'ignoreTrailingComments': true,
+				'ignoreRegExpLiterals': true,
+				'ignorePattern': '^\\s*import\\s.+\\sfrom\\s.+;$'
+			}
+		],
 		'no-console': [
 			'error',
 		],

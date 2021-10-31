@@ -2,9 +2,9 @@ import React from 'react'
 
 const PrivacyPolicy = () => {
 	return (
-		<h1>
-			PRIVACY POLICY
-		</h1>
+		<div>
+			<h1>PrivacyPolicy</h1>
+		</div>
 	)
 }
 
