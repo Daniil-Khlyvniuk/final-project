@@ -1,4 +1,4 @@
-
+// import React from 'react'
 import {styled} from '@mui/material'
 import Input from '@mui/material/Input'
 import theme from '../../../utils/Theme'
@@ -14,5 +14,18 @@ const CustomInput = styled(Input)({
 	transition: '0.5s'
 })
 
+// const Input = ({field, form, ...rest}) => {
+// 	const {name} = field;
+// 	return (
+// 		<div className={'input-place'}>
+// 			<CustomInput/>
+// 			<div>
+// 				{form.touched[name] && form.errors[name] && (
+// 					<div className="error">{form.errors[name]}</div>
+// 				)}
+// 			</div>
+// 		</div>
+// 	);
+// };
 
 export default CustomInput

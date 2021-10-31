@@ -33,6 +33,11 @@ const LoginForm = () => {
 							type="text"
 							placeholder="Email"
 						/>
+						{formikProps.errors.name &&
+						<div>
+							<p>{formikProps.errors.name}</p>
+						</div>
+						}
 						<Field
 							data-testid="password"
 							component={CustomInput}
