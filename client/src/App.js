@@ -9,6 +9,7 @@ const App = () => {
 		<div className={ 'App' }>
 			<NavBar/>
 			<AppRoutes />
+
 			<Footer />
 		</div>
 	)
