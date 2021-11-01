@@ -1,21 +1,19 @@
 import React from 'react'
-import { Typography } from '@mui/material'
-import AppRoutes from './components/routes/AppRoutes'
+import NavBar from './components/NavBar/NavBar'
+import AppRoutes from './routes/AppRoutes'
+import Footer from './components/Footer'
 import Form from './components/Form/Form'
 
 const App = () => {
 	return (
-		<div className={'App'}>
-			<Typography
-				variant={'h2'}
-				sx={{ color: 'primary', fontSize: 'primary' }}>
-				<div>
-					<Form/>
-					<AppRoutes/>
-				</div>
-			</Typography>
+		<div className={ 'App' }>
+			<NavBar/>
+			<AppRoutes />
+			<Footer />
+			<Form/>
 		</div>
 	)
 }
+
 
 export default App

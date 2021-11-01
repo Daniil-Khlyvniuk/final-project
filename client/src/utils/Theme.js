@@ -15,20 +15,43 @@ const theme = createTheme({
 		primary: { main: '#373F41' },
 		secondary: { main: '#5C5E60' },
 		error: { main: '#8C8C8C' },
-		success: { main: '# ' },
+		success: { main: '#388e3c' },
 	},
-
 	typography: {
-		fontFamily: 'Mulish, Montserrat, sans-serif',
+		fontFamily: 'Mulish, sans-serif',
 		fontSize: 16,
 		h2: {
-			fontFamily: 'Abel'
+			fontFamily: 'Abel, sans-serif'
 		},
 		h3: {},
 		h4: {},
 		p: {
-			fontFamily: 'Mulish,',
-		}
+			fontFamily: 'Mulish, sans-serif',
+		},
+		menuBold: {
+			textTransform: 'capitalize',
+			color: '#373F41',
+			fontFamily: 'Mulish, sans-serif',
+			fontWeight: 700,
+			fontSize: '16px',
+			lineHeight: 'normal'
+		},
+		footerTextMedium: {
+			textTransform: 'capitalize',
+			color: '#373F41',
+			fontFamily: 'Mulish, sans-serif',
+			fontWeight: 400,
+			fontSize: '16px',
+			lineHeight: 'normal'
+		},
+		footerTextLight: {
+			textTransform: 'capitalize',
+			color: '#8A9394',
+			fontFamily: 'Mulish, sans-serif',
+			fontWeight: 200,
+			fontSize: '14px',
+			lineHeight: 'normal'
+		},
 	},
 })
 export default theme
