@@ -5,13 +5,16 @@
   "dependencies": {
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
+    "@mui/icons-material": "^5.0.5",
     "@mui/material": "^5.0.6",
+    "@mui/styles": "^5.0.2",
     "@reduxjs/toolkit": "^1.6.2",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "formik": "^2.2.9",
-    "npm-watch": "^0.3.0",
+    "npm-watch": "^0.11.0",
+    "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
@@ -28,7 +31,7 @@
     "build": "npm run eslint && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "eslint": "eslint 'src/**/*.js'"
+    "lint": "eslint src/**/*.js"
   },
   "eslintConfig": {
     "extends": [
@@ -47,5 +50,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "prettier": "2.4.1"
   }
 }
