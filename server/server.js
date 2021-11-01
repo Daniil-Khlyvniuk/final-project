@@ -36,7 +36,6 @@ app.use(bodyParser.json());
 
 // DB Config
 const db = require("./config/keys").mongoURI;
-console.log("[db]", db);
 // Connect to MongoDB
 
 // Passport middleware
@@ -78,7 +77,7 @@ if (process.env.NODE_ENV === "production") {
 
 const port = process.env.PORT || 5000;
 mongoose
-  .connect("", {
+  .connect(db, {
     useNewUrlParser: true,
     useFindAndModify: false,
     useUnifiedTopology: true,
