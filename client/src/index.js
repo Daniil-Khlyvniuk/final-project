@@ -12,7 +12,7 @@ ReactDOM.render(
 		<React.StrictMode>
 			<BrowserRouter>
 				<ErrorBoundary>
-					<App/>
+					<App />
 				</ErrorBoundary>
 			</BrowserRouter>
 		</React.StrictMode>
