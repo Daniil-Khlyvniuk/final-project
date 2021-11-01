@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import ProtectedRoute from '../components/ProtectedRoute/ProtectedRoute'
@@ -6,7 +5,6 @@ import Main from '../pages/Main/Main'
 import ProductsList from '../pages/ProductsList/ProductsList'
 import ProductDetails from '../pages/ProductDetails/ProductDetails'
 import Catalog from '../pages/Catalog/Catalog'
-// eslint-disable-next-line max-len
 import PaymentAndDelivery from '../staticPages/PaymentAndDelivery/PaymentAndDelivery'
 import Returns from '../staticPages/Returns/Returns'
 import About from '../staticPages/About/About'
@@ -54,7 +52,6 @@ const AppRoutes = () => {
 			<Route exact path='/blog'><Blog /></Route>
 			<Route exact path='*'><Page404 /></Route>
 		</Switch>
-		
 	)
 }
 

@@ -7,13 +7,16 @@ import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from '@mui/material/styles'
 import Theme from './utils/Theme'
 
-
 ReactDOM.render(
-	<ThemeProvider theme={Theme}>
+	<ThemeProvider theme={ Theme }>
 		<React.StrictMode>
 			<BrowserRouter>
 				<ErrorBoundary>
+<<<<<<< HEAD
 					<App />
+=======
+					<App/>
+>>>>>>> develop
 				</ErrorBoundary>
 			</BrowserRouter>
 		</React.StrictMode>
