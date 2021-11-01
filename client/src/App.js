@@ -1,10 +1,15 @@
 import React from 'react'
 
+import NavBar from './components/NavBar/NavBar'
+import AppRoutes from './routes/AppRoutes'
+import Footer from './components/Footer'
 
-function App() {
+const App = () => {
 	return (
 		<div className={ 'App' }>
-			<h1>F I N A L P R O J E C T</h1>
+			<NavBar />
+			<AppRoutes />
+			<Footer />
 		</div>
 	)
 }
