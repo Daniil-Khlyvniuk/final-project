@@ -84,7 +84,7 @@ export const useFormStyle = makeStyles({
 		borderBottom: 'none'
 	},
 	active:{
-		background: '#000'
+		color: 'red'
 	},
 	socialBox:{
 		marginTop: '30px',
