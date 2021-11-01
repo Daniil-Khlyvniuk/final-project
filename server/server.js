@@ -35,13 +35,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // DB Config
-<<<<<<< HEAD
-// const db = require("./config/keys").mongoURI;
 const db = require("./config/keys").mongoURI;
-console.log("[db]", db);
-=======
-const db = require("./config/keys").mongoURI;
->>>>>>> 53d65cc2559a948cef4c62a5d7b448266002ea11
 // Connect to MongoDB
 
 // Passport middleware
