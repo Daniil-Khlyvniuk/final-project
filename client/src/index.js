@@ -13,8 +13,8 @@ ReactDOM.render(
 		<React.StrictMode>
 			<BrowserRouter>
 				<ErrorBoundary>
-			    <App />
-		    </ErrorBoundary>
+					<App />
+				</ErrorBoundary>
 			</BrowserRouter>
 		</React.StrictMode>
 	</ThemeProvider>,
