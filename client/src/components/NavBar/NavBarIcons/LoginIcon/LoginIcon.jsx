@@ -1,21 +1,15 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { makeStyles } from '@mui/styles'
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
 import { IconButton } from '@mui/material'
-
-const useStyles = makeStyles(() => ({
-	navbarLink: {
-		color: '#373F41',
-	}
-}))
+import { useStyles } from './styles'
 
 const LoginIcon = () => {
-	const { navbarLink } = useStyles()
+	const classes = useStyles()
 
 	return (
 		<IconButton aria-label="favorites" sx={{ padding: 0 }}>
-			<NavLink exact to='/login' className={navbarLink}>
+			<NavLink exact to='/login' className={classes.navbarLink}>
 				<PersonOutlineIcon />
 			</NavLink>
 		</IconButton>
