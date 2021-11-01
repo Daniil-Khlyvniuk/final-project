@@ -12,7 +12,7 @@ const ShopLinks = ({styles}) => {
 			<List>
 				<ListItem>
 					<Link 
-						to="/Shop" 
+						to="/shop" 
 						className={boldText}
 					>
 									shop
@@ -28,7 +28,7 @@ const ShopLinks = ({styles}) => {
 				</ListItem>
 				<ListItem>
 					<Link 
-						to="/paymentAndDelivery"
+						to="/paymentanddelivery"
 						className={notBoldText}
 					>
 									payment & delivery
@@ -44,7 +44,7 @@ const ShopLinks = ({styles}) => {
 				</ListItem>
 				<ListItem>
 					<Link 
-						to="/privacyAndPolicy"
+						to="/privacypolicy"
 						className={notBoldText}
 					>
 									privacy Policy

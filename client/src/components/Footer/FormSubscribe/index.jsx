@@ -60,7 +60,7 @@ const FormSibscribe = () => {
                 formikProps.isSubmitting
 							}
 						>
-            sent
+            send
 						</StyledButton>
 					</StyledForm>
 
