@@ -111,16 +111,30 @@ const UseCategoryTree = () => {
 	const [categoryTree, setCategoryTree] = useState([])
 	const [category, setCategory] = useState([])
 
-	const getParent = (parentId, curArray) => (
-		curArray.find(el => el.id === parentId)
-	)
+
+	const getParent = (parentId, curArray) => {
+		return curArray.find(el => el.id === parentId)
+	}
 
 	const addChildren = (curElem, curArray) => {
 		const parent = getParent(curElem.parentId, curArray)
 		parent.children = [...parent.children || [], curElem]
-		parent.children = [...new Set(parent.children)]
-
 		return parent
+	}
+
+	const setTree = (tree, elem) => {
+		let res = [...tree]
+		if (res.includes(elem)) {
+			res = res.filter(el => el.id !== elem.id)
+			res.push(elem)
+		} else {
+			res.push(elem)
+		}
+		return res
+	}
+
+	const sortTreeByChildren = (tree) => {
+		return tree.filter(el => !el.parentId)
 	}
 
 	const makeCategoryTree = (arr) => (
@@ -129,10 +143,10 @@ const UseCategoryTree = () => {
 				tree.push(curElem)
 			} else {
 				const parentWithChildren = addChildren(curElem, curArray)
-				tree.push(parentWithChildren)
+				tree = setTree(tree, parentWithChildren)
 			}
-			return tree.filter(el => !el.parentId)
-		}, [category])
+			return sortTreeByChildren(tree)
+		}, [])
 	)
 
 	useEffect(() => {
@@ -143,7 +157,7 @@ const UseCategoryTree = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [category])
 
-	return [...new Set(categoryTree)]
+	return categoryTree
 }
 
 export default UseCategoryTree
