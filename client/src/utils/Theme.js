@@ -17,7 +17,6 @@ const theme = createTheme({
 		error: { main: '#8C8C8C' },
 		success: { main: '#388e3c' },
 	},
-
 	typography: {
 		fontFamily: 'Mulish, sans-serif',
 		fontSize: 16,
