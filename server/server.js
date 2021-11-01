@@ -35,7 +35,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // DB Config
-// const db = require("./config/keys").mongoURI;
 const db = require("./config/keys").mongoURI;
 console.log("[db]", db);
 // Connect to MongoDB
@@ -79,16 +78,11 @@ if (process.env.NODE_ENV === "production") {
 
 const port = process.env.PORT || 5000;
 mongoose
-  .connect(
-    "mongodb+srv://FINAL_PROJECT:R$Pm$a$SWH8F.rQ@cluster1.xwkad.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-    //mongodb+srv://finalProject:<password>@cluster0.ciofz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
-    //myAmazingPassword
-    {
-      useNewUrlParser: true,
-      useFindAndModify: false,
-      useUnifiedTopology: true,
-    }
-  )
+  .connect("", {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("MongoDB Connected"))
   .then(() => {
     app.listen(port, () => console.log(`Server running on port ${port}`));
