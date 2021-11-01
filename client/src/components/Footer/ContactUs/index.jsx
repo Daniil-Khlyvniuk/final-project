@@ -4,20 +4,17 @@ import { Grid, List, ListItem, Typography,
 	Link as LinkMui } from '@mui/material'
 import PropTypes from 'prop-types'
 
-import { makeStyles } from '@mui/styles'
+import { styled } from '@mui/material/styles'
 
-const useStyles = makeStyles(() => ({
-	outerLink: {
-		color: '#373F41',
-		fontFamily: 'Mulish',
-		fontWeight: 400,
-		fontSize: '16px',
-		lineHeight: 'normal'
-	}
+const StyledLinkMui = styled(LinkMui)((theme) => ({
+	color: theme.primary,
+	fontFamily: 'Mulish',
+	fontWeight: 400,
+	fontSize: '16px',
+	lineHeight: 'normal'
 }))
 
 const ContactUs = ({styles}) => {
-	const {outerLink} = useStyles()
 
 	const {boldText} = styles
 	return (
@@ -25,21 +22,20 @@ const ContactUs = ({styles}) => {
 			<List>
 				<ListItem>
 					<Link
-						to="/contactUs" 
+						to="/contact" 
 						className={boldText}
 					>
 								contact us
 					</Link>
 				</ListItem>
 				<ListItem>
-					<LinkMui
-						href="tel:380938759922"
+					<StyledLinkMui
+						href="mailto:hello@gmail.com"
 						target="_blank"
-						className={outerLink}
 						underline='none'
 					>
-									hello@gmail.com
-					</LinkMui>
+						hello@gmail.com
+					</StyledLinkMui>
 						
 				</ListItem>
 				<ListItem>
@@ -51,14 +47,13 @@ const ContactUs = ({styles}) => {
 					</Typography>
 				</ListItem>
 				<ListItem>
-					<LinkMui
+					<StyledLinkMui
 						href="tel:380938759922"
 						target="_blank"
-						className={outerLink}
 						underline={'none'}
 					>
 								+38 093 875 9922
-					</LinkMui>
+					</StyledLinkMui>
 				</ListItem>
 			</List>
 		</Grid>

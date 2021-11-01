@@ -18,7 +18,7 @@ const AboutLinks = ({styles}) => {
 				</ListItem>
 				<ListItem>
 					<Link 
-						to="/about_us"
+						to="/aboutus"
 						className={notBoldText}
 					>
 									about us
