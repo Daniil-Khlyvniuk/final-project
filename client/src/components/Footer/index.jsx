@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@mui/styles'
-import { Box, Grid } from '@mui/material'
+import { Box, Container, Grid } from '@mui/material'
 
 import ContactUs from './ContactUs'
 import Subscribe from './Subscribe'
@@ -10,8 +10,7 @@ import Credentials from './Credentials'
 
 const useStyles = makeStyles(() => ({
 	blockStyle: {
-		borderTop: '1px solid #373F41',
-		padding: '80px 60px 40px',
+		padding: '80px 0 40px',
 	},
 	boldText: {
 		textTransform: 'capitalize',
@@ -42,15 +41,17 @@ const Footer = () => {
 	} = useStyles()
 
 	return (
-		<Box>
-			<Grid container columns={12} 
-				className={blockStyle}
-			>
-				<ShopLinks styles={{boldText,notBoldText}} />
-				<AboutLinks styles={{boldText,notBoldText}} />
-				<ContactUs styles={{boldText}} />
-				<Subscribe />
-			</Grid>
+		<Box sx={{ borderColor: '#373F41', borderTop: 1, maxWidth: 1310, margin: '0 auto' }}>
+			<Container maxWidth="lg">
+				<Grid container columns={12}
+					className={blockStyle}
+				>
+					<ShopLinks styles={{ boldText, notBoldText }} />
+					<AboutLinks styles={{ boldText, notBoldText }} />
+					<ContactUs styles={{ boldText }} />
+					<Subscribe />
+				</Grid>
+			</Container>
 			<Credentials />
 		</Box>
 	)

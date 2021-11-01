@@ -1,5 +1,5 @@
 import React from 'react'
-import { AppBar, Toolbar } from '@mui/material'
+import { AppBar, Container, Toolbar } from '@mui/material'
 import NavBarLogo from './NavBarLogo/NavBarLogo'
 import { Box } from '@mui/system'
 import NavbarMenu from './NavBarMenu/NavBarMenu'
@@ -16,20 +16,22 @@ const Navbar = () => {
 
 	return (
 		<Box sx={{ borderColor: '#373F41', borderBottom: 1 }}>
-			<AppBar position="static" sx={{ boxShadow: 'none' }}>
-				<Toolbar className={classes.header}>
-					<NavBarLogo />
-					<NavbarMenu />
-					{/* <Navbarlist /> */}
-					<NavBarSearch />
-					<div className={classes.iconsWrapper}>
-						<LoginIcon />
-						<FavoriteIcon />
-						<CartIcon />
-					</div>
-					{/* <NavBarLanguages /> */}
-				</Toolbar>
-			</AppBar>
+			<Container maxWidth="lg">
+				<AppBar position="static" sx={{ boxShadow: 'none' }}>
+					<Toolbar className={classes.header} disableGutters={true} >
+						<NavBarLogo />
+						<NavbarMenu />
+						{/* <Navbarlist /> */}
+						<NavBarSearch />
+						<div className={classes.iconsWrapper}>
+							<LoginIcon />
+							<FavoriteIcon />
+							<CartIcon />
+						</div>
+						{/* <NavBarLanguages /> */}
+					</Toolbar>
+				</AppBar>
+			</Container>
 		</Box>
 	)
 }
