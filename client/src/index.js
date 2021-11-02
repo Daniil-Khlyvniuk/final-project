@@ -14,15 +14,18 @@ const store = configureStore()
 
 ReactDOM.render(
 	<ThemeProvider theme={Theme}>
-	<React.StrictMode>
-		<Provider store={store}>
-						<BrowserRouter>
+		<React.StrictMode>
+			<Provider store={store}>
+				<BrowserRouter>
+					{/* eslint-disable-next-line no-mixed-spaces-and-tabs */}
     	<ErrorBoundary>
-      <App/>
- 		    </ErrorBoundary>
-			</BrowserRouter>
-	</Provider>
-	</React.StrictMode>
+						<App/>
+						{/* eslint-disable-next-line max-len */}
+						{/* eslint-disable-next-line no-mixed-spaces-and-tabs */}
+    	</ErrorBoundary>
+				</BrowserRouter>
+			</Provider>
+		</React.StrictMode>
 	</ThemeProvider>,
 	document.getElementById('root')
 )

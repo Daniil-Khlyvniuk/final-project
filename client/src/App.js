@@ -2,7 +2,7 @@ import React from 'react'
 import CardList from './components/CardList/CardList'
 import Catalog from './components/Catalog/Catalog'
 import NavBar from './components/NavBar/NavBar'
-import { Typography } from '@mui/material
+import { Typography } from '@mui/material'
 
 const App = () => {
 	return (
