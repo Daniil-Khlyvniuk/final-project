@@ -5,7 +5,7 @@ const theme = createTheme({
 		keys: ['xs', 'sm', 'md', 'lg', 'xl'],
 		values: {
 			xl: 1440,
-			lg: 1000,
+			lg: 1180,
 			md: 768,
 			sm: 480,
 			xs: 320,
@@ -53,5 +53,76 @@ const theme = createTheme({
 			lineHeight: 'normal'
 		},
 	},
+	components: {
+		MuiButton: {
+			variants: [
+				{
+					props: { variant: 'contained' },
+					style: {
+						backgroundColor: 'primary',
+					}
+				},
+				{
+					props: { variant: 'contained', asyncBorderRadius: true },
+					style: {
+						backgroundColor: 'primary',
+						borderTopLeftRadius: 0,
+						borderBottomLeftRadius: 0,
+					}
+				}
+			]
+		},
+		MuiTextField: {
+			variants: [
+				{
+					props: { asyncBorderRadius: true },
+					style: {
+						'& .MuiOutlinedInput-root': 
+						{
+							borderTopRightRadius: 0,
+							borderBottomRightRadius: 0,
+						},
+					}
+				}
+			]
+		},
+		MuiLink: {
+			variants: [
+				{
+					props: { variant: 'bold' },
+					style: {
+						underline: 'none',
+						textTransform: 'capitalize',
+						textDecoration: 'none',
+						color: '#373F41',
+						fontFamily: 'Mulish',
+						fontWeight: 700,
+						fontSize: '16px',
+						lineHeight: 'normal'
+					}
+				},
+				{
+					props: { variant: 'semiBold' },
+					style: {
+						underline: 'none',
+						textTransform: 'capitalize',
+						textDecoration: 'none',
+						color: '#373F41',
+						fontFamily: 'Mulish',
+						fontWeight: 400,
+						fontSize: '16px',
+						lineHeight: 'normal'
+					}
+				},
+				{
+					props: {capitalize: false},
+					style: {
+						textTransform: 'none',
+					}
+				}
+			],
+		}
+
+	}
 })
 export default theme
