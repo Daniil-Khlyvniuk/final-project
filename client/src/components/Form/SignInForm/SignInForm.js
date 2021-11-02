@@ -2,7 +2,7 @@ import React from 'react'
 import { Formik, Form, Field } from 'formik'
 import * as schema from '../setting/Schemes'
 import CustomInput from '../setting/CustomInput'
-import { useFormStyle } from '../hooks/useFormStyle'
+import { useFormStyle } from '../../../utils/customHooks/useFormStyle'
 import { Checkbox } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { Facebook, Google } from '../setting/SocialIcons'
@@ -17,8 +17,9 @@ const SignInForm = () => {
 			confirmPass: ''
 		}}
 		onSubmit={(values, { setSubmitting }) => {
-			alert('sbmt')
 			setSubmitting(false)
+			// eslint-disable-next-line no-console
+			console.log(values)
 		}}
 		validationSchema={schema.SING_UP_SCHEMA}
 		>
@@ -29,63 +30,38 @@ const SignInForm = () => {
 						className={classes.form}>
 						<div>
 							<Field
-								data-testid="name"
 								component={CustomInput}
 								name="name"
 								type="text"
 								placeholder="Name"
 							/>
-							{formikProps.touched.name &&
-              formikProps.errors.name && (
-								<p className={classes.error}>
-									{formikProps.errors.name}
-								</p>
-							)}
 						</div>
 						<div>
 							<Field
-								data-testid="email"
 								component={CustomInput}
 								name="email"
 								type="text"
 								placeholder="Email"
 							/>
-							{formikProps.touched.name &&
-              formikProps.errors.name && (
-								<p className={classes.error}>
-									{formikProps.errors.name}
-								</p>
-							)}
+
 						</div>
 						<div>
 							<Field
-								data-testid="password"
 								component={CustomInput}
 								name="password"
 								type="password"
 								placeholder="Password"
 							/>
-							{formikProps.touched.name &&
-              formikProps.errors.name && (
-								<p className={classes.error}>
-									{formikProps.errors.name}
-								</p>
-							)}
+
 						</div>
 						<div>
 							<Field
-								data-testid="confirmPass"
 								component={CustomInput}
 								name="confirmPass"
 								type="password"
 								placeholder="Confirm Password"
 							/>
-							{formikProps.touched.name &&
-              formikProps.errors.name && (
-								<p className={classes.error}>
-									{formikProps.errors.name}
-								</p>
-							)}
+
 						</div>
 						<div className={classes.ads}>
 							<Checkbox style={{
@@ -94,21 +70,17 @@ const SignInForm = () => {
 								height: 20,
 								color: '#6FB7AC',
 							}}/>
-							<p>
-                Let`s get personal!
-                We`ll send you only the good stuff: Exclusive early
-                access to Sale, new arrivals and promotions.
-                No nasties.
+							<p>Let`s get personal! We`ll send you only the good stuff:
+							Exclusive early access to Sale,
+							new arrivals and promotions. No nasties.
 							</p>
 						</div>
 						<p className={classes.policy}>By signing up you agree to
-							<Link to="/policy"> Terms of Service </Link>
-              and <Link to="/policy"> Privacy Policy </Link>
+							<Link to="/policy"> Terms of Service </Link>  and <Link to="/policy"> Privacy Policy </Link>
 						</p>
 						<button
 							className={classes.submit}
-							type="submit">
-              SIGN UP
+							type="submit">SIGN UP
 						</button>
 						<div className={classes.socialBox}>
 							<Link to="#"><Google/></Link>

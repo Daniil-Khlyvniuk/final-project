@@ -1,5 +1,5 @@
 import React from 'react'
-import { useFormStyle } from '../hooks/useFormStyle'
+import { useFormStyle } from '../../../utils/customHooks/useFormStyle'
 import { Field, Form, Formik } from 'formik'
 import * as schema from '../setting/Schemes'
 import CustomInput from '../setting/CustomInput'
@@ -12,12 +12,10 @@ const LoginForm = () => {
 		<Formik initialValues={{
 			email: '',
 			password: '',
-
 		}}
+
 		validationSchema={schema.SING_UP_SCHEMA}
 		onSubmit={(values, { setSubmitting }) => {
-			// eslint-disable-next-line no-console
-			console.log(JSON.stringify(values, null, 2))
 			setSubmitting(false)
 		}}
 		>
@@ -33,11 +31,6 @@ const LoginForm = () => {
 							type="text"
 							placeholder="Email"
 						/>
-						{formikProps.errors.name &&
-						<div>
-							<p>{formikProps.errors.name}</p>
-						</div>
-						}
 						<Field
 							data-testid="password"
 							component={CustomInput}

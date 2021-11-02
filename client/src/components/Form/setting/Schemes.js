@@ -2,7 +2,6 @@ import * as yup from 'yup'
 import {
 	STR_REGEX,
 	PHONE_REGEX,
-	// GMAIL_REGEX,
 	IS_REQUIRED
 } from './regex'
 
@@ -10,7 +9,6 @@ import {
 export const SING_UP_SCHEMA = yup.object().shape({
 	name: yup.string()
 		.required(IS_REQUIRED),
-	// .matches(STR_REGEX, 'Use only character'),
 	email: yup.string()
 		.required(IS_REQUIRED)
 		.email('Enter correct email'),
@@ -18,7 +16,8 @@ export const SING_UP_SCHEMA = yup.object().shape({
 		.required(IS_REQUIRED),
 	confirmPass: yup.string()
 		.required(IS_REQUIRED)
-		// .oneOf('password', 'Password must match')
+		.oneOf([yup.ref('password')], 'Passwords do not match'),
+
 })
 
 export const SHIPPING_SCHEMA = yup.object().shape({

@@ -1,31 +1,26 @@
-// import React from 'react'
-import {styled} from '@mui/material'
+import React from 'react'
 import Input from '@mui/material/Input'
-import theme from '../../../utils/Theme'
+import PropTypes from 'prop-types'
+import { useFormStyle } from '../../../utils/customHooks/useFormStyle'
 
-const CustomInput = styled(Input)({
-	width: 448.69,
-	height: 26.06,
-	fontFamily: theme.typography.fontFamily,
-	fontStyle: 'normal',
-	fontWeight: 300,
-	fontSize: 20,
-	lineHeight: 24,
-	transition: '0.5s'
-})
+const CustomInput = ({field, form, ...rest}) => {
+	const {name} = field
+	const classes = useFormStyle()
+	return (
+		<div>
+			<Input className={classes.input} {...rest} {...field}/>
+			<div>
+				{form.touched[name] && form.errors[name] && (
+					<div className={classes.error}>{form.errors[name]}</div>
+				)}
+			</div>
+		</div>
+	)
+}
 
-// const Input = ({field, form, ...rest}) => {
-// 	const {name} = field;
-// 	return (
-// 		<div className={'input-place'}>
-// 			<CustomInput/>
-// 			<div>
-// 				{form.touched[name] && form.errors[name] && (
-// 					<div className="error">{form.errors[name]}</div>
-// 				)}
-// 			</div>
-// 		</div>
-// 	);
-// };
+CustomInput.propTypes = {
+	field: PropTypes.object,
+	form: PropTypes.object
+}
 
 export default CustomInput

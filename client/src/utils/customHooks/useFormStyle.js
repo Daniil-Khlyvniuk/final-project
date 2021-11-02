@@ -1,4 +1,4 @@
-import theme from '../../../utils/Theme'
+import theme from '../Theme'
 import { makeStyles } from '@mui/styles'
 
 export const useFormStyle = makeStyles({
@@ -7,6 +7,17 @@ export const useFormStyle = makeStyles({
 		paddingRight: 50,
 		width: 'min-content',
 		margin: 'auto'
+	},
+	input:{
+		width: 448.69,
+		height: 26.06,
+		fontFamily: theme.typography.fontFamily,
+		fontStyle: 'normal',
+		fontWeight: 300,
+		fontSize: 20,
+		lineHeight: 24,
+		marginTop: '50px',
+		transition: '0.5s'
 	},
 	ads: {
 		display: 'flex',
@@ -83,6 +94,7 @@ export const useFormStyle = makeStyles({
 		border: '1px solid #000',
 		borderBottom: 'none'
 	},
+	signinActive:{},
 	active:{
 		color: 'red'
 	},

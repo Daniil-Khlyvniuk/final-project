@@ -1,36 +1,37 @@
-import React, { useState } from 'react'
-import { useFormStyle } from './hooks/useFormStyle'
+import React from 'react'
+import { useFormStyle } from '../../utils/customHooks/useFormStyle'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
+import SignInForm from './SignInForm/SignInForm'
+import LoginForm from './LoginForm/LoginForm'
 
 const Form = () => {
 	const classes = useFormStyle()
-	const [value, setValue] = useState(1 )
+	const [value, setValue] = React.useState(0)
 
 	const handleChange = (event, newValue) => {
 		setValue(newValue)
 	}
 
 	return (
-		<Tabs
-			className={classes.switchForm}
-			value={value}
-			onChange={handleChange}
-			centered>
-			<Tab
-				className={classes.signin}
-				value= {value}
-				key={1}
-				label="SIGN UP"
-				href="/signup"
-			/>
-			<Tab
-				className={classes.login}
-				value={2}
-				label="LOG IN"
-				href="/login"
-			/>
-		</Tabs>
+		<div>
+			<Tabs
+				value={value}
+				onChange={handleChange}
+				centered
+				className={classes.switchForm}>
+				<Tab
+					label="SIGN UP"
+					className={classes.signin}
+				/>
+				<Tab
+					className={classes.login}
+					label="LOG IN"
+				/>
+			</Tabs>
+			{value === 0 && <SignInForm/>}
+			{value === 1 && <LoginForm/>}
+		</div>
 	)
 }
 
