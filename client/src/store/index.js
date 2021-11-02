@@ -1,16 +1,10 @@
-import {applyMiddleware, createStore} from 'redux'
-import thunk from 'redux-thunk'
-import {composeWithDevTools} from 'redux-devtools-extension'
+import {configureStore} from '@reduxjs/toolkit'
+import productsSlice from './Products/productsSlice'
 
-import rootReducer from './reducers'
+const store = configureStore({
+	reducer: {
+		products: productsSlice,
+	}
+})
 
-const customMiddleware = () => {
-	return applyMiddleware(thunk)
-}
-
-export const configureStore = () => {
-	return createStore(
-		rootReducer,
-		composeWithDevTools(customMiddleware())
-	)
-}
+export default store

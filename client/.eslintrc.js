@@ -19,8 +19,8 @@ module.exports = {
 		'react'
 	],
 	'rules': {
-		// 'react/jsx-uses-react': ['error'],
-		// 'react/jsx-uses-vars': ['error'],
+		'react/jsx-uses-react': ['error'],
+		'react/jsx-uses-vars': ['error'],
 		'no-duplicate-imports': [ 'error' ],
 		'no-use-before-define': [ 'error' ],
 		'func-style': ['error', 'expression'],

@@ -1,8 +1,9 @@
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import * as productsActions from '../../store/actions/products'
 import Card from '../ProductCard/ProductCard'
 import {makeStyles} from '@mui/styles'
+import {getAllProducts} from '../../store/Products/productsSlice'
+import axios from 'axios'
 
 const useStyles = makeStyles({
 	container: {
@@ -18,28 +19,34 @@ const useStyles = makeStyles({
 })
 
 const CardList = () => {
-
-	const products = useSelector(state => state.products.data)
+	const products = useSelector(state => state.products)
 	const dispatch = useDispatch()
 	const classes = useStyles()
 
-	useEffect(() => {
-		// axios.get('http://localhost:5000/products')
-		// axios.get('/products.json')
-		// 	.then(products => console.log(products.data))
-		dispatch(productsActions.getAllProducts())
+	const fetch = async () => {
+		const data = await axios
+			.get('/products.json')
+			.then(products => products?.data)
+		if (!data) return
+
+		dispatch(getAllProducts(data))
 	}
-	, [])
+
+	useEffect(() => {
+		fetch()
+	}, [])
 
 	return (
 		<div>
 			<p className={classes.title}>NEW IN</p>
-			{/* eslint-disable-next-line max-len */}
 			<div className={classes.container}>
-				{/* eslint-disable-next-line max-len */}
-				{products.map((item, key) => <Card key={key} image={item.img} title={item.title} price={item.price}/>)}
+				{
+					!!products?.list
+					&& products?.list?.map((item, key) => (
+						<Card key={key} image={item.img} title={item.title} price={item.price}/>
+					))
+				}
 			</div>
-
 		</div>
 	)
 }
