@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import CardInCatalog from '../CardInCatalog/CardInCatalog'
 import {makeStyles} from '@mui/styles'
 import {getAllProducts} from '../../store/Products/productsSlice'
-import axios from "axios";
+import axios from 'axios'
 
 
 const useStyles = makeStyles({
@@ -40,7 +40,10 @@ const Catalog = () => {
 			{
 				!!products?.list
 				&& products?.list?.map((item, key) => (
-					<CardInCatalog key={key} image={item.img} title={item.title} price={item.price}/>
+					<CardInCatalog
+						key={key} image={item.img}
+						title={item.title}
+						price={item.price}/>
 				))
 			}
 		</div>

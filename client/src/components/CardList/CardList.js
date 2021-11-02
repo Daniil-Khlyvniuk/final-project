@@ -43,7 +43,11 @@ const CardList = () => {
 				{
 					!!products?.list
 					&& products?.list?.map((item, key) => (
-						<Card key={key} image={item.img} title={item.title} price={item.price}/>
+						<Card
+							key={key}
+							image={item.img}
+							title={item.title}
+							price={item.price}/>
 					))
 				}
 			</div>
