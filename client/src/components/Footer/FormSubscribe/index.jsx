@@ -37,7 +37,7 @@ const FormSibscribe = () => {
 							onBlur={formikProps.handleBlur}
 							onChange={formikProps.handleChange}
 							error={true}
-							asyncBorderRadius={true}
+							asyncborderradius={'on'}
 						/>
 						<Button 
 							type='submit'
@@ -46,7 +46,7 @@ const FormSibscribe = () => {
 								!formikProps.isValid ||
                 formikProps.isSubmitting
 							}
-							asyncBorderRadius={true}
+							asyncborderradius={'on'}
 						>
             send
 						</Button>
