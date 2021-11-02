@@ -1,25 +1,20 @@
 import React from 'react'
 import { makeStyles } from '@mui/styles'
-import { Grid, Typography, Box } from '@mui/material'
-import { styled } from '@mui/material/styles'
-
-const StyledGrid = styled(Grid)(() => ({
-	borderTop: '1px solid #373F41',
-	padding: '25px 60px 20px',
-	// display: 'flex',
-	justifyContent: 'center',
-	alignItems: 'center',
-}))
-
-const StyledBox = styled(Box)(() => ({
-	display: 'flex',
-	justifyContent: 'center',
-	alignItems: 'center',
-	position: 'absolute',
-	left: 60,
-}))
+import { Container, Grid, Typography } from '@mui/material'
+import { Box } from '@mui/system'
 
 const useStyles = makeStyles(() => ({
+	subBlockStyle: {
+		padding: '25px 0 20px',
+		display: 'flex',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+	},
+	logoBottom: {
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
 	logoBottomLeft: {
 		marginRight: 10,
 	}
@@ -27,25 +22,31 @@ const useStyles = makeStyles(() => ({
 
 const Credentials = () => {
 
-	const {logoBottomLeft} = useStyles()
-  
+	const {
+		subBlockStyle,
+		logoBottom,
+		logoBottomLeft
+	} = useStyles()
+
 	return (
-		<StyledGrid 
-			container
-			columns={12}
-			direction="row"
-		>
-			<StyledBox>
-				<img 
-					className={logoBottomLeft} 
-					src="./img/bottom_logo1.png" alt="Company" />
-				<img src="./img/bottom_logo2.png" alt="Postil logo" />
-			</StyledBox>
-			<Typography variant='footerTextMedium'>
-    © 2010 — 2020  Simple Studio 
-			</Typography>
-			<Typography></Typography>
-		</StyledGrid>
+		<Box sx={{ borderColor: '#373F41', borderTop: 1, maxWidth: 1310, margin: '0 auto' }}>
+			<Container maxWidth="lg">
+				<Grid container columns={12}
+					className={subBlockStyle}
+				>
+					<Typography className={logoBottom}>
+						<img
+							className={logoBottomLeft}
+							src="./img/bottom_logo1.png" alt="Company" />
+						<img src="./img/bottom_logo2.png" alt="Postil logo" />
+					</Typography>
+					<Typography variant='footerTextMedium'>
+						© 2010 — 2020  Simple Studio
+					</Typography>
+					<Typography></Typography>
+				</Grid>
+			</Container>
+		</Box>
 	)
 }
 

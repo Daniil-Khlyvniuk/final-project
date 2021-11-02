@@ -5,7 +5,7 @@ const theme = createTheme({
 		keys: ['xs', 'sm', 'md', 'lg', 'xl'],
 		values: {
 			xl: 1440,
-			lg: 1000,
+			lg: 1180,
 			md: 768,
 			sm: 480,
 			xs: 320,
