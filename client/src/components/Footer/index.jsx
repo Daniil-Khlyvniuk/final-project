@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@mui/styles'
-import { Box, Grid } from '@mui/material'
+import { Box, Container, Grid } from '@mui/material'
 
 import ContactUs from './ContactUs'
 import Subscribe from './Subscribe'
@@ -10,8 +10,7 @@ import Credentials from './Credentials'
 
 const useStyles = makeStyles(() => ({
 	blockStyle: {
-		borderTop: '1px solid #373F41',
-		padding: '80px 60px 40px',
+		padding: '80px 0 40px',
 	},
 }))
 

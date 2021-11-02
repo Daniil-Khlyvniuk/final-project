@@ -1,19 +1,19 @@
 import React from 'react'
-import NavBar from './components/NavBar/NavBar'
-
+import Header from './components/NavBar/NavBar'
 import AppRoutes from './routes/AppRoutes'
 import Footer from './components/Footer'
+import { Container } from '@mui/material'
 
 const App = () => {
 	return (
-		<div className={ 'App' }>
-			<NavBar/>
-			<AppRoutes />
-
+		<div className={'App'}>
+			<Header />
+			<Container maxWidth="lg">
+				<AppRoutes />
+			</Container>
 			<Footer />
 		</div>
 	)
 }
-
 
 export default App

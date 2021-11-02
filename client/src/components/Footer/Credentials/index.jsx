@@ -26,7 +26,6 @@ const useStyles = makeStyles(() => ({
 }))
 
 const Credentials = () => {
-
 	const {logoBottomLeft} = useStyles()
   
 	return (

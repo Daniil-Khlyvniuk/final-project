@@ -1,5 +1,5 @@
 /**
- * @prettier
+ * @format
  */
 module.exports = {
   trailingComma: "es6",
