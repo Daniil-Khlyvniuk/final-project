@@ -20,7 +20,7 @@ const ContactUs = () => {
 						href="mailto:hello@gmail.com"
 						target="_blank"
 						variant={'semiBold'}
-						capitalize={false}
+						capitalize={'on'}
 					>
 						hello@gmail.com
 					</Link>
@@ -38,7 +38,7 @@ const ContactUs = () => {
 						href="tel:380938759922"
 						target="_blank"
 						variant={'semiBold'}
-						capitalize={false}
+						capitalize={'on'}
 					>
 						+38 093 875 9922
 					</Link>

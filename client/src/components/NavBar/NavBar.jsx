@@ -19,18 +19,18 @@ const Navbar = () => {
 			<Container maxWidth="lg">
 				<AppBar position="static" sx={{ boxShadow: 'none' }}>
 					<Toolbar className={classes.header} disableGutters={true} >
-						<NavBarLogo/>
-					  {/*<NavbarMenu />*/ }
-					  <Category/>
-					  {/* <Navbarlist /> */ }
-					  <NavBarSearch/>
-					  <div className={ classes.iconsWrapper }>
-						  <LoginIcon/>
-						  <FavoriteIcon/>
-						  <CartIcon/>
-					  </div>
-					  {/* <NavBarLanguages /> */ }
-				  </Toolbar>
+						<NavBarLogo />
+						{/*<NavbarMenu />*/}
+						<Category />
+						{/* <Navbarlist /> */}
+						<NavBarSearch />
+						<div className={classes.iconsWrapper}>
+							<LoginIcon />
+							<FavoriteIcon />
+							<CartIcon />
+						</div>
+						{/* <NavBarLanguages /> */}
+					</Toolbar>
 				</AppBar>
 			</Container>
 		</Box>

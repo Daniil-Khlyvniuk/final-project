@@ -63,7 +63,7 @@ const theme = createTheme({
 					}
 				},
 				{
-					props: { variant: 'contained', asyncBorderRadius: true },
+					props: { variant: 'contained', asyncborderradius: 'on' },
 					style: {
 						backgroundColor: 'primary',
 						borderTopLeftRadius: 0,
@@ -75,9 +75,9 @@ const theme = createTheme({
 		MuiTextField: {
 			variants: [
 				{
-					props: { asyncBorderRadius: true },
+					props: { asyncborderradius: 'on' },
 					style: {
-						'& .MuiOutlinedInput-root': 
+						'& .MuiOutlinedInput-root':
 						{
 							borderTopRightRadius: 0,
 							borderBottomRightRadius: 0,
@@ -115,7 +115,7 @@ const theme = createTheme({
 					}
 				},
 				{
-					props: {capitalize: false},
+					props: { capitalize: 'on' },
 					style: {
 						textTransform: 'none',
 					}
