@@ -1,11 +1,11 @@
 import React from 'react'
 
 const Returns = () => {
-  return (
-    <h1>
-      R E T U R N S
-    </h1>
-  )
+	return (
+		<div>
+			<h1>Returns</h1>
+		</div>
+	)
 }
 
 export default Returns

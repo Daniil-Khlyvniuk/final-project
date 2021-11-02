@@ -10,7 +10,7 @@ import { BrowserRouter } from 'react-router-dom'
 import store from './store/index'
 
 ReactDOM.render(
-	<ThemeProvider theme={Theme}>
+	<ThemeProvider theme={ Theme }>
 		<React.StrictMode>
 			<Provider store={store}>
 				<BrowserRouter>

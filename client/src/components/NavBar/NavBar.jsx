@@ -1,51 +1,38 @@
 import React from 'react'
-import { AppBar, Toolbar } from '@mui/material'
-import { makeStyles } from '@mui/styles'
+import { AppBar, Container, Toolbar } from '@mui/material'
 import NavBarLogo from './NavBarLogo/NavBarLogo'
 import { Box } from '@mui/system'
-import NavbarMenu from './NavBarMenu/NavBarMenu'
 import LoginIcon from './NavBarIcons/LoginIcon/LoginIcon'
 import FavoriteIcon from './NavBarIcons/FavotiteIcon/FavoriteIcon'
 import CartIcon from './NavBarIcons/CartIcon/CartIcon'
 import NavBarSearch from './NavBarSearch/NavBarSearch'
+import { useStyles } from './styles'
+import Category from '../Category/Category'
 // import Navbarlist from './NavBarList/NavBarList'
 // import NavBarLanguages from './NavBarLanguages/NavBarLanguages'
 
-const useStyles = makeStyles(() => ({
-	header: {
-		backgroundColor: '#ffffff',
-		display: 'flex',
-		justifyContent: 'space-between',
-		alignItems: 'center',
-	},
-	iconsWrapper: {
-		width: 135,
-		display: 'flex',
-		justifyContent: 'space-between',
-		alignItems: 'center',
-		gap: 30
-	}
-}))
-
 const Navbar = () => {
-	const { header, iconsWrapper } = useStyles()
+	const classes = useStyles()
 
 	return (
 		<Box sx={{ borderColor: '#373F41', borderBottom: 1 }}>
-			<AppBar position="static" sx={{ boxShadow: 'none' }}>
-				<Toolbar className={header}>
-					<NavBarLogo />
-					<NavbarMenu />
-					{/* <Navbarlist /> */}
-					<NavBarSearch />
-					<div className={iconsWrapper}>
-						<LoginIcon />
-						<FavoriteIcon />
-						<CartIcon />
-					</div>
-					{/* <NavBarLanguages /> */}
-				</Toolbar>
-			</AppBar>
+			<Container maxWidth="lg">
+				<AppBar position="static" sx={{ boxShadow: 'none' }}>
+					<Toolbar className={classes.header} disableGutters={true} >
+						<NavBarLogo />
+						{/*<NavbarMenu />*/}
+						<Category />
+						{/* <Navbarlist /> */}
+						<NavBarSearch />
+						<div className={classes.iconsWrapper}>
+							<LoginIcon />
+							<FavoriteIcon />
+							<CartIcon />
+						</div>
+						{/* <NavBarLanguages /> */}
+					</Toolbar>
+				</AppBar>
+			</Container>
 		</Box>
 	)
 }
