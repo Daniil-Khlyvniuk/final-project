@@ -23,6 +23,7 @@
     "react-scripts": "4.0.3",
     "react-slick": "^0.28.1",
     "react-transition-group": "^4.4.2",
+    "slick-carousel": "^1.8.1",
     "standard": "^16.0.4",
     "web-vitals": "^1.0.1",
     "yup": "^0.32.11"
