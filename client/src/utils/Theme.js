@@ -91,7 +91,15 @@ const theme = createTheme({
 				{
 					props: { variant: 'active'},
 					style: {
+						border: '1px solid #000',
 						borderBottom: 'none',
+						padding: '5px 77px',
+					}
+				},
+				{
+					props: {variant: 'default'},
+					style: {
+						borderBottom: '1px solid #000',
 						padding: '5px 77px',
 					}
 				},
@@ -103,7 +111,7 @@ const theme = createTheme({
 					props: { variant: 'form-tab' },
 					style: {
 						'& span.MuiTabs-indicator': {
-							// display: 'none',
+							display: 'none',
 						},
 					}
 				},

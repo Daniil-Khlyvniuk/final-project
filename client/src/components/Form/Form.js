@@ -7,7 +7,6 @@ import LoginForm from './LoginForm/LoginForm'
 
 const Form = () => {
 	const [value, setValue] = React.useState(0)
-	// const classes = useFormStyle()
 	const handleChange = (event, newValue) => {
 		setValue(newValue)
 	}
@@ -21,11 +20,11 @@ const Form = () => {
 				variant='form-tab'
 			>
 				<Tab
-					variant='active'
+					variant = {value === 0 ? 'active' : 'default'}
 					label="SIGN UP"
 				/>
 				<Tab
-					variant='active'
+					variant = {value === 1 ? 'active' : 'default'}
 					label="LOG IN"
 				/>
 			</Tabs>
