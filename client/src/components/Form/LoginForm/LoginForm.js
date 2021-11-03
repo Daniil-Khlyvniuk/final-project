@@ -55,8 +55,7 @@ const LoginForm = () => {
 							</p>
 						</div>
 						<p className={classes.policy}>By signing up you agree to
-							<Link to="/policy"> Terms of Service </Link>
-							and <Link to="/policy"> Privacy Policy </Link>
+							<Link to="/termsOfService"> Terms of Service </Link>  and <Link to="/privacypolicy"> Privacy Policy </Link>
 						</p>
 						<button
 							className={classes.submit}

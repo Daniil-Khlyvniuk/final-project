@@ -8,7 +8,8 @@ import {
 
 export const SING_UP_SCHEMA = yup.object().shape({
 	name: yup.string()
-		.required(IS_REQUIRED),
+		.required(IS_REQUIRED)
+		.matches(STR_REGEX, 'Invalid symbols, use only character'),
 	email: yup.string()
 		.required(IS_REQUIRED)
 		.email('Enter correct email'),

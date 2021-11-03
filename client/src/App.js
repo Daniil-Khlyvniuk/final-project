@@ -1,16 +1,16 @@
 import React from 'react'
-// import NavBar from './components/NavBar/NavBar'
+import NavBar from './components/NavBar/NavBar'
 import AppRoutes from './routes/AppRoutes'
-// import Footer from './components/Footer'
+import Footer from './components/Footer'
 import Form from './components/Form/Form'
 
 const App = () => {
 	return (
 		<div className={ 'App' }>
-			{/*<NavBar/>*/}
+			<NavBar/>
 			<Form/>
 			<AppRoutes />
-			{/*<Footer />*/}
+			<Footer />
 		</div>
 	)
 }

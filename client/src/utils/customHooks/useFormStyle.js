@@ -5,7 +5,8 @@ export const useFormStyle = makeStyles({
 	form: {
 		paddingLeft: 50,
 		paddingRight: 50,
-		width: 'min-content',
+		maxWidth: '450px',
+		width: '100%',
 		margin: 'auto'
 	},
 	input:{
@@ -81,22 +82,10 @@ export const useFormStyle = makeStyles({
 	},
 
 	signin:{
-		cursor: 'pointer',
-		fontFamily: theme.typography.fontFamily,
-		fontStyle: 'normal',
-		fontWeight: 'normal',
-		fontSize: 16,
-		lineHeight: '48px',
-		letterSpacing: '0.04em',
-		color: '#373F41',
 		textDecoration: 'none',
 		padding: '5px 77px',
 		border: '1px solid #000',
 		borderBottom: 'none'
-	},
-	signinActive:{},
-	active:{
-		color: 'red'
 	},
 	socialBox:{
 		marginTop: '30px',
@@ -115,6 +104,6 @@ export const useFormStyle = makeStyles({
 	},
 	error:{
 		color: 'red',
-		fontSize: 10
+		fontSize: 15
 	}
 })
