@@ -6,7 +6,8 @@ import { Child, Menu, Parent } from './categoryElems'
 const Category = () => {
 	const categoryTree = UseCategoryTree()
 	const categoryList = UseMakeNodeChild(categoryTree, Parent, Child)
-
+	// eslint-disable-next-line no-console
+	console.log('categoryList', categoryList)
 	return (
 		<Menu>
 			{ categoryList }

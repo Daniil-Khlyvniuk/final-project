@@ -1,22 +1,26 @@
 import React from 'react'
 import { styled } from '@mui/material/styles'
-import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
+import MenuList from '@mui/material/MenuList'
 
 export const StyledMenu = styled((props) => (
-	<Menu
-		elevation={0}
-		anchorOrigin={{
+	<MenuList
+		elevation={ 0 }
+		anchorOrigin={ {
 			vertical: 'bottom',
 			horizontal: 'right',
-		}}
-		transformOrigin={{
+		} }
+		transformOrigin={ {
 			vertical: 'top',
 			horizontal: 'right',
-		}}
-		{...props}
+		} }
+
+		{ ...props }
 	/>
 ))(({ theme }) => ({
+	'&': {
+		zIndex: '9999999999'
+	},
 	'& .MuiPaper-root': {
 		borderRadius: 6,
 		marginTop: theme.spacing(1),
@@ -43,5 +47,11 @@ export const StyledMenuItem = styled(MenuItem)(() => ({
 	fontFamily: 'Mulish',
 	fontWeight: 600,
 	fontSize: '16px',
+	cursor: 'pointer',
 	color: '#373F41',
+	alignSelf: 'center',
+	position: 'relative',
+	display: 'flex',
+	justifyContent: 'space-between',
+	width: '100%'
 }))

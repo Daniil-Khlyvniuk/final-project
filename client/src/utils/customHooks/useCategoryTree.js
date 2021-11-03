@@ -28,7 +28,7 @@ const dataTest = [
 	},
 	{
 		id: 4,
-		name: 'Kitchen--children--children',
+		name: 'Bedroom--children-1--children--children',
 		parentId: 3,
 		date: Date.now()
 	},

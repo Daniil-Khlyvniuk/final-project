@@ -2,6 +2,7 @@ import React from 'react'
 
 const UseMakeNodeChild = (objectTree, Parent, Child) => {
 	if (objectTree.length < 1) return
+
 	const makeResultList = (objectTree) => objectTree.map((group, i) => {
 		if (group.children) {
 			return (
