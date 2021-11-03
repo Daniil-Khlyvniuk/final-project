@@ -1,52 +1,50 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { Grid, List, ListItem } from '@mui/material'
-import PropTypes from 'prop-types'
+import { Link as RouterLink } from 'react-router-dom'
+import { Grid, List, ListItem, Link } from '@mui/material'
 
-const AboutLinks = ({styles}) => {
-	const {boldText,notBoldText} = styles
+const AboutLinks = () => {
 	return (
 		<Grid item xs={12} sm={3}>
 			<List>
 				<ListItem>
 					<Link 
 						to="/about" 
-						className={boldText}
+						component={RouterLink}
+						variant={'bold'}
 					>
-								about
+						about
 					</Link>
 				</ListItem>
 				<ListItem>
 					<Link 
-						to="/about_us"
-						className={notBoldText}
+						to="/aboutus"
+						component={RouterLink}
+						variant={'semiBold'}
 					>
-									about us
+						about us
 					</Link>
 				</ListItem>
 				<ListItem>
 					<Link 
 						to="/reviews" 
-						className={notBoldText}
+						component={RouterLink}
+						variant={'semiBold'}
 					>
-									reviews
+						reviews
 					</Link>
 				</ListItem>
 				<ListItem>
 					<Link 
 						to="/blog"
-						className={notBoldText}
+						component={RouterLink}
+						variant={'semiBold'}
 					>
-									blog
+						blog
 					</Link>
 				</ListItem>
 			</List> 
 		</Grid>
 	)
-}
-
-AboutLinks.propTypes = {
-	styles: PropTypes.object.isRequired,
 }
 
 export default AboutLinks
