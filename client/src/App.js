@@ -20,7 +20,7 @@ const App = () => {
 			<Header />
 			<Container maxWidth="lg">
 				<AppRoutes />
-				<Form/>
+				
 			</Container>
 			<Footer />
 		</div>
