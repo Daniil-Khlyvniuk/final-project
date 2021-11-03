@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@mui/styles'
-import { Box, Grid } from '@mui/material'
+import { Box, Container, Grid } from '@mui/material'
 
 import ContactUs from './ContactUs'
 import Subscribe from './Subscribe'

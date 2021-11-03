@@ -5,6 +5,7 @@ import Footer from './components/Footer'
 import { Container } from '@mui/material'
 import cardActions from './store/Card'
 import { useDispatch } from 'react-redux'
+import Form from './components/Form/Form'
 
 const App = () => {
 	// it is an example of dispatching actions
@@ -19,10 +20,12 @@ const App = () => {
 			<Header />
 			<Container maxWidth="lg">
 				<AppRoutes />
+				
 			</Container>
 			<Footer />
 		</div>
 	)
 }
+
 
 export default App
