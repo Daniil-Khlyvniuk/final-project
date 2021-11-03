@@ -60,13 +60,6 @@ export const useFormStyle = makeStyles({
 			color: '#000'
 		}
 	},
-	switchForm:{
-		display: 'flex',
-		marginTop: 20,  //optional style, remove before build
-		justifyContent: 'center',
-		alignContent: 'center',
-		alignItems: 'center'
-	},
 	login:{
 		cursor: 'pointer',
 		fontFamily: theme.typography.fontFamily,

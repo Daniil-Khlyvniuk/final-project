@@ -6,14 +6,18 @@ import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'
 import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from '@mui/material/styles'
 import Theme from './utils/Theme'
+import {Provider} from 'react-redux'
+import store from './store/index'
 
 ReactDOM.render(
 	<ThemeProvider theme={ Theme }>
 		<React.StrictMode>
 			<BrowserRouter>
-				<ErrorBoundary>
-					<App/>
-				</ErrorBoundary>
+				<Provider store={store}>
+					<ErrorBoundary>
+						<App />
+					</ErrorBoundary>
+				</Provider>
 			</BrowserRouter>
 		</React.StrictMode>
 	</ThemeProvider>,
