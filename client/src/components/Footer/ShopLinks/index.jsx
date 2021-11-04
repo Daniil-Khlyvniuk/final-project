@@ -1,70 +1,68 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { Grid, List, ListItem } from '@mui/material'
-import PropTypes from 'prop-types'
+import { Link as RouterLink } from 'react-router-dom'
+import { Grid, List, ListItem, Link } from '@mui/material'
 
-const ShopLinks = ({styles}) => {
-
-	const {boldText,notBoldText} = styles
-
+const ShopLinks = () => {
 	return (
 		<Grid item xs={12} sm={3}>
 			<List>
 				<ListItem>
 					<Link 
-						to="/Shop" 
-						className={boldText}
+						to="/shop" 
+						component={RouterLink}
+						variant={'bold'}
 					>
-									shop
+						shop
 					</Link>
 				</ListItem>
 				<ListItem>
 					<Link 
 						to="/catalog"
-						className={notBoldText}
+						component={RouterLink}
+						variant={'semiBold'}
 					>
-									catalog
+						catalog
 					</Link>
 				</ListItem>
 				<ListItem>
 					<Link 
-						to="/paymentAndDelivery"
-						className={notBoldText}
+						to="/paymentanddelivery"
+						component={RouterLink}
+						variant={'semiBold'}
 					>
-									payment & delivery
+						payment & delivery
 					</Link>
 				</ListItem>
 				<ListItem>
 					<Link 
 						to="/returns" 
-						className={notBoldText}
+						component={RouterLink}
+						variant={'semiBold'}
 					>
-								returns
+						returns
 					</Link>
 				</ListItem>
 				<ListItem>
 					<Link 
-						to="/privacyAndPolicy"
-						className={notBoldText}
+						to="/privacypolicy"
+						component={RouterLink}
+						variant={'semiBold'}
 					>
-									privacy Policy
+						privacy Policy
 					</Link>
 				</ListItem>
 				<ListItem>
 					<Link 
 						to="/termsOfService"
-						className={notBoldText}
+						component={RouterLink}
+						variant={'semiBold'}
 					>
-									terms of service
+						terms of service
 					</Link>
 				</ListItem>
 			</List>
 		</Grid>
 	)
-}
-
-ShopLinks.propTypes = {
-	styles: PropTypes.object.isRequired,
 }
 
 export default ShopLinks

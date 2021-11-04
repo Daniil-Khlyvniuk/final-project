@@ -6,7 +6,6 @@ import { Child, Parent } from './categoryElems'
 const Category = () => {
 	const categoryTree = UseCategoryTree()
 	const categoryList = UseMakeNodeChild(categoryTree, Parent, Child)
-	
 	return (
 		<Parent root>
 			{ categoryList }

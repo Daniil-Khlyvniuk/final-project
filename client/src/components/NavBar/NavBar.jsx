@@ -8,8 +8,6 @@ import CartIcon from './NavBarIcons/CartIcon/CartIcon'
 import NavBarSearch from './NavBarSearch/NavBarSearch'
 import { useStyles } from './styles'
 import Category from '../Category/Category'
-// import Navbarlist from './NavBarList/NavBarList'
-// import NavBarLanguages from './NavBarLanguages/NavBarLanguages'
 
 const Navbar = () => {
 	const classes = useStyles()

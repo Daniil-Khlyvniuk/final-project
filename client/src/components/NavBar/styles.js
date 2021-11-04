@@ -8,7 +8,7 @@ export const useStyles = makeStyles(() => ({
 		alignItems: 'center',
 	},
 	iconsWrapper: {
-		width: 135,
+		width: 150,
 		display: 'flex',
 		justifyContent: 'space-between',
 		alignItems: 'center',

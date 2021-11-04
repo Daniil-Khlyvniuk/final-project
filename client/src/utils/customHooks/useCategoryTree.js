@@ -92,24 +92,6 @@ const dataTest = [
 		parentId: null,
 		date: Date.now()
 	},
-	{
-		id: 12,
-		name: 'test child',
-		parentId: 7,
-		date: Date.now()
-	},
-	{
-		id: 13,
-		name: 'test child 1',
-		parentId: 11,
-		date: Date.now()
-	},
-	{
-		id: 14,
-		name: 'test child 2',
-		parentId: 7,
-		date: Date.now()
-	},
 ]
 
 
