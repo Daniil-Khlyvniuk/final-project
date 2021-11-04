@@ -16,7 +16,7 @@ const cardSlice = createSlice({
 		},
 		/*
 		the next action will be here like:
-
+		
 		newAction(state, action) {
 			return state.push(action.payload)
 		}
