@@ -17,3 +17,12 @@ const getCustomerOrders = () => axios.get('/orders')
 
 const getOrderByOrderNo = (orderNo) => axios.get(`/orders/${orderNo}`)
 // orderNo is assigned to the order by the system atomatically, when it is created
+
+export default {
+	placeOrder,
+	updateOrder,
+	cancelOrder,
+	deleteOrder,
+	getCustomerOrders,
+	getOrderByOrderNo
+}
