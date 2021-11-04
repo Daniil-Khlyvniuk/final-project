@@ -1,52 +1,109 @@
-import React, { memo } from 'react'
-import Button from '@mui/material/Button'
-import { StyledMenu } from '../style'
+import * as React from 'react'
+import { StyledMenuItem } from './style'
+import { ClickAwayListener, Grow, MenuList, Popper } from '@mui/material'
+import Paper from '@mui/material/Paper'
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
+import { KeyboardArrowUp } from '@mui/icons-material'
+import PropTypes from 'prop-types'
 
-// eslint-disable-next-line no-unused-vars,react/prop-types
-const Parent = ({ children, text }) => {
-	// eslint-disable-next-line react/prop-types
-	// eslint-disable-next-line no-unused-vars
-	const [anchorEl, setAnchorEl] = React.useState(null)
-	const open = Boolean(anchorEl)
+const ParentMenuList = ({
+	children = [],
+	text = 'Category',
+	parent = false,
+	root = false
+}) => {
+	const [open, setOpen] = React.useState(false)
+	const anchorRef = React.useRef(null)
+	const prevOpen = React.useRef()
+	const menuList = React.useRef()
 
-	const handleClick = (event) => {
-		setAnchorEl(event.currentTarget)
+	const handleToggle = () => {
+		setOpen((prevOpen) => !prevOpen)
 	}
-	const handleClose = () => {
-		setAnchorEl(null)
+
+	const handleClose = (ev) => {
+		try {
+			if (!!menuList && menuList?.current?.contains(ev.relatedTarget)) {
+				return
+			}
+		} catch (err) {
+			return setOpen(false)
+		}
+		setOpen(false)
 	}
+
+	const handleOpen = () => {
+		setOpen(true)
+	}
+
+	React.useEffect(() => {
+		prevOpen.current = open
+	}, [open])
 
 	return (
-		<div>
-			<Button
-				id={ 'rootCategory' }
-				aria-controls="category"
+		<>
+			<StyledMenuItem
+				ref={ anchorRef }
+				id={ `${ text }-button` }
+				aria-controls={ open && 'composition-menu' }
+				aria-expanded={ open && 'true' }
 				aria-haspopup="true"
-				aria-expanded={ open ? 'true' : undefined }
-				onClick={ handleClick }
+				onClick={ root ? handleToggle : null }
+				onMouseEnter={ parent ? handleOpen : null }
+				onMouseLeave={ handleClose }
 			>
-				{ text }
-			</Button>
-			<StyledMenu
-				id="category"
-				aria-labelledby={ 'rootCategory' }
-				anchorEl={ anchorEl }
+				{ root ? text.toUpperCase() : text }
+				{ parent && <KeyboardArrowRightIcon/> }
+				{ (root && !open) && <KeyboardArrowDownIcon/> }
+				{ (root && open) && <KeyboardArrowUp/> }
+			</StyledMenuItem>
+
+			<Popper
 				open={ open }
-				onClose={ handleClose }
-				anchorOrigin={ {
-					vertical: 'top',
-					horizontal: 'left',
-				} }
-				transformOrigin={ {
-					vertical: 'top',
-					horizontal: 'left',
-				} }
+				anchorEl={ anchorRef.current }
+				role={ undefined }
+				placement={ root ? 'bottom-start' : 'right-start' }
+				transition
+				disablePortal
 			>
-				{ children }
-			</StyledMenu>
-		</div>
+				{ ({ TransitionProps, placement }) => (
+					<Grow
+						{ ...TransitionProps }
+						style={ {
+							transformOrigin:
+								placement === 'bottom-start' ? 'left top' : 'left bottom',
+						} }
+					>
+						<Paper
+							ref={ menuList }
+							onMouseLeave={ handleClose }
+						>
+							<ClickAwayListener
+								onClickAway={ handleClose }
+							>
+								<MenuList
+									ref={ menuList }
+									autoFocusItem={ open }
+									id={ `${ text }-menu` }
+									aria-labelledby={ `${ text }-button` }
+								>
+									{ children }
+								</MenuList>
+							</ClickAwayListener>
+						</Paper>
+					</Grow>
+				) }
+			</Popper>
+		</>
 	)
 }
 
-export default memo(Parent)
+ParentMenuList.propTypes = {
+	text: PropTypes.string,
+	children: PropTypes.array,
+	parent: PropTypes.bool,
+	root: PropTypes.bool,
+}
 
+export default ParentMenuList

@@ -1,3 +1,4 @@
+
 import { createTheme } from '@mui/material/styles'
 
 const theme = createTheme({
@@ -12,6 +13,7 @@ const theme = createTheme({
 		},
 	},
 	palette: {
+
 		primary: { main: '#373F41' },
 		secondary: { main: '#5C5E60' },
 		error: { main: '#8C8C8C' },
@@ -36,6 +38,7 @@ const theme = createTheme({
 			fontSize: '16px',
 			lineHeight: 'normal'
 		},
+
 		footerTextMedium: {
 			textTransform: 'capitalize',
 			color: '#373F41',
@@ -53,5 +56,107 @@ const theme = createTheme({
 			lineHeight: 'normal'
 		},
 	},
+	components: {
+		MuiButton: {
+			variants: [
+				{
+					props: { variant: 'contained' },
+					style: {
+						backgroundColor: 'primary',
+					}
+				},
+				{
+					props: { variant: 'contained', asyncborderradius: 'on' },
+					style: {
+						backgroundColor: 'primary',
+						borderTopLeftRadius: 0,
+						borderBottomLeftRadius: 0,
+					}
+				}
+			]
+		},
+		MuiTextField: {
+			variants: [
+				{
+					props: { asyncborderradius: 'on' },
+					style: {
+						'& .MuiOutlinedInput-root':
+						{
+							borderTopRightRadius: 0,
+							borderBottomRightRadius: 0,
+						},
+					}
+				}
+			]
+		},
+		MuiTab:{
+			variants: [
+				{
+					props: { variant: 'active'},
+					style: {
+						border: '1px solid #000',
+						borderBottom: 'none',
+						padding: '5px 77px',
+					}
+				},
+				{
+					props: {variant: 'default'},
+					style: {
+						borderBottom: '1px solid #000',
+						padding: '5px 77px',
+					}
+				},
+			]
+		},
+		MuiTabs:{
+			variants: [
+				{
+					props: { variant: 'form-tab' },
+					style: {
+						'& span.MuiTabs-indicator': {
+							display: 'none',
+						},
+					}
+				},
+			]
+		},
+		MuiLink: {
+			variants: [
+				{
+					props: { variant: 'bold' },
+					style: {
+						underline: 'none',
+						textTransform: 'capitalize',
+						textDecoration: 'none',
+						color: '#373F41',
+						fontFamily: 'Mulish',
+						fontWeight: 700,
+						fontSize: '16px',
+						lineHeight: 'normal'
+					}
+				},
+				{
+					props: { variant: 'semiBold' },
+					style: {
+						underline: 'none',
+						textTransform: 'capitalize',
+						textDecoration: 'none',
+						color: '#373F41',
+						fontFamily: 'Mulish',
+						fontWeight: 400,
+						fontSize: '16px',
+						lineHeight: 'normal'
+					}
+				},
+				{
+					props: { capitalize: 'on' },
+					style: {
+						textTransform: 'none',
+					}
+				}
+			],
+		}
+	}
 })
+
 export default theme

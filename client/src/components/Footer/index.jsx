@@ -12,33 +12,11 @@ const useStyles = makeStyles(() => ({
 	blockStyle: {
 		padding: '80px 0 40px',
 	},
-	boldText: {
-		textTransform: 'capitalize',
-		textDecoration: 'none',
-		color: '#373F41',
-		fontFamily: 'Mulish',
-		fontWeight: 700,
-		fontSize: '16px',
-		lineHeight: 'normal'
-	},
-	notBoldText: {
-		textTransform: 'capitalize',
-		textDecoration: 'none',
-		color: '#373F41',
-		fontFamily: 'Mulish',
-		fontWeight: 400,
-		fontSize: '16px',
-		lineHeight: 'normal'
-	},
 }))
 
 const Footer = () => {
 
-	const {
-		blockStyle,
-		boldText,
-		notBoldText,
-	} = useStyles()
+	const { blockStyle } = useStyles()
 
 	return (
 		<Box sx={{ borderColor: '#373F41', borderTop: 1, maxWidth: 1310, margin: '0 auto' }}>
@@ -46,9 +24,9 @@ const Footer = () => {
 				<Grid container columns={12}
 					className={blockStyle}
 				>
-					<ShopLinks styles={{ boldText, notBoldText }} />
-					<AboutLinks styles={{ boldText, notBoldText }} />
-					<ContactUs styles={{ boldText }} />
+					<ShopLinks />
+					<AboutLinks />
+					<ContactUs />
 					<Subscribe />
 				</Grid>
 			</Container>

@@ -10,17 +10,6 @@ const StyledForm = styled(Form)(() => ({
 	width: '100%',
 }))
 
-const StyledTextField = styled(TextField)(() => ({
-	'& .MuiOutlinedInput-root': {
-		borderTopRightRadius: 0,
-		borderBottomRightRadius: 0
-	},
-}))
-
-const StyledButton = styled(Button)(() => ({
-	borderTopLeftRadius: 0,
-	borderBottomLeftRadius: 0
-}))
 
 const isRequiredError = 'This field is required'
 const userFormSchema = yup.object().shape({
@@ -32,8 +21,6 @@ const FormSibscribe = () => {
   
 	}
 
-
-
 	return (
 		<Formik
 			initialValues={{}}
@@ -43,25 +30,26 @@ const FormSibscribe = () => {
 			{(formikProps) => (
 				<>
 					<StyledForm noValidate>
-						<StyledTextField 
+						<TextField 
 							type="email" 
 							placeholder="e-mail"
 							name="email"
 							onBlur={formikProps.handleBlur}
 							onChange={formikProps.handleChange}
 							error={true}
+							asyncborderradius={'on'}
 						/>
-						<StyledButton 
+						<Button 
 							type='submit'
 							variant="contained"
-							color="primary"
 							disabled={
 								!formikProps.isValid ||
                 formikProps.isSubmitting
 							}
+							asyncborderradius={'on'}
 						>
             send
-						</StyledButton>
+						</Button>
 					</StyledForm>
 
 					{!formikProps.isValid && (
