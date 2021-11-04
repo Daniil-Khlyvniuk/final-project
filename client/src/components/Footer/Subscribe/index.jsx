@@ -1,5 +1,5 @@
 import React from 'react'
-import { makeStyles } from '@mui/styles'
+import { styled } from '@mui/material/styles'
 import { Grid, List, ListItem, Typography,
 	Link as LinkMui } from '@mui/material'
 
@@ -9,27 +9,19 @@ import TwitterIcon from '@mui/icons-material/Twitter'
 import FacebookIcon from '@mui/icons-material/Facebook'
 import InstagramIcon from '@mui/icons-material/Instagram'
 
-
-const useStyles = makeStyles(() => ({
-	subscribe: {
-		flexDirection: 'row',
-		flexWrap: 'wrap',
-		justifyContent: 'flex-start',
-	},
-	socialList: {
-		display: 'flex',
-		flexDirection: 'row',
-	},
+const StyledListItem = styled(ListItem)(() => ({
+	flexDirection: 'row',
+	flexWrap: 'wrap',
+	justifyContent: 'flex-start',
 }))
 
+const StyledList = styled(List)(() => ({
+	display: 'flex',
+	flexDirection: 'row',
+}))
+
+
 const Subscribe = () => {
-
-	const {
-		subscribe,
-		socialList,
-	} = useStyles()
-
-
 	return (
 		<Grid item xs={12} sm={3}>
 			<List>
@@ -37,7 +29,7 @@ const Subscribe = () => {
 					<Typography
 						variant="menuBold"
 					>
-									subscribe
+						subscribe
 					</Typography>
 				</ListItem>
 				<ListItem>
@@ -46,16 +38,14 @@ const Subscribe = () => {
 								on your first order
 					</Typography>
 				</ListItem>
-				<ListItem 
-					className={subscribe}>
+				<StyledListItem>
 					<FormSubscribe />
-				</ListItem>
+				</StyledListItem>
 				<ListItem>
 					<Typography variant="menuBold">
 								Follow us
 					</Typography>
-					<List 
-						className={socialList}
+					<StyledList 
 						disablePadding={true}
 					>
 						<ListItem>
@@ -82,15 +72,11 @@ const Subscribe = () => {
 								<InstagramIcon />
 							</LinkMui>
 						</ListItem>
-					</List>
+					</StyledList>
 				</ListItem>
 			</List>
 		</Grid>
 	)
 }
-
-// Subscribe.propTypes = {
-// 	styles: PropTypes.object.isRequired,
-// }
 
 export default Subscribe
