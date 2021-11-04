@@ -1,17 +1,16 @@
 import React, { memo } from 'react'
 import UseCategoryTree from '../../utils/customHooks/useCategoryTree'
 import UseMakeNodeChild from '../../utils/customHooks/useMakeNodeChild'
-import { Child, Menu, Parent } from './categoryElems'
+import { Child, Parent } from './categoryElems'
 
 const Category = () => {
 	const categoryTree = UseCategoryTree()
 	const categoryList = UseMakeNodeChild(categoryTree, Parent, Child)
-	// eslint-disable-next-line no-console
-	console.log('categoryList', categoryList)
+	
 	return (
-		<Menu>
+		<Parent root>
 			{ categoryList }
-		</Menu>
+		</Parent>
 	)
 }
 
