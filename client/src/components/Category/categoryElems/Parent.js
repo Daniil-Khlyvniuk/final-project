@@ -23,8 +23,12 @@ const ParentMenuList = ({
 	}
 
 	const handleClose = (ev) => {
-		if (menuList?.current && menuList?.current?.contains(ev.relatedTarget)) {
-			return
+		try {
+			if (!!menuList && menuList?.current?.contains(ev.relatedTarget)) {
+				return
+			}
+		} catch (err) {
+			return setOpen(false)
 		}
 		setOpen(false)
 	}
