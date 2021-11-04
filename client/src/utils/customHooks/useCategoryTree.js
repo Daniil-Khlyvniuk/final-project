@@ -16,7 +16,7 @@ const dataTest = [
 	},
 	{
 		id: 33,
-		name: 'Bedroom--children-2',
+		name: 'Bedroom--children-222',
 		parentId: 2,
 		date: Date.now()
 	},
@@ -28,12 +28,18 @@ const dataTest = [
 	},
 	{
 		id: 4,
-		name: 'Kitchen--children--children',
+		name: 'Bedroom--children-1--children--children',
 		parentId: 3,
 		date: Date.now()
 	},
 	{
 		id: 55,
+		name: 'Bedroom--children-1--children-11',
+		parentId: 33,
+		date: Date.now()
+	},
+	{
+		id: 555,
 		name: 'Bedroom--children-1--children-11',
 		parentId: 3,
 		date: Date.now()
@@ -84,24 +90,6 @@ const dataTest = [
 		id: 11,
 		name: 'Shop All',
 		parentId: null,
-		date: Date.now()
-	},
-	{
-		id: 12,
-		name: 'test child',
-		parentId: 7,
-		date: Date.now()
-	},
-	{
-		id: 13,
-		name: 'test child 1',
-		parentId: 11,
-		date: Date.now()
-	},
-	{
-		id: 14,
-		name: 'test child 2',
-		parentId: 7,
 		date: Date.now()
 	},
 ]

@@ -36,6 +36,7 @@ const theme = createTheme({
 			fontSize: '16px',
 			lineHeight: 'normal'
 		},
+
 		footerTextMedium: {
 			textTransform: 'capitalize',
 			color: '#373F41',
@@ -153,7 +154,7 @@ const theme = createTheme({
 				}
 			],
 		}
-
 	}
 })
+
 export default theme

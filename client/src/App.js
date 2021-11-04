@@ -5,24 +5,21 @@ import Footer from './components/Footer'
 import { Container } from '@mui/material'
 import cardActions from './store/Card'
 import { useDispatch } from 'react-redux'
-import Form from './components/Form/Form'
 
 const App = () => {
 	// it is an example of dispatching actions
 	const dispatch = useDispatch()
 	dispatch(cardActions.test())
 	dispatch(cardActions.test2('it works'))
-
 	//========================================
 
 	return (
-		<div className={'App'}>
-			<Header />
+		<div className={ 'App' }>
+			<Header/>
 			<Container maxWidth="lg">
-				<AppRoutes />
-				
+				<AppRoutes/>
 			</Container>
-			<Footer />
+			<Footer/>
 		</div>
 	)
 }
