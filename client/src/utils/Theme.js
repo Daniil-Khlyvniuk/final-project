@@ -55,6 +55,12 @@ const theme = createTheme({
 			fontSize: '14px',
 			lineHeight: 'normal'
 		},
+		sectionHeading : {
+			textTransform: 'uppercase' ,
+			letterSpacing : '5px',
+			color:'primary',
+			textAlign:'center'
+		},
 	},
 	components: {
 		MuiButton: {

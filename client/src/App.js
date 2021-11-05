@@ -1,7 +1,7 @@
 import React from 'react'
 import CardList from './components/CardList/CardList'
-import Catalog from './components/Catalog/Catalog'
-import NavBar from './components/NavBar/NavBar'
+// import Catalog from './components/Catalog/Catalog'
+
 import AppRoutes from './routes/AppRoutes'
 import Footer from './components/Footer'
 // eslint-disable-next-line no-duplicate-imports
@@ -30,7 +30,7 @@ const App = () => {
 			</Container>
 			<CardList />
 			<Popular/>
-			<Catalog />
+			{/*<Catalog />*/}
 			<Footer />
 
 		</div>

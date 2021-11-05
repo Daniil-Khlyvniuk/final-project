@@ -4,8 +4,9 @@ import Card from '../ProductCard/ProductCard'
 import {makeStyles} from '@mui/styles'
 import {getAllProducts} from '../../store/Products/productsSlice'
 import axios from 'axios'
+import {Typography} from '@mui/material'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme)=>({
 	container: {
 		display: 'flex',
 		flexWrap: 'wrap',
@@ -13,10 +14,8 @@ const useStyles = makeStyles({
 		margin: '0 auto',
 		justifyContent: 'center'
 	},
-	title: {
-		textAlign: 'center'
-	}
-})
+	title: theme.typography.sectionHeading,
+}))
 
 const CardList = () => {
 	const products = useSelector(state => state.products)
@@ -38,7 +37,9 @@ const CardList = () => {
 
 	return (
 		<div>
-			<p className={classes.title}>NEW IN</p>
+			<Typography fontSize={32}
+				sx={{mb:'14px'}}
+				variant={'h2'} className={classes.title}>NEW IN</Typography>
 			<div className={classes.container}>
 				{
 					!!products?.list
