@@ -1,9 +1,10 @@
 import React from 'react'
+import ProductsCatalog from '../../components/Catalog/Catalog'
 
 const Catalog = () => {
 	return (
 		<div>
-			<h1>Catalog</h1>
+			<ProductsCatalog />
 		</div>
 	)
 }
