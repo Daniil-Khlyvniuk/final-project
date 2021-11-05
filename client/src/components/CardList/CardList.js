@@ -1,10 +1,15 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Card from '../ProductCard/ProductCard'
-import { makeStyles } from '@mui/styles'
+
+import {makeStyles} from '@mui/styles'
+
+import {Typography} from '@mui/material'
+
 import { productsOperations, productsSelectors } from '../../store/Products'
 
-const useStyles = makeStyles({
+
+const useStyles = makeStyles((theme)=>({
 	container: {
 		display: 'flex',
 		flexWrap: 'wrap',
@@ -12,10 +17,8 @@ const useStyles = makeStyles({
 		margin: '0 auto',
 		justifyContent: 'center'
 	},
-	title: {
-		textAlign: 'center'
-	}
-})
+	title: theme.typography.sectionHeading,
+}))
 
 const CardList = () => {
 	const products = useSelector(productsSelectors.getProducts())
@@ -28,7 +31,9 @@ const CardList = () => {
 
 	return (
 		<div>
-			<p className={classes.title}>NEW IN</p>
+			<Typography fontSize={32}
+				sx={{mb:'14px', mt:'85px'}}
+				variant={'h2'} className={classes.title}>NEW IN</Typography>
 			<div className={classes.container}>
 				{
 					!!products?.list
