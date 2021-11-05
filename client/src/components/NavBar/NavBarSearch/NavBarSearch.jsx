@@ -34,8 +34,6 @@ const HeaderSearch = () => {
 			)))
 	}
 
-	console.log(products)
-
 	return (
 		<Box>
 			<Search>
