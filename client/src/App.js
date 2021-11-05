@@ -1,8 +1,8 @@
 import React from 'react'
 // import Header from './components/NavBar/NavBar'
-// import AppRoutes from './routes/AppRoutes'
 // import Footer from './components/Footer'
-// import { Container } from '@mui/material'
+import AppRoutes from './routes/AppRoutes'
+import { Container } from '@mui/material'
 import cardActions from './store/Card'
 import { useDispatch } from 'react-redux'
 import Carousel from './components/Carousel/Carousel'
@@ -19,11 +19,11 @@ const App = () => {
 	return (
 		<div className={'App'}>
 			{/*<Header />*/}
-			{/*<Container maxWidth="lg">*/}
-			{/*	<AppRoutes />*/}
-			{/*</Container>*/}
+			<Container maxWidth="lg">
+				<AppRoutes />
+				<Carousel/>
+			</Container>
 			{/*<Footer />*/}
-			<Carousel/>
 		</div>
 	)
 }

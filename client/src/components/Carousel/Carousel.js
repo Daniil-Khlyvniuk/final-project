@@ -1,65 +1,62 @@
-import React, { useRef } from 'react'
-import Slider from 'react-slick'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
+import React from 'react'
+
+import { Swiper, SwiperSlide } from 'swiper/react/swiper-react'
+
+import { EffectFade, Navigation, Pagination } from 'swiper'
+import 'swiper/swiper.scss'
+import 'swiper/modules/navigation/navigation.min.css'
+import 'swiper/modules/pagination/pagination.min.css'
+import 'swiper/modules/effect-fade/effect-fade.min.css'
+import { useStyleCarousel } from './useStyleCarousel'
+
+const slideData = [
+	{
+		id: '1',
+		customId: 'promotion-women-clothing',
+		imageUrl: 'https://cdn.akamai.steamstatic.com/steam/apps/313340/ss_9f74ee916294bb39a9fb0269369b36a3c5495462.1920x1080.jpg',
+		title: 'OCEAN  COLLECTION',
+		description: 'Do not miss our hot offer. Promotion ends 10/30/2019',
+		category: '5d99f68e419d040eec0f722c'
+	},
+	{
+		id: '2',
+		customId: 'promotion-women-clothing',
+		imageUrl: 'https://media.cntraveler.com/photos/5a009c8e25be133d871c008e/16:9/w_1280,c_limit/Mountain-Travel_GettyImages-503689316.jpg',
+		title: 'Something text',
+		description: 'Do not miss our hot offer. Promotion ends 22/30/2021',
+		category: '5d99f68e419d040eec0f722c'
+	},
+]
 
 const Carousel = () => {
-	const settings = {
-		dots: true,
-		infinite: true,
-		speed: 500,
-		customPaging: () => (
-			<div
-				style={{
-					width: '30px',
-					marginLeft: '55px',
-					color: 'black',
-					border: '1px blue solid'
-				}}
-			>
-			</div>
-		)
-	}
-
-	const carousel = useRef()
-
-	// eslint-disable-next-line no-console
-	console.log(carousel)
-	const slidesData = [
-		{
-			id: 1,
-			title: 'repellendus id ullam',
-			label: 'Dolorem officiis temporibus.'
-		}, {
-			id: 2,
-			title: 'excepturi consequatur est',
-			label: 'Officia non provident dolor esse et neque.'
-		}, {
-			id: 3,
-			title: 'eius doloribus blanditiis',
-			label: 'Ut recusandae vel vitae molestiae id soluta.'
-		},
-	]
-
+	const style = useStyleCarousel()
 	return (
-		<div className="slider-wrapper">
-			{/*<button onClick={() => carousel.current.slickGoTo(0)}>Go to start*/}
-			{/*</button>*/}
-			{/*<button onClick={() => carousel.current.slickGoTo(slidesData.length - 1)}>*/}
-			{/*	*/}
-			{/*</button>*/}
-			<Slider {...settings}>
-				{slidesData.map((slide) =>
-					<div className="slick-slide" key={slide.id}>
-						<h2 className="slick-slide-title">{slide.title}</h2>
-						<img className="slick-slide-image" src={`https://picsum.photos/800/400?img=${slide.id}`} />
-						<label className="slick-slide-label">{slide.label}</label>
+		<Swiper
+			modules={[Navigation, Pagination, EffectFade]}
+			spaceBetween={50}
+			slidesPerView={1}
+			effect="fade"
+			navigation
+			pagination={{ clickable: true }}
+			scrollbar={{ draggable: true }}
+			/* eslint-disable-next-line no-console */
+			onSlideChange={() => console.log('slide change')}
+			/* eslint-disable-next-line no-console */
+			onSwiper={(swiper) => console.log(swiper)}
+		>
+			{slideData.map((slide) => {
+				return <SwiperSlide key={slide.id}>
+					<div>
+						<img className={style.slide} src={slide.imageUrl} alt=""/>
+						<div className={style.textBlock}>
+							<p className={style.title}>{slide.title}</p>
+							<p className={style.desc}>{slide.description}</p>
+							<button className={style.shopBtn}>SHOP NEW ARRIVALS</button>
+						</div>
 					</div>
-				)}
-
-			</Slider>
-		</div>
-
+				</SwiperSlide>
+			})}
+		</Swiper>
 	)
 }
 
