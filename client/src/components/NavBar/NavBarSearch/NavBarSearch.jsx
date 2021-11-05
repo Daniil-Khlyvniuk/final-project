@@ -2,13 +2,16 @@ import { Box } from '@mui/system'
 import React, { useEffect, useState } from 'react'
 import SearchIcon from './SearchIcon/SearchIcon'
 import { Search, StyledAlert, StyledInputBase } from './styles'
+import { useDispatch, useSelector } from 'react-redux'
+import { getAllProducts } from '../../../store/Products/productsSlice'
 
-import defProducts from './products.json'
+import defProducts from '../../../data/products.json'
 
 const HeaderSearch = () => {
-	const [products, setProducts] = useState([])
+	const products = useSelector(state => state.products)
 	const [search, setSearch] = useState('')
 	const [warning, setWarning] = useState('')
+	const dispatch = useDispatch()
 
 	useEffect(() => {
 		setTimeout(() => {
@@ -19,18 +22,19 @@ const HeaderSearch = () => {
 
 	const handleChange = (e) => {
 		if (!e.target.value) {
-			setProducts(defProducts)
+			dispatch(getAllProducts(defProducts))
 			setSearch('')
 			return
 		}
 
 		setSearch(e.target.value)
-		setProducts(
+		dispatch(getAllProducts(
 			defProducts.filter((good) =>
-				good.name.toLowerCase().includes(e.target.value.toLowerCase()) || 
-				good.color.toLowerCase().includes(e.target.value.toLowerCase())
-			))
+				good.title.toLowerCase().includes(e.target.value.toLowerCase())
+			)))
 	}
+
+	console.log(products)
 
 	return (
 		<Box>
