@@ -1,10 +1,15 @@
-import React, {useEffect} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import Card from '../ProductCard/ProductCard'
+<<<<<<< HEAD
 import {makeStyles} from '@mui/styles'
 import {getAllProducts} from '../../store/Products/productsSlice'
 import axios from 'axios'
 import {Typography} from '@mui/material'
+=======
+import { makeStyles } from '@mui/styles'
+import { productsOperations, productsSelectors } from '../../store/Products'
+>>>>>>> develop
 
 const useStyles = makeStyles((theme)=>({
 	container: {
@@ -18,22 +23,13 @@ const useStyles = makeStyles((theme)=>({
 }))
 
 const CardList = () => {
-	const products = useSelector(state => state.products)
+	const products = useSelector(productsSelectors.getProducts())
 	const dispatch = useDispatch()
 	const classes = useStyles()
 
-	const fetch = async () => {
-		const data = await axios
-			.get('/products.json')
-			.then(products => products?.data)
-		if (!data) return
-
-		dispatch(getAllProducts(data))
-	}
-
 	useEffect(() => {
-		fetch()
-	}, [])
+		dispatch(productsOperations.fetchProducts())
+	}, [dispatch])
 
 	return (
 		<div>
@@ -48,7 +44,7 @@ const CardList = () => {
 							key={key}
 							image={item.img}
 							title={item.title}
-							price={item.price}/>
+							price={item.price} />
 					))
 				}
 			</div>

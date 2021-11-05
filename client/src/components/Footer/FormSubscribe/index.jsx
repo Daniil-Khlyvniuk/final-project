@@ -1,7 +1,10 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Formik, Form} from 'formik'
 import {Button, TextField, Alert} from '@mui/material'
 import * as yup from 'yup'
+
+//for server subscribe
+// import {addSubscriber} from '../../../utils/API/subscribersAPI'
 
 import { styled } from '@mui/material/styles'
 
@@ -17,8 +20,16 @@ const userFormSchema = yup.object().shape({
 })
 
 const FormSibscribe = () => {
+	const [subscribeStatus, setSubscribeStatus] = useState(null)
 	const handleSubmit = () => {
-  
+		// const handleSubmit = ({email}) => {
+		//then import addSubscriber from API
+		// addSubscriber(email)
+		
+		// console.log(email)
+		setSubscribeStatus({ success: 'You subscribed with success!' })
+		// setSubscribeStatus({ error: 'Error happened while subscription! Try later' })
+		setTimeout(() => setSubscribeStatus(null), 5000)
 	}
 
 	return (
@@ -53,10 +64,26 @@ const FormSibscribe = () => {
 					</StyledForm>
 
 					{!formikProps.isValid && (
-						<Alert severity="error"
+						<Alert 
+							severity="error"
+							icon={false}
 							sx={{width: '100%'}}
 						>
 							{formikProps.errors.email}
+						</Alert>
+					)}
+					{subscribeStatus && subscribeStatus['success'] && (
+						<Alert icon={false} severity="success"
+							sx={{ width: '100%' }}
+						>
+							{subscribeStatus.success}
+						</Alert>
+					)}
+					{subscribeStatus && subscribeStatus['error'] && (
+						<Alert icon={false} severity="success"
+							sx={{ width: '100%' }}
+						>
+							{subscribeStatus.error}
 						</Alert>
 					)}
 				</>

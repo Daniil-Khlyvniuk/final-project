@@ -1,9 +1,10 @@
 import React from 'react'
+import CardList from '../../components/CardList/CardList'
 
 const Main = () => {
 	return (
 		<div>
-			<h1>Main</h1>
+			<CardList />
 		</div>
 	)
 }

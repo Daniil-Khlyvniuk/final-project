@@ -43,6 +43,7 @@ module.exports = {
 				'ignorePattern': '^import .*'
 			}
 		],
+		// 'no-console': 'off',
 		'no-console': [
 			'error',
 		],
