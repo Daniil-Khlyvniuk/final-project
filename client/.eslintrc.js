@@ -43,10 +43,9 @@ module.exports = {
 				'ignorePattern': '^import .*'
 			}
 		],
-		// 'no-console': [
-		//   'error',
-		// ],
-		'no-console': 0,
+		 'no-console': [
+		   'error',
+		 ],
 		'indent': [
 			'error',
 			'tab'
