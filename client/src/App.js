@@ -1,6 +1,4 @@
 import React from 'react'
-import CardList from './components/CardList/CardList'
-import Catalog from './components/Catalog/Catalog'
 import Header from './components/NavBar/NavBar'
 import AppRoutes from './routes/AppRoutes'
 import Footer from './components/Footer'
@@ -21,8 +19,6 @@ const App = () => {
 			<Container maxWidth="lg">
 				<AppRoutes/>
 			</Container>
-			<CardList />
-			<Catalog />
 			<Footer />
 		</div>
 	)

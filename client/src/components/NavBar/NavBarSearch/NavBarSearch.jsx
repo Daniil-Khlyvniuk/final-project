@@ -8,7 +8,7 @@ import { getAllProducts } from '../../../store/Products/productsSlice'
 import defProducts from '../../../data/products.json'
 
 const HeaderSearch = () => {
-	const products = useSelector(state => state.products)
+	const products = useSelector(state => state.products.list)
 	const [search, setSearch] = useState('')
 	const [warning, setWarning] = useState('')
 	const dispatch = useDispatch()
@@ -34,7 +34,7 @@ const HeaderSearch = () => {
 			)))
 	}
 
-	console.log(products)
+	console.log('products length', products.length)
 
 	return (
 		<Box>
