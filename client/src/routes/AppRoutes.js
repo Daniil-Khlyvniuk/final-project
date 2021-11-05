@@ -15,32 +15,41 @@ import Blog from '../staticPages/Blog/Blog'
 import Login from '../pages/Login/Login'
 import Cart from '../pages/Cart/Cart'
 import Contact from '../staticPages/Contact/Contact'
-import Page404 from '../pages/Page404/Page404'
+import Error404 from '../pages/Error404/Error404'
 import Favorites from '../pages/Favorites/Favorites'
-import TermsOfService from '../staticPages/TermsOfService/TermsOfService'
+
+// get isLoggedIn from Redux
 
 const AppRoutes = () => {
+
 	return (
 		<Switch>
 			<Route exact path='/'><Main /></Route>
 			<Route exact path='/about'><About /></Route>
-			<Route exact path='/login'><Login /></Route>
-			<ProtectedRoute exact path='/favorites' isLoggedIn={false}>
-				<Favorites />
-			</ProtectedRoute>
-			<Route exact path='/productslist'><ProductsList /></Route>
-			<Route exact path='/productdetails'><ProductDetails /></Route>
-			<Route exact path='/cart'><Cart /></Route>
 			<Route exact path='/contact'><Contact /></Route>
-			<Route exact path='/catalog'><Catalog /></Route>
+			<Route exact path='/login'><Login /></Route>
+			<Route exact path='/favorites'><Favorites /></Route>
+			<ProtectedRoute exact path='/productslist' isLoggedIn={false}>
+				<ProductsList />
+			</ProtectedRoute>
+			<ProtectedRoute exact path='/productdetails' isLoggedIn={false}>
+				<ProductDetails />
+			</ProtectedRoute>
+			<ProtectedRoute exact path='/cart' isLoggedIn={false}>
+				<Cart />
+			</ProtectedRoute>
+			<ProtectedRoute exact path='/catalog' isLoggedIn={false}>
+				<Catalog />
+			</ProtectedRoute>
 			<Route exact path='/paymentanddelivery'><PaymentAndDelivery /></Route>
-			<Route exact path='/returns'><Returns /></Route>
+			<ProtectedRoute exact path='/returns' isLoggedIn={false}>
+				<Returns />
+			</ProtectedRoute>
 			<Route exact path='/privacypolicy'><PrivacyPolicy /></Route>
 			<Route exact path='/aboutus'><AboutUs /></Route>
 			<Route exact path='/reviews'><Reviews /></Route>
 			<Route exact path='/blog'><Blog /></Route>
-			<Route exact path='/termsofservice'><TermsOfService /></Route>
-			<Route exact path='*'><Page404 /></Route>
+			<Route exact path='*'><Error404 /></Route>
 		</Switch>
 	)
 }
