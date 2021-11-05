@@ -42,60 +42,60 @@ const ParentMenuList = ({
 	}, [open])
 
 	return (
-		<>
+		<div style={{ zIndex: '99999999999999' }}>
 			<StyledMenuItem
-				ref={ anchorRef }
-				id={ `${ text }-button` }
-				aria-controls={ open && 'composition-menu' }
-				aria-expanded={ open && 'true' }
+				ref={anchorRef}
+				id={`${text}-button`}
+				aria-controls={open && 'composition-menu'}
+				aria-expanded={open && 'true'}
 				aria-haspopup="true"
-				onClick={ root ? handleToggle : null }
-				onMouseEnter={ parent ? handleOpen : null }
-				onMouseLeave={ handleClose }
+				onClick={root ? handleToggle : null}
+				onMouseEnter={parent ? handleOpen : null}
+				onMouseLeave={handleClose}
 			>
-				{ root ? text.toUpperCase() : text }
-				{ parent && <KeyboardArrowRightIcon/> }
-				{ (root && !open) && <KeyboardArrowDownIcon/> }
-				{ (root && open) && <KeyboardArrowUp/> }
+				{root ? text.toUpperCase() : text}
+				{parent && <KeyboardArrowRightIcon />}
+				{(root && !open) && <KeyboardArrowDownIcon />}
+				{(root && open) && <KeyboardArrowUp />}
 			</StyledMenuItem>
 
 			<Popper
-				open={ open }
-				anchorEl={ anchorRef.current }
-				role={ undefined }
-				placement={ root ? 'bottom-start' : 'right-start' }
+				open={open}
+				anchorEl={anchorRef.current}
+				role={undefined}
+				placement={root ? 'bottom-start' : 'right-start'}
 				transition
 				disablePortal
 			>
-				{ ({ TransitionProps, placement }) => (
+				{({ TransitionProps, placement }) => (
 					<Grow
-						{ ...TransitionProps }
-						style={ {
+						{...TransitionProps}
+						style={{
 							transformOrigin:
 								placement === 'bottom-start' ? 'left top' : 'left bottom',
-						} }
+						}}
 					>
 						<Paper
-							ref={ menuList }
-							onMouseLeave={ handleClose }
+							ref={menuList}
+							onMouseLeave={handleClose}
 						>
 							<ClickAwayListener
-								onClickAway={ handleClose }
+								onClickAway={handleClose}
 							>
 								<MenuList
-									ref={ menuList }
-									autoFocusItem={ open }
-									id={ `${ text }-menu` }
-									aria-labelledby={ `${ text }-button` }
+									ref={menuList}
+									autoFocusItem={open}
+									id={`${text}-menu`}
+									aria-labelledby={`${text}-button`}
 								>
-									{ children }
+									{children}
 								</MenuList>
 							</ClickAwayListener>
 						</Paper>
 					</Grow>
-				) }
+				)}
 			</Popper>
-		</>
+		</div >
 	)
 }
 
