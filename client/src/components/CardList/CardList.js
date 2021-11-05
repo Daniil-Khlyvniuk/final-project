@@ -1,15 +1,13 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Card from '../ProductCard/ProductCard'
-<<<<<<< HEAD
+
 import {makeStyles} from '@mui/styles'
-import {getAllProducts} from '../../store/Products/productsSlice'
-import axios from 'axios'
+
 import {Typography} from '@mui/material'
-=======
-import { makeStyles } from '@mui/styles'
+
 import { productsOperations, productsSelectors } from '../../store/Products'
->>>>>>> develop
+
 
 const useStyles = makeStyles((theme)=>({
 	container: {
@@ -34,7 +32,7 @@ const CardList = () => {
 	return (
 		<div>
 			<Typography fontSize={32}
-				sx={{mb:'14px'}}
+				sx={{mb:'14px', mt:'85px'}}
 				variant={'h2'} className={classes.title}>NEW IN</Typography>
 			<div className={classes.container}>
 				{
