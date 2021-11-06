@@ -23,7 +23,7 @@ const StyledGrid = styled(Grid)(() => ({
 
 
 const styles = {
-	padding: '72px 100px 0px 25px', textAlign: 'center',
+	padding: '72px 50px 0px 50px', textAlign: 'center',
 }
 
 
