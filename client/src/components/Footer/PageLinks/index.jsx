@@ -9,14 +9,6 @@ const PageLinks = ({linksArr}) =>
 	return (
 		<Grid item xs={12} sm={3}>
 			<List>
-				
-				{/* <Link 
-						to="/shop" 
-						component={RouterLink}
-						variant={'bold'}
-					>
-						shop
-					</Link> */}
 				{linksArr.title && (
 					<ListItem>
 						<Typography
@@ -35,58 +27,14 @@ const PageLinks = ({linksArr}) =>
 									to={link.url}
 									component={RouterLink}
 									variant={'semiBold'}
+									dangerouslySetInnerHTML={{__html: link.description }} 
 								>
-									{link.description}
+									{/* {link.description} */}
 								</Link>
 							</ListItem>
 						)
 					)
 				}
-				{/* <ListItem>
-					<Link 
-						to="/catalog"
-						component={RouterLink}
-						variant={'semiBold'}
-					>
-						catalog
-					</Link>
-				</ListItem>
-				<ListItem>
-					<Link 
-						to="/paymentanddelivery"
-						component={RouterLink}
-						variant={'semiBold'}
-					>
-						payment & delivery
-					</Link>
-				</ListItem>
-				<ListItem>
-					<Link 
-						to="/returns" 
-						component={RouterLink}
-						variant={'semiBold'}
-					>
-						returns
-					</Link>
-				</ListItem>
-				<ListItem>
-					<Link 
-						to="/privacypolicy"
-						component={RouterLink}
-						variant={'semiBold'}
-					>
-						privacy Policy
-					</Link>
-				</ListItem>
-				<ListItem>
-					<Link 
-						to="/termsOfService"
-						component={RouterLink}
-						variant={'semiBold'}
-					>
-						terms of service
-					</Link>
-				</ListItem> */}
 			</List>
 		</Grid>
 	)
@@ -94,10 +42,8 @@ const PageLinks = ({linksArr}) =>
 
 PageLinks.propTypes = {
 	linksArr: PropTypes.shape({
-		// _id: PropTypes.string,
 		title: PropTypes.string,
 		links: PropTypes.arrayOf(PropTypes.shape({
-			// _id: PropTypes.string,
 			description: PropTypes.string,
 			url: PropTypes.string
 		}))
