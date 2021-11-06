@@ -9,65 +9,24 @@ const queryCreator = require("../commonHelpers/queryCreator");
 const filterParser = require("../commonHelpers/filterParser");
 const _ = require("lodash");
 
-// exports.addImages = (req, res, next) => {
-//   if (req.files.length > 0) {
-//     res.json({
-//       message: "Photos are received"
-//     });
-//   } else {
-//     res.json({
-//       message:
-//         "Something wrong with receiving photos at server. Please, check the path folder"
-//     });
-//   }
-// };
-
 exports.addProduct = async (req, res) => {
 	const productFields = req.body
-	console.log("[addProduct]:productFields", productFields)
-
 	const src = fileService.saveFile(req.files.img)
-
-	console.log("[addProduct]:req.files.img", req.files.img);
-	console.log("[addProduct]:productFields.name", productFields.name);
 	productFields.itemNo = rand();
 
-	// try {
 	productFields.name = productFields.name
 	.toLowerCase()
 	.trim()
 	.replace(/\s\s+/g, " ");
 
-	// const imageUrls = req.body.previewImages.map(img => {
-	//   return `/img/products/${productFields.itemNo}/${img.name}`;
-	// });
-
-	// productFields.imageUrls = _.cloneDeep(imageUrls);
-	// } catch (err) {
-	// 	res.status(400).json({
-	// 		message: `Error happened on server: "${ err }" `
-	// 	});
-	// }
-
-	// const updatedProduct = queryCreator(productFields);
 	try {
 		const newProduct = await Product.create({ ...productFields, imageUrls: src })
 		return res.json(newProduct)
-
 	} catch (err) {
 		res.status(400).json({
 			message: `Error happened on server: "${ err }" `
 		})
 	}
-
-	// newProduct
-	// .save()
-	// .then(product => res.json(product))
-	// .catch(err =>
-	// 	res.status(400).json({
-	// 		message: `Error happened on server: "${ err }" `
-	// 	})
-	// );
 };
 
 exports.updateProduct = (req, res, next) => {

@@ -2,22 +2,19 @@ const uuid = require("uuid")
 const path = require("path")
 
 const createFileName = () => {
-	return uuid.v4() + ".jpg"
+	return `upload/images/${ uuid.v4() }.jpg`
 }
 
 module.exports.saveFile = (file) => {
-	console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-	try {
-		return file.map(img => {
+	return file.map(img => {
+		try {
 			const fileName = createFileName()
-			const filePath = path.resolve("static", fileName)
+			const filePath = path.resolve("static/upload/images", fileName)
 			img.mv(filePath)
 			return fileName
-		})
-		// console.log("[saveFile]:files", file);
-
-	} catch (err) {
-		console.log("[saveFile]:err", err)
-	}
+		} catch (err) {
+			console.log("[saveFile]:err", err)
+		}
+	})
 }
 
