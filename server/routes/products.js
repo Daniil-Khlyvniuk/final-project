@@ -14,11 +14,6 @@ const {
   searchProducts,
 } = require("../controllers/products");
 
-// @route   POST /products/images
-// @desc    Add images
-// @access  Private
-
-
 // @route   POST /products
 // @desc    Create new product
 // @access  Private

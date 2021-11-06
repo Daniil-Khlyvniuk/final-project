@@ -3,7 +3,7 @@ const queryCreator = require("../commonHelpers/queryCreator");
 const _ = require("lodash");
 
 exports.addCategory = (req, res, next) => {
-  Catalog.findOne({ id: req.body.id }).then(category => {
+  Catalog.findOne({ _id: req.body._id }).then(category => {
     if (category) {
       return res
         .status(400)
@@ -55,15 +55,15 @@ exports.aupdateCategory = (req, res, next) => {
 };
 
 exports.deleteCategory = (req, res, next) => {
-  Catalog.findOne({ id: req.params.id }).then(async category => {
+  Catalog.findOne({ _id: req.params.id }).then(async category => {
     if (!category) {
       return res.status(400).json({
         message: `Category with id "${req.params.id}" is not found.`
       });
     } else {
-      const categoryToDelete = await Catalog.findOne({ id: req.params.id });
+      const categoryToDelete = await Catalog.findOne({ _id: req.params.id });
 
-      Catalog.deleteOne({ id: req.params.id })
+      Catalog.deleteOne({ _id: req.params.id })
         .then(deletedCount =>
           res.status(200).json({
             message: `Category witn id "${categoryToDelete.id}" is successfully deleted from DB.`,
