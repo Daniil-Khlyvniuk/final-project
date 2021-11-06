@@ -3,10 +3,11 @@ import React, { useRef } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react'
 
 import { EffectFade, Navigation, Pagination } from 'swiper'
-import 'swiper/swiper.scss'
+
+import 'swiper/swiper.min.css'
 import 'swiper/modules/pagination/pagination.min.css'
 import 'swiper/modules/effect-fade/effect-fade.min.css'
-import { useStyleCarousel } from './useStyleCarousel'
+import { useStyleCarousel } from '../../utils/customHooks/useStyleCarousel'
 // import Button from '@mui/material/Button'
 
 const slideData = [

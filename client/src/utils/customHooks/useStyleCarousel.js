@@ -1,5 +1,5 @@
 import { makeStyles } from '@mui/styles'
-import theme from '../../utils/Theme'
+import theme from '../Theme'
 
 export const useStyleCarousel = makeStyles({
 	slide:{
