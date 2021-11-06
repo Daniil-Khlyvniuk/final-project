@@ -1,10 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import categoriesApi from '../../utils/API/categoriesApi'
+import API from '../../utils/API/categoriesApi'
 
 const fetchCategories = createAsyncThunk(
 	'category/fetchCategories',
 	async () => {
-		const response = await categoriesApi.getCategories()
+		const response = await API.getCategories()
+		// eslint-disable-next-line no-console
+		console.log(response.data)
+
 		return response.data
 	}
 )

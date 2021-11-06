@@ -1,8 +1,9 @@
+/* eslint-disable no-undef */
 // eslint-disable-next-line no-unused-vars
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { categoryOperations, categorySelectors } from '../../store/Category'
-import { setCategory, setCategoryTree } from '../../store/Category/categorySlice'
+// import { setCategory } from '../../store/Category/categorySlice'
 
 // const dataTest = [
 // 	{
@@ -99,10 +100,13 @@ import { setCategory, setCategoryTree } from '../../store/Category/categorySlice
 
 const UseCategoryTree = () => {
 	// const [categoryTree, setCategoryTree] = useState([])
-	// const [category, setCategory] = useState([])
+	const [category, setCategory] = useState([])
 	const categoryTree = useSelector(categorySelectors.getCategoryTree())
-	const category = useSelector(categorySelectors.getCategory())
+	// const category = useSelector(categorySelectors.getCategory())
 	const dispatch = useDispatch()
+
+	// eslint-disable-next-line no-console
+	console.log('category_____category', category)
 
 	const getParent = (parentId, curArray) => {
 		return curArray.find(el => el._id === parentId)
@@ -110,12 +114,37 @@ const UseCategoryTree = () => {
 
 	const addChildren = (curElem, curArray) => {
 		const parent = getParent(curElem.parentId, curArray)
-		parent.children = [...parent.children || [], curElem]
-		return parent
+		if (parent.children){
+			return {
+				...parent,
+				children: [
+					...parent.children,
+					curElem
+				]
+			}
+		} else {
+			return {
+				...parent,
+				children: [
+					curElem
+				]
+			}
+		}
+
+
+
+
+
+
+
+
+		// parent.children = [...parent.children || [], curElem]
 	}
 
 	const setTree = (tree, elem) => {
 		let res = [...tree]
+		// eslint-disable-next-line no-console
+		console.log(res)
 		if (res.includes(elem)) {
 			res = res.filter(el => el._id !== elem._id)
 			res.push(elem)
@@ -130,9 +159,10 @@ const UseCategoryTree = () => {
 	}
 
 	const makeCategoryTree = (arr) => {
+		// eslint-disable-next-line no-debugger
+		// debugger
 		// eslint-disable-next-line no-console
-		console.log(arr)
-
+		console.log('arr', arr)
 		return arr.reduce((tree, curElem, index, curArray) => {
 			if (!curElem.parentId) {
 				tree.push(curElem)
@@ -145,16 +175,24 @@ const UseCategoryTree = () => {
 	}
 
 	useEffect(() => {
-		setTimeout(() => {
-			// setCategory(dataTest)
-			dispatch(setCategory(categoryOperations.fetchCategories())) 
-			// setCategoryTree(makeCategoryTree(category))
-			dispatch(setCategoryTree(makeCategoryTree(category)))
-		}, 500)
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [category])
+		// setCategory(dataTest)
+		dispatch(categoryOperations.fetchCategories())
 
-	return categoryTree
+		// eslint-disable-next-line no-console
+		// console.log('categoryTree111111111', categoryTree)
+		// const test = makeCategoryTree(categoryTree)
+		// setCategoryTree(makeCategoryTree(category))
+		// setCategory(test)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
+
+	useEffect(() => {
+		const test = makeCategoryTree(categoryTree)
+		// setCategoryTree(makeCategoryTree(category))
+		setCategory(test)
+	}, [categoryTree])
+
+	return category
 }
 
 export default UseCategoryTree
