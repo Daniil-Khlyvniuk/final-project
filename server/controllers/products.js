@@ -1,4 +1,6 @@
 const Product = require("../models/Product");
+const fileService = require("../services/fileService")
+
 
 const uniqueRandom = require("unique-random");
 const rand = uniqueRandom(0, 999999);
@@ -7,53 +9,65 @@ const queryCreator = require("../commonHelpers/queryCreator");
 const filterParser = require("../commonHelpers/filterParser");
 const _ = require("lodash");
 
-exports.addImages = (req, res, next) => {
-  if (req.files.length > 0) {
-    res.json({
-      message: "Photos are received"
-    });
-  } else {
-    res.json({
-      message:
-        "Something wrong with receiving photos at server. Please, check the path folder"
-    });
-  }
-};
+// exports.addImages = (req, res, next) => {
+//   if (req.files.length > 0) {
+//     res.json({
+//       message: "Photos are received"
+//     });
+//   } else {
+//     res.json({
+//       message:
+//         "Something wrong with receiving photos at server. Please, check the path folder"
+//     });
+//   }
+// };
 
-exports.addProduct = (req, res, next) => {
-  const productFields = _.cloneDeep(req.body);
+exports.addProduct = async (req, res) => {
+	const productFields = req.body
+	console.log("[addProduct]:productFields", productFields)
 
-  productFields.itemNo = rand();
+	const src = fileService.saveFile(req.files.img)
 
-  try {
-    productFields.name = productFields.name
-      .toLowerCase()
-      .trim()
-      .replace(/\s\s+/g, " ");
+	console.log("[addProduct]:req.files.img", req.files.img);
+	console.log("[addProduct]:productFields.name", productFields.name);
+	productFields.itemNo = rand();
 
-    // const imageUrls = req.body.previewImages.map(img => {
-    //   return `/img/products/${productFields.itemNo}/${img.name}`;
-    // });
+	// try {
+	productFields.name = productFields.name
+	.toLowerCase()
+	.trim()
+	.replace(/\s\s+/g, " ");
 
-    // productFields.imageUrls = _.cloneDeep(imageUrls);
-  } catch (err) {
-    res.status(400).json({
-      message: `Error happened on server: "${err}" `
-    });
-  }
+	// const imageUrls = req.body.previewImages.map(img => {
+	//   return `/img/products/${productFields.itemNo}/${img.name}`;
+	// });
 
-  const updatedProduct = queryCreator(productFields);
+	// productFields.imageUrls = _.cloneDeep(imageUrls);
+	// } catch (err) {
+	// 	res.status(400).json({
+	// 		message: `Error happened on server: "${ err }" `
+	// 	});
+	// }
 
-  const newProduct = new Product(updatedProduct);
+	// const updatedProduct = queryCreator(productFields);
+	try {
+		const newProduct = await Product.create({ ...productFields, imageUrls: src })
+		return res.json(newProduct)
 
-  newProduct
-    .save()
-    .then(product => res.json(product))
-    .catch(err =>
-      res.status(400).json({
-        message: `Error happened on server: "${err}" `
-      })
-    );
+	} catch (err) {
+		res.status(400).json({
+			message: `Error happened on server: "${ err }" `
+		})
+	}
+
+	// newProduct
+	// .save()
+	// .then(product => res.json(product))
+	// .catch(err =>
+	// 	res.status(400).json({
+	// 		message: `Error happened on server: "${ err }" `
+	// 	})
+	// );
 };
 
 exports.updateProduct = (req, res, next) => {

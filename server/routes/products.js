@@ -43,30 +43,30 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
-const upload = multer({
-  storage: storage,
-  limits: {
-    fileSize: 1024 * 1024 * 3, // Max size 5MB
-  },
-  fileFilter: fileFilter,
-});
+// const upload = multer({
+//   storage: storage,
+//   limits: {
+//     fileSize: 1024 * 1024 * 3, // Max size 5MB
+//   },
+//   fileFilter: fileFilter,
+// });
 
 // @route   POST /products/images
 // @desc    Add images
 // @access  Private
-router.post(
-  "/images",
-  passport.authenticate("jwt-admin", { session: false }),
-  upload.array("photos"),
-  addImages
-);
+// router.post(
+//   "/images",
+//   passport.authenticate("jwt-admin", { session: false }),
+//   upload.array("photos"),
+//   addImages
+// );
 
 // @route   POST /products
 // @desc    Create new product
 // @access  Private
 router.post(
   "/",
-  passport.authenticate("jwt-admin", { session: false }),
+  // passport.authenticate("jwt-admin", { session: false }),
   addProduct
 );
 
