@@ -24,8 +24,6 @@ const Catalog = () => {
 		dispatch(productsOperations.fetchProducts())
 	}, [dispatch])
 
-	console.log('products --> ', products)
-
 	return (
 
 		<div className={classes.container}>
