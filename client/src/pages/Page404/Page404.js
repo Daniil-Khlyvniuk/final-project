@@ -9,36 +9,41 @@ import theme from '../../utils/Theme'
 const StyledGrid = styled(Grid)(() => ({
 	backgroundImage: 'url(https://telegra.ph/file/3cc57f6e2278684805a33.jpg)',
 	backgroundSize: 'cover',
-	paddingBottom: '0.67em'
+	backgroundPosition: 'center',
+	paddingBottom: '0.67em',
+	alignItems:'center',
 }))
 
+
+const styles = {
+	padding: '72px 50px 0px 50px', textAlign: 'center',
+}
 
 const Error404 = () => {
 	return (
 		<StyledGrid
 			container
 			direction={'column'}
-			alignItems='center'
 			className={ 'errorPage' }
-			spacing={{ xs: 9}}
+			// spacing={{sx:9 , xs: 9}}
 		>
 			<Grid item>
 				<Typography variant={'h1'}>
-        404
+    404
 				</Typography>
 			</Grid>
 			<Grid item>
-				<Typography  variant={'h2'}>
-					Oops. Looks like you came to wrong page on our server
+				<Typography style={styles}  variant={'h2'}>
+      Oops. Looks like you came to wrong page on our server
 				</Typography>
 			</Grid>
 			<Grid item>
-				<Typography variant={'body1'}>
-					You may have mistyped the
-					address or the page may have moved.
+				<Typography style={styles} variant={'body1'}>
+      You may have mistyped the
+      address or the page may have moved.
 				</Typography>
 			</Grid>
-			<Grid item>
+			<Grid style={styles} item>
 				<ThemeProvider theme={theme}>
 					<Button
 						color="primary"
