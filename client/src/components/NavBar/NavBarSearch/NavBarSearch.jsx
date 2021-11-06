@@ -3,11 +3,11 @@ import React, { useState } from 'react'
 import SearchIcon from './SearchIcon/SearchIcon'
 import { Search, StyledAlert, StyledInputBase } from './styles'
 import { useDispatch, useSelector } from 'react-redux'
-import { setAllProducts } from '../../../store/Products/productsSlice'
-import { productsOperations, productsSelectors } from '../../../store/Products'
+// import { setAllProducts } from '../../../store/Products/productsSlice'
+import {productsActions, productsOperations, productsSelectors } from '../../../store/Products'
 
 const HeaderSearch = () => {
-	const getProductsList = useSelector(productsSelectors.getProductsList())
+	const getProductsList = useSelector(productsSelectors.getProducts())
 	const [search, setSearch] = useState('')
 	const dispatch = useDispatch()
 	let timer
@@ -22,9 +22,9 @@ const HeaderSearch = () => {
 				return
 			}
 
-			dispatch(setAllProducts(
+			dispatch(productsActions.setAllProducts(
 				getProductsList.filter((good) =>
-					good.title.toLowerCase().includes(e.target.value.toLowerCase())
+					good.name.toLowerCase().includes(e.target.value.toLowerCase())
 				)
 			))
 		}, 1000)
