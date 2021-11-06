@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from './components/NavBar/NavBar'
-import AppRoutes from './routes/AppRoutes'
 import Footer from './components/Footer'
+import AppRoutes from './routes/AppRoutes'
 import { Container } from '@mui/material'
 
 
@@ -13,8 +13,8 @@ const App = () => {
 	// //========================================
 
 	return (
-		<div className={ 'App' }>
-			<Header/>
+		<div className={'App'}>
+			<Header />
 			<Container maxWidth="lg">
 				<AppRoutes />
 			</Container>
