@@ -105,28 +105,29 @@ exports.getProducts = (req, res, next) => {
     const sort = req.query.sort;
 
     console.log('TTTTTTTTTT')
-    Product.find({}).exec().then(res => {
-        console.log('res --> ', res);
-    })
-        .catch(err => {
-            console.log('ERRRRR --> ', err);
-        })
-    // Product.find()
-    //     .skip(startPage * perPage - perPage)
-    //     .limit(perPage)
-    //     .sort(sort)
-    //     .then(products => {
-    //         console.log('1111')
-    //         res.send(products)
-    //     })
+    // Product.find({}).exec().then(res => {
+    //     console.log('res --> ', res);
+    //     res.send(products)
+    // })
     //     .catch(err => {
-    //             console.log('222');
-    //
-    //             res.status(400).json({
-    //                 message: `Error happened on server: "${err}" `
-    //             })
-    //         }
-    //     );
+    //         console.log('ERRRRR --> ', err);
+    //     })
+    Product.find()
+        .skip(startPage * perPage - perPage)
+        .limit(perPage)
+        .sort(sort)
+        .then(products => {
+            console.log('1111')
+            res.send(products)
+        })
+        .catch(err => {
+                console.log('222');
+    
+                res.status(400).json({
+                    message: `Error happened on server: "${err}" `
+                })
+            }
+        );
 };
 
 exports.getProductById = (req, res, next) => {

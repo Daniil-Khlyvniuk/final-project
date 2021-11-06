@@ -3,16 +3,16 @@ import React, { useEffect, useState } from 'react'
 
 const dataTest = [
 	{
-		id: 2,
+		// id: 2,
 		name: 'Bedroom',
 		parentId: null,
-		date: Date.now()
+		// date: Date.now()
 	},
 	{
-		id: 3,
+		// id: 3,
 		name: 'Bedroom--children-1',
 		parentId: 2,
-		date: Date.now()
+		// date: Date.now()
 	},
 	{
 		id: 33,
@@ -51,10 +51,10 @@ const dataTest = [
 		date: Date.now()
 	},
 	{
-		id: 5,
+		// id: 5,
 		name: 'Bed linen',
 		parentId: null,
-		date: Date.now()
+		// date: Date.now()
 	},
 	{
 		id: 6,
@@ -63,34 +63,34 @@ const dataTest = [
 		date: Date.now()
 	},
 	{
-		id: 7,
+		// id: 7,
 		name: 'Kitchen',
 		parentId: null,
-		date: Date.now()
+		// date: Date.now()
 	},
 	{
-		id: 8,
+		// id: 8,
 		name: 'Bathroom',
 		parentId: null,
-		date: Date.now()
+		// date: Date.now()
 	},
 	{
-		id: 9,
+		// id: 9,
 		name: 'Loungewear',
 		parentId: null,
-		date: Date.now()
+		// date: Date.now()
 	},
 	{
-		id: 10,
+		// id: 10,
 		name: 'Sale',
 		parentId: null,
-		date: Date.now()
+		// date: Date.now()
 	},
 	{
-		id: 11,
+		// id: 11,
 		name: 'Shop All',
 		parentId: null,
-		date: Date.now()
+		// date: Date.now()
 	},
 ]
 
