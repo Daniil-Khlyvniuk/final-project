@@ -1,0 +1,22 @@
+[
+  {
+    "title" : "BEDROOM",
+    "grid": 8,
+    "image": "img/popular/popular1.jpg"
+  },
+  {
+    "title" : "BATHROOM",
+    "grid": 4,
+    "image": "img/popular/popular2.jpg"
+  },
+  {
+    "title" : "BED LINEN",
+    "grid": 4,
+    "image": "img/popular/popular3.jpg"
+  },
+  {
+    "title" : "LOUNGEWEAR",
+    "grid": 8,
+    "image": "img/popular/popular4.jpg"
+  }
+]

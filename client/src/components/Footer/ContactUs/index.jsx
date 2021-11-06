@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link as RouterLink } from 'react-router-dom'
 import { Grid, List, ListItem, Typography, Link } from '@mui/material'
 
 const ContactUs = () => {
@@ -7,13 +6,11 @@ const ContactUs = () => {
 		<Grid item xs={12} sm={3}>
 			<List>
 				<ListItem>
-					<Link
-						to="/contact" 
-						component={RouterLink}
-						variant={'bold'}
+					<Typography
+						variant="menuBold"
 					>
 						contact us
-					</Link>
+					</Typography>
 				</ListItem>
 				<ListItem>
 					<Link

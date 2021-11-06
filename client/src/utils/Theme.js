@@ -1,3 +1,4 @@
+
 import { createTheme } from '@mui/material/styles'
 
 const theme = createTheme({
@@ -12,6 +13,7 @@ const theme = createTheme({
 		},
 	},
 	palette: {
+
 		primary: { main: '#373F41' },
 		secondary: { main: '#5C5E60' },
 		error: { main: '#8C8C8C' },
@@ -51,6 +53,12 @@ const theme = createTheme({
 			fontWeight: 200,
 			fontSize: '14px',
 			lineHeight: 'normal'
+		},
+		sectionHeading : {
+			textTransform: 'uppercase' ,
+			letterSpacing : '5px',
+			color:'primary',
+			textAlign:'center'
 		},
 	},
 	components: {
@@ -153,7 +161,7 @@ const theme = createTheme({
 				}
 			],
 		}
-
 	}
 })
+
 export default theme

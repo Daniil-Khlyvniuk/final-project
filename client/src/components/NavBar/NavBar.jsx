@@ -8,28 +8,26 @@ import CartIcon from './NavBarIcons/CartIcon/CartIcon'
 import NavBarSearch from './NavBarSearch/NavBarSearch'
 import { useStyles } from './styles'
 import Category from '../Category/Category'
-// import Navbarlist from './NavBarList/NavBarList'
-// import NavBarLanguages from './NavBarLanguages/NavBarLanguages'
 
 const Navbar = () => {
 	const classes = useStyles()
 
 	return (
-		<Box sx={{ borderColor: '#373F41', borderBottom: 1 }}>
+		<Box sx={ { borderColor: '#373F41', borderBottom: 1 } }>
 			<Container maxWidth="lg">
-				<AppBar position="static" sx={{ boxShadow: 'none' }}>
-					<Toolbar className={classes.header} disableGutters={true} >
-						<NavBarLogo />
-						{/*<NavbarMenu />*/}
-						<Category />
-						{/* <Navbarlist /> */}
-						<NavBarSearch />
-						<div className={classes.iconsWrapper}>
-							<LoginIcon />
-							<FavoriteIcon />
-							<CartIcon />
+				<AppBar position="static" sx={ { boxShadow: 'none' } }>
+					<Toolbar className={ classes.header }>
+						<NavBarLogo/>
+						{/*<NavbarMenu />*/ }
+						<Category/>
+						{/* <Navbarlist /> */ }
+						<NavBarSearch/>
+						<div className={ classes.iconsWrapper }>
+							<LoginIcon/>
+							<FavoriteIcon/>
+							<CartIcon/>
 						</div>
-						{/* <NavBarLanguages /> */}
+						{/* <NavBarLanguages /> */ }
 					</Toolbar>
 				</AppBar>
 			</Container>

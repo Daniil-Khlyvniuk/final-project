@@ -1,14 +1,17 @@
 import React from 'react'
-import { StyledMenuItem } from '../style'
+import { StyledMenuItem } from './style'
+import PropTypes from 'prop-types'
 
-// eslint-disable-next-line react/prop-types
-const DeepChild = ({ text, handleClick }) => {
-	// eslint-disable-next-line react/prop-types
+const DeepChild = ({ text }) => {
 	return (
-		<StyledMenuItem onClick={ handleClick }>
+		<StyledMenuItem>
 			{ text }
 		</StyledMenuItem>
 	)
+}
+
+DeepChild.propTypes = {
+	text: PropTypes.string.isRequired,
 }
 
 export default DeepChild
