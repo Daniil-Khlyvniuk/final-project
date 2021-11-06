@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
+const fileUpload = require("express-fileupload")
 var cors = require("cors");
 const path = require("path");
 require("dotenv").config();
@@ -35,11 +36,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // DB Config
+// const db = require("./config/keys").mongoURI;
 const db = require("./config/keys").mongoURI;
+console.log("[db]", db);
+
 // Connect to MongoDB
 
 // Passport middleware
 app.use(passport.initialize());
+
+
+app.use(fileUpload({}));
+app.use(express.static("static"))
 
 // Passport Config
 require("./config/passport")(passport);

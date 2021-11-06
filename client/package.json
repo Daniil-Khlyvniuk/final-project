@@ -56,6 +56,8 @@
     ]
   },
   "devDependencies": {
-    "prettier": "2.4.1"
-  }
+    "prettier": "2.4.1",
+    "axios": "^0.24.0"
+  },
+  "proxy": "http://localhost:5000"
 }
