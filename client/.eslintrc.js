@@ -13,7 +13,7 @@ module.exports = {
 			'jsx': true,
 			'js': true
 		},
-		'ecmaVersion': 2018,
+		'ecmaVersion': 2020,
 		'sourceType': 'module',
 		'parser': 'babel-eslint',
 	},
@@ -43,6 +43,7 @@ module.exports = {
 				'ignorePattern': '^import .*'
 			}
 		],
+		// 'no-console': 'off',
 		'no-console': [
 			'error',
 		],

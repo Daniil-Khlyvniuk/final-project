@@ -1,11 +1,13 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const UseMakeNodeChild = (objectTree, Parent, Child) => {
 	if (objectTree.length < 1) return
+
 	const makeResultList = (objectTree) => objectTree.map((group, i) => {
 		if (group.children) {
 			return (
-				<Parent key={ i } text={ group.name }>
+				<Parent parent key={ i } text={ group.name }>
 					{
 						makeResultList(group.children)
 					}
@@ -19,6 +21,12 @@ const UseMakeNodeChild = (objectTree, Parent, Child) => {
 	})
 
 	return makeResultList(objectTree)
+}
+
+UseMakeNodeChild.propTypes = {
+	objectTree: PropTypes.array.isRequired,
+	Parent: PropTypes.object.isRequired,
+	Child: PropTypes.object.isRequired
 }
 
 export default UseMakeNodeChild

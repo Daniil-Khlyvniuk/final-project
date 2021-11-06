@@ -1,3 +1,4 @@
+
 import { createTheme } from '@mui/material/styles'
 
 const theme = createTheme({
@@ -12,6 +13,7 @@ const theme = createTheme({
 		},
 	},
 	palette: {
+
 		primary: { main: '#373F41' },
 		secondary: { main: '#5C5E60' },
 		error: { main: '#8C8C8C' },
@@ -52,6 +54,12 @@ const theme = createTheme({
 			fontSize: '14px',
 			lineHeight: 'normal'
 		},
+		sectionHeading : {
+			textTransform: 'uppercase' ,
+			letterSpacing : '5px',
+			color:'primary',
+			textAlign:'center'
+		},
 	},
 	components: {
 		MuiButton: {
@@ -84,6 +92,37 @@ const theme = createTheme({
 						},
 					}
 				}
+			]
+		},
+		MuiTab:{
+			variants: [
+				{
+					props: { variant: 'active'},
+					style: {
+						border: '1px solid #000',
+						borderBottom: 'none',
+						padding: '5px 77px',
+					}
+				},
+				{
+					props: {variant: 'default'},
+					style: {
+						borderBottom: '1px solid #000',
+						padding: '5px 77px',
+					}
+				},
+			]
+		},
+		MuiTabs:{
+			variants: [
+				{
+					props: { variant: 'form-tab' },
+					style: {
+						'& span.MuiTabs-indicator': {
+							display: 'none',
+						},
+					}
+				},
 			]
 		},
 		MuiLink: {
@@ -122,7 +161,7 @@ const theme = createTheme({
 				}
 			],
 		}
-
 	}
 })
+
 export default theme

@@ -3,18 +3,15 @@ import React from 'react'
 // import Footer from './components/Footer'
 import AppRoutes from './routes/AppRoutes'
 import { Container } from '@mui/material'
-import cardActions from './store/Card'
-import { useDispatch } from 'react-redux'
 import Carousel from './components/Carousel/Carousel'
 
 
 const App = () => {
-	// it is an example of dispatching actions
-	const dispatch = useDispatch()
-	dispatch(cardActions.test())
-	dispatch(cardActions.test2('it works'))
-
-	//========================================
+	// // it is an example of dispatching actions
+	// const dispatch = useDispatch()
+	// dispatch(cardActions.test())
+	// dispatch(cardActions.test2('it works'))
+	// //========================================
 
 	return (
 		<div className={'App'}>
