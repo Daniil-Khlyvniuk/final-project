@@ -29,23 +29,15 @@ const AppRoutes = () => {
 			<Route exact path='/about'><About /></Route>
 			<Route exact path='/contact'><Contact /></Route>
 			<Route exact path='/login'><Login /></Route>
-			<Route exact path='/favorites'><Favorites /></Route>
-			<ProtectedRoute exact path='/productslist' isLoggedIn={false}>
-				<ProductsList />
+			<ProtectedRoute exact path='/favorites' isLoggedIn={false}>
+				<Favorites />
 			</ProtectedRoute>
-			<ProtectedRoute exact path='/productdetails' isLoggedIn={false}>
-				<ProductDetails />
-			</ProtectedRoute>
-			<ProtectedRoute exact path='/cart' isLoggedIn={false}>
-				<Cart />
-			</ProtectedRoute>
-			<ProtectedRoute exact path='/catalog' isLoggedIn={false}>
-				<Catalog />
-			</ProtectedRoute>
+			<Route exact path='/productslist'><ProductsList /></Route>
+			<Route exact path='/productdetails'><ProductDetails /></Route>
+			<Route exact path='/cart'><Cart /></Route>
+			<Route exact path='/catalog'><Catalog /></Route>
 			<Route exact path='/paymentanddelivery'><PaymentAndDelivery /></Route>
-			<ProtectedRoute exact path='/returns' isLoggedIn={false}>
-				<Returns />
-			</ProtectedRoute>
+			<Route exact path='/returns'><Returns /></Route>
 			<Route exact path='/privacypolicy'><PrivacyPolicy /></Route>
 			<Route exact path='/aboutus'><AboutUs /></Route>
 			<Route exact path='/reviews'><Reviews /></Route>

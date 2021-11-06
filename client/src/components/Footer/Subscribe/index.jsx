@@ -1,35 +1,18 @@
 import React from 'react'
-import { makeStyles } from '@mui/styles'
-import { Grid, List, ListItem, Typography,
-	Link as LinkMui } from '@mui/material'
+import { styled } from '@mui/material/styles'
+import { Grid, List, ListItem, Typography, } from '@mui/material'
 
 import FormSubscribe from '../FormSubscribe'
+import SocialLinks from '../../SocialLInks'
 
-import TwitterIcon from '@mui/icons-material/Twitter'
-import FacebookIcon from '@mui/icons-material/Facebook'
-import InstagramIcon from '@mui/icons-material/Instagram'
-
-
-const useStyles = makeStyles(() => ({
-	subscribe: {
-		flexDirection: 'row',
-		flexWrap: 'wrap',
-		justifyContent: 'flex-start',
-	},
-	socialList: {
-		display: 'flex',
-		flexDirection: 'row',
-	},
+const StyledListItem = styled(ListItem)(() => ({
+	flexDirection: 'row',
+	flexWrap: 'wrap',
+	justifyContent: 'flex-start',
 }))
 
+
 const Subscribe = () => {
-
-	const {
-		subscribe,
-		socialList,
-	} = useStyles()
-
-
 	return (
 		<Grid item xs={12} sm={3}>
 			<List>
@@ -37,7 +20,7 @@ const Subscribe = () => {
 					<Typography
 						variant="menuBold"
 					>
-									subscribe
+						subscribe
 					</Typography>
 				</ListItem>
 				<ListItem>
@@ -46,51 +29,18 @@ const Subscribe = () => {
 								on your first order
 					</Typography>
 				</ListItem>
-				<ListItem 
-					className={subscribe}>
+				<StyledListItem>
 					<FormSubscribe />
-				</ListItem>
+				</StyledListItem>
 				<ListItem>
 					<Typography variant="menuBold">
-								Follow us
+						follow us
 					</Typography>
-					<List 
-						className={socialList}
-						disablePadding={true}
-					>
-						<ListItem>
-							<LinkMui
-								href="https://facebook.com" 
-								target="_blank"
-							>
-								<FacebookIcon />
-							</LinkMui>
-						</ListItem>
-						<ListItem>
-							<LinkMui
-								href="https://twitter.com" 
-								target="_blank"
-							>
-								<TwitterIcon />
-							</LinkMui>
-						</ListItem>
-						<ListItem>
-							<LinkMui
-								href="https://instagram.com" 
-								target="_blank"
-							>
-								<InstagramIcon />
-							</LinkMui>
-						</ListItem>
-					</List>
+					<SocialLinks />
 				</ListItem>
 			</List>
 		</Grid>
 	)
 }
-
-// Subscribe.propTypes = {
-// 	styles: PropTypes.object.isRequired,
-// }
 
 export default Subscribe

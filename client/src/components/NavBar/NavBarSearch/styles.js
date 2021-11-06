@@ -1,5 +1,5 @@
 import { styled } from '@mui/material/styles'
-import { InputBase } from '@mui/material'
+import { Alert, InputBase } from '@mui/material'
 
 export const Search = styled('div')(() => ({
 	display: 'flex',
@@ -7,7 +7,6 @@ export const Search = styled('div')(() => ({
 	justifyContent: 'space-between',
 	padding: 0,
 	width: 380,
-	borderBottom: '1px solid #373F41'
 }))
 
 export const StyledInputBase = styled(InputBase)(() => ({
@@ -16,4 +15,15 @@ export const StyledInputBase = styled(InputBase)(() => ({
 	fontWeight: 600,
 	fontSize: '16px',
 	color: '#373F41',
+	display: 'block'
+}))
+
+export const StyledAlert = styled(Alert)(() => ({
+	color: '#373F41',
+	marginLeft: 27,
+	padding: 0,
+	backgroundColor: 'unset',
+	'& .css-acap47-MuiAlert-message, & .MuiAlert-icon': {
+		padding: '5px 0',
+	}
 }))

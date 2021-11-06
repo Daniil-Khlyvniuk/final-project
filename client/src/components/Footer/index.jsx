@@ -1,56 +1,52 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { makeStyles } from '@mui/styles'
-import { Box, Grid } from '@mui/material'
+import { Box, Container, Grid } from '@mui/material'
 
+import { useSelector, useDispatch } from 'react-redux'
+import {linksSelectors, linksOperations} from '../../store/Links'
 import ContactUs from './ContactUs'
 import Subscribe from './Subscribe'
-import ShopLinks from './ShopLinks'
-import AboutLinks from './AboutLinks'
 import Credentials from './Credentials'
+
+import PageLinks from './PageLinks'
+
+//testing api
+// import linkApi from '../../utils/API/linksApi'
 
 const useStyles = makeStyles(() => ({
 	blockStyle: {
-		borderTop: '1px solid #373F41',
-		padding: '80px 60px 40px',
-	},
-	boldText: {
-		textTransform: 'capitalize',
-		textDecoration: 'none',
-		color: '#373F41',
-		fontFamily: 'Mulish',
-		fontWeight: 700,
-		fontSize: '16px',
-		lineHeight: 'normal'
-	},
-	notBoldText: {
-		textTransform: 'capitalize',
-		textDecoration: 'none',
-		color: '#373F41',
-		fontFamily: 'Mulish',
-		fontWeight: 400,
-		fontSize: '16px',
-		lineHeight: 'normal'
+		padding: '80px 0 40px',
 	},
 }))
 
 const Footer = () => {
+	const { blockStyle } = useStyles()
 
-	const {
-		blockStyle,
-		boldText,
-		notBoldText,
-	} = useStyles()
+	const dispatch = useDispatch()
+	const allLinks = useSelector(linksSelectors.getLinks())
+
+	// console.log('links', allLinks)
+
+	useEffect(() => {
+		// linkApi.getLinks
+		dispatch(linksOperations.fetchLinks())
+	}, [dispatch])
 
 	return (
-		<Box>
-			<Grid container columns={12} 
-				className={blockStyle}
-			>
-				<ShopLinks styles={{boldText,notBoldText}} />
-				<AboutLinks styles={{boldText,notBoldText}} />
-				<ContactUs styles={{boldText}} />
-				<Subscribe />
-			</Grid>
+		<Box sx={{ borderColor: '#373F41', borderTop: 1, maxWidth: 1310, margin: '0 auto' }}>
+			<Container maxWidth="lg">
+				<Grid container columns={12}
+					className={blockStyle}
+				>
+					{
+						allLinks.length > 0 && 
+						allLinks.map(
+							links => <PageLinks key={links._id} linksArr={links} />)
+					}
+					<ContactUs />
+					<Subscribe />
+				</Grid>
+			</Container>
 			<Credentials />
 		</Box>
 	)

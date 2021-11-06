@@ -1,7 +1,10 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Formik, Form} from 'formik'
 import {Button, TextField, Alert} from '@mui/material'
 import * as yup from 'yup'
+
+//for server subscribe
+// import {addSubscriber} from '../../../utils/API/subscribersAPI'
 
 import { styled } from '@mui/material/styles'
 
@@ -10,17 +13,6 @@ const StyledForm = styled(Form)(() => ({
 	width: '100%',
 }))
 
-const StyledTextField = styled(TextField)(() => ({
-	'& .MuiOutlinedInput-root': {
-		borderTopRightRadius: 0,
-		borderBottomRightRadius: 0
-	},
-}))
-
-const StyledButton = styled(Button)(() => ({
-	borderTopLeftRadius: 0,
-	borderBottomLeftRadius: 0
-}))
 
 const isRequiredError = 'This field is required'
 const userFormSchema = yup.object().shape({
@@ -28,11 +20,17 @@ const userFormSchema = yup.object().shape({
 })
 
 const FormSibscribe = () => {
+	const [subscribeStatus, setSubscribeStatus] = useState(null)
 	const handleSubmit = () => {
-  
+		// const handleSubmit = ({email}) => {
+		//then import addSubscriber from API
+		// addSubscriber(email)
+		
+		// console.log(email)
+		setSubscribeStatus({ success: 'You subscribed with success!' })
+		// setSubscribeStatus({ error: 'Error happened while subscription! Try later' })
+		setTimeout(() => setSubscribeStatus(null), 5000)
 	}
-
-
 
 	return (
 		<Formik
@@ -43,32 +41,49 @@ const FormSibscribe = () => {
 			{(formikProps) => (
 				<>
 					<StyledForm noValidate>
-						<StyledTextField 
+						<TextField 
 							type="email" 
 							placeholder="e-mail"
 							name="email"
 							onBlur={formikProps.handleBlur}
 							onChange={formikProps.handleChange}
 							error={true}
+							asyncborderradius={'on'}
 						/>
-						<StyledButton 
+						<Button 
 							type='submit'
 							variant="contained"
-							color="primary"
 							disabled={
 								!formikProps.isValid ||
                 formikProps.isSubmitting
 							}
+							asyncborderradius={'on'}
 						>
-            sent
-						</StyledButton>
+            send
+						</Button>
 					</StyledForm>
 
 					{!formikProps.isValid && (
-						<Alert severity="error"
+						<Alert 
+							severity="error"
+							icon={false}
 							sx={{width: '100%'}}
 						>
 							{formikProps.errors.email}
+						</Alert>
+					)}
+					{subscribeStatus && subscribeStatus['success'] && (
+						<Alert icon={false} severity="success"
+							sx={{ width: '100%' }}
+						>
+							{subscribeStatus.success}
+						</Alert>
+					)}
+					{subscribeStatus && subscribeStatus['error'] && (
+						<Alert icon={false} severity="success"
+							sx={{ width: '100%' }}
+						>
+							{subscribeStatus.error}
 						</Alert>
 					)}
 				</>
