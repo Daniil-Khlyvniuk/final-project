@@ -1,11 +1,15 @@
-import React, {useEffect} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import Card from '../ProductCard/ProductCard'
-import {makeStyles} from '@mui/styles'
-import {getAllProducts} from '../../store/Products/productsSlice'
-import axios from 'axios'
 
-const useStyles = makeStyles({
+import {makeStyles} from '@mui/styles'
+
+import {Typography} from '@mui/material'
+
+import { productsOperations, productsSelectors } from '../../store/Products'
+
+
+const useStyles = makeStyles((theme)=>({
 	container: {
 		display: 'flex',
 		flexWrap: 'wrap',
@@ -13,32 +17,23 @@ const useStyles = makeStyles({
 		margin: '0 auto',
 		justifyContent: 'center'
 	},
-	title: {
-		textAlign: 'center'
-	}
-})
+	title: theme.typography.sectionHeading,
+}))
 
 const CardList = () => {
-	const products = useSelector(state => state.products)
+	const products = useSelector(productsSelectors.getProducts())
 	const dispatch = useDispatch()
 	const classes = useStyles()
 
-	const fetch = async () => {
-		const data = await axios
-			.get('/products.json')
-			.then(products => products?.data)
-		if (!data) return
-
-		dispatch(getAllProducts(data))
-	}
-
 	useEffect(() => {
-		fetch()
-	}, [])
+		dispatch(productsOperations.fetchProducts())
+	}, [dispatch])
 
 	return (
 		<div>
-			<p className={classes.title}>NEW IN</p>
+			<Typography fontSize={32}
+				sx={{mb:'14px', mt:'85px'}}
+				variant={'h2'} className={classes.title}>NEW IN</Typography>
 			<div className={classes.container}>
 				{
 					!!products?.list
@@ -47,7 +42,7 @@ const CardList = () => {
 							key={key}
 							image={item.img}
 							title={item.title}
-							price={item.price}/>
+							price={item.price} />
 					))
 				}
 			</div>

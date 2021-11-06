@@ -1,10 +1,8 @@
-import React, {useEffect} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import CardInCatalog from '../CardInCatalog/CardInCatalog'
-import {makeStyles} from '@mui/styles'
-import {getAllProducts} from '../../store/Products/productsSlice'
-import axios from 'axios'
-
+import { makeStyles } from '@mui/styles'
+import { productsSelectors } from '../../store/Products'
 
 const useStyles = makeStyles({
 	container: {
@@ -18,22 +16,9 @@ const useStyles = makeStyles({
 })
 
 const Catalog = () => {
-	const products = useSelector(state => state.products)
-	const dispatch = useDispatch()
+	const products = useSelector(productsSelectors.getProducts())
 	const classes = useStyles()
 
-	const fetch = async () => {
-		const data = await axios
-			.get('/products.json')
-			.then(products => products?.data)
-		if (!data) return
-
-		dispatch(getAllProducts(data))
-	}
-
-	useEffect(() => {
-		fetch()
-	}, [])
 	return (
 
 		<div className={classes.container}>
@@ -43,7 +28,7 @@ const Catalog = () => {
 					<CardInCatalog
 						key={key} image={item.img}
 						title={item.title}
-						price={item.price}/>
+						price={item.price} />
 				))
 			}
 		</div>

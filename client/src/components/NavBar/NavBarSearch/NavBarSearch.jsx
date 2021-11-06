@@ -1,38 +1,37 @@
 import { Box } from '@mui/system'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import SearchIcon from './SearchIcon/SearchIcon'
 import { Search, StyledAlert, StyledInputBase } from './styles'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllProducts } from '../../../store/Products/productsSlice'
-
-import defProducts from '../../../data/products.json'
+import { setAllProducts } from '../../../store/Products/productsSlice'
+import { productsOperations, productsSelectors } from '../../../store/Products'
 
 const HeaderSearch = () => {
-	const products = useSelector(state => state.products)
+	const getProductsList = useSelector(productsSelectors.getProductsList())
 	const [search, setSearch] = useState('')
-	const [warning, setWarning] = useState('')
 	const dispatch = useDispatch()
-
-	useEffect(() => {
-		setTimeout(() => {
-			const productNotFound = <StyledAlert severity="info">Product not found</StyledAlert>
-			setWarning(productNotFound)
-		}, 3000)
-	})
+	let timer
 
 	const handleChange = (e) => {
-		if (!e.target.value) {
-			dispatch(getAllProducts(defProducts))
-			setSearch('')
-			return
-		}
+		clearTimeout(timer)
 
+		timer = setTimeout(() => {
+			if (!e.target.value) {
+				dispatch(productsOperations.fetchProducts())
+				setSearch('')
+				return
+			}
+
+			dispatch(setAllProducts(
+				getProductsList.filter((good) =>
+					good.title.toLowerCase().includes(e.target.value.toLowerCase())
+				)
+			))
+		}, 1000)
 		setSearch(e.target.value)
-		dispatch(getAllProducts(
-			defProducts.filter((good) =>
-				good.title.toLowerCase().includes(e.target.value.toLowerCase())
-			)))
 	}
+
+	const warning = <StyledAlert severity="info">Product not found</StyledAlert>
 
 	return (
 		<Box>
@@ -46,7 +45,7 @@ const HeaderSearch = () => {
 					sx={{ borderBottom: '1px solid #373F41' }}
 				/>
 			</Search>
-			{!products.length && warning}
+			{!getProductsList.length && search && warning}
 		</Box>
 	)
 }
