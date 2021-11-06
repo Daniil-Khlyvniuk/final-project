@@ -13,7 +13,8 @@ const useStyles = makeStyles((theme)=>({
 	container: {
 		display: 'flex',
 		flexWrap: 'wrap',
-		gap: '20px', maxWidth: '1180px',
+		gap: '20px',
+		maxWidth: '1180px',
 		margin: '0 auto',
 		justifyContent: 'center'
 	},
