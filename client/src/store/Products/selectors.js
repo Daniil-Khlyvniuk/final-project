@@ -1,7 +1,9 @@
-const getProducts = () => (state) => state.products
-const getProductsList = () => (state) => state.products.list
+const getProducts = () => (state) => state.products.data
+const getIsLoading = () => (state) => state.products.getIsLoading
+const getError = () => (state) => state.products.error
 
 export default {
 	getProducts,
-	getProductsList
+	getIsLoading,
+	getError,
 }

@@ -14,9 +14,11 @@ const {
   searchProducts,
 } = require("../controllers/products");
 
-// @route   POST /products
-// @desc    Create new product
+
+// @route   POST /products/images
+// @desc    Add images
 // @access  Private
+
 router.post(
   "/",
   // passport.authenticate("jwt-admin", { session: false }),
