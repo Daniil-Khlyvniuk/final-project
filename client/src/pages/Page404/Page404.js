@@ -11,14 +11,7 @@ const StyledGrid = styled(Grid)(() => ({
 	backgroundSize: 'cover',
 	backgroundPosition: 'center',
 	paddingBottom: '0.67em',
-	width: '100%',
-	marginLeft: '0px',
 	alignItems:'center',
-	'& .MuiGrid-root':
-		{
-			width: 'auto',
-			marginLeft: '0',
-		},
 }))
 
 
