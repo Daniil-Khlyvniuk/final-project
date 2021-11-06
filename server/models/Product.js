@@ -18,31 +18,31 @@ const ProductSchema = new Schema(
     },
     currentPrice: {
       type: Number,
-      required: true
+	    required: true
     },
-    previousPrice: {
-      type: Number
-    },
-    categories: {
-      type: String,
-      required: true
-    },
-    imageUrls: [
-      {
-        type: String,
-        required: true
-      }
-    ],
-    quantity: {
-      type: Number,
-      required: true,
-      default: 0
-    },
-    color: {
-      type: String
-    },
-    sizes: {
-      type: String
+	  previousPrice: {
+		  type: Number
+	  },
+	  categories: {
+		  type: String,
+		  required: true
+	  },
+	  imageUrls: [
+		  {
+			  type: String,
+			  required: true
+		  }
+	  ],
+	  quantity: {
+		  type: Number,
+		  required: true,
+		  default: 0
+	  },
+	  color: {
+		  type: String
+	  },
+	  sizes: {
+		  type: String
     },
     productUrl: {
       type: String
