@@ -1,7 +1,7 @@
 import React from 'react'
-// import Header from './components/NavBar/NavBar'
-// import Footer from './components/Footer'
-// import AppRoutes from './routes/AppRoutes'
+import Header from './components/NavBar/NavBar'
+import Footer from './components/Footer'
+import AppRoutes from './routes/AppRoutes'
 import { Container } from '@mui/material'
 import Carousel from './components/Carousel/Carousel'
 
@@ -15,12 +15,12 @@ const App = () => {
 
 	return (
 		<div className={'App'}>
-			{/*<Header />*/}
+			<Header />
 			<Container maxWidth="lg">
-				{/*<AppRoutes />*/}
 				<Carousel/>
+				<AppRoutes />
 			</Container>
-			{/*<Footer />*/}
+			<Footer />
 		</div>
 	)
 }
