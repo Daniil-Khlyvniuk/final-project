@@ -38,7 +38,6 @@ const theme = createTheme({
 			fontSize: '16px',
 			lineHeight: 'normal'
 		},
-
 		footerTextMedium: {
 			textTransform: 'capitalize',
 			color: '#373F41',
@@ -54,6 +53,12 @@ const theme = createTheme({
 			fontWeight: 200,
 			fontSize: '14px',
 			lineHeight: 'normal'
+		},
+		sectionHeading : {
+			textTransform: 'uppercase' ,
+			letterSpacing : '5px',
+			color:'primary',
+			textAlign:'center'
 		},
 	},
 	components: {
