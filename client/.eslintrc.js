@@ -44,9 +44,9 @@ module.exports = {
 			}
 		],
 		// 'no-console': 'off',
-		'no-console': [
-			'error',
-		],
+		// 'no-console': [
+		// 	'error',
+		// ],
 		'indent': [
 			'error',
 			'tab'
