@@ -7,10 +7,53 @@ export const useStyleCarousel = makeStyles({
 		height: '630px',
 		position: 'relative'
 	},
+	arrowLeft:{
+		width: '25px',
+		height: '25px',
+		borderTop: '2px solid #5C5E60',
+		borderRight: '2px solid #5C5E60',
+		marginRight: '60px',
+		transform: 'rotate(-135deg)'
+	},
+	arrowRight: {
+		width: '25px',
+		height: '25px',
+		borderTop: '2px solid #5C5E60',
+		borderRight: '2px solid #5C5E60',
+		marginRight: '60px',
+		transform: 'rotate(45deg)'
+	},
+	nextEl: {
+		position: 'absolute',
+		top:'50%',
+		right:'-3%',
+		transform:'translate(-50%, -50%)',
+		background: '#FFFFFF',
+		borderRadius: '2px',
+		padding: '25px 24px 25px 0',
+		width: '20px',
+		zIndex: 10,
+		cursor: 'pointer'
+	},
+	prevEl: {
+		position: 'absolute',
+		top:'50%',
+		left:'1%',
+		transform:'translate(-50%, -50%)',
+		background: '#FFFFFF',
+		borderRadius: '2px',
+		padding: '25px 4px 25px 22px',
+		width: '20px',
+		zIndex: 10,
+		cursor: 'pointer'
+	},
 	textBlock: {
 		position:'absolute',
 		bottom: '100px',
 		left: '50px'
+	},
+	pagination:{
+		background: 'red'
 	},
 	title: {
 		display: 'inline-block',
