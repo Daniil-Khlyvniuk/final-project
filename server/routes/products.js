@@ -12,22 +12,22 @@ const {
   getProducts,
   getProductById,
   getProductsFilterParams,
-  searchProducts
+  searchProducts,
 } = require("../controllers/products");
 
-// Configurations for multer
-const storage = multer.diskStorage({
-  // Destination, where files should be stored (image url)
-  destination: function(req, file, cb) {
-    var newDestination = req.headers.path; // We sen image url in header ("path"), when making axios request
-    fse.mkdirsSync(newDestination); // We creating folder in destination, specified in headers "path"
-    cb(null, newDestination); // Saving file
-  },
-
-  filename: function(req, file, cb) {
-    cb(null, file.originalname); // We accept original file-name
-  }
-});
+// // Configurations for multer
+// const storage = multer.diskStorage({
+//   // Destination, where files should be stored (image url)
+//   destination: function(req, file, cb) {
+//     var newDestination = req.headers.path; // We sen image url in header ("path"), when making axios request
+//     fse.mkdirsSync(newDestination); // We creating folder in destination, specified in headers "path"
+//     cb(null, newDestination); // Saving file
+//   },
+//
+//   filename: function(req, file, cb) {
+//     cb(null, file.originalname); // We accept original file-name
+//   }
+// });
 
 const fileFilter = (req, file, cb) => {
   // Accept file (only jpeg/jpg/png)
@@ -46,9 +46,9 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
   storage: storage,
   limits: {
-    fileSize: 1024 * 1024 * 3 // Max size 5MB
+    fileSize: 1024 * 1024 * 3, // Max size 5MB
   },
-  fileFilter: fileFilter
+  fileFilter: fileFilter,
 });
 
 // @route   POST /products/images
