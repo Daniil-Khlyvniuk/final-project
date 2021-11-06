@@ -19,7 +19,6 @@ const styles = {
 	padding: '72px 50px 0px 50px', textAlign: 'center',
 }
 
-
 const Error404 = () => {
 	return (
 		<StyledGrid
