@@ -11,7 +11,6 @@ module.exports.saveFile = (file) => {
 			const fileName = createFileName()
 			const filePath = path.resolve("static/upload/images", fileName)
 			img.mv(filePath)
-
 			return `upload/images/${fileName}`
 		} catch (err) {
 			console.log("[saveFile]:err", err)
