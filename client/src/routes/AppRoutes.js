@@ -33,7 +33,7 @@ const AppRoutes = () => {
 				<Favorites />
 			</ProtectedRoute>
 			<Route exact path='/products-list'><ProductsList /></Route>
-			<Route exact path='/product-details'><ProductDetails /></Route>
+			<Route exact path='/product-details/:id'><ProductDetails /></Route>
 			<Route exact path='/cart'><Cart /></Route>
 			<Route exact path='/shop/catalog'><Catalog /></Route>
 			<Route exact path='/shop/payment-and-delivery'><PaymentAndDelivery /></Route>
