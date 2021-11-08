@@ -21,13 +21,12 @@ const styles = {
 	padding: '72px 50px 0px 50px', textAlign: 'center',
 }
 
+
 const Error404 = () => {
 	return (
 		<StyledGrid
 			container
 			direction={'column'}
-			className={ 'errorPage' }
-			// spacing={{sx:9 , xs: 9}}
 		>
 			<Grid item>
 				<Typography variant={'h1'}>
