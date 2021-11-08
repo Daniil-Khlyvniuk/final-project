@@ -1,10 +1,14 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from 'react'
 import API from '../API/categoriesApi'
+import { useDispatch, useSelector } from 'react-redux'
+import { categorySelectors } from '../../store/Category'
+import * as categoryActions from '../../store/Category/categorySlice'
 
 const UseCategoryTree = () => {
-	const [categoryTree, setCategoryTree] = useState([])
-	const [category, setCategory] = useState([])
+	const [ category, setCategory ] = useState([])
+	const categoryTree = useSelector(categorySelectors.getCategoryTree())
+	const dispatch = useDispatch()
 
 	const getParent = (parentId, curArray) => {
 		return curArray.find(el => el._id === parentId)
@@ -12,7 +16,7 @@ const UseCategoryTree = () => {
 
 	const addChildren = (curElem, curArray) => {
 		const parent = getParent(curElem.parentId, curArray)
-		parent.children = [...parent.children || [], curElem]
+		parent.children = [ ...parent.children || [], curElem ]
 		return parent
 	}
 
@@ -51,7 +55,7 @@ const UseCategoryTree = () => {
 	}, [])
 
 	useEffect(() => {
-		setCategoryTree(makeCategoryTree(category))
+		dispatch(categoryActions.setCategoryTree(makeCategoryTree(category)))
 	}, [category])
 
 	return categoryTree
