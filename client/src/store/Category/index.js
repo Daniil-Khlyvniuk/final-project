@@ -1,5 +1,6 @@
 export { default as categorySelectors } from './selectors'
 export { default as categoryOperations } from './operations'
+// export { default as categoryActions } from './categorySlice'
 
-import categoryReducer from './categorySlice'
-export default categoryReducer
+import * as categoryActions from './categorySlice'
+export default categoryActions
