@@ -2,17 +2,19 @@ import {makeStyles} from '@mui/styles'
 
 export const useStyles = makeStyles({
 	container: {
-		'&:hover $blockHover':{
-			display: 'block'
+		'&:hover $blockHover': {
+			visibility: 'visible',
+			opacity: 1,
 		},
-		'&:hover $catalogTitle':{
-			display: 'none'
+		'&:hover $catalogTitle': {
+			display: 'none',
 		},
 		position: 'relative',
 	},
 	img: {
 		width: 280,
-		height: 280
+		height: 280,
+
 	},
 	catalogTitle: {
 		fontSize: '18px',
@@ -28,7 +30,11 @@ export const useStyles = makeStyles({
 		margin: 0,
 	},
 	blockHover: {
-		display: 'none',
+		cursor: 'pointer',
+		transition: 'visibility 0s, opacity 0.5s linear',
+		visibility: 'hidden',
+		opacity: 0,
+		// display: 'none',
 		background: 'rgba(0,0,0,0.5)',
 		width: '280px',
 		height: '280px',

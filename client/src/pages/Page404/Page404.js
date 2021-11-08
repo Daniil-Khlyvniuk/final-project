@@ -31,6 +31,7 @@ const styles = {
 // 	left: '0px',
 // }
 
+
 const Error404 = () => {
 	return (
 		<StyledGrid

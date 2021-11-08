@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react'
 import { makeStyles } from '@mui/styles'
 import { Box, Container, Grid } from '@mui/material'
-
 import { useSelector, useDispatch } from 'react-redux'
 import {linksSelectors, linksOperations} from '../../store/Links'
 import ContactUs from './ContactUs'
@@ -9,9 +8,6 @@ import Subscribe from './Subscribe'
 import Credentials from './Credentials'
 
 import PageLinks from './PageLinks'
-
-//testing api
-// import linkApi from '../../utils/API/linksApi'
 
 const useStyles = makeStyles(() => ({
 	blockStyle: {
@@ -25,10 +21,7 @@ const Footer = () => {
 	const dispatch = useDispatch()
 	const allLinks = useSelector(linksSelectors.getLinks())
 
-	// console.log('links', allLinks)
-
 	useEffect(() => {
-		// linkApi.getLinks
 		dispatch(linksOperations.fetchLinks())
 	}, [dispatch])
 

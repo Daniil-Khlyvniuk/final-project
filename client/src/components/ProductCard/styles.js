@@ -2,7 +2,7 @@ import {makeStyles} from '@mui/styles'
 
 export const useStyles = makeStyles({
 	image: {
-		width: '580px',
+		width: '555px',
 		height: '545px'
 	},
 	card: {

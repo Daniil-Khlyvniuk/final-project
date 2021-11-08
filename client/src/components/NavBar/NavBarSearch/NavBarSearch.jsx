@@ -1,52 +1,25 @@
-import { Box } from '@mui/system'
-import React, { useState } from 'react'
+import * as React from 'react'
+import TextField from '@mui/material/TextField'
 import SearchIcon from './SearchIcon/SearchIcon'
-import { Search, StyledAlert, StyledInputBase } from './styles'
-import { useDispatch, useSelector } from 'react-redux'
-import { setAllProducts } from '../../../store/Products/productsSlice'
-import { productsOperations, productsSelectors } from '../../../store/Products'
+import { StyledAutocomplete, StyledBox } from './styles'
+import { useSelector } from 'react-redux'
+import { productsSelectors } from '../../../store/Products'
 
 const HeaderSearch = () => {
-	const getProductsList = useSelector(productsSelectors.getProductsList())
-	const [search, setSearch] = useState('')
-	const dispatch = useDispatch()
-	let timer
-
-	const handleChange = (e) => {
-		clearTimeout(timer)
-
-		timer = setTimeout(() => {
-			if (!e.target.value) {
-				dispatch(productsOperations.fetchProducts())
-				setSearch('')
-				return
-			}
-
-			dispatch(setAllProducts(
-				getProductsList.filter((good) =>
-					good.title.toLowerCase().includes(e.target.value.toLowerCase())
-				)
-			))
-		}, 1000)
-		setSearch(e.target.value)
-	}
-
-	const warning = <StyledAlert severity="info">Product not found</StyledAlert>
+	const getProducts = useSelector(productsSelectors.getProducts())
+	const productsNames = getProducts.map(product => product.name)
 
 	return (
-		<Box>
-			<Search>
-				<SearchIcon />
-				<StyledInputBase
-					placeholder="Search..."
-					type='search'
-					value={search}
-					onChange={handleChange}
-					sx={{ borderBottom: '1px solid #373F41' }}
-				/>
-			</Search>
-			{!getProductsList.length && search && warning}
-		</Box>
+		<StyledBox>
+			<StyledAutocomplete
+				disablePortal
+				id="combo-box-demo"
+				options={productsNames}
+				size='small'
+				renderInput={(params) => <TextField {...params} label="Search..." variant="standard" />}
+			/>
+			<SearchIcon />
+		</StyledBox>
 	)
 }
 
