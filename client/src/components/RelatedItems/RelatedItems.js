@@ -3,30 +3,35 @@ import PropTypes from 'prop-types'
 import {useSelector} from 'react-redux'
 
 
-const RelatedItems = (props) => {
-	const {card: {title, article, url}} = props
 
+const RelatedItems = (props) => {
 	const ItemView = useSelector(state => state.ItemView)
+
+
+	const {
+		key,
+		url,
+	} = props
+
 
 	
 	useEffect(() => {
 		const ItemView = localStorage.getItem('view')
 			? JSON.parse(localStorage.getItem('view'))
 			: []
-		if (ItemView.find((card) => card.article === article)) {
+		if (ItemView.find((card) => card.article === key)) {
 			ItemView.shift()
 		}
 		if (ItemView.length >= 10) {
 			ItemView.pop()
 		}
-	}, [ItemView, article])
+	}, [ItemView, key])
 
 
 	return (
 		<div>
 			<li>
-				<h1>{title}</h1>
-				<p>{article}</p>
+				<h1>{key}</h1>
 				<img src={url} width="200" height="180" alt="laptop"/>
 			</li>
 		</div>
@@ -35,9 +40,10 @@ const RelatedItems = (props) => {
 
 
 RelatedItems.propTypes = {
+	key: PropTypes.number,
+	url: PropTypes.string,
 	card: PropTypes.shape({
 		article: PropTypes.number,
-		url: PropTypes.string,
 		title: PropTypes.string,
 	}),
 }

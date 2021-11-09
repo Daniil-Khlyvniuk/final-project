@@ -3,6 +3,10 @@ import Header from './components/NavBar/NavBar'
 import Footer from './components/Footer'
 import AppRoutes from './routes/AppRoutes'
 import { Container } from '@mui/material'
+import RelatedItemsList from './components/RelatedItems/RelatedItemsList'
+
+
+
 
 
 const App = () => {
@@ -18,6 +22,7 @@ const App = () => {
 			<Container maxWidth="lg">
 				<AppRoutes />
 			</Container>
+			<RelatedItemsList />
 			<Footer />
 		</div>
 	)

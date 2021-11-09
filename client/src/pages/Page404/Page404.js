@@ -7,8 +7,6 @@ import theme from '../../utils/Theme'
 import { Link as RouterLink } from 'react-router-dom'
 
 
-// const IMG = 'https://telegra.ph/file/a833f6b2d325d08432a9e.jpg'
-
 const StyledGrid = styled(Grid)(() => ({
 	borderRadius: '4px',
 	backgroundImage: 'url(https://telegra.ph/file/a833f6b2d325d08432a9e.jpg)',
@@ -24,13 +22,6 @@ const styles = {
 	padding: '72px 50px 0px 50px', textAlign: 'center',
 }
 
-// const stilesIMG = {
-// 	height: '504px',
-// 	position: 'absolute',
-// 	width: '100%',
-// 	left: '0px',
-// }
-
 
 const Error404 = () => {
 	return (
@@ -38,11 +29,6 @@ const Error404 = () => {
 			container
 			direction={'column'}
 		>
-			{/*<img*/}
-			{/*	alt='Background'*/}
-			{/*	style={stilesIMG}*/}
-			{/*	src={IMG}*/}
-			{/*/>*/}
 			<Grid item>
 				<Typography variant={'h1'}>
     404
@@ -66,7 +52,6 @@ const Error404 = () => {
 						component={RouterLink}
 						color="primary"
 						variant="outlined"
-						// href="/"
 					>Home Page
 					</Button>
 				</ThemeProvider>
