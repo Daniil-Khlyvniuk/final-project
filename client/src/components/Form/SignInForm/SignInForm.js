@@ -16,8 +16,9 @@ const SignInForm = () => {
 			password: '',
 			confirmPass: ''
 		}}
-		onSubmit={(values, { setSubmitting }) => {
+		onSubmit={(values, { setSubmitting, resetForm}) => {
 			setSubmitting(false)
+			resetForm()
 			// eslint-disable-next-line no-console
 			console.log(values)
 		}}
@@ -43,7 +44,6 @@ const SignInForm = () => {
 								type="text"
 								placeholder="Email"
 							/>
-
 						</div>
 						<div>
 							<Field

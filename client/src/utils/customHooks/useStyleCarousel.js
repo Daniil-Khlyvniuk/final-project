@@ -3,10 +3,8 @@ import theme from '../Theme'
 
 export const useStyleCarousel = makeStyles({
 	slide:{
-		width: '1180px',
-		height: '630px',
-		position: 'relative',
-
+		width: '100%',
+		height: '100%',
 	},
 	arrowLeft:{
 		width: '25px',
@@ -61,7 +59,6 @@ export const useStyleCarousel = makeStyles({
 		'& .swiper-pagination-horizontal':{
 			bottom:'1px',
 			background: '#fff',
-			// position: 'fixed',
 			'& .swiper-pagination-bullet':{
 				margin: 0
 			}
@@ -78,7 +75,7 @@ export const useStyleCarousel = makeStyles({
 				display: 'block',
 				height: '2px',
 				width: '100%',
-				borderBottom: '3px solid #000',
+				borderBottom: '4px solid #000',
 			}
 		}
 	},
@@ -110,9 +107,6 @@ export const useStyleCarousel = makeStyles({
 		backgroundColor:'#373F41',
 		padding: '20px'
 	},
-	ads:{
-
-	},
 	shopBtn:{
 		cursor: 'pointer',
 		width: '192px',
@@ -127,5 +121,14 @@ export const useStyleCarousel = makeStyles({
 		fontSize: 16,
 		lineHeight: '32px',
 		color: '#373F41'
+	},
+	thumbWrapper:{
+		'& swiper-slide.swiper-slide-active': {
+			opacity: 1
+		}
+	},
+	thumb:{
+		opacity: 0.4,
+
 	}
 })
