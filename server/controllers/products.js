@@ -27,7 +27,7 @@ exports.addProduct = async (req, res) => {
 	.trim()
 	.replace(/\s\s+/g, " ");
 
-	const imageUrls = fileService.saveFile(req?.files?.img); // save images
+	const imageUrls = fileService.saveFile(req?.files?.img, "goods") // save images
 	variantData.itemNo = rand().toString()
 	variantData.imageUrls = imageUrls
 
