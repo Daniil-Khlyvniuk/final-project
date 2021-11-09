@@ -5,15 +5,15 @@ const CatalogSchema = new Schema(
   {
     id: {
       type: String,
-      required: true,
+      // required: true,
     },
     name: {
       type: String,
       required: true,
     },
     parentId: {
-      type: String,
-      default: null,
+      // type: String,
+      // default: null,
     },
     date: {
       type: Date,

@@ -17,7 +17,6 @@ exports.addProduct = async (req, res) => {
     .toLowerCase()
     .trim()
     .replace(/\s\s+/g, " ");
-
   try {
     const newProduct = await Product.create({
       ...productFields,
@@ -79,24 +78,14 @@ exports.getProducts = (req, res, next) => {
   const startPage = Number(req.query.startPage);
   const sort = req.query.sort;
 
-  // console.log('TTTTTTTTTT')
-  // Product.find({}).exec().then(res => {
-  //     console.log('res --> ', res);
-  // })
-  //     .catch(err => {
-  //         console.log('ERRRRR --> ', err);
-  //     })
   Product.find()
     .skip(startPage * perPage - perPage)
     .limit(perPage)
     .sort(sort)
     .then((products) => {
-      console.log("1111");
       res.send(products);
     })
     .catch((err) => {
-      console.log("222");
-
       res.status(400).json({
         message: `Error happened on server: "${err}" `,
       });
