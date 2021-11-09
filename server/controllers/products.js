@@ -1,5 +1,7 @@
 const Product = require("../models/Product");
+const ProductVariant = require("../models/ProductVariant");
 const fileService = require("../services/fileService");
+const isVariantExist = require("../commonHelpers/isVariantExist");
 
 const uniqueRandom = require("unique-random");
 const rand = uniqueRandom(0, 999999);
@@ -9,26 +11,57 @@ const filterParser = require("../commonHelpers/filterParser");
 const _ = require("lodash");
 
 exports.addProduct = async (req, res) => {
-  const productFields = req.body;
-  const src = fileService.saveFile(req.files.img);
-  productFields.itemNo = rand();
+	const {
+		name,
+		categories,
+		brand,
+		manufacturer,
+		manufacturerCountry,
+		seller,
+		variants = [],
+		...variantData
+	} = req.body;
 
-  productFields.name = productFields.name
-    .toLowerCase()
-    .trim()
-    .replace(/\s\s+/g, " ");
+	const modifiedName = name
+	.toLowerCase()
+	.trim()
+	.replace(/\s\s+/g, " ");
 
-  try {
-    const newProduct = await Product.create({
-      ...productFields,
-      imageUrls: src,
-    });
-    return res.json(newProduct);
-  } catch (err) {
-    res.status(400).json({
-      message: `Error happened on server: "${err}" `,
-    });
-  }
+	const imageUrls = fileService.saveFile(req?.files?.img, "goods") // save images
+	variantData.itemNo = rand().toString()
+	variantData.imageUrls = imageUrls
+
+	const productData = {
+		name: modifiedName,
+		categories,
+		brand,
+		manufacturer,
+		manufacturerCountry,
+		seller,
+		variants
+	}
+
+	try {
+		let product = await Product.findOne({ name: modifiedName }).populate("variants")
+		if (!product) product = await Product.create(productData)
+
+		isVariantExist(product.variants, variantData)
+
+		const newVariant = await ProductVariant.create(variantData)
+		const updatedVariant = await ProductVariant.findByIdAndUpdate(newVariant._id, {
+			...variantData,
+			product
+		}, { new: true })
+		product.variants.push(updatedVariant)
+
+		const updatedProduct = await Product.findByIdAndUpdate(product._id, product, { new: true }).populate("variants")
+
+		return res.json(updatedProduct);
+	} catch (err) {
+		res.status(400).json({
+			message: `Error happened on server: "${ err }"`,
+		});
+	}
 };
 
 exports.updateProduct = (req, res, next) => {
@@ -75,22 +108,23 @@ exports.updateProduct = (req, res, next) => {
 };
 
 exports.getProducts = (req, res, next) => {
-  const perPage = Number(req.query.perPage);
-  const startPage = Number(req.query.startPage);
-  const sort = req.query.sort;
+	const perPage = Number(req.query.perPage);
+	const startPage = Number(req.query.startPage);
+	const sort = req.query.sort;
 
-  Product.find()
-    .skip(startPage * perPage - perPage)
-    .limit(perPage)
-    .sort(sort)
-    .then((products) => {
-      res.send(products);
-    })
-    .catch((err) => {
-      res.status(400).json({
-        message: `Error happened on server: "${err}" `,
-      });
-    });
+	Product.find()
+	.skip(startPage * perPage - perPage)
+	.limit(perPage)
+	.sort(sort)
+	.populate('variants')
+	.then((products) => {
+		res.send(products);
+	})
+	.catch((err) => {
+		res.status(400).json({
+			message: `Error happened on server: "${ err }" `,
+		});
+	});
 };
 
 exports.getProductById = (req, res, next) => {
