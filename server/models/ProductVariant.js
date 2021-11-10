@@ -34,12 +34,8 @@ const ProductVariantSchema = new Schema(
 			required: true,
 			default: 0
 		},
-		color: {
-			type: String
-		},
-		size: {
-			type: String
-		},
+		color: String,
+		size: String,
 		date: {
 			type: Date,
 			default: Date.now
