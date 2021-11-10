@@ -10,10 +10,6 @@ const HeaderSearch = () => {
 	const [options, setOptions] = useState([])
 	let timer
 
-	const clearOptions = () => {
-		setOptions([])
-	}
-
 	const onSearch = (e) => {
 		clearTimeout(timer)
 
@@ -44,33 +40,19 @@ const HeaderSearch = () => {
 	}
 
 	return (
-		<StyledBox>
+		<StyledBox xs={12} sm={3}>
 			<Search>
 				<SearchIconWrapper>
 					<SearchIcon />
 				</SearchIconWrapper>
 				<StyledAutocomplete
+					disablePortal
 					id="combo-box-demo"
 					options={options}
 					onKeyUp={onSearch}
-					onBlur={clearOptions}
-					// onBlur={clearInput}
-					// onKeyDown={(event) => {
-					// 	if (event.key === 'Enter') {
-					// 		// Prevent's default 'Enter' behavior.
-					// 		event.defaultMuiPrevented = true
-					// 		// eslint-disable-next-line no-console
-					// 		console.log('test')
-					// 	}
-					// }}
 					size='small'
 					renderInput={(params) => <TextField {...params} label="Search..." variant="standard" />}
-					// getOptionLabel={(option) => `${option.name} 
-					// 	${option.currentPrice} 
-					// 	${option.itemNo} 
-					// 	${option.categories}
-					// `}
-					getOptionLabel={(option) => option.name.toString()}
+					getOptionLabel={(option) => option.name}
 					renderOption={(props, option) => {
 						return (
 							<Link to={`/product-details/${option._id}`}
@@ -80,7 +62,7 @@ const HeaderSearch = () => {
 								<Grid container wrap="nowrap" spacing={2}>
 									<Grid item>
 										<Avatar
-											src={option.imageUrls[0]}
+											// src={option.imageUrls[0]}
 											alt={option.name}
 											sx={{ width: 50, height: 50 }}
 											variant='square'
