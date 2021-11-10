@@ -1,8 +1,11 @@
 const Slider = require("../models/Slider");
 const queryCreator = require("../commonHelpers/queryCreator");
 const _ = require("lodash");
+const fileService = require("../services/fileService");
 
 exports.addSlide = (req, res, next) => {
+  const imageUrls = fileService.saveFile(req?.files?.imageUrl, "slide")
+
   Slider.findOne({ customId: req.body.customId }).then(slide => {
     if (slide) {
       res.status(400).json({
@@ -10,7 +13,7 @@ exports.addSlide = (req, res, next) => {
       });
     } else {
       const slideData = _.cloneDeep(req.body);
-      const newSlide = new Slider(queryCreator(slideData));
+      const newSlide = new Slider(queryCreator({imageUrl: imageUrls,...slideData}));
 
       newSlide
         .populate("product")
