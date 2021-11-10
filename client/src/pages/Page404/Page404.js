@@ -4,14 +4,17 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import {ThemeProvider, styled} from '@mui/material/styles'
 import theme from '../../utils/Theme'
+import { Link as RouterLink } from 'react-router-dom'
 
 
 const StyledGrid = styled(Grid)(() => ({
-	backgroundImage: 'url(https://telegra.ph/file/3cc57f6e2278684805a33.jpg)',
+	borderRadius: '4px',
+	backgroundImage: 'url(https://telegra.ph/file/a833f6b2d325d08432a9e.jpg)',
 	backgroundSize: 'cover',
 	backgroundPosition: 'center',
 	paddingBottom: '0.67em',
 	alignItems:'center',
+	objectFit: 'cover',
 }))
 
 
@@ -24,8 +27,6 @@ const Error404 = () => {
 		<StyledGrid
 			container
 			direction={'column'}
-			className={ 'errorPage' }
-			// spacing={{sx:9 , xs: 9}}
 		>
 			<Grid item>
 				<Typography variant={'h1'}>
@@ -34,7 +35,7 @@ const Error404 = () => {
 			</Grid>
 			<Grid item>
 				<Typography style={styles}  variant={'h2'}>
-      Oops. Looks like you came to wrong page on our server
+      Oops. Page not found
 				</Typography>
 			</Grid>
 			<Grid item>
@@ -46,9 +47,10 @@ const Error404 = () => {
 			<Grid style={styles} item>
 				<ThemeProvider theme={theme}>
 					<Button
+						to='/'
+						component={RouterLink}
 						color="primary"
-						variant="contained"
-						href="/"
+						variant="outlined"
 					>Home Page
 					</Button>
 				</ThemeProvider>

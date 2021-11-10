@@ -42,8 +42,8 @@ const Credentials = () => {
 					<StyledBox>
 						<img
 							className={logoBottomLeft}
-							src="./img/bottom_logo1.png" alt="Company" />
-						<img src="./img/bottom_logo2.png" alt="Postil logo" />
+							src="/logo/bottom_logo1.png" alt="Company" />
+						<img src="/logo/bottom_logo2.png" alt="Postil logo" />
 					</StyledBox>
 					<Typography variant='footerTextMedium'>
 						© 2010 — 2020  Simple Studio

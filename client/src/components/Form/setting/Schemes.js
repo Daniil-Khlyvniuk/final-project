@@ -5,6 +5,9 @@ import {
 	IS_REQUIRED
 } from './regex'
 
+//default required field error
+const isRequiredError = 'This field is required'
+
 
 export const SING_UP_SCHEMA = yup.object().shape({
 	name: yup.string()
@@ -36,4 +39,8 @@ export const SHIPPING_SCHEMA = yup.object().shape({
 		.max(4, 'Post code can`t be bigger then 4 characters'),
 	phone: yup.string()
 		.matches(PHONE_REGEX, 'Phone need to be in format +38(0xx) XXX-XX-XX')
+})
+
+export const SUBSCRIBE_SCHEMA = yup.object().shape({
+	email: yup.string().required(isRequiredError).email('Enter correct email'),
 })

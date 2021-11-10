@@ -1,4 +1,4 @@
-import { Alert } from '@mui/material'
+import { Alert, Container } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import productsAPI from '../../utils/API/productsAPI'
@@ -23,9 +23,9 @@ const ProductDetails = () => {
 	} 
 
 	return (
-		<div>
+		<Container maxWidth="lg">
 			<h1>ProductDetails</h1>
-		</div>
+		</Container>
 	)
 }
 

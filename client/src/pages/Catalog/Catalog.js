@@ -1,11 +1,12 @@
 import React from 'react'
+import { Container } from '@mui/material'
 import ProductsCatalog from '../../components/Catalog/Catalog'
 
 const Catalog = () => {
 	return (
-		<div>
+		<Container maxWidth="lg">
 			<ProductsCatalog />
-		</div>
+		</Container>
 	)
 }
 
