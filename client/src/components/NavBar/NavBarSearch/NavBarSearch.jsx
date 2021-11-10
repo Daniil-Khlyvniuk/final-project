@@ -10,6 +10,10 @@ const HeaderSearch = () => {
 	const [options, setOptions] = useState([])
 	let timer
 
+	const clearOptions = () => {
+		setOptions([])
+	}
+
 	const onSearch = (e) => {
 		clearTimeout(timer)
 
@@ -49,13 +53,24 @@ const HeaderSearch = () => {
 					id="combo-box-demo"
 					options={options}
 					onKeyUp={onSearch}
+					onBlur={clearOptions}
+					// onBlur={clearInput}
+					// onKeyDown={(event) => {
+					// 	if (event.key === 'Enter') {
+					// 		// Prevent's default 'Enter' behavior.
+					// 		event.defaultMuiPrevented = true
+					// 		// eslint-disable-next-line no-console
+					// 		console.log('test')
+					// 	}
+					// }}
 					size='small'
 					renderInput={(params) => <TextField {...params} label="Search..." variant="standard" />}
-					getOptionLabel={(option) => `${option.name} 
-						${option.currentPrice} 
-						${option.itemNo} 
-						${option.categories}
-					`}
+					// getOptionLabel={(option) => `${option.name} 
+					// 	${option.currentPrice} 
+					// 	${option.itemNo} 
+					// 	${option.categories}
+					// `}
+					getOptionLabel={(option) => option.name.toString()}
 					renderOption={(props, option) => {
 						return (
 							<Link to={`/product-details/${option._id}`}
