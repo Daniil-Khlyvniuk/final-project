@@ -2,7 +2,7 @@ import React from 'react'
 import { styled } from '@mui/material/styles'
 import { Grid, List, ListItem, Typography, } from '@mui/material'
 
-import FormSubscribe from '../FormSubscribe'
+import SubscribeForm from '../../Form/SubscribeForm'
 import SocialLinks from '../../SocialLInks'
 
 const StyledListItem = styled(ListItem)(() => ({
@@ -30,7 +30,7 @@ const Subscribe = () => {
 					</Typography>
 				</ListItem>
 				<StyledListItem>
-					<FormSubscribe />
+					<SubscribeForm />
 				</StyledListItem>
 				<ListItem>
 					<Typography variant="menuBold">

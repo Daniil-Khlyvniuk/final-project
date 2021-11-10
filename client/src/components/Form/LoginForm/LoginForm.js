@@ -1,7 +1,7 @@
 import React from 'react'
 import { useFormStyle } from '../../../utils/customHooks/useFormStyle'
 import { Field, Form, Formik } from 'formik'
-import * as schema from '../setting/Schemes'
+import {SING_UP_SCHEMA} from '../setting/Schemes'
 import CustomInput from '../setting/CustomInput'
 import { Checkbox } from '@mui/material'
 import { Link } from 'react-router-dom'
@@ -14,7 +14,7 @@ const LoginForm = () => {
 			password: '',
 		}}
 
-		validationSchema={schema.SING_UP_SCHEMA}
+		validationSchema={SING_UP_SCHEMA}
 		onSubmit={(values, { setSubmitting }) => {
 			setSubmitting(false)
 		}}

@@ -88,7 +88,7 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 
-const port = process.env.PORT || 9854;
+const port = process.env.PORT || 5000;
 mongoose
 .connect(db)
 .then(() => console.log("MongoDB Connected"))
