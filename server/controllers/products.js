@@ -1,7 +1,9 @@
 const Product = require("../models/Product");
 const ProductVariant = require("../models/ProductVariant");
+const Color = require("../models/Color");
+const Catalog = require("../models/Catalog");
+const Size = require("../models/Size");
 const fileService = require("../services/fileService");
-const isVariantExist = require("../commonHelpers/isVariantExist");
 
 const uniqueRandom = require("unique-random");
 const rand = uniqueRandom(0, 999999);
@@ -19,20 +21,22 @@ exports.addProduct = async (req, res) => {
 		manufacturerCountry,
 		seller,
 		variants = [],
+		size: sizeName, // do not touch
+		color: colorName, // do not touch
 		...variantData
 	} = req.body;
 
-	const modifiedName = name
-	.toLowerCase()
-	.trim()
-	.replace(/\s\s+/g, " ");
 
 	const imageUrls = fileService.saveFile(req?.files?.img, "goods") // save images
 	variantData.itemNo = rand().toString()
 	variantData.imageUrls = imageUrls
 
+
 	const productData = {
-		name: modifiedName,
+		name: name
+		.toLowerCase()
+		.trim()
+		.replace(/\s\s+/g, " "),
 		categories,
 		brand,
 		manufacturer,
@@ -40,22 +44,39 @@ exports.addProduct = async (req, res) => {
 		seller,
 		variants
 	}
-
 	try {
-		let product = await Product.findOne({ name: modifiedName }).populate("variants")
-		if (!product) product = await Product.create(productData)
+		const category = await Catalog.findOne({ name: productData.categories })
+		if (!category) console.log(`category ${ productData.categories } not found`)
 
-		isVariantExist(product.variants, variantData)
+		let product = await Product.findOne({ name: productData.name, categories: category._id })
+		if (!product) product = await Product.create({ ...productData, categories: category })
 
-		const newVariant = await ProductVariant.create(variantData)
+		const isVarExist = await ProductVariant.findOne(
+			{
+				product: product._id,
+				color: colorName,
+				size: sizeName,
+			})
+		if (isVarExist) res.json({ message: `The variant already exist` })
+
+		const color = await Color.findOne({ name: colorName })
+		if (!color) return res.json({ message: `Color ${ colorName } not found` });
+
+		const size = await Size.findOne({ name: sizeName })
+		if (!size) return res.json({ message: `Size ${ sizeName } not found` });
+
+		const newVariant = await ProductVariant.create({ ...variantData })
+
 		const updatedVariant = await ProductVariant.findByIdAndUpdate(newVariant._id, {
 			...variantData,
+			size: size.name,
+			color: color.name,
 			product
 		}, { new: true })
+
 		product.variants.push(updatedVariant)
 
-		const updatedProduct = await Product.findByIdAndUpdate(product._id, product, { new: true }).populate("variants")
-
+		const updatedProduct = await Product.findByIdAndUpdate(product._id, product, { new: true })
 		return res.json(updatedProduct);
 	} catch (err) {
 		res.status(400).json({
@@ -117,6 +138,7 @@ exports.getProducts = (req, res, next) => {
 	.limit(perPage)
 	.sort(sort)
 	.populate('variants')
+	.populate('categories')
 	.then((products) => {
 		res.send(products);
 	})
