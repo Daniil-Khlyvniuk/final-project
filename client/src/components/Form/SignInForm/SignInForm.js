@@ -1,6 +1,6 @@
 import React from 'react'
 import { Formik, Form, Field } from 'formik'
-import * as schema from '../setting/Schemes'
+import {SING_UP_SCHEMA} from '../setting/Schemes'
 import CustomInput from '../setting/CustomInput'
 import { useFormStyle } from '../../../utils/customHooks/useFormStyle'
 import { Checkbox } from '@mui/material'
@@ -21,7 +21,7 @@ const SignInForm = () => {
 			// eslint-disable-next-line no-console
 			console.log(values)
 		}}
-		validationSchema={schema.SING_UP_SCHEMA}
+		validationSchema={SING_UP_SCHEMA}
 		>
 			{(formikProps) => {
 				return (

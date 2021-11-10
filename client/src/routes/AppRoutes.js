@@ -17,6 +17,7 @@ import Cart from '../pages/Cart/Cart'
 // import Contact from '../staticPages/Contact/Contact'
 import Page404 from '../pages/Page404/Page404'
 import Favorites from '../pages/Favorites/Favorites'
+import HandleSubscribe from '../pages/HandleSubscribe'
 
 
 // get isLoggedIn from Redux
@@ -43,6 +44,9 @@ const AppRoutes = () => {
 			<Route exact path='/about/about-us'><AboutUs /></Route>
 			<Route exact path='/about/careers'><Reviews /></Route>
 			{/* <Route exact path='/blog'><Blog /></Route> */}
+
+			<Route exact path='/subscription/:email'><HandleSubscribe /></Route>
+
 			<Route exact path='*'><Page404 /></Route>
 		</Switch>
 	)
