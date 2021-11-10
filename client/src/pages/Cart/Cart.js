@@ -1,10 +1,11 @@
 import React from 'react'
+import { Container } from '@mui/material'
 
 const Cart = () => {
 	return (
-		<div>
+		<Container maxWidth="lg">
 			<h1>Cart</h1>
-		</div>
+		</Container>
 	)
 }
 

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useParams, useHistory, Link} from 'react-router-dom'
-import {Box, Grid, Typography, Button} from '@mui/material'
+import { Grid, Typography, Button, Container} from '@mui/material'
 
 import {getSubscriptionByEmail,changeSubscription} from '../../utils/API/subscribersAPI'
 
@@ -47,26 +47,35 @@ const HandleSubscribe = () =>
 	}
 
 	return (
-		<Box maxWidth='lg' sx={{minHeight: '500px'}}>
+		<Container maxWidth="lg" sx={{minHeight: '500px'}}>
 			<Grid
 				container
 				spacing={5}
 				direction="column"
 				alignItems="center"
 				justifyContent="center"
-				style={{ minHeight: '500px' }}>
-				<Grid xs={6} item>
+				style={{ minHeight: '500px' }}
+			>
 				
-					{subscribeStatus && subscribeStatus.status && (
-						<StyledTypography variant="h2">{subscribeStatus.status}</StyledTypography>
-					)}
+				{!subscribeStatus && (
+					<Grid xs={6} item>
+						<StyledTypography variant="h2">Loading...</StyledTypography>
+					</Grid>
+				)}
+				
+				{subscribeStatus && subscribeStatus.status && (
+					<>
+						<Grid xs={6} item>
+							<StyledTypography variant="h2">{subscribeStatus.status}</StyledTypography>
+						</Grid>
+						<Grid xs={6} item>
+							<Button variant="contained" to="/" component={Link}>to main page</Button>
+						</Grid>
+					</>
+				)}
 					
-				</Grid>
-				<Grid xs={6} item>
-					<Button variant="contained" to="/" component={Link}>to main page</Button>
-				</Grid>
 			</Grid>
-		</Box>
+		</Container>
 	)
 }
 
