@@ -3,70 +3,42 @@ const Schema = mongoose.Schema;
 
 const ProductSchema = new Schema(
   {
-    itemNo: {
-      type: String,
-      required: true
-    },
-    enabled: {
-      type: Boolean,
-      required: true,
-      default: true
-    },
-    name: {
-      type: String,
-      required: true
-    },
-    currentPrice: {
-      type: Number,
-	    required: true
-    },
-	  previousPrice: {
-		  type: Number
+	  name: {
+		  type: String,
+		  required: true
 	  },
 	  categories: {
 		  type: String,
 		  required: true
 	  },
-	  imageUrls: [
+	  variants: [
 		  {
-			  type: String,
-			  required: true
+			  type: Schema.Types.ObjectId,
+			  ref: 'ProductVariant'
 		  }
 	  ],
-	  quantity: {
-		  type: Number,
-		  required: true,
-		  default: 0
-	  },
-	  color: {
+	  productUrl: {
 		  type: String
 	  },
-	  sizes: {
+	  brand: {
 		  type: String
-    },
-    productUrl: {
-      type: String
-    },
-    brand: {
-      type: String
-    },
-    manufacturer: {
-      type: String
-    },
-    manufacturerCountry: {
-      type: String
-    },
-    seller: {
-      type: String
-    },
-    date: {
-      type: Date,
-      default: Date.now
-    }
+	  },
+	  manufacturer: {
+		  type: String
+	  },
+	  manufacturerCountry: {
+		  type: String
+	  },
+	  seller: {
+		  type: String
+	  },
+	  date: {
+		  type: Date,
+		  default: Date.now
+	  }
   },
   { strict: false }
 );
 
 ProductSchema.index({ "$**": "text" });
-
-module.exports = Product = mongoose.model("products", ProductSchema);
+module.exports = Product = mongoose.model("Product", ProductSchema);

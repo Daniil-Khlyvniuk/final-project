@@ -1,15 +1,19 @@
 const Catalog = require("../models/Catalog");
 const queryCreator = require("../commonHelpers/queryCreator");
 const _ = require("lodash");
+const fileService = require("../services/fileService");
 
 exports.addCategory = (req, res, next) => {
+	const imageUrls = fileService.saveFile(req?.files?.img, "category")
+
   Catalog.findOne({ _id: req.body._id }).then(category => {
     if (category) {
       return res
         .status(400)
         .json({ message: `Category with id "${category.id}" already exists` });
     } else {
-      const newCategory = new Catalog(queryCreator(req.body));
+
+      const newCategory = new Catalog(queryCreator({img: imageUrls, ...req.body}));
 
       newCategory
         .save()
