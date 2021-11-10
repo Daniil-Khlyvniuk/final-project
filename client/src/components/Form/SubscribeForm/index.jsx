@@ -1,10 +1,11 @@
 import React, {useState} from 'react'
-import {Formik, Form} from 'formik'
-import {Button, TextField, Alert} from '@mui/material'
-import * as yup from 'yup'
+import {Formik, Form, Field} from 'formik'
+import {Button, Alert} from '@mui/material'
 
-//for server subscribe
-// import {addSubscriber} from '../../../utils/API/subscribersAPI'
+import {SUBSCRIBE_SCHEMA} from '../setting/Schemes'
+import TextInput from '../setting/TextInput'
+
+import {addSubscribe} from '../../../utils/API/subscribersAPI'
 
 import { styled } from '@mui/material/styles'
 
@@ -13,35 +14,35 @@ const StyledForm = styled(Form)(() => ({
 	width: '100%',
 }))
 
-
-const isRequiredError = 'This field is required'
-const userFormSchema = yup.object().shape({
-	email: yup.string().required(isRequiredError).email('Enter correct email'),
-})
-
-const FormSibscribe = () => {
+const SubscribeForm = () => {
 	const [subscribeStatus, setSubscribeStatus] = useState(null)
-	const handleSubmit = () => {
-		// const handleSubmit = ({email}) => {
-		//then import addSubscriber from API
-		// addSubscriber(email)
-		
-		// console.log(email)
-		setSubscribeStatus({ success: 'You subscribed with success!' })
-		// setSubscribeStatus({ error: 'Error happened while subscription! Try later' })
+	const handleSubmit = async ({email}, formikFunctions) => {
+		try{
+			const res = await addSubscribe(email)
+			if(res.status === 200)
+			{
+				setSubscribeStatus({ success: 'You successfully subscribed!' })
+			}
+		}
+		catch(er)
+		{
+			setSubscribeStatus({ error: er.response.data.message })
+		}
+		formikFunctions.resetForm()
 		setTimeout(() => setSubscribeStatus(null), 5000)
 	}
 
 	return (
 		<Formik
-			initialValues={{}}
-			validationSchema={userFormSchema}
+			initialValues={{email: ''}}
+			validationSchema={SUBSCRIBE_SCHEMA}
 			onSubmit={handleSubmit}
 		>
 			{(formikProps) => (
 				<>
 					<StyledForm noValidate>
-						<TextField 
+						<Field 
+							component={TextInput}
 							type="email" 
 							placeholder="e-mail"
 							name="email"
@@ -50,6 +51,7 @@ const FormSibscribe = () => {
 							error={true}
 							asyncborderradius={'on'}
 						/>
+						
 						<Button 
 							type='submit'
 							variant="contained"
@@ -92,4 +94,4 @@ const FormSibscribe = () => {
 	)
 }
 
-export default FormSibscribe
+export default SubscribeForm

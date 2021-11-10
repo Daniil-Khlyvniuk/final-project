@@ -1,10 +1,11 @@
 import React from 'react'
+import { Container } from '@mui/material'
 
 const Favorites = () => {
 	return (
-		<div>
+		<Container maxWidth="lg">
 			<h1>Favorites</h1>
-		</div>
+		</Container>
 	)
 }
 
