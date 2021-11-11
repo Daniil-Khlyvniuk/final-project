@@ -123,12 +123,14 @@ export const useStyleCarousel = makeStyles({
 		color: '#373F41'
 	},
 	thumbWrapper:{
-		'& swiper-slide.swiper-slide-active': {
+		display: 'flex',
+		'& .swiper-slide-active': {
 			opacity: 1
 		}
 	},
 	thumb:{
+		textAlign: 'center',
 		opacity: 0.4,
-
+		margin: 'auto'
 	}
 })

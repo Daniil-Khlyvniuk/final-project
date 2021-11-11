@@ -10,29 +10,7 @@ import axios from 'axios'
 import PropTypes from 'prop-types'
 // import Button from '@mui/material/Button'
 SwiperCore.use([Thumbs])
-let slideData = [
-	{
-		id: '1',
-		customId: 'promotion-women-clothing',
-		imageUrl: 'img/slides/slider-1.jpg',
-		title: 'OCEAN  COLLECTION',
-		description: 'Do not miss our hot offer. Promotion ends 10/30/2019',
-		category: '5d99f68e419d040eec0f722c'
-	},
-	{
-		id: '2',
-		customId: 'promotion-women-clothing',
-		imageUrl: 'img/slides/slider-2.jpg',
-		description: 'SUBSCRIBE NOW AND GET 15% OFF ON YOUR FIRST ORDER',
-		category: '5d99f68e419d040eec0f722c'
-	},
-	{
-		id: '3',
-		customId: 'promotion-women-clothing',
-		imageUrl: 'img/slides/slider-3.jpg',
-		description: 'UP TO 30% OFF ON YOUR FAVOURITE FRENCH LINEN',
-		category: '5d99f68e419d040eec0f722c'
-	}]
+
 let thumbsData = [
 	{
 		id: '1',
@@ -51,7 +29,7 @@ const Carousel = ({ isProduct = false }) => {
 	const prev = useRef()
 	const next = useRef()
 	const [thumbsSwiper, setThumbsSwiper] = useState(null)
-
+	const [slideData, setSlideData] = useState([])
 	const getSetting = (isThumbs) => {
 		return {
 			effect: 'fade',
@@ -69,20 +47,20 @@ const Carousel = ({ isProduct = false }) => {
 		}
 	}
 	const setting = getSetting(isProduct)
-
-	useEffect(() => {
+	useEffect( () =>  {
 		axios.get('api/slides')
 			.then((slides) => {
 				if (slides.data.length !== 0) {
-					slideData = [...slides.data]
+					setSlideData([...slides.data])
 				}
-			})
+			}
+			)
 			.catch(err => {
 				error = err.message
 				// eslint-disable-next-line no-console
 				console.log(error)
 			})
-	})
+	}, [])
 
 	const style = useStyleCarousel()
 	return (
@@ -96,10 +74,10 @@ const Carousel = ({ isProduct = false }) => {
 					{...setting}
 				>
 					{slideData.map((slide) => {
-						return <SwiperSlide key={slide.id}>
+						return <SwiperSlide key={slide.customId}>
 							<div>
 								{/*<Link to={`/${slide.category}`}>*/}
-								<img style={{ alignText: 'center' }} className={style.slide} src={slide.imageUrl} alt=""/>
+								<img style={{ alignText: 'center' }} className={style.slide} src={slide.imageUrl} alt="slide"/>
 								{/*</Link>*/}
 								<div className={style.textBlock}>
 
@@ -127,17 +105,16 @@ const Carousel = ({ isProduct = false }) => {
 			</div>
 			{/*{isProduct &&*/}
 			<Swiper
+				className={style.thumbWrapper}
 				thumbs={{
 					swiper:thumbsSwiper
 				}}
 				slidesPerView={2}
-				spaceBetween={-500}
-				className={style.thumbWrapper}
-				// centeredSlides={true}
+				centeredSlides={true}
 				slideToClickedSlide={true}>
 				{thumbsData.map((thumb) => {
 					return <SwiperSlide key={thumb.id} className={style.thumb}>
-						<img style={{ width: '200px', height: ' 200px' }} src={thumb.url} alt=""/>
+						<img style={{ width: '200px', height: ' 200px' }} src={thumb.url} alt="slide thumbs"/>
 					</SwiperSlide>
 				})}
 			</Swiper>
