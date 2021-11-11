@@ -6,10 +6,21 @@ export const StyledBox = styled(Box)(() => ({
 	display: 'flex',
 	alignItems: 'center',
 	justifyContent: 'center',
+	paddingRight: 10,
+	['@media (max-width:684px)']: {
+		order: 1,
+	},
 }))
 
 export const StyledAutocomplete = styled(Autocomplete)(() => ({
 	width: 380,
+	['@media (max-width:900px)']: {
+		width: 250
+	},
+	['@media (max-width:684px)']: {
+		width: '90vw',
+		padding: '10px 0'
+	},
 	position: 'relative',
 	'& .css-y2vtlc-MuiFormLabel-root-MuiInputLabel-root': {
 		fontWeight: 600,

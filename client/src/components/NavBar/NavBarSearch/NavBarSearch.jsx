@@ -40,7 +40,7 @@ const HeaderSearch = () => {
 	}
 
 	return (
-		<StyledBox xs={12} sm={3}>
+		<StyledBox>
 			<Search>
 				<SearchIconWrapper>
 					<SearchIcon />
