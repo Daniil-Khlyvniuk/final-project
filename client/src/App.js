@@ -4,6 +4,7 @@ import Footer from './components/Footer'
 import AppRoutes from './routes/AppRoutes'
 
 
+
 const App = () => {
 	// // it is an example of dispatching actions
 	// const dispatch = useDispatch()
