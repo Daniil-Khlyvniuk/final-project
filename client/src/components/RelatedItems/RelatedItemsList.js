@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import RelatedItems from './RelatedItems'
-// import {useSelector} from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
 
+import {useSelector, useDispatch} from 'react-redux'
+import {productsSelectors,productsActions } from '../../store/Products' //
 
 const slideData = [
 	{
@@ -86,12 +87,62 @@ const slideData = [
 		imageUrl: 'https://images.ua.prom.st/1783929320_postelnoe-bele-satin.jpg',
 		description: 'UP TO 30% OFF ON YOUR FAVOURITE FRENCH LINEN',
 		category: '5d99f68e419d040eec0f722c'
+	},{
+		id: '1',
+		customId: 'promotion-women-clothing',
+		imageUrl: 'https://marieclairehome.com.ua/assets/images/products/868/800x/postilna-bilyzna-marie-claire-innsbruck.jpg',
+		title: 'OCEAN  COLLECTION',
+		description: 'Do not miss our hot offer. Promotion ends 10/30/2019',
+		category: '5d99f68e419d040eec0f722c'
+	},{
+		id: '1',
+		customId: 'promotion-women-clothing',
+		imageUrl: 'https://marieclairehome.com.ua/assets/images/products/868/800x/postilna-bilyzna-marie-claire-innsbruck.jpg',
+		title: 'OCEAN  COLLECTION',
+		description: 'Do not miss our hot offer. Promotion ends 10/30/2019',
+		category: '5d99f68e419d040eec0f722c'
 	},
-
 ]
 
 
 const RelatedItemsList = () => {
+	// const [items, setItems] = useState([])
+	const relatedIds = useSelector(productsSelectors.getRelatedIds())
+	const dispatch = useDispatch()
+	const test = 111
+
+	// eslint-disable-next-line no-console
+	console.log(relatedIds)
+
+	useEffect(() => {
+		// 	localStorage.setItem('related', [])
+		// 	const ItemView = localStorage.getItem('related')
+		// 		? JSON.parse(localStorage.getItem('related'))
+		// 		: []
+		// 	// if (ItemView.find((card) => card.id === items.id)) {
+		// 	// 	setItems.shift()
+		// 	// 	ItemView.shift()
+		// 	// }
+		// 	if (items.length >= 10) {
+		// 		setItems.pop()
+		// 		ItemView.pop()
+		// 	}
+		dispatch(productsActions.addRelatedId(test))
+	}, [test])
+
+
+
+	const addToRelated = () => {
+		// if (!items.find((item) => item.id === id)) {
+		// 	const newCard = slideData.filter((item) => item.id === id)
+		// 	const [{...addToRelated}] = newCard
+		// 	setItems([...items, addToRelated])
+		// 	localStorage.setItem(
+		// 		'related',
+		// 		JSON.stringify([...items, addToRelated])
+		// 	)
+		// }
+	}
 
 
 	const card = slideData.map((item) => (
@@ -107,6 +158,9 @@ const RelatedItemsList = () => {
 	return (
 		<div>
 			<ul>{revCards.slice(1, 11)}</ul>
+			<button
+				onClick={()=>{addToRelated()}}
+			>click here</button>
 		</div>
 	)
 }

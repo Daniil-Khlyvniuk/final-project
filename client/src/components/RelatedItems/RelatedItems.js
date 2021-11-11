@@ -1,11 +1,11 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import {useSelector} from 'react-redux'
+// import {useSelector} from 'react-redux'
 
 
 
 const RelatedItems = (props) => {
-	const ItemView = useSelector(state => state.ItemView)
+	// const ItemView = useSelector(state => state.ItemView)
 
 
 	const {
@@ -14,18 +14,19 @@ const RelatedItems = (props) => {
 	} = props
 
 
-	
-	useEffect(() => {
-		const ItemView = localStorage.getItem('view')
-			? JSON.parse(localStorage.getItem('view'))
-			: []
-		if (ItemView.find((card) => card.article === key)) {
-			ItemView.shift()
-		}
-		if (ItemView.length >= 10) {
-			ItemView.pop()
-		}
-	}, [ItemView, key])
+
+	// useEffect(() => {
+	// 	localStorage.setItem('related', [])
+	// 	const ItemView = localStorage.getItem('related')
+	// 		? JSON.parse(localStorage.getItem('related'))
+	// 		: []
+	// 	if (ItemView.find((card) => card.id === key)) {
+	// 		ItemView.shift()
+	// 	}
+	// 	if (ItemView.length >= 10) {
+	// 		ItemView.pop()
+	// 	}
+	// }, [ItemView, key])
 
 
 	return (
@@ -40,7 +41,7 @@ const RelatedItems = (props) => {
 
 
 RelatedItems.propTypes = {
-	key: PropTypes.number,
+	key: PropTypes.string,
 	url: PropTypes.string,
 	card: PropTypes.shape({
 		article: PropTypes.number,
