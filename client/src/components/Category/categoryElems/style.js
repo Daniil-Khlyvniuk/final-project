@@ -12,4 +12,11 @@ export const StyledMenuItem = styled(MenuItem)(() => ({
 	display: 'flex',
 	justifyContent: 'space-between',
 	gap: '1em',
+	['@media (max-width:750px)']: {
+		gap: '0.5em',
+	},
+	['@media (max-width:450px)']: {
+		padding: 6,
+		gap: 0
+	},
 }))
