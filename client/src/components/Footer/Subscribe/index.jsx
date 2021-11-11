@@ -32,8 +32,8 @@ const Subscribe = () => {
 				<StyledListItem>
 					<SubscribeForm />
 				</StyledListItem>
-				<ListItem>
-					<Typography variant="menuBold">
+				<ListItem sx={{justifyContent: 'space-between'}}>
+					<Typography variant="menuBold" noWrap={true} align='left'>
 						follow us
 					</Typography>
 					<SocialLinks />
