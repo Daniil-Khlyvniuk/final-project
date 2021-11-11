@@ -51,33 +51,37 @@ exports.addProduct = async (req, res) => {
     if (!product) {
       product = await Product.create({ ...productData, categories: category });
     }
-
-    const isVarExist = await ProductVariant.findOne({
-      product: product._id,
-      color: colorName,
-      size: sizeName,
-    });
-    if (isVarExist) {
-      throw new Error(`The variant already exist`);
-    }
-
     const color = await Color.findOne({ name: colorName });
     notFoundError(color, colorName);
 
     const size = await Size.findOne({ name: sizeName });
     notFoundError(size, sizeName);
 
+    const isVarExist = await ProductVariant.findOne({
+      product: product._id,
+      color: color._id,
+      size: size._id,
+    });
+    if (isVarExist) {
+      throw new Error(`The variant already exist`);
+    }
+
     const newVariant = await ProductVariant.create({
       ...variantData,
-      size: size.name,
-      color: color.name,
+      size: size,
+      color: color,
       product,
+    }).catch((err) => {
+      console.log("1", err);
     });
 
     product.variants.push(newVariant);
     const updatedProduct = await Product.findByIdAndUpdate(
       product._id,
-      product,
+      {
+        ...product,
+        $push: { variants: product.variants },
+      },
       { new: true }
     );
     return res.json(updatedProduct);
@@ -136,12 +140,13 @@ exports.getProducts = (req, res, next) => {
   const startPage = Number(req.query.startPage);
   const sort = req.query.sort;
 
-  Product.find()
+  ProductVariant.find()
     .skip(startPage * perPage - perPage)
     .limit(perPage)
     .sort(sort)
-    .populate("variants")
-    .populate("categories")
+    .populate("product")
+    .populate("color")
+    .populate("size")
     .then((products) => {
       res.send(products);
     })
