@@ -8,6 +8,8 @@ import CartIcon from './NavBarIcons/CartIcon/CartIcon'
 import NavBarSearch from './NavBarSearch/NavBarSearch'
 import { useStyles } from './styles'
 import Category from '../Category/Category'
+import LoginModal from '../Modal/LoginModal'
+// import CartModal from '../Modal/CartModal'
 
 const Navbar = () => {
 	const classes = useStyles()
@@ -28,6 +30,8 @@ const Navbar = () => {
 					</Toolbar>
 				</AppBar>
 			</Container>
+			<LoginModal />
+			{/* <CartModal /> */}
 		</Box>
 	)
 }
