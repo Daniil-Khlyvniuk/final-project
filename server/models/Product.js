@@ -3,40 +3,40 @@ const Schema = mongoose.Schema;
 
 const ProductSchema = new Schema(
   {
-	  name: {
-		  type: String,
-		  required: true
-	  },
-	  categories: {
-		  type: Schema.Types.ObjectId,
-		  ref: 'catalogs',
-		  required: true
-	  },
-	  variants: [
-		  {
-			  type: Schema.Types.ObjectId,
-			  ref: 'ProductVariant'
-		  }
-	  ],
-	  productUrl: {
-		  type: String
-	  },
-	  brand: {
-		  type: String
-	  },
-	  manufacturer: {
-		  type: String
-	  },
-	  manufacturerCountry: {
-		  type: String
-	  },
-	  seller: {
-		  type: String
-	  },
-	  date: {
-		  type: Date,
-		  default: Date.now
-	  }
+    name: {
+      type: String,
+      required: true,
+    },
+    categories: {
+      type: Schema.Types.ObjectId,
+      ref: "catalogs",
+      required: true,
+    },
+    variants: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "ProductVariant",
+      },
+    ],
+    productUrl: {
+      type: String,
+    },
+    brand: {
+      type: String,
+    },
+    manufacturer: {
+      type: String,
+    },
+    manufacturerCountry: {
+      type: String,
+    },
+    seller: {
+      type: String,
+    },
+    date: {
+      type: Date,
+      default: Date.now,
+    },
   },
   { strict: false }
 );
