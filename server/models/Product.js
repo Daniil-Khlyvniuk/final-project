@@ -8,7 +8,8 @@ const ProductSchema = new Schema(
 		  required: true
 	  },
 	  categories: {
-		  type: String,
+		  type: Schema.Types.ObjectId,
+		  ref: 'catalogs',
 		  required: true
 	  },
 	  variants: [

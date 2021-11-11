@@ -6,6 +6,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
 import { KeyboardArrowUp } from '@mui/icons-material'
 import PropTypes from 'prop-types'
+import { Box } from '@mui/system'
 
 const ParentMenuList = ({
 	children = [],
@@ -42,7 +43,7 @@ const ParentMenuList = ({
 	}, [open])
 
 	return (
-		<div style={{ zIndex: '99999999999999' }}>
+		<Box style={{ zIndex: '99999999999999' }}>
 			<StyledMenuItem
 				ref={anchorRef}
 				id={`${text}-button`}
@@ -53,7 +54,7 @@ const ParentMenuList = ({
 				onMouseEnter={parent ? handleOpen : null}
 				onMouseLeave={handleClose}
 			>
-				{root ? text.toUpperCase() : text}
+				{root ? text : text}
 				{parent && <KeyboardArrowRightIcon />}
 				{(root && !open) && <KeyboardArrowDownIcon />}
 				{(root && open) && <KeyboardArrowUp />}
@@ -95,7 +96,7 @@ const ParentMenuList = ({
 					</Grow>
 				)}
 			</Popper>
-		</div >
+		</Box >
 	)
 }
 

@@ -14,6 +14,10 @@ const StyledForm = styled(Form)(() => ({
 	width: '100%',
 }))
 
+const StyledAlert = styled(Alert)(() => ({
+	width: '100%',
+}))
+
 const SubscribeForm = () => {
 	const [subscribeStatus, setSubscribeStatus] = useState(null)
 	const handleSubmit = async ({email}, formikFunctions) => {
@@ -50,6 +54,7 @@ const SubscribeForm = () => {
 							onChange={formikProps.handleChange}
 							error={true}
 							asyncborderradius={'on'}
+							fullWidth={true}
 						/>
 						
 						<Button 
@@ -60,33 +65,38 @@ const SubscribeForm = () => {
                 formikProps.isSubmitting
 							}
 							asyncborderradius={'on'}
+							sx={{
+								paddingLeft: '40px',
+								paddingRight: '40px',
+							}}
 						>
             send
 						</Button>
 					</StyledForm>
 
 					{!formikProps.isValid && (
-						<Alert 
+						<StyledAlert 
 							severity="error"
 							icon={false}
-							sx={{width: '100%'}}
 						>
 							{formikProps.errors.email}
-						</Alert>
+						</StyledAlert>
 					)}
 					{subscribeStatus && subscribeStatus['success'] && (
-						<Alert icon={false} severity="success"
-							sx={{ width: '100%' }}
+						<StyledAlert 
+							icon={false}
+							severity="success"
 						>
 							{subscribeStatus.success}
-						</Alert>
+						</StyledAlert>
 					)}
 					{subscribeStatus && subscribeStatus['error'] && (
-						<Alert icon={false} severity="success"
-							sx={{ width: '100%' }}
+						<StyledAlert
+							icon={false}
+							severity="success"
 						>
 							{subscribeStatus.error}
-						</Alert>
+						</StyledAlert>
 					)}
 				</>
 			)}
