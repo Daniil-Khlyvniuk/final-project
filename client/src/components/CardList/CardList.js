@@ -2,18 +2,22 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Card from '../ProductCard/ProductCard'
 
+
+
 import {makeStyles} from '@mui/styles'
 
 import {Typography} from '@mui/material'
 
-import { productsOperations, productsSelectors } from '../../store/Products'
+import { productsOperations, productsSelectors } from '../../store/Products' //
+
 
 
 const useStyles = makeStyles((theme)=>({
 	container: {
 		display: 'flex',
 		flexWrap: 'wrap',
-		gap: '20px', maxWidth: '1180px',
+		gap: '20px',
+		maxWidth: '1180px',
 		margin: '0 auto',
 		justifyContent: 'center'
 	},
@@ -36,13 +40,13 @@ const CardList = () => {
 				variant={'h2'} className={classes.title}>NEW IN</Typography>
 			<div className={classes.container}>
 				{
-					!!products?.list
-					&& products?.list?.map((item, key) => (
+					!!products
+					&& products.map(item => (
 						<Card
-							key={key}
-							image={item.img}
-							title={item.title}
-							price={item.price} />
+							key={item._id}
+							// image={'/' + item.imageUrls[0]}
+							title={item.name}
+							price={item.currentPrice + ' $'}  />
 					))
 				}
 			</div>

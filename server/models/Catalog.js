@@ -3,17 +3,15 @@ const Schema = mongoose.Schema;
 
 const CatalogSchema = new Schema(
   {
-    id: {
-      type: String,
-      required: true,
-    },
     name: {
       type: String,
       required: true,
     },
+	  img: {
+			type: String
+	  },
     parentId: {
       type: String,
-      default: null,
     },
     date: {
       type: Date,

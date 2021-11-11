@@ -11,36 +11,41 @@ const StyledList = styled(List)(() => ({
 	flexDirection: 'row',
 }))
 
+const StyledListItem = styled(ListItem)(() => ({
+	paddingLeft: '15px',
+	paddingRight: '15px',
+}))
+
 const SocialLinks = () => 
 {
 	return (
 		<StyledList 
 			disablePadding={true}
 		>
-			<ListItem>
+			<StyledListItem>
 				<LinkMui
 					href="https://facebook.com" 
 					target="_blank"
 				>
 					<FacebookIcon />
 				</LinkMui>
-			</ListItem>
-			<ListItem>
+			</StyledListItem>
+			<StyledListItem>
 				<LinkMui
 					href="https://twitter.com" 
 					target="_blank"
 				>
 					<TwitterIcon />
 				</LinkMui>
-			</ListItem>
-			<ListItem>
+			</StyledListItem>
+			<StyledListItem>
 				<LinkMui
 					href="https://instagram.com" 
 					target="_blank"
 				>
 					<InstagramIcon />
 				</LinkMui>
-			</ListItem>
+			</StyledListItem>
 		</StyledList>
 	)
 }

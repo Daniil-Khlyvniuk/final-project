@@ -11,11 +11,11 @@ const useStyles = makeStyles({
 	}
 })
 
-const PopularCard = ({data}) => {
+const PopularCard = ({data, index}) => {
 	const classes = useStyles()
 	return (
-		<Grid item md={data.grid} >
-			<Card sx={{border: 'none', boxShadow: 'none', borderRadius:'2px' }} >
+		<Grid item md={index === 0 ?  8 : index === 3 ? 8 : 4} sm={12} >
+			<Card  sx={{border: 'none', boxShadow: 'none', borderRadius:'2px' }} >
 				<Box sx={{ position: 'relative' }}>
 					<CardMedia
 						height={'342px'}
@@ -54,7 +54,8 @@ PopularCard.propTypes ={
 		title: PropTypes.string,
 		image: PropTypes.string,
 		grid:PropTypes.number
-	})
+	}),
+	index:PropTypes.number
 }
 
 export default PopularCard

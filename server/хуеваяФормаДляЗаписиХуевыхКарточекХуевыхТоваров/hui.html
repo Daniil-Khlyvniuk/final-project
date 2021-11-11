@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="./хуйПЭ_ЭН_ГЭ_2.png" type="image/png">
+    <title>хуеваяФормаДляЗаписиХуевыхКарточекХуевыхТоваров</title>
+    <style>
+      form {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+
+      label {
+        display: block;
+      }
+    </style>
+</head>
+<body style="font-family: 'Comic Sans MS'; background: url('./хуйПЭ_ЭН_ГЭ.png') center no-repeat">
+<h1>ХУЙ__ХУЙ__ХУЙ__ХУЙ__ХУЙ__ХУЙ__ХУЙ__ХУЙ__ХУЙ__ХУЙ__ХУЙ__ХУЙ__ХУЙ__ХУЙ__ХУЙ__ХУЙ</h1>
+<form style="font-family: 'Comic Sans MS'; width: 550px; margin: 150px auto;"
+      action="http://localhost:5000/api/products"
+      enctype="multipart/form-data"
+      method="post">
+    <!--    __________________________________________________________________________-->
+    <h1 style="color: lime">Product</h1>
+
+
+    <label>name
+        <input style="font-family: 'Comic Sans MS';" type="text" placeholder="name" name="name">
+    </label>
+    <label>seller
+        <input style="font-family: 'Comic Sans MS';" type="text" placeholder="seller" name="seller">
+    </label>
+    <label>manufacturerCountry
+        <input style="font-family: 'Comic Sans MS';" type="text" placeholder="manufacturerCountry"
+               name="manufacturerCountry">
+    </label>
+    <label>manufacturer
+        <input style="font-family: 'Comic Sans MS';" type="text" placeholder="manufacturer" name="manufacturer">
+    </label>
+    <label>brand
+        <input style="font-family: 'Comic Sans MS';" type="text" placeholder="brand" name="brand">
+    </label>
+    <label>categories
+        <input style="font-family: 'Comic Sans MS';" type="text" placeholder="categories" name="categories">
+    </label>
+    <!--    ________________________________________________________________-->
+    <h1 style="color: lime">======================================================================================</h1>
+    <h1 style="color: lime">Variant</h1>
+    <label>currentPrice
+        <input style="font-family: 'Comic Sans MS';" type="text" placeholder="currentPrice" name="currentPrice">
+    </label>
+    <label>previousPrice
+        <input style="font-family: 'Comic Sans MS';" type="text" placeholder="previousPrice" name="previousPrice">
+    </label>
+    <label>imgs
+        <input style="font-family: 'Comic Sans MS';" type="file" multiple name="img">
+    </label>
+    <label>quantity
+        <input style="font-family: 'Comic Sans MS';" type="text" placeholder="quantity" name="quantity">
+    </label>
+    <label>size
+        <input style="font-family: 'Comic Sans MS';" type="text" placeholder="size" name="size">
+    </label>
+    <label>color
+        <input style="font-family: 'Comic Sans MS';" type="text" placeholder="color" name="color">
+    </label>
+    <!--    <label>enabled (bool)-->
+    <!--        <input style="font-family: 'Comic Sans MS';" type="text" placeholder="enabled" name="enabled">-->
+    <!--    </label>-->
+
+
+    <input style="font-family: 'Comic Sans MS';" type="submit" value="Отправить">
+</form>
+</body>
+</html>

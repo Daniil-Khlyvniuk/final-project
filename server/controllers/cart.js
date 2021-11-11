@@ -3,6 +3,7 @@ const Product = require('../models/Product');
 const queryCreator = require('../commonHelpers/queryCreator');
 const _ = require('lodash');
 
+
 exports.createCart = (req, res, next) => {
   Cart.findOne({ customerId: req.user.id }).then((cart) => {
     if (cart) {
