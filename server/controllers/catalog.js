@@ -4,7 +4,7 @@ const _ = require("lodash");
 const fileService = require("../services/fileService");
 
 exports.addCategory = (req, res, next) => {
-	const imageUrls = fileService.saveFile(req?.files?.img, "category")
+	const imageUrls = fileService.saveFile(req?.files?.imgUrl, "category")
 
   Catalog.findOne({ _id: req.body._id }).then(category => {
     if (category) {
@@ -13,7 +13,7 @@ exports.addCategory = (req, res, next) => {
         .json({ message: `Category with id "${category.id}" already exists` });
     } else {
 
-      const newCategory = new Catalog(queryCreator({img: imageUrls, ...req.body}));
+      const newCategory = new Catalog(queryCreator({imgUrl: imageUrls, ...req.body}));
 
       newCategory
         .save()
