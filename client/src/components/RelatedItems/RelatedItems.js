@@ -4,14 +4,14 @@ import PropTypes from 'prop-types'
 
 
 
-const RelatedItems = (props) => {
+const RelatedItems = ({ product }) => {
 	// const ItemView = useSelector(state => state.ItemView)
 
 
 	const {
-		key,
-		url,
-	} = props
+		name,
+		_id,
+	} = product
 
 
 
@@ -32,8 +32,9 @@ const RelatedItems = (props) => {
 	return (
 		<div>
 			<li>
-				<h1>{key}</h1>
-				<img src={url} width="200" height="180" alt="laptop"/>
+				<h1>{name}</h1>
+				<h2>{_id}</h2>
+				{/*<img src={url} width="200" height="180" alt="laptop"/>*/}
 			</li>
 		</div>
 	)
@@ -41,12 +42,13 @@ const RelatedItems = (props) => {
 
 
 RelatedItems.propTypes = {
-	key: PropTypes.string,
-	url: PropTypes.string,
-	card: PropTypes.shape({
-		article: PropTypes.number,
-		title: PropTypes.string,
-	}),
+	product: PropTypes.object
+	// _id: PropTypes.string,
+	// name: PropTypes.string,
+	// card: PropTypes.shape({
+	// 	article: PropTypes.number,
+	// 	title: PropTypes.string,
+	// }),
 }
 
 
