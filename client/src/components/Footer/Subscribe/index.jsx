@@ -12,19 +12,43 @@ const StyledListItem = styled(ListItem)(() => ({
 }))
 
 
+
 const Subscribe = () => {
 	return (
-		<Grid item xs={12} sm={3}>
+		<Grid item xs={12} sm={6} lg={3}>
 			<List>
-				<ListItem>
+				<ListItem
+					sx={{
+						justifyContent: {
+							xs: 'center',
+							lg: 'flex-start',
+						}
+					}}
+				>
 					<Typography
 						variant="menuBold"
+					
 					>
 						subscribe
 					</Typography>
 				</ListItem>
-				<ListItem>
-					<Typography variant='footerTextLight'>
+				<ListItem
+					sx={{
+						justifyContent: {
+							xs: 'center',
+							lg: 'flex-start',
+						}
+					}}
+				>
+					<Typography 
+						variant='footerTextLight'
+						sx={{
+							textAlign: {
+								xs: 'center',
+								lg: 'left',
+							}
+						}}
+					>
 								Subscribe now and get 15% off
 								on your first order
 					</Typography>
@@ -32,7 +56,15 @@ const Subscribe = () => {
 				<StyledListItem>
 					<SubscribeForm />
 				</StyledListItem>
-				<ListItem sx={{justifyContent: 'space-between'}}>
+				<ListItem 
+					sx={{
+						flexWrap: 'wrap',
+						justifyContent: {
+							xs: 'center',
+							lg: 'space-between',
+						}
+					}}
+				>
 					<Typography variant="menuBold" noWrap={true} align='left'>
 						follow us
 					</Typography>
