@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react'
 import {Box, Typography, Button, Divider, Stack} from '@mui/material'
-import SocialLinks from '../SocialLInks'
-import {makeStyles, useTheme} from '@mui/styles'
 
+import SocialLinks from '../SocialLInks'
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined'
 import AccordionProduct from './Accordion/Accordion'
 import PropTypes from 'prop-types'
 import Colors from './Colors'
+
+import{useProductDescriptionStyle} from '../../utils/customHooks/useProductDescriptionStyle'
 
 const colors = [
 	{'_id': '618b8739af938f27ec67e6ee',
@@ -18,59 +19,7 @@ const colors = [
 ]
 
 const user = false
-const useStyles = makeStyles((theme) => ({
 
-	header:{
-		display: 'flex' ,
-		alignItems: 'center' ,
-		justifyContent : 'space-between',
-		[theme.breakpoints.down('md')]: {
-			flexDirection:'column',
-			alignItems: 'flex-start',
-			'& .MuiListItem-root':{
-				paddingLeft:0
-			}
-		},
-	},
-	actions:{display:'flex', justifyContent:'space-between', alignItems:'center' , margin:'26px 0',
-		[theme.breakpoints.down('md')]:{
-			flexDirection:'column',
-			alignItems: 'flex-start',
-		}
-	},
-
-	productId : {
-		color:'rgba(92, 94, 96, 0.5)',
-		lineHeight: '18px',
-		textTransform: 'uppercase'
-	},
-	optionText:{
-		color: theme.palette.primary,
-		textTransform: 'uppercase',
-		lineHeight: '24px',
-	},
-	stack:{
-		display:'flex',
-		alignItems:'center',
-
-
-		'& .MuiButton-root': {
-			fontSize: '14px',
-			padding: 0,
-			minWidth : 'none',
-
-		}
-	},
-	sizeBtn:{
-		backgroundColor: 'transparent',
-		border : 'none',
-		padding: 0,
-
-
-	}
-
-
-}))
 
 const ProductDescription = (
 	{title = 'Title' ,
@@ -79,11 +28,11 @@ const ProductDescription = (
 		currentPrice =123}) => {
 
 
-	const theme = useTheme()
-	const classes = useStyles(theme)
+	const classes = useProductDescriptionStyle()
 
-
+	// eslint-disable-next-line no-unused-vars
 	const [activeColor, setActiveColor] = useState(null)
+	// eslint-disable-next-line no-unused-vars
 	const [activeSize, setActiveSize] = useState(null)
 	const [available, setAvailable] = useState(null)
 	useEffect(()=>{
@@ -96,12 +45,13 @@ const ProductDescription = (
 		}
 	}, [quantity])
 
+	// eslint-disable-next-line no-unused-vars
 	const handleActiveColor = ()=>{
 	//	Set active color
 		//Send req
 
 	}
-
+	// eslint-disable-next-line no-unused-vars
 	const handleActiveSize = () => {
 		//SetActiveSize
 		//Send req

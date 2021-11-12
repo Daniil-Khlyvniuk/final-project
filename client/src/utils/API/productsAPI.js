@@ -4,6 +4,9 @@ const getAllProducts = () => axios.get('/api/products')
 
 const getOneProduct = (productId) => axios.get(`/api/products/${productId}`)
 
+// eslint-disable-next-line max-len
+const getProductVariant = (productId , variantId) => axios.get(`/api/products/${productId}/${variantId}`)
+
 const addNewProduct = (product) => axios.post('/api/products', product)
 // product is an object with all the product's properties like name, quantity, brand etc.
 
@@ -29,6 +32,7 @@ const getFilteredProducts = (filterParams) => axios.get(`/api/products/filter${f
 export default {
 	getAllProducts,
 	getOneProduct,
+	getProductVariant,
 	addNewProduct,
 	updateProduct,
 	searchForProducts,

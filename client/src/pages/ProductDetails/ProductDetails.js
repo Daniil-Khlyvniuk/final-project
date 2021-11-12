@@ -2,7 +2,7 @@ import React from 'react'
 // import { useParams } from 'react-router-dom'
 // import productsAPI from '../../utils/API/productsAPI'
 import ProductDescription from '../../components/ProductDescription/ProductDescription'
-import {  Container } from '@mui/material'
+import {  Container , Grid } from '@mui/material'
 
 const ProductDetails = () => {
 	// const { id } = useParams()
@@ -28,9 +28,15 @@ const ProductDetails = () => {
 	return (
 		<Container maxWidth="lg">
 			<h1>ProductDetails</h1>
+			<Grid container spacing={2} >
+				<Grid item md={6} xs={12}>Img</Grid>
+				<Grid item md={6} xs={12}>
+					{/*props data={data}-/product/variant*/}
+					<ProductDescription/>
+				</Grid>
+			</Grid>
 
-			{/*props data={data}-/product/variant*/}
-			<ProductDescription/>
+
 		</Container>
 	)
 }
