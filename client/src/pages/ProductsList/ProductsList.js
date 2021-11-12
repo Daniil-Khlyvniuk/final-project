@@ -1,10 +1,11 @@
 import React from 'react'
+import { Container } from '@mui/material'
 
 const ProductsList = () => {
 	return (
-		<div>
+		<Container maxWidth="lg">
 			<h1>ProductsList</h1>
-		</div>
+		</Container>
 	)
 }
 

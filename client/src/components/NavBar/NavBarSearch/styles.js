@@ -1,29 +1,48 @@
 import { styled } from '@mui/material/styles'
-import { Alert, InputBase } from '@mui/material'
+import { Box } from '@mui/system'
+import Autocomplete from '@mui/material/Autocomplete'
 
-export const Search = styled('div')(() => ({
+export const StyledBox = styled(Box)(() => ({
 	display: 'flex',
 	alignItems: 'center',
-	justifyContent: 'space-between',
-	padding: 0,
-	width: 380,
+	justifyContent: 'center',
+	paddingRight: 10,
+	['@media (max-width:684px)']: {
+		order: 1,
+	},
 }))
 
-export const StyledInputBase = styled(InputBase)(() => ({
+export const StyledAutocomplete = styled(Autocomplete)(() => ({
 	width: 380,
-	fontFamily: 'Mulish',
-	fontWeight: 600,
-	fontSize: '16px',
-	color: '#373F41',
-	display: 'block'
-}))
-
-export const StyledAlert = styled(Alert)(() => ({
-	color: '#373F41',
-	marginLeft: 27,
-	padding: 0,
-	backgroundColor: 'unset',
-	'& .css-acap47-MuiAlert-message, & .MuiAlert-icon': {
-		padding: '5px 0',
+	['@media (max-width:900px)']: {
+		width: 250
+	},
+	['@media (max-width:684px)']: {
+		width: '90vw',
+		padding: '10px 0'
+	},
+	position: 'relative',
+	'& .css-y2vtlc-MuiFormLabel-root-MuiInputLabel-root': {
+		fontWeight: 600,
+		fontSize: '16px',
+		color: '#373F41',
+		left: 30
+	},
+	'& .MuiAutocomplete-inputRoot': {
+		paddingLeft: 30
 	}
+}))
+
+export const Search = styled('div')(() => ({
+	position: 'relative',
+}))
+
+export const SearchIconWrapper = styled('div')(() => ({
+	height: '100%',
+	position: 'absolute',
+	top: 5,
+	pointerEvents: 'none',
+	display: 'flex',
+	alignItems: 'center',
+	justifyContent: 'center',
 }))

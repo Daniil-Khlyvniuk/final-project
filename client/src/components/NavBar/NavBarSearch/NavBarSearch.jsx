@@ -1,52 +1,95 @@
-import { Box } from '@mui/system'
 import React, { useState } from 'react'
+import TextField from '@mui/material/TextField'
 import SearchIcon from './SearchIcon/SearchIcon'
-import { Search, StyledAlert, StyledInputBase } from './styles'
-import { useDispatch, useSelector } from 'react-redux'
-import { setAllProducts } from '../../../store/Products/productsSlice'
-import { productsOperations, productsSelectors } from '../../../store/Products'
+import { Search, SearchIconWrapper, StyledAutocomplete, StyledBox } from './styles'
+import productsAPI from '../../../utils/API/productsAPI'
+import { Grid, Avatar, Typography } from '@mui/material'
+import { Link } from 'react-router-dom'
 
 const HeaderSearch = () => {
-	const getProductsList = useSelector(productsSelectors.getProductsList())
-	const [search, setSearch] = useState('')
-	const dispatch = useDispatch()
+	const [options, setOptions] = useState([])
 	let timer
 
-	const handleChange = (e) => {
+	const onSearch = (e) => {
 		clearTimeout(timer)
 
-		timer = setTimeout(() => {
-			if (!e.target.value) {
-				dispatch(productsOperations.fetchProducts())
-				setSearch('')
+		timer = setTimeout(async function () {
+
+			if (e.target.value.trim().length === 0) {
+				setOptions([])
 				return
 			}
 
-			dispatch(setAllProducts(
-				getProductsList.filter((good) =>
-					good.title.toLowerCase().includes(e.target.value.toLowerCase())
+			try {
+				const res = await productsAPI.searchForProducts(
+					{ query: e.target.value }
 				)
-			))
-		}, 1000)
-		setSearch(e.target.value)
+				const data = await res.data
+
+				if (data.length > 0) {
+					setOptions(data)
+				} else {
+					setOptions([])
+				}
+			} catch (err) {
+				// eslint-disable-next-line no-console
+				console.error(err)
+				setOptions([])
+			}
+		}, 500)
 	}
 
-	const warning = <StyledAlert severity="info">Product not found</StyledAlert>
-
 	return (
-		<Box>
+		<StyledBox>
 			<Search>
-				<SearchIcon />
-				<StyledInputBase
-					placeholder="Search..."
-					type='search'
-					value={search}
-					onChange={handleChange}
-					sx={{ borderBottom: '1px solid #373F41' }}
-				/>
+				<SearchIconWrapper>
+					<SearchIcon />
+				</SearchIconWrapper>
+				<StyledAutocomplete
+					disablePortal
+					id="combo-box-demo"
+					options={options}
+					onKeyUp={onSearch}
+					size='small'
+					renderInput={(params) => <TextField {...params} label="Search..." variant="standard" />}
+					getOptionLabel={(option) => option.name}
+					renderOption={(props, option) => {
+						return (
+							<Link to={`/product-details/${option._id}`}
+								style={{ textDecoration: 'none' }}
+								{...props}
+							>
+								<Grid container wrap="nowrap" spacing={2}>
+									<Grid item>
+										<Avatar
+											// src={option.imageUrls[0]}
+											alt={option.name}
+											sx={{ width: 50, height: 50 }}
+											variant='square'
+										/>
+									</Grid>
+									<Grid item xs zeroMinWidth>
+										<Typography
+											variant='menuBold'
+											sx={{ display: 'block' }}
+										>
+											{option.name} ({option.itemNo})
+										</Typography>
+										<Typography
+											variant='footerTextMedium'
+											sx={{ display: 'block' }}
+										>
+											{'$' + option.currentPrice}
+										</Typography>
+									</Grid>
+								</Grid>
+							</Link>
+						)
+					}}
+				>
+				</StyledAutocomplete>
 			</Search>
-			{!getProductsList.length && search && warning}
-		</Box>
+		</StyledBox>
 	)
 }
 

@@ -10,7 +10,7 @@ const NavBarLogo = () => {
 		<Typography variant="h6" component="h1" >
 			<NavLink exact to='/'>
 				<div className={classes.logoWrapper} >
-					<img src="./img/header-logo.png" alt="logo" />
+					<img src="/logo/header-logo.png" alt="logo" />
 				</div>
 			</NavLink>
 		</Typography>
