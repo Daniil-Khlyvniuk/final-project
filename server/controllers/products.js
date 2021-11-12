@@ -94,12 +94,13 @@ exports.addProduct = async (req, res) => {
 
 exports.getVariantById = async (req, res, next) => {
 	const varId = req.params.varId
-	if (!varId) res.status(400).json({ message: `Wrong params` })
 	try {
 		const variant = await ProductVariant.findById(varId)
 			.populate("product")
 			.populate("size")
 			.populate("color")
+		if (!variant) res.status(400).json({ message: `Variant with id "${varId}" not found ` })
+
 		res.json(variant)
 	} catch (err) {
 		res.status(400).json({ message: `Error happened on server: "${ err }"` })
