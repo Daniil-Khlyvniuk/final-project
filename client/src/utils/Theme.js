@@ -17,6 +17,10 @@ const theme = createTheme({
 		secondary: { main: '#5C5E60' },
 		error: { main: '#8C8C8C' },
 		success: { main: '#388e3c' },
+		neutral: {
+			main: '#fff',
+			contrastText: '#fff',
+		},
 	},
 	typography: {
 		fontFamily: 'Mulish, sans-serif',
@@ -61,6 +65,7 @@ const theme = createTheme({
 		},
 	},
 	components: {
+
 		MuiButton: {
 			variants: [
 				{

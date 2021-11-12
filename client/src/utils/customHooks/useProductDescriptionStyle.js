@@ -48,9 +48,22 @@ export const useProductDescriptionStyle = makeStyles((theme) => ({
 		backgroundColor: 'transparent',
 		border : 'none',
 		padding: 0,
+		borderBottom: '1px',
+		borderColor:'black'
 
 
+	},
+	indicator:{
+		height: '1px',
+		bottom: '7px'
+
+	},
+	activeColorBtn:{
+		padding:'0',
+		borderRadius: '20px',
+		height:'20px',
+		mr:'10px',
+		borderColor:'black'
 	}
-
 
 }))
