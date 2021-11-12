@@ -2,9 +2,10 @@ import React, {useState} from 'react'
 import {Box, AccordionDetails, AccordionSummary, Accordion, Typography} from '@mui/material'
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined'
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined'
+import PropTypes from 'prop-types'
 
 
-const AccordionProduct = () => {
+const AccordionProduct = ({description = 'Random string', accordionTitle = 'Product Details'}) => {
 	const [open, setOpen] = useState(false)
 
 	const handleOpenAccordion = () => {
@@ -23,22 +24,22 @@ const AccordionProduct = () => {
 							<AddOutlinedIcon fontSize={'small'} sx={{mr:'19px'}}/>
 						}
 						<Typography fontSize={16} fontWeight={600}>
-							Product Details
+							{accordionTitle}
 						</Typography>
 					</Box>
 
 				</AccordionSummary>
 				<AccordionDetails sx={{maxWidth: '447px' , pl:'54px'}}>
-					Far far away, behind the word mountains,
-					far from the countries Vokalia and Consonantia,
-					there live the blind texts.
-					Far far away, behind the word mountains,
-					far from the countries
-					Vokalia and Consonantia, there live the blind texts
+					{description}
 				</AccordionDetails>
 			</Accordion>
 		</Box>
 	)
+}
+
+AccordionProduct.propTypes={
+	description: PropTypes.string,
+	accordionTitle: PropTypes.string
 }
 
 export default AccordionProduct
