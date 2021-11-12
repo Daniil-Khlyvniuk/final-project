@@ -1,4 +1,4 @@
-const checkOpen = () => state => state.modal.open
+const checkOpen = () => state => state.modal.modal
 
 export default {
 	checkOpen

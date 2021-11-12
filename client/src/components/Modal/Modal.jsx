@@ -1,22 +1,21 @@
 import React from 'react'
 import Box from '@mui/material/Box'
 import Modal from '@mui/material/Modal'
-import { useDispatch, useSelector } from 'react-redux'
-import modalActions, { modalSelectors } from '../../store/Modal'
+import { useDispatch } from 'react-redux'
+import modalActions from '../../store/Modal'
 import PropTypes from 'prop-types'
 import { IconButton } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 import { StyledBox } from './styles'
 
 const BasicModal = ({ style, body }) => {
-	const open = useSelector(modalSelectors.checkOpen())
 	const dispatch = useDispatch()
 	const handleClose = () => dispatch(modalActions.handleClose(false))
 
 	return (
 		<div>
 			<Modal
-				open={open}
+				open={true}
 				onClose={handleClose}
 				aria-labelledby="modal-modal-title"
 				aria-describedby="modal-modal-description"
@@ -40,7 +39,7 @@ const BasicModal = ({ style, body }) => {
 
 BasicModal.propTypes = {
 	style: PropTypes.object,
-	body: PropTypes.object
+	body: PropTypes.element
 }
 
 export default BasicModal

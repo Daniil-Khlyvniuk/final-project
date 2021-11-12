@@ -9,8 +9,15 @@ const store = configureStore({
 		products: productsSlice,
 		links: linksSlice,
 		category: categorySlice,
-		modal: modalSlice
-	}
+		modal: modalSlice,
+	},
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware({
+			serializableCheck: {
+				// Ignore these action types
+				ignoredActions: ['modal/handleOpen'],
+			},
+		}),
 })
 
 export default store
