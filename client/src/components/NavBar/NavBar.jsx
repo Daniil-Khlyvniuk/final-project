@@ -13,21 +13,18 @@ const Navbar = () => {
 	const classes = useStyles()
 
 	return (
-		<Box sx={ { borderColor: '#373F41', borderBottom: 1 } }>
-			<Container maxWidth="lg">
-				<AppBar position="static" sx={ { boxShadow: 'none' } }>
-					<Toolbar className={ classes.header }>
-						<NavBarLogo/>
-						{/*<NavbarMenu />*/ }
-						<Category/>
-						{/* <Navbarlist /> */ }
-						<NavBarSearch/>
-						<div className={ classes.iconsWrapper }>
-							<LoginIcon/>
-							<FavoriteIcon/>
-							<CartIcon/>
+		<Box sx={{ borderColor: '#373F41', borderBottom: 1 }}>
+			<Container maxWidth="lg" sx={{ minWidth: 320 }}>
+				<AppBar className={classes.appbar} position="static" sx={{ boxShadow: 'none' }}>
+					<Toolbar className={classes.header}>
+						<NavBarLogo />
+						<Category />
+						<NavBarSearch />
+						<div className={classes.iconsWrapper}>
+							<LoginIcon />
+							<FavoriteIcon />
+							<CartIcon />
 						</div>
-						{/* <NavBarLanguages /> */ }
 					</Toolbar>
 				</AppBar>
 			</Container>
