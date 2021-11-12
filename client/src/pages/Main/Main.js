@@ -4,6 +4,7 @@ import CardList from '../../components/CardList/CardList'
 import Popular from '../../components/Popular/Popular'
 import Carousel from '../../components/Carousel/Carousel'
 
+
 const Main = () => {
 	return (
 		<Container maxWidth="lg">
@@ -11,6 +12,7 @@ const Main = () => {
 			<CardList />
 			<Popular/>
 		</Container>
+
 	)
 }
 
