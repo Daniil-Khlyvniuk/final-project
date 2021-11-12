@@ -1,18 +1,21 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import PopularCard from '../PopularCard/PopularCard'
 import {Grid} from '@mui/material'
+import useCategoryTree from '../../../utils/customHooks/useCategoryTree'
+
 
 const PopularList = () => {
-	const [data, setData] = useState([])
-
-	useEffect(() => {
-		fetch('/popular.json')
-			.then(res=>res.json()).then(items => setData(items) )
-	} , [])
+	const categories = useCategoryTree()
 
 	return (
 		<Grid container spacing={2}>
-			{data.map(item => <PopularCard key={item.title} data={item} /> )}
+			{
+				categories.map((category , index) => {
+					return <PopularCard
+						key={category._id}
+						data={category} index={index}/>
+				})
+			}
 		</Grid>
 	)
 }
