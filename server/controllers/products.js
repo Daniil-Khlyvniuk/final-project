@@ -158,7 +158,12 @@ exports.getProducts = (req, res, next) => {
 		.skip(startPage * perPage - perPage)
 		.limit(perPage)
 		.sort(sort)
-		.populate("product")
+		.populate({
+			path: 'product',
+			populate: {
+				path: 'categories'
+			}
+		})
 		.populate("color")
 		.populate("size")
 		.then((products) => {
