@@ -9,7 +9,7 @@ import LoginModal from '../../../Modal/LoginModal'
 const LoginIcon = () => {
 	const classes = useStyles()
 	const dispatch = useDispatch()
-	const handleOpen = (content) => dispatch(modalActions.handleOpen(content))
+	const handleOpen = (content) => dispatch(modalActions.modalToggle(content))
 
 	return (
 		<IconButton aria-label="favorites" sx={{ padding: 0 }} onClick={() => handleOpen(<LoginModal />)}>

@@ -33,7 +33,7 @@ const SignInForm = () => {
 					setServerResult({success: 'You successfully registered. Now you need to login'})
 					setTimeout(() => {
 						setServerResult(null)
-						dispatch(modalActions.handleClose(false))
+						dispatch(modalActions.modalToggle(false))
 					}, 5000)
 				}
 			}
@@ -115,6 +115,7 @@ const SignInForm = () => {
 						<p className={classes.policy}>By signing up you agree to
 							<Link to="/termsOfService"> Terms of Service </Link>  and <Link to="/privacypolicy"> Privacy Policy </Link>
 						</p>
+
 						{serverResult && serverResult.error && (
 							<div className={classes.formStatusBlock}>
 								<p className={classes.error}>{serverResult.error}</p>

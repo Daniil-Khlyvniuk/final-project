@@ -17,7 +17,7 @@ const store = configureStore({
 		getDefaultMiddleware({
 			serializableCheck: {
 				// Ignore these action types
-				ignoredActions: ['modal/handleOpen'],
+				ignoredActions: ['modal/modalToggle'],
 			},
 		}),
 })

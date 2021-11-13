@@ -44,6 +44,14 @@ export const SING_UP_SCHEMA = yup.object().shape({
 	subscribe: yup.bool(),
 })
 
+export const LOGIN_SCHEMA = yup.object().shape({
+	loginOrEmail: yup.string()
+		.required(IS_REQUIRED),
+	password: yup.string()
+		.required(IS_REQUIRED),
+	subscribe: yup.bool(),
+})
+
 export const SHIPPING_SCHEMA = yup.object().shape({
 	firstname: yup.string()
 		.matches(STR_REGEX, 'Use only characters'),
