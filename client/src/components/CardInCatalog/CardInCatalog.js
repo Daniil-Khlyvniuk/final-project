@@ -1,9 +1,18 @@
 import React from 'react'
 import {useStyles} from './styles'
+import * as shoppingBagActions from "../../store/ShoppingBag/shoppingBagSlice";
+import {useDispatch} from "react-redux";
 
 // eslint-disable-next-line react/prop-types
-const CardInCatalog = ({title, image, price}) => {
+const CardInCatalog = ({title, image, price, _id}) => {
 	const classes = useStyles()
+	const dispatch = useDispatch()
+
+	const buy = () => {
+		const ls = JSON.parse(localStorage.getItem('shoppingBag') || '[]') || [];
+		localStorage.setItem('shoppingBag', JSON.stringify([...ls, ...[{title, image, price, _id}]]))
+		dispatch(shoppingBagActions.addToShoppingBag([...ls, ...[{title, image, price, _id}]]))
+	}
 
 	return (
 		<div>
@@ -12,8 +21,8 @@ const CardInCatalog = ({title, image, price}) => {
 				<p className={classes.catalogTitle}>{title}</p>
 				<div className={classes.blockHover}>
 					<p className={classes.title}>{title}</p>
-					<p className={classes.price}>{price}</p>
-					<button className={classes.btn}>BUY NOW</button>
+					<p className={classes.price}>{price} $</p>
+					<button className={classes.btn} onClick={buy}>BUY NOW</button>
 				</div>
 			</div>
 		</div>

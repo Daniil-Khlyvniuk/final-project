@@ -41,7 +41,7 @@ exports.addProduct = async (req, res) => {
 		variants,
 	};
 	try {
-		const category = await Catalog.findOne({ name: productData.categories });
+		const category = await Catalog.findOne({name: productData.categories});
 		notFoundError(category, productData.categories);
 
 		let product = await Product.findOne({
@@ -49,12 +49,12 @@ exports.addProduct = async (req, res) => {
 			categories: category._id,
 		});
 		if (!product) {
-			product = await Product.create({ ...productData, categories: category });
+			product = await Product.create({...productData, categories: category});
 		}
-		const color = await Color.findOne({ name: colorName });
+		const color = await Color.findOne({name: colorName});
 		notFoundError(color, colorName);
 
-		const size = await Size.findOne({ name: sizeName });
+		const size = await Size.findOne({name: sizeName});
 		notFoundError(size, sizeName);
 
 		const isVarExist = await ProductVariant.findOne({
@@ -80,14 +80,14 @@ exports.addProduct = async (req, res) => {
 			product._id,
 			{
 				...product,
-				$push: { variants: product.variants },
+				$push: {variants: product.variants},
 			},
-			{ new: true }
+			{new: true}
 		);
 		return res.json(updatedProduct);
 	} catch (err) {
 		res.status(400).json({
-			message: `Error happened on server: "${ err }"`,
+			message: `Error happened on server: "${err}"`,
 		});
 	}
 };
@@ -99,20 +99,20 @@ exports.getVariantById = async (req, res, next) => {
 			.populate("product")
 			.populate("size")
 			.populate("color")
-		if (!variant) res.status(400).json({ message: `Variant with id "${varId}" not found ` })
+		if (!variant) res.status(400).json({message: `Variant with id "${varId}" not found `})
 
 		res.json(variant)
 	} catch (err) {
-		res.status(400).json({ message: `Error happened on server: "${ err }"` })
+		res.status(400).json({message: `Error happened on server: "${err}"`})
 	}
 }
 
 exports.updateProduct = (req, res, next) => {
-	Product.findOne({ _id: req.params.id })
+	Product.findOne({_id: req.params.id})
 		.then((product) => {
 			if (!product) {
 				return res.status(400).json({
-					message: `Product with id "${ req.params.id }" is not found.`,
+					message: `Product with id "${req.params.id}" is not found.`,
 				});
 			} else {
 				const productFields = _.cloneDeep(req.body);
@@ -124,28 +124,28 @@ exports.updateProduct = (req, res, next) => {
 						.replace(/\s\s+/g, " ");
 				} catch (err) {
 					res.status(400).json({
-						message: `Error happened on server: "${ err }" `,
+						message: `Error happened on server: "${err}" `,
 					});
 				}
 
 				const updatedProduct = queryCreator(productFields);
 
 				Product.findOneAndUpdate(
-					{ _id: req.params.id },
-					{ $set: updatedProduct },
-					{ new: true }
+					{_id: req.params.id},
+					{$set: updatedProduct},
+					{new: true}
 				)
 					.then((product) => res.json(product))
 					.catch((err) =>
 						res.status(400).json({
-							message: `Error happened on server: "${ err }" `,
+							message: `Error happened on server: "${err}" `,
 						})
 					);
 			}
 		})
 		.catch((err) =>
 			res.status(400).json({
-				message: `Error happened on server: "${ err }" `,
+				message: `Error happened on server: "${err}" `,
 			})
 		);
 };
@@ -154,7 +154,7 @@ exports.getProducts = (req, res, next) => {
 	const perPage = Number(req.query.perPage);
 	const startPage = Number(req.query.startPage);
 	const sort = req.query.sort;
-
+	console.log('sort --> ', sort)
 	ProductVariant.find()
 		.skip(startPage * perPage - perPage)
 		.limit(perPage)
@@ -172,7 +172,7 @@ exports.getProducts = (req, res, next) => {
 		})
 		.catch((err) => {
 			res.status(400).json({
-				message: `Error happened on server: "${ err }" `,
+				message: `Error happened on server: "${err}" `,
 			});
 		});
 };
@@ -184,7 +184,7 @@ exports.getProductById = (req, res, next) => {
 		.then((product) => {
 			if (!product) {
 				res.status(400).json({
-					message: `Product with itemNo ${ req.params.itemNo } is not found`,
+					message: `Product with itemNo ${req.params.itemNo} is not found`,
 				});
 			} else {
 				res.json(product);
@@ -192,7 +192,7 @@ exports.getProductById = (req, res, next) => {
 		})
 		.catch((err) =>
 			res.status(400).json({
-				message: `Error happened on server: "${ err }" `,
+				message: `Error happened on server: "${err}" `,
 			})
 		);
 };
@@ -211,17 +211,17 @@ exports.getProductsFilterParams = async (req, res, next) => {
 
 		const productsQuantity = await Product.find(mongooseQuery);
 
-		res.json({ products, productsQuantity: productsQuantity.length });
+		res.json({products, productsQuantity: productsQuantity.length});
 	} catch (err) {
 		res.status(400).json({
-			message: `Error happened on server: "${ err }" `,
+			message: `Error happened on server: "${err}" `,
 		});
 	}
 };
 
 exports.searchProducts = async (req, res, next) => {
 	if (!req.body.query) {
-		res.status(400).json({ message: "Query string is empty" });
+		res.status(400).json({message: "Query string is empty"});
 	}
 
 	//Taking the entered value from client in lower-case and trimed
@@ -258,7 +258,7 @@ exports.searchProducts = async (req, res, next) => {
 	]);
 
 	const result = await Promise.all(
-		foundProducts.map(({ _id }) =>
+		foundProducts.map(({_id}) =>
 			Product.findById(_id).populate("variants").populate("categories")
 		)
 	);
