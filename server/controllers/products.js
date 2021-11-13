@@ -6,6 +6,7 @@ const Size = require("../models/Size");
 const fileService = require("../services/fileService");
 const notFoundError = require("../commonHelpers/notFoundError");
 const isExist = require("../commonHelpers/isExist");
+const findOrCreate = require("../commonHelpers/findOrCreate");
 
 const uniqueRandom = require("unique-random");
 const rand = uniqueRandom(0, 999999);
@@ -18,6 +19,7 @@ exports.addProduct = async (req, res) => {
 	const {
 		name,
 		categories,
+		description,
 		brand,
 		manufacturer,
 		manufacturerCountry,
@@ -40,18 +42,27 @@ exports.addProduct = async (req, res) => {
 		manufacturerCountry,
 		seller,
 		variants,
+		description
 	};
 	try {
 		const category = await Catalog.findOne({ name: productData.categories });
 		notFoundError(category, productData.categories);
-
-		let product = await Product.findOne({
-			name: productData.name,
-			categories: category._id,
-		});
-		if (!product) {
-			product = await Product.create({ ...productData, categories: category });
-		}
+		const product = await findOrCreate(
+			Product,
+			{
+				name: productData.name,
+				categories: category._id,
+			},
+			{
+				...productData, categories: category
+			})
+		// let product = await Product.findOne({
+		// 	name: productData.name,
+		// 	categories: category._id,
+		// });
+		// if (!product) {
+		// 	product = await Product.create({ ...productData, categories: category });
+		// }
 		const color = await Color.findOne({ name: colorName });
 		notFoundError(color, colorName);
 
