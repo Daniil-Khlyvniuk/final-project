@@ -48,7 +48,9 @@ export const LOGIN_SCHEMA = yup.object().shape({
 	loginOrEmail: yup.string()
 		.required(IS_REQUIRED),
 	password: yup.string()
-		.required(IS_REQUIRED),
+		.required(IS_REQUIRED)
+		.min(7,'Password must be 7 digits minimum')
+		.max(30,'Password must be 30 digits maximum'),
 	subscribe: yup.bool(),
 })
 

@@ -6,7 +6,7 @@ import { useFormStyle } from '../../../utils/customHooks/useFormStyle'
 import { Checkbox } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { Facebook, Google } from '../setting/SocialIcons'
-import {registerCustomer} from '../../../utils/API/customerAPI'
+import {registerUser} from '../../../utils/API/userAPI'
 import {useDispatch} from 'react-redux'
 import modalActions from '../../../store/Modal'
 
@@ -27,7 +27,8 @@ const SignInForm = () => {
 		}}
 		onSubmit={ async (values) => {
 			try{
-				const res = await registerCustomer(values)
+				delete(values.confirmPass)
+				const res = await registerUser(values)
 				if(res.status === 200)
 				{
 					setServerResult({success: 'You successfully registered. Now you need to login'})
@@ -37,7 +38,9 @@ const SignInForm = () => {
 					}, 5000)
 				}
 			}
-			catch(err) {setServerResult({error: err.response.data.message})}
+			catch(err) {
+				setServerResult({error: Object.values(err.response.data)[0]})
+			}
 		}}
 		validationSchema={SING_UP_SCHEMA}
 		>

@@ -5,9 +5,10 @@ import {LOGIN_SCHEMA} from '../setting/Schemes'
 import CustomInput from '../setting/CustomInput'
 import { Checkbox } from '@mui/material'
 import { Link } from 'react-router-dom'
-import {loginCustomer} from '../../../utils/API/customerAPI'
+import {loginUser} from '../../../utils/API/userAPI'
 import {useDispatch} from 'react-redux'
 import modalActions from '../../../store/Modal'
+import { userOperations} from '../../../store/User'
 
 const LoginForm = () => {
 	const classes = useFormStyle()
@@ -23,11 +24,18 @@ const LoginForm = () => {
 		validationSchema={LOGIN_SCHEMA}
 		onSubmit={ async values => {
 			// eslint-disable-next-line no-console
-			console.log('values',values)
+			// console.log('values',values)
 			try{
-				const res = await loginCustomer(values)
+				const res = await loginUser(values)
+
+				// eslint-disable-next-line no-console
+				// console.log('res',res)
+
 				if(res.status === 200)
 				{
+					//save token to store (and localStorage)
+					dispatch(userOperations.setToken(res.data.token))
+
 					setServerResult({success: 'You successfully Logged In'})
 					setTimeout(() => {
 						setServerResult(null)
@@ -35,7 +43,9 @@ const LoginForm = () => {
 					}, 5000)
 				}
 			}
-			catch(err) {setServerResult({error: err.response.data.message})}
+			catch(err) {
+				setServerResult({error:  Object.values(err.response.data)[0]})
+			}
 		}}
 		>
 			{(formikProps) => {
