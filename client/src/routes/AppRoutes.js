@@ -1,6 +1,5 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import ProtectedRoute from '../components/ProtectedRoute/ProtectedRoute'
 import Main from '../pages/Main/Main'
 import ProductsList from '../pages/ProductsList/ProductsList'
 import ProductDetails from '../pages/ProductDetails/ProductDetails'
@@ -14,18 +13,13 @@ import Cart from '../pages/Cart/Cart'
 import Page404 from '../pages/Page404/Page404'
 import Favorites from '../pages/Favorites/Favorites'
 import HandleSubscribe from '../pages/HandleSubscribe'
-// import { useSelector } from 'react-redux'
 
 const AppRoutes = () => {
-	// const user = useSelector(state => state.user.data)
-	// const isLoggedIn = !!user
 
 	return (
 		<Switch>
 			<Route exact path='/'><Main /></Route>
-			<ProtectedRoute exact path='/favorites' isLoggedIn={false}>
-				<Favorites />
-			</ProtectedRoute>
+			<Route exact path='/favorites'><Favorites /></Route>
 			<Route exact path='/products-list'><ProductsList /></Route>
 			<Route exact path='/product-details/:id'><ProductDetails /></Route>
 			<Route exact path='/cart'><Cart /></Route>
