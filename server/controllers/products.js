@@ -231,25 +231,25 @@ exports.getProducts = (req, res, next) => {
 		});
 };
 
-exports.getProductById = (req, res, next) => {
-	Product.findOne({
-		_id: req.params.itemNo,
-	})
-		.then((product) => {
-			if (!product) {
-				res.status(400).json({
-					message: `Product with itemNo ${ req.params.itemNo } is not found`,
-				});
-			} else {
-				res.json(product);
-			}
-		})
-		.catch((err) =>
-			res.status(400).json({
-				message: `Error happened on server: "${ err }" `,
-			})
-		);
-};
+// exports.getProductById = (req, res, next) => {
+// 	Product.findOne({
+// 		_id: req.params.itemNo,
+// 	})
+// 		.then((product) => {
+// 			if (!product) {
+// 				res.status(400).json({
+// 					message: `Product with itemNo ${ req.params.itemNo } is not found`,
+// 				});
+// 			} else {
+// 				res.json(product);
+// 			}
+// 		})
+// 		.catch((err) =>
+// 			res.status(400).json({
+// 				message: `Error happened on server: "${ err }" `,
+// 			})
+// 		);
+// };
 
 exports.getProductsFilterParams = async (req, res, next) => {
 	const mongooseQuery = filterParser(req.query);
@@ -278,9 +278,33 @@ exports.searchProducts = async (req, res, next) => {
 		res.status(400).json({ message: "Query string is empty" });
 	}
 
+	const query = req.body.query
+		.toLowerCase()
+		.trim()
+		.replace(/\s\s+/g, " ");
+
+	let products = await Product.find({
+		$text: { $search: query }
+	})
+
+	const matchedProducts = await Promise.all(
+		products.map(({ _id: productId }) => ProductVariant.find({ product: productId })
+			.populate("product")
+			.populate("color")
+			.populate("size")
+		)
+	)
+	res.json(matchedProducts)
+};
+
+exports.searchAutocomplete = async (req, res, next) => {
+	if (!req.body.query) {
+		res.status(400).json({ message: "Query string is empty" });
+	}
+
 	//Taking the entered value from client in lower-case and trimed
 	const query = req.body.query.toLowerCase().trim().replace(/\s\s+/g, " ");
-
+	console.log(query);
 	const foundProducts = await Product.aggregate([
 		{
 			$search: {
@@ -311,10 +335,11 @@ exports.searchProducts = async (req, res, next) => {
 		},
 	]);
 
-	const result = await Promise.all(
-		foundProducts.map(({ _id }) =>
-			Product.findById(_id).populate("variants").populate("categories")
-		)
-	);
+	const result = foundProducts.reduce((acc, cur) => (
+		acc = [ ...acc, ...(cur.name.includes(query) ? [ cur.name ] : []), ...(cur.brand.includes(query) ? [ cur.brand ] : []) ]
+	), [])
+	// const {name , brand} = foundProducts
+	// console.log(result)
 	res.send(result);
+	// res.send(result.name);
 };
