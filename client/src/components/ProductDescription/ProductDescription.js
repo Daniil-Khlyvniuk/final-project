@@ -12,26 +12,15 @@ import axios from 'axios'
 import CircleIcon from '@mui/icons-material/Circle'
 
 
-// const colors = [
-// 	{'_id': '618b8739af938f27ec67e6ee',
-// 		'name': 'green',
-// 		'cssValue': '#5A5D51'},
-// 	{'_id': '618b8739af938fee',
-// 		'name': 'red',
-// 		'cssValue': '#FF0000'}
-// ]
-
 const user = false
 
 
-const ProductDescription = (
-	{data}) => {
+const ProductDescription = ({data}) => {
 
 	const {name = 'Title' ,
 		_id,
 		quantity = 4,
 		currentPrice =123 , variants} = data
-
 
 
 	const classes = useProductDescriptionStyle()
