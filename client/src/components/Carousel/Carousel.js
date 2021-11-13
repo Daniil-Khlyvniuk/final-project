@@ -7,7 +7,7 @@ import { useStyleCarousel } from '../../utils/customHooks/useStyleCarousel'
 
 const Carousel = ({
 	slides,
-	main = true,
+	main,
 	product = false,
 	related = false  }) => {
 	const style = useStyleCarousel()
@@ -125,12 +125,11 @@ const Carousel = ({
 							{...settingsProducts}
 							asNavFor={nav2}
 							ref={slider}
-							className={style.thumbWrapper}
 						>
 							{slides?.map((slide) => {
 								return (
 									<div key={slide.customId} className={style.slideContainer}>
-										<img src={slide.imageUrl} className={style.slideProducts} alt=""/>
+										<img src={slide.imageUrl} className={style.slide} alt=""/>
 									</div>
 								)
 							})}

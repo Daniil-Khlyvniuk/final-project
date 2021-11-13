@@ -21,7 +21,7 @@ const Main = () => {
 
 	return (
 		<Container maxWidth="lg">
-			<Carousel slides={slides}/>
+			<Carousel slides={slides} main={true}/>
 			<CardList />
 			<Popular/>
 		</Container>

@@ -7,10 +7,6 @@ export const useStyleCarousel = makeStyles({
 		height: '100%',
 		position: 'relative'
 	},
-	slideProducts:{
-		width: '100%',
-		height: '100%',
-	},
 	slideContainer: {
 		position: 'relative'
 	},
@@ -105,6 +101,7 @@ export const useStyleCarousel = makeStyles({
 		textAlign: 'center'
 	},
 	show:{
+		marginTop: '20px',
 		'& .slick-slide.slick-current': {
 			opacity: 1
 		}
