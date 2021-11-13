@@ -1,11 +1,16 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import { userSelectors } from '../../store/User'
+import { useSelector } from 'react-redux'
 
-const ProtectedRoute = ({isLoggedIn, children, ...rest}) => {
+const ProtectedRoute = ({ children, ...rest }) => {
+	const user = useSelector(userSelectors.getData())
+	const isLoggedIn = !!user
+
 	return (
 		<Route {...rest}>
-			{isLoggedIn ? children : <Redirect to='/login' />}
+			{isLoggedIn ? children : <Redirect to='/' />}
 		</Route>
 	)
 }
