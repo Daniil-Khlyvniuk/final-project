@@ -5,6 +5,7 @@ import Footer from './components/Footer'
 import AppRoutes from './routes/AppRoutes'
 import { useSelector } from 'react-redux'
 import { modalSelectors } from './store/Modal'
+import RelatedItemsList from './components/RelatedItems/RelatedItemsList'
 
 
 
@@ -16,6 +17,7 @@ const App = () => {
 		<div className={'App'}>
 			<Header />
 			<AppRoutes />
+			<RelatedItemsList />
 			<Footer />
 			{modal}
 		</div>

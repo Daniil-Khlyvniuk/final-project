@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 import RelatedItems from './RelatedItems'
 import { Link as RouterLink } from 'react-router-dom'
 
-import {useSelector, useDispatch} from 'react-redux'
-import {productsSelectors,productsActions } from '../../store/Products'
+import { useSelector, useDispatch } from 'react-redux'
+import productsReducer, { productsSelectors } from '../../store/Products'
 import axios from 'axios'
 
 // const slideData = [
@@ -105,15 +105,14 @@ import axios from 'axios'
 // 	},
 // ]
 
-
 const RelatedItemsList = () => {
 	// const [items, setItems] = useState([])
 	const relatedIds = useSelector(productsSelectors.getRelatedIds())
 	let relatedList = useSelector(productsSelectors.getRelatedProductsList())
 	const dispatch = useDispatch()
 	// const id = '618d61efc4e9563080ca7aea'
-	const id = '618d61dcc4e9563080ca7acf'
-	// const id = '618d6217c4e9563080ca7b0a'
+	// const id = '618d61dcc4e9563080ca7acf'
+	const id = '618d6217c4e9563080ca7b0a'
 	// const id = '618d6b7e9a51df0aacce12b6'
 
 	// eslint-disable-next-line no-console
@@ -121,32 +120,33 @@ const RelatedItemsList = () => {
 
 	//передаем в редакс текущий id товара
 	useEffect(() => {
-		dispatch(productsActions.addRelatedId(id))
-	}, [dispatch])
+		dispatch(productsReducer.addRelatedId(id))
+	}, [])
+
+	// eslint-disable-next-line no-console
+	console.log(dispatch)
 
 	useEffect(() => {
 		let requests =
-			relatedIds.map(id => axios(`/api/products/${id}`))
+      relatedIds.map(id => axios(`/api/products/${id}`))
 		Promise.all(requests).then(res => {
-			dispatch(productsActions.setRelatedProductsList(
+			dispatch(productsReducer.setRelatedProductsList(
 				res.map(prod => prod.data)))
 		}).catch(err => {
 			// eslint-disable-next-line no-console
-			console.log('err',err)
+			console.log('err', err)
 		})
-	}, [dispatch])
+	}, [])
 
 	//убираем текущий товар из массива
-	if(relatedList.length)
-	{
+	if (relatedList.length) {
 		relatedList = relatedList.filter(prod => prod._id !== id)
 	}
 
 	return (
 		<div>
 			{relatedList.length && relatedList.reverse().map(prod => {
-				if(prod._id !== id)
-				{
+				if (prod._id !== id) {
 					return (
 						<RelatedItems
 							key={prod.id}

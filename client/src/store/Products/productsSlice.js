@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import productsOperations from './operations'
 // import axios from 'axios'
 
-const {fetchProducts} = productsOperations
+const { fetchProducts } = productsOperations
 
 const initialState = {
 	data: [],
@@ -16,30 +16,27 @@ const productsSlice = createSlice({
 	name: 'products',
 	initialState,
 	reducers: {
-		setAllProducts(state, action) {
+		setAllProducts (state, action) {
 			state.data = action.payload
 		},
-		addRelatedId(state, action)
-		{
+		addRelatedId (state, action) {
 			const item = action.payload
 			if (!state.relatedArray.find((id) => item === id)) {
 				state.relatedArray.push(item)
-			}else{
-				const newArr = state.relatedArray.filter((id)=> id !== item)
+			} else {
+				const newArr = state.relatedArray.filter((id) => id !== item)
 				newArr.push(item)
 				state.relatedArray = newArr
 			}
 
 			//это надо будет проверить, когда будет много товаров
-			if(state.relatedArray.length > 10)
-			{
+			if (state.relatedArray.length > 10) {
 				state.relatedArray =
-					state.relatedArray.slice(1,11)
+          state.relatedArray.slice(1, 11)
 			}
 			localStorage.setItem('related', JSON.stringify(state.relatedArray))
 		},
-		setRelatedProductsList(state,action)
-		{
+		setRelatedProductsList (state, action) {
 			state.relatedProductsList = action.payload
 		}
 	},
@@ -60,6 +57,12 @@ const productsSlice = createSlice({
 	},
 })
 
-export const { actions } = productsSlice
+export const {
+	setAllProducts,
+	addRelatedId,
+	setRelatedProductsList,
+} = productsSlice.actions
 
 export default productsSlice.reducer
+
+
