@@ -8,6 +8,7 @@ import CartIcon from './NavBarIcons/CartIcon/CartIcon'
 import NavBarSearch from './NavBarSearch/NavBarSearch'
 import { useStyles } from './styles'
 import Category from '../Category/Category'
+import LogoutIconHeader from './NavBarIcons/LogoutIcon/LogoutIcon'
 
 const Navbar = () => {
 	const classes = useStyles()
@@ -22,6 +23,7 @@ const Navbar = () => {
 						<NavBarSearch />
 						<div className={classes.iconsWrapper}>
 							<LoginIcon />
+							<LogoutIconHeader />
 							<FavoriteIcon />
 							<CartIcon />
 						</div>
