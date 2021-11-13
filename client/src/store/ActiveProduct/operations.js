@@ -9,4 +9,20 @@ const fetchActiveProduct = createAsyncThunk(
 	}
 )
 
-export default {fetchActiveProduct}
+const fetchColors = createAsyncThunk(
+	'products/fetchColors',
+	async (productId) => {
+		const response = await productsAPI.getColors(productId)
+		return response.data
+	}
+)
+
+const fetchSizes= createAsyncThunk(
+	'products/fetchColors',
+	async (productId) => {
+		const response = await productsAPI.getSizes(productId)
+		return response.data
+	}
+)
+
+export default {fetchActiveProduct, fetchColors, fetchSizes}

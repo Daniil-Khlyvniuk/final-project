@@ -1,59 +1,72 @@
-import React, {useEffect, useState} from 'react'
+import React, { useState} from 'react'
 import {Box, Typography, Button, Divider, Tabs, Tab, ToggleButtonGroup, ToggleButton} from '@mui/material'
 
 import SocialLinks from '../SocialLInks'
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined'
 import AccordionProduct from './Accordion/Accordion'
-import PropTypes from 'prop-types'
 
 
 import{useProductDescriptionStyle} from '../../utils/customHooks/useProductDescriptionStyle'
-import axios from 'axios'
+
 import CircleIcon from '@mui/icons-material/Circle'
+import {useSelector} from 'react-redux'
+import {activeProductSelector} from '../../store/ActiveProduct'
+
 
 
 const user = false
 
 
-const ProductDescription = ({data}) => {
+// eslint-disable-next-line react/prop-types
+const ProductDescription = () => {
 
-	const {name = 'Title' ,
-		_id,
-		quantity = 4,
-		currentPrice =123 , variants} = data
+	const activeProduct = useSelector(activeProductSelector.getActiveVariant())
+	const allColors = useSelector(activeProductSelector.getColors())
+	const allSizes = useSelector(activeProductSelector.getSizes())
 
+
+	// eslint-disable-next-line no-console
+	console.log(allSizes)
+	// eslint-disable-next-line no-console
+	console.log(allColors)
 
 	const classes = useProductDescriptionStyle()
+
+
+	// eslint-disable-next-line no-unused-vars
 	const [allVariants , setAllVariants] = useState(null)
 	// eslint-disable-next-line no-unused-vars
 	const [activeColor, setActiveColor] = useState(null)
 	// eslint-disable-next-line no-unused-vars
 	const [activeSize, setActiveSize] = useState(null)
+	// eslint-disable-next-line no-unused-vars
 	const [available, setAvailable] = useState(null)
 
-	useEffect(()=>{
-		if(!variants){
-			return
-		} else {
-			const all = variants.map(i => axios.get(`/api/products/${data._id}/${i}`))
-			Promise.all(all).then(res => {
-				setAllVariants(res.data)
-			})
-		}
 
-	}, [allVariants])
-	// eslint-disable-next-line no-console
-	console.log(allVariants)
+	//
+	// useEffect(()=>{
+	// 	if(!variants){
+	// 		return
+	// 	} else {
+	// 		const all = variants.map(i => axios.get(`/api/products/${data._id}/${i}`))
+	// 		Promise.all(all).then(res => {
+	// 			setAllVariants(res.data)
+	// 		})
+	// 	}
 
-	useEffect(()=>{
-		if(quantity === 0){
-			setAvailable('pre-order')
-		}else if(quantity < 5){
-			setAvailable('low on stock!')
-		} else {
-			setAvailable('Available')
-		}
-	}, [quantity])
+	// }, [allVariants])
+	// // eslint-disable-next-line no-console
+	// console.log(allVariants)
+
+	// useEffect(()=>{
+	// 	if(quantity === 0){
+	// 		setAvailable('pre-order')
+	// 	}else if(quantity < 5){
+	// 		setAvailable('low on stock!')
+	// 	} else {
+	// 		setAvailable('Available')
+	// 	}
+	// }, [quantity])
 
 	// eslint-disable-next-line no-unused-vars
 	const handleActiveColor = (event , newActiveColor)=>{
@@ -73,10 +86,12 @@ const ProductDescription = ({data}) => {
 		<Box maxWidth={537}>
 			<Box className={classes.header}>
 				<Typography color={'primary'} fontSize={32} sx={{textTransform: 'uppercase', letterSpacing:'4px'}}>
-					{name}</Typography>
+					{/* eslint-disable-next-line react/prop-types */}
+					{}</Typography>
 				<SocialLinks/>
 			</Box>
-			<Typography classes={{overline : classes.productId}} fontSize={14}  variant="overline" display="block" gutterBottom>PRODUCT ID: {_id}</Typography>
+			{/* eslint-disable-next-line react/prop-types */}
+			<Typography classes={{overline : classes.productId}} fontSize={14}  variant="overline" display="block" gutterBottom>PRODUCT ID: {activeProduct?.itemNo}</Typography>
 			<Box>
 				<Typography fontSize={14} fontWeight={600}
 					className={classes.optionText}>
@@ -89,11 +104,12 @@ const ProductDescription = ({data}) => {
 					{/* eslint-disable-next-line no-console,max-len */}
 					<ToggleButtonGroup exclusive value={activeColor} onChange={handleActiveColor}>
 						{/* eslint-disable-next-line no-mixed-spaces-and-tabs */}
-						 <ToggleButton  aria-label='color1' value='12345' color={'neutral'} sx={{border: 'none', padding: '0'}}>
-							<CircleIcon stroke={activeColor === '12345' && 'black'}
-								sx={{width: '20px',color: 'red' }}/>
-						</ToggleButton>
-
+						{ allColors && allColors.map(color => (
+							<ToggleButton key={color._id}  aria-label={color.name} value={color._id} color={'neutral'} sx={{border: 'none', padding: '0', mr:'10px'}}>
+								<CircleIcon stroke={activeColor === color._id && 'black'}
+									sx={{width: '20px',color: color.cssValue }}/>
+							</ToggleButton>
+						))}
 					</ToggleButtonGroup>
 
 
@@ -137,8 +153,9 @@ const ProductDescription = ({data}) => {
 			</Box>
 			<Box className={classes.actions}>
 				<Box>
-					<Typography sx={{textTransform:'uppercase'}} fontSize={24} fontWeight={600}>USD ${currentPrice}.00</Typography>
-					<Typography sx={{textTransform:'uppercase'}} fontSize={14} color={'rgba(92, 94, 96, 0.5)'}>{available}</Typography>
+					{/* eslint-disable-next-line react/prop-types */}
+					<Typography sx={{textTransform:'uppercase'}} fontSize={24} fontWeight={600}>USD ${}.00</Typography>
+					<Typography sx={{textTransform:'uppercase'}} fontSize={14} color={'rgba(92, 94, 96, 0.5)'}>Available</Typography>
 				</Box>
 				<Box >
 					<Button sx={{py: '22px', px:'33px', mr:'15px'}} variant={'contained'}>
@@ -156,14 +173,14 @@ const ProductDescription = ({data}) => {
 		</Box>
 	)
 }
-ProductDescription.propTypes ={
-	data: PropTypes.shape({
-		name : PropTypes.string,
-		_id: PropTypes.string,
-		quantity: PropTypes.number,
-		currentPrice: PropTypes.number,
-		variants : PropTypes.array,
-	})
-
-}
+// ProductDescription.propTypes ={
+// 	data: PropTypes.shape({
+// 		name : PropTypes.string,
+// 		_id: PropTypes.string,
+// 		quantity: PropTypes.number,
+// 		currentPrice: PropTypes.number,
+// 		variants : PropTypes.array,
+// 	})
+//
+// }
 export default ProductDescription
