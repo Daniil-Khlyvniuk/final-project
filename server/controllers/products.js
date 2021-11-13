@@ -338,8 +338,5 @@ exports.searchAutocomplete = async (req, res, next) => {
 	const result = foundProducts.reduce((acc, cur) => (
 		acc = [ ...acc, ...(cur.name.includes(query) ? [ cur.name ] : []), ...(cur.brand.includes(query) ? [ cur.brand ] : []) ]
 	), [])
-	// const {name , brand} = foundProducts
-	// console.log(result)
 	res.send(result);
-	// res.send(result.name);
 };
