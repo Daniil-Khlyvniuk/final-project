@@ -3,15 +3,12 @@ import Header from './components/NavBar/NavBar'
 import Footer from './components/Footer'
 
 import AppRoutes from './routes/AppRoutes'
-
+import { useSelector } from 'react-redux'
+import { modalSelectors } from './store/Modal'
 
 
 const App = () => {
-	// // it is an example of dispatching actions
-	// const dispatch = useDispatch()
-	// dispatch(cardActions.test())
-	// dispatch(cardActions.test2('it works'))
-	// //========================================
+	const modal = useSelector(modalSelectors.checkOpen())
 
 	return (
 
@@ -20,6 +17,7 @@ const App = () => {
 			<AppRoutes />
 
 			<Footer />
+			{modal}
 		</div>
 	)
 }

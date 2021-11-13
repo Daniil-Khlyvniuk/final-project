@@ -12,6 +12,7 @@ const {
   getProductById,
   getProductsFilterParams,
   searchProducts,
+  getVariantById
 } = require("../controllers/products");
 
 
@@ -39,6 +40,8 @@ router.put(
 // @access  Public
 router.get("/", getProducts);
 
+router.get("/:varId", getVariantById);
+
 // @route   GET /products/filter
 // @desc    GET appropriate filtered products
 // @access  Public
@@ -52,6 +55,6 @@ router.post("/search", searchProducts);
 // @route   GET /products/:id
 // @desc    GET existing product by id
 // @access  Public
-router.get("/:itemNo", getProductById);
+// router.get("/:itemNo", getProductById/\);
 
 module.exports = router;
