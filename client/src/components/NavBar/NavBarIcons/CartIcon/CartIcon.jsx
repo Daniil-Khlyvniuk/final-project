@@ -20,6 +20,7 @@ const Carticon = () => {
 		<IconButton
 			aria-label="cart"
 			sx={{ padding: 0 }}
+			title='Cart'
 		// onClick={() => handleOpen(<CartModal />)}
 		>
 			<Badge badgeContent={shoppingBag?.length} color="success">
