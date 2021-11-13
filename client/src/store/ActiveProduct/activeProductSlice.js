@@ -1,43 +1,33 @@
 import { createSlice } from '@reduxjs/toolkit'
+import activeProductOperations from './operations'
+
+const {fetchActiveProduct} = activeProductOperations
 
 const activeProductSlice = createSlice({
-	name : 'activeProduct',
-	initialState : {
-		product : null,
-		activeSize : null,
-		activeColor: null,
-		variants: null,
-		isAvailable :null
+	name : 'Active Product',
+	initialState:{
+		currentVariant : {
+			data : {},
+			error: null,
+			isLoading : true
+		}
 	},
-	reducers:{
-		setActiveProduct(state,action){
-			state.product = {...action.payload , amount : 1}
+	extraReducers: {
+		[fetchActiveProduct.fulfilled]: (state, action) => {
+			state.currentVariant.data = action.payload
+			state.currentVariant.error = null
+			state.currentVariant.isLoading = false
 		},
-		clearActiveProduct(state){
-			// eslint-disable-next-line no-unused-vars
-			state = {}
+		[fetchActiveProduct.pending]: (state) => {
+			state.currentVariant.isLoading = true
+			state.currentVariant.error = null
 		},
-		setActiveColor(state, action){
-			state.activeColor = action.payload
-		},
-		setActiveSize(state, action){
-			state.activeSize = action.payload
-		},
-		setIsAvailable(state, action){
-			if(action.payload === 0){
-				state.isAvailable = 'pre-order'
-			}else if(action.payload < 5){
-				state.isAvailable = 'low on stock!'
-			} else {
-				state.isAvailable = 'Available'
-			}
-		},
-		setAllVariants(state, action){
-			state.variants = action.payload
+		[fetchActiveProduct.rejected]: (state) => {
+			state.currentVariant.isLoading = true
+			state.currentVariant.error = 'Error'
 		}
 	}
 })
 
-export const {setActiveProduct, setActiveColor , setActiveSize, setIsAvailable , clearActiveProduct ,} = activeProductSlice.actions
 
 export default activeProductSlice.reducer

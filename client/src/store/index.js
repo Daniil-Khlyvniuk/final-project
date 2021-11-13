@@ -4,6 +4,7 @@ import linksSlice from './Links/linksSlice'
 import categorySlice from './Category/categorySlice'
 import modalSlice from './Modal/modalSlice'
 import shoppingBagSlice from './ShoppingBag/shoppingBagSlice'
+import activeProductSlice from './ActiveProduct/activeProductSlice'
 
 const store = configureStore({
 	reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
 		category: categorySlice,
 		modal: modalSlice,
 		shoppingBag: shoppingBagSlice,
+		activeProduct : activeProductSlice,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({

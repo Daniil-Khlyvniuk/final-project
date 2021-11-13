@@ -1,3 +1,3 @@
-const getActiveProduct = state => state.activeProduct
+const getActiveVariant= state => state.activeProduct.currentVariant
 
-export default {getActiveProduct}
+export default {getActiveVariant}
