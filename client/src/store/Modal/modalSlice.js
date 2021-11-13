@@ -6,14 +6,11 @@ const modalSlice = createSlice({
 		modal: false,
 	},
 	reducers: {
-		handleOpen(state, action) {
+		modalToggle(state, action) {
 			state.modal = action.payload
 		},
-		handleClose(state, action) {
-			state.modal = action.payload
-		}
 	},
 })
 
-export const { handleOpen, handleClose } = modalSlice.actions
+export const { modalToggle } = modalSlice.actions
 export default modalSlice.reducer

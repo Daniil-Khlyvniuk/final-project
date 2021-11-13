@@ -5,6 +5,7 @@ import categorySlice from './Category/categorySlice'
 import sliderSlice from './Slider'
 import modalSlice from './Modal/modalSlice'
 import shoppingBagSlice from './ShoppingBag/shoppingBagSlice'
+import userSlice from './User'
 
 const store = configureStore({
 	reducer: {
@@ -14,12 +15,13 @@ const store = configureStore({
 		category: categorySlice,
 		modal: modalSlice,
 		shoppingBag: shoppingBagSlice,
+		user: userSlice,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({
 			serializableCheck: {
 				// Ignore these action types
-				ignoredActions: ['modal/handleOpen'],
+				ignoredActions: ['modal/modalToggle', 'user/setToken', 'user/fetchUser/pending','user/fetchUser/fulfilled'],
 			},
 		}),
 })
