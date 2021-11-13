@@ -7,6 +7,7 @@ import { slidesOperations, slidesSelectors } from '../../store/Slider'
 import { useDispatch, useSelector } from 'react-redux'
 
 
+
 const Main = () => {
 
 	const slides = useSelector(slidesSelectors.getSlides())
@@ -25,6 +26,7 @@ const Main = () => {
 			<CardList />
 			<Popular/>
 		</Container>
+
 	)
 }
 

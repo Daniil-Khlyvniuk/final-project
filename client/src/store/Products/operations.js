@@ -1,12 +1,10 @@
-
-import { createAsyncThunk } from '@reduxjs/toolkit'
+import {createAsyncThunk} from '@reduxjs/toolkit'
 import productsApi from '../../utils/API/productsAPI'
 
 const fetchProducts = createAsyncThunk(
 	'products/fetchProducts',
-	async () => {
-		const response = await productsApi.getAllProducts()
-		return  response.data
+	async (options) => {
+		return await productsApi.getAllProducts(options)
 	}
 )
 

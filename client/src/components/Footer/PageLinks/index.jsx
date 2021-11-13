@@ -7,10 +7,18 @@ import PropTypes from 'prop-types'
 const PageLinks = ({linksArr}) => 
 {
 	return (
-		<Grid item xs={12} sm={3}>
+		<Grid item xs={12} sm={6} lg={3}>
 			<List>
 				{linksArr.title && (
-					<ListItem>
+					<ListItem 
+						variant="footer-adaptive"
+						sx={{
+							justifyContent: {
+								xs: 'center',
+								lg: 'flex-start',
+							}
+						}}
+					>
 						<Typography
 							variant="menuBold"
 						>
@@ -22,7 +30,14 @@ const PageLinks = ({linksArr}) =>
 				{
 					linksArr.links.length > 0 && linksArr.links.map(link => 
 						(
-							<ListItem key={link._id}>
+							<ListItem key={link._id} 
+								sx={{
+									justifyContent: {
+										xs: 'center',
+										lg: 'flex-start',
+									}
+								}}
+							>
 								<Link 
 									to={link.url}
 									component={RouterLink}
