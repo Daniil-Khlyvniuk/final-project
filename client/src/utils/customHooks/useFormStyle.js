@@ -7,7 +7,11 @@ export const useFormStyle = makeStyles({
 		paddingRight: 50,
 		maxWidth: '450px',
 		width: '100%',
-		margin: 'auto'
+		margin: 'auto',
+		overflowY: 'auto ',
+	},
+	formAuth: {
+		maxHeight: 'calc(100vh - 200px)',
 	},
 	input:{
 		width: 448.69,
@@ -95,8 +99,20 @@ export const useFormStyle = makeStyles({
 		textDecorationLine: 'underline',
 		'& a':{color: '#373F41'}
 	},
+	formStatusBlock: {
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+		paddingTop: '10px',
+		paddingBottom: '10px',
+	},
 	error:{
 		color: 'red',
+		fontSize: 15,
+		
+	},
+	success: {
+		color: 'green',
 		fontSize: 15
 	}
 })
