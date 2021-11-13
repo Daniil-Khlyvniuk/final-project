@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField'
 import SearchIcon from './SearchIcon/SearchIcon'
 import { Search, SearchIconWrapper, StyledAutocomplete, StyledBox } from './styles'
 import productsAPI from '../../../utils/API/productsAPI'
-import { Grid, Avatar, Typography } from '@mui/material'
+import { Grid, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 
 const HeaderSearch = () => {
@@ -21,7 +21,7 @@ const HeaderSearch = () => {
 			}
 
 			try {
-				const res = await productsAPI.searchForProducts(
+				const res = await productsAPI.searchAutocomplete(
 					{ query: e.target.value }
 				)
 				const data = await res.data
@@ -36,7 +36,7 @@ const HeaderSearch = () => {
 				console.error(err)
 				setOptions([])
 			}
-		}, 500)
+		}, 700)
 	}
 
 	return (
@@ -52,35 +52,39 @@ const HeaderSearch = () => {
 					onKeyUp={onSearch}
 					size='small'
 					renderInput={(params) => <TextField {...params} label="Search..." variant="standard" />}
-					getOptionLabel={(option) => option.name}
+					getOptionLabel={(option) => option}
 					renderOption={(props, option) => {
+						// eslint-disable-next-line no-console
+						console.log(option)
 						return (
-							<Link to={`/product-details/${option._id}`}
+							<Link 
+								to={`/product-details/${option._id}`}
 								style={{ textDecoration: 'none' }}
 								{...props}
 							>
 								<Grid container wrap="nowrap" spacing={2}>
-									<Grid item>
+									{/* <Grid item>
 										<Avatar
 											// src={option.imageUrls[0]}
 											alt={option.name}
 											sx={{ width: 50, height: 50 }}
 											variant='square'
 										/>
-									</Grid>
+									</Grid> */}
 									<Grid item xs zeroMinWidth>
 										<Typography
 											variant='menuBold'
 											sx={{ display: 'block' }}
 										>
-											{option.name} ({option.itemNo})
+											{/* {option} ({option.itemNo}) */}
+											{option}
 										</Typography>
-										<Typography
+										{/* <Typography
 											variant='footerTextMedium'
 											sx={{ display: 'block' }}
 										>
 											{'$' + option.currentPrice}
-										</Typography>
+										</Typography> */}
 									</Grid>
 								</Grid>
 							</Link>
