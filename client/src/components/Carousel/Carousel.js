@@ -1,101 +1,184 @@
-import React, { useRef } from 'react'
-
-import { Swiper, SwiperSlide } from 'swiper/react/swiper-react'
-
-import { EffectFade, Navigation, Pagination } from 'swiper'
-
-import 'swiper/swiper.min.css'
-import 'swiper/modules/pagination/pagination.min.css'
-import 'swiper/modules/effect-fade/effect-fade.min.css'
+import React, { useEffect, useRef, useState } from 'react'
+import PropTypes from 'prop-types'
+import Slider from 'react-slick'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 import { useStyleCarousel } from '../../utils/customHooks/useStyleCarousel'
-// import Button from '@mui/material/Button'
 
-const slideData = [
-	{
-		id: '1',
-		customId: 'promotion-women-clothing',
-		imageUrl: 'https://marieclairehome.com.ua/assets/images/products/868/800x/postilna-bilyzna-marie-claire-innsbruck.jpg',
-		title: 'OCEAN  COLLECTION',
-		description: 'Do not miss our hot offer. Promotion ends 10/30/2019',
-		category: '5d99f68e419d040eec0f722c'
-	},
-	{
-		id: '2',
-		customId: 'promotion-women-clothing',
-		imageUrl: 'https://shuhlyadka.com.ua/image/cache/catalog/Aran%20Clasy/%D0%9F%D0%BE%D1%81%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B5%20%D0%B1%D0%B5%D0%BB%D1%8C%D0%B5%20%D1%81%D0%B0%D1%82%D0%B8%D0%BD%20%D0%A2%D1%83%D1%80%D1%86%D0%B8%D1%8F%20%D0%B5%D0%B2%D1%80%D0%BE%20Aran%20Clasy%20Adra%20v1-800x800.jpg',
-		description: 'SUBSCRIBE NOW AND GET 15% OFF ON YOUR FIRST ORDER',
-		category: '5d99f68e419d040eec0f722c'
-	},{
-		id: '3',
-		customId: 'promotion-women-clothing',
-		imageUrl: 'https://images.ua.prom.st/1783929320_postelnoe-bele-satin.jpg',
-		description: 'UP TO 30% OFF ON YOUR FAVOURITE FRENCH LINEN',
-		category: '5d99f68e419d040eec0f722c'
-	},
-]
-
-const Carousel = () => {
-	const next = useRef()
-	const prev = useRef()
+const Carousel = ({
+	slides,
+	main,
+	product = false,
+	related = false  }) => {
 	const style = useStyleCarousel()
+	const [nav1, setNav1] = useState()
+	const [nav2, setNav2] = useState()
+	const slider = useRef()
+	const thumbs = useRef()
+
+
+	useEffect(() => {
+		setNav1(slider.current)
+		setNav2(thumbs.current)
+	}, [])
+
+
+	const SampleNextArrow = (props) => {
+		const { className, onClick } = props
+		return (
+			<div className={style.nextEl}>
+				<div
+					className={className + style.nextEl}
+					style={{
+						width: '25px',
+						height: '25px',
+						borderTop: '2px solid #5C5E60',
+						borderRight: '2px solid #5C5E60',
+						transform: 'rotate(45deg)' }}
+					onClick={onClick}
+				/>
+			</div>
+		)
+	}
+
+	const  SamplePrevArrow = (props) => {
+		const { className, onClick } = props
+		return (
+			<div className={style.prevEl}>
+				<div
+					className={className + style.prevEl}
+					style={{
+						width: '25px',
+						height: '25px',
+						borderTop: '2px solid #5C5E60',
+						borderRight: '2px solid #5C5E60',
+						transform: 'rotate(-135deg)' }}
+					onClick={onClick}
+				/>
+			</div>
+		)
+	}
+
+	const settingsMain = {
+		dots: true,
+		infinite: true,
+		fade: true,
+		speed: 500,
+		arrows: true,
+		slidesToShow: 1,
+		slidesToScroll: 1,
+		nextArrow: <SampleNextArrow/>,
+		prevArrow: <SamplePrevArrow/>,
+	}
+	const settingRelated = {
+		infinite: true,
+		speed: 500,
+		slidesToShow: 3,
+		initialSlide: 1,
+		arrows: true,
+		nextArrow: <SampleNextArrow/>,
+		prevArrow: <SamplePrevArrow/>,
+	}
+	const settingsProducts = {
+		slidesToShow: 1,
+		slidesToScroll: 1,
+		fade: true,
+		arrows: true,
+		nextArrow: <SampleNextArrow/>,
+		prevArrow: <SamplePrevArrow/>,
+	}
+	const settingThumbs = {
+		slidesToShow: 3,
+		slidesToScroll: 1,
+		initialSlide: 1,
+		centerMode: true,
+		focusOnSelect: true,
+	}
+
+
 	return (
-		<div className={style.pagination}>
-			<Swiper
-				modules={[Navigation, Pagination, EffectFade]}
-				slidesPerView={1}
-				effect="fade"
-				loop="true"
-				autoHeight='true'
-				navigation={{
-					prevEl: '.swiper-button-prev',
-					nextEl: '.swiper-button-next'
-				}}
-				pagination={{
-					clickable: true,
-				}}
-				scrollbar={{ draggable: true }}
-				onSwiper={(swiper) => {
-					swiper.navigation.destroy()
-					swiper.navigation.init()
-					swiper.navigation.$prevEl = prev.current
-					swiper.navigation.prevEl = style.prevEl
-					swiper.navigation.$nextEl = next.current
-					swiper.navigation.nextEl = style.nextEl
-					swiper.navigation.update()
-				}}
+		<>
+			{main &&
+			<Slider
+				{...settingsMain}
+				className={style.show}
 			>
-				{slideData.map((slide) => {
-					return <SwiperSlide key={slide.id}>
-						<div>
-							<img style={{alignText: 'center'}} className={style.slide} src={slide.imageUrl} alt=""/>
+				{slides?.map((slide) => {
+					return (
+						<div key={slide.customId} className={style.slideContainer}>
+							<img src={slide.imageUrl} className={style.slide} alt=""/>
 							<div className={style.textBlock}>
-								{
-									slide.title &&
-										<div>
-											<p className={style.title}>{slide.title}</p>
-											<p className={style.desc}>{slide.description}</p>
-										</div>
-								}
-								{!slide.title &&
-								<p className={style.desc} style={{fontSize:'32px', lineHeight: '32px'}}>{slide.description}</p>
-								}
-								{/*<Button className={style.shopBtn} variant="contained">SHOP NEW ARRIVALS</Button>*/}
-								<button className={style.shopBtn}>SHOP NEW ARRIVALS</button>
+								<p className={style.title}>{slide.title}</p>
+								{slide.description &&
+								<p className={style.desc}>{slide.description}</p>}
 							</div>
 						</div>
-						<div ref={next} className={` swiper-button-next ${style.nextEl}`}>
-							<div className={style.arrowRight}></div>
-						</div>
-
-						<div ref={prev} className={`swiper-button-prev ${style.prevEl}`}>
-							<div className={style.arrowLeft}></div>
-						</div>
-					</SwiperSlide>
+					)
 				})}
+			</Slider>
+			}
 
-			</Swiper>
-		</div>
+			{product &&
+				<>
+					<div style={{width: '50%'}}>
+						<Slider
+							{...settingsProducts}
+							asNavFor={nav2}
+							ref={slider}
+						>
+							{slides?.map((slide) => {
+								return (
+									<div key={slide.customId} className={style.slideContainer}>
+										<img src={slide.imageUrl} className={style.slide} alt=""/>
+									</div>
+								)
+							})}
+						</Slider>
+						<Slider
+							{...settingThumbs}
+							asNavFor={nav1}
+							ref={thumbs}
+							className={style.thumbWrapper}
+						>
+							{slides?.map((slide) => {
+								return (
+									<div key={slide.customId}>
+										<img src={slide.imageUrl} className={style.thumb} alt=""/>
+									</div>
+								)
+							})}
+						</Slider>
+					</div>
+				</>
+			}
+
+			{related &&
+				<>
+					<h3 className={style.relatedTitle}>RELATED ITEMS</h3>
+					<Slider
+						{...settingRelated}>
+						{slides?.map((slide) => {
+							return (
+								<div key={slide.customId}>
+									<img src={slide.imageUrl} className={style.thumb} alt=""/>
+								</div>
+							)
+						})}
+					</Slider>
+				</>
+			}
+		</>
 	)
+}
+
+Carousel.propTypes = {
+	isLoading: PropTypes.bool,
+	slides: PropTypes.array,
+	main: PropTypes.bool,
+	related: PropTypes.bool,
+	product: PropTypes.bool,
+	className: PropTypes.string,
+	onClick: PropTypes.func
 }
 
 export default Carousel
