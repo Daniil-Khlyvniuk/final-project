@@ -1,15 +1,29 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { useStyleCarousel } from '../../utils/customHooks/useStyleCarousel'
 
-const Carousel = ({ slides }) => {
+const Carousel = ({
+	slides,
+	main = true,
+	product = false,
+	related = false  }) => {
 	const style = useStyleCarousel()
+	const [nav1, setNav1] = useState()
+	const [nav2, setNav2] = useState()
+	const slider = useRef()
+	const thumbs = useRef()
 
-	// eslint-disable-next-line func-style
-	function SampleNextArrow(props) {
+
+	useEffect(() => {
+		setNav1(slider.current)
+		setNav2(thumbs.current)
+	}, [])
+
+
+	const SampleNextArrow = (props) => {
 		const { className, onClick } = props
 		return (
 			<div className={style.nextEl}>
@@ -26,8 +40,8 @@ const Carousel = ({ slides }) => {
 			</div>
 		)
 	}
-	// eslint-disable-next-line func-style
-	function SamplePrevArrow(props) {
+
+	const  SamplePrevArrow = (props) => {
 		const { className, onClick } = props
 		return (
 			<div className={style.prevEl}>
@@ -45,9 +59,10 @@ const Carousel = ({ slides }) => {
 		)
 	}
 
-	const settings = {
+	const settingsMain = {
 		dots: true,
 		infinite: true,
+		fade: true,
 		speed: 500,
 		arrows: true,
 		slidesToShow: 1,
@@ -55,24 +70,115 @@ const Carousel = ({ slides }) => {
 		nextArrow: <SampleNextArrow/>,
 		prevArrow: <SamplePrevArrow/>,
 	}
+	const settingRelated = {
+		infinite: true,
+		speed: 500,
+		slidesToShow: 3,
+		initialSlide: 1,
+		arrows: true,
+		nextArrow: <SampleNextArrow/>,
+		prevArrow: <SamplePrevArrow/>,
+	}
+	const settingsProducts = {
+		slidesToShow: 1,
+		slidesToScroll: 1,
+		fade: true,
+		arrows: true,
+		nextArrow: <SampleNextArrow/>,
+		prevArrow: <SamplePrevArrow/>,
+	}
+	const settingThumbs = {
+		slidesToShow: 3,
+		slidesToScroll: 1,
+		initialSlide: 1,
+		centerMode: true,
+		focusOnSelect: true,
+	}
+
+
 	return (
-		<Slider {...settings}>
-			{slides.map((slide)=>{
-				return (
-					<div key={slide.customId} >
-						<img src={slide.imageUrl} className={style.slide} alt=""/>
+		<>
+			{main &&
+			<Slider
+				{...settingsMain}
+				className={style.show}
+			>
+				{slides?.map((slide) => {
+					return (
+						<div key={slide.customId} className={style.slideContainer}>
+							<img src={slide.imageUrl} className={style.slide} alt=""/>
+							<div className={style.textBlock}>
+								<p className={style.title}>{slide.title}</p>
+								{slide.description &&
+								<p className={style.desc}>{slide.description}</p>}
+							</div>
+						</div>
+					)
+				})}
+			</Slider>
+			}
+
+			{product &&
+				<>
+					<div style={{width: '50%'}}>
+						<Slider
+							{...settingsProducts}
+							asNavFor={nav2}
+							ref={slider}
+							className={style.thumbWrapper}
+						>
+							{slides?.map((slide) => {
+								return (
+									<div key={slide.customId} className={style.slideContainer}>
+										<img src={slide.imageUrl} className={style.slideProducts} alt=""/>
+									</div>
+								)
+							})}
+						</Slider>
+						<Slider
+							{...settingThumbs}
+							asNavFor={nav1}
+							ref={thumbs}
+							className={style.thumbWrapper}
+						>
+							{slides?.map((slide) => {
+								return (
+									<div key={slide.customId}>
+										<img src={slide.imageUrl} className={style.thumb} alt=""/>
+									</div>
+								)
+							})}
+						</Slider>
 					</div>
-				)
-			})}
-		</Slider>
+				</>
+			}
+
+			{related &&
+				<>
+					<h3 className={style.relatedTitle}>RELATED ITEMS</h3>
+					<Slider
+						{...settingRelated}>
+						{slides?.map((slide) => {
+							return (
+								<div key={slide.customId}>
+									<img src={slide.imageUrl} className={style.thumb} alt=""/>
+								</div>
+							)
+						})}
+					</Slider>
+				</>
+			}
+		</>
 	)
 }
 
 Carousel.propTypes = {
-	// isProduct: PropTypes.bool,
+	isLoading: PropTypes.bool,
 	slides: PropTypes.array,
+	main: PropTypes.bool,
+	related: PropTypes.bool,
+	product: PropTypes.bool,
 	className: PropTypes.string,
-	style: PropTypes.object,
 	onClick: PropTypes.func
 }
 

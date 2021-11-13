@@ -10,10 +10,8 @@ import { useDispatch, useSelector } from 'react-redux'
 const Main = () => {
 
 	const slides = useSelector(slidesSelectors.getSlides())
-	// eslint-disable-next-line no-console
-	console.log('NACHALO ---',slides)
-	// const error = useSelector(slidesSelectors.getError())
 	// const isLoading = useSelector(slidesSelectors.getError())
+	// const error = useSelector(slidesSelectors.getError())
 
 	const dispatch = useDispatch()
 	useEffect( () =>  {

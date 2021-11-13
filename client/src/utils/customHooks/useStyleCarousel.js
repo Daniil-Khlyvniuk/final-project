@@ -5,6 +5,14 @@ export const useStyleCarousel = makeStyles({
 	slide:{
 		width: '100%',
 		height: '100%',
+		position: 'relative'
+	},
+	slideProducts:{
+		width: '100%',
+		height: '100%',
+	},
+	slideContainer: {
+		position: 'relative'
 	},
 	nextEl: {
 		cursor: 'pointer',
@@ -38,34 +46,7 @@ export const useStyleCarousel = makeStyles({
 		bottom: '100px',
 		left: '50px'
 	},
-	pagination:{
-		marginTop: '20px',
-		'& .swiper':{
-			borderRadius: '4px',
-		},
-		'& .swiper-pagination-horizontal':{
-			bottom:'1px',
-			background: '#fff',
-			'& .swiper-pagination-bullet':{
-				margin: 0
-			}
-		},
-		'& .swiper-pagination-bullet':{
-			width: '15%',
-			height:  '2px',
-			background: 'black',
-			borderRadius: '0'
-		},
-		'& .swiper-pagination-bullet-active':{
-			'&::before':{
-				content: '""',
-				display: 'block',
-				height: '2px',
-				width: '100%',
-				borderBottom: '4px solid #000',
-			}
-		}
-	},
+
 	title: {
 		display: 'inline-block',
 		fontFamily: theme.typography.h2.fontFamily,
@@ -80,7 +61,8 @@ export const useStyleCarousel = makeStyles({
 		paddingLeft: '8px',
 		paddingRight: '8px',
 		borderRadius: '2px',
-		marginBottom: '-13px'
+		marginBottom: '-13px',
+		textTransform: 'uppercase'
 	},
 	desc:{
 		fontFamily: theme.typography.h2.fontFamily,
@@ -110,12 +92,30 @@ export const useStyleCarousel = makeStyles({
 		color: '#373F41'
 	},
 	thumbWrapper:{
-		'& .swiper-slide-active': {
+		'& .slick-slide': {
+			opacity: 0.4
+		},
+		'& .slick-slide.slick-current': {
 			opacity: 1
 		}
 	},
 	thumb:{
+		width: '100%',
+		height: '100%',
+		textAlign: 'center'
+	},
+	show:{
+		'& .slick-slide.slick-current': {
+			opacity: 1
+		}
+	},
+	relatedTitle:{
 		textAlign: 'center',
-		opacity: 0.4,
+		fontStyle: 'normal',
+		fontWeight: 'normal',
+		fontSize: 32,
+		lineHeight: '58px',
+		letterSpacing: '5px',
+		color: '#373F41'
 	}
 })
