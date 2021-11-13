@@ -21,19 +21,21 @@ const Catalog = () => {
 	const classes = useStyles()
 
 	useEffect(() => {
-		dispatch(productsOperations.fetchProducts())
+		dispatch(productsOperations.fetchProducts('sort=-date&perPage=4&startPage=1'))
 	}, [dispatch])
 
 	return (
-
 		<div className={classes.container}>
 			{
-				!!products?.list
-				&& products?.list?.map((item, key) => (
+				!!products
+				&& products?.map((item) => (
 					<CardInCatalog
-						key={key} image={item.img}
-						title={item.title}
-						price={item.price} />
+						key={item._id}
+						_id={item._id}
+						image={'/' + item.imageUrls[0]}
+						title={item?.product?.name || ''}
+						price={item.currentPrice}
+					/>
 				))
 			}
 		</div>

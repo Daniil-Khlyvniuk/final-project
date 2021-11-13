@@ -66,12 +66,14 @@ exports.addProduct = async (req, res) => {
 
 		isExist(isVarExist, "variant")
 
+
 		const newVariant = await ProductVariant.create({
 			...variantData,
 			size: size,
 			color: color,
 			product,
 		})
+
 
 		product.variants.push(newVariant);
 		const updatedProduct = await Product.findByIdAndUpdate(

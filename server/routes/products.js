@@ -1,15 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
-const multer = require("multer"); // multer for parsing multipart form data (files)
-const fse = require("fs-extra");
 
 //Import controllers
 const {
 	addProduct,
 	updateProduct,
 	getProducts,
-	getProductById,
 	getProductsInfo,
 	getFilteredVariants,
 	getProductsFilterParams,
@@ -45,7 +42,6 @@ router.get("/", getProducts);
 router.get("/:varId", getVariantById);
 router.get("/info/:kindOfInfo/:productId", getProductsInfo);
 router.get("/variant/:filterParam/:filterParamId/:productId", getFilteredVariants);
-// router.get("/:info/:productId", getProductsSizes);
 
 // @route   GET /products/filter
 // @desc    GET appropriate filtered products
