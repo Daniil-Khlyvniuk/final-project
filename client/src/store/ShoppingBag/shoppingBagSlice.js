@@ -11,12 +11,15 @@ const shoppingBagSlice = createSlice({
 		addToShoppingBag(state, action) {
 			state.data = action.payload
 		},
-		removeFromShoppingBag(state, action){
+		removeFromShoppingBag(state, action) {
 			state.data = action.payload
 		}
 	},
 })
 
-export const { addToShoppingBag, removeFromShoppingBag } = shoppingBagSlice.actions
+export const {
+	addToShoppingBag,
+	removeFromShoppingBag
+} = shoppingBagSlice.actions
 
 export default shoppingBagSlice.reducer
