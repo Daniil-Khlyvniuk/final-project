@@ -55,8 +55,6 @@ const HeaderSearch = () => {
 					renderInput={(params) => <TextField {...params} label="Search..." variant="standard" />}
 					getOptionLabel={(option) => option}
 					renderOption={(props, option) => {
-						// eslint-disable-next-line no-console
-						console.log(option)
 						return (
 							<Link
 								to={`/product-details/${option._id}`}
