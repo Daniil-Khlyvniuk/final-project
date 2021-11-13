@@ -6,13 +6,15 @@ const fse = require("fs-extra");
 
 //Import controllers
 const {
-  addProduct,
-  updateProduct,
-  getProducts,
-  getProductById,
-  getProductsFilterParams,
-  searchProducts,
-  getVariantById
+	addProduct,
+	updateProduct,
+	getProducts,
+	getProductById,
+	getProductsInfo,
+	getFilteredVariants,
+	getProductsFilterParams,
+	searchProducts,
+	getVariantById
 } = require("../controllers/products");
 
 
@@ -21,18 +23,18 @@ const {
 // @access  Private
 
 router.post(
-  "/",
-  // passport.authenticate("jwt-admin", { session: false }),
-  addProduct
+	"/",
+	// passport.authenticate("jwt-admin", { session: false }),
+	addProduct
 );
 
 // @route   PUT /products/:id
 // @desc    Update existing product
 // @access  Private
 router.put(
-  "/:id",
-  passport.authenticate("jwt-admin", { session: false }),
-  updateProduct
+	"/:id",
+	passport.authenticate("jwt-admin", { session: false }),
+	updateProduct
 );
 
 // @route   GET /products
@@ -41,6 +43,9 @@ router.put(
 router.get("/", getProducts);
 
 router.get("/:varId", getVariantById);
+router.get("/info/:kindOfInfo/:productId", getProductsInfo);
+router.get("/variant/:filterParam/:filterParamId/:productId", getFilteredVariants);
+// router.get("/:info/:productId", getProductsSizes);
 
 // @route   GET /products/filter
 // @desc    GET appropriate filtered products

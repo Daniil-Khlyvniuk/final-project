@@ -5,6 +5,7 @@ const Catalog = require("../models/Catalog");
 const Size = require("../models/Size");
 const fileService = require("../services/fileService");
 const notFoundError = require("../commonHelpers/notFoundError");
+const isExist = require("../commonHelpers/isExist");
 
 const uniqueRandom = require("unique-random");
 const rand = uniqueRandom(0, 999999);
@@ -62,18 +63,15 @@ exports.addProduct = async (req, res) => {
 			color: color._id,
 			size: size._id,
 		});
-		if (isVarExist) {
-			throw new Error(`The variant already exist`);
-		}
+
+		isExist(isVarExist, "variant")
 
 		const newVariant = await ProductVariant.create({
 			...variantData,
 			size: size,
 			color: color,
 			product,
-		}).catch((err) => {
-			console.log("1", err);
-		});
+		})
 
 		product.variants.push(newVariant);
 		const updatedProduct = await Product.findByIdAndUpdate(
@@ -99,7 +97,50 @@ exports.getVariantById = async (req, res, next) => {
 			.populate("product")
 			.populate("size")
 			.populate("color")
-		if (!variant) res.status(400).json({ message: `Variant with id "${varId}" not found ` })
+		if (!variant) res.status(400).json({ message: `Variant with id "${ varId }" not found ` })
+
+		res.json(variant)
+	} catch (err) {
+		res.status(400).json({ message: `Error happened on server: "${ err }"` })
+	}
+}
+
+exports.getProductsInfo = async (req, res, next) => {
+	const productId = req.params.productId
+	const kindOfInfo = req.params.kindOfInfo
+	try {
+		const variant = await ProductVariant.find({ product: productId })
+			.populate(kindOfInfo)
+		if (!variant) res.status(400).json(
+			{
+				message: `Product with id "${ productId }" not found `
+			}
+		)
+
+		const allInfo = variant.map((variant) => variant[ kindOfInfo ])
+		const infoWithOutRepeats = [ ...new Set(allInfo) ]
+
+		res.json(infoWithOutRepeats)
+	} catch (err) {
+		res.status(400).json({ message: `Error happened on server: "${ err }"` })
+	}
+}
+
+exports.getFilteredVariants = async (req, res, next) => {
+	console.log(req.params)
+	const productId = req.params.productId
+	const filterParam = req.params.filterParam
+	const filterParamId = req.params.filterParamId
+
+	try {
+		const variant = await ProductVariant.find({ product: productId, [ filterParam ]: filterParamId })
+			.populate("size")
+			.populate("color")
+		if (!variant) res.status(400).json(
+			{
+				message: `Product with id "${ productId }" not found `
+			}
+		)
 
 		res.json(variant)
 	} catch (err) {
