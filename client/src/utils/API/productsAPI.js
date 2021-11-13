@@ -16,11 +16,11 @@ const updateProduct = (productId, updatedProduct) => axios.put(`/api/products/${
 // 																										brand: 'new brand'
 // 																									}
 
-// const searchForProducts = (searchPhrases) => axios.post('/api/products/search', searchPhrases)
-// // SearchPhrases has to be an object with a "query" key and searchwords separated by spaces: 
-// // 																								{
-// //                                      						query: 'linen square beige'
-// //                                      					}
+const searchForProducts = (searchPhrases) => axios.post('/api/products/search', searchPhrases)
+// SearchPhrases has to be an object with a "query" key and searchwords separated by spaces: 
+// 																								{
+//                                      						query: 'linen square beige'
+//                                      					}
 
 const searchAutocomplete = (searchPhrases) => axios.post('/api/products/autocomplete', searchPhrases)
 // SearchPhrases has to be an object with a "query" key and searchwords separated by spaces: 
@@ -37,7 +37,7 @@ export default {
 	getOneProduct,
 	addNewProduct,
 	updateProduct,
-	// searchForProducts,
+	searchForProducts,
 	searchAutocomplete,
 	getFilteredProducts
 }

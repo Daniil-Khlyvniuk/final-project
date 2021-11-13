@@ -7,34 +7,35 @@ import { Grid, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 
 const HeaderSearch = () => {
-	const [options, setOptions] = useState([])
+	const [autocomplete, setAutocomplete] = useState([])
+	// const [matchedCards, setMatchedCards] = useState([])
 	let timer
 
 	const onSearch = (e) => {
 		clearTimeout(timer)
 
-		timer = setTimeout(async function () {
+		timer = setTimeout(() => {
 
 			if (e.target.value.trim().length === 0) {
-				setOptions([])
+				setAutocomplete([])
 				return
 			}
 
 			try {
-				const res = await productsAPI.searchAutocomplete(
+				productsAPI.searchAutocomplete(
 					{ query: e.target.value }
-				)
-				const data = await res.data
-
-				if (data.length > 0) {
-					setOptions(data)
-				} else {
-					setOptions([])
-				}
+				).then(({data}) => {
+					if (data.length > 0) {
+						setAutocomplete(data)
+					} else {
+						setAutocomplete([])
+					}
+				})
+				
 			} catch (err) {
 				// eslint-disable-next-line no-console
 				console.error(err)
-				setOptions([])
+				setAutocomplete([])
 			}
 		}, 700)
 	}
@@ -48,7 +49,7 @@ const HeaderSearch = () => {
 				<StyledAutocomplete
 					disablePortal
 					id="combo-box-demo"
-					options={options}
+					options={autocomplete}
 					onKeyUp={onSearch}
 					size='small'
 					renderInput={(params) => <TextField {...params} label="Search..." variant="standard" />}
@@ -57,7 +58,7 @@ const HeaderSearch = () => {
 						// eslint-disable-next-line no-console
 						console.log(option)
 						return (
-							<Link 
+							<Link
 								to={`/product-details/${option._id}`}
 								style={{ textDecoration: 'none' }}
 								{...props}
