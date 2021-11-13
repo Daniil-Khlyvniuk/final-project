@@ -10,7 +10,7 @@ const store = configureStore({
 		products: productsSlice,
 		links: linksSlice,
 		category: categorySlice,
-    modal: modalSlice,
+    		modal: modalSlice,
 		shoppingBag: shoppingBagSlice,
 	},
 	middleware: (getDefaultMiddleware) =>
