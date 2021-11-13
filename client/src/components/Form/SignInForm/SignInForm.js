@@ -85,7 +85,6 @@ const SignInForm = () => {
 								type="password"
 								placeholder="Password"
 							/>
-
 						</div>
 						<div>
 							<Field
@@ -130,7 +129,13 @@ const SignInForm = () => {
 						
 						<button
 							className={classes.submit}
-							type="submit">SIGN UP
+							type="submit"
+							disabled={
+								!formikProps.isValid ||
+                formikProps.isSubmitting
+							}
+						>
+							SIGN UP
 						</button>
 						<div className={classes.socialBox}>
 							<Link to="#"><Google/></Link>
