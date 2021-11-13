@@ -28,7 +28,7 @@ const Catalog = () => {
 		<div className={classes.container}>
 			{
 				!!products
-				&& products?.map((item, key) => (
+				&& products?.map((item) => (
 					<CardInCatalog
 						key={item._id}
 						_id={item._id}

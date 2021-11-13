@@ -1,9 +1,9 @@
-import {createAsyncThunk} from '@reduxjs/toolkit'
+import { createAsyncThunk } from '@reduxjs/toolkit'
 
 // TODO - API
 const addToShoppingBag = createAsyncThunk(
 	'shoppingBag/addToShoppingBag',
-	async (value) => {}
+	// async (value) => { }
 )
 
 
