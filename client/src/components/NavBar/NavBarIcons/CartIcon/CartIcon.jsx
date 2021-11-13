@@ -13,7 +13,7 @@ import { NavLink } from 'react-router-dom'
 const Carticon = () => {
 	const classes = useStyles()
 	// const dispatch = useDispatch()
-	// const handleOpen = (content) => dispatch(modalActions.handleOpen(content))
+	// const handleOpen = (content) => dispatch(modalActions.modalToggle(content))
 	const shoppingBag = useSelector(shoppingBagSelectors.getShoppingBag())
 
 	return (
