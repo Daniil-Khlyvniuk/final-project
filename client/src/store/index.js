@@ -2,12 +2,14 @@ import { configureStore } from '@reduxjs/toolkit'
 import productsSlice from './Products/productsSlice'
 import linksSlice from './Links/linksSlice'
 import categorySlice from './Category/categorySlice'
+import sliderSlice from './Slider'
 import modalSlice from './Modal/modalSlice'
 import shoppingBagSlice from './ShoppingBag/shoppingBagSlice'
 import userSlice from './User'
 
 const store = configureStore({
 	reducer: {
+		slides: sliderSlice,
 		products: productsSlice,
 		links: linksSlice,
 		category: categorySlice,
