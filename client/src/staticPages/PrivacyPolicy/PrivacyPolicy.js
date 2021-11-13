@@ -1,10 +1,11 @@
 import React from 'react'
+import { Container } from '@mui/material'
 
 const PrivacyPolicy = () => {
 	return (
-		<div>
+		<Container maxWidth="lg">
 			<h1>PrivacyPolicy</h1>
-		</div>
+		</Container>
 	)
 }
 

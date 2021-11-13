@@ -1,6 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@mui/styles'
-import { Grid, Typography, Box, Container } from '@mui/material'
+import { Grid, Typography, Box, Container, Link } from '@mui/material'
+import { Link as RouterLink } from 'react-router-dom'
 import { styled } from '@mui/material/styles'
 
 const StyledGrid = styled(Grid)(() => ({
@@ -10,7 +11,7 @@ const StyledGrid = styled(Grid)(() => ({
 	alignItems: 'center',
 }))
 
-const StyledBox = styled(Box)(() => ({
+const StyledBox = styled(Link)(() => ({
 	display: 'flex',
 	justifyContent: 'center',
 	alignItems: 'center',
@@ -39,11 +40,13 @@ const Credentials = () => {
 				direction="row"
 			>
 				<StyledContainer maxWidth="lg" >
-					<StyledBox>
+					<StyledBox
+						component={RouterLink} to='/'
+					>
 						<img
 							className={logoBottomLeft}
-							src="./img/bottom_logo1.png" alt="Company" />
-						<img src="./img/bottom_logo2.png" alt="Postil logo" />
+							src="/logo/bottom_logo1.png" alt="Company" />
+						<img src="/logo/bottom_logo2.png" alt="Postil logo" />
 					</StyledBox>
 					<Typography variant='footerTextMedium'>
 						© 2010 — 2020  Simple Studio

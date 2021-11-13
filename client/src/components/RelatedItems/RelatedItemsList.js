@@ -142,7 +142,6 @@ const RelatedItemsList = () => {
 		relatedList = relatedList.filter(prod => prod._id !== id)
 	}
 
-
 	return (
 		<div>
 			{relatedList.length && relatedList.reverse().map(prod => {
