@@ -1,17 +1,19 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
 import { IconButton } from '@mui/material'
 import { useStyles } from './styles'
+import { useDispatch } from 'react-redux'
+import modalActions from '../../../../store/Modal'
+import LoginModal from '../../../Modal/LoginModal'
 
 const LoginIcon = () => {
 	const classes = useStyles()
+	const dispatch = useDispatch()
+	const handleOpen = (content) => dispatch(modalActions.handleOpen(content))
 
 	return (
-		<IconButton aria-label="favorites" sx={{ padding: 0 }}>
-			<NavLink exact to='/login' className={classes.navbarLink}>
-				<PersonOutlineIcon />
-			</NavLink>
+		<IconButton aria-label="favorites" sx={{ padding: 0 }} onClick={() => handleOpen(<LoginModal />)}>
+			<PersonOutlineIcon className={classes.navbarLink} />
 		</IconButton>
 	)
 }

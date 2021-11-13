@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import productsSlice from './Products/productsSlice'
 import linksSlice from './Links/linksSlice'
 import categorySlice from './Category/categorySlice'
+import modalSlice from './Modal/modalSlice'
 import shoppingBagSlice from './ShoppingBag/shoppingBagSlice'
 
 const store = configureStore({
@@ -9,8 +10,16 @@ const store = configureStore({
 		products: productsSlice,
 		links: linksSlice,
 		category: categorySlice,
+    modal: modalSlice,
 		shoppingBag: shoppingBagSlice,
-	}
+	},
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware({
+			serializableCheck: {
+				// Ignore these action types
+				ignoredActions: ['modal/handleOpen'],
+			},
+		}),
 })
 
 export default store
