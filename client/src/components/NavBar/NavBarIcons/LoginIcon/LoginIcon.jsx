@@ -12,7 +12,7 @@ const LoginIcon = () => {
 	const handleOpen = (content) => dispatch(modalActions.handleOpen(content))
 
 	return (
-		<IconButton aria-label="favorites" sx={{ padding: 0 }} onClick={() => handleOpen(<LoginModal />)}>
+		<IconButton aria-label="login" title='Login' sx={{ padding: 0 }} onClick={() => handleOpen(<LoginModal />)}>
 			<PersonOutlineIcon className={classes.navbarLink} />
 		</IconButton>
 	)

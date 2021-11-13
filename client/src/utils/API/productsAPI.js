@@ -22,6 +22,12 @@ const searchForProducts = (searchPhrases) => axios.post('/api/products/search', 
 //                                      						query: 'linen square beige'
 //                                      					}
 
+const searchAutocomplete = (searchPhrases) => axios.post('/api/products/autocomplete', searchPhrases)
+// SearchPhrases has to be an object with a "query" key and searchwords separated by spaces: 
+// 																								{
+//                                      						query: 'linen square beige'
+//         
+
 // eslint-disable-next-line max-len
 const getFilteredProducts = (filterParams) => axios.get(`/api/products/filter${filterParams}`)
 // please see documentaion for available and custom params
@@ -32,5 +38,6 @@ export default {
 	addNewProduct,
 	updateProduct,
 	searchForProducts,
+	searchAutocomplete,
 	getFilteredProducts
 }
