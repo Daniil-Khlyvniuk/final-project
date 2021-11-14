@@ -1,12 +1,12 @@
 import React from 'react'
 import { Container } from '@mui/material'
 
-const Contact = () => {
+const Careers = () => {
 	return (
 		<Container maxWidth="lg">
-			<h1>Contact</h1>
+			<h1>Careers</h1>
 		</Container>
 	)
 }
 
-export default Contact
+export default Careers

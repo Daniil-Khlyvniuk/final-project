@@ -16,12 +16,9 @@ ReactDOM.render(
 		<React.StrictMode>
 			<Provider store={store}>
 				<BrowserRouter>
-					{/* eslint-disable-next-line no-mixed-spaces-and-tabs */}
-    	<ErrorBoundary>
+					<ErrorBoundary>
 						<App/>
-						{/* eslint-disable-next-line max-len */}
-						{/* eslint-disable-next-line no-mixed-spaces-and-tabs */}
-    	</ErrorBoundary>
+					</ErrorBoundary>
 				</BrowserRouter>
 			</Provider>
 		</React.StrictMode>

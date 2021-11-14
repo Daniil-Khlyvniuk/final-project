@@ -10,7 +10,6 @@ const Form = () => {
 	const handleChange = (event, newValue) => {
 		setValue(newValue)
 	}
-
 	return (
 		<div>
 			<Tabs

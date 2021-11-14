@@ -10,7 +10,7 @@ import { StyledBox } from './styles'
 
 const BasicModal = ({ style, body }) => {
 	const dispatch = useDispatch()
-	const handleClose = () => dispatch(modalActions.handleClose(false))
+	const handleClose = () => dispatch(modalActions.modalToggle(false))
 
 	return (
 		<div>
