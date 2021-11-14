@@ -1,12 +1,12 @@
 import React from 'react'
 import { Container } from '@mui/material'
 
-const Reviews = () => {
+const ContactUs = () => {
 	return (
 		<Container maxWidth="lg">
-			<h1>Reviews</h1>
+			<h1>ContactUs</h1>
 		</Container>
 	)
 }
 
-export default Reviews
+export default ContactUs

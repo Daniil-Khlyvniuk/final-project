@@ -27,12 +27,7 @@ const AppRoutes = () => {
 	return (
 		<Switch>
 			<Route exact path='/'><Main /></Route>
-			{/* <Route exact path='/about'><About /></Route>  */}
-			<Route exact path='/about/contact-us'><Contact /></Route>
-			<Route exact path='/login'><Login /></Route>
-			<ProtectedRoute exact path='/favorites' isLoggedIn={false}>
-				<Favorites />
-			</ProtectedRoute>
+			<ProtectedRoute exact path='/favorites'><Favorites /></ProtectedRoute>
 			<Route exact path='/products-list'><ProductsList /></Route>
 			<Route exact path='/product-details/:id'><ProductDetails /></Route>
 			<Route exact path='/cart'><Cart /></Route>
@@ -40,13 +35,11 @@ const AppRoutes = () => {
 			<Route exact path='/shop/payment-and-delivery'><PaymentAndDelivery /></Route>
 			<Route exact path='/shop/returns'><Returns /></Route>
 			<Route exact path='/shop/privacy-policy'><PrivacyPolicy /></Route>
-			<Route exact path='/shop/terms-of-service'>terms-of-service</Route>
+			<Route exact path='/shop/terms-of-service'><TermsOfService /></Route>
 			<Route exact path='/about/about-us'><AboutUs /></Route>
-			<Route exact path='/about/careers'><Reviews /></Route>
-			{/* <Route exact path='/blog'><Blog /></Route> */}
-
+			<Route exact path='/about/careers'><Careers /></Route>
+			<Route exact path='/about/contact-us'><ContactUs /></Route>
 			<Route exact path='/subscription/:email'><HandleSubscribe /></Route>
-
 			<Route exact path='*'><Page404 /></Route>
 		</Switch>
 	)

@@ -1,4 +1,5 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+
 import Header from './components/NavBar/NavBar'
 import Footer from './components/Footer'
 
@@ -12,11 +13,9 @@ const App = () => {
 	const modal = useSelector(modalSelectors.checkOpen())
 
 	return (
-
 		<div className={'App'}>
 			<Header />
 			<AppRoutes />
-
 			<Footer />
 			{modal}
 		</div>

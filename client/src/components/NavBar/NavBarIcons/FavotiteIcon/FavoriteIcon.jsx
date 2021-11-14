@@ -8,7 +8,7 @@ const Favoriteicon = () => {
 	const classes = useStyles()
 
 	return (
-		<IconButton aria-label="favorites" sx={{ padding: 0 }}>
+		<IconButton aria-label="favorites" title='Favorites' sx={{ padding: 0 }}>
 			<NavLink exact to='/favorites' className={classes.navbarLink}>
 				<FavoriteBorderIcon />
 			</NavLink>
