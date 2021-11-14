@@ -1,15 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import Slider from 'react-slick'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
+// import 'slick-carousel/slick/slick.css'
+// import 'slick-carousel/slick/slick-theme.css'
+import './slick(costil).css'
+import './slick-theme(costil).css'
 import { useStyleCarousel } from '../../utils/customHooks/useStyleCarousel'
 
 const Carousel = ({
 	slides,
 	main,
-	product = false,
-	related = false  }) => {
+	product,
+	related  }) => {
 	const style = useStyleCarousel()
 	const [nav1, setNav1] = useState()
 	const [nav2, setNav2] = useState()

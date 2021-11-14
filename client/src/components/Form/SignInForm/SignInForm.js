@@ -98,7 +98,7 @@ const SignInForm = () => {
 							/>
 						</div>
 						<div className={classes.ads}>
-							<Checkbox 
+							<Checkbox
 								style={{
 									width: 20,
 									padding: 25,
@@ -130,7 +130,7 @@ const SignInForm = () => {
 								<p className={classes.success}>{serverResult.success}</p>
 							</div>
 						)}
-						
+
 						<button
 							className={classes.submit}
 							type="submit"
