@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from 'react-redux'
 
 import {activeProductOperations, activeProductSelector} from '../../store/ActiveProduct'
 import ProductDescription from '../../components/ProductDescription/ProductDescription'
+import Carousel from '../../components/Carousel/Carousel'
 
 const ProductDetails = () => {
 
@@ -44,7 +45,7 @@ const ProductDetails = () => {
 				</Backdrop>)}
 			{activeProduct && (
 				<Grid sx={{mt:'80px'}} container spacing={2} >
-					<Grid item md={6} xs={12}>Img</Grid>
+					<Grid item md={6} xs={12}><Carousel  /></Grid>
 					<Grid item md={6} xs={12}>
 						{activeProduct && <ProductDescription />}
 					</Grid>
