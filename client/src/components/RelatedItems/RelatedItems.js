@@ -11,6 +11,7 @@ const RelatedItems = ({ product }) => {
 	const {
 		name,
 		_id,
+		// imgUrl,
 	} = product
 
 

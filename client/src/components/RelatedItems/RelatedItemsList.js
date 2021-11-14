@@ -10,13 +10,10 @@ const RelatedItemsList = () => {
 	let relatedList = useSelector(productsSelectors.getRelatedProductsList())
 	const dispatch = useDispatch()
 	// const id = '618d61dcc4e9563080ca7acf'
-	// const id = '618d61e7c4e9563080ca7ae5'
-	const id = '618d61dcc4e9563080ca7ad4'
+	// const id = '61900597b6ba7e18e4336d9d'
+	const id = '6190058db6ba7e18e4336d8b'
 	// const id = '618d61e2c4e9563080ca7add'
 	// const id = '618b85bbaf938f27ec67e6e2'
-
-	// eslint-disable-next-line no-console
-	console.log(relatedIds)
 
 	//передаем в редакс текущий id товара
 	useEffect(() => {
@@ -24,8 +21,6 @@ const RelatedItemsList = () => {
 	}, [relatedList, dispatch])
 
 	// eslint-disable-next-line no-console
-	console.log(dispatch)
-
 	useEffect(() => {
 		let requests =
       relatedIds.map(id => axios(`/api/products/${id}`))

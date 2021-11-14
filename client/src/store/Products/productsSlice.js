@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
 import productsOperations from './operations'
-// import axios from 'axios'
 
 const { fetchProducts } = productsOperations
 
