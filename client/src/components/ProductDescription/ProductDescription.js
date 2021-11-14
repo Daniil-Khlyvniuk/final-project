@@ -40,18 +40,21 @@ const ProductDescription = () => {
 
 
 	const handleActiveColor = (event , newActiveColor)=>{
-		setActiveColor(newActiveColor)
-		dispatch(activeProductActions.setActiveColor(newActiveColor))
-		if(newActiveColor){
-			dispatch(activeProductOperations.fetchNewActiveProduct({
-				specification : 'color',
-				specificationId: newActiveColor,
-				productId : parent._id
-
-			}))
+		if(newActiveColor !== null){
+			setActiveColor(newActiveColor)
+			if(newActiveColor !== activeColor){
+				dispatch(activeProductActions.setActiveColor(newActiveColor))
+				dispatch(activeProductOperations.fetchNewActiveProduct({
+					specification : 'color',
+					specificationId: newActiveColor,
+					productId : parent._id
+				}))
+			}
 		}
-	}
 
+
+
+	}
 
 	const handleActiveSize = (event , newActiveSize) => {
 		setActiveSize(newActiveSize)
@@ -112,7 +115,7 @@ const ProductDescription = () => {
 						}
 					}}
 				>
-					{allSizes && allSizes.map(size => <Tab key={size._id} disableRipple value={size._id} label={size.name} sx={{fontSize: '14px', minWidth:'0', padding:'0' , mr:'40px'}}/>)}
+					{allSizes && allSizes.map(item => <Tab key={item.size._id} disableRipple value={item.size._id} label={item.size.name} sx={{fontSize: '14px', minWidth:'0', padding:'0' , mr:'40px'}}/>)}
 
 				</Tabs>
 				

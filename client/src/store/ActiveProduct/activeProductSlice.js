@@ -41,7 +41,7 @@ const activeProductSlice = createSlice({
 			state.currentVariant.error = 'Error'
 		},
 		[fetchNewActiveProduct.fulfilled]: (state, action) => {
-			state.currentVariant.data = action.payload.find(i => i._id)
+			state.sizes = action.payload
 			state.currentVariant.error = null
 			state.currentVariant.isLoading = false
 		},

@@ -24,7 +24,7 @@ const ProductDetails = () => {
 
 	useEffect(()=>{
 		if(activeProduct && parent){
-			dispatch(activeProductOperations.fetchSizes(parent._id))
+			// dispatch(activeProductOperations.fetchSizes(parent._id))
 			dispatch(activeProductOperations.fetchColors(parent._id))
 		}
 	},[activeProduct])
@@ -45,7 +45,9 @@ const ProductDetails = () => {
 				</Backdrop>)}
 			{activeProduct && (
 				<Grid sx={{mt:'80px'}} container spacing={2} >
-					<Grid item md={6} xs={12}><Carousel  /></Grid>
+					<Grid item md={6} xs={12}>
+						<Carousel slides={activeProduct.imageUrls} />
+					</Grid>
 					<Grid item md={6} xs={12}>
 						{activeProduct && <ProductDescription />}
 					</Grid>
