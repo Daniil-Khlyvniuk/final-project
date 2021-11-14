@@ -5,11 +5,11 @@ import categorySlice from './Category/categorySlice'
 import sliderSlice from './Slider'
 import modalSlice from './Modal/modalSlice'
 import shoppingBagSlice from './ShoppingBag/shoppingBagSlice'
-<<<<<<< HEAD
+
 import activeProductSlice from './ActiveProduct/activeProductSlice'
-=======
+
 import userSlice from './User'
->>>>>>> develop
+
 
 const store = configureStore({
 	reducer: {
@@ -19,11 +19,10 @@ const store = configureStore({
 		category: categorySlice,
 		modal: modalSlice,
 		shoppingBag: shoppingBagSlice,
-<<<<<<< HEAD
-		activeProduct : activeProductSlice,
-=======
 		user: userSlice,
->>>>>>> develop
+		activeProduct : activeProductSlice,
+
+
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({

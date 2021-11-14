@@ -7,23 +7,17 @@ import ProductDetails from '../pages/ProductDetails/ProductDetails'
 import Catalog from '../pages/Catalog/Catalog'
 import PaymentAndDelivery from '../staticPages/PaymentAndDelivery/PaymentAndDelivery'
 import Returns from '../staticPages/Returns/Returns'
-// import About from '../staticPages/About/About'
 import PrivacyPolicy from '../staticPages/PrivacyPolicy/PrivacyPolicy'
+import TermsOfService from '../staticPages/TermsOfService/TermsOfService'
 import AboutUs from '../staticPages/AboutUs/AboutUs'
-import Reviews from '../staticPages/Reviews/Reviews'
-// import Blog from '../staticPages/Blog/Blog'
-import Login from '../pages/Login/Login'
+import Careers from '../staticPages/Careers/Careers'
+import ContactUs from '../staticPages/ContactUs/ContactUs'
 import Cart from '../pages/Cart/Cart'
-import Contact from '../staticPages/Contact/Contact'
 import Page404 from '../pages/Page404/Page404'
 import Favorites from '../pages/Favorites/Favorites'
 import HandleSubscribe from '../pages/HandleSubscribe'
 
-
-// get isLoggedIn from Redux
-
 const AppRoutes = () => {
-
 	return (
 		<Switch>
 			<Route exact path='/'><Main /></Route>
