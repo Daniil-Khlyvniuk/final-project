@@ -77,6 +77,9 @@ const theme = createTheme({
 					props: { variant: 'contained' },
 					style: {
 						backgroundColor: 'primary',
+						'@media (max-width:860px)': {
+							padding:'12px'
+						},
 						'@media (max-width:480px)': {
 							padding:'10px'
 						}
@@ -88,6 +91,9 @@ const theme = createTheme({
 						backgroundColor: 'primary',
 						borderTopLeftRadius: 0,
 						borderBottomLeftRadius: 0,
+						'@media (max-width:860px)': {
+							padding:'12px'
+						},
 						'@media (max-width:480px)': {
 							padding:'10px'
 						}
