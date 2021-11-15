@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {useHistory} from 'react-router-dom'
-import {ProductOperations, ProductSelector} from '../../store/Product'
+import productActions, {ProductSelector} from '../../store/Product'
 import SocialLinks from '../SocialLInks'
 import AccordionProduct from './Accordion/Accordion'
 
@@ -18,16 +18,20 @@ const user = false
 
 
 const ProductDescription = () => {
-
-	const [activeColor, setActiveColor] = useState(null)
+	const activeProduct = useSelector(ProductSelector.getProduct())
+	// eslint-disable-next-line max-len
+	const [activeColor, setActiveColor] = useState( null)
+	// eslint-disable-next-line max-len
 	const [activeSize, setActiveSize] = useState(null)
 	const [available, setAvailable] = useState('')
 
 	const allColors = useSelector(ProductSelector.allColors())
 	const variants = useSelector(ProductSelector.allVarinats())
 	const allSizes = useSelector(ProductSelector.allSizes())
-	const activeProduct = useSelector(ProductSelector.getProduct())
+
 	const parent = useSelector(ProductSelector.getParent())
+	// eslint-disable-next-line no-unused-vars
+	const isLoading = useSelector(ProductSelector.isLoading())
 
 
 	const history = useHistory()
@@ -52,10 +56,6 @@ const ProductDescription = () => {
 		if(activeProduct){
 			setActiveColor(activeProduct.color._id)
 			setActiveSize(activeProduct.size._id)
-			dispatch(ProductOperations.fetchAllColors(parent._id))
-			dispatch(ProductOperations.fetchSizes({
-				colorId: activeProduct.color._id,
-				productId: activeProduct.product._id}))
 		}
 	}, [activeProduct])
 
@@ -64,6 +64,7 @@ const ProductDescription = () => {
 		if(newActiveColor !== null){
 			setActiveColor(newActiveColor)
 			if(newActiveColor !== activeColor){
+				dispatch(productActions.clearSizes())
 				// eslint-disable-next-line max-len
 				const newProduct = variants.find(item => item.color._id === newActiveColor)
 				history.push(`/product-details/${newProduct._id}`)
@@ -75,6 +76,7 @@ const ProductDescription = () => {
 		setActiveSize(newActiveSize)
 		// eslint-disable-next-line max-len
 		const newProduct = variants.find(i =>i.size._id === newActiveSize && i.color._id === activeColor)
+
 		history.push(`/product-details/${newProduct._id}`)
 	}
 
@@ -100,8 +102,8 @@ const ProductDescription = () => {
 					{/* eslint-disable-next-line max-len */}
 					<ToggleButtonGroup exclusive value={activeColor} onChange={handleActiveColor}>
 						{  allColors && allColors.map(color => (
-							<ToggleButton key={color._id}  aria-label={color.name} value={color._id} color={'neutral'} sx={{border: 'none', padding: '0', mr:'10px'}}>
-								<CircleIcon stroke-width={1} stroke={activeColor === color._id ? 'black' : 'white'}
+							<ToggleButton  key={color._id}  aria-label={color.name} value={color._id} color={'neutral'} sx={{border: 'none', padding: '0', mr:'10px'}}>
+								<CircleIcon strokeWidth={1} stroke={activeColor === color._id ? 'black' : 'white'}
 									sx={{width: '20px',color: color.cssValue }}/>
 							</ToggleButton>
 						))}
@@ -114,9 +116,9 @@ const ProductDescription = () => {
 					classes={{root : classes.optionText}}>
 					size
 				</Typography>
-				<Tabs value={activeSize}
+				<Tabs value={activeSize || null}
 					onChange={handleActiveSize}
-					extColor='primary'
+					extcolor='primary'
 					indicatorColor="primary"
 					aria-label="sizes"
 					TabIndicatorProps={{

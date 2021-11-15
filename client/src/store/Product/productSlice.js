@@ -16,6 +16,10 @@ const productSlice = createSlice({
 	reducers:{
 		getAllVariants(state, action){
 			state.variants = action.payload
+		},
+		clearSizes(state){
+			// state.activeProduct = null
+			state.allSizes= null
 		}
 	},
 	extraReducers:{
@@ -52,5 +56,5 @@ const productSlice = createSlice({
 		},
 	}
 })
-export const {getAllVariants} = productSlice.actions
+export const {getAllVariants, clearSizes} = productSlice.actions
 export default productSlice.reducer
