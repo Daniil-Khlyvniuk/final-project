@@ -1,21 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-// import {useSelector} from 'react-redux'
+import Carousel from '../Carousel/Carousel'
 
+const RelatedItems = ({ slides }) => {
+	
 
-
-const RelatedItems = ({ product }) => {
-	// const ItemView = useSelector(state => state.ItemView)
-
-
-	const {
-		name,
-		_id,
-		// imgUrl,
-	} = product
-
-
-
+	console.log(slides)
 	// useEffect(() => {
 	// 	localStorage.setItem('related', [])
 	// 	const ItemView = localStorage.getItem('related')
@@ -29,21 +19,19 @@ const RelatedItems = ({ product }) => {
 	// 	}
 	// }, [ItemView, key])
 
-
 	return (
 		<div>
-			<li>
-				<h1>{name}</h1>
-				<h2>{_id}</h2>
-				{/*<img src={url} width="200" height="180" alt="laptop"/>*/}
-			</li>
+			<Carousel
+				slides={slides}
+				related={true}
+			/>
 		</div>
 	)
 }
 
 
 RelatedItems.propTypes = {
-	product: PropTypes.object
+	slides: PropTypes.object
 	// _id: PropTypes.string,
 	// name: PropTypes.string,
 	// card: PropTypes.shape({
