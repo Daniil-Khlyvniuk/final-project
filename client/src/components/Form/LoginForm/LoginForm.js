@@ -3,7 +3,7 @@ import { useFormStyle } from '../../../utils/customHooks/useFormStyle'
 import { Field, Form, Formik } from 'formik'
 import {LOGIN_SCHEMA} from '../setting/Schemes'
 import CustomInput from '../setting/CustomInput'
-import { Checkbox } from '@mui/material'
+import { Box, Button, Checkbox } from '@mui/material'
 import { Link } from 'react-router-dom'
 import {loginUser} from '../../../utils/API/userAPI'
 import {useDispatch} from 'react-redux'
@@ -52,7 +52,8 @@ const LoginForm = () => {
 				return (
 					<Form noValidate
 						onSubmit={formikProps.handleSubmit}
-						className={`${classes.form} ${classes.formAuth}`}>
+						// className={`${classes.form} ${classes.formAuth}`}
+					>
 						<Field
 							data-testid="loginOrEmail"
 							component={CustomInput}
@@ -103,16 +104,24 @@ const LoginForm = () => {
 							</div>
 						)}
 
-						<button
-							className={classes.submit}
-							type="submit"
-							// disabled={
-							// 	!formikProps.isValid ||
-							//   formikProps.isSubmitting
-							// }
-						>
-							LOG IN
-						</button>
+						<Box sx={{ display: 'flex', justifyContent: 'center' }}>
+							<Button 
+								type='submit'
+								variant="contained"
+								sx={{
+									padding: '15px 95px',
+									fontSize: '18px',
+									fontFamily: 'Abel',
+									fontWeight: '400',
+								}}
+								disabled={
+									!formikProps.isValid ||
+                formikProps.isSubmitting
+								}
+							>
+							log in
+							</Button>
+						</Box>
 
 						<p className= {classes.alreadyIn}>
 							<Link to="/#">FORGOT PASSWORD?</Link>
