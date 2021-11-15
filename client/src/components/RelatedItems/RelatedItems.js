@@ -5,45 +5,45 @@ import Carousel from '../Carousel/Carousel'
 
 
 // eslint-disable-next-line react/prop-types
-const RelatedItems = ({ slides }) => {
+const RelatedItems = ({ product, slides }) => {
 	// const ItemView = useSelector(state => state.ItemView)
 
 
-	// const {
-	// 	name,
-	// 	_id,
-	// 	imageUrls,
-	// } = product
+	const {
+		// name,
+		_id,
+		imageUrls,
+	} = product
+
+	// const customId = _id
+	const imageUrl = imageUrls[0]
+
+	const slide =  [{
+		imageUrl: `http://localhost:5000/${imageUrl}`,
+		customId: _id
+	},{
+		imageUrl: `http://localhost:5000/${imageUrl}`,
+		customId: _id
+	},{
+		imageUrl: `http://localhost:5000/${imageUrl}`,
+		customId: _id
+	},{
+		imageUrl: `http://localhost:5000/${imageUrl}`,
+		customId: _id
+	},{
+		imageUrl: `http://localhost:5000/${imageUrl}`,
+		customId: _id
+	},{
+		imageUrl: `http://localhost:5000/${imageUrl}`,
+		customId: _id
+	},{
+		imageUrl: `http://localhost:5000/${imageUrl}`,
+		customId: _id
+	}]
 
 
-	// const imageUrl = imageUrls[0]
-
-	// const slide =  [{
-	// 	imageUrl: `http://localhost:5000/${imageUrl}`,
-	// 	customId: _id
-	// },{
-	// 	imageUrl: `http://localhost:5000/${imageUrl}`,
-	// 	customId: _id
-	// },{
-	// 	imageUrl: `http://localhost:5000/${imageUrl}`,
-	// 	customId: _id
-	// },{
-	// 	imageUrl: `http://localhost:5000/${imageUrl}`,
-	// 	customId: _id
-	// },{
-	// 	imageUrl: `http://localhost:5000/${imageUrl}`,
-	// 	customId: _id
-	// },{
-	// 	imageUrl: `http://localhost:5000/${imageUrl}`,
-	// 	customId: _id
-	// },{
-	// 	imageUrl: `http://localhost:5000/${imageUrl}`,
-	// 	customId: _id
-	// }]
 
 	console.log(slides)
-
-
 	// useEffect(() => {
 	// 	localStorage.setItem('related', [])
 	// 	const ItemView = localStorage.getItem('related')
@@ -61,7 +61,7 @@ const RelatedItems = ({ slides }) => {
 	return (
 		<div>
 			<Carousel
-				slides={slides}
+				slides={slide}
 				related={true}
 			/>
 		</div>
@@ -72,8 +72,8 @@ const RelatedItems = ({ slides }) => {
 RelatedItems.propTypes = {
 	slides: PropTypes.object,
 	product: PropTypes.object,
-	// _id: PropTypes.string,
-	// imageUrls: PropTypes.string,
+	_id: PropTypes.string,
+	imageUrls: PropTypes.string,
 	// card: PropTypes.shape({
 	// 	article: PropTypes.number,
 	// 	title: PropTypes.string,
