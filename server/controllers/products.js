@@ -204,10 +204,16 @@ exports.updateProduct = (req, res, next) => {
 		);
 };
 
-exports.getProducts = (req, res, next) => {
+exports.getProducts = async (req, res, next) => {
 	const perPage = Number(req.query.perPage);
 	const startPage = Number(req.query.startPage);
 	const sort = req.query.sort;
+
+
+
+
+
+
 
 	ProductVariant.find()
 		.skip(startPage * perPage - perPage)

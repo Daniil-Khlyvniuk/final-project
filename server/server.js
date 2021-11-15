@@ -90,7 +90,7 @@ mongoose.set('useUnifiedTopology', true);
 
 const port = process.env.PORT || 5000;
 mongoose
-.connect(db)
+.connect("mongodb+srv://forTest:forTest@cluster0.eeiyv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
 .then(() => console.log("MongoDB Connected"))
 .then(() => {
 	app.listen(port, () => console.log(`Server running on port ${ port }`));
