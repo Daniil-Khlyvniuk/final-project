@@ -4,6 +4,7 @@ const getColors = () => state => state.activeProduct.colors
 const getSizes = () => state => state.activeProduct.sizes
 const getActiveColor = () => state => state.activeProduct.activeColor
 const getParent = () => state => state.activeProduct.parent
-
+const getVariants =() => state => state.activeProduct.variants
+const getV = () => state => state.activeProduct.v
 // eslint-disable-next-line max-len
-export default {getActiveVariant, getColors, isLoading, getSizes, getActiveColor, getParent}
+export default {getActiveVariant, getColors, isLoading, getSizes, getActiveColor, getParent,getVariants,getV}

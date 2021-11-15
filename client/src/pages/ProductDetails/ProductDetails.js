@@ -3,32 +3,45 @@ import { useParams } from 'react-router-dom'
 import {Container, Grid, Alert, Backdrop, CircularProgress} from '@mui/material'
 import {useDispatch, useSelector} from 'react-redux'
 
-import {activeProductOperations, activeProductSelector} from '../../store/ActiveProduct'
+import activeProductActions, {activeProductOperations, activeProductSelector} from '../../store/ActiveProduct'
 import ProductDescription from '../../components/ProductDescription/ProductDescription'
 import Carousel from '../../components/Carousel/Carousel'
+import axios from 'axios'
 
 const ProductDetails = () => {
 
 	const { id } = useParams()
 	const dispatch = useDispatch()
 
-	useEffect(() => {
-		dispatch(activeProductOperations.fetchActiveProduct(id))
-	}, [id, dispatch])
-
 	const isLoading = useSelector(activeProductSelector.isLoading())
 	const activeProduct = useSelector(activeProductSelector.getActiveVariant())
-
-
 	const parent = useSelector(activeProductSelector.getParent())
 
+	useEffect(() => {
+		dispatch(activeProductOperations.fetchActiveProduct(id))
+	}, [id])
+
 	useEffect(()=>{
-		if(activeProduct && parent){
-			// dispatch(activeProductOperations.fetchSizes(parent._id))
+		if(activeProduct){
+			dispatch(activeProductOperations.fetchallSizesNew({
+				colorId : activeProduct.color._id,
+				productId: parent._id
+			}))
 			dispatch(activeProductOperations.fetchColors(parent._id))
 		}
 	},[activeProduct])
 
+	useEffect(() => {
+		if(parent){
+			const requests = parent.variants.map(c => axios(`/api/products/${c}`))
+			Promise.all(requests).then(res => {
+				// eslint-disable-next-line no-console
+				const data = res.map(i => i.data)
+				dispatch(activeProductActions.setV(data))
+			})
+		}
+
+	},[])
 
 
 	if (!activeProduct ) {

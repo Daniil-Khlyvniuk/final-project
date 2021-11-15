@@ -24,7 +24,14 @@ const fetchSizes= createAsyncThunk(
 		return response.data
 	}
 )
-
+const fetchallSizesNew = createAsyncThunk(
+	'products/fetchNewSizes',
+	async(params)=>{
+		const {colorId , productId} = params
+		const response = await productsAPI.getSizesNew(colorId, productId)
+		return response.data
+	}
+)
 const fetchNewActiveProduct = createAsyncThunk(
 	'products/fetchNewActiveProduct',
 	async(params) =>{
@@ -37,4 +44,4 @@ const fetchNewActiveProduct = createAsyncThunk(
 )
 
 // eslint-disable-next-line max-len
-export default {fetchActiveProduct, fetchColors, fetchSizes, fetchNewActiveProduct}
+export default {fetchActiveProduct, fetchColors, fetchSizes, fetchNewActiveProduct,fetchallSizesNew}

@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import activeProductOperations from './operations'
 
 // eslint-disable-next-line max-len
-const {fetchActiveProduct , fetchColors , fetchSizes, fetchNewActiveProduct} = activeProductOperations
+const {fetchActiveProduct , fetchColors , fetchSizes, fetchNewActiveProduct,fetchallSizesNew} = activeProductOperations
 
 const activeProductSlice = createSlice({
 	name : 'Active Product',
@@ -15,14 +15,27 @@ const activeProductSlice = createSlice({
 		parent: null ,
 		activeColor: null,
 		colors : [],
-		sizes:[]
+		sizes:[],
+		variants:[],
+		order: null,
+		v: null
 	},
 	reducers:{
 		setActiveColor(state,action){
 			state.activeColor=action.payload
 		},
+		setActiveSize(state,action){
+			state.sizes = action.payload
+		}
+		,
 		setParent(state,action){
 			state.parent = action.payload
+		},
+		setActiveVariant(state,action){
+			state.order = action.payload
+		},
+		setV (state, action){
+			state.v = action.payload
 		}
 	},
 	extraReducers: {
@@ -41,7 +54,7 @@ const activeProductSlice = createSlice({
 			state.currentVariant.error = 'Error'
 		},
 		[fetchNewActiveProduct.fulfilled]: (state, action) => {
-			state.sizes = action.payload
+			state.variants = action.payload
 			state.currentVariant.error = null
 			state.currentVariant.isLoading = false
 		},
@@ -58,9 +71,13 @@ const activeProductSlice = createSlice({
 		},
 		[fetchSizes.fulfilled]:(state,action) => {
 			state.sizes = action.payload
+		},
+		[fetchallSizesNew.fulfilled]:(state,action) => {
+			state.sizes = action.payload
 		}
 	}
 })
 
-export const {setActiveColor, setParent} = activeProductSlice.actions
+// eslint-disable-next-line max-len
+export const {setActiveColor, setParent ,setActiveSize,setActiveVariant , setV} = activeProductSlice.actions
 export default activeProductSlice.reducer

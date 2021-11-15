@@ -20,12 +20,16 @@ const ProductDescription = () => {
 	const allColors = useSelector(activeProductSelector.getColors())
 	const allSizes = useSelector(activeProductSelector.getSizes())
 	const parent = useSelector(activeProductSelector.getParent())
+	const v = useSelector(activeProductSelector.getV())
+	// const variants = useSelector(activeProductSelector.getVariants())
 	const classes = useProductDescriptionStyle()
 	const dispatch = useDispatch()
 
 	const [activeColor, setActiveColor] = useState(activeProduct.color._id)
 	const [activeSize, setActiveSize] = useState(activeProduct.size._id)
 	const [available, setAvailable] = useState('')
+
+
 
 	useEffect(()=>{
 		if(activeProduct.quantity === 0){
@@ -38,33 +42,35 @@ const ProductDescription = () => {
 		}
 	}, [activeProduct.quantity])
 
+	useEffect(() => {
+		if(activeColor !== activeProduct.color._id ){
+			const currentVariant = allSizes.find(i => i)
+			console.log(currentVariant)
+			dispatch(activeProductActions.setActiveVariant(currentVariant))
+		}
+	}, [activeColor])
+
 
 	const handleActiveColor = (event , newActiveColor)=>{
 		if(newActiveColor !== null){
 			setActiveColor(newActiveColor)
 			if(newActiveColor !== activeColor){
+				setActiveSize(null)
 				dispatch(activeProductActions.setActiveColor(newActiveColor))
-				dispatch(activeProductOperations.fetchNewActiveProduct({
-					specification : 'color',
-					specificationId: newActiveColor,
-					productId : parent._id
-				}))
+				const d = v.find(item => item.color._id === newActiveColor)
+				dispatch(activeProductOperations.fetchActiveProduct(d._id))
+				// dispatch(activeProductOperations.fetchallSizesNew({
+				// 	colorId : newActiveColor,
+				// 	productId: parent._id
+				// }))
 			}
 		}
-
-
-
 	}
 
 	const handleActiveSize = (event , newActiveSize) => {
 		setActiveSize(newActiveSize)
-		if(newActiveSize){
-			dispatch(activeProductOperations.fetchNewActiveProduct({
-				specification : 'size',
-				specificationId: newActiveSize,
-				productId : parent._id
-			}))
-		}
+		const check = allSizes.find(i =>i.size._id === newActiveSize)
+		dispatch(activeProductOperations.fetchActiveProduct(check._id))
 	}
 
 	return (
@@ -115,7 +121,8 @@ const ProductDescription = () => {
 						}
 					}}
 				>
-					{allSizes && allSizes.map(item => <Tab key={item.size._id} disableRipple value={item.size._id} label={item.size.name} sx={{fontSize: '14px', minWidth:'0', padding:'0' , mr:'40px'}}/>)}
+					{!allSizes.length && <Tab key={allSizes._id} disableRipple value={allSizes._id} label={allSizes.name} sx={{fontSize: '14px', minWidth:'0', padding:'0' , mr:'40px'}}/>}
+					{allSizes.length && allSizes.map(item => <Tab key={item.size._id} disableRipple value={item.size._id} label={item.size.name} sx={{fontSize: '14px', minWidth:'0', padding:'0' , mr:'40px'}}/>)}
 
 				</Tabs>
 				
