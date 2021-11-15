@@ -1,0 +1,29 @@
+import { createAsyncThunk } from '@reduxjs/toolkit'
+import productsAPI from '../../utils/API/productsAPI'
+
+
+const fetchProductUrl = createAsyncThunk(
+	'product/getProduct',
+	async (productId) => {
+		const response = await productsAPI.getOneProduct(productId)
+		return response.data
+	}
+)
+
+const fetchAllColors = createAsyncThunk(
+	'product/getAllColors',
+	async (productId) => {
+		const response = await productsAPI.getColors(productId)
+		return response.data
+	}
+)
+
+const fetchSizes = createAsyncThunk(
+	'product/getSizes',
+	async(params)=>{
+		const {colorId , productId} = params
+		const response = await productsAPI.getSizesNew(colorId, productId)
+		return response.data
+	}
+)
+export default {fetchProductUrl,fetchAllColors,fetchSizes}

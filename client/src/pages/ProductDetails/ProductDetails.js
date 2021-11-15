@@ -1,73 +1,62 @@
-import React, {useEffect} from 'react'
+import React, {useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import {Container, Grid, Alert, Backdrop, CircularProgress} from '@mui/material'
 import {useDispatch, useSelector} from 'react-redux'
-
-import activeProductActions, {activeProductOperations, activeProductSelector} from '../../store/ActiveProduct'
-import ProductDescription from '../../components/ProductDescription/ProductDescription'
-import Carousel from '../../components/Carousel/Carousel'
 import axios from 'axios'
+import productActions, {ProductOperations, ProductSelector} from '../../store/Product'
+import {Alert, Backdrop, CircularProgress, Container, Grid} from '@mui/material'
+import ProductDescription from '../../components/ProductDescription/ProductDescription'
+
 
 const ProductDetails = () => {
 
 	const { id } = useParams()
 	const dispatch = useDispatch()
 
-	const isLoading = useSelector(activeProductSelector.isLoading())
-	const activeProduct = useSelector(activeProductSelector.getActiveVariant())
-	const parent = useSelector(activeProductSelector.getParent())
+	const isLoading = useSelector(ProductSelector.isLoading())
+	const activeProduct = useSelector(ProductSelector.getProduct())
+
 
 	useEffect(() => {
-		dispatch(activeProductOperations.fetchActiveProduct(id))
-	}, [id])
+		dispatch(ProductOperations.fetchProductUrl(id))
+	}, [id, dispatch])
 
-	useEffect(()=>{
+	useEffect(() => {
 		if(activeProduct){
-			dispatch(activeProductOperations.fetchallSizesNew({
-				colorId : activeProduct.color._id,
-				productId: parent._id
-			}))
-			dispatch(activeProductOperations.fetchColors(parent._id))
+			const getAll = async() =>{
+				// eslint-disable-next-line max-len
+				const requests = await activeProduct.product.variants.map(c => axios(`/api/products/${c}`))
+				Promise.all(requests).then(res => {
+					const data = res.map(i => i.data)
+					dispatch(productActions.getAllVariants(data))
+				})
+			}
+			getAll()
 		}
-	},[activeProduct])
+	}, [activeProduct, dispatch])
 
-	useEffect(() => {
-		if(parent){
-			const requests = parent.variants.map(c => axios(`/api/products/${c}`))
-			Promise.all(requests).then(res => {
-				// eslint-disable-next-line no-console
-				const data = res.map(i => i.data)
-				dispatch(activeProductActions.setV(data))
-			})
-		}
-
-	},[])
 
 
 	if (!activeProduct ) {
 		return <Alert severity='error'>Product not found</Alert>
 	}
-
+	
 	return (
-		<Container maxWidth="lg">
+		<Container maxWidth='lg'>
 			{isLoading && (
 				<Backdrop
 					sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
 					open={isLoading}>
 					<CircularProgress color="inherit" />
 				</Backdrop>)}
-			{activeProduct && (
-				<Grid sx={{mt:'80px'}} container spacing={2} >
-					<Grid item md={6} xs={12}>
-						<Carousel slides={activeProduct.imageUrls} />
-					</Grid>
-					<Grid item md={6} xs={12}>
-						{activeProduct && <ProductDescription />}
-					</Grid>
-					<Grid sx={{mt:'80px'}} item md={12}>Recently Viewed Products </Grid>
-				</Grid>)}
+			{activeProduct && <Grid container spacing={2}>
+				<Grid item md={6} >Carusel</Grid>
+				<Grid item md={6}>
+					<ProductDescription />
+				</Grid>
+			</Grid>}
 		</Container>
 	)
-}
 
+}
+	
 export default ProductDetails

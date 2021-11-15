@@ -1,34 +1,39 @@
 import React, {useState, useEffect} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
+import {useHistory} from 'react-router-dom'
+import {ProductOperations, ProductSelector} from '../../store/Product'
+import SocialLinks from '../SocialLInks'
+import AccordionProduct from './Accordion/Accordion'
+
+
+// eslint-disable-next-line no-unused-vars
 import {Box, Typography, Button, Divider, Tabs, Tab, ToggleButtonGroup, ToggleButton} from '@mui/material'
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined'
 import CircleIcon from '@mui/icons-material/Circle'
-import SocialLinks from '../SocialLInks'
-import AccordionProduct from './Accordion/Accordion'
 import{useProductDescriptionStyle} from '../../utils/customHooks/useProductDescriptionStyle'
 
 
-import {useDispatch, useSelector} from 'react-redux'
-import activeProductActions, {activeProductOperations, activeProductSelector} from '../../store/ActiveProduct'
-
-
+// eslint-disable-next-line no-unused-vars
 const user = false
 
 
 const ProductDescription = () => {
 
-	const activeProduct = useSelector(activeProductSelector.getActiveVariant())
-	const allColors = useSelector(activeProductSelector.getColors())
-	const allSizes = useSelector(activeProductSelector.getSizes())
-	const parent = useSelector(activeProductSelector.getParent())
-	const v = useSelector(activeProductSelector.getV())
-	// const variants = useSelector(activeProductSelector.getVariants())
-	const classes = useProductDescriptionStyle()
-	const dispatch = useDispatch()
-
-	const [activeColor, setActiveColor] = useState(activeProduct.color._id)
-	const [activeSize, setActiveSize] = useState(activeProduct.size._id)
+	const [activeColor, setActiveColor] = useState(null)
+	const [activeSize, setActiveSize] = useState(null)
 	const [available, setAvailable] = useState('')
 
+	const allColors = useSelector(ProductSelector.allColors())
+	const variants = useSelector(ProductSelector.allVarinats())
+	const allSizes = useSelector(ProductSelector.allSizes())
+	const activeProduct = useSelector(ProductSelector.getProduct())
+	const parent = useSelector(ProductSelector.getParent())
+
+
+	const history = useHistory()
+	const dispatch = useDispatch()
+
+	const classes = useProductDescriptionStyle()
 
 
 	useEffect(()=>{
@@ -42,35 +47,35 @@ const ProductDescription = () => {
 		}
 	}, [activeProduct.quantity])
 
+
 	useEffect(() => {
-		if(activeColor !== activeProduct.color._id ){
-			const currentVariant = allSizes.find(i => i)
-			console.log(currentVariant)
-			dispatch(activeProductActions.setActiveVariant(currentVariant))
+		if(activeProduct){
+			setActiveColor(activeProduct.color._id)
+			setActiveSize(activeProduct.size._id)
+			dispatch(ProductOperations.fetchAllColors(parent._id))
+			dispatch(ProductOperations.fetchSizes({
+				colorId: activeProduct.color._id,
+				productId: activeProduct.product._id}))
 		}
-	}, [activeColor])
+	}, [activeProduct])
 
 
-	const handleActiveColor = (event , newActiveColor)=>{
+	const handleActiveColor =  (event , newActiveColor) => {
 		if(newActiveColor !== null){
 			setActiveColor(newActiveColor)
 			if(newActiveColor !== activeColor){
-				setActiveSize(null)
-				dispatch(activeProductActions.setActiveColor(newActiveColor))
-				const d = v.find(item => item.color._id === newActiveColor)
-				dispatch(activeProductOperations.fetchActiveProduct(d._id))
-				// dispatch(activeProductOperations.fetchallSizesNew({
-				// 	colorId : newActiveColor,
-				// 	productId: parent._id
-				// }))
+				// eslint-disable-next-line max-len
+				const newProduct = variants.find(item => item.color._id === newActiveColor)
+				history.push(`/product-details/${newProduct._id}`)
 			}
 		}
 	}
 
 	const handleActiveSize = (event , newActiveSize) => {
 		setActiveSize(newActiveSize)
-		const check = allSizes.find(i =>i.size._id === newActiveSize)
-		dispatch(activeProductOperations.fetchActiveProduct(check._id))
+		// eslint-disable-next-line max-len
+		const newProduct = variants.find(i =>i.size._id === newActiveSize && i.color._id === activeColor)
+		history.push(`/product-details/${newProduct._id}`)
 	}
 
 	return (
@@ -94,7 +99,7 @@ const ProductDescription = () => {
 				<Box sx={{my:'10px'}}>
 					{/* eslint-disable-next-line max-len */}
 					<ToggleButtonGroup exclusive value={activeColor} onChange={handleActiveColor}>
-						{ activeProduct && allColors && allColors.map(color => (
+						{  allColors && allColors.map(color => (
 							<ToggleButton key={color._id}  aria-label={color.name} value={color._id} color={'neutral'} sx={{border: 'none', padding: '0', mr:'10px'}}>
 								<CircleIcon stroke-width={1} stroke={activeColor === color._id ? 'black' : 'white'}
 									sx={{width: '20px',color: color.cssValue }}/>
@@ -109,7 +114,7 @@ const ProductDescription = () => {
 					classes={{root : classes.optionText}}>
 					size
 				</Typography>
-				<Tabs value={activeSize || null}
+				<Tabs value={activeSize}
 					onChange={handleActiveSize}
 					extColor='primary'
 					indicatorColor="primary"
@@ -121,11 +126,9 @@ const ProductDescription = () => {
 						}
 					}}
 				>
-					{!allSizes.length && <Tab key={allSizes._id} disableRipple value={allSizes._id} label={allSizes.name} sx={{fontSize: '14px', minWidth:'0', padding:'0' , mr:'40px'}}/>}
-					{allSizes.length && allSizes.map(item => <Tab key={item.size._id} disableRipple value={item.size._id} label={item.size.name} sx={{fontSize: '14px', minWidth:'0', padding:'0' , mr:'40px'}}/>)}
-
+					{allSizes && allSizes.map(item => <Tab key={item.size._id} disableRipple value={item.size._id} label={item.size.name} sx={{fontSize: '14px', minWidth:'0', padding:'0' , mr:'40px'}}/>)}
 				</Tabs>
-				
+
 			</Box>
 			<Box className={classes.actions}>
 				<Box className={classes.price}>
@@ -144,6 +147,7 @@ const ProductDescription = () => {
 			</Box>
 			<Divider sx={{background:'#373F41'}}  />
 			<AccordionProduct description={parent.description} />
+
 		</Box>
 	)
 }
