@@ -5,26 +5,15 @@ import ProductsCatalog from '../../components/Catalog/Catalog'
 import Typography from '@mui/material/Typography'
 import theme from '../../utils/Theme'
 import { ThemeProvider } from '@mui/material/styles'
-import Button from '@mui/material/Button'
-import { Link as RouterLink } from 'react-router-dom'
-
-const textStyle = {
-	color: '#373F41',
-	fontSize: '32px',
-	display: 'flex',
-	justifyContent: 'center',
-	margin: '50px auto',
-}
-
-const headSearch = {
-	display: 'flex',
-	justifyContent: 'space-between',
-	margin: '50px auto',
-	maxWidth: '880px',
-}
+import { textStyle } from './styles'
+import HeadButton from '../../components/Catalog/HeadButton'
+import HeadSearch from '../../components/Catalog/HeadSearch'
+import PriceRange from '../../components/Catalog/PriceRange'
+import SearchSize from '../../components/Catalog/SearchSize'
 
 
-export default function Catalog() {
+const Catalog = () => {
+
 	return (
 		<div>
 			<ThemeProvider theme={theme}>
@@ -37,58 +26,13 @@ export default function Catalog() {
 								variant={'h2'}>
 								CATALOG
 							</Typography>
+							<PriceRange />
+							<SearchSize />
 						</Grid>
 						<Grid item xs={9}>
-							<Grid style={headSearch} item xs={12}>
-								<Button
-									to='/'
-									component={RouterLink}
-									color="primary"
-									variant="outlined"
-								>SHOP ALL
-								</Button>
-								<Button
-									to='/'
-									component={RouterLink}
-									color="primary"
-									variant="outlined"
-								>BEDROOM
-								</Button>
-								<Button
-									to='/'
-									component={RouterLink}
-									color="primary"
-									variant="outlined"
-								>BED LINEN
-								</Button>
-								<Button
-									to='/'
-									component={RouterLink}
-									color="primary"
-									variant="outlined"
-								>KITCHEN
-								</Button>
-								<Button
-									to='/'
-									component={RouterLink}
-									color="primary"
-									variant="outlined"
-								>BATHROOM
-								</Button>
-								<Button
-									to='/'
-									component={RouterLink}
-									color="primary"
-									variant="outlined"
-								>LOUNGEWEAR
-								</Button>
-								<Button
-									to='/'
-									component={RouterLink}
-									color="primary"
-									variant="outlined"
-								>SALE
-								</Button>
+							<HeadButton />
+							<Grid item xs={12}>
+								<HeadSearch />
 							</Grid>
 							<Grid item xs={12}>
 								<ProductsCatalog />
@@ -109,4 +53,4 @@ export default function Catalog() {
 // 	)
 // }
 //
-// export default Catalog
+export default Catalog
