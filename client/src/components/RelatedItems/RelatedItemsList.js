@@ -39,7 +39,7 @@ const RelatedItemsList = () => {
 		relatedList = relatedList.filter(prod => prod._id !== id).reverse()
 	}
 
-	const slides = relatedList.map(prod => {
+	const slides = relatedList.reverse().map(prod => {
 		if (prod._id !== id) {
 			return {
 				imageUrl: `http://localhost:5000/${prod.imageUrls[0]}`,
