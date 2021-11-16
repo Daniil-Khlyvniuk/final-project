@@ -11,10 +11,9 @@ import {Box, Typography, Button, Divider, Tabs, Tab, ToggleButtonGroup, ToggleBu
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined'
 import CircleIcon from '@mui/icons-material/Circle'
 import{useProductDescriptionStyle} from '../../utils/customHooks/useProductDescriptionStyle'
+import shoppingBagReducer from '../../store/ShoppingBag'
+import {userSelectors} from '../../store/User'
 
-
-// eslint-disable-next-line no-unused-vars
-const user = false
 
 
 const ProductDescription = () => {
@@ -32,6 +31,9 @@ const ProductDescription = () => {
 	const parent = useSelector(ProductSelector.getParent())
 	// eslint-disable-next-line no-unused-vars
 	const isLoading = useSelector(ProductSelector.isLoading())
+
+	const user = useSelector(userSelectors.getToken())
+
 
 
 	const history = useHistory()
@@ -79,6 +81,16 @@ const ProductDescription = () => {
 
 		history.push(`/product-details/${newProduct._id}`)
 	}
+
+	const handleFavorites = (product) => {
+		// eslint-disable-next-line no-console
+		console.log(product)
+	}
+
+	// const handleCart = (product)=>{
+	// 	// eslint-disable-next-line no-console
+	// 	console.log({...product, amount:1})
+	// }
 
 	return (
 		<Box mxnWidth={650}>
@@ -138,11 +150,23 @@ const ProductDescription = () => {
 					<Typography sx={{textTransform:'uppercase'}} fontSize={14} color={'rgba(92, 94, 96, 0.5)'}>{available}</Typography>
 				</Box>
 				<Box className={classes.productActions} >
-					<Button disableRipple disabled={!activeColor || !activeSize} sx={{py: '22px', px:'33px', mr:'13px'}} variant={'contained'}>
+					<Button disableRipple
+						disabled={!activeColor || !activeSize}
+						sx={{py: '22px', px:'33px', mr:'13px'}}
+						variant={'contained'}
+						onClick={()=>{
+							// eslint-disable-next-line max-len
+							dispatch(shoppingBagReducer.addToShoppingBag({...activeProduct, amount:1}))
+						}}
+					>
 						ADD TO BAG
 					</Button>
 					<Button disableRipple
-						disabled={!user} sx={{p:'24px'}} variant={'contained'}>
+						disabled={!user}
+						sx={{p:'24px'}} variant={'contained'}
+
+						onClick={handleFavorites(activeProduct)}
+					>
 						<FavoriteBorderOutlinedIcon fontSize={'small'}/>
 					</Button>
 				</Box>
