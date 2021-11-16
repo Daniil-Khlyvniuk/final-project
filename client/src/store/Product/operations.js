@@ -10,6 +10,7 @@ const fetchProductUrl = createAsyncThunk(
 	}
 )
 
+
 const fetchAllColors = createAsyncThunk(
 	'product/getAllColors',
 	async (productId) => {

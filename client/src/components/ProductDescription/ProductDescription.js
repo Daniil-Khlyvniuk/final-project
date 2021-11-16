@@ -26,7 +26,7 @@ const ProductDescription = () => {
 	const [available, setAvailable] = useState('')
 
 	const allColors = useSelector(ProductSelector.allColors())
-	const variants = useSelector(ProductSelector.allVarinats())
+	const variants = useSelector(ProductSelector.allVariants())
 	const allSizes = useSelector(ProductSelector.allSizes())
 
 	const parent = useSelector(ProductSelector.getParent())

@@ -46,7 +46,7 @@ const ProductDetails = () => {
 	}
 	
 	return (
-		<Container maxWidth='lg'>
+		<Container maxWidth='lg' sx={{mt:'80px'}}>
 			{isLoading && (
 				<Backdrop
 					sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
@@ -54,11 +54,14 @@ const ProductDetails = () => {
 					<CircularProgress color="inherit" />
 				</Backdrop>)}
 			{activeProduct && <Grid container spacing={2}>
-				<Grid item md={6} >
+				<Grid item md={6} xs={12} >
 					<Carousel slides={activeProduct.imageUrls} product={true} />
 				</Grid>
-				<Grid item md={6}>
+				<Grid item md={6} xs={12}>
 					<ProductDescription />
+				</Grid>
+				<Grid sx={{mt:'80px'}} item md={12}>
+					Recently viewed
 				</Grid>
 			</Grid>}
 		</Container>
