@@ -5,6 +5,11 @@ const getAllProducts = (options) => axios.get(`/api/products${options ? `?${opti
 const getOneProduct = (productId) => axios.get(`/api/products/${productId}`)
 
 
+
+// eslint-disable-next-line max-len
+const getSizesNew = (colorId , productId) => axios.get(`/api/products/variant/color/${colorId}/${productId}`)
+
+
 // eslint-disable-next-line max-len
 const getColors = (productId) => axios.get(`/api/products/info/color/${productId}`)
 // eslint-disable-next-line max-len
@@ -55,6 +60,9 @@ export default {
 	getSizes,
 	getNewVariant,
 	searchAutocomplete,
+	getSizesNew
+
+
 
 
 }

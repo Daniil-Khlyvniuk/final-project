@@ -52,10 +52,12 @@ const UseCategoryTree = () => {
 		API.getCategories().then(res => {
 			setCategory(res.data)
 		})
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	useEffect(() => {
 		dispatch(categoryActions.setCategoryTree(makeCategoryTree(category)))
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [category])
 
 	return categoryTree

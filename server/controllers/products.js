@@ -140,7 +140,6 @@ exports.getProductsInfo = async (req, res, next) => {
 }
 
 exports.getFilteredVariants = async (req, res, next) => {
-	console.log(req.params)
 	const productId = req.params.productId
 	const filterParam = req.params.filterParam
 	const filterParamId = req.params.filterParamId
@@ -295,7 +294,7 @@ exports.searchProducts = async (req, res, next) => {
 			.populate("size")
 		)
 	)
-	res.json(matchedProducts)
+	res.json(matchedProducts.flat())
 };
 
 exports.searchAutocomplete = async (req, res, next) => {
@@ -305,7 +304,6 @@ exports.searchAutocomplete = async (req, res, next) => {
 
 	//Taking the entered value from client in lower-case and trimed
 	const query = req.body.query.toLowerCase().trim().replace(/\s\s+/g, " ");
-	console.log(query);
 	const foundProducts = await Product.aggregate([
 		{
 			$search: {

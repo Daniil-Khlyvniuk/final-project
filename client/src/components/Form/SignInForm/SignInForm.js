@@ -70,28 +70,28 @@ const SignInForm = () => {
 							type="text"
 							placeholder="Login"
 						/>
-		
+
 						<Field
 							component={CustomInput}
 							name="email"
 							type="email"
 							placeholder="Email"
 						/>
-			
+
 						<Field
 							component={CustomInput}
 							name="password"
 							type="password"
 							placeholder="Password"
 						/>
-	
+
 						<Field
 							component={CustomInput}
 							name="confirmPass"
 							type="password"
 							placeholder="Confirm Password"
 						/>
-					
+
 						<div className={classes.ads}>
 							<Checkbox
 								style={{
@@ -126,7 +126,7 @@ const SignInForm = () => {
 							</div>
 						)}
 						<Box sx={{ display: 'flex', justifyContent: 'center' }}>
-							<Button 
+							<Button
 								type='submit'
 								variant="contained"
 								sx={{
