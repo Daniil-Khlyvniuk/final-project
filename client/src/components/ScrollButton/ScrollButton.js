@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
-// eslint-disable-next-line no-unused-vars
-import Button from '@mui/material/Button'
+// import Button from '@mui/material/Button'
 import {FaArrowCircleUp} from 'react-icons/fa'
+import styled from 'styled-components'
 
 const ScrollButton = () => {
 	const [visible, setVisible] = useState(false)
 
-	// eslint-disable-next-line no-undef
 	const Button = styled.div`
    position: fixed; 
    width: 100%;
