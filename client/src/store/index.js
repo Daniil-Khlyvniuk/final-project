@@ -5,11 +5,9 @@ import categorySlice from './Category/categorySlice'
 import sliderSlice from './Slider'
 import modalSlice from './Modal/modalSlice'
 import shoppingBagSlice from './ShoppingBag/shoppingBagSlice'
-import activeProductSlice from './ActiveProduct/activeProductSlice'
+import productSlice from './Product/productSlice'
 
 import userSlice from './User'
-
-
 
 const store = configureStore({
 	reducer: {
@@ -20,7 +18,7 @@ const store = configureStore({
 		modal: modalSlice,
 		shoppingBag: shoppingBagSlice,
 		user: userSlice,
-		activeProduct : activeProductSlice,
+		product : productSlice,
 
 
 	},
