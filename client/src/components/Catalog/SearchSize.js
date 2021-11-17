@@ -1,10 +1,8 @@
 import React from 'react'
-import Typography from '@mui/material/Typography'
 import { FormControl, FormControlLabel, Radio, RadioGroup } from '@mui/material'
 
 
 const style = {
-	margin: '50px',
 	display: 'block',
 	width: 'fit-content'
 }
@@ -12,9 +10,6 @@ const style = {
 const SearchSize = () => {
 	return (
 		<div style={style}>
-			<Typography id="range-slider" gutterBottom>
-        - SIZE
-			</Typography>
 			<FormControl component="fieldset">
 				<RadioGroup
 					aria-label="gender"

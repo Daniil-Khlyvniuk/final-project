@@ -1,10 +1,17 @@
 import React from 'react'
-import Typography from '@mui/material/Typography'
-import { Slider } from '@mui/material'
+import { FormControl, InputAdornment, OutlinedInput, Slider } from '@mui/material'
 
 const PriceRng = {
-	width: '50px',
+	height: '22px',
+	width: '80px',
 	margin: '0px 10px',
+	borderRadius: '0px',
+
+}
+
+const PriceRangeBlock = {
+	display: 'flex',
+	alignItems: 'center',
 }
 
 const PriceRange = () => {
@@ -26,29 +33,48 @@ const PriceRange = () => {
 
 	return (
 		<div style={{
-			margin: 'auto',
 			display: 'block',
 			width: 'fit-content'
 		}}>
-			<Typography id="range-slider" gutterBottom>
-        - PRICE
-			</Typography>
 			<Slider
 				value={value}
 				onChange={rangeSelector}
 				valueLabelDisplay="auto"
 			/>
-			FROM
-			<input
-				style={PriceRng}
-				placeholder={`$ ${value[0]+'0'}`}
-				prefix= "$"
-			/>
-      TO
-			<input
-				style={PriceRng}
-				placeholder={`$ ${value[1]+'0'}`}
-			/>
+			<div style={PriceRangeBlock}>
+				FROM
+				{/*<input*/}
+				{/*	style={PriceRng}*/}
+				{/*	placeholder={`$ ${value[0]+'0'}`}*/}
+				{/*	prefix= "$"*/}
+				{/*/>*/}
+				<FormControl fullWidth sx={{ m: 1 }}>
+					<OutlinedInput
+						style={PriceRng}
+						id="outlined-adornment-amount"
+						value={value[0]}
+						placeholder={value[0]}
+						// onChange={handleChange('amount')}
+						startAdornment={<InputAdornment position="start">$</InputAdornment>}
+					/>
+				</FormControl>
+				TO
+				<FormControl fullWidth sx={{ m: 1 }}>
+					<OutlinedInput
+						style={PriceRng}
+						id="outlined-adornment-amount"
+						value={value[1]}
+						placeholder={value[1]}
+						// onChange={handleChange('amount')}
+						startAdornment={<InputAdornment position="start">$</InputAdornment>}
+					/>
+				</FormControl>
+			</div>
+			{/* eslint-disable-next-line no-mixed-spaces-and-tabs */}
+		 	{/*<input*/}
+			{/*	style={PriceRng}*/}
+			{/*	placeholder={`$ ${value[1]+'0'}`}*/}
+			{/*/>*/}
       
 		</div>
 	)
