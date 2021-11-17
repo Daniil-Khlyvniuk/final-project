@@ -250,6 +250,7 @@ exports.getProducts = (req, res, next) => {
 // 		);
 // };
 
+
 exports.getProductsFilterParams = async (req, res, next) => {
 	const mongooseQuery = filterParser(req.query);
 	const perPage = Number(req.query.perPage);

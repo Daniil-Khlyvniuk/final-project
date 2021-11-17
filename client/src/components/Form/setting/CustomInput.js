@@ -8,7 +8,7 @@ const CustomInput = ({field, form, ...rest}) => {
 	const classes = useFormStyle()
 	return (
 		<div>
-			<Input className={classes.input} {...rest} {...field}/>
+			<Input className={classes.input} {...rest} {...field} fullWidth={true}/>
 			<div>
 				{form.touched[name] && form.errors[name] && (
 					<div className={classes.error}>{form.errors[name]}</div>
