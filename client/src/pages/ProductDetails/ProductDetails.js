@@ -29,6 +29,7 @@ const ProductDetails = () => {
 			dispatch(ProductOperations.fetchAllVariants(parent.variants))
 
 		}
+
 	}, [activeProduct, dispatch])
 
 
