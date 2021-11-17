@@ -82,14 +82,8 @@ const ProductDescription = () => {
 		history.push(`/product-details/${newProduct._id}`)
 	}
 
-	const handleFavorites = (product) => {
-		// eslint-disable-next-line no-console
-		console.log(product)
-	}
-
-	// const handleCart = (product)=>{
-	// 	// eslint-disable-next-line no-console
-	// 	console.log({...product, amount:1})
+	// const handleFavorites = (product) => {
+	//
 	// }
 
 	return (
@@ -140,7 +134,7 @@ const ProductDescription = () => {
 						}
 					}}
 				>
-					{allSizes && allSizes.map(item => <Tab key={item.size._id} disableRipple value={item.size._id} label={item.size.name} sx={{fontSize: '14px', minWidth:'0', padding:'0' , mr:'40px'}}/>)}
+					{ allSizes && allSizes.map(item => <Tab key={item.size._id} disableRipple value={item.size._id} label={item.size.name} sx={{fontSize: '14px', minWidth:'0', padding:'0' , mr:'40px'}}/>)}
 				</Tabs>
 
 			</Box>
@@ -165,7 +159,7 @@ const ProductDescription = () => {
 						disabled={!user}
 						sx={{p:'24px'}} variant={'contained'}
 
-						onClick={handleFavorites(activeProduct)}
+						// onClick={handleFavorites(activeProduct)}
 					>
 						<FavoriteBorderOutlinedIcon fontSize={'small'}/>
 					</Button>

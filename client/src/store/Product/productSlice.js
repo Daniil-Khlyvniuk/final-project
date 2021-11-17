@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import productOperations from './operations'
-
-const {fetchProductUrl,fetchAllColors,fetchSizes} = productOperations
+// eslint-disable-next-line max-len
+const {fetchProductUrl,fetchAllColors,fetchSizes,fetchAllVariants} = productOperations
 const productSlice = createSlice({
 	name: 'Product',
 	initialState:{
@@ -14,9 +14,6 @@ const productSlice = createSlice({
 		hasError: false
 	},
 	reducers:{
-		getAllVariants(state, action){
-			state.variants = action.payload
-		},
 		clearSizes(state){
 			// state.activeProduct = null
 			state.allSizes= null
@@ -54,7 +51,17 @@ const productSlice = createSlice({
 		[fetchSizes.rejected]:(state)=>{
 			state.hasError = true
 		},
+		[fetchAllVariants.fulfilled]:(state,action)=>{
+			state.variants = action.payload
+			state.isLoading = false
+		},
+		[fetchAllVariants.pending]:(state)=>{
+			state.isLoading = true
+		},
+		[fetchAllVariants.rejected]:(state)=>{
+			state.hasError = true
+		},
 	}
 })
-export const {getAllVariants, clearSizes} = productSlice.actions
+export const { clearSizes} = productSlice.actions
 export default productSlice.reducer

@@ -1,8 +1,7 @@
 import React, {useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
-import axios from 'axios'
-import productActions, {ProductOperations, ProductSelector} from '../../store/Product'
+import  {ProductOperations, ProductSelector} from '../../store/Product'
 import {Alert, Backdrop, CircularProgress, Container, Grid} from '@mui/material'
 import ProductDescription from '../../components/ProductDescription/ProductDescription'
 import Carousel from '../../components/Carousel/Carousel'
@@ -23,19 +22,12 @@ const ProductDetails = () => {
 
 	useEffect(() => {
 		if(activeProduct){
-			const getAll = async() =>{
-				dispatch(ProductOperations.fetchAllColors(parent._id))
-				dispatch(ProductOperations.fetchSizes({
-					colorId: activeProduct.color._id,
-					productId: activeProduct.product._id}))
-				// eslint-disable-next-line max-len
-				const requests = await activeProduct.product.variants.map(c => axios(`/api/products/${c}`))
-				Promise.all(requests).then(res => {
-					const data = res.map(i => i.data)
-					dispatch(productActions.getAllVariants(data))
-				})
-			}
-			getAll()
+			dispatch(ProductOperations.fetchAllColors(parent._id))
+			dispatch(ProductOperations.fetchSizes({
+				colorId: activeProduct.color._id,
+				productId: activeProduct.product._id}))
+			dispatch(ProductOperations.fetchAllVariants(parent.variants))
+
 		}
 	}, [activeProduct, dispatch])
 
@@ -49,7 +41,7 @@ const ProductDetails = () => {
 		<Container maxWidth='lg' sx={{mt:'80px'}}>
 			{isLoading && (
 				<Backdrop
-					sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+					sx={{ color: 'white', zIndex: (theme) => theme.zIndex.drawer + 1 }}
 					open={isLoading}>
 					<CircularProgress color="inherit" />
 				</Backdrop>)}
