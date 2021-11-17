@@ -1,12 +1,6 @@
-import { createAsyncThunk } from '@reduxjs/toolkit'
-import linksApi from '../../utils/API/linksApi'
+import {actions, fetchLinks} from './linksSlice'
 
-const fetchLinks = createAsyncThunk(
-	'links/fetchLinks',
-	async () => {
-		const response = await linksApi.getLinks()
-		return response.data
-	}
-)
-
-export default {fetchLinks}
+export default {
+	...actions,
+	fetchLinks,
+}
