@@ -1,31 +1,46 @@
 import React, {useState, useEffect} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
+import {useHistory} from 'react-router-dom'
+import productActions, {ProductSelector} from '../../store/Product'
+import SocialLinks from '../SocialLInks'
+import AccordionProduct from './Accordion/Accordion'
+
+
+// eslint-disable-next-line no-unused-vars
 import {Box, Typography, Button, Divider, Tabs, Tab, ToggleButtonGroup, ToggleButton} from '@mui/material'
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined'
 import CircleIcon from '@mui/icons-material/Circle'
-import SocialLinks from '../SocialLInks'
-import AccordionProduct from './Accordion/Accordion'
 import{useProductDescriptionStyle} from '../../utils/customHooks/useProductDescriptionStyle'
+import shoppingBagReducer from '../../store/ShoppingBag'
+import {userSelectors} from '../../store/User'
 
-
-import {useDispatch, useSelector} from 'react-redux'
-import activeProductActions, {activeProductOperations, activeProductSelector} from '../../store/ActiveProduct'
-
-
-const user = false
 
 
 const ProductDescription = () => {
+	const activeProduct = useSelector(ProductSelector.getProduct())
+	// eslint-disable-next-line max-len
+	const [activeColor, setActiveColor] = useState( null)
+	// eslint-disable-next-line max-len
+	const [activeSize, setActiveSize] = useState(null)
+	const [available, setAvailable] = useState('')
 
-	const activeProduct = useSelector(activeProductSelector.getActiveVariant())
-	const allColors = useSelector(activeProductSelector.getColors())
-	const allSizes = useSelector(activeProductSelector.getSizes())
-	const parent = useSelector(activeProductSelector.getParent())
-	const classes = useProductDescriptionStyle()
+	const allColors = useSelector(ProductSelector.allColors())
+	const variants = useSelector(ProductSelector.allVariants())
+	const allSizes = useSelector(ProductSelector.allSizes())
+
+	const parent = useSelector(ProductSelector.getParent())
+	// eslint-disable-next-line no-unused-vars
+	const isLoading = useSelector(ProductSelector.isLoading())
+
+	const user = useSelector(userSelectors.getToken())
+
+
+
+	const history = useHistory()
 	const dispatch = useDispatch()
 
-	const [activeColor, setActiveColor] = useState(activeProduct.color._id)
-	const [activeSize, setActiveSize] = useState(activeProduct.size._id)
-	const [available, setAvailable] = useState('')
+	const classes = useProductDescriptionStyle()
+
 
 	useEffect(()=>{
 		if(activeProduct.quantity === 0){
@@ -39,30 +54,37 @@ const ProductDescription = () => {
 	}, [activeProduct.quantity])
 
 
-	const handleActiveColor = (event , newActiveColor)=>{
-		setActiveColor(newActiveColor)
-		dispatch(activeProductActions.setActiveColor(newActiveColor))
-		if(newActiveColor){
-			dispatch(activeProductOperations.fetchNewActiveProduct({
-				specification : 'color',
-				specificationId: newActiveColor,
-				productId : parent._id
+	useEffect(() => {
+		if(activeProduct){
+			setActiveColor(activeProduct.color._id)
+			setActiveSize(activeProduct.size._id)
+		}
+	}, [activeProduct])
 
-			}))
+
+	const handleActiveColor =  (event , newActiveColor) => {
+		if(newActiveColor !== null){
+			setActiveColor(newActiveColor)
+			if(newActiveColor !== activeColor){
+				dispatch(productActions.clearSizes())
+				// eslint-disable-next-line max-len
+				const newProduct = variants.find(item => item.color._id === newActiveColor)
+				history.push(`/product-details/${newProduct._id}`)
+			}
 		}
 	}
-
 
 	const handleActiveSize = (event , newActiveSize) => {
 		setActiveSize(newActiveSize)
-		if(newActiveSize){
-			dispatch(activeProductOperations.fetchNewActiveProduct({
-				specification : 'size',
-				specificationId: newActiveSize,
-				productId : parent._id
-			}))
-		}
+		// eslint-disable-next-line max-len
+		const newProduct = variants.find(i =>i.size._id === newActiveSize && i.color._id === activeColor)
+
+		history.push(`/product-details/${newProduct._id}`)
 	}
+
+	// const handleFavorites = (product) => {
+	//
+	// }
 
 	return (
 		<Box mxnWidth={650}>
@@ -85,9 +107,9 @@ const ProductDescription = () => {
 				<Box sx={{my:'10px'}}>
 					{/* eslint-disable-next-line max-len */}
 					<ToggleButtonGroup exclusive value={activeColor} onChange={handleActiveColor}>
-						{ activeProduct && allColors && allColors.map(color => (
-							<ToggleButton key={color._id}  aria-label={color.name} value={color._id} color={'neutral'} sx={{border: 'none', padding: '0', mr:'10px'}}>
-								<CircleIcon stroke-width={1} stroke={activeColor === color._id ? 'black' : 'white'}
+						{  allColors && allColors.map(color => (
+							<ToggleButton  key={color._id}  aria-label={color.name} value={color._id} color={'neutral'} sx={{border: 'none', padding: '0', mr:'10px'}}>
+								<CircleIcon strokeWidth={1} stroke={activeColor === color._id ? 'black' : 'white'}
 									sx={{width: '20px',color: color.cssValue }}/>
 							</ToggleButton>
 						))}
@@ -102,7 +124,7 @@ const ProductDescription = () => {
 				</Typography>
 				<Tabs value={activeSize || null}
 					onChange={handleActiveSize}
-					extColor='primary'
+					extcolor='primary'
 					indicatorColor="primary"
 					aria-label="sizes"
 					TabIndicatorProps={{
@@ -112,10 +134,9 @@ const ProductDescription = () => {
 						}
 					}}
 				>
-					{allSizes && allSizes.map(size => <Tab key={size._id} disableRipple value={size._id} label={size.name} sx={{fontSize: '14px', minWidth:'0', padding:'0' , mr:'40px'}}/>)}
-
+					{ allSizes && allSizes.map(item => <Tab key={item.size._id} disableRipple value={item.size._id} label={item.size.name} sx={{fontSize: '14px', minWidth:'0', padding:'0' , mr:'40px'}}/>)}
 				</Tabs>
-				
+
 			</Box>
 			<Box className={classes.actions}>
 				<Box className={classes.price}>
@@ -123,17 +144,30 @@ const ProductDescription = () => {
 					<Typography sx={{textTransform:'uppercase'}} fontSize={14} color={'rgba(92, 94, 96, 0.5)'}>{available}</Typography>
 				</Box>
 				<Box className={classes.productActions} >
-					<Button disableRipple disabled={!activeColor || !activeSize} sx={{py: '22px', px:'33px', mr:'13px'}} variant={'contained'}>
+					<Button disableRipple
+						disabled={!activeColor || !activeSize}
+						sx={{py: '22px', px:'33px', mr:'13px'}}
+						variant={'contained'}
+						onClick={()=>{
+							// eslint-disable-next-line max-len
+							dispatch(shoppingBagReducer.addToShoppingBag({...activeProduct, amount:1}))
+						}}
+					>
 						ADD TO BAG
 					</Button>
 					<Button disableRipple
-						disabled={!user} sx={{p:'24px'}} variant={'contained'}>
+						disabled={!user}
+						sx={{p:'24px'}} variant={'contained'}
+
+						// onClick={handleFavorites(activeProduct)}
+					>
 						<FavoriteBorderOutlinedIcon fontSize={'small'}/>
 					</Button>
 				</Box>
 			</Box>
 			<Divider sx={{background:'#373F41'}}  />
 			<AccordionProduct description={parent.description} />
+
 		</Box>
 	)
 }

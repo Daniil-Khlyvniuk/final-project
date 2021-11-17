@@ -128,10 +128,10 @@ const Carousel = ({
 							asNavFor={nav2}
 							ref={slider}
 						>
-							{slides?.map((slide) => {
+							{slides?.map((slide, index) => {
 								return (
-									<div key={slide.customId} className={style.slideContainer}>
-										<img src={slide.imageUrl} className={style.slide} alt=""/>
+									<div key={index} className={style.slideContainer}>
+										<img src={slide[index]} className={style.slide} alt=""/>
 									</div>
 								)
 							})}
@@ -142,10 +142,10 @@ const Carousel = ({
 							ref={thumbs}
 							className={style.thumbWrapper}
 						>
-							{slides?.map((slide) => {
+							{slides?.map((slide, index) => {
 								return (
-									<div key={slide.customId}>
-										<img src={slide.imageUrl} className={style.thumb} alt=""/>
+									<div key={index}>
+										<img src={slide[index]} className={style.thumb} alt=""/>
 									</div>
 								)
 							})}
