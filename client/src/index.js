@@ -10,6 +10,7 @@ import { BrowserRouter } from 'react-router-dom'
 import store from './store/index'
 
 
+
 ReactDOM.render(
 	<ThemeProvider theme={ Theme }>
 		<React.StrictMode>

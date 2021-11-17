@@ -1,11 +1,11 @@
 import React, {useEffect} from 'react'
-
 import Header from './components/NavBar/NavBar'
 import Footer from './components/Footer'
 import AppRoutes from './routes/AppRoutes'
 import { useSelector } from 'react-redux'
 import { modalSelectors } from './store/Modal'
 import useAuthToken from './utils/customHooks/useAuthToken'
+
 
 
 const App = () => {
