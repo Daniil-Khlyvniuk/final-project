@@ -1,7 +1,5 @@
 import axios from 'axios'
 
-const getCategories = () => {
-	return axios('/api/catalog')
-}
+const getCategories = () => axios('/api/catalog')
 
 export default { getCategories }

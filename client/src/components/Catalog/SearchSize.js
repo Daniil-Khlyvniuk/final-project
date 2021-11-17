@@ -1,5 +1,9 @@
-import React from 'react'
-import { FormControl, FormControlLabel, Radio, RadioGroup } from '@mui/material'
+import React, { useEffect, useState } from 'react'
+import { Checkbox, FormControl, FormControlLabel, RadioGroup } from '@mui/material'
+import sizeAPI from '../../utils/API/sizeAPI'
+import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked'
+import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked'
+
 
 
 const style = {
@@ -8,18 +12,40 @@ const style = {
 }
 
 const SearchSize = () => {
+	const [size, setSize] = useState()
+
+	useEffect(async ()=>{
+		const res =  await sizeAPI.getSizes()
+		setSize(res.data)
+	})
 	return (
 		<div style={style}>
+			
 			<FormControl component="fieldset">
+		
 				<RadioGroup
 					aria-label="gender"
 					defaultValue="SINGLE"
 					name="radio-buttons-group"
 				>
-					<FormControlLabel value="SINGLE" control={<Radio />} label="SINGLE" />
-					<FormControlLabel value="DOUBLE" control={<Radio />} label="DOUBLE" />
-					<FormControlLabel value="QUEEN" control={<Radio />} label="QUEEN" />
-					<FormControlLabel value="KING" control={<Radio />} label="KING" />
+					{size && (size.map((sizes)=>{
+						return (
+						// eslint-disable-next-line react/jsx-key
+							<FormControlLabel
+								value={sizes.name}
+								control={		
+									<Checkbox
+										// checked={true}
+										value={sizes.name}
+										// onChange={() => dispatch(filterOperations.handleColor(sizes.name))}
+										icon={<RadioButtonUncheckedIcon sx={{}}  />}
+										checkedIcon={<RadioButtonCheckedIcon sx={{}} />}
+									/>
+								}
+								label={sizes.name} />
+
+						)
+					}))}
 				</RadioGroup>
 			</FormControl>
 		</div>

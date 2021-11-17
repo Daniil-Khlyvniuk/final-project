@@ -4,7 +4,8 @@ import React, {useState} from 'react'
 import {Box, AccordionDetails, AccordionSummary, Accordion, Typography} from '@mui/material'
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined'
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined'
-// import ColorSearch from './ColorSearch'
+// import SearchFabrik from './SearchFabrik'
+import ColorSearch from './ColorSearch'
 
 
 const LeftSide = () => {
@@ -34,11 +35,24 @@ const LeftSide = () => {
 		}))
 	}
 
+	const style = {
+		borderBottom: '1px solid rgba(0, 0, 0, .125)',
+	}
+
+	const styleOpen = {
+		borderBottom: 'none'
+	}
+
 	return(
 	// eslint-disable-next-line no-mixed-spaces-and-tabs
 	  <div>
 			<Box>
-				<Accordion sx={{boxShadow:'none'}} onChange={handleOpenAccordion} expanded={open}>
+				<Accordion
+					sx={{boxShadow:'none'}}
+					onChange={handleOpenAccordion}
+					expanded={open}
+					style={open ? styleOpen : style}
+				>
 					<AccordionSummary>
 						<Box sx={{display:'flex', alignItems:'center'}}>
 							{open ?
@@ -57,7 +71,7 @@ const LeftSide = () => {
 				</Accordion>
 			</Box>
 			<box>
-				<Accordion sx={{boxShadow:'none'}} onChange={handleOpenAccordionSize} expanded={openSize}>
+				<Accordion sx={{boxShadow:'none'}} onChange={handleOpenAccordionSize} expanded={openSize} style={openSize ? styleOpen : style}>
 					<AccordionSummary>
 						<Box sx={{display:'flex', alignItems:'center'}}>
 							{openSize ?
@@ -76,7 +90,7 @@ const LeftSide = () => {
 				</Accordion>
 			</box>
 			<box>
-				<Accordion sx={{boxShadow:'none'}} onChange={handleOpenAccordionColor} expanded={openColor}>
+				<Accordion sx={{boxShadow:'none'}} onChange={handleOpenAccordionColor} expanded={openColor} style={openColor ? styleOpen : style}>
 					<AccordionSummary>
 						<Box sx={{display:'flex', alignItems:'center'}}>
 							{openColor ?
@@ -87,15 +101,14 @@ const LeftSide = () => {
                 COLOR
 							</Typography>
 						</Box>
-						{/*<ColorSearch />*/}
 					</AccordionSummary>
 					<AccordionDetails sx={{maxWidth: '447px' , pl:'54px', color: 'rgba(92, 94, 96, 0.5)'}}>
-						<p>COLOR</p>
+						<ColorSearch />
 					</AccordionDetails>
 				</Accordion>
 			</box>
 			<box>
-				<Accordion sx={{boxShadow:'none'}} onChange={handleOpenAccordionFabric} expanded={openFabric}>
+				<Accordion sx={{boxShadow:'none'}} onChange={handleOpenAccordionFabric} expanded={openFabric} style={openFabric ? styleOpen : style}>
 					<AccordionSummary>
 						<Box sx={{display:'flex', alignItems:'center'}}>
 							{openFabric ?
@@ -108,9 +121,9 @@ const LeftSide = () => {
 						</Box>
 
 					</AccordionSummary>
-					<AccordionDetails sx={{maxWidth: '447px' , pl:'54px', color: 'rgba(92, 94, 96, 0.5)'}}>
-						<p>FABRIC</p>
-					</AccordionDetails>
+					{/*<AccordionDetails sx={{maxWidth: '447px' , pl:'54px', color: 'rgba(92, 94, 96, 0.5)'}}>*/}
+					{/*	<SearchFabrik />*/}
+					{/*</AccordionDetails>*/}
 				</Accordion>
 			</box>
 		</div>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { NativeSelect } from '@mui/material'
 
+
 const headSearch = {
 	display: 'flex',
 	justifyContent: 'space-between',
@@ -15,14 +16,14 @@ const HeadSearch = () => {
 		<div style={headSearch}>
 			<NativeSelect
 				margin={'50px'}
-				defaultValue={18}
+				defaultValue={1}
 				variant={'outlined'}
 				inputProps={{
 					name: 'count',
 					id: 'uncontrolled-native',
 				}}
 			>
-				<option>Show</option>
+				<option value={1}>Show</option>
 				<option value={18}>18</option>
 				<option value={36}>36</option>
 				<option>All</option>
