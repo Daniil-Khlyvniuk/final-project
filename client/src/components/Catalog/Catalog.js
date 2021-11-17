@@ -21,8 +21,10 @@ const Catalog = () => {
 	const classes = useStyles()
 
 	useEffect(() => {
+		if (products.length) return
 		dispatch(productsOperations.fetchProducts('sort=-date&perPage=4&startPage=1'))
-	}, [dispatch])
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
 	return (
 		<div className={classes.container}>

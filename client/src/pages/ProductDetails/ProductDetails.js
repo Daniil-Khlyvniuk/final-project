@@ -28,6 +28,7 @@ const ProductDetails = () => {
 			dispatch(activeProductOperations.fetchSizes(parent._id))
 			dispatch(activeProductOperations.fetchColors(parent._id))
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[activeProduct])
 
 
