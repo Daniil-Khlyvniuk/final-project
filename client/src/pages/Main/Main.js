@@ -22,7 +22,7 @@ const Main = () => {
 
 	return (
 		<Container maxWidth="lg">
-			<Carousel slides={slides} main={true}/>
+			<Carousel slides={slides} product={true}/>
 			<CardList />
 			<Popular/>
 		</Container>
