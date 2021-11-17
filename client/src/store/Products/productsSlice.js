@@ -50,7 +50,7 @@ const productsSlice = createSlice({
 			state.error = null
 		},
 		[fetchProducts.rejected]: (state) => {
-			state.isLoading = true
+			state.isLoading = false
 			state.error = 'Error happened while products loading'
 		},
 	},
@@ -63,5 +63,3 @@ export const {
 } = productsSlice.actions
 
 export default productsSlice.reducer
-
-
