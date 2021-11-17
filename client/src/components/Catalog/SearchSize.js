@@ -30,8 +30,8 @@ const SearchSize = () => {
 				>
 					{size && (size.map((sizes)=>{
 						return (
-						// eslint-disable-next-line react/jsx-key
 							<FormControlLabel
+								key={sizes.id}
 								value={sizes.name}
 								control={		
 									<Checkbox

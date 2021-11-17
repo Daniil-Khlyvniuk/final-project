@@ -4,10 +4,6 @@ import Grid from '@mui/material/Grid'
 import categoriesAPI from '../../utils/API/categoriesApi'
 
 
-// const headButton = {
-//
-// }
-
 const HeadSearch = () => {
 
 	const [catalogs, setCatalogs] = useState([])
