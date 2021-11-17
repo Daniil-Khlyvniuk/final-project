@@ -1,9 +1,15 @@
-import { createSlice } from '@reduxjs/toolkit'
-import linksOperations from './operations'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import linksApi from '../../utils/API/linksApi'
 
-const {fetchLinks} = linksOperations
+export const fetchLinks = createAsyncThunk(
+	'links/fetchLinks',
+	async () => {
+		const response = await linksApi.getLinks()
+		return response.data
+	}
+)
 
-const linksSlise = createSlice({
+const linksSlice = createSlice({
 	name: 'links',
 	initialState: {
 		data: [],
@@ -27,5 +33,6 @@ const linksSlise = createSlice({
 	},
 })
 
-// export const { increment, decrement, incrementByAmount } = linksSlise.actions
-export default linksSlise.reducer
+export const { actions } = linksSlice
+
+export default linksSlice.reducer

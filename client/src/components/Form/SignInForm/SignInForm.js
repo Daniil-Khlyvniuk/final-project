@@ -3,7 +3,7 @@ import { Formik, Form, Field } from 'formik'
 import {SING_UP_SCHEMA} from '../setting/Schemes'
 import CustomInput from '../setting/CustomInput'
 import { useFormStyle } from '../../../utils/customHooks/useFormStyle'
-import { Checkbox } from '@mui/material'
+import { Box, Checkbox, Button } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { Facebook, Google } from '../setting/SocialIcons'
 import {registerUser} from '../../../utils/API/userAPI'
@@ -48,57 +48,52 @@ const SignInForm = () => {
 				return (
 					<Form noValidate
 						onSubmit={formikProps.handleSubmit}
-						className={`${classes.form} ${classes.formAuth}`}>
-						<div>
-							<Field
-								component={CustomInput}
-								name="firstName"
-								type="text"
-								placeholder="First Name"
-							/>
-						</div>
-						<div>
-							<Field
-								component={CustomInput}
-								name="lastName"
-								type="text"
-								placeholder="Last Name"
-							/>
-						</div>
-						<div>
-							<Field
-								component={CustomInput}
-								name="login"
-								type="text"
-								placeholder="Login"
-							/>
-						</div>
-						<div>
-							<Field
-								component={CustomInput}
-								name="email"
-								type="email"
-								placeholder="Email"
-							/>
-						</div>
-						<div>
-							<Field
-								component={CustomInput}
-								name="password"
-								type="password"
-								placeholder="Password"
-							/>
-						</div>
-						<div>
-							<Field
-								component={CustomInput}
-								name="confirmPass"
-								type="password"
-								placeholder="Confirm Password"
-							/>
-						</div>
+						// className={`${classes.form} ${classes.formAuth}`}
+					>
+						<Field
+							component={CustomInput}
+							name="firstName"
+							type="text"
+							placeholder="First Name"
+						/>
+
+						<Field
+							component={CustomInput}
+							name="lastName"
+							type="text"
+							placeholder="Last Name"
+						/>
+
+						<Field
+							component={CustomInput}
+							name="login"
+							type="text"
+							placeholder="Login"
+						/>
+		
+						<Field
+							component={CustomInput}
+							name="email"
+							type="email"
+							placeholder="Email"
+						/>
+			
+						<Field
+							component={CustomInput}
+							name="password"
+							type="password"
+							placeholder="Password"
+						/>
+	
+						<Field
+							component={CustomInput}
+							name="confirmPass"
+							type="password"
+							placeholder="Confirm Password"
+						/>
+					
 						<div className={classes.ads}>
-							<Checkbox 
+							<Checkbox
 								style={{
 									width: 20,
 									padding: 25,
@@ -130,17 +125,24 @@ const SignInForm = () => {
 								<p className={classes.success}>{serverResult.success}</p>
 							</div>
 						)}
-						
-						<button
-							className={classes.submit}
-							type="submit"
-							disabled={
-								!formikProps.isValid ||
+						<Box sx={{ display: 'flex', justifyContent: 'center' }}>
+							<Button 
+								type='submit'
+								variant="contained"
+								sx={{
+									padding: '15px 95px',
+									fontSize: '18px',
+									fontFamily: 'Abel',
+									fontWeight: '400',
+								}}
+								disabled={
+									!formikProps.isValid ||
                 formikProps.isSubmitting
-							}
-						>
-							SIGN UP
-						</button>
+								}
+							>
+							sign up
+							</Button>
+						</Box>
 						<div className={classes.socialBox}>
 							<Link to="#"><Google/></Link>
 							<Link to="#"><Facebook/></Link>

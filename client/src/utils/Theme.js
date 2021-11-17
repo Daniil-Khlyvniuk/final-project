@@ -120,16 +120,18 @@ const theme = createTheme({
 				{
 					props: { variant: 'active'},
 					style: {
-						border: '1px solid #000',
+						minWidth: 'calc(100% / 2)',
+						border: '1px solid #373F41',
 						borderBottom: 'none',
-						padding: '5px 77px',
+						// padding: '5px 77px',
 					}
 				},
 				{
 					props: {variant: 'default'},
 					style: {
-						borderBottom: '1px solid #000',
-						padding: '5px 77px',
+						borderBottom: '1px solid #373F41',
+						minWidth: 'calc(100% / 2)',
+						// padding: '5px 77px',
 					}
 				},
 			]
