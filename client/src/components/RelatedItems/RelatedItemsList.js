@@ -44,6 +44,7 @@ const RelatedItemsList = () => {
 			return {
 				imageUrl: `http://localhost:5000/${prod.imageUrls[0]}`,
 				customId: prod._id,
+				price: prod.currentPrice,
 			}
 		}
 	})

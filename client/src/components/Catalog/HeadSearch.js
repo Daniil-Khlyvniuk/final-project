@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { NativeSelect } from '@mui/material'
+import filterApi from '../../utils/API/filterApi'
 
 
 const headSearch = {
@@ -12,22 +13,36 @@ const headSearch = {
 }
 
 const HeadSearch = () => {
+
+	const [perPage, setPerPage] = useState([])
+	const [sortBy, setSortBy] = useState([])
+
+	useEffect(async ()=> {
+		const pageRes = await filterApi.getFiltersByType('perPage')
+		setPerPage(pageRes.data)
+	},[])
+
+	useEffect(async ()=> {
+		const sortRes = await filterApi.getFiltersByType('sortBy')
+		setSortBy(sortRes.data)
+	},[])
+
 	return (
 		<div style={headSearch}>
-			<NativeSelect
-				margin={'50px'}
-				defaultValue={1}
-				variant={'outlined'}
-				inputProps={{
-					name: 'count',
-					id: 'uncontrolled-native',
-				}}
-			>
-				<option value={1}>Show</option>
-				<option value={18}>18</option>
-				<option value={36}>36</option>
-				<option>All</option>
-			</NativeSelect>
+			{perPage.length && (
+				<NativeSelect
+					margin={'50px'}
+					defaultValue={1}
+					variant={'outlined'}
+					inputProps={{
+						name: 'count',
+						id: 'uncontrolled-native',
+					}}
+				>
+					{perPage.map((item)=>
+						<option key={item._id} value={item.value}>{item.name}</option>)}
+				</NativeSelect>
+			)}
 			<NativeSelect
 				margin={'50px'}
 				defaultValue={18}
@@ -36,11 +51,8 @@ const HeadSearch = () => {
 					id: 'uncontrolled-native',
 				}}
 			>
-				<option>Sort by</option>
-				<option>Best Match</option>
-				<option>Featured</option>
-				<option>Lowest Price</option>
-				<option>Highest Price</option>
+				{sortBy.map((item)=>
+					<option key={item._id} value={item.value}>{item.name}</option>)}
 			</NativeSelect>
 		</div>
 	)

@@ -1,68 +1,39 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from '@mui/material/Button'
-import { Link as RouterLink } from 'react-router-dom'
 import Grid from '@mui/material/Grid'
+import categoriesAPI from '../../utils/API/categoriesApi'
 
 
-const headButton = {
-	display: 'flex',
-	justifyContent: 'space-between',
-	margin: '50px auto',
-	maxWidth: '880px',
-}
+// const headButton = {
+//
+// }
 
 const HeadSearch = () => {
+
+	const [catalogs, setCatalogs] = useState([])
+
+	useEffect(async ()=> {
+		const catalogRes = await categoriesAPI.getCategories()
+		setCatalogs(catalogRes.data)
+	})
+
 	return (
-		<Grid style={headButton} item xs={12}>
-			<Button
-				to='/'
-				component={RouterLink}
-				color="primary"
-				variant="outlined"
-			>SHOP ALL
-			</Button>
-			<Button
-				to='/'
-				component={RouterLink}
-				color="primary"
-				variant="outlined"
-			>BEDROOM
-			</Button>
-			<Button
-				to='/'
-				component={RouterLink}
-				color="primary"
-				variant="outlined"
-			>BED LINEN
-			</Button>
-			<Button
-				to='/'
-				component={RouterLink}
-				color="primary"
-				variant="outlined"
-			>KITCHEN
-			</Button>
-			<Button
-				to='/'
-				component={RouterLink}
-				color="primary"
-				variant="outlined"
-			>BATHROOM
-			</Button>
-			<Button
-				to='/'
-				component={RouterLink}
-				color="primary"
-				variant="outlined"
-			>LOUNGEWEAR
-			</Button>
-			<Button
-				to='/'
-				component={RouterLink}
-				color="primary"
-				variant="outlined"
-			>SALE
-			</Button>
+		<Grid item xs={12} sx={{
+			flexWrap:'wrap',
+			display: 'flex',
+			justifyContent: 'flex-start',
+			margin: '50px auto',
+			width: '900px',
+			gap: '15px',
+		}}>
+			{catalogs.length && catalogs.map(catalog => (
+				<Button
+					key={catalog._id}
+					color="primary"
+					variant="outlined"
+				>{catalog.name}
+				</Button>
+			))}
 		</Grid>
 	)
 }
