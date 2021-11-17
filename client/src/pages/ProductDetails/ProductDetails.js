@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {activeProductOperations, activeProductSelector} from '../../store/ActiveProduct'
 import ProductDescription from '../../components/ProductDescription/ProductDescription'
 import Carousel from '../../components/Carousel/Carousel'
+import RelatedItemsList from '../../components/RelatedItems/RelatedItemsList'
 
 const ProductDetails = () => {
 
@@ -49,7 +50,9 @@ const ProductDetails = () => {
 					<Grid item md={6} xs={12}>
 						{activeProduct && <ProductDescription />}
 					</Grid>
-					<Grid sx={{mt:'80px'}} item md={12}>Recently Viewed Products </Grid>
+					<Grid sx={{mt:'80px'}} item md={12}>
+						<RelatedItemsList />
+					</Grid>
 				</Grid>)}
 		</Container>
 	)
