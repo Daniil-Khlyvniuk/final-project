@@ -4,50 +4,51 @@ const passport = require("passport");
 
 //Import controllers
 const {
-	addProduct,
-	updateProduct,
-	getProducts,
-	getProductsInfo,
-	getFilteredVariants,
-	getProductsFilterParams,
-	searchAutocomplete,
-	getVariantById,
-	searchProducts
+  addProduct,
+  updateProduct,
+  getProducts,
+  getProductsInfo,
+  getFilteredVariants,
+  getProductsFilterParams,
+  searchAutocomplete,
+  getVariantById,
+  searchProducts,
 } = require("../controllers/products");
-
 
 // @route   POST /products/images
 // @desc    Add images
 // @access  Private
 
 router.post(
-	"/",
-	// passport.authenticate("jwt-admin", { session: false }),
-	addProduct
+  "/",
+  // passport.authenticate("jwt-admin", { session: false }),
+  addProduct
 );
 
 // @route   PUT /products/:id
 // @desc    Update existing product
 // @access  Private
 router.put(
-	"/:id",
-	passport.authenticate("jwt-admin", { session: false }),
-	updateProduct
+  "/:id",
+  passport.authenticate("jwt-admin", { session: false }),
+  updateProduct
 );
 
 // @route   GET /products
 // @desc    GET existing products
 // @access  Public
 router.get("/", getProducts);
-
-router.get("/:varId", getVariantById);
+router.get("/filter", getProductsFilterParams);
 router.get("/info/:kindOfInfo/:productId", getProductsInfo);
-router.get("/variant/:filterParam/:filterParamId/:productId", getFilteredVariants);
+router.get(
+  "/variant/:filterParam/:filterParamId/:productId",
+  getFilteredVariants
+);
+router.get("/:varId", getVariantById);
 
 // @route   GET /products/filter
 // @desc    GET appropriate filtered products
 // @access  Public
-router.get("/filter", getProductsFilterParams);
 
 // @route   POST /products/search
 // @desc    POST appropriate to search query products
