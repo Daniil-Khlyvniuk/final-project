@@ -4,6 +4,7 @@ export const textStyle = {
 	display: 'flex',
 	justifyContent: 'center',
 	margin: '50px auto',
+	textTransform: 'uppercase',
 }
 
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormControl, InputAdornment, OutlinedInput, Slider } from '@mui/material'
+import { FormControl, InputAdornment, OutlinedInput, Slider, Box } from '@mui/material'
 
 const PriceRng = {
 	height: '22px',
@@ -32,16 +32,13 @@ const PriceRange = () => {
 	
 
 	return (
-		<div style={{
-			display: 'block',
-			width: 'fit-content'
-		}}>
+		<Box>
 			<Slider
 				value={value}
 				onChange={rangeSelector}
 				valueLabelDisplay="auto"
 			/>
-			<div style={PriceRangeBlock}>
+			<Box style={PriceRangeBlock}>
 				FROM
 				{/*<input*/}
 				{/*	style={PriceRng}*/}
@@ -69,14 +66,14 @@ const PriceRange = () => {
 						startAdornment={<InputAdornment position="start">$</InputAdornment>}
 					/>
 				</FormControl>
-			</div>
+			</Box>
 			{/* eslint-disable-next-line no-mixed-spaces-and-tabs */}
 		 	{/*<input*/}
 			{/*	style={PriceRng}*/}
 			{/*	placeholder={`$ ${value[1]+'0'}`}*/}
 			{/*/>*/}
       
-		</div>
+		</Box>
 	)
 }
 
