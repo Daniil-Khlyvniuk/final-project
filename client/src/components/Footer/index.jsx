@@ -26,9 +26,16 @@ const Footer = () => {
 	}, [dispatch])
 
 	return (
-		<Box sx={{ borderColor: '#373F41', borderTop: 1, maxWidth: 1310, margin: '0 auto' }}>
+		<Box 
+			sx={{ 
+				borderColor: '#373F41', 
+				borderTop: 1, 
+				maxWidth: 1310, 
+				margin: '0 auto'
+			}}
+		>
 			<Container maxWidth="lg">
-				<Grid container columns={12}
+				<Grid container columns={12} 
 					className={blockStyle}
 				>
 					{

@@ -8,7 +8,6 @@ import { Link as RouterLink } from 'react-router-dom'
 
 
 const StyledGrid = styled(Grid)(() => ({
-	borderRadius: '4px',
 	backgroundImage: 'url(https://telegra.ph/file/a833f6b2d325d08432a9e.jpg)',
 	backgroundSize: 'cover',
 	backgroundPosition: 'center',
@@ -21,6 +20,7 @@ const StyledGrid = styled(Grid)(() => ({
 const styles = {
 	padding: '72px 50px 0px 50px', textAlign: 'center',
 }
+
 
 const Error404 = () => {
 	return (

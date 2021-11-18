@@ -17,6 +17,10 @@ const theme = createTheme({
 		secondary: { main: '#5C5E60' },
 		error: { main: '#8C8C8C' },
 		success: { main: '#388e3c' },
+		neutral: {
+			main: '#fff',
+			contrastText: '#fff',
+		},
 	},
 	typography: {
 		fontFamily: 'Mulish, sans-serif',
@@ -24,7 +28,12 @@ const theme = createTheme({
 		h2: {
 			fontFamily: 'Abel, sans-serif'
 		},
-		h3: {},
+		h3: {
+			fontSize: '14px',
+			'@media (max-width:760px)': {
+				fontSize: '16px',
+				margin:'6px 0px',
+			},},
 		h4: {},
 		p: {
 			fontFamily: 'Mulish, sans-serif',
@@ -61,12 +70,19 @@ const theme = createTheme({
 		},
 	},
 	components: {
+
 		MuiButton: {
 			variants: [
 				{
 					props: { variant: 'contained' },
 					style: {
 						backgroundColor: 'primary',
+						'@media (max-width:860px)': {
+							padding:'12px'
+						},
+						'@media (max-width:480px)': {
+							padding:'10px'
+						}
 					}
 				},
 				{
@@ -75,6 +91,12 @@ const theme = createTheme({
 						backgroundColor: 'primary',
 						borderTopLeftRadius: 0,
 						borderBottomLeftRadius: 0,
+						'@media (max-width:860px)': {
+							padding:'12px'
+						},
+						'@media (max-width:480px)': {
+							padding:'10px'
+						}
 					}
 				}
 			]
@@ -98,16 +120,18 @@ const theme = createTheme({
 				{
 					props: { variant: 'active'},
 					style: {
-						border: '1px solid #000',
+						minWidth: 'calc(100% / 2)',
+						border: '1px solid #373F41',
 						borderBottom: 'none',
-						padding: '5px 77px',
+						// padding: '5px 77px',
 					}
 				},
 				{
 					props: {variant: 'default'},
 					style: {
-						borderBottom: '1px solid #000',
-						padding: '5px 77px',
+						borderBottom: '1px solid #373F41',
+						minWidth: 'calc(100% / 2)',
+						// padding: '5px 77px',
 					}
 				},
 			]

@@ -1,32 +1,65 @@
-import { Alert, Container } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import React, {useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import productsAPI from '../../utils/API/productsAPI'
+import {useDispatch, useSelector} from 'react-redux'
+import  {ProductOperations, ProductSelector} from '../../store/Product'
+import {Alert, Backdrop, CircularProgress, Container, Grid} from '@mui/material'
+import ProductDescription from '../../components/ProductDescription/ProductDescription'
+import Carousel from '../../components/Carousel/Carousel'
+import RelatedItemsList from '../../components/RelatedItems/RelatedItemsList'
 
 const ProductDetails = () => {
+
 	const { id } = useParams()
-	const [data, setData] = useState({})
+	const dispatch = useDispatch()
 
-	const getProductData = async (id) => {
-		if (id.length === 0) return
+	const isLoading = useSelector(ProductSelector.isLoading())
+	const activeProduct = useSelector(ProductSelector.getProduct())
+	const parent = useSelector(ProductSelector.getParent())
 
-		const res = await productsAPI.getOneProduct(id)
-		setData(res.data)
-	}
 
 	useEffect(() => {
-		getProductData(id)
-	}, [id])
+		dispatch(ProductOperations.fetchProductUrl(id))
+	}, [id, dispatch])
 
-	if (Object.keys(data).length === 0) {
+	useEffect(() => {
+		if(activeProduct){
+			dispatch(ProductOperations.fetchAllColors(parent._id))
+			dispatch(ProductOperations.fetchSizes({
+				colorId: activeProduct.color._id,
+				productId: activeProduct.product._id}))
+			dispatch(ProductOperations.fetchAllVariants(parent.variants))
+
+		}
+	}, [activeProduct, dispatch])
+
+
+
+	if (!activeProduct ) {
 		return <Alert severity='error'>Product not found</Alert>
-	} 
-
+	}
+	
 	return (
-		<Container maxWidth="lg">
-			<h1>ProductDetails</h1>
+		<Container maxWidth='lg' sx={{mt:'80px'}}>
+			{isLoading && (
+				<Backdrop
+					sx={{ color: 'white', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+					open={isLoading}>
+					<CircularProgress color="inherit" />
+				</Backdrop>)}
+			{activeProduct && <Grid container spacing={2}>
+				<Grid item md={6} xs={12} >
+					<Carousel slides={activeProduct.imageUrls} product={true} />
+				</Grid>
+				<Grid item md={6} xs={12}>
+					<ProductDescription />
+				</Grid>
+				<Grid sx={{mt:'80px'}} item md={12}>
+					<RelatedItemsList />
+				</Grid>
+			</Grid>}
 		</Container>
 	)
-}
 
+}
+	
 export default ProductDetails

@@ -1,21 +1,28 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+
 import Header from './components/NavBar/NavBar'
 import Footer from './components/Footer'
 import AppRoutes from './routes/AppRoutes'
+import { useSelector } from 'react-redux'
+import { modalSelectors } from './store/Modal'
+import useAuthToken from './utils/customHooks/useAuthToken'
+
 
 
 const App = () => {
-	// // it is an example of dispatching actions
-	// const dispatch = useDispatch()
-	// dispatch(cardActions.test())
-	// dispatch(cardActions.test2('it works'))
-	// //========================================
+	const modal = useSelector(modalSelectors.checkOpen())
 
+	const [checkToken] = useAuthToken()
+	useEffect(() => {
+		checkToken()
+	},[checkToken])
+	
 	return (
 		<div className={'App'}>
 			<Header />
 			<AppRoutes />
 			<Footer />
+			{modal}
 		</div>
 	)
 }
