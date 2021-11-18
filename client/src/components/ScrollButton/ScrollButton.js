@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@mui/styles'
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
+// import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
+import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded'
 
 const ScrollButton = () => {
 	const [visible, setVisible] = useState(false)
@@ -8,13 +9,13 @@ const ScrollButton = () => {
 		button: {
 			position: 'fixed',
 			width: '100%',
-			left: '92%',
+			left: '90%',
 			bottom: '150px',
 			height: '20px',
 			fontSize: '3rem',
 			zIndex: 1,
 			cursor: 'pointer',
-			color: '#373F41'
+			color:'#373F41'
 		}
 	})
 	const style = buttonStyles()
@@ -40,7 +41,7 @@ const ScrollButton = () => {
 
 	return (
 		<div	className={style.button}>
-			<ArrowUpwardIcon fontSize={'large'} onClick={scrollToTop} style={{display: visible ? 'inline' : 'none'}} />
+			<ArrowForwardIosRoundedIcon fontSize={'large'} onClick={scrollToTop} style={{display: visible ? 'inline' : 'none', transform: 'rotate(-90deg)'}} />
 		</div>
 	)
 }
