@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 		gap: '20px',
 		maxWidth: '1180px',
 		margin: '0 auto',
-		justifyContent: 'center'
+		justifyContent: 'space-between'
 	},
 	title: theme.typography.sectionHeading,
 }))
