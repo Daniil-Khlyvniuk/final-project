@@ -1,6 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import {Box, NativeSelect } from '@mui/material'
 import filterApi from '../../utils/API/filterApi'
+import { styled } from '@mui/material/styles'
+import InputBase from '@mui/material/InputBase'
+
+
+
+const BootstrapInput = styled(InputBase)(({ theme }) => ({
+	'label + &': {
+		marginTop: theme.spacing(3),
+	},
+	'& .MuiInputBase-input': {
+		position: 'relative',
+		fontSize: 16,
+		padding: '10px 26px 10px 12px',
+		backgroundColor: '#ffffff',
+	},
+}))
 
 
 const HeadSearch = () => {
@@ -15,6 +31,7 @@ const HeadSearch = () => {
 		const sortRes = await filterApi.getFiltersByType('sortBy')
 		setSortBy(sortRes.data)
 	}
+
 
 	useEffect(()=> {
 		getPerPageFilters()
@@ -32,9 +49,13 @@ const HeadSearch = () => {
 		>
 			{perPage.length && (
 				<NativeSelect
-					borderBottom={'none'}
+					sx={{
+						borderBottom: 'none',
+						color: '#373F41'
+					}}
 					margin={'50px'}
 					defaultValue={1}
+					input={<BootstrapInput />}
 					variant={'outlined'}
 					inputProps={{
 						name: 'count',
@@ -48,13 +69,16 @@ const HeadSearch = () => {
 			<NativeSelect
 				margin={'50px'}
 				defaultValue={18}
+				input={<BootstrapInput />}
 				inputProps={{
 					name: 'Sort by',
 					id: 'uncontrolled-native',
 				}}
 			>
 				{sortBy.map((item)=>
-					<option key={item._id} value={item.value}>{item.name}</option>)}
+					<option
+						key={item._id}
+						value={item.value}>{item.name}</option>)}
 			</NativeSelect>
 		</Box>
 	)

@@ -10,6 +10,7 @@ const PriceRng = {
 
 }
 
+
 const style = {
 	marginLeft: '-50px',
 }
@@ -27,14 +28,6 @@ const PriceRange = () => {
 	const rangeSelector = (event, newValue) => {
 		setValue(newValue)
 	}
-	
-	// const priceSelector = (price) => {
-	// 	// eslint-disable-next-line no-mixed-spaces-and-tabs
-	// 	const minPrice =
-	//   setValue(price)
-	// }
-	//
-	
 
 	return (
 		<Box style={style}>
@@ -42,14 +35,19 @@ const PriceRange = () => {
 				value={value}
 				onChange={rangeSelector}
 				valueLabelDisplay="auto"
+				sx={{
+					height: '2px',
+					width: 250,
+					color: '#373F41',
+					'& .MuiSlider-thumb': {
+						borderRadius: '1px',
+						width: '17px',
+						height: '10px',
+					},
+				}}
 			/>
 			<Box style={PriceRangeBlock}>
 				FROM
-				{/*<input*/}
-				{/*	style={PriceRng}*/}
-				{/*	placeholder={`$ ${value[0]+'0'}`}*/}
-				{/*	prefix= "$"*/}
-				{/*/>*/}
 				<FormControl fullWidth sx={{ m: 1 }}>
 					<OutlinedInput
 						style={PriceRng}
@@ -72,11 +70,6 @@ const PriceRange = () => {
 					/>
 				</FormControl>
 			</Box>
-			{/* eslint-disable-next-line no-mixed-spaces-and-tabs */}
-		 	{/*<input*/}
-			{/*	style={PriceRng}*/}
-			{/*	placeholder={`$ ${value[1]+'0'}`}*/}
-			{/*/>*/}
 		</Box>
 	)
 }
