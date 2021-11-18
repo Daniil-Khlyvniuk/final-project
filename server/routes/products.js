@@ -12,6 +12,7 @@ const {
 	getProductsFilterParams,
 	searchAutocomplete,
 	getVariantById,
+	getVariantsByProductId,
 	searchProducts
 } = require("../controllers/products");
 
@@ -43,6 +44,7 @@ router.get("/", getProducts);
 router.get("/:varId", getVariantById);
 router.get("/info/:kindOfInfo/:productId", getProductsInfo);
 router.get("/variant/:filterParam/:filterParamId/:productId", getFilteredVariants);
+router.get("/variant/:productId", getVariantsByProductId);
 
 // @route   GET /products/filter
 // @desc    GET appropriate filtered products
