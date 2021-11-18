@@ -230,6 +230,7 @@ exports.getProducts = async (req, res, next) => {
 
 exports.getProductsFilterParams = async (req, res, next) => {
   const mongooseQuery = filterParser(req.query);
+  console.log(mongooseQuery);
   const filterParams = getFilterConditions(mongooseQuery);
   const sortParam = getSortConditions(req.query.sort);
   const perPage = Number(req.query.perPage);
@@ -294,7 +295,8 @@ exports.getProductsFilterParams = async (req, res, next) => {
           categories: 1,
         },
       },
-      { $sort: sortParam },
+      // getSortConditions(req.query.sort),
+      // { ...sortParam },
     ]);
 
     res.json(products);

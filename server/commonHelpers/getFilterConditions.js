@@ -8,11 +8,26 @@ module.exports.getFilterConditions = (query) => {
 };
 
 module.exports.getSortConditions = (sortParam) => {
-  const sortType = sortParam.includes("-") ? -1 : 1;
+  console.log(sortParam);
+  const sortType = sortParam?.includes("-") ? -1 : 1;
   const sortParamValue = sortParam?.trim()?.replace("-", "");
   // -1 -> small > big
   //1 -> big > small
   return {
-    ["variants." + sortParamValue]: sortType,
+    ...(sortParam
+      ? { $sort: { ["variants." + sortParamValue]: sortType } }
+      : {}),
   };
+
+  // return {
+  // 	...(sortParam
+  // 		? { $sort: { ["variants." + sortParamValue]: sortType } }
+  // 		: {}),
+  // };
+  //
+  // {
+  //   $sort: {
+  //     ...(!!sortParam ? { ["variants." + sortParamValue]: sortType } : {}),
+  //   },
+  // };
 };
