@@ -32,9 +32,12 @@ const PriceRange = () => {
 	return (
 		<Box style={style}>
 			<Slider
+				getAriaLabel={() => 'Minimum distance shift'}
 				value={value}
 				onChange={rangeSelector}
 				valueLabelDisplay="auto"
+				// getAriaValueText={valuetext}
+				disableSwap
 				sx={{
 					height: '2px',
 					width: 250,

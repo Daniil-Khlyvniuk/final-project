@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import {Box, NativeSelect } from '@mui/material'
 import filterApi from '../../utils/API/filterApi'
-import { styled } from '@mui/material/styles'
+import { styled, ThemeProvider } from '@mui/material/styles'
 import InputBase from '@mui/material/InputBase'
+import theme from '../../utils/Theme'
 
 
 
@@ -66,20 +67,23 @@ const HeadSearch = () => {
 						<option key={item._id} value={item.value}>{item.name}</option>)}
 				</NativeSelect>
 			)}
-			<NativeSelect
-				margin={'50px'}
-				defaultValue={18}
-				input={<BootstrapInput />}
-				inputProps={{
-					name: 'Sort by',
-					id: 'uncontrolled-native',
-				}}
-			>
-				{sortBy.map((item)=>
-					<option
-						key={item._id}
-						value={item.value}>{item.name}</option>)}
-			</NativeSelect>
+			<ThemeProvider theme={theme}>
+				<NativeSelect
+					margin={'50px'}
+					defaultValue={18}
+					input={<BootstrapInput />}
+					inputProps={{
+						name: 'Sort by',
+						id: 'uncontrolled-native',
+					}}
+				>
+					{sortBy.map((item)=>
+				
+						<option
+							key={item._id}
+							value={item.value}>{item.name}</option>)}
+				</NativeSelect>
+			</ThemeProvider>
 		</Box>
 	)
 }
