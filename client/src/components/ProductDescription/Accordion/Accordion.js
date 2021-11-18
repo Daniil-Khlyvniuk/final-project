@@ -29,7 +29,12 @@ const AccordionProduct = ({description = 'Random string', accordionTitle = 'Prod
 					</Box>
 
 				</AccordionSummary>
-				<AccordionDetails sx={{maxWidth: '447px' , pl:'54px', color: 'rgba(92, 94, 96, 0.5)'}}>
+				<AccordionDetails sx={{
+					maxWidth: '447px' ,
+					pl:'54px',
+					color: 'rgba(92, 94, 96, 0.5)',
+					fontSize:'14px',
+					fontWeight:'400'}}>
 					{description}
 				</AccordionDetails>
 			</Accordion>
