@@ -7,7 +7,10 @@ const fileService = require("../services/fileService");
 const notFoundError = require("../commonHelpers/notFoundError");
 const isExist = require("../commonHelpers/isExist");
 const findOrCreate = require("../commonHelpers/findOrCreate");
-const queryString = require("query-string");
+const {
+  getFilterConditions,
+  getSortConditions,
+} = require("../commonHelpers/getFilterConditions");
 const uniqueRandom = require("unique-random");
 const rand = uniqueRandom(0, 999999);
 
@@ -117,7 +120,7 @@ exports.getVariantById = async (req, res, next) => {
 
 exports.getProductsInfo = async (req, res, next) => {
   const { productId, kindOfInfo } = req.params;
-  // const kindOfInfo = req.params.kindOfInfo;
+
   try {
     const variant = await ProductVariant.find({ product: productId }).populate(
       kindOfInfo
@@ -139,8 +142,6 @@ exports.getProductsInfo = async (req, res, next) => {
 exports.getFilteredVariants = async (req, res, next) => {
   console.log(req.params);
   const { productId, filterParam, filterParamId } = req.params;
-  // const filterParam = req.params.filterParam;
-  // const filterParamId = req.params.filterParamId;
 
   try {
     const variant = await ProductVariant.find({
@@ -214,8 +215,10 @@ exports.getProducts = async (req, res, next) => {
     .sort(sort)
     .populate({
       path: "variants",
+      populate: ["color", "size"],
       options: { perDocumentLimit: 1 },
     })
+
     .then((products) => {
       res.send(products);
     })
@@ -228,36 +231,60 @@ exports.getProducts = async (req, res, next) => {
 
 exports.getProductsFilterParams = async (req, res, next) => {
   const mongooseQuery = filterParser(req.query);
-  console.log("aaaaaaa", req.query);
+  const filterParams = getFilterConditions(mongooseQuery);
+  const sortParam = getSortConditions(req.query.sort);
   const perPage = Number(req.query.perPage);
   const startPage = Number(req.query.startPage);
-  const sort = req.query.sort;
-  console.log("sort", sort);
-
   try {
     const products = await Product.aggregate([
+      { $skip: startPage * perPage - perPage },
       {
         $lookup: {
           from: ProductVariant.collection.name,
-          // localField: "product",
-          // foreignField: "_id",
-          // let: { variantPrice: "$currentPrice" },
-          pipeline: [
-            {
-              $match: {
-                // currentPrice: 222,
-                $expr: {
-                  $gte: ["$currentPrice", 0],
-                },
-              },
-            },
-          ],
+          localField: "_id",
+          foreignField: "product",
           as: "variants",
-          // $lookup: {
-          //   from: "Colors",
-          //   localField: "product",
-          //   foreignField: "_id",
-          // },
+        },
+      },
+      {
+        $unwind: "$variants",
+      },
+      {
+        $lookup: {
+          from: Catalog.collection.name,
+          localField: "categories",
+          foreignField: "_id",
+          as: "categories",
+        },
+      },
+      {
+        $unwind: "$categories",
+      },
+      {
+        $lookup: {
+          from: Color.collection.name,
+          localField: "variants.color",
+          foreignField: "_id",
+          as: "variants.color",
+        },
+      },
+      {
+        $unwind: "$variants.color",
+      },
+      {
+        $lookup: {
+          from: Size.collection.name,
+          localField: "variants.size",
+          foreignField: "_id",
+          as: "variants.size",
+        },
+      },
+      {
+        $unwind: "$variants.size",
+      },
+      {
+        $match: {
+          $and: filterParams,
         },
       },
       {
@@ -265,18 +292,10 @@ exports.getProductsFilterParams = async (req, res, next) => {
           _id: 1,
           name: 1,
           variants: 1,
-          // variants_test: 1,
-          // campId: 1,
-          // "articleId": 1,
-          // "campaign._id": 1,
-          // "campaign.clientid": 1,
-          // "campaign.client._id": 1,
-          // "campaign.client.username": 1
+          categories: 1,
         },
       },
-      {
-        $unwind: { path: "$variants", preserveNullAndEmptyArrays: true },
-      },
+      { $sort: sortParam },
     ]);
 
     res.json(products);
@@ -285,19 +304,6 @@ exports.getProductsFilterParams = async (req, res, next) => {
       message: `Error happened on server: "${err}" `,
     });
   }
-  //   const products = await Product.find(mongooseQuery)
-  //     .skip(startPage * perPage - perPage)
-  //     .limit(perPage)
-  //     .sort(sort);
-  //
-  //   const productsQuantity = await Product.find(mongooseQuery);
-  //
-  //   res.json({ products, productsQuantity: productsQuantity.length });
-  // } catch (err) {
-  //   res.status(400).json({
-  //     message: `Error happened on server: "${err}" `,
-  //   });
-  // }
 };
 
 exports.searchProducts = async (req, res, next) => {
@@ -310,9 +316,6 @@ exports.searchProducts = async (req, res, next) => {
   let products = await Product.find({
     $text: { $search: query },
   });
-  console.log("searchProducts");
-  console.log(query);
-  console.log("products", products);
 
   const matchedProducts = await Promise.all(
     products.map(({ _id: productId }) =>
@@ -323,8 +326,6 @@ exports.searchProducts = async (req, res, next) => {
     )
   );
 
-  console.log("matchedProducts", matchedProducts);
-  console.log("================");
   res.json(matchedProducts.flat());
 };
 
@@ -335,7 +336,6 @@ exports.searchAutocomplete = async (req, res, next) => {
 
   //Taking the entered value from client in lower-case and trimed
   const query = req.body.query.toLowerCase().trim().replace(/\s\s+/g, " ");
-  console.log(query);
   const foundProducts = await Product.aggregate([
     {
       $search: {
@@ -375,7 +375,5 @@ exports.searchAutocomplete = async (req, res, next) => {
       ]),
     []
   );
-  console.log("result", [...new Set(result)]);
-  // console.log("result", result);
   res.send([...new Set(result)]);
 };
