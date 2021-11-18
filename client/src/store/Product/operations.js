@@ -31,7 +31,7 @@ const fetchAllVariants = createAsyncThunk(
 	'product/getAllVariants',
 	async(variants)=>{
 		// eslint-disable-next-line max-len
-		const response = await productsAPI.getFilteredProducts(variants)
+		const response = await productsAPI.getAllVariantsByProductId(variants)
 		return response.data
 		// const response = await variants.map(variant => productsAPI.getOneProduct(variant))
 		// const responses = await Promise.all(response)

@@ -5,7 +5,7 @@ import  {ProductOperations, ProductSelector} from '../../store/Product'
 import {Alert, Backdrop, CircularProgress, Container, Grid} from '@mui/material'
 import ProductDescription from '../../components/ProductDescription/ProductDescription'
 import Carousel from '../../components/Carousel/Carousel'
-import RelatedItemsList from '../../components/RelatedItems/RelatedItemsList'
+// import RelatedItemsList from '../../components/RelatedItems/RelatedItemsList'
 
 const ProductDetails = () => {
 
@@ -27,10 +27,10 @@ const ProductDetails = () => {
 			dispatch(ProductOperations.fetchSizes({
 				colorId: activeProduct.color._id,
 				productId: activeProduct.product._id}))
-			dispatch(ProductOperations.fetchAllVariants(parent.variants))
+			dispatch(ProductOperations.fetchAllVariants(parent._id))
 
 		}
-	}, [activeProduct, dispatch])
+	}, [activeProduct])
 
 
 
@@ -54,7 +54,7 @@ const ProductDetails = () => {
 					<ProductDescription />
 				</Grid>
 				<Grid sx={{mt:'80px'}} item md={12}>
-					<RelatedItemsList />
+					{/*<RelatedItemsList />*/}
 				</Grid>
 			</Grid>}
 		</Container>
