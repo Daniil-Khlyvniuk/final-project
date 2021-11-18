@@ -5,6 +5,7 @@ import  {ProductOperations, ProductSelector} from '../../store/Product'
 import {Alert, Backdrop, CircularProgress, Container, Grid} from '@mui/material'
 import ProductDescription from '../../components/ProductDescription/ProductDescription'
 import Carousel from '../../components/Carousel/Carousel'
+import RelatedItemsList from '../../components/RelatedItems/RelatedItemsList'
 
 const ProductDetails = () => {
 
@@ -36,7 +37,7 @@ const ProductDetails = () => {
 	if (!activeProduct ) {
 		return <Alert severity='error'>Product not found</Alert>
 	}
-	
+
 	return (
 		<Container maxWidth='lg' sx={{mt:'80px'}}>
 			{isLoading && (
@@ -53,12 +54,12 @@ const ProductDetails = () => {
 					<ProductDescription />
 				</Grid>
 				<Grid sx={{mt:'80px'}} item md={12}>
-					Recently viewed
+					<RelatedItemsList />
 				</Grid>
 			</Grid>}
 		</Container>
 	)
 
 }
-	
+
 export default ProductDetails
