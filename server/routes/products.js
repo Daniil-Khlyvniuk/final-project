@@ -4,7 +4,6 @@ const passport = require("passport");
 
 //Import controllers
 const {
-<<<<<<< HEAD
 	addProduct,
 	updateProduct,
 	getProducts,
@@ -15,17 +14,6 @@ const {
 	getVariantById,
 	getVariantsByProductId,
 	searchProducts
-=======
-  addProduct,
-  updateProduct,
-  getProducts,
-  getProductsInfo,
-  getFilteredVariants,
-  getProductsFilterParams,
-  searchAutocomplete,
-  getVariantById,
-  searchProducts,
->>>>>>> FUCKING_SERVER
 } = require("../controllers/products");
 
 // @route   POST /products/images
@@ -53,16 +41,13 @@ router.put(
 router.get("/", getProducts);
 router.get("/filter", getProductsFilterParams);
 router.get("/info/:kindOfInfo/:productId", getProductsInfo);
-<<<<<<< HEAD
 router.get("/variant/:filterParam/:filterParamId/:productId", getFilteredVariants);
 router.get("/variant/:productId", getVariantsByProductId);
-=======
 router.get(
   "/variant/:filterParam/:filterParamId/:productId",
   getFilteredVariants
 );
 router.get("/:varId", getVariantById);
->>>>>>> FUCKING_SERVER
 
 // @route   GET /products/filter
 // @desc    GET appropriate filtered products
