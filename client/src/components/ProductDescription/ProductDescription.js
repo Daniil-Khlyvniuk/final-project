@@ -67,8 +67,13 @@ const ProductDescription = () => {
 			setActiveColor(newActiveColor)
 			if(newActiveColor !== activeColor){
 				dispatch(productActions.clearSizes())
+
 				// eslint-disable-next-line max-len
 				const newProduct = variants.find(item => item.color._id === newActiveColor)
+				// eslint-disable-next-line no-console
+				console.log(newProduct._id)
+				// eslint-disable-next-line no-debugger
+				// debugger
 				history.push(`/product-details/${newProduct._id}`)
 			}
 		}

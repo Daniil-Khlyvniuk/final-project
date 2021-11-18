@@ -5,7 +5,7 @@ import  {ProductOperations, ProductSelector} from '../../store/Product'
 import {Alert, Backdrop, CircularProgress, Container, Grid} from '@mui/material'
 import ProductDescription from '../../components/ProductDescription/ProductDescription'
 import Carousel from '../../components/Carousel/Carousel'
-// import RelatedItemsList from '../../components/RelatedItems/RelatedItemsList'
+import RelatedItemsList from '../../components/RelatedItems/RelatedItemsList'
 
 const ProductDetails = () => {
 
@@ -54,7 +54,7 @@ const ProductDetails = () => {
 					<ProductDescription />
 				</Grid>
 				<Grid sx={{mt:'80px'}} item md={12}>
-					{/*<RelatedItemsList />*/}
+					<RelatedItemsList />
 				</Grid>
 			</Grid>}
 		</Container>

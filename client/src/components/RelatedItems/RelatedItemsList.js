@@ -32,7 +32,7 @@ const RelatedItemsList = () => {
 			// eslint-disable-next-line no-console
 			console.log('err', err)
 		})
-	},[relatedIds, dispatch])
+	},[])
 
 	//убираем текущий товар из массива
 	if (relatedList.length) {
@@ -50,6 +50,8 @@ const RelatedItemsList = () => {
 		}
 	})
 
+	// eslint-disable-next-line no-console
+	console.log('12221323',slides)
 	return (
 		<div>
 			{relatedList.length &&
