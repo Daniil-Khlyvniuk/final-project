@@ -39,17 +39,13 @@ const CardList = () => {
 				{
 					!!products?.length
 					&&
-					products.map(item => {
-						// eslint-disable-next-line no-console
-						console.log(item)
-						return (
-							<Card
-								key={item._id}
-								image={'/' + item.variants[0].imageUrls[0]}
-								title={item?.name || ''}
-								price={item.variants[0].currentPrice} />
-						)
-					})
+					products.map(item => (
+						<Card
+							key={item._id}
+							image={'/' + item.variants[0].imageUrls[0]}
+							title={item?.name || ''}
+							price={item.variants[0].currentPrice} />
+					))
 				}
 			</div>
 		</div>

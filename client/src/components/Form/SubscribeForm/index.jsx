@@ -1,11 +1,11 @@
-import React, {useState} from 'react'
-import {Formik, Form, Field} from 'formik'
-import {Button, Alert} from '@mui/material'
+import React, { useState } from 'react'
+import { Formik, Form, Field } from 'formik'
+import { Button, Alert } from '@mui/material'
 
-import {SUBSCRIBE_SCHEMA} from '../setting/Schemes'
+import { SUBSCRIBE_SCHEMA } from '../setting/Schemes'
 import TextInput from '../setting/TextInput'
 
-import {addSubscribe} from '../../../utils/API/subscribersAPI'
+import { addSubscribe } from '../../../utils/API/subscribersAPI'
 
 import { styled } from '@mui/material/styles'
 
@@ -20,16 +20,14 @@ const StyledAlert = styled(Alert)(() => ({
 
 const SubscribeForm = () => {
 	const [subscribeStatus, setSubscribeStatus] = useState(null)
-	const handleSubmit = async ({email}, formikFunctions) => {
-		try{
+	const handleSubmit = async ({ email }, formikFunctions) => {
+		try {
 			const res = await addSubscribe(email)
-			if(res.status === 200)
-			{
+			if (res.status === 200) {
 				setSubscribeStatus({ success: 'You successfully subscribed!' })
 			}
 		}
-		catch(er)
-		{
+		catch (er) {
 			setSubscribeStatus({ error: er.response.data.message })
 		}
 		formikFunctions.resetForm()
@@ -38,16 +36,16 @@ const SubscribeForm = () => {
 
 	return (
 		<Formik
-			initialValues={{email: ''}}
+			initialValues={{ email: '' }}
 			validationSchema={SUBSCRIBE_SCHEMA}
 			onSubmit={handleSubmit}
 		>
 			{(formikProps) => (
 				<>
 					<StyledForm noValidate>
-						<Field 
+						<Field
 							component={TextInput}
-							type="email" 
+							type="email"
 							placeholder="e-mail"
 							name="email"
 							onBlur={formikProps.handleBlur}
@@ -56,13 +54,13 @@ const SubscribeForm = () => {
 							asyncborderradius={'on'}
 							fullWidth={true}
 						/>
-						
-						<Button 
+
+						<Button
 							type='submit'
 							variant="contained"
 							disabled={
 								!formikProps.isValid ||
-                formikProps.isSubmitting
+								formikProps.isSubmitting
 							}
 							asyncborderradius={'on'}
 							sx={{
@@ -70,12 +68,12 @@ const SubscribeForm = () => {
 								paddingRight: '40px',
 							}}
 						>
-            send
+							send
 						</Button>
 					</StyledForm>
 
 					{!formikProps.isValid && (
-						<StyledAlert 
+						<StyledAlert
 							severity="error"
 							icon={false}
 						>
@@ -83,7 +81,7 @@ const SubscribeForm = () => {
 						</StyledAlert>
 					)}
 					{subscribeStatus && subscribeStatus['success'] && (
-						<StyledAlert 
+						<StyledAlert
 							icon={false}
 							severity="success"
 						>
