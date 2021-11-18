@@ -3,25 +3,27 @@ import { makeStyles } from '@mui/styles'
 
 export const useFormStyle = makeStyles({
 	form: {
-		paddingLeft: 50,
-		paddingRight: 50,
-		maxWidth: '450px',
-		width: '100%',
+		// paddingLeft: 50,
+		// paddingRight: 50,
+		// maxWidth: '450px',
+		// width: '100%',
 		margin: 'auto',
-		overflowY: 'auto ',
+		// overflowY: 'auto ',
 	},
 	formAuth: {
 		maxHeight: 'calc(100vh - 200px)',
 	},
 	input:{
-		width: 448.69,
-		height: 26.06,
+		// width: 448.69,
+		// height: 26.06,
+		padding: '5px',
 		fontFamily: theme.typography.fontFamily,
 		fontStyle: 'normal',
 		fontWeight: 300,
 		fontSize: 20,
 		lineHeight: 24,
-		marginTop: '50px',
+		// marginTop: '50px',
+		marginTop: '25px',
 		transition: '0.5s'
 	},
 	ads: {
@@ -34,23 +36,6 @@ export const useFormStyle = makeStyles({
 		fontSize: '14px',
 		lineHeight: '20px',
 		marginBottom: 5
-	},
-	submit: {
-		width: 240,
-		height: 50.47,
-		background: '#373F41',
-		boxShadow: '0, 1, 1, rgba(0, 0, 0, 0.25)',
-		borderRadius: 4,
-		color: '#ffffff',
-		fontFamily: 'Abel, sans-serif',
-		fontStyle: 'normal',
-		fontWeight: 'lighter',
-		letterSpacing: 0.05,
-		cursor: 'pointer',
-		display: 'block',
-		margin: 'auto',
-		fontSize: '18px',
-		lineHeight: '32px'
 	},
 	policy: {
 		fontFamily: theme.typography.fontFamily,

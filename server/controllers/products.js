@@ -140,7 +140,6 @@ exports.getProductsInfo = async (req, res, next) => {
 };
 
 exports.getFilteredVariants = async (req, res, next) => {
-  console.log(req.params);
   const { productId, filterParam, filterParamId } = req.params;
 
   try {

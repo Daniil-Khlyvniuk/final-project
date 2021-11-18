@@ -7,6 +7,8 @@ import { useSelector } from 'react-redux'
 import { modalSelectors } from './store/Modal'
 import useAuthToken from './utils/customHooks/useAuthToken'
 
+
+
 const App = () => {
 	const modal = useSelector(modalSelectors.checkOpen())
 
