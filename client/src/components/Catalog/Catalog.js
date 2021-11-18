@@ -30,15 +30,17 @@ const Catalog = () => {
 		<Box className={classes.container}>
 			{
 				!!products
-				&& products?.map((item) => (
-					<CardInCatalog
-						key={item._id}
-						_id={item._id}
-						image={'/' + item.imageUrls[0]}
-						title={item?.product?.name || ''}
-						price={item.currentPrice}
-					/>
-				))
+				&& products?.map((item) => {
+					return (
+						<CardInCatalog
+							key={item._id}
+							_id={item._id}
+							image={'/' + item.variants[0].imageUrls[0]}
+							title={item?.name || ''}
+							price={item.variants[0].currentPrice}
+						/>
+					)
+				})
 			}
 		</Box>
 	)
