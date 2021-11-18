@@ -32,11 +32,10 @@ const Carousel = ({
 				<div
 					className={className + style.nextEl}
 					style={{
-						width: '25px',
-						height: '25px',
 						borderTop: '2px solid #5C5E60',
 						borderRight: '2px solid #5C5E60',
-						transform: 'rotate(45deg)' }}
+						transform: 'rotate(45deg)'
+					}}
 					onClick={onClick}
 				/>
 			</div>
@@ -50,8 +49,6 @@ const Carousel = ({
 				<div
 					className={className + style.prevEl}
 					style={{
-						width: '25px',
-						height: '25px',
 						borderTop: '2px solid #5C5E60',
 						borderRight: '2px solid #5C5E60',
 						transform: 'rotate(-135deg)' }}
