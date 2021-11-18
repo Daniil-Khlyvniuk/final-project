@@ -333,7 +333,6 @@ exports.searchAutocomplete = async (req, res, next) => {
     res.status(400).json({ message: "Query string is empty" });
   }
 
-  //Taking the entered value from client in lower-case and trimed
   const query = req.body.query.toLowerCase().trim().replace(/\s\s+/g, " ");
   const foundProducts = await Product.aggregate([
     {

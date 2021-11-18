@@ -8,8 +8,8 @@ module.exports.getFilterConditions = (query) => {
 };
 
 module.exports.getSortConditions = (sortParam) => {
-  const sortParamValue = sortParam?.trim()?.replace("-", "");
   const sortType = sortParam.includes("-") ? -1 : 1;
+  const sortParamValue = sortParam?.trim()?.replace("-", "");
   // -1 -> small > big
   //1 -> big > small
   return {
