@@ -6,6 +6,7 @@ import AppRoutes from './routes/AppRoutes'
 import { useSelector } from 'react-redux'
 import { modalSelectors } from './store/Modal'
 import useAuthToken from './utils/customHooks/useAuthToken'
+import ScrollButton from './components/ScrollButton/ScrollButton'
 
 
 
@@ -22,6 +23,7 @@ const App = () => {
 			<Header />
 			<AppRoutes />
 			<Footer />
+			<ScrollButton/>
 			{modal}
 		</div>
 	)

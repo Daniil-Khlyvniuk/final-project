@@ -1,22 +1,24 @@
 import React, { useState } from 'react'
-// import Button from '@mui/material/Button'
-import {FaArrowCircleUp} from 'react-icons/fa'
-import styled from 'styled-components'
+import { makeStyles } from '@mui/styles'
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
 
 const ScrollButton = () => {
 	const [visible, setVisible] = useState(false)
+	const buttonStyles = makeStyles({
+		button: {
+			position: 'fixed',
+			width: '100%',
+			left: '92%',
+			bottom: '150px',
+			height: '20px',
+			fontSize: '3rem',
+			zIndex: 1,
+			cursor: 'pointer',
+			color: '#373F41'
+		}
+	})
+	const style = buttonStyles()
 
-	const Button = styled.div`
-   position: fixed; 
-   width: 100%;
-   left: 50%;
-   bottom: 40px;
-   height: 20px;
-   font-size: 3rem;
-   z-index: 1;
-   cursor: pointer;
-   color: green;
-	`
 	const toggleVisible = () => {
 		const scrolled = document.documentElement.scrollTop
 		if (scrolled > 300){
@@ -37,9 +39,9 @@ const ScrollButton = () => {
 	window.addEventListener('scroll', toggleVisible)
 
 	return (
-		<Button>
-			<FaArrowCircleUp onClick={scrollToTop} style={{display: visible ? 'inline' : 'none'}} />
-		</Button>
+		<div	className={style.button}>
+			<ArrowUpwardIcon fontSize={'large'} onClick={scrollToTop} style={{display: visible ? 'inline' : 'none'}} />
+		</div>
 	)
 }
 
