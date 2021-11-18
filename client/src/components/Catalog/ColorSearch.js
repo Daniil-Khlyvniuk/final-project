@@ -6,15 +6,21 @@ import colorAPI from '../../utils/API/colorAPI'
 
 
 const ColorSearch = () => {
-
+	const [formats, setFormats] = useState()
 	const [colors, setColors] =	useState([])
+
+
 
 	useEffect(async ()=>{
 		const res = await colorAPI.getColors()
 		setColors(res.data)
 	},[])
 
-
+	const handleFormat = (event, newActiveColor) => {
+		if (newActiveColor !== null) {
+			setFormats(newActiveColor)
+		}
+	}
 
 	return (
 		<div>
@@ -22,9 +28,13 @@ const ColorSearch = () => {
 				{colors.length && (colors.map((color)=> {
 					return(
 						// eslint-disable-next-line react/jsx-key
-						<ToggleButtonGroup exclusive value={'red'}>
+						<ToggleButtonGroup
+							exclusive
+							value={formats}
+							onChange={handleFormat}
+						>
 							<ToggleButton key={color._id}  aria-label={color.name} value={color._id} color={'neutral'} sx={{border: 'none', padding: '0', mr:'10px'}}>
-								<CircleIcon stroke-width={1} stroke={'black'}
+								<CircleIcon stroke-width={1} stroke={formats === color._id ? 'black' : 'white'}
 									sx={{width: '20px',color: color.cssValue }}/>
 							</ToggleButton>
 						</ToggleButtonGroup>

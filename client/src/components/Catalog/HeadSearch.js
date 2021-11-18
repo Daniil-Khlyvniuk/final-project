@@ -10,6 +10,14 @@ const headSearch = {
 	maxWidth: '880px',
 	marginTop: '-40px',
 	marginBottom: '-40px',
+	gap: '1em',
+	['@media (max-width:750px)']: {
+		gap: '0.5em',
+	},
+	['@media (max-width:450px)']: {
+		padding: 6,
+		gap: 0
+	},
 }
 
 const HeadSearch = () => {
@@ -31,6 +39,7 @@ const HeadSearch = () => {
 		<div style={headSearch}>
 			{perPage.length && (
 				<NativeSelect
+					style={headSearch}
 					margin={'50px'}
 					defaultValue={1}
 					variant={'outlined'}
@@ -45,6 +54,8 @@ const HeadSearch = () => {
 			)}
 			<NativeSelect
 				margin={'50px'}
+				style={headSearch}
+				sx={5}
 				defaultValue={18}
 				inputProps={{
 					name: 'Sort by',

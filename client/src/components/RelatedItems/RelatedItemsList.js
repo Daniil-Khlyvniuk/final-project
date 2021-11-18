@@ -17,7 +17,6 @@ const RelatedItemsList = () => {
 	// const id = '61900607b6ba7e18e4336dbb'
 
 
-	//передаем в редакс текущий id товара
 	useEffect(() => {
 		dispatch(productsReducer.addRelatedId(id))
 	}, [relatedList, dispatch])
