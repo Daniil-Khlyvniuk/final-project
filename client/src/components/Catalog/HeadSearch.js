@@ -32,6 +32,7 @@ const HeadSearch = () => {
 		>
 			{perPage.length && (
 				<NativeSelect
+					borderBottom={'none'}
 					margin={'50px'}
 					defaultValue={1}
 					variant={'outlined'}

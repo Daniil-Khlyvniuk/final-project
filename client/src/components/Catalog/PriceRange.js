@@ -5,9 +5,13 @@ import { FormControl, InputAdornment, OutlinedInput, Slider, Box } from '@mui/ma
 const PriceRng = {
 	height: '22px',
 	width: '80px',
-	margin: '0px 10px',
+	margin: '0px 5px',
 	borderRadius: '0px',
 
+}
+
+const style = {
+	marginLeft: '-50px',
 }
 
 const PriceRangeBlock = {
@@ -33,7 +37,7 @@ const PriceRange = () => {
 	
 
 	return (
-		<Box>
+		<Box style={style}>
 			<Slider
 				value={value}
 				onChange={rangeSelector}
