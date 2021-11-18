@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import Button from '@mui/material/Button'
-import Grid from '@mui/material/Grid'
+import {Box} from '@mui/material'
 import categoriesAPI from '../../utils/API/categoriesApi'
+import CatalogSearchItem from './CatalogSearchItem'
 
-
-const HeadSearch = () => {
+const CatalogSearch = () => {
 
 	const [catalogs, setCatalogs] = useState([])
 	
@@ -18,7 +17,7 @@ const HeadSearch = () => {
 	})
 
 	return (
-		<Grid item xs={12} 
+		<Box
 			sx={{
 				flexWrap:'wrap',
 				display: 'flex',
@@ -28,15 +27,10 @@ const HeadSearch = () => {
 			}}
 		>
 			{catalogs.length && catalogs.map(catalog => (
-				<Button
-					key={catalog._id}
-					color="primary"
-					variant="outlined"
-				>{catalog.name}
-				</Button>
+				<CatalogSearchItem key={catalog._id} catalog={catalog} />
 			))}
-		</Grid>
+		</Box>
 	)
 }
 
-export default HeadSearch
+export default CatalogSearch
