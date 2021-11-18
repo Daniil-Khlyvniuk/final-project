@@ -7,9 +7,7 @@ import { slidesOperations, slidesSelectors } from '../../store/Slider'
 import { useDispatch, useSelector } from 'react-redux'
 
 
-
 const Main = () => {
-
 	const slides = useSelector(slidesSelectors.getSlides())
 	// const isLoading = useSelector(slidesSelectors.getError())
 	// const error = useSelector(slidesSelectors.getError())
@@ -19,14 +17,12 @@ const Main = () => {
 		dispatch(slidesOperations.fetchSliders())
 	}, [dispatch])
 
-
 	return (
 		<Container maxWidth="lg">
 			<Carousel slides={slides} main={true}/>
 			<CardList />
 			<Popular/>
 		</Container>
-
 	)
 }
 
