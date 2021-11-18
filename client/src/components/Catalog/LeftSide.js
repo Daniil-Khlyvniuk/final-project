@@ -12,7 +12,7 @@ const LeftSide = () => {
 	const [open, setOpen] = useState(false)
 	const [openSize, setOpenSize] = useState(false)
 	const [openColor, setOpenColor] = useState(false)
-	const [openFabric, setOpenFabric] = useState(false)
+	// const [openFabric, setOpenFabric] = useState(false)
 
 	const handleOpenAccordion = () => {
 		setOpen((prevState => {
@@ -29,11 +29,13 @@ const LeftSide = () => {
 			setOpenColor(!prevState)
 		}))
 	}
-	const handleOpenAccordionFabric = () => {
-		setOpenFabric((prevState => {
-			setOpenFabric(!prevState)
-		}))
-	}
+
+	// const handleOpenAccordionFabric = () => {
+	// 	setOpenFabric((prevState => {
+	// 		setOpenFabric(!prevState)
+	// 	}))
+	// }
+
 
 	const style = {
 		borderBottom: '1px solid rgba(0, 0, 0, .125)',
@@ -44,8 +46,7 @@ const LeftSide = () => {
 	}
 
 	return(
-	// eslint-disable-next-line no-mixed-spaces-and-tabs
-	  <div>
+		<Box>
 			<Box>
 				<Accordion
 					sx={{boxShadow:'none'}}
@@ -60,17 +61,17 @@ const LeftSide = () => {
 								<AddOutlinedIcon fontSize={'small'} sx={{mr:'19px'}}/>
 							}
 							<Typography fontSize={16} fontWeight={600}>
-              PRICE
+						PRICE
 							</Typography>
 						</Box>
 
 					</AccordionSummary>
-					<AccordionDetails sx={{maxWidth: '447px' , pl:'54px', color: 'rgba(92, 94, 96, 0.5)'}}>
+					<AccordionDetails sx={{pl:'54px', color: '#373F41'}}>
 						<PriceRange />
 					</AccordionDetails>
 				</Accordion>
 			</Box>
-			<box>
+			<Box>
 				<Accordion sx={{boxShadow:'none'}} onChange={handleOpenAccordionSize} expanded={openSize} style={openSize ? styleOpen : style}>
 					<AccordionSummary>
 						<Box sx={{display:'flex', alignItems:'center'}}>
@@ -84,12 +85,12 @@ const LeftSide = () => {
 						</Box>
 
 					</AccordionSummary>
-					<AccordionDetails sx={{maxWidth: '447px' , pl:'54px', color: 'rgba(92, 94, 96, 0.5)'}}>
+					<AccordionDetails sx={{pl:'54px', color: '#373F41'}}>
 						<SearchSize />
 					</AccordionDetails>
 				</Accordion>
-			</box>
-			<box>
+			</Box>
+			<Box>
 				<Accordion sx={{boxShadow:'none'}} onChange={handleOpenAccordionColor} expanded={openColor} style={openColor ? styleOpen : style}>
 					<AccordionSummary>
 						<Box sx={{display:'flex', alignItems:'center'}}>
@@ -98,35 +99,40 @@ const LeftSide = () => {
 								<AddOutlinedIcon fontSize={'small'} sx={{mr:'19px'}}/>
 							}
 							<Typography fontSize={16} fontWeight={600}>
-                COLOR
+							COLOR
 							</Typography>
 						</Box>
 					</AccordionSummary>
-					<AccordionDetails sx={{maxWidth: '447px' , pl:'54px', color: 'rgba(92, 94, 96, 0.5)'}}>
+					<AccordionDetails sx={{pl:'54px', color: '#373F41'}}>
 						<ColorSearch />
 					</AccordionDetails>
 				</Accordion>
-			</box>
-			<box>
-				<Accordion sx={{boxShadow:'none'}} onChange={handleOpenAccordionFabric} expanded={openFabric} style={openFabric ? styleOpen : style}>
-					<AccordionSummary>
-						<Box sx={{display:'flex', alignItems:'center'}}>
-							{openFabric ?
-								<RemoveOutlinedIcon fontSize={'small'} sx={{mr:'19px'}}/> :
-								<AddOutlinedIcon fontSize={'small'} sx={{mr:'19px'}}/>
-							}
-							<Typography fontSize={16} fontWeight={600}>
-                FABRIC
-							</Typography>
-						</Box>
+			</Box>
+			{/* <Box>
+			<Accordion 
+				sx={{boxShadow:'none'}}
+				onChange={handleOpenAccordionFabric}
+				expanded={openFabric} 
+				style={openFabric ? styleOpen : style}
+			>
+				<AccordionSummary>
+					<Box sx={{display:'flex', alignItems:'center'}}>
+						{openFabric ?
+							<RemoveOutlinedIcon fontSize={'small'} sx={{mr:'19px'}}/> :
+							<AddOutlinedIcon fontSize={'small'} sx={{mr:'19px'}}/>
+						}
+						<Typography fontSize={16} fontWeight={600}>
+							FABRIC
+						</Typography>
+					</Box>
 
-					</AccordionSummary>
-					{/*<AccordionDetails sx={{maxWidth: '447px' , pl:'54px', color: 'rgba(92, 94, 96, 0.5)'}}>*/}
-					{/*	<SearchFabrik />*/}
-					{/*</AccordionDetails>*/}
-				</Accordion>
-			</box>
-		</div>
+				</AccordionSummary>
+				<AccordionDetails sx={{maxWidth: '447px' , pl:'54px', color: '#373F41'}}>
+					<SearchFabrik />
+				</AccordionDetails>
+			</Accordion>
+		</Box> */}
+		</Box>
 	)
 }
 
