@@ -32,7 +32,6 @@ const RelatedItemsList = () => {
 			console.log('err', err)
 		})
 	},[])
-
 	if (relatedList.length) {
 		relatedList = relatedList.filter(prod => prod._id !== id).reverse()
 	}
