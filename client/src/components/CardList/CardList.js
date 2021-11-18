@@ -29,7 +29,7 @@ const CardList = () => {
 	useEffect(() => {
 		if (products.length) return
 		dispatch(productsOperations.fetchProducts('sort=-date&perPage=4&startPage=1'))
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	return (
