@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import {Box} from '@mui/material'
 import categoriesAPI from '../../utils/API/categoriesApi'
-import CatalogSearchItem from './CatalogSearchItem'
+import CategorySearchItem from './CategorySearchItem'
 
-const CatalogSearch = () => {
+const CategorySearch = () => {
 
 	const [catalogs, setCatalogs] = useState([])
 	
-	const getCatalogFilters = async () => {
+	const getCategoryFilters = async () => {
 		const catalogRes = await categoriesAPI.getCategories()
 		setCatalogs(catalogRes.data)
 	}
 
 	useEffect(()=> {
-		getCatalogFilters()
-	})
+		getCategoryFilters()
+	},[])
 
 	return (
 		<Box
@@ -27,10 +27,10 @@ const CatalogSearch = () => {
 			}}
 		>
 			{catalogs.length && catalogs.map(catalog => (
-				<CatalogSearchItem key={catalog._id} catalog={catalog} />
+				<CategorySearchItem key={catalog._id} catalog={catalog} />
 			))}
 		</Box>
 	)
 }
 
-export default CatalogSearch
+export default CategorySearch

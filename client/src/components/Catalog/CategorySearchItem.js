@@ -1,13 +1,13 @@
 import React from 'react'
 import {Button} from '@mui/material'
-import {useSelector,useDispatch} from 'react-redux'
-import {filterSelectors,filterOperations} from '../../store/Filter'
+import {useSelector, useDispatch} from 'react-redux'
+import {filterSelectors, filterOperations} from '../../store/Filter'
 import PropTypes from 'prop-types'
 
-const CatalogSearchItem = ({catalog}) => {
+const CategorySearchItem = ({catalog}) => {
 	const {name} = catalog
-	const dispatch = useDispatch()
 	const isSelected = useSelector(filterSelectors.checkCategory(name))
+	const dispatch = useDispatch()
 	return (
 		<Button
 			color="primary"
@@ -19,11 +19,10 @@ const CatalogSearchItem = ({catalog}) => {
 	)
 }
 
-
-CatalogSearchItem.propTypes = {
+CategorySearchItem.propTypes = {
 	catalog: PropTypes.shape({
 		name: PropTypes.string,
 	})
 }
 
-export default CatalogSearchItem
+export default CategorySearchItem

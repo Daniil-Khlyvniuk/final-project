@@ -1,14 +1,15 @@
 import React from 'react'
-import {useSelector,useDispatch} from 'react-redux'
-import {filterSelectors,filterOperations} from '../../store/Filter'
 import { ToggleButton, ToggleButtonGroup } from '@mui/material'
 import CircleIcon from '@mui/icons-material/Circle'
+import {useSelector, useDispatch} from 'react-redux'
+import {filterSelectors, filterOperations} from '../../store/Filter'
 import PropTypes from 'prop-types'
 
 const ColorSearchItem = ({color}) => {
 	const {name, cssValue} = color
-	const dispatch = useDispatch()
 	const isSelected = useSelector(filterSelectors.checkColor(name))
+	const dispatch = useDispatch()
+
 	return (
 		<ToggleButtonGroup 
 			exclusive

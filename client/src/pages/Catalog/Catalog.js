@@ -1,60 +1,39 @@
 import React, {useEffect} from 'react'
 import {Container, Grid, Typography} from '@mui/material'
 import ProductsCatalog from '../../components/Catalog/Catalog'
-import CatalogSearch from '../../components/Catalog/CatalogSearch'
+import CategorySearch from '../../components/Catalog/CategorySearch'
 import HeadSearch from '../../components/Catalog/HeadSearch'
 import LeftSide from '../../components/Catalog/LeftSide'
 import { textStyle } from './styles'
 
-import {filterSelectors,filterOperations} from '../../store/Filter'
-import {useSelector,useDispatch} from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import {filterSelectors, filterOperations} from '../../store/Filter'
+import {useHistory} from 'react-router-dom'
+import {useSelector, useDispatch} from 'react-redux'
 import queryString from 'query-string'
 
-// import productsAPI from '../../utils/API/productsAPI'
-
 const Catalog = () => {
+	const filterStore = useSelector(filterSelectors.getFilters())
 	const history = useHistory()
-	const filters = useSelector(filterSelectors.getFilters())
+	const urlParams = queryString.parse(history.location.search,{arrayFormat: 'comma'})
 	const dispatch = useDispatch()
-	const incomeQuery = queryString.parse(history.location.search, {arrayFormat: 'comma'})
 
-	const makeSearchQueryString = () => {
-		const res = []
-		for (let key in filters)
-		{
-			if(filters[key].length)
-			{
-				res.push(`${key}=${filters[key].join(',')}`)
-			}
-		} 
-		return res.join('&')
+	//build query string on filters change
+	const buildQueryString = () => {
+		history.push({
+			pathname: history.location.pathname,
+			search: `?${queryString.stringify(filterStore,{arrayFormat: 'comma'})}`,
+		})
 	}
-	// const getProducts = async (queryString) => {
-	// 	const productsRes = await productsAPI.getFilteredProducts(queryString)
-	// 	console.log('productsRes',productsRes)
-	// }
+	useEffect(() => {
+		buildQueryString(history)
+	},[filterStore])
 
 	useEffect(() => {
-		dispatch(filterOperations.setFiltersFromQueryString(incomeQuery))
-	}, [dispatch])
+		dispatch(filterOperations.setFiltersFromUri(urlParams))
+	},[])
 
-	useEffect(() => {
-	
-		let newQueryString = makeSearchQueryString()
-		if(newQueryString)
-		{
-			newQueryString = `?${makeSearchQueryString()}`
-			history.push({
-				pathname: '/shop/catalog',
-				search: `${newQueryString}`
-			})
-			
-			// getProducts(newQueryString)
-		}
-	
-
-	}, [filters,history])
+	// eslint-disable-next-line no-console
+	// console.log('urlParams',urlParams)
 
 	return (
 		<Container maxWidth="lg">
@@ -69,7 +48,7 @@ const Catalog = () => {
 					<LeftSide />
 				</Grid>
 				<Grid item xs={9}>
-					<CatalogSearch />
+					<CategorySearch />
 					<Grid item xs={12}>
 						<HeadSearch />
 					</Grid>

@@ -1,67 +1,52 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
+	category: [],
 	color: [],
 	size: [],
-	category: [],
-	sort: ['-currentPrice']
 }
 
 export const filterSlice = createSlice({
 	name: 'filter',
 	initialState,
 	reducers: {
-		handleColor: (state, action) => {
-			const id = action.payload
-			if(state.color.includes(id))
+		handleCategory: (state, action) => {
+			const name = action.payload
+			if(state.category.includes(name))
 			{
-				state.color = state.color.filter(color => color !== id)
+				state.category = state.category.filter(category => category !== name)
 			}
 			else
 			{
-				state.color.push(id)
+				state.category.push(name)
+			}
+		},
+		handleColor: (state, action) => {
+			const name = action.payload
+			if(state.color.includes(name))
+			{
+				state.color = state.color.filter(color => color !== name)
+			}
+			else
+			{
+				state.color.push(name)
 			}
 		},
 		handleSize: (state, action) => {
-			const id = action.payload
-			if(state.size.includes(id))
+			const name = action.payload
+			if(state.size.includes(name))
 			{
-				state.size = state.size.filter(size => size !== id)
+				state.size = state.size.filter(size => size !== name)
 			}
 			else
 			{
-				state.size.push(id)
+				state.size.push(name)
 			}
 		},
-		handleCategory: (state, action) => {
-			const id = action.payload
-			if(state.category.includes(id))
-			{
-				state.category = state.category.filter(category => category !== id)
-			}
-			else
-			{
-				state.category.push(id)
-			}
-		},
- 
-		//пока под ???, как это правильно сделать
-		setFiltersFromQueryString: (state, action) => {
-			if(Object.keys(action.payload).length)
-			{
-				const fromQuery = {}
-				for(let key in action.payload)
-				{
-					if(state[key])
-					{
-						fromQuery[key] = Array.isArray(action.payload[key]) 
-							? [...action.payload[key]] 
-							: [action.payload[key]]
-					}
-				}
-				return state = {...fromQuery}
-			}
-			return state
+		
+		//for filter update from query string ONLY
+		setNewStore: (state, action) => {
+			return state = {...action.payload}
 		}
 	},
 })
