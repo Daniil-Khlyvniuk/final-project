@@ -14,29 +14,8 @@ const ColorSearch = () => {
 
 	return (
 		<Box sx={{my:'10px'}}>
-			{colors.length && (colors.map((color)=> {
-				return(
-					<ColorSearchItem key={color._id} color={color} />
-					// <ToggleButtonGroup 
-					// 	exclusive
-					// 	key={color._id}
-					// >
-					// 	<ToggleButton 
-					// 		key={color._id}
-					// 		aria-label={color.name}
-					// 		value={color._id}
-					// 		color={'neutral'}
-					// 		sx={{border: 'none', padding: '0', mr:'10px'}}
-					// 	>
-					// 		<CircleIcon 
-					// 			stroke-width={1}
-					// 			stroke={'black'}
-					// 			sx={{width: '20px', color: color.cssValue }}
-					// 		/>
-					// 	</ToggleButton>
-					// </ToggleButtonGroup>
-				)
-			})) }
+			{colors.length && 
+			colors.map((color)=> <ColorSearchItem key={color._id} color={color} />) }
 		</Box>
 	)
 }

@@ -18,7 +18,7 @@ const SearchSizeItem = ({size}) => {
 				<Checkbox
 					checked={isSelected}
 					value={name}
-					onClick={() => dispatch(filterOperations.handleSize(name))}
+					onChange={() => dispatch(filterOperations.handleSize(name))}
 					icon={<RadioButtonUncheckedIcon />}
 					checkedIcon={<RadioButtonCheckedIcon />}
 				/>

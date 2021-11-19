@@ -1,5 +1,5 @@
 import React from 'react'
-import { ToggleButton, ToggleButtonGroup } from '@mui/material'
+import { Box, ToggleButton } from '@mui/material'
 import CircleIcon from '@mui/icons-material/Circle'
 import {useSelector, useDispatch} from 'react-redux'
 import {filterSelectors, filterOperations} from '../../store/Filter'
@@ -11,9 +11,7 @@ const ColorSearchItem = ({color}) => {
 	const dispatch = useDispatch()
 
 	return (
-		<ToggleButtonGroup 
-			exclusive
-		>
+		<Box sx={{display: 'inline-block'}}>
 			<ToggleButton 
 				aria-label={name} 
 				color={'neutral'} 
@@ -21,12 +19,14 @@ const ColorSearchItem = ({color}) => {
 			>
 				<CircleIcon 
 					stroke-width={1} 
-					stroke={isSelected ? 'black' : 'white'}
-					sx={{width: '20px', color: cssValue }}
+					stroke={isSelected ? 'black' : 'transparent'}
+					fontSize={'medium'}
+					sx={{color: cssValue, opacity: () => isSelected ? '1' : '0.7' }}
 					onClick={() => dispatch(filterOperations.handleColor(name))}
 				/>
 			</ToggleButton>
-		</ToggleButtonGroup>
+		</Box>
+	
 	)
 }
 
