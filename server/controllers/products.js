@@ -244,7 +244,7 @@ exports.getProductsFilterParams = async (req, res, next) => {
   try {
     const products = await Product.aggregate([
       { $skip: startPage * perPage - perPage },
-      // { $limit: 1 },
+      { $limit: 10}, // it is not a problem
       {
         $lookup: {
           from: ProductVariant.collection.name,
