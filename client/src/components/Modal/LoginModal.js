@@ -3,18 +3,15 @@ import Form from '../Form/Form'
 import BasicModal from './Modal'
 
 const style = {
-	// position: 'absolute',
-	// top: '8%',
-	// left: '40%',
-	// // transform: 'translate(-50%, -50%)',
-	// bgcolor: '#fff',
-	// padding: '20px',
 	position: 'absolute',
 	top: '50%',
 	left: '50%',
 	transform: 'translate(-50%, -50%)',
 	bgcolor: '#fff',
 	padding: '20px',
+	['@media (max-width:440px)']: {
+		padding: '5px'
+	}
 }
 
 const LoginModal = () => {
