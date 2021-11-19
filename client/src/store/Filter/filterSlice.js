@@ -4,6 +4,8 @@ const initialState = {
 	category: [],
 	color: [],
 	size: [],
+	perPage: null,
+	sort: null,
 }
 
 export const filterSlice = createSlice({
@@ -47,6 +49,13 @@ export const filterSlice = createSlice({
 		//for filter update from query string ONLY
 		setNewStore: (state, action) => {
 			return state = {...action.payload}
+		},
+
+		setPerPage: (state, action) => {
+			state.perPage = action.payload
+		},
+		setSort: (state, action) => {
+			state.sort = action.payload
 		}
 	},
 })

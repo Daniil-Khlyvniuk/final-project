@@ -32,6 +32,7 @@ const Catalog = () => {
 		dispatch(filterOperations.setFiltersFromUri(urlParams))
 	},[])
 
+
 	// eslint-disable-next-line no-console
 	// console.log('urlParams',urlParams)
 
