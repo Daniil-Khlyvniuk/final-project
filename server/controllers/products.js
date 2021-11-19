@@ -7,6 +7,7 @@ const fileService = require("../services/fileService");
 const notFoundError = require("../commonHelpers/notFoundError");
 const isExist = require("../commonHelpers/isExist");
 const findOrCreate = require("../commonHelpers/findOrCreate");
+const filterProductDuplicates = require("../commonHelpers/filterProductDuplicates");
 const {
   getFilterConditions,
   getSortConditions,
@@ -48,7 +49,9 @@ exports.addProduct = async (req, res) => {
     description,
   };
   try {
-    const category = await Catalog.findOne({ name: productData.categories });
+    const category = await Catalog.findOne({
+      name: productData.categories,
+    });
     notFoundError(category, productData.categories);
     const product = await findOrCreate(
       Product,
@@ -114,7 +117,9 @@ exports.getVariantById = async (req, res, next) => {
 
     res.json(variant);
   } catch (err) {
-    res.status(400).json({ message: `Error happened on server: "${err}"` });
+    res.status(400).json({
+      message: `Error happened on server: "${err}"`,
+    });
   }
 };
 
@@ -122,9 +127,10 @@ exports.getProductsInfo = async (req, res, next) => {
   const { productId, kindOfInfo } = req.params;
 
   try {
-    const variant = await ProductVariant.find({ product: productId }).populate(
-      kindOfInfo
-    );
+    const variant = await ProductVariant.find({
+      product: productId,
+    }).populate(kindOfInfo);
+
     if (!variant)
       res.status(400).json({
         message: `Product with id "${productId}" not found `,
@@ -230,14 +236,15 @@ exports.getProducts = async (req, res, next) => {
 
 exports.getProductsFilterParams = async (req, res, next) => {
   const mongooseQuery = filterParser(req.query);
-  console.log(mongooseQuery);
   const filterParams = getFilterConditions(mongooseQuery);
   const sortParam = getSortConditions(req.query.sort);
   const perPage = Number(req.query.perPage);
   const startPage = Number(req.query.startPage);
+
   try {
     const products = await Product.aggregate([
       { $skip: startPage * perPage - perPage },
+      // { $limit: 1 },
       {
         $lookup: {
           from: ProductVariant.collection.name,
@@ -247,7 +254,10 @@ exports.getProductsFilterParams = async (req, res, next) => {
         },
       },
       {
-        $unwind: "$variants",
+        $unwind: {
+          path: "$variants",
+          preserveNullAndEmptyArrays: true,
+        },
       },
       {
         $lookup: {
@@ -291,15 +301,22 @@ exports.getProductsFilterParams = async (req, res, next) => {
         $project: {
           _id: 1,
           name: 1,
-          variants: 1,
           categories: 1,
+          productUrl: 1,
+          brand: 1,
+          manufacturer: 1,
+          manufacturerCountry: 1,
+          seller: 1,
+          description: 1,
+          date: 1,
+          variants: 1,
         },
       },
-      // getSortConditions(req.query.sort),
-      // { ...sortParam },
     ]);
 
-    res.json(products);
+    const result = filterProductDuplicates(products, mongooseQuery);
+
+    res.json(result);
   } catch (err) {
     res.status(400).json({
       message: `Error happened on server: "${err}" `,
@@ -314,9 +331,20 @@ exports.searchProducts = async (req, res, next) => {
 
   const query = req.body.query.toLowerCase().trim().replace(/\s\s+/g, " ");
 
-  let products = await Product.find({
-    $text: { $search: query },
-  });
+  let products = await Product.aggregate([
+    {
+      $lookup: {
+        from: ProductVariant.collection.name,
+        localField: "variants.color",
+        foreignField: "_id",
+        as: "variants.color",
+      },
+    },
+    {
+      $unwind: "$variants.color",
+    },
+    { $text: { $search: query } },
+  ]);
 
   const matchedProducts = await Promise.all(
     products.map(({ _id: productId }) =>

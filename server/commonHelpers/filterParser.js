@@ -1,13 +1,16 @@
+// const Color = require("../models/Color");
+// const Size = require("../models/Size");
+
 const excludedParams = ["perPage", "startPage", "minPrice", "maxPrice", "sort"];
 
 module.exports = function filterParser(filtersQueryString) {
   const mongooseQuery = {};
 
   mongooseQuery.currentPrice = {
-    $gte: !!filtersQueryString?.minPrice
+    $gte: filtersQueryString?.minPrice
       ? Number(filtersQueryString.minPrice)
       : 0,
-    $lte: !!filtersQueryString?.maxPrice
+    $lte: filtersQueryString?.maxPrice
       ? Number(filtersQueryString.maxPrice)
       : Infinity,
   };
