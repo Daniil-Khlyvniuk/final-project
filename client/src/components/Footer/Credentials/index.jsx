@@ -21,16 +21,20 @@ const StyledContainer = styled(Container)(() => ({
 	display: 'flex',
 	justifyContent: 'space-between',
 	alignItems: 'center',
+	flexWrap: 'wrap'
 }))
 
 const useStyles = makeStyles(() => ({
 	logoBottomLeft: {
 		marginRight: 10,
+	},
+	logoBottomRight: {
+		paddingRight: 20,
 	}
 }))
 
 const Credentials = () => {
-	const { logoBottomLeft } = useStyles()
+	const { logoBottomLeft, logoBottomRight } = useStyles()
 
 	return (
 		<Box sx={{ borderColor: '#373F41', borderTop: 1, maxWidth: 1310, margin: '0 auto' }}>
@@ -46,7 +50,9 @@ const Credentials = () => {
 						<img
 							className={logoBottomLeft}
 							src="/logo/bottom_logo1.png" alt="Company" />
-						<img src="/logo/bottom_logo2.png" alt="Postil logo" />
+						<img
+							className={logoBottomRight}
+							src="/logo/bottom_logo2.png" alt="Postil logo" />
 					</StyledBox>
 					<Typography variant='footerTextMedium'>
 						© 2010 — 2020  Simple Studio
