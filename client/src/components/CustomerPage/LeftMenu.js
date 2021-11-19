@@ -1,6 +1,7 @@
 import React from 'react'
-import {AppBar, Box, Button,  Menu, MenuItem, Toolbar, Typography, Link} from '@mui/material'
+import {AppBar, Box, Button,  Menu, MenuItem, Toolbar, Typography} from '@mui/material'
 import ScreenSearchDesktopIcon from '@mui/icons-material/ScreenSearchDesktop'
+import { HashLink } from 'react-router-hash-link'
 
 // eslint-disable-next-line react/prop-types
 const LeftMenu = ({data}) => {
@@ -34,29 +35,31 @@ const LeftMenu = ({data}) => {
 	const renderMobileMenu = (
 		<Menu
 			anchorEl={mobileMoreAnchorEl}
-			anchorOrigin={{
-				vertical: 'top',
-				horizontal: 'right'
-			}}
+
 			id={mobileMenuId}
 			keepMounted
-			transformOrigin={{
-				vertical: 'top',
-				horizontal: 'right'
-			}}
+
+			sx={{display:{md:'none'}}}
 			open={isMobileMenuOpen}
 			onClose={handleMobileMenuClose}
 		>
 			{/* eslint-disable-next-line react/prop-types */}
 			{data && data.tabs.map(tab => {
-				return (
-					<MenuItem
-						onClick={()=>{
-							handleMenuClose()
-						}}
+				if(tab.id){
+					return (
+						<MenuItem
+							onClick={()=>{
+								handleMenuClose()
+							}}
+							key={tab.tabTitle}>
+							<HashLink style={{color:'black', textDecoration:'none'}} smooth to={`/shop/terms-of-service#${tab.id}`}>
+								{tab.tabTitle}
+							</HashLink>
 
-						key={tab.tabTitle}>{tab.tabTitle}</MenuItem>
-				)
+						</MenuItem>
+					)
+				}
+
 			})}
 
 		</Menu>
@@ -85,13 +88,13 @@ const LeftMenu = ({data}) => {
 						{/* eslint-disable-next-line react/prop-types */}
 						{data && data.tabs.map(tab => {
 							return (
-								<Link
+								<Typography
 									fontSize={'16px'}
 									sx={{letterSpacing:'0.04em' ,marginTop:'25px'}}
 									underline="none"
 									key={tab.tabTitle}>
-									{tab.id}
-								</Link>
+									{tab.tabTitle}
+								</Typography>
 							)
 						})}
 
