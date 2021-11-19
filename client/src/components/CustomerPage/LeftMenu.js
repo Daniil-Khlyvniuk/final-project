@@ -1,6 +1,7 @@
 import React from 'react'
 import {AppBar, Box, Button,  Menu, MenuItem, Toolbar, Typography, Link} from '@mui/material'
 import ScreenSearchDesktopIcon from '@mui/icons-material/ScreenSearchDesktop'
+
 // eslint-disable-next-line react/prop-types
 const LeftMenu = ({data}) => {
 	const [anchorEl, setAnchorEl] = React.useState(null)
@@ -28,28 +29,6 @@ const LeftMenu = ({data}) => {
 		setMobileMoreAnchorEl(event.currentTarget)
 	}
 
-	// eslint-disable-next-line no-unused-vars
-	const menuId = 'primary-search-account-menu'
-	// const renderMenu = (
-	//   <Menu
-	//     anchorEl={anchorEl}
-	//     anchorOrigin={{
-	//       vertical: 'top',
-	//       horizontal: 'right',
-	//     }}
-	//     id={menuId}
-	//     keepMounted
-	//     transformOrigin={{
-	//       vertical: 'top',
-	//       horizontal: 'right',
-	//     }}
-	//     open={isMenuOpen}
-	//     onClose={handleMenuClose}
-	//   >
-	//     <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-	//     <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-	//   </Menu>
-	// );
 
 	const mobileMenuId = 'primary-search-account-menu-mobile'
 	const renderMobileMenu = (
@@ -71,7 +50,12 @@ const LeftMenu = ({data}) => {
 			{/* eslint-disable-next-line react/prop-types */}
 			{data && data.tabs.map(tab => {
 				return (
-					<MenuItem key={tab.tabTitle}>{tab.tabTitle}</MenuItem>
+					<MenuItem
+						onClick={()=>{
+							handleMenuClose()
+						}}
+
+						key={tab.tabTitle}>{tab.tabTitle}</MenuItem>
 				)
 			})}
 
@@ -88,12 +72,26 @@ const LeftMenu = ({data}) => {
 							flexDirection: 'column'
 						}}
 					>
-						{/* eslint-disable-next-line react/prop-types */}
-						<Typography color={'primary'} variant={'h6'} fontSize={'18px'} fontWeight={'700'}>{data.pageTitle}</Typography>
+
+						<Typography
+							color={'rgba(55, 63, 65, 1)'}
+							variant={'h6'}
+							fontSize={'18px'}
+							fontWeight={'700'}
+							sx={{lineHeight:'24px'}}>
+							{/* eslint-disable-next-line react/prop-types */}
+							{data.pageTitle}
+						</Typography>
 						{/* eslint-disable-next-line react/prop-types */}
 						{data && data.tabs.map(tab => {
 							return (
-								<Link fontSize={'16px'} sx={{letterSpacing:'0.04em' ,marginTop:'25px'}} underline="none" key={tab.tabTitle}>{tab.tabTitle}</Link>
+								<Link
+									fontSize={'16px'}
+									sx={{letterSpacing:'0.04em' ,marginTop:'25px'}}
+									underline="none"
+									key={tab.tabTitle}>
+									{tab.id}
+								</Link>
 							)
 						})}
 

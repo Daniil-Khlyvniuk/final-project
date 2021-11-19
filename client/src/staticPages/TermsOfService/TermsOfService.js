@@ -23,11 +23,13 @@ const TermsOfService = () => {
 			{loading && <p>Loading</p>}
 			{data &&
 				<Container>
-					<Grid container sx={{marginTop:'90px'}}>
-						<Grid item md={3}>
+					<Grid container spacing={1} sx={{marginTop:{xs:'10px', md:'90px'}}}>
+						<Grid item
+							md={3} sx={{margin:{xs:'0 auto'}}}
+						>
 							<LeftMenu data={data}/>
 						</Grid>
-						<Grid item={9}>
+						<Grid item md={9}>
 							<RightMenu tabs={data.tabs}/>
 						</Grid>
 					</Grid>

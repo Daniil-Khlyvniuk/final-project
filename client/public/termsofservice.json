@@ -4,6 +4,7 @@
     "tabs": [
       {
         "tabTitle": "ORDER ISSUES",
+        "id": "order",
         "subject": [
           {
             "title": "DUTIES & TAXES",
@@ -25,6 +26,7 @@
       },
       {
         "tabTitle": "DELIVERY",
+        "id": "delivery",
         "subject": [
           {
             "title":"CANCELLATIONS",
@@ -38,6 +40,7 @@
       },
       {
         "tabTitle": "RETURNS & REFUNDS",
+        "id": "returns",
         "subject": [
           {
             "title": "CUSTOMISED ITEMS",
@@ -45,10 +48,12 @@
           },
           {
             "title": "REFUNDS",
+            "id": "refunds",
             "description": "To request a tax refund, file an Application for Refund - Sales and Use Tax (Form DR-26S) or Application for Refund - All Other Taxes (Form DR-26). An application form may be completed to request moneys paid into the State Treasury for a tax overpayment, payment when tax was not due, or payment made in error.\n\nWhen submitting your refund application online, a confirmation page will be displayed with a confirmation number on it. Print the page or write down the confirmation number for your records. The Florida Department of Revenue may notify you within 30 days of the refund submission of any documentation required to process your refund claim. The application will not be considered valid until all supporting documentation is received by the Department."
           },
           {
             "title":  "FINAL SALE",
+            "id": "sale",
           "description": "Items marked Final Sale may not be returned or exchanged."
           },
           {
@@ -63,6 +68,7 @@
       },
       {
         "tabTitle": "PAYMENT",
+        "id": "payment",
         "description": "At Postil’ Shop, you are shopping pieces from our luxury brands and partners around the globe, expertly curated for you by our team. \nPrices are determined by each our partner, therefore the price of the same item may vary depending on your location and where you order an item from.",
         "subject": [
           {
