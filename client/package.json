@@ -13,6 +13,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.24.0",
+    "eslint-plugin-babel": "^5.3.1",
     "formik": "^2.2.9",
     "npm-watch": "^0.11.0",
     "prop-types": "^15.7.2",
@@ -60,6 +61,8 @@
     ]
   },
   "devDependencies": {
+    "@babel/eslint-parser": "^7.16.3",
+    "@babel/eslint-plugin": "^7.14.5",
     "axios": "^0.24.0",
     "prettier": "2.4.1"
   },

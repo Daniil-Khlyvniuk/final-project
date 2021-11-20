@@ -8,6 +8,7 @@ const productSlice = createSlice({
 		activeProduct :null,
 		parent : null,
 		variants: null,
+		activeColor:null,
 		allColors: null,
 		allSizes : null,
 		isLoading: false,
@@ -23,6 +24,7 @@ const productSlice = createSlice({
 		[fetchProductUrl.fulfilled]:(state, action) => {
 			state.activeProduct = action.payload
 			state.parent = action.payload.product
+			state.activeColor = action.payload.color._id
 			state.isLoading = false
 		},
 		[fetchProductUrl.pending]:(state) => {

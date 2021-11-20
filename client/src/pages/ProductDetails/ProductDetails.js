@@ -2,10 +2,11 @@ import React, {useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import  {ProductOperations, ProductSelector} from '../../store/Product'
-import {Alert, Backdrop, CircularProgress, Container, Grid} from '@mui/material'
+import {Alert, Container, Grid} from '@mui/material'
 import ProductDescription from '../../components/ProductDescription/ProductDescription'
 import Carousel from '../../components/Carousel/Carousel'
 import RelatedItemsList from '../../components/RelatedItems/RelatedItemsList'
+import BackdropLoader from '../../components/UI/BackdropLoader/BackdropLoader'
 
 const ProductDetails = () => {
 
@@ -27,25 +28,20 @@ const ProductDetails = () => {
 			dispatch(ProductOperations.fetchSizes({
 				colorId: activeProduct.color._id,
 				productId: activeProduct.product._id}))
-			dispatch(ProductOperations.fetchAllVariants(parent.variants))
+			dispatch(ProductOperations.fetchAllVariants(parent._id))
+
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [activeProduct, dispatch])
+	}, [activeProduct])
 
 
 
 	if (!activeProduct ) {
 		return <Alert severity='error'>Product not found</Alert>
 	}
-	
+
 	return (
 		<Container maxWidth='lg' sx={{mt:'80px'}}>
-			{isLoading && (
-				<Backdrop
-					sx={{ color: 'white', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-					open={isLoading}>
-					<CircularProgress color="inherit" />
-				</Backdrop>)}
+			{isLoading && <BackdropLoader open={isLoading} />}
 			{activeProduct && <Grid container spacing={2}>
 				<Grid item md={6} xs={12} >
 					<Carousel slides={activeProduct.imageUrls} product={true} />
@@ -61,5 +57,5 @@ const ProductDetails = () => {
 	)
 
 }
-	
+
 export default ProductDetails

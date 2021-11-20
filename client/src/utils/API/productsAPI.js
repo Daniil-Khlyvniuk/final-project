@@ -47,6 +47,10 @@ const searchAutocomplete = (searchPhrases) => axios.post('/api/products/autocomp
 // eslint-disable-next-line max-len
 const getFilteredProducts = (filterParams) => axios.get(`/api/products/filter${filterParams}`)
 // please see documentaion for available and custom params
+const getAllVariantsByProductId = (productId) => (
+	axios.get(`/api/products/variant/${productId}`)
+)
+
 
 export default {
 	getAllProducts,
@@ -60,6 +64,7 @@ export default {
 	getSizes,
 	getNewVariant,
 	searchAutocomplete,
+	getAllVariantsByProductId,
 	getSizesNew
 
 
