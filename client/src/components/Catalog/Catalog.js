@@ -24,6 +24,8 @@ const Catalog = () => {
 		dispatch(productsOperations.fetchProducts('sort=-date&perPage=4&startPage=1'))
 	}, [dispatch])
 
+	console.log(products)
+
 	return (
 		<div className={classes.container}>
 			{

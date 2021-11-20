@@ -7,16 +7,21 @@ export const useStyles = makeStyles(() => ({
 	},
 	container: {
 		display: 'flex',
+		flexDirection: 'column',
 		padding: '20px',
 		borderBottom: '1px solid grey',
 		position: 'relative',
 		gap: '80px',
-		alignItems: 'flex-start',
+		alignItems: 'center',
 		'& h2': {
 			margin: '0',
 		},
 		'& span': {
 			margin: '0'
+		},
+		['@media(min-width: 600px)']:{
+			flexDirection: 'row',
+			alignItems: 'flex-start',
 		}
 	},
 	cross: {

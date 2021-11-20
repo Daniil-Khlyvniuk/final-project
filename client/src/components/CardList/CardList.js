@@ -30,6 +30,8 @@ const CardList = () => {
 		dispatch(productsOperations.fetchProducts('sort=-date&perPage=4&startPage=1'))
 	}, [dispatch])
 
+	console.log(products)
+
 	return (
 		<div>
 			<Typography fontSize={32} sx={{mb: '14px', mt: '85px'}} variant={'h2'} className={classes.title}>NEW IN</Typography>
