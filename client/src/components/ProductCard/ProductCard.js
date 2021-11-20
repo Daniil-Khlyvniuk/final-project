@@ -1,7 +1,7 @@
 import React from 'react'
 import {useStyles} from './styles'
+import PropTypes from 'prop-types'
 
-// eslint-disable-next-line react/prop-types
 const ProductCard = ({image,title,price}) => {
 	const classes = useStyles()
 	return (
@@ -13,6 +13,13 @@ const ProductCard = ({image,title,price}) => {
 			</div>
 		</div>
 	)
+}
+
+
+ProductCard.propTypes = {
+	title: PropTypes.string,
+	image: PropTypes.string,
+	price: PropTypes.string,
 }
 
 

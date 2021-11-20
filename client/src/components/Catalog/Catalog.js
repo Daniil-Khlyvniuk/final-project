@@ -15,7 +15,6 @@ const useStyles = makeStyles({
 	}
 })
 
-
 const Catalog = () => {
 	const products = useSelector(productsSelectors.getProducts())
 	const dispatch = useDispatch()
@@ -26,8 +25,6 @@ const Catalog = () => {
 		dispatch(productsOperations.fetchProducts('sort=-date&perPage=4&startPage=1'))
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
-
-	console.log(products)
 
 	return (
 		<Box className={classes.container}>

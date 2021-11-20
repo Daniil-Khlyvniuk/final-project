@@ -2,15 +2,16 @@ import React from 'react'
 import {useStyles} from './styles'
 import * as shoppingBagActions from '../../store/ShoppingBag/shoppingBagSlice'
 import {useDispatch} from 'react-redux'
+import PropTypes from 'prop-types'
 
-// eslint-disable-next-line react/prop-types
 const CardInCatalog = ({title, image, price, _id}) => {
 	const classes = useStyles()
 	const dispatch = useDispatch()
-
 	const buy = () => {
 		const ls = JSON.parse(localStorage.getItem('shoppingBag') || '[]') || []
-		localStorage.setItem('shoppingBag', JSON.stringify([...ls, ...[{title, image, price, _id}]]))
+		localStorage.setItem('shoppingBag',
+			JSON.stringify([...ls, ...[{title, image, price, _id}]])
+		)
 		dispatch(shoppingBagActions.addToShoppingBag(
 			[...ls, ...[{title, image, price, _id}]]
 		))
@@ -29,6 +30,13 @@ const CardInCatalog = ({title, image, price, _id}) => {
 			</div>
 		</div>
 	)
+}
+
+CardInCatalog.propTypes = {
+	_id: PropTypes.string,
+	title: PropTypes.string,
+	image: PropTypes.string,
+	price: PropTypes.string,
 }
 
 export default CardInCatalog
