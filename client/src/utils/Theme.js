@@ -52,7 +52,10 @@ const theme = createTheme({
 			fontFamily: 'Mulish, sans-serif',
 			fontWeight: 400,
 			fontSize: '16px',
-			lineHeight: 'normal'
+			lineHeight: 'normal',
+			['@media (max-width:390px)']: {
+				paddingTop: '15px',
+			}
 		},
 		footerTextLight: {
 			textTransform: 'capitalize',
