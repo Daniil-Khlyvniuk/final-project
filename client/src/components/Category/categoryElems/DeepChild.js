@@ -1,16 +1,15 @@
 import React from 'react'
 import { StyledMenuItem } from './style'
 import PropTypes from 'prop-types'
-import { useHistory } from 'react-router'
+import { Link } from 'react-router-dom'
 
 const DeepChild = ({ text }) => {
-	let history = useHistory()
-	// ...?category=${text}
 	return (
-		// eslint-disable-next-line max-len
-		<StyledMenuItem onClick={() => history.push(`/api/products/filter?category=${text}`)}>
-			{ text }
-		</StyledMenuItem>
+		<Link to={`/api/products/filter?category=${text}`}>
+			<StyledMenuItem>
+				{text}
+			</StyledMenuItem>
+		</Link>
 	)
 }
 

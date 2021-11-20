@@ -26,6 +26,7 @@ const AppRoutes = () => {
 			<Route exact path='/product-details/:id'><ProductDetails /></Route>
 			<Route exact path='/cart'><Cart /></Route>
 			<Route exact path='/shop/catalog'><Catalog /></Route>
+			{/* <Route exact path='/api/catalog'><Catalog /></Route> */}
 			<Route exact path='/shop/payment-and-delivery'><PaymentAndDelivery /></Route>
 			<Route exact path='/shop/returns'><Returns /></Route>
 			<Route exact path='/shop/privacy-policy'><PrivacyPolicy /></Route>
