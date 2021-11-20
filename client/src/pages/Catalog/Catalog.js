@@ -5,17 +5,18 @@ import CategorySearch from '../../components/Catalog/CategorySearch'
 import HeadSearch from '../../components/Catalog/HeadSearch'
 import LeftSide from '../../components/Catalog/LeftSide'
 import { textStyle } from './styles'
-
+// eslint-disable-next-line no-unused-vars
 import {filterSelectors, filterOperations} from '../../store/Filter'
 import {useHistory} from 'react-router-dom'
+// eslint-disable-next-line no-unused-vars
 import {useSelector, useDispatch} from 'react-redux'
 import queryString from 'query-string'
 
 const Catalog = () => {
 	const filterStore = useSelector(filterSelectors.getFilters())
 	const history = useHistory()
-	const urlParams = queryString.parse(history.location.search,{arrayFormat: 'comma'})
-	const dispatch = useDispatch()
+	// const urlParams = queryString.parse(history.location.search,{arrayFormat: 'comma'})
+	// const dispatch = useDispatch()
 
 	//build query string on filters change
 	const buildQueryString = () => {
@@ -29,10 +30,10 @@ const Catalog = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[filterStore])
 
-	useEffect(() => {
-		dispatch(filterOperations.setFiltersFromUri(urlParams))
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	},[])
+	// useEffect(() => {
+	// 	dispatch(filterOperations.setFiltersFromUri(urlParams))
+	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
+	// },[])
 
 
 	// eslint-disable-next-line no-console

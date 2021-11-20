@@ -39,9 +39,9 @@ const CardList = () => {
 					products.map(item => (
 						<Card
 							key={item._id}
-							// image={'/' + item.variants.imageUrls[0]}
+							image={'/' + item.variants[0].imageUrls[0]}
 							title={item?.name || ''}
-							price={item.variants.currentPrice} />
+							price={item.variants[0].currentPrice} />
 					))
 				}
 			</div>
