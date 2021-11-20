@@ -13,7 +13,7 @@ const SearchSize = () => {
 	}
 	useEffect(()=>{
 		getSizeFilters()
-	})
+	}, [])
 	return (
 		<Box>
 			<FormControl component="fieldset">

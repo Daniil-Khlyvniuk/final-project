@@ -15,7 +15,7 @@ const HeadSearch = () => {
 
 	useEffect(()=> {
 		getCatalogFilters()
-	})
+	}, [])
 
 	return (
 		<Grid item xs={12} 

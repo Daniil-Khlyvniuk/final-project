@@ -7,6 +7,7 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
 import { KeyboardArrowUp } from '@mui/icons-material'
 import PropTypes from 'prop-types'
 import { Box } from '@mui/system'
+import { Link } from 'react-router-dom'
 
 const ParentMenuList = ({
 	children = [],
@@ -44,7 +45,23 @@ const ParentMenuList = ({
 
 	return (
 		<Box style={{ zIndex: '99999999999999' }}>
-			<StyledMenuItem
+			{parent ? <Link>
+				<StyledMenuItem
+					ref={anchorRef}
+					id={`${text}-button`}
+					aria-controls={open && 'composition-menu'}
+					aria-expanded={open && 'true'}
+					aria-haspopup="true"
+					onClick={root ? handleToggle : null}
+					onMouseEnter={parent ? handleOpen : null}
+					onMouseLeave={handleClose}
+				>
+					{root ? text : text}
+					{parent && <KeyboardArrowRightIcon />}
+					{(root && !open) && <KeyboardArrowDownIcon />}
+					{(root && open) && <KeyboardArrowUp />}
+				</StyledMenuItem>
+			</Link> : <StyledMenuItem
 				ref={anchorRef}
 				id={`${text}-button`}
 				aria-controls={open && 'composition-menu'}
@@ -58,7 +75,7 @@ const ParentMenuList = ({
 				{parent && <KeyboardArrowRightIcon />}
 				{(root && !open) && <KeyboardArrowDownIcon />}
 				{(root && open) && <KeyboardArrowUp />}
-			</StyledMenuItem>
+			</StyledMenuItem>}
 
 			<Popper
 				open={open}
