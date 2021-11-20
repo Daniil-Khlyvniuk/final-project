@@ -18,6 +18,8 @@ const Carousel = ({
 	const slider = useRef()
 	const thumbs = useRef()
 
+	// eslint-disable-next-line no-console
+	console.log(slides)
 
 	useEffect(() => {
 		setNav1(slider.current)
@@ -126,9 +128,11 @@ const Carousel = ({
 							ref={slider}
 						>
 							{slides?.map((slide, index) => {
+								// eslint-disable-next-line no-console
+								console.log('slide_1', slide)
 								return (
 									<div key={index} className={style.slideContainer}>
-										<img src={slide[index]} className={style.slide} alt=""/>
+										<img src={`http://localhost:5000/${slide}`} className={style.slide} alt=""/>
 									</div>
 								)
 							})}
@@ -140,9 +144,11 @@ const Carousel = ({
 							className={style.thumbWrapper}
 						>
 							{slides?.map((slide, index) => {
+								// eslint-disable-next-line no-console
+								console.log('slide_2', slide)
 								return (
 									<div key={index}>
-										<img src={slide[index]} className={style.thumb} alt=""/>
+										<img src={`http://localhost:5000/${slide}`} className={style.thumb} alt=""/>
 									</div>
 								)
 							})}
@@ -155,7 +161,8 @@ const Carousel = ({
 				<>
 					<h3 className={style.relatedTitle}>RELATED ITEMS</h3>
 					<Slider
-						{...settingRelated}>
+						{...settingRelated}
+					>
 						{slides?.map((slide) => {
 							return (
 								<div key={slide.customId}>
