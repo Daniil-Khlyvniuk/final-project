@@ -8,7 +8,6 @@ import {useSelector,useDispatch} from 'react-redux'
 import {filterSelectors,filterOperations} from '../../store/Filter'
 
 import Icon from '../UI/Icon'
-
 const ColorSearch = () => {
 	const dispatch = useDispatch()
 	const [isLoading, setIsLoading] = useState(false)
@@ -19,7 +18,8 @@ const ColorSearch = () => {
 		const res = await colorAPI.getColors()
 		setColors(res.data)
 	}
-	useEffect(()=>{
+
+	useEffect( ()=>{
 		getColorFilters()
 	},[])
 
@@ -36,7 +36,7 @@ const ColorSearch = () => {
 	{
 		return <Loader />
 	}
-	
+
 	return (
 		<Box sx={{my:'10px'}}>
 			<ToggleButtonGroup

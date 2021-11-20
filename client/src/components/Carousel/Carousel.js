@@ -161,7 +161,8 @@ const Carousel = ({
 				<>
 					<h3 className={style.relatedTitle}>RELATED ITEMS</h3>
 					<Slider
-						{...settingRelated}>
+						{...settingRelated}
+					>
 						{slides?.map((slide) => {
 							return (
 								<div key={slide.customId}>

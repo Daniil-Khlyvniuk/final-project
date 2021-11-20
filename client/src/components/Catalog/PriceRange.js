@@ -1,12 +1,18 @@
 import React from 'react'
 import { FormControl, InputAdornment, OutlinedInput, Slider, Box } from '@mui/material'
 
+
 const PriceRng = {
 	height: '22px',
 	width: '80px',
-	margin: '0px 10px',
+	margin: '0px 5px',
 	borderRadius: '0px',
 
+}
+
+
+const style = {
+	marginLeft: '-50px',
 }
 
 const PriceRangeBlock = {
@@ -22,29 +28,29 @@ const PriceRange = () => {
 	const rangeSelector = (event, newValue) => {
 		setValue(newValue)
 	}
-	
-	// const priceSelector = (price) => {
-	// 	// eslint-disable-next-line no-mixed-spaces-and-tabs
-	// 	const minPrice =
-	//   setValue(price)
-	// }
-	//
-	
 
 	return (
-		<Box>
+		<Box style={style}>
 			<Slider
+				getAriaLabel={() => 'Minimum distance shift'}
 				value={value}
 				onChange={rangeSelector}
 				valueLabelDisplay="auto"
+				// getAriaValueText={valuetext}
+				disableSwap
+				sx={{
+					height: '2px',
+					width: 250,
+					color: '#373F41',
+					'& .MuiSlider-thumb': {
+						borderRadius: '1px',
+						width: '17px',
+						height: '10px',
+					},
+				}}
 			/>
 			<Box style={PriceRangeBlock}>
 				FROM
-				{/*<input*/}
-				{/*	style={PriceRng}*/}
-				{/*	placeholder={`$ ${value[0]+'0'}`}*/}
-				{/*	prefix= "$"*/}
-				{/*/>*/}
 				<FormControl fullWidth sx={{ m: 1 }}>
 					<OutlinedInput
 						style={PriceRng}
@@ -67,12 +73,6 @@ const PriceRange = () => {
 					/>
 				</FormControl>
 			</Box>
-			{/* eslint-disable-next-line no-mixed-spaces-and-tabs */}
-		 	{/*<input*/}
-			{/*	style={PriceRng}*/}
-			{/*	placeholder={`$ ${value[1]+'0'}`}*/}
-			{/*/>*/}
-      
 		</Box>
 	)
 }
