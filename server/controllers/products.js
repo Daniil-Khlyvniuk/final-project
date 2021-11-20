@@ -214,24 +214,31 @@ exports.getProducts = async (req, res, next) => {
   const startPage = Number(req.query.startPage);
   const sort = req.query.sort;
 
-  Product.find()
-    .skip(startPage * perPage - perPage)
-    .limit(perPage)
-    .sort(sort)
-    .populate({
-      path: "variants",
-      populate: ["color", "size"],
-      options: { perDocumentLimit: 1 },
-    })
+	try{
+		const products = await Product.find()
+		.skip(startPage * perPage - perPage)
+		.limit(perPage)
+		.sort(sort)
+		.populate({
+			path: "variants",
+			perDocumentLimit: 1
+		})
 
-    .then((products) => {
-      res.send(products);
-    })
-    .catch((err) => {
-      res.status(400).json({
-        message: `Error happened on server: "${err}" `,
-      });
-    });
+
+		const result = products.map(({_doc: product}) => (
+			{
+				...product,
+				variants: product.variants[0]
+			}
+		))
+
+		res.json(result)
+	} catch (err) {
+		res.status(400).json({
+			message: `Error happened on server: "${err}" `,
+		});
+	}
+
 };
 
 exports.getProductsFilterParams = async (req, res, next) => {
@@ -313,7 +320,6 @@ exports.getProductsFilterParams = async (req, res, next) => {
         },
       },
     ]);
-
     const result = filterProductDuplicates(products, mongooseQuery);
 
     res.json(result);
