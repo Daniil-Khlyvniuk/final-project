@@ -1,6 +1,7 @@
 import React from 'react'
 import AccordionProduct from '../ProductDescription/Accordion/Accordion'
 import {Divider, Typography} from '@mui/material'
+import PropTypes from 'prop-types'
 
 
 // eslint-disable-next-line react/prop-types
@@ -12,7 +13,7 @@ const RightMenu = ({tabs}) => {
 			{tabs && tabs.map(tab => {
 				return (
 					<>
-						<Typography key={tab.tabTitle}
+						<Typography
 							id={tab.id}
 							color={'rgba(140, 140, 140, 1)'}
 							fontSize={'16px'}
@@ -33,12 +34,12 @@ const RightMenu = ({tabs}) => {
 							tab.subject &&
 					tab.subject.map(item => {
 						return (
-							<>
+							<div key={item.title}>
 								<AccordionProduct key={item.title} 
 									accordionTitle={item?.description ?item.title : null}
 									description={item.description}/>
 								{item?.description ? <Divider/> : null}
-							</>)
+							</div>)
 					})
 						}
 					</>
@@ -47,5 +48,7 @@ const RightMenu = ({tabs}) => {
 		</div>
 	)
 }
-
+RightMenu.propTypes = {
+	tabs : PropTypes.array
+}
 export default RightMenu
