@@ -15,6 +15,7 @@ const useStyles = makeStyles({
 	}
 })
 
+
 const Catalog = () => {
 	const products = useSelector(productsSelectors.getProducts())
 	const dispatch = useDispatch()
