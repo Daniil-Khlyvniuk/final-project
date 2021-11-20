@@ -52,7 +52,10 @@ const theme = createTheme({
 			fontFamily: 'Mulish, sans-serif',
 			fontWeight: 400,
 			fontSize: '16px',
-			lineHeight: 'normal'
+			lineHeight: 'normal',
+			['@media (max-width:390px)']: {
+				paddingTop: '15px',
+			}
 		},
 		footerTextLight: {
 			textTransform: 'capitalize',
@@ -77,12 +80,12 @@ const theme = createTheme({
 					props: { variant: 'contained' },
 					style: {
 						backgroundColor: 'primary',
-						'@media (max-width:860px)': {
-							padding:'12px'
-						},
-						'@media (max-width:480px)': {
-							padding:'10px'
-						}
+						// '@media (max-width:860px)': {
+						// 	padding:'12px'
+						// },
+						// '@media (max-width:480px)': {
+						// 	padding:'10px'
+						// }
 					}
 				},
 				{
@@ -91,12 +94,12 @@ const theme = createTheme({
 						backgroundColor: 'primary',
 						borderTopLeftRadius: 0,
 						borderBottomLeftRadius: 0,
-						'@media (max-width:860px)': {
-							padding:'12px'
-						},
-						'@media (max-width:480px)': {
-							padding:'10px'
-						}
+						// '@media (max-width:860px)': {
+						// 	padding:'12px'
+						// },
+						// '@media (max-width:480px)': {
+						// 	padding:'10px'
+						// }
 					}
 				}
 			]

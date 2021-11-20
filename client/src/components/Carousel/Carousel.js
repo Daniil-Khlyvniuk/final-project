@@ -11,7 +11,7 @@ const Carousel = ({
 	slides,
 	main,
 	product,
-	related = true }) => {
+	related  }) => {
 	const style = useStyleCarousel()
 	const [nav1, setNav1] = useState()
 	const [nav2, setNav2] = useState()
@@ -135,7 +135,7 @@ const Carousel = ({
 							{slides?.map((slide, index) => {
 								return (
 									<div key={index} className={style.slideContainer}>
-										<img src={slide[index]} className={style.slide} alt=""/>
+										<img src={`http://localhost:5000/${slide}`} className={style.slide} alt=""/>
 									</div>
 								)
 							})}
@@ -150,7 +150,7 @@ const Carousel = ({
 							{slides?.map((slide, index) => {
 								return (
 									<div key={index}>
-										<img src={slide[index]} className={style.thumb} alt=""/>
+										<img src={`http://localhost:5000/${slide}`} className={style.thumb} alt=""/>
 									</div>
 								)
 							})}
