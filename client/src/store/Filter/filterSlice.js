@@ -24,15 +24,16 @@ export const filterSlice = createSlice({
 			}
 		},
 		handleColor: (state, action) => {
-			const name = action.payload
-			if(state.color.includes(name))
-			{
-				state.color = state.color.filter(color => color !== name)
-			}
-			else
-			{
-				state.color.push(name)
-			}
+			// const name = action.payload
+			// if(state.color.includes(name))
+			// {
+			// 	state.color = state.color.filter(color => color !== name)
+			// }
+			// else
+			// {
+			// 	state.color.push(name)
+			// }
+			state.color = action.payload
 		},
 		handleSize: (state, action) => {
 			const name = action.payload

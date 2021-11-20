@@ -24,6 +24,7 @@ const HeadSearch = () => {
 	useEffect(()=> {
 		getPerPageFilters()
 		getSortByFilters()
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[])
 
 

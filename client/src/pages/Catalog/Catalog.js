@@ -26,10 +26,12 @@ const Catalog = () => {
 	}
 	useEffect(() => {
 		buildQueryString(history)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[filterStore])
 
 	useEffect(() => {
 		dispatch(filterOperations.setFiltersFromUri(urlParams))
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[])
 
 
