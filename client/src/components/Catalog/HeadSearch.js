@@ -6,6 +6,8 @@ import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
+import { filterOperations } from '../../store/Filter'
+import { useDispatch } from 'react-redux'
 
 
 // const style = {
@@ -38,6 +40,7 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
 const HeadSearch = () => {
 	const [perPage, setPerPage] = useState([])
 	const [sortBy, setSortBy] = useState([])
+	const dispatch = useDispatch()
 
 	const [anchorEl, setAnchorEl] = React.useState(null)
 	const [anchorPerP, setAnchorPerP] = React.useState(null)
@@ -61,16 +64,19 @@ const HeadSearch = () => {
 	const getPerPageFilters = async () => {
 		const pageRes = await filterApi.getFiltersByType('perPage')
 		setPerPage(pageRes.data)
+		dispatch(filterOperations.setPerPage(pageRes.data[0].value))
 	}
 	const getSortByFilters = async () => {
 		const sortRes = await filterApi.getFiltersByType('sortBy')
 		setSortBy(sortRes.data)
+		dispatch(filterOperations.setSort(sortRes.data[0].value))
 	}
 
 
 	useEffect(()=> {
 		getPerPageFilters()
 		getSortByFilters()
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[])
 
 
@@ -135,6 +141,8 @@ const HeadSearch = () => {
 					MenuListProps={{
 						'aria-labelledby': 'basic-button',
 					}}
+					onChange={(event) => 
+						dispatch(filterOperations.setPerPage(event.target.value))}
 				>
 					{sortBy.map((item)=>
 						<MenuItem
