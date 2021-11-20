@@ -21,7 +21,10 @@ const StyledContainer = styled(Container)(() => ({
 	display: 'flex',
 	justifyContent: 'space-between',
 	alignItems: 'center',
-	flexWrap: 'wrap'
+	flexWrap: 'wrap',
+	['@media (max-width:390px)']: {
+		justifyContent: 'center'
+	}
 }))
 
 const useStyles = makeStyles(() => ({
