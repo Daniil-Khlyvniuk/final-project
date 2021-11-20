@@ -19,7 +19,7 @@ const ProductCard = ({image,title,price}) => {
 ProductCard.propTypes = {
 	title: PropTypes.string,
 	image: PropTypes.string,
-	price: PropTypes.string,
+	price: PropTypes.number,
 }
 
 

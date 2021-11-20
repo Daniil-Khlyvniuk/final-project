@@ -36,7 +36,7 @@ CardInCatalog.propTypes = {
 	_id: PropTypes.string,
 	title: PropTypes.string,
 	image: PropTypes.string,
-	price: PropTypes.string,
+	price: PropTypes.number,
 }
 
 export default CardInCatalog

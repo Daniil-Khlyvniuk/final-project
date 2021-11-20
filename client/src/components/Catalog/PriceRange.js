@@ -50,7 +50,7 @@ const PriceRange = () => {
 						style={PriceRng}
 						id="outlined-adornment-amount"
 						value={value[0]}
-						placeholder={value[0]}
+						// placeholder={value[0]}
 						// onChange={handleChange('amount')}
 						startAdornment={<InputAdornment position="start">$</InputAdornment>}
 					/>
@@ -61,7 +61,7 @@ const PriceRange = () => {
 						style={PriceRng}
 						id="outlined-adornment-amount"
 						value={value[1]}
-						placeholder={value[1]}
+						// placeholder={value[1]}
 						// onChange={handleChange('amount')}
 						startAdornment={<InputAdornment position="start">$</InputAdornment>}
 					/>
