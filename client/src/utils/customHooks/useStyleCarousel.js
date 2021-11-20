@@ -151,6 +151,18 @@ export const useStyleCarousel = makeStyles({
 			}
 		}
 	},
+	related:{
+		'& .slick-arrow': {
+			width: '25px',
+			height: '25px',
+		}
+	},
+	products:{
+		'& .slick-arrow': {
+			width: '25px',
+			height: '25px',
+		}
+	},
 	relatedTitle:{
 		textAlign: 'center',
 		fontStyle: 'normal',
@@ -159,5 +171,32 @@ export const useStyleCarousel = makeStyles({
 		lineHeight: '58px',
 		letterSpacing: '5px',
 		color: '#373F41'
+	},
+	relatedTextBox:{
+		// display: 'flex'
+	},
+	relatedText:{
+		fontFamily: theme.typography,
+		fontStyle: 'normal',
+		fontWeight: 'normal',
+		fontSize: 18,
+		lineHeight: '38px',
+		color: '#fff',
+		backgroundColor: '#373F41',
+		borderRadius: '2px',
+		padding:'8px',
+		display: 'inline-block'
+	},
+	relatedPrice:{
+		fontFamily: 'Roboto, sans-serif',
+		fontStyle: 'normal',
+		fontWeight: 'bold',
+		fontSize: '24px',
+		lineHeight: '25px',
+		color: '#FFFFFF',
+		mixBlendModelend: 'normal',
+		textShadow: '0px 4px 1px rgba(0, 0, 0, 0.25)',
+		display: 'inline-block',
+		backgroundColor: '#373F41',
 	}
 })

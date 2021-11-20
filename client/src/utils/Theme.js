@@ -123,7 +123,6 @@ const theme = createTheme({
 						minWidth: 'calc(100% / 2)',
 						border: '1px solid #373F41',
 						borderBottom: 'none',
-						// padding: '5px 77px',
 					}
 				},
 				{
@@ -131,7 +130,6 @@ const theme = createTheme({
 					style: {
 						borderBottom: '1px solid #373F41',
 						minWidth: 'calc(100% / 2)',
-						// padding: '5px 77px',
 					}
 				},
 			]
@@ -139,7 +137,7 @@ const theme = createTheme({
 		MuiTabs:{
 			variants: [
 				{
-					props: { variant: 'form-tab' },
+					props: { variant: 'standard' },
 					style: {
 						'& span.MuiTabs-indicator': {
 							display: 'none',

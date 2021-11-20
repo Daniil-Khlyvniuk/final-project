@@ -11,7 +11,7 @@ const Carousel = ({
 	slides,
 	main,
 	product,
-	related  }) => {
+	related = true }) => {
 	const style = useStyleCarousel()
 	const [nav1, setNav1] = useState()
 	const [nav2, setNav2] = useState()
@@ -68,11 +68,18 @@ const Carousel = ({
 		slidesToScroll: 1,
 		nextArrow: <SampleNextArrow/>,
 		prevArrow: <SamplePrevArrow/>,
+		responsive: [
+			{
+				breakpoint: 600,
+				settings: {
+					arrows: false
+				}
+			},
+		]
 	}
 	const settingRelated = {
 		infinite: true,
 		speed: 500,
-		slidesToShow: 3,
 		initialSlide: 1,
 		arrows: true,
 		nextArrow: <SampleNextArrow/>,
@@ -87,7 +94,6 @@ const Carousel = ({
 		prevArrow: <SamplePrevArrow/>,
 	}
 	const settingThumbs = {
-		slidesToShow: 3,
 		slidesToScroll: 1,
 		initialSlide: 1,
 		centerMode: true,
@@ -121,6 +127,7 @@ const Carousel = ({
 				<>
 					<div style={{width: '50%'}}>
 						<Slider
+							className={style.products}
 							{...settingsProducts}
 							asNavFor={nav2}
 							ref={slider}
@@ -135,6 +142,7 @@ const Carousel = ({
 						</Slider>
 						<Slider
 							{...settingThumbs}
+							slidesToShow={slides.length <= 3 ? slides.length : 3}
 							asNavFor={nav1}
 							ref={thumbs}
 							className={style.thumbWrapper}
@@ -155,11 +163,19 @@ const Carousel = ({
 				<>
 					<h3 className={style.relatedTitle}>RELATED ITEMS</h3>
 					<Slider
-						{...settingRelated}>
+						{...settingRelated}
+						className={style.related}
+						slidesToShow={slides.length <= 3 ? slides.length : 3}
+					>
 						{slides?.map((slide) => {
 							return (
 								<div key={slide.customId}>
-									<img src={slide.imageUrl} className={style.thumb} alt=""/>
+									<img src={slide.imageUrl} className={style.thumb} style={{width:'380px',
+										height: '380px'}} alt=""/>
+									<div className={style.relatedTextBox}>
+										<p className={style.relatedText}>Mint Candy Bed Lilen</p>
+										<p className={style.relatedPrice}>$150</p>
+									</div>
 								</div>
 							)
 						})}

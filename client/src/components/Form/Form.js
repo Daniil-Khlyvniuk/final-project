@@ -13,6 +13,8 @@ import PropTypes from 'prop-types'
 // 	}
 // }
 
+
+
 const Form = () => {
 	const [value, setValue] = React.useState(0)
 	const handleChange = (event, newValue) => {
@@ -42,7 +44,7 @@ const Form = () => {
 				value={value}
 				onChange={handleChange}
 				centered
-				variant='form-tab'
+				variant='standard'
 			>
 				<Tab
 					variant = {value === 0 ? 'active' : 'default'}
