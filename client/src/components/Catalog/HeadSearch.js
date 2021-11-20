@@ -1,28 +1,62 @@
 import React, { useEffect, useState } from 'react'
-import {Box, NativeSelect } from '@mui/material'
+import { Box } from '@mui/material'
 import filterApi from '../../utils/API/filterApi'
-import { styled, ThemeProvider } from '@mui/material/styles'
-import InputBase from '@mui/material/InputBase'
-import theme from '../../utils/Theme'
+import Button from '@mui/material/Button'
+import Menu from '@mui/material/Menu'
+import MenuItem from '@mui/material/MenuItem'
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
 
 
+// const style = {
+// 	border: '1px solid #373F41',
+// 	borderRadius: '1px',
+// 	boxShadow: 'none'
+// }
 
-const BootstrapInput = styled(InputBase)(({ theme }) => ({
-	'label + &': {
-		marginTop: theme.spacing(3),
-	},
-	'& .MuiInputBase-input': {
-		position: 'relative',
-		fontSize: 16,
-		padding: '10px 26px 10px 12px',
-		backgroundColor: '#ffffff',
-	},
-}))
+// import { styled } from '@mui/material/styles'
 
+// const MenuSearch =  styled(Menu)(() => ({
+// 	fontFamily: 'Mulish',
+// 	fontWeight: 600,
+// 	fontSize: '16px',
+// 	cursor: 'pointer',
+// 	color: '#373F41',
+// 	border: '1px solid #373F41',
+// 	borderRadius: '1px',
+// 	boxShadow: 'none',
+// 	gap: '1em',
+// 	['@media (max-width:750px)']: {
+// 		gap: '0.5em',
+// 	},
+// 	['@media (max-width:450px)']: {
+// 		padding: 6,
+// 		gap: 0
+// 	},
+// }))
 
 const HeadSearch = () => {
 	const [perPage, setPerPage] = useState([])
 	const [sortBy, setSortBy] = useState([])
+
+	const [anchorEl, setAnchorEl] = React.useState(null)
+	const [anchorPerP, setAnchorPerP] = React.useState(null)
+
+	const open = Boolean(anchorEl)
+	const handleClick = (event) => {
+		setAnchorEl(event.currentTarget)
+	}
+	const handleClose = () => {
+		setAnchorEl(null)
+	}
+
+	const openPer = Boolean(anchorPerP)
+	const handleClickPer = (event) => {
+		setAnchorPerP(event.currentTarget)
+	}
+	const handleClosePer = () => {
+		setAnchorPerP(null)
+	}
 
 	const getPerPageFilters = async () => {
 		const pageRes = await filterApi.getFiltersByType('perPage')
@@ -49,41 +83,67 @@ const HeadSearch = () => {
 			}}
 		>
 			{perPage.length && (
-				<NativeSelect
-					sx={{
-						borderBottom: 'none',
-						color: '#373F41'
-					}}
-					margin={'50px'}
-					defaultValue={1}
-					input={<BootstrapInput />}
-					variant={'outlined'}
-					inputProps={{
-						name: 'count',
-						id: 'uncontrolled-native',
-					}}
-				>
-					{perPage.map((item)=>
-						<option key={item._id} value={item.value}>{item.name}</option>)}
-				</NativeSelect>
+				<div>
+					<Button
+						id="basic-button"
+						aria-controls="basic-menu"
+						aria-haspopup="true"
+						aria-expanded={openPer ? 'true' : undefined}
+						onClick={handleClickPer}
+					>Show
+						{openPer ? <KeyboardArrowRightIcon /> : <KeyboardArrowDownIcon />}
+					</Button>
+					<Menu
+						id="basic-menu"
+						anchorEl={anchorPerP}
+						open={openPer}
+						onClose={handleClosePer}
+						MenuListProps={{
+							'aria-labelledby': 'basic-button',
+						}}
+					>
+						{perPage.map((item)=>
+							<MenuItem
+								style={{boxShadow: 'none'}}
+								onClick={handleClosePer}
+								key={item._id} 
+								value={item.value}
+							>{item.name}</MenuItem>)}
+					</Menu>
+				</div>
 			)}
-			<ThemeProvider theme={theme}>
-				<NativeSelect
-					margin={'50px'}
-					defaultValue={18}
-					input={<BootstrapInput />}
-					inputProps={{
-						name: 'Sort by',
-						id: 'uncontrolled-native',
+			<div>
+				<Button
+					id="basic-button"
+					aria-controls="basic-menu"
+					aria-haspopup="true"
+					aria-expanded={open ? 'true' : undefined}
+					onClick={handleClick}
+				>Sort by
+					{open ? <KeyboardArrowRightIcon /> : <KeyboardArrowDownIcon />}
+				</Button>
+				<Menu
+					style={{
+						border: '1px solid #373F41',
+						borderRadius: '1px',
+						boxShadow: 'none'
+					}}
+					id="basic-menu"
+					anchorEl={anchorEl}
+					open={open}
+					onClose={handleClose}
+					MenuListProps={{
+						'aria-labelledby': 'basic-button',
 					}}
 				>
 					{sortBy.map((item)=>
-				
-						<option
+						<MenuItem
 							key={item._id}
-							value={item.value}>{item.name}</option>)}
-				</NativeSelect>
-			</ThemeProvider>
+							value={item.value}
+							onClick={handleClose}
+						>{item.name}</MenuItem>)}
+				</Menu>
+			</div>
 		</Box>
 	)
 }

@@ -9,12 +9,12 @@ const RelatedItemsList = () => {
 	const relatedIds = useSelector(productsSelectors.getRelatedIds())
 	let relatedList = useSelector(productsSelectors.getRelatedProductsList())
 	const dispatch = useDispatch()
-	// const id = '6190058db6ba7e18e4336d8b'
+	const id = '6190058db6ba7e18e4336d8b'
 	// const id = '61900597b6ba7e18e4336d9d'
 	// const id = '619005abb6ba7e18e4336db1'
 	// const id = '6190059fb6ba7e18e4336da9'
 	// const id = '6190059fb6ba7e18e4336da9'
-	const id = '61900607b6ba7e18e4336dbb'
+	// const id = '61900607b6ba7e18e4336dbb'
 
 
 	useEffect(() => {
