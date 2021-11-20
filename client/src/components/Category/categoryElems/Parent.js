@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { StyledMenuItem } from './style'
 import { ClickAwayListener, Grow, MenuList, Popper } from '@mui/material'
 import Paper from '@mui/material/Paper'
@@ -7,6 +7,10 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
 import { KeyboardArrowUp } from '@mui/icons-material'
 import PropTypes from 'prop-types'
 import { Box } from '@mui/system'
+import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import productsAPI from '../../../utils/API/productsAPI'
+import productsReducer from '../../../store/Products'
 
 const ParentMenuList = ({
 	children = [],
@@ -14,10 +18,11 @@ const ParentMenuList = ({
 	parent = false,
 	root = false
 }) => {
-	const [open, setOpen] = React.useState(false)
-	const anchorRef = React.useRef(null)
-	const prevOpen = React.useRef()
-	const menuList = React.useRef()
+	const [open, setOpen] = useState(false)
+	const anchorRef = useRef(null)
+	const prevOpen = useRef()
+	const menuList = useRef()
+	const dispatch = useDispatch()
 
 	const handleToggle = () => {
 		setOpen((prevOpen) => !prevOpen)
@@ -38,27 +43,52 @@ const ParentMenuList = ({
 		setOpen(true)
 	}
 
-	React.useEffect(() => {
+	useEffect(() => {
 		prevOpen.current = open
 	}, [open])
 
+	const getProductsByCategory = () => {
+		productsAPI.getFilteredProducts(`?category=${text}`)
+			.then(products => dispatch(productsReducer.setAllProducts(products)))
+	}
+
 	return (
 		<Box style={{ zIndex: '99999999999999' }}>
-			<StyledMenuItem
-				ref={anchorRef}
-				id={`${text}-button`}
-				aria-controls={open && 'composition-menu'}
-				aria-expanded={open && 'true'}
-				aria-haspopup="true"
-				onClick={root ? handleToggle : null}
-				onMouseEnter={parent ? handleOpen : null}
-				onMouseLeave={handleClose}
-			>
-				{root ? text : text}
-				{parent && <KeyboardArrowRightIcon />}
-				{(root && !open) && <KeyboardArrowDownIcon />}
-				{(root && open) && <KeyboardArrowUp />}
-			</StyledMenuItem>
+			{parent ?
+				<Link
+					to={`/api/products/filter?category=${text}`}
+					style={{ textDecoration: 'none' }}
+				>
+					<StyledMenuItem
+						ref={anchorRef}
+						id={`${text}-button`}
+						aria-controls={open && 'composition-menu'}
+						aria-expanded={open && 'true'}
+						aria-haspopup="true"
+						onClick={root ? handleToggle : getProductsByCategory}
+						onMouseEnter={parent ? handleOpen : null}
+						onMouseLeave={handleClose}
+					>
+						{root ? text : text}
+						{parent && <KeyboardArrowRightIcon />}
+						{(root && !open) && <KeyboardArrowDownIcon />}
+						{(root && open) && <KeyboardArrowUp />}
+					</StyledMenuItem>
+				</Link> : <StyledMenuItem
+					ref={anchorRef}
+					id={`${text}-button`}
+					aria-controls={open && 'composition-menu'}
+					aria-expanded={open && 'true'}
+					aria-haspopup="true"
+					onClick={root ? handleToggle : null}
+					onMouseEnter={parent ? handleOpen : null}
+					onMouseLeave={handleClose}
+				>
+					{root ? text : text}
+					{parent && <KeyboardArrowRightIcon />}
+					{(root && !open) && <KeyboardArrowDownIcon />}
+					{(root && open) && <KeyboardArrowUp />}
+				</StyledMenuItem>}
 
 			<Popper
 				open={open}
