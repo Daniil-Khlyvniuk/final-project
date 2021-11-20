@@ -13,7 +13,6 @@ module.exports = function queryCreator(data) {
     ) {
       queryObject[param] = data[param];
     }
-
     return queryObject;
   }, {});
 };
