@@ -56,7 +56,7 @@ const ParentMenuList = ({
 		<Box style={{ zIndex: '99999999999999' }}>
 			{parent ?
 				<Link
-					to={`/api/products/filter?category=${text}`}
+					to={`/shop/catalog?category=${text}`}
 					style={{ textDecoration: 'none' }}
 				>
 					<StyledMenuItem

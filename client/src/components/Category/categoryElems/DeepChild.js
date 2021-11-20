@@ -16,7 +16,7 @@ const DeepChild = ({ text }) => {
 
 	return (
 		<Link
-			to={`/api/products/filter?category=${text}`}
+			to={`/shop/catalog?category=${text}`}
 			style={{ textDecoration: 'none' }}
 		>
 			<StyledMenuItem onClick={getProductsByCategory}>
