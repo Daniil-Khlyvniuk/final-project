@@ -4,17 +4,18 @@ import SearchIcon from './SearchIcon/SearchIcon'
 import { Search, SearchIconWrapper, StyledAutocomplete, StyledBox } from './styles'
 import productsAPI from '../../../utils/API/productsAPI'
 import { CircularProgress, Grid, Avatar, Typography } from '@mui/material'
+// eslint-disable-next-line no-unused-vars
 import { useHistory, Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import setAllProducts from '../../../store/Products'
+// import { useDispatch } from 'react-redux'
+// import setAllProducts from '../../../store/Products'
 
 const HeaderSearch = () => {
 	const [options, setOptions] = useState([])
 	// eslint-disable-next-line no-console
 	console.log('options', options)
 	const [isLoading, setIsLoading] = useState(false)
-	const dispatch = useDispatch()
-	let history = useHistory()
+	// const dispatch = useDispatch()
+	// let history = useHistory()
 	let timer
 
 	const onSearch = (e) => {
@@ -59,25 +60,25 @@ const HeaderSearch = () => {
 					loading={isLoading}
 					clearOnBlur
 					onKeyUp={onSearch}
-					onKeyDown={(e) => {
-						if (e.key === 'Enter') {
-							e.defaultMuiPrevented = true
-							try {
-								productsAPI.searchForProducts(
-									{ query: e.target.value }
-								).then(({ data }) => {
-									if (data.length > 0) {
-										dispatch(setAllProducts.setAllProducts(data))
-										history.push('/shop/catalog')
-									}
-								})
-							} catch (err) {
-								// eslint-disable-next-line no-console
-								console.error(err)
-								dispatch(setAllProducts.setAllProducts([]))
-							}
-						}
-					}}
+					// onKeyDown={(e) => {
+					// 	if (e.key === 'Enter') {
+					// 		e.defaultMuiPrevented = true
+					// 		try {
+					// 			productsAPI.searchForProducts(
+					// 				{ query: e.target.value }
+					// 			).then(({ data }) => {
+					// 				if (data.length > 0) {
+					// 					dispatch(setAllProducts.setAllProducts(data))
+					// 					history.push('/shop/catalog')
+					// 				}
+					// 			})
+					// 		} catch (err) {
+					// 			// eslint-disable-next-line no-console
+					// 			console.error(err)
+					// 			dispatch(setAllProducts.setAllProducts([]))
+					// 		}
+					// 	}
+					// }}
 					renderInput={(params) => <TextField
 						{...params}
 						label="Search..."
@@ -105,7 +106,7 @@ const HeaderSearch = () => {
 								<Grid container wrap="nowrap" spacing={2}>
 									<Grid item>
 										<Avatar
-											src={option.imageUrls[0]}
+											src={'/' + option.imageUrls[0]}
 											alt={option.product.name}
 											sx={{ width: 50, height: 50 }}
 											variant='square'
