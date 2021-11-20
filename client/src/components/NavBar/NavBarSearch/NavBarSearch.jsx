@@ -3,16 +3,19 @@ import TextField from '@mui/material/TextField'
 import SearchIcon from './SearchIcon/SearchIcon'
 import { Search, SearchIconWrapper, StyledAutocomplete, StyledBox } from './styles'
 import productsAPI from '../../../utils/API/productsAPI'
-import { CircularProgress, Grid, Typography } from '@mui/material'
-import { useHistory } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import setAllProducts from '../../../store/Products'
+import { CircularProgress, Grid, Avatar, Typography } from '@mui/material'
+// eslint-disable-next-line no-unused-vars
+import { useHistory, Link } from 'react-router-dom'
+// import { useDispatch } from 'react-redux'
+// import setAllProducts from '../../../store/Products'
 
 const HeaderSearch = () => {
-	const [autocomplete, setAutocomplete] = useState([])
+	const [options, setOptions] = useState([])
+	// eslint-disable-next-line no-console
+	console.log('options', options)
 	const [isLoading, setIsLoading] = useState(false)
-	const dispatch = useDispatch()
-	let history = useHistory()
+	// const dispatch = useDispatch()
+	// let history = useHistory()
 	let timer
 
 	const onSearch = (e) => {
@@ -22,22 +25,23 @@ const HeaderSearch = () => {
 
 		timer = setTimeout(() => {
 			if (e.target.value.trim().length === 0) {
-				setAutocomplete([])
+				setOptions([])
 				return
 			}
 			try {
-				productsAPI.searchAutocomplete(
+				productsAPI.searchForProducts(
 					{ query: e.target.value }
 				).then(({ data }) => {
 					setIsLoading(false)
 					if (data.length > 0) {
-						setAutocomplete(data)
+						setOptions(data)
+					// dispatch(setAllProducts.setAllProducts(data)) // var2
 					}
 				})
 			} catch (err) {
 				// eslint-disable-next-line no-console
 				console.error(err)
-				setAutocomplete([])
+				setOptions([])
 			}
 		}, 700)
 	}
@@ -51,30 +55,30 @@ const HeaderSearch = () => {
 				<StyledAutocomplete
 					disablePortal
 					id="combo-box-demo"
-					options={autocomplete}
+					options={options}
 					noOptionsText={'Search for products...'}
 					loading={isLoading}
 					clearOnBlur
 					onKeyUp={onSearch}
-					onKeyDown={(e) => {
-						if (e.key === 'Enter') {
-							e.defaultMuiPrevented = true
-							try {
-								productsAPI.searchForProducts(
-									{ query: e.target.value }
-								).then(({ data }) => {
-									if (data.length > 0) {
-										dispatch(setAllProducts.setAllProducts(data))
-										history.push('/shop/catalog')
-									}
-								})
-							} catch (err) {
-								// eslint-disable-next-line no-console
-								console.error(err)
-								dispatch(setAllProducts.setAllProducts([]))
-							}
-						}
-					}}
+					// onKeyDown={(e) => {
+					// 	if (e.key === 'Enter') {
+					// 		e.defaultMuiPrevented = true
+					// 		try {
+					// 			productsAPI.searchForProducts(
+					// 				{ query: e.target.value }
+					// 			).then(({ data }) => {
+					// 				if (data.length > 0) {
+					// 					dispatch(setAllProducts.setAllProducts(data))
+					// 					history.push('/shop/catalog')
+					// 				}
+					// 			})
+					// 		} catch (err) {
+					// 			// eslint-disable-next-line no-console
+					// 			console.error(err)
+					// 			dispatch(setAllProducts.setAllProducts([]))
+					// 		}
+					// 	}
+					// }}
 					renderInput={(params) => <TextField
 						{...params}
 						label="Search..."
@@ -90,33 +94,40 @@ const HeaderSearch = () => {
 						}}
 					/>}
 					size='small'
-					getOptionLabel={(option) => option}
+					getOptionLabel={(option) => option.product.name}
 					renderOption={(props, option) => {
 						return (
-							<Grid item xs zeroMinWidth spacing={2} {...props}>
-								<Typography
-									variant='menuBold'
-									sx={{ display: 'block' }}
-									onClick={(e) => {
-										try {
-											productsAPI.searchForProducts(
-												{ query: e.target.textContent }
-											).then(({ data }) => {
-												if (data.length > 0) {
-													dispatch(setAllProducts.setAllProducts(data))
-													history.push('/shop/catalog')
-												}
-											})
-										} catch (err) {
-											// eslint-disable-next-line no-console
-											console.error(err)
-											dispatch(setAllProducts.setAllProducts([]))
-										}
-									}}
-								>
-									{option}
-								</Typography>
-							</Grid>
+							<Link
+								to={`/product-details/${option._id}`} // var 1
+								// to={'/shop/catalog'} // var2 
+								style={{ textDecoration: 'none' }}
+								{...props}
+							>
+								<Grid container wrap="nowrap" spacing={2}>
+									<Grid item>
+										<Avatar
+											src={'/' + option.imageUrls[0]}
+											alt={option.product.name}
+											sx={{ width: 50, height: 50 }}
+											variant='square'
+										/>
+									</Grid>
+									<Grid item xs zeroMinWidth>
+										<Typography
+											variant='menuBold'
+											sx={{ display: 'block' }}
+										>
+											{option.product.name} ({option.itemNo})
+										</Typography>
+										<Typography
+											variant='footerTextMedium'
+											sx={{ display: 'block' }}
+										>
+											{'$' + option.currentPrice}
+										</Typography>
+									</Grid>
+								</Grid>
+							</Link>
 						)
 					}}
 				>
