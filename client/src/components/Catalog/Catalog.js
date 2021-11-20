@@ -35,7 +35,7 @@ const Catalog = () => {
 						<CardInCatalog
 							key={item._id}
 							_id={item._id}
-							image={'/' + item.variants.imageUrls[0]}
+							// image={'/' + item.variants.imageUrls[0]}
 							title={item?.name || ''}
 							price={item.variants.currentPrice}
 						/>
