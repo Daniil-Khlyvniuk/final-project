@@ -6,6 +6,7 @@ import sliderSlice from './Slider'
 import modalSlice from './Modal/modalSlice'
 import shoppingBagSlice from './ShoppingBag/shoppingBagSlice'
 import productSlice from './Product/productSlice'
+import filterSlice from './Filter'
 
 import userSlice from './User'
 
@@ -19,14 +20,14 @@ const store = configureStore({
 		shoppingBag: shoppingBagSlice,
 		user: userSlice,
 		product : productSlice,
-
+		filter: filterSlice,
 
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({
 			serializableCheck: {
 				// Ignore these action types
-				ignoredActions: ['modal/modalToggle', 'user/setToken', 'user/fetchUser/pending','user/fetchUser/fulfilled'],
+				ignoredActions: ['modal/modalToggle', 'user/setToken', 'user/fetchUser/pending','user/fetchUser/fulfilled','filter/setFiltersFromQueryString'],
 			},
 		}),
 })

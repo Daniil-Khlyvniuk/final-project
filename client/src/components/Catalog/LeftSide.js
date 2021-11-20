@@ -29,11 +29,13 @@ const LeftSide = () => {
 			setOpenColor(!prevState)
 		}))
 	}
+
 	// const handleOpenAccordionFabric = () => {
 	// 	setOpenFabric((prevState => {
 	// 		setOpenFabric(!prevState)
 	// 	}))
 	// }
+
 
 	const style = {
 		borderBottom: '1px solid rgba(0, 0, 0, .125)',
@@ -78,7 +80,7 @@ const LeftSide = () => {
 								<AddOutlinedIcon fontSize={'small'} sx={{mr:'19px'}}/>
 							}
 							<Typography fontSize={16} fontWeight={600}>
-						SIZE
+              SIZE
 							</Typography>
 						</Box>
 

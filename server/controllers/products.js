@@ -118,6 +118,21 @@ exports.getVariantById = async (req, res, next) => {
   }
 };
 
+exports.getVariantsByProductId = async (req, res, next) => {
+  const productId = req.params.productId
+  try {
+    const variant = await ProductVariant.find({product: productId})
+      .populate("size")
+      .populate("color")
+    if (!variant) res.status(400).json({ message: `Variant with id "${ productId }" not found ` })
+
+    res.json(variant)
+  } catch (err) {
+    res.status(400).json({ message: `Error happened on server: "${ err }"` })
+  }
+}
+
+
 exports.getProductsInfo = async (req, res, next) => {
   const { productId, kindOfInfo } = req.params;
 
@@ -230,6 +245,7 @@ exports.getProducts = async (req, res, next) => {
 
 exports.getProductsFilterParams = async (req, res, next) => {
   const mongooseQuery = filterParser(req.query);
+  console.log(mongooseQuery);
   const filterParams = getFilterConditions(mongooseQuery);
   const sortParam = getSortConditions(req.query.sort);
   const perPage = Number(req.query.perPage);
@@ -294,7 +310,8 @@ exports.getProductsFilterParams = async (req, res, next) => {
           categories: 1,
         },
       },
-      { $sort: sortParam },
+      // getSortConditions(req.query.sort),
+      // { ...sortParam },
     ]);
 
     res.json(products);
