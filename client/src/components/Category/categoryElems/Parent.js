@@ -8,9 +8,9 @@ import { KeyboardArrowUp } from '@mui/icons-material'
 import PropTypes from 'prop-types'
 import { Box } from '@mui/system'
 import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import productsAPI from '../../../utils/API/productsAPI'
-import productsReducer from '../../../store/Products'
+// import { useDispatch } from 'react-redux'
+// import productsAPI from '../../../utils/API/productsAPI'
+// import productsReducer from '../../../store/Products'
 
 const ParentMenuList = ({
 	children = [],
@@ -22,7 +22,7 @@ const ParentMenuList = ({
 	const anchorRef = useRef(null)
 	const prevOpen = useRef()
 	const menuList = useRef()
-	const dispatch = useDispatch()
+	// const dispatch = useDispatch()
 
 	const handleToggle = () => {
 		setOpen((prevOpen) => !prevOpen)
@@ -48,8 +48,8 @@ const ParentMenuList = ({
 	}, [open])
 
 	const getProductsByCategory = () => {
-		productsAPI.getFilteredProducts(`?category=${text}`)
-			.then(products => dispatch(productsReducer.setAllProducts(products)))
+		// productsAPI.getFilteredProducts(`?category=${text}`)
+		// 	.then(products => dispatch(productsReducer.setAllProducts(products)))
 	}
 
 	return (
