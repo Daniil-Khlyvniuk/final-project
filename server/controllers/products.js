@@ -248,6 +248,8 @@ exports.getProductsFilterParams = async (req, res, next) => {
   const perPage = Number(req.query.perPage);
   const startPage = Number(req.query.startPage);
 
+	console.log("=====================")
+
   try {
     const products = await Product.aggregate([
       { $skip: startPage * perPage - perPage },
@@ -369,9 +371,12 @@ exports.searchAutocomplete = async (req, res, next) => {
     res.status(400).json({ message: "Query string is empty" });
   }
 
+	console.log(req.body.query)
+
   const query = req.body.query.toLowerCase().trim().replace(/\s\s+/g, " ");
   const foundProducts = await Product.aggregate([
-    {
+
+	  {
       $search: {
         index: "productSearch",
         compound: {
@@ -398,6 +403,17 @@ exports.searchAutocomplete = async (req, res, next) => {
         },
       },
     },
+	  {
+		  $lookup: {
+			  from: ProductVariant.collection.name,
+			  localField: "_id",
+			  foreignField: "variants.product",
+			  as: "variants",
+		  },
+	  },
+	  {
+		  $unwind: "$variants",
+	  },
   ]);
 
   const result = foundProducts.reduce(

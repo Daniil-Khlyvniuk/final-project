@@ -2,7 +2,7 @@ const _ = require("lodash");
 
 module.exports = (products, filterParams) => {
 	const exitCondition = ( //  exit condition
-		(!filterParams.color && !filterParams.size) ||
+		(!filterParams.color && !filterParams.size && !filterParams.category) ||
 		(filterParams.color && filterParams.size)
 	)
 
@@ -19,9 +19,16 @@ module.exports = (products, filterParams) => {
       filterParams.color &&
       !isExist(productList, currentProduct, "color")
     )
+	  const haveJustCategory = ( // condition
+      !filterParams.size &&
+      !filterParams.color &&
+      !isExist(productList, currentProduct, "color") &&
+      !isExist(productList, currentProduct, "size") &&
+		  filterParams.category
+    )
 
 
-    if (haveJustSize || haveJustColor) return [ ...productList, currentProduct ];
+    if (haveJustSize || haveJustColor || haveJustCategory) return [ ...productList, currentProduct ];
     return productList;
   }, []);
 };
