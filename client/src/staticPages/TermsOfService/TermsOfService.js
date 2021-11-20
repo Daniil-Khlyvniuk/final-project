@@ -3,6 +3,8 @@ import axios from 'axios'
 import LeftMenu from '../../components/CustomerPage/LeftMenu'
 import RightMenu from '../../components/CustomerPage/RightMenu'
 import {Container, Grid} from '@mui/material'
+import Loader from '../../components/UI/Loader/Loader'
+
 
 
 const TermsOfService = () => {
@@ -18,11 +20,9 @@ const TermsOfService = () => {
 			})
 	}, [])
 	return (
-
-		<h1>
-			{loading && <p>Loading</p>}
+		<Container>
+			{loading && <Loader/>}
 			{data &&
-				<Container>
 					<Grid container spacing={1} sx={{marginTop:{xs:'10px', md:'90px'}}}>
 						<Grid item
 							md={3} sx={{margin:{xs:'0 auto'}}}
@@ -33,9 +33,8 @@ const TermsOfService = () => {
 							<RightMenu tabs={data.tabs}/>
 						</Grid>
 					</Grid>
-				</Container>
 			}
-		</h1>
+		</Container>
 	)
 }
 
