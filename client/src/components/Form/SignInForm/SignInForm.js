@@ -1,51 +1,88 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Formik, Form, Field } from 'formik'
-import {SING_UP_SCHEMA} from '../setting/Schemes'
+import { SING_UP_SCHEMA } from '../setting/Schemes'
 import CustomInput from '../setting/CustomInput'
 import { useFormStyle } from '../../../utils/customHooks/useFormStyle'
-import { Checkbox } from '@mui/material'
+import { Box, Checkbox, Button } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { Facebook, Google } from '../setting/SocialIcons'
+import { registerUser } from '../../../utils/API/userAPI'
+import { useDispatch } from 'react-redux'
+import modalActions from '../../../store/Modal'
 
 const SignInForm = () => {
+	const [serverResult, setServerResult] = useState(null)
+	const dispatch = useDispatch()
+
 	const classes = useFormStyle()
 	return (
-		<Formik initialValues={{
-			name: '',
-			email: '',
-			password: '',
-			confirmPass: ''
-		}}
-		onSubmit={(values, { setSubmitting }) => {
-			setSubmitting(false)
-			// eslint-disable-next-line no-console
-			console.log(values)
-		}}
-		validationSchema={SING_UP_SCHEMA}
+		<Box
+			sx={{
+				overflowY: 'auto',
+				maxHeight: '530px',
+				paddingRight: '10px'
+			}}
 		>
-			{(formikProps) => {
-				return (
-					<Form noValidate
-						onSubmit={formikProps.handleSubmit}
-						className={classes.form}>
-						<div>
+			<Formik initialValues={{
+				firstName: '',
+				lastName: '',
+				login: '',
+				email: '',
+				password: '',
+				confirmPass: '',
+				subscribe: false,
+			}}
+			onSubmit={async (values) => {
+				try {
+					delete (values.confirmPass)
+					const res = await registerUser(values)
+					if (res.status === 200) {
+						setServerResult({ success: 'You successfully registered. Now you need to login' })
+						setTimeout(() => {
+							setServerResult(null)
+							dispatch(modalActions.modalToggle(false))
+						}, 5000)
+					}
+				}
+				catch (err) {
+					setServerResult({ error: Object.values(err.response.data)[0] })
+				}
+			}}
+			validationSchema={SING_UP_SCHEMA}
+			>
+				{(formikProps) => {
+					return (
+						<Form noValidate
+							onSubmit={formikProps.handleSubmit}
+						>
 							<Field
 								component={CustomInput}
-								name="name"
+								name="firstName"
 								type="text"
-								placeholder="Name"
+								placeholder="First Name"
 							/>
-						</div>
-						<div>
+
+							<Field
+								component={CustomInput}
+								name="lastName"
+								type="text"
+								placeholder="Last Name"
+							/>
+
+							<Field
+								component={CustomInput}
+								name="login"
+								type="text"
+								placeholder="Login"
+							/>
+
 							<Field
 								component={CustomInput}
 								name="email"
-								type="text"
+								type="email"
 								placeholder="Email"
 							/>
 
-						</div>
-						<div>
 							<Field
 								component={CustomInput}
 								name="password"
@@ -53,8 +90,6 @@ const SignInForm = () => {
 								placeholder="Password"
 							/>
 
-						</div>
-						<div>
 							<Field
 								component={CustomInput}
 								name="confirmPass"
@@ -62,38 +97,70 @@ const SignInForm = () => {
 								placeholder="Confirm Password"
 							/>
 
-						</div>
-						<div className={classes.ads}>
-							<Checkbox style={{
-								width: 20,
-								padding: 25,
-								height: 20,
-								color: '#6FB7AC',
-							}}/>
-							<p>Let`s get personal! We`ll send you only the good stuff:
-							Exclusive early access to Sale,
-							new arrivals and promotions. No nasties.
+							<div className={classes.ads}>
+								<Checkbox
+									style={{
+										width: 20,
+										padding: 25,
+										height: 20,
+										color: '#6FB7AC',
+									}}
+									name="subscribe"
+									type="checkbox"
+									onBlur={formikProps.handleBlur}
+									onChange={formikProps.handleChange}
+								/>
+								<p>Let`s get personal! We`ll send you only the good stuff:
+									Exclusive early access to Sale,
+									new arrivals and promotions. No nasties.
+								</p>
+							</div>
+							<p className={classes.policy}>By signing up you agree to
+								<Link to="/termsOfService"> Terms of Service </Link> 
+								and <Link to="/privacypolicy"> Privacy Policy </Link>
 							</p>
-						</div>
-						<p className={classes.policy}>By signing up you agree to
-							<Link to="/termsOfService"> Terms of Service </Link>  and <Link to="/privacypolicy"> Privacy Policy </Link>
-						</p>
-						<button
-							className={classes.submit}
-							type="submit">SIGN UP
-						</button>
-						<div className={classes.socialBox}>
-							<Link to="#"><Google/></Link>
-							<Link to="#"><Facebook/></Link>
-						</div>
-						<p className={classes.alreadyIn}>
-							<Link to="/login">I HAVE AN ACCOUNT</Link>
-						</p>
-					</Form>
-				)
-			}}
-		</Formik>
 
+							{serverResult && serverResult.error && (
+								<div className={classes.formStatusBlock}>
+									<p className={classes.error}>{serverResult.error}</p>
+								</div>
+							)}
+
+							{serverResult && serverResult.success && (
+								<div className={classes.formStatusBlock}>
+									<p className={classes.success}>{serverResult.success}</p>
+								</div>
+							)}
+							<Box sx={{ display: 'flex', justifyContent: 'center' }}>
+								<Button
+									type='submit'
+									variant="contained"
+									sx={{
+										padding: '10px 89px',
+										fontSize: '18px',
+										fontFamily: 'Abel',
+										fontWeight: '400',
+									}}
+									disabled={
+										!formikProps.isValid ||
+										formikProps.isSubmitting
+									}
+								>
+									sign up
+								</Button>
+							</Box>
+							<div className={classes.socialBox}>
+								<Link to="#"><Google /></Link>
+								<Link to="#"><Facebook /></Link>
+							</div>
+							<p className={classes.alreadyIn}>
+								<Link to="/login">I HAVE AN ACCOUNT</Link>
+							</p>
+						</Form>
+					)
+				}}
+			</Formik>
+		</Box>
 	)
 }
 

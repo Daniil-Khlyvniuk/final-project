@@ -1,20 +1,19 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
-const multer = require("multer"); // multer for parsing multipart form data (files)
-const fse = require("fs-extra");
 
 //Import controllers
 const {
   addProduct,
   updateProduct,
   getProducts,
-  getProductById,
+  getProductsInfo,
+  getFilteredVariants,
   getProductsFilterParams,
+  searchAutocomplete,
+  getVariantById,
   searchProducts,
-  getVariantById
 } = require("../controllers/products");
-
 
 // @route   POST /products/images
 // @desc    Add images
@@ -39,17 +38,22 @@ router.put(
 // @desc    GET existing products
 // @access  Public
 router.get("/", getProducts);
-
+router.get("/filter", getProductsFilterParams);
+router.get("/info/:kindOfInfo/:productId", getProductsInfo);
+router.get(
+  "/variant/:filterParam/:filterParamId/:productId",
+  getFilteredVariants
+);
 router.get("/:varId", getVariantById);
 
 // @route   GET /products/filter
 // @desc    GET appropriate filtered products
 // @access  Public
-router.get("/filter", getProductsFilterParams);
 
 // @route   POST /products/search
 // @desc    POST appropriate to search query products
 // @access  Public
+router.post("/autocomplete", searchAutocomplete);
 router.post("/search", searchProducts);
 
 // @route   GET /products/:id

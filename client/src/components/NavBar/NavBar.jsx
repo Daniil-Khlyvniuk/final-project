@@ -8,9 +8,14 @@ import CartIcon from './NavBarIcons/CartIcon/CartIcon'
 import NavBarSearch from './NavBarSearch/NavBarSearch'
 import { useStyles } from './styles'
 import Category from '../Category/Category'
+import LogoutIconHeader from './NavBarIcons/LogoutIcon/LogoutIcon'
+import { userSelectors } from '../../store/User'
+import { useSelector } from 'react-redux'
 
 const Navbar = () => {
 	const classes = useStyles()
+	const user = useSelector(userSelectors.getData())
+	const isLoggedIn = !!user
 
 	return (
 		<Box sx={{ borderColor: '#373F41', borderBottom: 1 }}>
@@ -21,8 +26,9 @@ const Navbar = () => {
 						<Category />
 						<NavBarSearch />
 						<div className={classes.iconsWrapper}>
-							<LoginIcon />
-							<FavoriteIcon />
+							{!isLoggedIn && <LoginIcon />}
+							{isLoggedIn && <LogoutIconHeader />}
+							{isLoggedIn && <FavoriteIcon />}
 							<CartIcon />
 						</div>
 					</Toolbar>

@@ -1,0 +1,64 @@
+[
+  {
+    "pageTitle": "TERMS OF SERVICE",
+    "tabs": [
+      {
+        "tabTitle": "ORDER ISSUES",
+        "subject": [
+          {
+            "title": "DUTIES & TAXES",
+            "description": "Internationally shipped packages may be subject to customs and import fees. The exact amount of these fees are determined by your local customs laws.\n\nWe recommend checking with your local customs office for more information on import taxes, customs duties, and handling fees."
+          },
+          {
+            "title": "ORDER TRACKING",
+            "description": "After placing an order, you will receive an email containing all the details. We may also be in touch if we need further information to verify your payment. \nOnce your order is confirmed, it will be dispatched within 2 business days. Depending on your location and chosen shipping method, delivery takes 2-7 business days after it's dispatched. We will keep you updated with \ntracking information and an estimated delivery date. You can also follow its journey by heading to ‘My Orders’ in your account, or if you opted for guest \ncheckout, you can track the status of your order here."
+          },
+          {
+            "title": "SAME DAY DELIVERY",
+            "description": ""
+          },
+          {
+            "title":"CAN I CHANGE THE COLLECTION LOCATION FOR MY ORDER?",
+            "description": ""
+          }
+        ]
+      },
+      {
+        "tabTitle": "DELIVERY",
+        "subject": [
+          {
+            "title":"CANCELLATIONS",
+            "description": ""
+          },
+          {
+            "title": "PREORDERS"
+          }
+        ]
+      },
+      {
+        "tabTitle": "RETURNS & REFUNDS",
+        "subject": [
+          {"title": "CUSTOMISED ITEMS"},
+          {"title": "REFUNDS"},
+          {"title":  "FINAL SALE"},
+          {"title":  "RETURNS PROCESS"},
+          {"title" : "RETURNS POLICY & PROCESS"}
+        ]
+      },
+      {
+        "tabTitle": "PAYMENT",
+        "description": "At Postil’ Shop, you are shopping pieces from our luxury brands and partners around the globe, expertly curated for you by our team. \nPrices are determined by each our partner, therefore the price of the same item may vary depending on your location and where you order an item from.",
+        "subject": [
+          {"title": "WHICH CURRENCIES CAN I SHOP IN?"},
+          {"title": "WHEN WILL MY CARD BE CHARGED?"},
+          {"title":  "WHICH PAYMENT METHODS DO YOU ACCEPT?"},
+          {"title": "WILL MY PERSONAL DETAILS STAY SAFE?"},
+          {"title": "HOW TO FIND PRODUCTS"},
+          {"title": "HOW TO ORDER & PAY"}
+        ]
+      },
+      {"tabTitle":  "PRODUCT & STOCK"},
+      {"tabTitle":  "LEGAL POLICIES"}
+    ]
+  }
+]

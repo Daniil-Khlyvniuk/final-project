@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
+import {Box} from '@mui/material'
 import CardInCatalog from '../CardInCatalog/CardInCatalog'
 import { makeStyles } from '@mui/styles'
 import {productsOperations, productsSelectors} from '../../store/Products'
@@ -8,9 +9,8 @@ const useStyles = makeStyles({
 	container: {
 		display: 'flex',
 		flexWrap: 'wrap',
-		maxWidth: '880px',
 		gap: '20px',
-		margin: '50px auto',
+		margin: '20px auto',
 		justifyContent: 'center',
 	}
 })
@@ -21,26 +21,30 @@ const Catalog = () => {
 	const classes = useStyles()
 
 	useEffect(() => {
+		if (products.length) return
 		dispatch(productsOperations.fetchProducts('sort=-date&perPage=4&startPage=1'))
-	}, [dispatch])
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
 	console.log(products)
 
 	return (
-		<div className={classes.container}>
+		<Box className={classes.container}>
 			{
 				!!products
-				&& products?.map((item) => (
-					<CardInCatalog
-						key={item._id}
-						_id={item._id}
-						image={'/' + item.imageUrls[0]}
-						title={item?.product?.name || ''}
-						price={item.currentPrice}
-					/>
-				))
+				&& products?.map((item) => {
+					return (
+						<CardInCatalog
+							key={item._id}
+							_id={item._id}
+							image={'/' + item.variants[0].imageUrls[0]}
+							title={item?.name || ''}
+							price={item.variants[0].currentPrice}
+						/>
+					)
+				})
 			}
-		</div>
+		</Box>
 	)
 }
 
