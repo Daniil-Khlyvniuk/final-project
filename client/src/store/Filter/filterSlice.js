@@ -46,7 +46,7 @@ export const filterSlice = createSlice({
 		//for filter update from query string ONLY
 		setNewStore: (state, action) => {	
 			state.data = {...state.data, ...action.payload}
-			state.isLoading = false
+			// state.isLoading = false
 		},
 
 		setPerPage: (state, action) => {

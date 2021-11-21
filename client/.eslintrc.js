@@ -15,11 +15,12 @@ module.exports = {
 		},
 		'ecmaVersion': 2020,
 		'sourceType': 'module',
-		'parser': 'babel-eslint',
+		'parser': '@babel/eslint-parser',
 	},
 	'plugins': [
 		'react',
-		'react-hooks'
+		'react-hooks',
+		'@babel'
 	],
 	'rules': {
 		// 'react/jsx-uses-react': ['error'],
@@ -49,7 +50,8 @@ module.exports = {
 		],
 		'indent': [
 			'error',
-			'tab'
+			'tab',
+			{'ignoredNodes': ['TemplateLiteral']}
 		],
 		'linebreak-style': [
 			'error',

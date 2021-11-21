@@ -10,6 +10,7 @@ import {useHistory} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 import queryString from 'query-string'
 // import BackdropLoader from '../../components/UI/BackdropLoader/BackdropLoader'
+import productsApi from '../../utils/API/productAPI'
 
 const Catalog = () => {
 	const filterStore = useSelector(filterSelectors.getFilters())
@@ -17,17 +18,29 @@ const Catalog = () => {
 	const urlParams = queryString.parse(history.location.search,{arrayFormat: 'comma'})
 	const dispatch = useDispatch()
 	// const isLoading = useSelector(filterSelectors.getIsLoading())
-
+	let newQueryString = null
 	
 	//build query string on filters change
 	const buildQueryString = () => {
+		newQueryString = `?${queryString.stringify(filterStore,{arrayFormat: 'comma'})}`
 		history.push({
 			pathname: history.location.pathname,
-			search: `?${queryString.stringify(filterStore,{arrayFormat: 'comma'})}`,
+			search: newQueryString,
 		})
+		try{
+			productsApi.getFilteredProducts(newQueryString).then(resp => {console.log('filtered',resp.data)})
+
+		}
+		catch(er){
+			console.log('ddd',er)
+		}
+	
+		console.log('444',newQueryString)
 	}
 	useEffect(() => {
 		buildQueryString()
+
+	
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[filterStore])
 
@@ -42,7 +55,7 @@ const Catalog = () => {
 
 	// if(isLoading)
 	// {
-	// 	return <BackdropLoader />
+	// 	return <BackdropLoader open={isLoading} />
 	// }
 
 	return (
