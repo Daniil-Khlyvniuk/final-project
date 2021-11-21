@@ -5,18 +5,20 @@ import CategorySearch from '../../components/Catalog/CategorySearch'
 import HeadSearch from '../../components/Catalog/HeadSearch'
 import LeftSide from '../../components/Catalog/LeftSide'
 import { textStyle } from './styles'
-
 import {filterSelectors, filterOperations} from '../../store/Filter'
 import {useHistory} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 import queryString from 'query-string'
+// import BackdropLoader from '../../components/UI/BackdropLoader/BackdropLoader'
 
 const Catalog = () => {
 	const filterStore = useSelector(filterSelectors.getFilters())
 	const history = useHistory()
 	const urlParams = queryString.parse(history.location.search,{arrayFormat: 'comma'})
 	const dispatch = useDispatch()
+	// const isLoading = useSelector(filterSelectors.getIsLoading())
 
+	
 	//build query string on filters change
 	const buildQueryString = () => {
 		history.push({
@@ -25,7 +27,7 @@ const Catalog = () => {
 		})
 	}
 	useEffect(() => {
-		buildQueryString(history)
+		buildQueryString()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[filterStore])
 
@@ -37,6 +39,11 @@ const Catalog = () => {
 
 	// eslint-disable-next-line no-console
 	// console.log('urlParams',urlParams)
+
+	// if(isLoading)
+	// {
+	// 	return <BackdropLoader />
+	// }
 
 	return (
 		<Container maxWidth="lg">

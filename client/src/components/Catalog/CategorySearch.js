@@ -6,7 +6,6 @@ import CategorySearchItem from './CategorySearchItem'
 const CategorySearch = () => {
 
 	const [catalogs, setCatalogs] = useState([])
-	
 	const getCategoryFilters = async () => {
 		const catalogRes = await categoriesAPI.getCategories()
 		setCatalogs(catalogRes.data)
