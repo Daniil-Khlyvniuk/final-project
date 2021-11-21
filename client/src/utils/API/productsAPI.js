@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const getAllProducts = (options) => axios.get(`/api/products${options ? `?${options}` : ''}`).then(res => res.data).catch(() => null)
+const getAllProducts = () => axios.get('/api/products').then(res => res.data).catch(() => null)
 
 const getOneProduct = (productId) => axios.get(`/api/products/${productId}`)
 

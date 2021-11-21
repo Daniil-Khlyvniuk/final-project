@@ -13,20 +13,20 @@ const Form = () => {
 	return (
 		<Box
 			sx={{
-				minWidth: '450px',
+				width: '450px',
 				padding: '5px 35px 16px 35px',
 				['@media (max-width:600px)']: {
-					minWidth: '400px',
+					width: '400px',
 					padding: '5px 25px 10px'
 				},
 				['@media (max-width:490px)']: {
-					minWidth: '350px',
+					width: '350px',
 				},
 				['@media (max-width:440px)']: {
-					minWidth: '300px',
+					width: '300px',
 				},
 				['@media (max-width:360px)']: {
-					minWidth: '260px',
+					width: '260px',
 				}
 			}}
 		>
