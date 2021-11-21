@@ -4,16 +4,16 @@ const passport = require("passport");
 
 //Import controllers
 const {
-	addProduct,
-	updateProduct,
-	getProducts,
-	getProductsInfo,
-	getFilteredVariants,
-	getProductsFilterParams,
-	searchAutocomplete,
-	getVariantById,
+  addProduct,
+  updateProduct,
+  getProducts,
+  getProductsInfo,
+  getFilteredVariants,
+  getProductsFilterParams,
+  searchAutocomplete,
+  getVariantById,
+  searchProducts,
 	getVariantsByProductId,
-	searchProducts
 } = require("../controllers/products");
 
 // @route   POST /products/images
@@ -43,6 +43,7 @@ router.get("/filter", getProductsFilterParams);
 router.get("/info/:kindOfInfo/:productId", getProductsInfo);
 router.get("/variant/:filterParam/:filterParamId/:productId", getFilteredVariants);
 router.get("/variant/:productId", getVariantsByProductId);
+
 router.get(
   "/variant/:filterParam/:filterParamId/:productId",
   getFilteredVariants
