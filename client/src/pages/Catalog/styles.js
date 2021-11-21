@@ -34,13 +34,13 @@ export const useStyles = makeStyles({
 	},
 	rightSide: {
 		margin: 'auto',
-		['@media(min-width: 600px)']: {
+		['@media(min-width: 720px)']: {
 			width: '400px',
 		},
-		['@media(min-width: 800px)']: {
+		['@media(min-width: 860px)']: {
 			width: '552px',
 		},
-		['@media(min-width: 1130px)']: {
+		['@media(min-width: 1180px)']: {
 			width: '852px',
 		}
 	}
