@@ -343,6 +343,8 @@ exports.searchProducts = async (req, res, next) => {
   }
 
   const query = req.body.query.toLowerCase().trim().replace(/\s\s+/g, " ");
+
+
   let products = await Product.aggregate([
 		{
 		  $match: {
