@@ -3,13 +3,13 @@ import TextField from '@mui/material/TextField'
 import SearchIcon from './SearchIcon/SearchIcon'
 import { Search, SearchIconWrapper, StyledAutocomplete, StyledBox } from './styles'
 import productsAPI from '../../../utils/API/productsAPI'
-import { CircularProgress, Grid, Typography } from '@mui/material'
-import { useHistory } from 'react-router-dom'
+import { CircularProgress, Grid, Avatar, Typography } from '@mui/material'
+import { useHistory, Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import setAllProducts from '../../../store/Products'
 
 const HeaderSearch = () => {
-	const [autocomplete, setAutocomplete] = useState([])
+	const [options, setOptions] = useState([])
 	const [isLoading, setIsLoading] = useState(false)
 	const dispatch = useDispatch()
 	let history = useHistory()
@@ -22,22 +22,22 @@ const HeaderSearch = () => {
 
 		timer = setTimeout(() => {
 			if (e.target.value.trim().length === 0) {
-				setAutocomplete([])
+				setOptions([])
 				return
 			}
 			try {
-				productsAPI.searchAutocomplete(
+				productsAPI.searchForProducts(
 					{ query: e.target.value }
 				).then(({ data }) => {
 					setIsLoading(false)
 					if (data.length > 0) {
-						setAutocomplete(data)
+						setOptions(data)
 					}
 				})
 			} catch (err) {
 				// eslint-disable-next-line no-console
 				console.error(err)
-				setAutocomplete([])
+				setOptions([])
 			}
 		}, 700)
 	}
@@ -51,7 +51,7 @@ const HeaderSearch = () => {
 				<StyledAutocomplete
 					disablePortal
 					id="combo-box-demo"
-					options={autocomplete}
+					options={options}
 					noOptionsText={'Search for products...'}
 					loading={isLoading}
 					clearOnBlur
@@ -90,33 +90,45 @@ const HeaderSearch = () => {
 						}}
 					/>}
 					size='small'
-					getOptionLabel={(option) => option}
+					getOptionLabel={(option) => option.name}
 					renderOption={(props, option) => {
 						return (
-							<Grid item xs zeroMinWidth spacing={2} {...props}>
-								<Typography
-									variant='menuBold'
-									sx={{ display: 'block' }}
-									onClick={(e) => {
-										try {
-											productsAPI.searchForProducts(
-												{ query: e.target.textContent }
-											).then(({ data }) => {
-												if (data.length > 0) {
-													dispatch(setAllProducts.setAllProducts(data))
-													history.push('/shop/catalog')
-												}
-											})
-										} catch (err) {
-											// eslint-disable-next-line no-console
-											console.error(err)
-											dispatch(setAllProducts.setAllProducts([]))
-										}
-									}}
-								>
-									{option}
-								</Typography>
-							</Grid>
+							<Link
+								to={`/product-details/${option.variants._id}`}
+								style={{ textDecoration: 'none' }}
+								{...props}
+							>
+								<Grid container wrap="nowrap" spacing={2}>
+									<Grid item>
+										<Avatar
+											src={'/' + option.variants.imageUrls[0]}
+											alt={option.name}
+											sx={{ width: 50, height: 50 }}
+											variant='square'
+										/>
+									</Grid>
+									<Grid item xs zeroMinWidth>
+										<Typography
+											variant='menuBold'
+											sx={{ display: 'block' }}
+										>
+											{option.name}
+										</Typography>
+										<Typography
+											variant='footerTextMedium'
+											sx={{ display: 'block' }}
+										>
+											({option.variants.itemNo})
+										</Typography>
+										<Typography
+											variant='menuBold'
+											sx={{ display: 'block' }}
+										>
+											{'$' + option.variants.currentPrice}
+										</Typography>
+									</Grid>
+								</Grid>
+							</Link>
 						)
 					}}
 				>

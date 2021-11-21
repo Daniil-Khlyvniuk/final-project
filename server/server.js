@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
-const fileUpload = require("express-fileupload")
+const fileUpload = require("express-fileupload");
 var cors = require("cors");
 const path = require("path");
 require("dotenv").config();
@@ -45,9 +45,8 @@ console.log("[db]", db);
 // Passport middleware
 app.use(passport.initialize());
 
-
 app.use(fileUpload({}));
-app.use(express.static("static"))
+app.use(express.static("static"));
 
 // Passport Config
 require("./config/passport")(passport);
@@ -75,24 +74,24 @@ app.use("/", mainRoute);
 
 // Server static assets if in production
 if (process.env.NODE_ENV === "production") {
-	// Set static folder
-	app.use(express.static("client/build"));
-	app.get("*", (req, res) => {
-		res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-	});
+  // Set static folder
+  app.use(express.static("client/build"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
 }
 
-
-mongoose.set('useNewUrlParser', true);
-mongoose.set('useFindAndModify', false);
-mongoose.set('useCreateIndex', true);
-mongoose.set('useUnifiedTopology', true);
+mongoose.set("useNewUrlParser", true);
+mongoose.set("useFindAndModify", false);
+mongoose.set("useCreateIndex", true);
+mongoose.set("useUnifiedTopology", true);
+// "mongodb+srv://forTest:forTest@cluster0.eeiyv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 
 const port = process.env.PORT || 5000;
 mongoose
-.connect(db)
-.then(() => console.log("MongoDB Connected"))
-.then(() => {
-	app.listen(port, () => console.log(`Server running on port ${ port }`));
-})
-.catch((err) => console.error(err));
+  .connect(db)
+  .then(() => console.log("MongoDB Connected"))
+  .then(() => {
+    app.listen(port, () => console.log(`Server running on port ${port}`));
+  })
+  .catch((err) => console.error(err));

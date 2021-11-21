@@ -13,15 +13,20 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.24.0",
+    "eslint-plugin-babel": "^5.3.1",
     "formik": "^2.2.9",
     "npm-watch": "^0.11.0",
     "prop-types": "^15.7.2",
+    "query-string": "^7.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-icons": "^4.3.1",
     "react-id-swiper": "^4.0.0",
+    "react-infinite-scroll-component": "^6.1.0",
     "react-redux": "^7.2.6",
     "react-router": "^5.2.1",
     "react-router-dom": "^5.3.0",
+    "react-router-hash-link": "^2.4.3",
     "react-scripts": "4.0.3",
     "react-slick": "^0.28.1",
     "react-transition-group": "^4.4.2",
@@ -57,8 +62,10 @@
     ]
   },
   "devDependencies": {
-    "prettier": "2.4.1",
-    "axios": "^0.24.0"
+    "@babel/eslint-parser": "^7.16.3",
+    "@babel/eslint-plugin": "^7.14.5",
+    "axios": "^0.24.0",
+    "prettier": "2.4.1"
   },
   "proxy": "http://localhost:5000"
 }
