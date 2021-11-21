@@ -15,11 +15,12 @@ module.exports = {
 		},
 		'ecmaVersion': 2020,
 		'sourceType': 'module',
-		'parser': 'babel-eslint',
+		'parser': '@babel/eslint-parser',
 	},
 	'plugins': [
 		'react',
-		'react-hooks'
+		'react-hooks',
+		'@babel'
 	],
 	'rules': {
 		// 'react/jsx-uses-react': ['error'],
@@ -30,6 +31,14 @@ module.exports = {
 		'no-use-before-define': ['error'],
 		'func-style': ['error', 'expression'],
 		'require-await': 'error',
+		'template-curly-spacing' : 'off',
+		'indent': ['error', 'tab', {
+			'ignoredNodes': ['TemplateLiteral']
+		}]
+		// 'indent': [2, 'tab', {
+		// 	'ignoredNodes': ['TemplateLiteral']
+		// }]
+		,
 		'max-len': [
 			'error',
 			{
@@ -46,10 +55,6 @@ module.exports = {
 		// 'no-console': 'off',
 		'no-console': [
 			'warn',
-		],
-		'indent': [
-			'error',
-			'tab'
 		],
 		'linebreak-style': [
 			'error',

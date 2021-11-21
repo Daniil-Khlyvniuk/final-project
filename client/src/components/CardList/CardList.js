@@ -1,11 +1,8 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Card from '../ProductCard/ProductCard'
-
 import { makeStyles } from '@mui/styles'
-
 import { Typography } from '@mui/material'
-
 import { productsOperations, productsSelectors } from '../../store/Products'
 
 
@@ -16,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
 		gap: '20px',
 		maxWidth: '1180px',
 		margin: '0 auto',
-		justifyContent: 'center'
+		justifyContent: 'space-between'
 	},
 	title: theme.typography.sectionHeading,
 }))
@@ -27,9 +24,9 @@ const CardList = () => {
 	const classes = useStyles()
 
 	useEffect(() => {
-		if (products.length) return
+		// if (products.length) return
 		dispatch(productsOperations.fetchProducts('sort=-date&perPage=4&startPage=1'))
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	return (
@@ -42,9 +39,9 @@ const CardList = () => {
 					products.map(item => (
 						<Card
 							key={item._id}
-							image={'/' + item.imageUrls[0]}
-							title={item?.product?.name || ''}
-							price={item.currentPrice} />
+							image={'/' + item.variants.imageUrls[0]}
+							title={item?.name || ''}
+							price={item.variants.currentPrice} />
 					))
 				}
 			</div>

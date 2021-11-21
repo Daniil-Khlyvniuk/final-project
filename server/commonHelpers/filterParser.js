@@ -1,6 +1,3 @@
-// const Color = require("../models/Color");
-// const Size = require("../models/Size");
-
 const excludedParams = ["perPage", "startPage", "minPrice", "maxPrice", "sort"];
 
 module.exports = function filterParser(filtersQueryString) {

@@ -10,6 +10,7 @@ const isExist = require("../commonHelpers/isExist");
 const findOrCreate = require("../commonHelpers/findOrCreate");
 const ObjectId = mongoose.Types.ObjectId;
 const filterProductDuplicates = require("../commonHelpers/filterProductDuplicates");
+
 const {
   getFilterConditions,
   getSortConditions,
@@ -54,6 +55,7 @@ exports.addProduct = async (req, res) => {
     const category = await Catalog.findOne({
       name: productData.categories,
     });
+
     notFoundError(category, productData.categories);
     const product = await findOrCreate(
       Product,
@@ -124,6 +126,7 @@ exports.getVariantById = async (req, res, next) => {
 		});
 	}
 };
+
 
 exports.getProductsInfo = async (req, res, next) => {
   const { productId, kindOfInfo } = req.params;
@@ -226,7 +229,6 @@ exports.getProducts = async (req, res, next) => {
 			perDocumentLimit: 1
 		})
 
-
 		const result = products.map(({_doc: product}) => (
 			{
 				...product,
@@ -253,7 +255,7 @@ exports.getProductsFilterParams = async (req, res, next) => {
   try {
     const products = await Product.aggregate([
       { $skip: startPage * perPage - perPage },
-      { $limit: 10}, // it is not a problem
+      // { $limit: 10}, // it is not a problem
       {
         $lookup: {
           from: ProductVariant.collection.name,
@@ -341,7 +343,6 @@ exports.searchProducts = async (req, res, next) => {
   }
 
   const query = req.body.query.toLowerCase().trim().replace(/\s\s+/g, " ");
-
   let products = await Product.aggregate([
 		{
 		  $match: {
@@ -360,7 +361,6 @@ exports.searchProducts = async (req, res, next) => {
 		  $unwind: "$variants",
 	  },
   ])
-
    res.json(products);
 };
 
@@ -369,9 +369,6 @@ exports.searchAutocomplete = async (req, res, next) => {
   if (!req.body.query) {
     res.status(400).json({ message: "Query string is empty" });
   }
-
-	console.log(req.body.query)
-
   const query = req.body.query.toLowerCase().trim().replace(/\s\s+/g, " ");
 
 	try {
@@ -465,4 +462,47 @@ exports.searchAutocomplete = async (req, res, next) => {
 			message: `Error happened on server: "${err}" `,
 		});
 	}
+// =======
+//   const query = req.body.query.toLowerCase().trim().replace(/\s\s+/g, " ");
+//   const foundProducts = await Product.aggregate([
+//     {
+//       $search: {
+//         index: "productSearch",
+//         compound: {
+//           should: [
+//             {
+//               autocomplete: {
+//                 query: query,
+//                 path: "name",
+//                 fuzzy: {
+//                   maxEdits: 1,
+//                 },
+//               },
+//             },
+//             {
+//               autocomplete: {
+//                 query: query,
+//                 path: "brand",
+//                 fuzzy: {
+//                   maxEdits: 1,
+//                 },
+//               },
+//             },
+//           ],
+//         },
+//       },
+//     },
+//   ]);
+//
+//   const result = foundProducts.reduce(
+//     (acc, cur) =>
+//       (acc = [
+//         ...acc,
+//         ...(cur.name.includes(query) ? [cur.name] : []),
+//         ...(cur.brand.includes(query) ? [cur.brand] : []),
+//       ]),
+//     []
+//   );
+//   res.send([...new Set(result)]);
+// >>>>>>> develop
 };

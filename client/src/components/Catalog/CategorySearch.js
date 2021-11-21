@@ -1,24 +1,22 @@
 import React, { useEffect, useState } from 'react'
-import Button from '@mui/material/Button'
-import Grid from '@mui/material/Grid'
+import {Box} from '@mui/material'
 import categoriesAPI from '../../utils/API/categoriesApi'
+import CategorySearchItem from './CategorySearchItem'
 
-
-const HeadSearch = () => {
+const CategorySearch = () => {
 
 	const [catalogs, setCatalogs] = useState([])
-	
-	const getCatalogFilters = async () => {
+	const getCategoryFilters = async () => {
 		const catalogRes = await categoriesAPI.getCategories()
 		setCatalogs(catalogRes.data)
 	}
 
 	useEffect(()=> {
-		getCatalogFilters()
-	})
+		getCategoryFilters()
+	},[])
 
 	return (
-		<Grid item xs={12} 
+		<Box
 			sx={{
 				flexWrap:'wrap',
 				display: 'flex',
@@ -27,16 +25,12 @@ const HeadSearch = () => {
 				gap: '15px',
 			}}
 		>
+
 			{catalogs.length && catalogs.map(catalog => (
-				<Button
-					key={catalog._id}
-					color="primary"
-					variant="outlined"
-				>{catalog.name}
-				</Button>
+				<CategorySearchItem key={catalog._id} catalog={catalog} />
 			))}
-		</Grid>
+		</Box>
 	)
 }
 
-export default HeadSearch
+export default CategorySearch
