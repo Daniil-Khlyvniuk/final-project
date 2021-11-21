@@ -7,6 +7,7 @@ const initialState = {
 		size: [],
 		perPage: null,
 		sort: null,
+		startPage: 1,
 	},
 	isLoading: true,
 }
