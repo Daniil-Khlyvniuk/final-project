@@ -36,6 +36,7 @@ const RelatedItemsList = () => {
 		relatedList = relatedList.filter(prod => prod._id !== id).reverse()
 	}
 
+	
 	const slides = relatedList.reverse().map(prod => {
 		if (prod._id !== id) {
 			return {
