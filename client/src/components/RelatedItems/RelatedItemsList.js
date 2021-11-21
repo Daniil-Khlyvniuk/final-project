@@ -31,6 +31,7 @@ const RelatedItemsList = () => {
 			// eslint-disable-next-line no-console
 			console.log('err', err)
 		})
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[])
 	if (relatedList.length) {
 		relatedList = relatedList.filter(prod => prod._id !== id).reverse()
