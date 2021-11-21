@@ -1,3 +1,4 @@
+const mongoose = require("mongoose")
 const Product = require("../models/Product");
 const ProductVariant = require("../models/ProductVariant");
 const Color = require("../models/Color");
@@ -7,6 +8,7 @@ const fileService = require("../services/fileService");
 const notFoundError = require("../commonHelpers/notFoundError");
 const isExist = require("../commonHelpers/isExist");
 const findOrCreate = require("../commonHelpers/findOrCreate");
+const ObjectId = mongoose.Types.ObjectId;
 const filterProductDuplicates = require("../commonHelpers/filterProductDuplicates");
 const {
   getFilterConditions,
@@ -103,27 +105,25 @@ exports.addProduct = async (req, res) => {
   }
 };
 
-// exports.getVariantById = async (req, res, next) => {
-//   const varId = req.params.varId;
-//
-// 	// Patients.populate(result, {path: "patient"}, callback);
-//   try {
-// 	  const variant = await Product.findOne({ variants:  });
-//
-//
-// 	  console.log(variant)
-// 	  if (!variant)
-//       res
-//         .status(400)
-//         .json({ message: `Variant with id "${varId}" not found ` });
-//
-//     res.json(variant);
-//   } catch (err) {
-//     res.status(400).json({
-//       message: `Error happened on server: "${err}"`,
-//     });
-//   }
-// };
+exports.getVariantById = async (req, res, next) => {
+	const varId = req.params.varId;
+	try {
+		const variant = await ProductVariant.findById(varId)
+		.populate("product")
+		.populate("size")
+		.populate("color");
+		if (!variant)
+			res
+			.status(400)
+			.json({ message: `Variant with id "${varId}" not found ` });
+
+		res.json(variant);
+	} catch (err) {
+		res.status(400).json({
+			message: `Error happened on server: "${err}"`,
+		});
+	}
+};
 
 exports.getProductsInfo = async (req, res, next) => {
   const { productId, kindOfInfo } = req.params;
