@@ -2,6 +2,7 @@ import React from 'react'
 import {Box, Button, Card, CardMedia, Grid, Typography} from '@mui/material'
 import {makeStyles} from '@mui/styles'
 import PropTypes from 'prop-types'
+import {Link} from 'react-router-dom'
 
 const useStyles = makeStyles({
 	popularHeader:{
@@ -41,6 +42,8 @@ const PopularCard = ({data, index}) => {
 								</Typography>
 								<Button
 									color={'primary'}
+									component={Link}
+									to={`/shop/catalog?category=${data.name}`}
 									sx={{paddingY: '10px', paddingX: '40px', mb: '15px'}}
 									variant={'outlined'}>
 									Shop
