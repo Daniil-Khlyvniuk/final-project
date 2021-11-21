@@ -103,25 +103,27 @@ exports.addProduct = async (req, res) => {
   }
 };
 
-exports.getVariantById = async (req, res, next) => {
-  const varId = req.params.varId;
-  try {
-    const variant = await ProductVariant.findById(varId)
-      .populate("product")
-      .populate("size")
-      .populate("color");
-    if (!variant)
-      res
-        .status(400)
-        .json({ message: `Variant with id "${varId}" not found ` });
-
-    res.json(variant);
-  } catch (err) {
-    res.status(400).json({
-      message: `Error happened on server: "${err}"`,
-    });
-  }
-};
+// exports.getVariantById = async (req, res, next) => {
+//   const varId = req.params.varId;
+//
+// 	// Patients.populate(result, {path: "patient"}, callback);
+//   try {
+// 	  const variant = await Product.findOne({ variants:  });
+//
+//
+// 	  console.log(variant)
+// 	  if (!variant)
+//       res
+//         .status(400)
+//         .json({ message: `Variant with id "${varId}" not found ` });
+//
+//     res.json(variant);
+//   } catch (err) {
+//     res.status(400).json({
+//       message: `Error happened on server: "${err}"`,
+//     });
+//   }
+// };
 
 exports.getProductsInfo = async (req, res, next) => {
   const { productId, kindOfInfo } = req.params;
@@ -238,7 +240,6 @@ exports.getProducts = async (req, res, next) => {
 			message: `Error happened on server: "${err}" `,
 		});
 	}
-
 };
 
 exports.getProductsFilterParams = async (req, res, next) => {
@@ -248,7 +249,6 @@ exports.getProductsFilterParams = async (req, res, next) => {
   const perPage = Number(req.query.perPage);
   const startPage = Number(req.query.startPage);
 
-	console.log("=====================")
 
   try {
     const products = await Product.aggregate([
@@ -321,6 +321,9 @@ exports.getProductsFilterParams = async (req, res, next) => {
           variants: 1,
         },
       },
+	    // {
+			// 	$sort
+	    // }
     ]);
     const result = filterProductDuplicates(products, mongooseQuery);
 
@@ -340,31 +343,27 @@ exports.searchProducts = async (req, res, next) => {
   const query = req.body.query.toLowerCase().trim().replace(/\s\s+/g, " ");
 
   let products = await Product.aggregate([
-    {
-      $lookup: {
-        from: ProductVariant.collection.name,
-        localField: "variants.color",
-        foreignField: "_id",
-        as: "variants.color",
-      },
-    },
-    {
-      $unwind: "$variants.color",
-    },
-    { $text: { $search: query } },
-  ]);
+		{
+		  $match: {
+			  $text:  { $search: query }
+		  }
+		},
+	  {
+		  $lookup: {
+			  from: ProductVariant.collection.name,
+			  localField: "_id",
+			  foreignField: "product",
+			  as: "variants",
+		  }
+		},
+	  {
+		  $unwind: "$variants",
+	  },
+  ])
 
-  const matchedProducts = await Promise.all(
-    products.map(({ _id: productId }) =>
-      ProductVariant.find({ product: productId })
-        .populate("product")
-        .populate("color")
-        .populate("size")
-    )
-  );
-
-  res.json(matchedProducts.flat());
+   res.json(products);
 };
+
 
 exports.searchAutocomplete = async (req, res, next) => {
   if (!req.body.query) {
@@ -374,56 +373,96 @@ exports.searchAutocomplete = async (req, res, next) => {
 	console.log(req.body.query)
 
   const query = req.body.query.toLowerCase().trim().replace(/\s\s+/g, " ");
-  const foundProducts = await Product.aggregate([
 
-	  {
-      $search: {
-        index: "productSearch",
-        compound: {
-          should: [
-            {
-              autocomplete: {
-                query: query,
-                path: "name",
-                fuzzy: {
-                  maxEdits: 1,
-                },
-              },
-            },
-            {
-              autocomplete: {
-                query: query,
-                path: "brand",
-                fuzzy: {
-                  maxEdits: 1,
-                },
-              },
-            },
-          ],
-        },
-      },
-    },
-	  {
-		  $lookup: {
-			  from: ProductVariant.collection.name,
-			  localField: "_id",
-			  foreignField: "variants.product",
-			  as: "variants",
-		  },
-	  },
-	  {
-		  $unwind: "$variants",
-	  },
-  ]);
+	try {
+		const foundProducts = await Product.aggregate([
+			{
+				$match: {
+					$expr: {
+						$search: {
+							index: "productSearch",
+							compound: {
+								should: [
+									{
+										autocomplete: {
+											query: query,
+											path: "name",
+											fuzzy: {
+												maxEdits: 1,
+												prefixLength: 1,
+												maxExpansions: 256
+											}
+										},
+									},
+									{
+										autocomplete: {
+											query: query,
+											path: "brand",
+											fuzzy: {
+												maxEdits: 1,
+												prefixLength: 1,
+												maxExpansions: 256
+											}
+										},
+									},
+								],
+							},
+						}
+					},
+				}
+				// $search: {
+				//   index: "productSearch",
+				//   compound: {
+				//     should: [
+				//       {
+				//         autocomplete: {
+				//           query: query,
+				//           path: "name",
+				//           fuzzy: {
+				//             maxEdits: 1,
+				//           },
+				//         },
+				//       },
+				//       {
+				//         autocomplete: {
+				//           query: query,
+				//           path: "brand",
+				//           fuzzy: {
+				//             maxEdits: 1,
+				//           },
+				//         },
+				//       },
+				//     ],
+				//   },
+				// },
+			},
+			{
+				$lookup: {
+					from: ProductVariant.collection.name,
+					localField: "_id",
+					foreignField: "product",
+					as: "variants",
+				}
+			},
+			{
+				$unwind: "$variants",
+			},
+		]);
+		console.log(foundProducts)
 
-  const result = foundProducts.reduce(
-    (acc, cur) =>
-      (acc = [
-        ...acc,
-        ...(cur.name.includes(query) ? [cur.name] : []),
-        ...(cur.brand.includes(query) ? [cur.brand] : []),
-      ]),
-    []
-  );
-  res.send([...new Set(result)]);
+		// const result = foundProducts.reduce(
+		// 	(acc, cur) =>
+		// 		(acc = [
+		// 			...acc,
+		// 			...(cur.name.includes(query) ? [cur.name] : []),
+		// 			...(cur.brand.includes(query) ? [cur.brand] : []),
+		// 		]),
+		// 	[]
+		// );
+		res.json(foundProducts);
+	}catch (err) {
+		res.status(400).json({
+			message: `Error happened on server: "${err}" `,
+		});
+	}
 };

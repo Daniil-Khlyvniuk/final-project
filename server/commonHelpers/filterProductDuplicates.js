@@ -22,9 +22,9 @@ module.exports = (products, filterParams) => {
 	  const haveJustCategory = ( // condition
       !filterParams.size &&
       !filterParams.color &&
+		  filterParams.category &&
       !isExist(productList, currentProduct, "color") &&
-      !isExist(productList, currentProduct, "size") &&
-		  filterParams.category
+      !isExist(productList, currentProduct, "size")
     )
 
 
