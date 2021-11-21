@@ -125,7 +125,7 @@ const Carousel = ({
 
 			{product &&
 				<>
-					<div style={{width: '50%'}}>
+					<div style={{width: '100%'}}>
 						<Slider
 							className={style.products}
 							{...settingsProducts}
@@ -135,7 +135,7 @@ const Carousel = ({
 							{slides?.map((slide, index) => {
 								return (
 									<div key={index} className={style.slideContainer}>
-										<img src={`http://localhost:5000/${slide}`} className={style.slide} alt=""/>
+										<img src={`/${slide}`} className={style.productSlide}  alt=""/>
 									</div>
 								)
 							})}
@@ -150,7 +150,7 @@ const Carousel = ({
 							{slides?.map((slide, index) => {
 								return (
 									<div key={index}>
-										<img src={`http://localhost:5000/${slide}`} className={style.thumb} alt=""/>
+										<img src={`/${slide}`} className={style.thumb} alt=""/>
 									</div>
 								)
 							})}

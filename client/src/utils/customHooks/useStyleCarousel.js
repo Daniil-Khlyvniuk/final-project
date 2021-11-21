@@ -7,7 +7,14 @@ export const useStyleCarousel = makeStyles({
 		height: '100%',
 		position: 'relative'
 	},
+	productSlide: {
+		width: '525px',
+		height: '525px',
+		position: 'relative'
+	},
 	slideContainer: {
+		width: '100%',
+		height: '100%',
 		position: 'relative'
 	},
 	nextEl: {
