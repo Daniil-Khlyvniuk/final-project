@@ -287,6 +287,7 @@ exports.getVariantsByProductId = async (req, res, next) => {
 	}
 }
 
+
 exports.getProductsFilterParams = async (req, res, next) => {
   const mongooseQuery = filterParser(req.query)
   const filterParams = getFilterConditions(mongooseQuery)
