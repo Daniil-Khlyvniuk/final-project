@@ -27,7 +27,14 @@ const store = configureStore({
 		getDefaultMiddleware({
 			serializableCheck: {
 				// Ignore these action types
-				ignoredActions: ['modal/modalToggle', 'user/setToken', 'user/fetchUser/pending','user/fetchUser/fulfilled','filter/setFiltersFromQueryString'],
+				ignoredActions: [
+					'modal/modalToggle',
+					'user/setToken',
+					'user/fetchUser/pending',
+					'user/fetchUser/fulfilled',
+					'filter/setFiltersFromQueryString',
+					'products/fetchProductsByFilter/fulfilled',
+				],
 			},
 		}),
 })

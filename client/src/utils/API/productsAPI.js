@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const getAllProducts = (options) => axios.get(`/api/products${options ? `?${options}` : ''}`).then(res => res.data).catch(() => null)
+const getAllProducts = () => axios.get('/api/products').then(res => res.data).catch(() => null)
 
 const getOneProduct = (productId) => axios.get(`/api/products/${productId}`)
 
@@ -44,8 +44,9 @@ const searchAutocomplete = (searchPhrases) => axios.post('/api/products/autocomp
 //                                      						query: 'linen square beige'
 //
 
-// eslint-disable-next-line max-len
-const getFilteredProducts = (filterParams) => axios.get(`/api/products/filter${filterParams}`)
+const getFilteredProducts = (filterParams) => 
+	axios.get(`/api/products/filter?${filterParams}`)
+	
 // please see documentaion for available and custom params
 const getAllVariantsByProductId = (productId) => (
 	axios.get(`/api/products/variant/${productId}`)

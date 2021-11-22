@@ -1,49 +1,50 @@
 import React, {useEffect} from 'react'
+import {useHistory} from 'react-router-dom'
+import {useSelector, useDispatch} from 'react-redux'
+import queryString from 'query-string'
+import {filterSelectors, filterOperations} from '../../store/Filter'
+import {productsOperations} from '../../store/Products'
+import { textStyle, useStyles } from './styles'
+
 import {Container, Grid, Typography} from '@mui/material'
 import ProductsCatalog from '../../components/Catalog/Catalog'
 import CategorySearch from '../../components/Catalog/CategorySearch'
 import HeadSearch from '../../components/Catalog/HeadSearch'
 import LeftSide from '../../components/Catalog/LeftSide'
-import { textStyle } from './styles'
-import {filterSelectors, filterOperations} from '../../store/Filter'
-import {useHistory} from 'react-router-dom'
-import {useSelector, useDispatch} from 'react-redux'
-import queryString from 'query-string'
-// import BackdropLoader from '../../components/UI/BackdropLoader/BackdropLoader'
-import productsApi from '../../utils/API/productAPI'
 
 const Catalog = () => {
-	const filterStore = useSelector(filterSelectors.getFilters())
 	const history = useHistory()
-	const urlParams = queryString.parse(history.location.search,{arrayFormat: 'comma'})
 	const dispatch = useDispatch()
-	// const isLoading = useSelector(filterSelectors.getIsLoading())
-	let newQueryString = null
+	const classes = useStyles()
+
+	const filterStore = useSelector(filterSelectors.getFilters())
+	const urlParams = queryString.parse(history.location.search,{arrayFormat: 'comma'})
 	
+	let newQueryString = null
+	//запрос по фильтру
+	let timer
+	const getPorductsByFilter = (filterString) => {
+		clearTimeout(timer)
+		timer = setTimeout(() => {
+			dispatch(productsOperations.fetchProductsByFilter(filterString))
+		},1000)
+	}
+
 	//build query string on filters change
 	const buildQueryString = () => {
-		newQueryString = `?${queryString.stringify(filterStore,{arrayFormat: 'comma'})}`
+		newQueryString = queryString.stringify(filterStore,{arrayFormat: 'comma'})
 		history.push({
 			pathname: history.location.pathname,
 			search: newQueryString,
 		})
-		try{
-			productsApi.getFilteredProducts(newQueryString).then(resp => {console.log('filtered',resp.data)})
-
-		}
-		catch(er){
-			console.log('ddd',er)
-		}
-	
-		console.log('444',newQueryString)
+		getPorductsByFilter(newQueryString)
 	}
+
 	useEffect(() => {
 		buildQueryString()
-
-	
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[filterStore])
 
+	//parse url on first page loading
 	useEffect(() => {
 		dispatch(filterOperations.setFiltersFromUri(urlParams))
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -53,15 +54,11 @@ const Catalog = () => {
 	// eslint-disable-next-line no-console
 	// console.log('urlParams',urlParams)
 
-	// if(isLoading)
-	// {
-	// 	return <BackdropLoader open={isLoading} />
-	// }
 
 	return (
 		<Container maxWidth="lg">
-			<Grid container spacing={2} >
-				<Grid item xs={3}>
+			<Grid  className={classes.MainGrd}>
+				<Grid item className={classes.leftSide}>
 					<Typography
 						style={textStyle}
 						variant={'h2'}
@@ -70,7 +67,7 @@ const Catalog = () => {
 					</Typography>
 					<LeftSide />
 				</Grid>
-				<Grid item xs={9}>
+				<Grid item className={classes.rightSide}>
 					<CategorySearch />
 					<Grid item xs={12}>
 						<HeadSearch />

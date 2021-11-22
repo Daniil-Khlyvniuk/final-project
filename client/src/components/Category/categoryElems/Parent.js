@@ -8,9 +8,6 @@ import { KeyboardArrowUp } from '@mui/icons-material'
 import PropTypes from 'prop-types'
 import { Box } from '@mui/system'
 import { Link } from 'react-router-dom'
-// import { useDispatch } from 'react-redux'
-// import productsAPI from '../../../utils/API/productsAPI'
-// import productsReducer from '../../../store/Products'
 
 const ParentMenuList = ({
 	children = [],
@@ -22,7 +19,6 @@ const ParentMenuList = ({
 	const anchorRef = useRef(null)
 	const prevOpen = useRef()
 	const menuList = useRef()
-	// const dispatch = useDispatch()
 
 	const handleToggle = () => {
 		setOpen((prevOpen) => !prevOpen)
@@ -47,11 +43,6 @@ const ParentMenuList = ({
 		prevOpen.current = open
 	}, [open])
 
-	const getProductsByCategory = () => {
-		// productsAPI.getFilteredProducts(`?category=${text}`)
-		// 	.then(products => dispatch(productsReducer.setAllProducts(products)))
-	}
-
 	return (
 		<Box style={{ zIndex: '99999999999999' }}>
 			{parent ?
@@ -65,7 +56,7 @@ const ParentMenuList = ({
 						aria-controls={open && 'composition-menu'}
 						aria-expanded={open && 'true'}
 						aria-haspopup="true"
-						onClick={root ? handleToggle : getProductsByCategory}
+						onClick={root ? handleToggle : null}
 						onMouseEnter={parent ? handleOpen : null}
 						onMouseLeave={handleClose}
 					>
