@@ -44,8 +44,9 @@ const searchAutocomplete = (searchPhrases) => axios.post('/api/products/autocomp
 //                                      						query: 'linen square beige'
 //
 
-// eslint-disable-next-line max-len
-const getFilteredProducts = (filterParams) => axios.get(`/api/products/filter${filterParams}`)
+const getFilteredProducts = (filterParams) => 
+	axios.get(`/api/products/filter?${filterParams}`)
+	
 // please see documentaion for available and custom params
 const getAllVariantsByProductId = (productId) => (
 	axios.get(`/api/products/variant/${productId}`)
