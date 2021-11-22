@@ -42,6 +42,7 @@ const Catalog = () => {
 
 	useEffect(() => {
 		buildQueryString()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[filterStore])
 
 	//parse url on first page loading
