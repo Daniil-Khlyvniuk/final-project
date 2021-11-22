@@ -14,18 +14,24 @@ const ActionButtons = () => {
 	return (
 		<>
 			<Button disableRipple
-				sx={{py: '22px', px:'33px', mr:'13px'}}
+				sx={{ mx:'13px' , padding:{lg: '21px 33px' ,md:'16px', sm:'10px'}}}
 				variant={'contained'}
 				onClick={()=>{
 					// eslint-disable-next-line max-len
-					dispatch(shoppingBagReducer.addToShoppingBag({...activeProduct, amount:1}))
+					dispatch(shoppingBagReducer.addToShoppingBag(
+						[{
+							title: activeProduct.name,
+							image: activeProduct.imageUrls[0],
+							price:activeProduct.currentPrice,
+							_id:activeProduct._id,
+							amount:1}]))
 				}}
 			>
 				ADD TO BAG
 			</Button>
 			<Button disableRipple
 				disabled={!user}
-				sx={{p:'24px'}} variant={'contained'}
+				sx={{ padding:{lg: '22px' ,md:'16px', sm:'12px', xs:'9px'}}} variant={'contained'}
 			>
 				<FavoriteBorderOutlinedIcon fontSize={'small'}/>
 			</Button>

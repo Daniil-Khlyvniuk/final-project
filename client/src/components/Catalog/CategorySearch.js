@@ -25,7 +25,6 @@ const CategorySearch = () => {
 				gap: '15px',
 			}}
 		>
-
 			{catalogs.length && catalogs.map(catalog => (
 				<CategorySearchItem key={catalog._id} catalog={catalog} />
 			))}

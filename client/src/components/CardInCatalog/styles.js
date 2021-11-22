@@ -40,7 +40,11 @@ export const useStyles = makeStyles({
 		height: '280px',
 		position: 'absolute',
 		top: 0,
-		left: 0
+		left: 0,
+		display: 'flex',
+		flexDirection: 'column',
+		justifyContent: 'center',
+		alignItems: 'center'
 	},
 	title: {
 		fontWeight: 'bold',

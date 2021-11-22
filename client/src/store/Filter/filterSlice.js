@@ -1,11 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-	category: [],
-	color: [],
-	size: [],
-	perPage: null,
-	sort: null,
+	data: {
+		category: [],
+		color: [],
+		size: [],
+		perPage: null,
+		sort: null,
+		startPage: 1,
+	},
+	isLoading: true,
 }
 
 export const filterSlice = createSlice({
@@ -14,49 +18,42 @@ export const filterSlice = createSlice({
 	reducers: {
 		handleCategory: (state, action) => {
 			const name = action.payload
-			if(state.category.includes(name))
+			if(state.data.category.includes(name))
 			{
-				state.category = state.category.filter(category => category !== name)
+				state.data.category = 
+					state.data.category.filter(category => category !== name)
 			}
 			else
 			{
-				state.category.push(name)
+				state.data.category.push(name)
 			}
 		},
 		handleColor: (state, action) => {
-			// const name = action.payload
-			// if(state.color.includes(name))
-			// {
-			// 	state.color = state.color.filter(color => color !== name)
-			// }
-			// else
-			// {
-			// 	state.color.push(name)
-			// }
-			state.color = action.payload
+			state.data.color = action.payload
 		},
 		handleSize: (state, action) => {
 			const name = action.payload
-			if(state.size.includes(name))
+			if(state.data.size.includes(name))
 			{
-				state.size = state.size.filter(size => size !== name)
+				state.data.size = state.data.size.filter(size => size !== name)
 			}
 			else
 			{
-				state.size.push(name)
+				state.data.size.push(name)
 			}
 		},
 		
 		//for filter update from query string ONLY
-		setNewStore: (state, action) => {
-			return state = {...action.payload}
+		setNewStore: (state, action) => {	
+			state.data = {...state.data, ...action.payload}
+			// state.isLoading = false
 		},
 
 		setPerPage: (state, action) => {
-			state.perPage = action.payload
+			state.data.perPage = action.payload
 		},
 		setSort: (state, action) => {
-			state.sort = action.payload
+			state.data.sort = action.payload
 		}
 	},
 })

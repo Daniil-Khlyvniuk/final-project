@@ -24,7 +24,7 @@ const CardList = () => {
 	const classes = useStyles()
 
 	useEffect(() => {
-		if (products.length) return
+		// if (products.length) return
 		dispatch(productsOperations.fetchProducts('sort=-date&perPage=4&startPage=1'))
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
@@ -39,9 +39,9 @@ const CardList = () => {
 					products.map(item => (
 						<Card
 							key={item._id}
-							image={'/' + item.variants[0].imageUrls[0]}
+							image={'/' + item.variants.imageUrls[0]}
 							title={item?.name || ''}
-							price={item.variants[0].currentPrice} />
+							price={item.variants.currentPrice} />
 					))
 				}
 			</div>

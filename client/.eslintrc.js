@@ -31,14 +31,6 @@ module.exports = {
 		'no-use-before-define': ['error'],
 		'func-style': ['error', 'expression'],
 		'require-await': 'error',
-		'template-curly-spacing' : 'off',
-		'indent': ['error', 'tab', {
-			'ignoredNodes': ['TemplateLiteral']
-		}]
-		// 'indent': [2, 'tab', {
-		// 	'ignoredNodes': ['TemplateLiteral']
-		// }]
-		,
 		'max-len': [
 			'error',
 			{
@@ -55,6 +47,11 @@ module.exports = {
 		// 'no-console': 'off',
 		'no-console': [
 			'warn',
+		],
+		'indent': [
+			'error',
+			'tab',
+			{'ignoredNodes': ['TemplateLiteral']}
 		],
 		'linebreak-style': [
 			'error',
