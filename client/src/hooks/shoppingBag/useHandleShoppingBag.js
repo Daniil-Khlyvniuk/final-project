@@ -19,3 +19,4 @@ export default function useHandleShoppingBag() {
 			?.sort((a, b) => b?.price - a?.price),
 	}
 }
+
