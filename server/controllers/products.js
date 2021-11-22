@@ -321,7 +321,7 @@ exports.getProductsFilterParams = async (req, res, next) => {
 	    sortParam
     ]);
 
-    const result = filterProductDuplices(products, mongooseQuery);
+    const result = filterProductDuplicates(products, mongooseQuery);
     res.json(result);
 
   } catch (err) {
