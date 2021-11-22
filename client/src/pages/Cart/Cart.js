@@ -17,7 +17,8 @@ const Cart = () => {
 					<Typography fontSize={32} sx={{mb: '14px', mt: '85px'}} variant={'h2'}>TOTAL USD ${totalPrice}</Typography>
 				</div>
 				<div className={classes.cards}>
-					{shoppingBag?.map((item, key) => <ShoppingBagCard key={key} {...item}/>)}
+					{shoppingBag
+						?.map((item, key) => <ShoppingBagCard key={key} {...item}/>)}
 				</div>
 				<Button variant={'contained'} style={{display: 'block', margin: '0 auto 1rem'}}>PROCEED TO CHECKOUT</Button>
 			</>}

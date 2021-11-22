@@ -12,7 +12,8 @@ const ShoppingBagCard = ({title, price, image, amount, _id}) => {
 
 	const add = () => {
 		const shoppingBag = JSON.parse(localStorage.getItem('shoppingBag'))
-		const newShoppingBag = [...shoppingBag, ...[shoppingBag.find(item => item?._id === _id)]]
+		const newShoppingBag = [...shoppingBag,
+			...[shoppingBag.find(item => item?._id === _id)]]
 
 		localStorage.setItem('shoppingBag', JSON.stringify(newShoppingBag))
 		dispatch(shoppingBagActions.removeFromShoppingBag(newShoppingBag))
@@ -61,8 +62,12 @@ const ShoppingBagCard = ({title, price, image, amount, _id}) => {
 							{amount}
 						</Typography>
 						<div>
-							<div className={classes.quantityUp} onClick={add}>{icons.arrowUp()}</div>
-							<div className={classes.quantityDown} onClick={remove}>{icons.arrowDown()}</div>
+							<div className={classes.quantityUp} onClick={add}>
+								{icons.arrowUp()}
+							</div>
+							<div className={classes.quantityDown} onClick={remove}>
+								{icons.arrowDown()}
+							</div>
 						</div>
 					</div>
 				</div>
