@@ -4,6 +4,7 @@ const isJSON = require("./isJSON");
 const excludedParams = ["letterSubject", "letterHtml"];
 
 module.exports = function queryCreator(data) {
+	console.log("queryCreator", data)
   return Object.keys(data).reduce((queryObject, param) => {
     if (isJSON(data[param])) {
       queryObject[param] = JSON.parse(data[param]);
