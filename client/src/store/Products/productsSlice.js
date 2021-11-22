@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import productsOperations from './operations'
 
-const { fetchProducts } = productsOperations
+const { fetchProducts, fetchProductsByFilter } = productsOperations
 
 const initialState = {
 	data: [],
@@ -52,6 +52,25 @@ const productsSlice = createSlice({
 		[fetchProducts.rejected]: (state) => {
 			state.isLoading = false
 			state.error = 'Error happened while products loading'
+		},
+
+		//for catalog page filters
+		[fetchProductsByFilter.fulfilled]: (state, action) => {
+
+			// eslint-disable-next-line no-console
+			console.log('aaa',action.payload)
+
+			state.data = action.payload
+			state.isLoading = false
+			state.error = null
+		},
+		[fetchProductsByFilter.pending]: (state) => {
+			state.isLoading = true
+			state.error = null
+		},
+		[fetchProductsByFilter.rejected]: (state) => {
+			state.isLoading = false
+			state.error = 'Error happened while products by filter loading'
 		},
 	},
 })
