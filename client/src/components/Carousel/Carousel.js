@@ -82,6 +82,7 @@ const Carousel = ({
 		speed: 500,
 		initialSlide: 1,
 		arrows: true,
+		centerMode: true,
 		nextArrow: <SampleNextArrow/>,
 		prevArrow: <SamplePrevArrow/>,
 	}
@@ -92,6 +93,14 @@ const Carousel = ({
 		arrows: true,
 		nextArrow: <SampleNextArrow/>,
 		prevArrow: <SamplePrevArrow/>,
+		responsive: [
+			{
+				breakpoint: 600,
+				settings: {
+					arrows: false
+				}
+			},
+		]
 	}
 	const settingThumbs = {
 		slidesToScroll: 1,
@@ -110,7 +119,7 @@ const Carousel = ({
 			>
 				{slides?.map((slide) => {
 					return (
-						<div key={slide.customId} className={style.slideContainer}>
+						<div key={slide.customId} className={style.mainContainer}>
 							<img src={slide.imageUrl} className={style.slide} alt=""/>
 							<div className={style.textBlock}>
 								<p className={style.title}>{slide.title}</p>
@@ -124,8 +133,7 @@ const Carousel = ({
 			}
 
 			{product &&
-				<>
-					<div style={{width: '100%'}}>
+					<div className={style.productsWrapper}>
 						<Slider
 							className={style.products}
 							{...settingsProducts}
@@ -149,14 +157,12 @@ const Carousel = ({
 						>
 							{slides?.map((slide, index) => {
 								return (
-									<div key={index}>
-										<img src={`/${slide}`} className={style.thumb} alt=""/>
-									</div>
+									<img key={index} src={`/${slide}`} className={style.thumb} alt="" />
 								)
 							})}
 						</Slider>
 					</div>
-				</>
+
 			}
 
 			{related &&
@@ -170,7 +176,7 @@ const Carousel = ({
 						{slides?.map((slide) => {
 							return (
 								<div key={slide.customId}>
-									<img src={slide.imageUrl} className={style.thumb} style={{width:'380px',
+									<img src={slide.imageUrl} className={style.thumb + style.relatedSlide} style={{width:'380px',
 										height: '380px'}} alt=""/>
 									<div className={style.relatedTextBox}>
 										<p className={style.relatedText}>Mint Candy Bed Lilen</p>

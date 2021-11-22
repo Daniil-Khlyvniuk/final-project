@@ -8,14 +8,22 @@ export const useStyleCarousel = makeStyles({
 		position: 'relative'
 	},
 	productSlide: {
-		width: '525px',
-		height: '525px',
-		position: 'relative'
+		position: 'absolute',
+		left: 0,
+		top: 0,
+		width: '100%',
+		height: 'auto'
+	},
+	mainContainer:{
+		position: 'relative',
+		height: '100%',
+		width: '100%'
 	},
 	slideContainer: {
 		width: '100%',
 		height: '100%',
-		position: 'relative'
+		position: 'relative',
+		paddingTop: '100%'
 	},
 	nextEl: {
 		cursor: 'pointer',
@@ -132,7 +140,9 @@ export const useStyleCarousel = makeStyles({
 		color: '#373F41'
 	},
 	thumbWrapper:{
+		width: '100%',
 		'& .slick-slide': {
+			margin: '0 3px',
 			opacity: 0.4
 		},
 		'& .slick-slide.slick-current': {
@@ -144,6 +154,7 @@ export const useStyleCarousel = makeStyles({
 		height: '100%',
 		textAlign: 'center'
 	},
+
 	show:{
 		marginTop: '20px',
 		'& .slick-slide.slick-current': {
@@ -168,6 +179,13 @@ export const useStyleCarousel = makeStyles({
 		'& .slick-arrow': {
 			width: '25px',
 			height: '25px',
+		},
+	},
+	productsWrapper:{
+		width: '95%',
+		[theme.breakpoints.down('md')]:{
+			width: '73%',
+			margin: 'auto'
 		}
 	},
 	relatedTitle:{
@@ -177,10 +195,8 @@ export const useStyleCarousel = makeStyles({
 		fontSize: 32,
 		lineHeight: '58px',
 		letterSpacing: '5px',
-		color: '#373F41'
-	},
-	relatedTextBox:{
-		// display: 'flex'
+		color: '#373F41',
+		margin: '0 0 20px 0'
 	},
 	relatedText:{
 		fontFamily: theme.typography,
@@ -192,7 +208,8 @@ export const useStyleCarousel = makeStyles({
 		backgroundColor: '#373F41',
 		borderRadius: '2px',
 		padding:'8px',
-		display: 'inline-block'
+		display: 'inline-block',
+		margin: 0
 	},
 	relatedPrice:{
 		fontFamily: 'Roboto, sans-serif',
@@ -203,7 +220,18 @@ export const useStyleCarousel = makeStyles({
 		color: '#FFFFFF',
 		mixBlendModelend: 'normal',
 		textShadow: '0px 4px 1px rgba(0, 0, 0, 0.25)',
-		display: 'inline-block',
+		display: 'block',
 		backgroundColor: '#373F41',
+		margin: 0,
+		width: 'fit-content',
+		padding: '5px 10px',
+		marginTop: '5px'
+	},
+	relatedTextBox:{
+		position: 'absolute',
+		display: 'flex',
+		flexDirection: 'column',
+		bottom: '7%',
+		left: '3%'
 	}
 })
