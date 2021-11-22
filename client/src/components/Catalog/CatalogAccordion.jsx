@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import PropTypes from 'prop-types'
 import {Box, AccordionDetails, AccordionSummary, Accordion, Typography} from '@mui/material'
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined'
@@ -8,19 +8,22 @@ const CatalogAccordion = ({
 	expanded,
 	title,
 	details,
-	// eslint-disable-next-line no-unused-vars
 	withBottomBorder = true
 }) => {
-	const [isOpen, setIsOpen] = useState(expanded)
+	const [isOpen, setIsOpen] = useState(false)
 	const handleOpenAccordion = () => {
-		setIsOpen((prevState => {
-			setIsOpen(!prevState)
-		}))
+		setIsOpen(!isOpen)
 	}
+
+	useEffect(() => {
+		if (expanded) setIsOpen(true)
+	}, [expanded])
+
 
 	return (
 		<Accordion
-			onChange={handleOpenAccordion}
+			onChange={() => handleOpenAccordion()}
+			// defaultExpanded={expanded}
 			expanded={isOpen}
 			square={true}
 			sx={{
