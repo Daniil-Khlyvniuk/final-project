@@ -1,10 +1,9 @@
 import {actions} from './filterSlice'
-// const {handleCategory,handleColor,handleSize} = actions
 
 const setFiltersFromUri = (uriObject) => (dispatch,getState) => {
 	if(Object.keys(uriObject).length)
 	{
-		const state = getState().filter
+		const state = getState().filter.data
 		const fromQuery = {}
 		for(let key in uriObject)
 		{
@@ -21,8 +20,5 @@ const setFiltersFromUri = (uriObject) => (dispatch,getState) => {
 
 export default {
 	setFiltersFromUri,
-	// handleCategory,
-	// handleColor,
-	// handleSize,
 	...actions,
 }
