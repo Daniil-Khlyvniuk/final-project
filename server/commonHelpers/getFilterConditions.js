@@ -13,9 +13,17 @@ module.exports.getSortConditions = (sortParam) => {
   // -1 -> small > big
   //1 -> big > small
   return {
-    ...(sortParam
-      ? { $sort: { ["variants." + sortParamValue]: sortType } }
-      : {}),
+    ...(
+			sortParam
+      ?
+				{ $sort: { ["variants." + sortParamValue]: sortType } }
+      :
+				{
+          $sort: {
+            date: -1,
+          },
+        }
+				),
   };
 
   // return {
