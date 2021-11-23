@@ -34,6 +34,7 @@ const Catalog = () => {
 		return <BackdropLoader open={isLoading} />
 	}
 
+
 	return (
 		<Box className={classes.container}>
 			{!products.length && (

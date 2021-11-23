@@ -9,7 +9,7 @@ const initialState = {
 		sort: null,
 		startPage: 1,
 		minPrice: null,
-		maxPrice: 1000,
+		maxPrice: null,
 	},
 	isLoading: true,
 }
