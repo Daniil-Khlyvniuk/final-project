@@ -3,7 +3,6 @@ const FormValidator = require("./FormValidator");
 
 module.exports = function validationHelper(data) {
   const fields = Object.keys(data);
-	console.log(  )
   const currentValidationRules = FormValidator.checkValidity(
     commonValidationRules,
     fields
