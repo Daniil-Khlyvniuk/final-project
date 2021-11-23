@@ -22,7 +22,8 @@ const Favoriteicon = () => {
 				top: '10px',
 				zIndex: 333
 			}}
-			onClick={!user ? () => handleOpen(<LoginModal />) : null}
+			// eslint-disable-next-line no-console
+			onClick={!user ? () => handleOpen(<LoginModal />) : console.log('test')}
 		>
 			<FavoriteBorderIcon fontSize="large" />
 		</IconButton>
