@@ -1,9 +1,17 @@
-import React, {useEffect} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import {Box} from '@mui/material'
+import React from 'react'
+import {useSelector} from 'react-redux'
+import {Box, Typography} from '@mui/material'
 import CardInCatalog from '../CardInCatalog/CardInCatalog'
-import { makeStyles } from '@mui/styles'
-import {productsOperations, productsSelectors} from '../../store/Products'
+import { makeStyles, styled } from '@mui/styles'
+import {productsSelectors} from '../../store/Products'
+
+import BackdropLoader from '../UI/BackdropLoader/BackdropLoader'
+
+const StyledTypography = styled(Typography)(() => ({
+	fontSize: '32px',
+	textTransform: 'uppercase',
+	fontWeight: 400,
+}))
 
 const useStyles = makeStyles({
 	container: {
@@ -17,24 +25,28 @@ const useStyles = makeStyles({
 
 const Catalog = () => {
 	const products = useSelector(productsSelectors.getProducts())
-	const dispatch = useDispatch()
+	const isLoading = useSelector(productsSelectors.getIsLoading())
 	const classes = useStyles()
 
-	useEffect(() => {
-		// if (products.length) return
-		dispatch(productsOperations.fetchProducts('sort=-date&perPage=4&startPage=1'))
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
+	//preloader
+	if(isLoading)
+	{
+		return <BackdropLoader open={isLoading} />
+	}
+
 
 	return (
 		<Box className={classes.container}>
+			{!products.length && (
+				<StyledTypography>no products by filter is found</StyledTypography>
+			)}
 			{
 				!!products
-				&& products?.map((item) => {
+				&& products.map((item) => {
 					return (
 						<CardInCatalog
 							key={item._id}
-							_id={item._id}
+							_id={item.variants._id}
 							image={'/' + item.variants.imageUrls[0]}
 							title={item?.name || ''}
 							price={item.variants.currentPrice}

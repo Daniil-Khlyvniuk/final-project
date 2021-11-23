@@ -4,7 +4,7 @@ const getAllProducts = () => axios.get('/api/products').then(res => res.data).ca
 
 const getOneProduct = (productId) => axios.get(`/api/products/${productId}`)
 
-
+const getMinMaxPrice = () => axios.get('/api/products/minMaxPrice')
 
 // eslint-disable-next-line max-len
 const getSizesNew = (colorId , productId) => axios.get(`/api/products/variant/color/${colorId}/${productId}`)
@@ -44,8 +44,9 @@ const searchAutocomplete = (searchPhrases) => axios.post('/api/products/autocomp
 //                                      						query: 'linen square beige'
 //
 
-// eslint-disable-next-line max-len
-const getFilteredProducts = (filterParams) => axios.get(`/api/products/filter${filterParams}`)
+const getFilteredProducts = (filterParams) => 
+	axios.get(`/api/products/filter?${filterParams}`)
+	
 // please see documentaion for available and custom params
 const getAllVariantsByProductId = (productId) => (
 	axios.get(`/api/products/variant/${productId}`)
@@ -55,6 +56,7 @@ const getAllVariantsByProductId = (productId) => (
 export default {
 	getAllProducts,
 	getOneProduct,
+	getMinMaxPrice,
 	getProductVariant,
 	addNewProduct,
 	updateProduct,

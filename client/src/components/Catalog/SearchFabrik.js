@@ -1,15 +1,10 @@
 import React from 'react'
 import { FormControl, FormControlLabel, Radio, RadioGroup } from '@mui/material'
-
-
-const style = {
-	display: 'block',
-	width: 'fit-content'
-}
+import {FabrikBox} from './style'
 
 const SearchSize = () => {
 	return (
-		<div style={style}>
+		<div style={FabrikBox}>
 			<FormControl component="fieldset">
 				<RadioGroup
 					aria-label="gender"

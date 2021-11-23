@@ -13,7 +13,8 @@ const {
   searchAutocomplete,
   getVariantById,
   searchProducts,
-	getVariantsByProductId,
+  getVariantsByProductId,
+  getMinMaxPrice,
 } = require("../controllers/products");
 
 // @route   POST /products/images
@@ -39,9 +40,13 @@ router.put(
 // @desc    GET existing products
 // @access  Public
 router.get("/", getProducts);
+router.get("/minMaxPrice", getMinMaxPrice);
 router.get("/filter", getProductsFilterParams);
 router.get("/info/:kindOfInfo/:productId", getProductsInfo);
-router.get("/variant/:filterParam/:filterParamId/:productId", getFilteredVariants);
+router.get(
+  "/variant/:filterParam/:filterParamId/:productId",
+  getFilteredVariants
+);
 router.get("/variant/:productId", getVariantsByProductId);
 
 router.get(
