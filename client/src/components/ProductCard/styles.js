@@ -1,18 +1,21 @@
-import {makeStyles} from '@mui/styles'
+import { makeStyles } from '@mui/styles'
 
 export const useStyles = makeStyles({
+	card: {
+		position: 'relative',
+		'&:hover': {
+			opacity: 0.9
+		}
+	},
 	image: {
-		maxWidth:'400px',
+		maxWidth: '400px',
 		width: '100%',
 		height: 'auto',
-		['@media(min-width: 600px)']:{
+		['@media(min-width: 600px)']: {
 			width: '555px',
 			height: '545px',
 			maxWidth: 'initial'
 		}
-	},
-	card: {
-		position: 'relative'
 	},
 	textContainer: {
 		position: 'absolute',
@@ -21,7 +24,7 @@ export const useStyles = makeStyles({
 		display: 'flex',
 		flexDirection: 'column',
 		gap: '5px',
-		['@media(min-width: 600px)']:{
+		['@media(min-width: 600px)']: {
 			top: '400px',
 			left: '50px',
 			bottom: '0'
@@ -30,19 +33,18 @@ export const useStyles = makeStyles({
 	title: {
 		background: '#373F41',
 		borderRadius: '2px',
-		fontSize: '14px',
 		lineHeight: '38px',
 		textAlign: 'center',
 		color: '#FFFFFF',
-		padding: '5px 5px',
 		margin: 0,
 		width: 'fit-content',
-		['@media(min-width: 600px)']:{
-			fontSize: '24px',
+		['@media(min-width: 600px)']: {
 			padding: '12px 15px',
 		}
 	},
 	price: {
+		fontFamily: 'Roboto',
+		fontWeight: 'bold',
 		fontSize: '22px',
 		lineHeight: '25px',
 		color: '#FFFFFF',
@@ -51,7 +53,8 @@ export const useStyles = makeStyles({
 		background: '#373F41',
 		width: 'fit-content',
 		textAlign: 'center',
-		['@media(min-width: 600px)']:{
+		textShadow: '0px 4px 1px rgba(0, 0, 0, 0.25)',
+		['@media(min-width: 600px)']: {
 			fontSize: '32px',
 		}
 	}
