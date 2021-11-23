@@ -8,6 +8,8 @@ const initialState = {
 		perPage: null,
 		sort: null,
 		startPage: 1,
+		minPrice: null,
+		maxPrice: 1000,
 	},
 	isLoading: true,
 }
@@ -46,9 +48,8 @@ export const filterSlice = createSlice({
 		//for filter update from query string ONLY
 		setNewStore: (state, action) => {	
 			state.data = {...state.data, ...action.payload}
-			// state.isLoading = false
+			state.isLoading = false
 		},
-
 		setPerPage: (state, action) => {
 			state.data.perPage = action.payload
 		},

@@ -27,12 +27,15 @@ const Catalog = () => {
 		clearTimeout(timer)
 		timer = setTimeout(() => {
 			dispatch(productsOperations.fetchProductsByFilter(filterString))
-		},3000)
+		},700)
 	}
 
 	//build query string on filters change
 	const buildQueryString = () => {
-		newQueryString = queryString.stringify(filterStore,{arrayFormat: 'comma'})
+		// eslint-disable-next-line no-console
+		console.log('111',filterStore)
+
+		newQueryString = queryString.stringify(filterStore,{arrayFormat: 'comma', skipNull: true})
 		history.push({
 			pathname: history.location.pathname,
 			search: newQueryString,
