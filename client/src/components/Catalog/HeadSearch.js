@@ -8,42 +8,18 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
 import { filterOperations } from '../../store/Filter'
 import { useDispatch } from 'react-redux'
+import {BoxSearch, MenuSearch} from './style'
 
-
-// const style = {
-// 	border: '1px solid #373F41',
-// 	borderRadius: '1px',
-// 	boxShadow: 'none'
-// }
-
-// import { styled } from '@mui/material/styles'
-
-// const MenuSearch =  styled(Menu)(() => ({
-// 	fontFamily: 'Mulish',
-// 	fontWeight: 600,
-// 	fontSize: '16px',
-// 	cursor: 'pointer',
-// 	color: '#373F41',
-// 	border: '1px solid #373F41',
-// 	borderRadius: '1px',
-// 	boxShadow: 'none',
-// 	gap: '1em',
-// 	['@media (max-width:750px)']: {
-// 		gap: '0.5em',
-// 	},
-// 	['@media (max-width:450px)']: {
-// 		padding: 6,
-// 		gap: 0
-// 	},
-// }))
 
 const HeadSearch = () => {
 	const [perPage, setPerPage] = useState([])
 	const [sortBy, setSortBy] = useState([])
-	const dispatch = useDispatch()
+	const [countSort, setCountSort] = useState([])
+	const [Sort, setSort] = useState([])
+	const [anchorEl, setAnchorEl] = useState(null)
+	const [anchorPerP, setAnchorPerP] = useState(null)
 
-	const [anchorEl, setAnchorEl] = React.useState(null)
-	const [anchorPerP, setAnchorPerP] = React.useState(null)
+	const dispatch = useDispatch()
 
 	const open = Boolean(anchorEl)
 	const handleClick = (event) => {
@@ -59,6 +35,15 @@ const HeadSearch = () => {
 	}
 	const handleClosePer = () => {
 		setAnchorPerP(null)
+	}
+
+	const handleShowCount = (item) => {
+		setCountSort(item)
+		handleClosePer()
+	}
+	const handleShowSort = (item) => {
+		setSort(item)
+		handleClose()
 	}
 
 	const getPerPageFilters = async () => {
@@ -80,14 +65,10 @@ const HeadSearch = () => {
 	},[])
 
 
+
 	return (
-		<Box
-			sx={{
-				display: 'flex',
-				justifyContent: 'space-between',
-				margin: 'auto',
-			}}
-		>
+		<Box style={BoxSearch}>
+
 			{perPage.length && (
 				<div>
 					<Button
@@ -96,13 +77,14 @@ const HeadSearch = () => {
 						aria-haspopup="true"
 						aria-expanded={openPer ? 'true' : undefined}
 						onClick={handleClickPer}
-					>Show
+					>{countSort.length ?  countSort :  'Show'}
 						{openPer ? <KeyboardArrowRightIcon /> : <KeyboardArrowDownIcon />}
 					</Button>
 					<Menu
 						id="basic-menu"
 						anchorEl={anchorPerP}
 						open={openPer}
+						value={countSort}
 						onClose={handleClosePer}
 						MenuListProps={{
 							'aria-labelledby': 'basic-button',
@@ -111,7 +93,7 @@ const HeadSearch = () => {
 						{perPage.map((item)=>
 							<MenuItem
 								style={{boxShadow: 'none'}}
-								onClick={handleClosePer}
+								onClick={()=>{ handleShowCount(item.name) }}
 								key={item._id} 
 								value={item.value}
 							>{item.name}</MenuItem>)}
@@ -125,15 +107,11 @@ const HeadSearch = () => {
 					aria-haspopup="true"
 					aria-expanded={open ? 'true' : undefined}
 					onClick={handleClick}
-				>Sort by
+				>{Sort.length ?  Sort :  'Sort by'}
 					{open ? <KeyboardArrowRightIcon /> : <KeyboardArrowDownIcon />}
 				</Button>
 				<Menu
-					style={{
-						border: '1px solid #373F41',
-						borderRadius: '1px',
-						boxShadow: 'none'
-					}}
+					style={MenuSearch}
 					id="basic-menu"
 					anchorEl={anchorEl}
 					open={open}
@@ -148,7 +126,7 @@ const HeadSearch = () => {
 						<MenuItem
 							key={item._id}
 							value={item.value}
-							onClick={handleClose}
+							onClick={()=>{handleShowSort(item.name)}}
 						>{item.name}</MenuItem>)}
 				</Menu>
 			</div>

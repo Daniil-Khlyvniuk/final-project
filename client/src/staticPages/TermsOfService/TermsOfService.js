@@ -1,6 +1,11 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios'
+import LeftMenu from '../../components/CustomerPage/LeftMenu'
+import RightMenu from '../../components/CustomerPage/RightMenu'
 import {Container, Grid} from '@mui/material'
+import Loader from '../../components/UI/Loader/Loader'
+
+
 
 const TermsOfService = () => {
 	const [data, setData] = useState(null)
@@ -15,40 +20,21 @@ const TermsOfService = () => {
 			})
 	}, [])
 	return (
-
-		<h1>
-			TermsOfService
-			{loading && <p>Loading</p>}
-			{data && <Container maxWidth='lg' sx={{mt:'80px'}}>
-				<Grid container>
-					<Grid item md={2}>
-						{
-
-							data.map(item => {
-								return <div key={item.pageTitle}>
-									<h6>{item.pageTitle}</h6>
-									<ul>
-										{item.tabs.map(tab => {
-											return <li key={tab.tabTitle}>{tab.tabTitle}</li>
-										})}
-									</ul>
-								</div>
-							
-							}
-							)
-						}
+		<Container>
+			{loading && <Loader/>}
+			{data &&
+					<Grid container spacing={1} sx={{marginTop:{xs:'10px', md:'90px'}}}>
+						<Grid item
+							md={3} sx={{margin:{xs:'0 auto'}}}
+						>
+							<LeftMenu data={data}/>
+						</Grid>
+						<Grid item md={9}>
+							<RightMenu tabs={data.tabs}/>
+						</Grid>
 					</Grid>
-					<Grid item md={10}>
-						{!loading && data.map((data) => {
-							data.tabs.map((item, index) => {
-								return <h1 key={index}>Hello!!!</h1>
-							})
-						})}
-					</Grid>
-				</Grid>
-
-			</Container>}
-		</h1>
+			}
+		</Container>
 	)
 }
 
