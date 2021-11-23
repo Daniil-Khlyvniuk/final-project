@@ -2,6 +2,12 @@ import { makeStyles } from '@mui/styles'
 import theme from '../Theme'
 
 export const useStyleCarousel = makeStyles({
+	test:{
+		display: 'flex'
+	},
+	test2:{
+		flex: 1
+	},
 	slide:{
 		width: '100%',
 		height: '100%',
@@ -142,7 +148,6 @@ export const useStyleCarousel = makeStyles({
 	thumbWrapper:{
 		width: '100%',
 		'& .slick-slide': {
-			margin: '0 3px',
 			opacity: 0.4
 		},
 		'& .slick-slide.slick-current': {
@@ -199,10 +204,10 @@ export const useStyleCarousel = makeStyles({
 		margin: '0 0 20px 0'
 	},
 	relatedText:{
-		fontFamily: theme.typography,
+		fontFamily: theme.typography.fontFamily,
 		fontStyle: 'normal',
 		fontWeight: 'normal',
-		fontSize: 18,
+		fontSize: 17,
 		lineHeight: '38px',
 		color: '#fff',
 		backgroundColor: '#373F41',

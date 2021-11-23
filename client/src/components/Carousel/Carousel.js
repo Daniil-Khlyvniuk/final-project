@@ -85,6 +85,22 @@ const Carousel = ({
 		centerMode: true,
 		nextArrow: <SampleNextArrow/>,
 		prevArrow: <SamplePrevArrow/>,
+		responsive: [
+			{
+				breakpoint: 800,
+				settings: {
+					slidesToShow: slides.length >= 3 ? 2 : slides.length
+				}
+			},
+			{
+				breakpoint: 600,
+				settings: {
+					arrows: false,
+					slidesToShow: 1
+				}
+			},
+		]
+
 	}
 	const settingsProducts = {
 		slidesToShow: 1,
@@ -170,14 +186,14 @@ const Carousel = ({
 					<h3 className={style.relatedTitle}>RELATED ITEMS</h3>
 					<Slider
 						{...settingRelated}
-						className={style.related}
+						className={`${style.related}` }
 						slidesToShow={slides.length <= 3 ? slides.length : 3}
 					>
 						{slides?.map((slide) => {
 							return (
-								<div key={slide.customId}>
-									<img src={slide.imageUrl} className={style.thumb + style.relatedSlide} style={{width:'380px',
-										height: '380px'}} alt=""/>
+								<div key={slide.customId} >
+									<img src={slide.imageUrl} className={style.thumb } style={{maxWidth:'380px',
+										maxHeight: '380px'}} alt=""/>
 									<div className={style.relatedTextBox}>
 										<p className={style.relatedText}>Mint Candy Bed Lilen</p>
 										<p className={style.relatedPrice}>$150</p>
