@@ -34,6 +34,7 @@ const Catalog = () => {
 		return <BackdropLoader open={isLoading} />
 	}
 
+
 	return (
 		<Box className={classes.container}>
 			{!products.length && (
@@ -45,7 +46,7 @@ const Catalog = () => {
 					return (
 						<CardInCatalog
 							key={item._id}
-							_id={item._id}
+							_id={item.variants._id}
 							image={'/' + item.variants.imageUrls[0]}
 							title={item?.name || ''}
 							price={item.variants.currentPrice}
