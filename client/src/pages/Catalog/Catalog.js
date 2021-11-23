@@ -27,7 +27,7 @@ const Catalog = () => {
 		clearTimeout(timer)
 		timer = setTimeout(() => {
 			dispatch(productsOperations.fetchProductsByFilter(filterString))
-		},1000)
+		},3000)
 	}
 
 	//build query string on filters change
