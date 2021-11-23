@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FormControl, InputAdornment, OutlinedInput, Slider, Box } from '@mui/material'
 import productsAPI from '../../utils/API/productsAPI'
 import {PriceRng, PriceBox, PriceRangeBlock, money} from './style'
@@ -7,7 +7,9 @@ const minDistance = 100
 
 const PriceRange = () => {
 	// временно
-	const [value, setValue] = React.useState([3, 35])
+	const [value, setValue] = useState([3, 35])
+	// Это не временно
+	const [maxPrice, setMaxPrice] = useState([])
 
 	const rangeSelector = (event, newValue, activeThumb) => {
 		if (!Array.isArray(newValue)) {
@@ -24,7 +26,8 @@ const PriceRange = () => {
 		try{
 			const res = await productsAPI.getMinMaxPrice()
 			// eslint-disable-next-line no-console
-			setValue([res.data[0].min, res.data[0].max])
+			setValue([0, res.data[0].max])
+			setMaxPrice([res.data[0].max])
 			console.log('mmm',res.data)
 		}
 		catch(err){
@@ -41,7 +44,7 @@ const PriceRange = () => {
 				getAriaLabel={() => 'Minimum distance shift'}
 				value={value}
 				min={0}
-				max={1000}
+				max={maxPrice}
 				onChange={rangeSelector}
 				disableSwap
 				sx={{
