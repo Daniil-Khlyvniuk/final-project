@@ -11,6 +11,7 @@ const PriceRange = () => {
 	// Это не временно
 	const [maxPrice, setMaxPrice] = useState([])
 
+
 	const rangeSelector = (event, newValue, activeThumb) => {
 		if (!Array.isArray(newValue)) {
 			return
@@ -28,7 +29,6 @@ const PriceRange = () => {
 			// eslint-disable-next-line no-console
 			setValue([0, res.data[0].max])
 			setMaxPrice([res.data[0].max])
-			console.log('mmm',res.data)
 		}
 		catch(err){
 			console.log('priceRange err', err)

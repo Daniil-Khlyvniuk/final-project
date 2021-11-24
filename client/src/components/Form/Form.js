@@ -34,7 +34,7 @@ const Form = () => {
 				value={value}
 				onChange={handleChange}
 				centered
-				variant='form-tab'
+				variant='standard'
 			>
 				<Tab
 					variant={value === 0 ? 'active' : 'default'}
