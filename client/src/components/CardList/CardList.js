@@ -29,6 +29,7 @@ const CardList = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
+
 	return (
 		<div>
 			<Typography fontSize={32} sx={{ mb: '14px', mt: '85px' }} variant={'h2'} className={classes.title}>NEW IN</Typography>

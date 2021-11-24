@@ -8,6 +8,8 @@ const initialState = {
 		perPage: null,
 		sort: null,
 		startPage: 1,
+		minPrice: null,
+		maxPrice: null,
 	},
 	isLoading: true,
 }
