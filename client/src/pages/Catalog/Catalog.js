@@ -1,10 +1,6 @@
 import React, {useEffect} from 'react'
-import {useHistory} from 'react-router-dom'
-import {useSelector, useDispatch} from 'react-redux'
-import queryString from 'query-string'
-import {filterSelectors, filterOperations} from '../../store/Filter'
-import {productsOperations} from '../../store/Products'
-import { textStyle, useStyles } from './styles'
+import {textStyle, useStyles} from './styles'
+import useFilterHandler from '../../utils/customHooks/useFilterHandler'
 
 import {Container, Grid, Typography} from '@mui/material'
 import ProductsCatalog from '../../components/Catalog/Catalog'
@@ -14,48 +10,15 @@ import LeftSide from '../../components/Catalog/LeftSide'
 import { Helmet } from 'react-helmet'
 
 const Catalog = () => {
-	const history = useHistory()
-	const dispatch = useDispatch()
+	// eslint-disable-next-line no-unused-vars
+	const [_,onLoadingPage] = useFilterHandler()
 	const classes = useStyles()
-
-	const filterStore = useSelector(filterSelectors.getFilters())
-	const urlParams = queryString.parse(history.location.search,{arrayFormat: 'comma'})
 	
-	let newQueryString = null
-	//запрос по фильтру
-	let timer
-	const getPorductsByFilter = (filterString) => {
-		clearTimeout(timer)
-		timer = setTimeout(() => {
-			dispatch(productsOperations.fetchProductsByFilter(filterString))
-		},1000)
-	}
-
-	//build query string on filters change
-	const buildQueryString = () => {
-		newQueryString = queryString.stringify(filterStore,{arrayFormat: 'comma'})
-		history.push({
-			pathname: history.location.pathname,
-			search: newQueryString,
-		})
-		getPorductsByFilter(newQueryString)
-	}
-
-	useEffect(() => {
-		buildQueryString()
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	},[filterStore])
-
 	//parse url on first page loading
 	useEffect(() => {
-		dispatch(filterOperations.setFiltersFromUri(urlParams))
+		onLoadingPage()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[])
-
-
-	// eslint-disable-next-line no-console
-	// console.log('urlParams',urlParams)
-
 
 	return (
 		<Container maxWidth="lg">

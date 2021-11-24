@@ -5,7 +5,7 @@ import { SvgIcon } from '@mui/material'
 export const multiColor = ({...rest}) => {
 
 	return (
-		<SvgIcon viewBox="0 0 24 24" width='24' height='24' {...rest}>
+		<SvgIcon viewBox="-2 0 24 21" width='24' height='24' {...rest}>
 			<path d="M10 0V10L17.0372 2.89656C15.23 1.10625 12.7447 0 10 0Z" fill="#6E7181"/>
 			<path d="M17.0372 2.89648L10 9.99992H20C20 7.22148 18.8663 4.70867 17.0372 2.89648Z" fill="#99B5BB"/>
 			<path d="M10 20V10L17.0372 17.1034C15.23 18.8937 12.7447 20 10 20Z" fill="#A9AAAC"/>

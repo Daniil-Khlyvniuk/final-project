@@ -1,5 +1,3 @@
-const getLinks = () => state => state.links.data
-const getIsLoading = () => state => state.links.isLoading
-const getError = () => state => state.links.error
+const getData = () => state => state.links
 
-export default {getLinks, getIsLoading, getError}
+export default {getData}
