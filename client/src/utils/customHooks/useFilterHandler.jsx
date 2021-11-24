@@ -20,8 +20,6 @@ const useFilterHandler = () => {
 		dispatch(productsOperations.fetchProductsByFilter())
 	}
 	const onLoadingPage = () => {
-		// eslint-disable-next-line no-console
-		console.log('HOHOHO',history.location.search)
 		if(!isLaunchedByUser)
 		{
 			const urlParams = queryString.parse(history.location.search,{arrayFormat: 'comma'})
