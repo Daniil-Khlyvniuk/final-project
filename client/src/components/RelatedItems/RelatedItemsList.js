@@ -45,6 +45,7 @@ const RelatedItemsList = () => {
 			}
 		}
 	})
+	console.log(slides)
 
 	return (
 		<div>

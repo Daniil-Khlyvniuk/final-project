@@ -11,6 +11,7 @@ import ProductsCatalog from '../../components/Catalog/Catalog'
 import CategorySearch from '../../components/Catalog/CategorySearch'
 import HeadSearch from '../../components/Catalog/HeadSearch'
 import LeftSide from '../../components/Catalog/LeftSide'
+import { Helmet } from 'react-helmet'
 
 const Catalog = () => {
 	const history = useHistory()
@@ -78,6 +79,11 @@ const Catalog = () => {
 					</Grid>
 				</Grid>
 			</Grid>
+			<Helmet>
+				<html lang='en'/>
+				<meta name='description' content='Catalog Bed Linens'/>
+				<meta name='keywords' content='Bedroom, Bed linen, Kitchen, Bathroom, Loungewear, Towels, Blanket, Pillowcase, Sheet, Bathrobe, Sale bed linen ' />
+			</Helmet>
 		</Container>
 	)
 }
