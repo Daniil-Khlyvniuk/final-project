@@ -110,11 +110,52 @@ exports.addProduct = async (req, res) => {
 
 exports.getVariantById = async (req, res, next) => {
   const varId = req.params.varId;
-  try {
-    const variant = await ProductVariant.findById(varId)
-      .populate("product")
-      .populate("size")
-      .populate("color");
+	try {
+		const variant = await Product.aggregate([
+      {
+        $lookup: {
+          from: ProductVariant.collection.name,
+          let: {
+            productId: "$_id",
+          },
+          pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $and: [
+										{ "$eq": [ "$_id", ObjectId(varId) ] },
+	                  { "$eq": [ "$product", "$$productId" ] },
+                  ],
+
+                },
+              },
+            },
+          ],
+          as: "variants",
+        },
+      },
+      {
+        $unwind: {
+          path: "$variants",
+        },
+      },
+      {
+        $project: {
+          _id: 1,
+          name: 1,
+          categories: 1,
+          productUrl: 1,
+          brand: 1,
+          manufacturer: 1,
+          manufacturerCountry: 1,
+          seller: 1,
+          description: 1,
+          date: 1,
+          variants: 1,
+        },
+      },
+    ]);
+
     if (!variant)
       res
         .status(400)
@@ -269,7 +310,8 @@ exports.getVariantsByProductId = async (req, res, next) => {
   try {
     const variant = await ProductVariant.find({ product: productId })
       .populate("size")
-      .populate("color");
+      .populate("color")
+      .populate("product");
     if (!variant)
       res.status(400).json({
         message: `Variant with id "${productId}" not found `,
