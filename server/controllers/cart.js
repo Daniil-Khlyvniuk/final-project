@@ -41,11 +41,10 @@ exports.updateCart = (req, res, next) => {
         initialQuery.customerId = req.user.id;
 
         const newCart = new Cart(queryCreator(initialQuery));
-
         newCart
           .populate('products.product')
           .populate('customerId')
-          .execPopulate();
+          .execPopulate()
 
         newCart
           .save()
@@ -76,7 +75,7 @@ exports.updateCart = (req, res, next) => {
     })
     .catch((err) =>
       res.status(400).json({
-        message: `Error happened on server: "${err}" `,
+        message: `Error happened on server: "${err}"`,
       })
     );
 };
