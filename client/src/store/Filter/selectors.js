@@ -1,3 +1,4 @@
+const getIsLaunchedByUser = () => state => state.filter.isLaunchedByUser
 const getFilters = () => state => state.filter.data
 const getIsLoading = () => state => state.filter.isLoading
 const getColors = () => state => state.filter.data.color
@@ -10,6 +11,7 @@ const getPerPage = () => state => state.filter.data.getPerPage
 const getSort = () => state => state.filter.data.sort
 
 const forExport = {
+	getIsLaunchedByUser,
 	getFilters,
 	getIsLoading,
 	getColors,

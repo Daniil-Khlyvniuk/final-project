@@ -8,14 +8,21 @@ const initialState = {
 		perPage: null,
 		sort: null,
 		startPage: 1,
+		minPrice: null,
+		maxPrice: null,
 	},
 	isLoading: true,
+	isLaunchedByUser: false,
 }
+
 
 export const filterSlice = createSlice({
 	name: 'filter',
 	initialState,
 	reducers: {
+		setIsLaunchedByUser: (state, action) => {
+			state.isLaunchedByUser = action.payload
+		},
 		handleCategory: (state, action) => {
 			const name = action.payload
 			if(state.data.category.includes(name))
@@ -46,9 +53,9 @@ export const filterSlice = createSlice({
 		//for filter update from query string ONLY
 		setNewStore: (state, action) => {	
 			state.data = {...state.data, ...action.payload}
-			// state.isLoading = false
+			state.isLoading = false
+	
 		},
-
 		setPerPage: (state, action) => {
 			state.data.perPage = action.payload
 		},

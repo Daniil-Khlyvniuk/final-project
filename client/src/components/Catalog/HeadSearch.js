@@ -8,6 +8,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
 import { filterOperations } from '../../store/Filter'
 import { useDispatch } from 'react-redux'
+import {BoxSearch, MenuSearch} from './style'
 
 
 const HeadSearch = () => {
@@ -15,11 +16,10 @@ const HeadSearch = () => {
 	const [sortBy, setSortBy] = useState([])
 	const [countSort, setCountSort] = useState([])
 	const [Sort, setSort] = useState([])
+	const [anchorEl, setAnchorEl] = useState(null)
+	const [anchorPerP, setAnchorPerP] = useState(null)
 
 	const dispatch = useDispatch()
-
-	const [anchorEl, setAnchorEl] = React.useState(null)
-	const [anchorPerP, setAnchorPerP] = React.useState(null)
 
 	const open = Boolean(anchorEl)
 	const handleClick = (event) => {
@@ -67,13 +67,7 @@ const HeadSearch = () => {
 
 
 	return (
-		<Box
-			sx={{
-				display: 'flex',
-				justifyContent: 'space-between',
-				margin: 'auto',
-			}}
-		>
+		<Box style={BoxSearch}>
 
 			{perPage.length && (
 				<div>
@@ -117,11 +111,7 @@ const HeadSearch = () => {
 					{open ? <KeyboardArrowRightIcon /> : <KeyboardArrowDownIcon />}
 				</Button>
 				<Menu
-					style={{
-						border: '1px solid #373F41',
-						borderRadius: '1px',
-						boxShadow: 'none'
-					}}
+					style={MenuSearch}
 					id="basic-menu"
 					anchorEl={anchorEl}
 					open={open}
