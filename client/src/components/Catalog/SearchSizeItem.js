@@ -2,14 +2,20 @@ import React from 'react'
 import {Checkbox, FormControlLabel} from '@mui/material'
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked'
 import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked'
-import { useSelector, useDispatch } from 'react-redux'
-import { filterSelectors, filterOperations } from '../../store/Filter'
+import { useSelector } from 'react-redux'
+import { filterSelectors } from '../../store/Filter'
+import useFilterHandler from '../../utils/customHooks/useFilterHandler'
 import PropTypes from 'prop-types'
 
 const SearchSizeItem = ({size}) => {
+	const [handleFilterChange] = useFilterHandler()
 	const {name} = size
 	const isSelected = useSelector(filterSelectors.checkSize(name))
-	const dispatch = useDispatch()
+
+	const handleChange = () =>
+	{
+		handleFilterChange('size', name)
+	}
 	
 	return (
 		<FormControlLabel
@@ -18,7 +24,7 @@ const SearchSizeItem = ({size}) => {
 				<Checkbox
 					checked={isSelected}
 					value={name}
-					onChange={() => dispatch(filterOperations.handleSize(name))}
+					onChange={handleChange}
 					icon={<RadioButtonUncheckedIcon />}
 					checkedIcon={<RadioButtonCheckedIcon />}
 				/>

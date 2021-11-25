@@ -1,18 +1,23 @@
 import React from 'react'
 import {Button} from '@mui/material'
-import {useSelector, useDispatch} from 'react-redux'
-import {filterSelectors, filterOperations} from '../../store/Filter'
+import {useSelector} from 'react-redux'
+import {filterSelectors} from '../../store/Filter'
+import useFilterHandler from '../../utils/customHooks/useFilterHandler'
 import PropTypes from 'prop-types'
 
 const CategorySearchItem = ({catalog}) => {
+	const [handleFilterChange] = useFilterHandler()
 	const {name} = catalog
 	const isSelected = useSelector(filterSelectors.checkCategory(name))
-	const dispatch = useDispatch()
+
+	const handler = () => {
+		handleFilterChange('category', name)
+	}
 	return (
 		<Button
 			color="primary"
 			variant={isSelected ? 'contained' : 'outlined'}
-			onClick={() => dispatch(filterOperations.handleCategory(name))}
+			onClick={handler}
 		>
 			{name}
 		</Button>

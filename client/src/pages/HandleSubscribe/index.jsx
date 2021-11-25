@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {useParams, useHistory, Link} from 'react-router-dom'
 import { Grid, Typography, Button, Container} from '@mui/material'
+import Loader from '../../components/UI/Loader/Loader'
 
 import {getSubscriptionByEmail,changeSubscription} from '../../utils/API/subscribersAPI'
 
@@ -59,7 +60,10 @@ const HandleSubscribe = () =>
 				
 				{!subscribeStatus && (
 					<Grid xs={6} item>
-						<StyledTypography variant="h2">Loading...</StyledTypography>
+						{/* <StyledTypography variant="h2">Loading...</StyledTypography> */}
+						<StyledTypography variant="h2">
+							<Loader />
+						</StyledTypography>
 					</Grid>
 				)}
 				
