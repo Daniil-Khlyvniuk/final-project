@@ -3,7 +3,7 @@ import { TextField } from '@mui/material'
 import { useField } from 'formik'
 
 // eslint-disable-next-line react/prop-types
-const TextInput = ({ name, ...rest }) => {
+const TextInput = ({ name,...rest }) => {
 	const [field, meta] = useField(name)
 
 	const configTextfield = {
@@ -11,6 +11,7 @@ const TextInput = ({ name, ...rest }) => {
 		...rest,
 		fullWidth: true,
 		variant: 'outlined',
+
 	}
 	if (meta && meta.touched && meta.error) {
 		configTextfield.error = true

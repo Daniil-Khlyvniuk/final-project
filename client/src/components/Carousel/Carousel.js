@@ -132,7 +132,7 @@ const Carousel = ({
 								console.log('slide_1', slide)
 								return (
 									<div key={index} className={style.slideContainer}>
-										<img src={`http://localhost:5000/${slide}`} className={style.slide} alt=""/>
+										<img src={`/${slide}`} className={style.slide} alt=""/>
 									</div>
 								)
 							})}
@@ -148,7 +148,7 @@ const Carousel = ({
 								console.log('slide_2', slide)
 								return (
 									<div key={index}>
-										<img src={`http://localhost:5000/${slide}`} className={style.thumb} alt=""/>
+										<img src={`/${slide}`} className={style.thumb} alt=""/>
 									</div>
 								)
 							})}

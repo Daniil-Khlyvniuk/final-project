@@ -5,7 +5,9 @@ import productsAPI from '../../utils/API/productsAPI'
 const fetchProductUrl = createAsyncThunk(
 	'product/getProduct',
 	async (productId) => {
+
 		const response = await productsAPI.getOneProduct(productId)
+
 		return response.data
 	}
 )
@@ -15,6 +17,8 @@ const fetchAllColors = createAsyncThunk(
 	'product/getAllColors',
 	async (productId) => {
 		const response = await productsAPI.getColors(productId)
+		// eslint-disable-next-line no-console
+		console.log(response.data)
 		return response.data
 	}
 )

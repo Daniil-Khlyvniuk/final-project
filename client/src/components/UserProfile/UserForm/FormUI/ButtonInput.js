@@ -11,6 +11,7 @@ const ButtonInput = ({ children, ...rest }) => {
 	}
 
 	const configButton = {
+		...rest,
 		variant: 'contained',
 		color: 'primary',
 		fullWidth: false,
