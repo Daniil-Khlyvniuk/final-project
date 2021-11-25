@@ -161,7 +161,10 @@ exports.getVariantById = async (req, res, next) => {
         .status(400)
         .json({ message: `Variant with id "${varId}" not found ` });
 
-    res.json(variant);
+
+		const result = variant[0]
+
+    res.json(result);
   } catch (err) {
     res.status(400).json({
       message: `Error happened on server: "${err}"`,
