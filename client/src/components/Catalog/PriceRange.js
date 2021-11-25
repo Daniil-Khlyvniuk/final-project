@@ -21,15 +21,9 @@ const PriceRange = () => {
 	}
 
 	const getPriceFilters = async () => {
-		try{
-			const res = await productsAPI.getMinMaxPrice()
-			// eslint-disable-next-line no-console
-			setValue([res.data[0].min, res.data[0].max])
-			console.log('mmm',res.data)
-		}
-		catch(err){
-			console.log('priceRange err', err)
-		}
+		const res = await productsAPI.getMinMaxPrice()
+		// eslint-disable-next-line no-console
+		setValue([res.data[0].min, res.data[0].max])
 	}
 	useEffect(()=>{
 		getPriceFilters()
@@ -56,7 +50,7 @@ const PriceRange = () => {
 				}}
 			/>
 			<Box style={PriceRangeBlock}>
-        FROM
+				FROM
 				<FormControl fullWidth sx={{ m: 1 }}>
 					<OutlinedInput
 						style={PriceRng}
@@ -66,7 +60,7 @@ const PriceRange = () => {
 						startAdornment={<InputAdornment position="start"><p style={money}>$</p></InputAdornment>}
 					/>
 				</FormControl>
-        TO
+				TO
 				<FormControl fullWidth sx={{ m: 1 }}>
 					<OutlinedInput
 						min={0}

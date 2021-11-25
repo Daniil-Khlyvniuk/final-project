@@ -9,7 +9,7 @@ export const useStyles = makeStyles(() => ({
 		display: 'flex',
 		flexDirection: 'column',
 		padding: '20px',
-		borderBottom: '1px solid grey',
+		// borderBottom: '1px solid grey',
 		position: 'relative',
 		gap: '80px',
 		alignItems: 'center',

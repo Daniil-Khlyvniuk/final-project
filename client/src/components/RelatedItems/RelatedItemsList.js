@@ -16,11 +16,11 @@ const RelatedItemsList = () => {
 
 	useEffect(() => {
 		dispatch(productsReducer.addRelatedId(id))
-	}, [relatedList, dispatch])
+	}, [relatedList, dispatch])// eslint-disable-line react-hooks/exhaustive-deps
 
 	useEffect(() => {
 		let requests =
-      relatedIds.map(id => axios(`/api/products/${id}`))
+			relatedIds.map(id => axios(`/api/products/${id}`))
 		Promise.all(requests).then(res => {
 			dispatch(productsReducer.setRelatedProductsList(
 				res.map(prod => prod.data)))
@@ -34,7 +34,7 @@ const RelatedItemsList = () => {
 		relatedList = relatedList.filter(prod => prod._id !== id).reverse()
 	}
 
-	
+
 	const slides = relatedList.reverse().map(prod => {
 		if (prod._id !== id) {
 			return {

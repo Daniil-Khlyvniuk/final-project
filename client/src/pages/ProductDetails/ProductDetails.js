@@ -31,9 +31,7 @@ const ProductDetails = () => {
 			dispatch(ProductOperations.fetchAllVariants(parent._id))
 
 		}
-	}, [activeProduct])
-
-
+	}, [activeProduct])// eslint-disable-line react-hooks/exhaustive-deps
 
 	if (!activeProduct ) {
 		return <Alert severity='error'>Product not found</Alert>

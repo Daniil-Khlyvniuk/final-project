@@ -23,6 +23,8 @@ const CardList = () => {
 	const dispatch = useDispatch()
 	const classes = useStyles()
 
+	console.log(products)
+
 	useEffect(() => {
 		// if (products.length) return
 		dispatch(productsOperations.fetchProducts('sort=-date&perPage=4&startPage=1'))
@@ -42,7 +44,9 @@ const CardList = () => {
 							key={item._id}
 							image={'/' + item.variants.imageUrls[0]}
 							title={item?.name || ''}
-							price={item.variants.currentPrice} />
+							price={item.variants.currentPrice}
+							inModal={false}
+						/>
 					))
 				}
 			</div>
