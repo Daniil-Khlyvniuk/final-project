@@ -42,14 +42,14 @@ const ProductDetails = () => {
 	return (
 		<Container maxWidth='lg' sx={{mt:'80px'}}>
 			{isLoading && <BackdropLoader open={isLoading} />}
-			{activeProduct && <Grid container spacing={2}>
+			{activeProduct && <Grid container spacing={4}>
 				<Grid item md={6} xs={12} >
 					<Carousel slides={activeProduct.imageUrls} product={true} />
 				</Grid>
 				<Grid item md={6} xs={12}>
 					<ProductDescription />
 				</Grid>
-				<Grid sx={{mt:'80px'}} item md={12}>
+				<Grid sx={{mt:'80px'}} item md={12} xs={12}>
 					<RelatedItemsList />
 				</Grid>
 			</Grid>}

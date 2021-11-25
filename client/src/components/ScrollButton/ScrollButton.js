@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { makeStyles } from '@mui/styles'
 // import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded'
+import theme from '../../utils/Theme'
 
 const ScrollButton = () => {
 	const [visible, setVisible] = useState(false)
@@ -15,7 +16,10 @@ const ScrollButton = () => {
 			fontSize: '3rem',
 			zIndex: 1,
 			cursor: 'pointer',
-			color:'#373F41'
+			color:'#373F41',
+			[theme.breakpoints.down('sm')]:{
+				left: '85%'
+			}
 		}
 	})
 	const style = buttonStyles()

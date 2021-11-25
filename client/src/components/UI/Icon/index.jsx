@@ -1,4 +1,4 @@
-import * as Icons from '../../../utils/Icons'
+import Icons from '../../../utils/Icons'
 
 const Icon = ({type, ...rest}) => {
 	const iconJsx = Icons[type]

@@ -3,19 +3,16 @@ import { useSelector, useDispatch } from 'react-redux'
 import productsReducer, { productsSelectors } from '../../store/Products'
 import axios from 'axios'
 import Carousel from '../Carousel/Carousel'
+import { ProductSelector } from '../../store/Product'
 
 
 const RelatedItemsList = () => {
 	const relatedIds = useSelector(productsSelectors.getRelatedIds())
 	let relatedList = useSelector(productsSelectors.getRelatedProductsList())
 	const dispatch = useDispatch()
-	const id = '6190058db6ba7e18e4336d8b'
-	// const id = '61900597b6ba7e18e4336d9d'
-	// const id = '619005abb6ba7e18e4336db1'
-	// const id = '6190059fb6ba7e18e4336da9'
-	// const id = '6190059fb6ba7e18e4336da9'
-	// const id = '61900607b6ba7e18e4336dbb'
 
+	const activeProduct = useSelector(ProductSelector.getProduct())
+	const id = activeProduct._id
 
 	useEffect(() => {
 		dispatch(productsReducer.addRelatedId(id))
