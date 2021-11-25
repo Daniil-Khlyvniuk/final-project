@@ -3,9 +3,14 @@ import linksApi from '../../utils/API/linksApi'
 
 export const fetchLinks = createAsyncThunk(
 	'links/fetchLinks',
-	async () => {
-		const response = await linksApi.getLinks()
-		return response.data
+	async (_,{rejectWithValue}) => {
+		try{
+			const response = await linksApi.getLinks()
+			return response.data
+		}
+		catch(error){ //error handle
+			return rejectWithValue(error.message)
+		}
 	}
 )
 
@@ -26,9 +31,9 @@ const linksSlice = createSlice({
 			state.isLoading = true
 			state.error = null
 		},
-		[fetchLinks.rejected]: (state) => {
-			state.isLoading = true
-			state.error = 'Error happened while links loading'
+		[fetchLinks.rejected]: (state, action) => {
+			state.isLoading = false
+			state.error = action.payload
 		},
 	},
 })

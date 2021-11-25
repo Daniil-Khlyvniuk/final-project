@@ -18,8 +18,6 @@ const Carousel = ({
 	const slider = useRef()
 	const thumbs = useRef()
 
-	// eslint-disable-next-line no-console
-	console.log(slides)
 
 	useEffect(() => {
 		setNav1(slider.current)
@@ -70,15 +68,39 @@ const Carousel = ({
 		slidesToScroll: 1,
 		nextArrow: <SampleNextArrow/>,
 		prevArrow: <SamplePrevArrow/>,
+		responsive: [
+			{
+				breakpoint: 600,
+				settings: {
+					arrows: false
+				}
+			},
+		]
 	}
 	const settingRelated = {
 		infinite: true,
 		speed: 500,
-		slidesToShow: 3,
 		initialSlide: 1,
 		arrows: true,
+		centerMode: true,
 		nextArrow: <SampleNextArrow/>,
 		prevArrow: <SamplePrevArrow/>,
+		responsive: [
+			{
+				breakpoint: 800,
+				settings: {
+					slidesToShow: slides.length >= 3 ? 2 : slides.length
+				}
+			},
+			{
+				breakpoint: 600,
+				settings: {
+					arrows: false,
+					slidesToShow: 1
+				}
+			},
+		]
+
 	}
 	const settingsProducts = {
 		slidesToShow: 1,
@@ -87,9 +109,16 @@ const Carousel = ({
 		arrows: true,
 		nextArrow: <SampleNextArrow/>,
 		prevArrow: <SamplePrevArrow/>,
+		responsive: [
+			{
+				breakpoint: 600,
+				settings: {
+					arrows: false
+				}
+			},
+		]
 	}
 	const settingThumbs = {
-		slidesToShow: 3,
 		slidesToScroll: 1,
 		initialSlide: 1,
 		centerMode: true,
@@ -106,7 +135,7 @@ const Carousel = ({
 			>
 				{slides?.map((slide) => {
 					return (
-						<div key={slide.customId} className={style.slideContainer}>
+						<div key={slide.customId} className={style.mainContainer}>
 							<img src={slide.imageUrl} className={style.slide} alt=""/>
 							<div className={style.textBlock}>
 								<p className={style.title}>{slide.title}</p>
@@ -120,25 +149,24 @@ const Carousel = ({
 			}
 
 			{product &&
-				<>
-					<div style={{width: '50%'}}>
+					<div className={style.productsWrapper}>
 						<Slider
+							className={style.products}
 							{...settingsProducts}
 							asNavFor={nav2}
 							ref={slider}
 						>
 							{slides?.map((slide, index) => {
-								// eslint-disable-next-line no-console
-								console.log('slide_1', slide)
 								return (
 									<div key={index} className={style.slideContainer}>
-										<img src={`/${slide}`} className={style.slide} alt=""/>
+										<img src={`/${slide}`} className={style.productSlide}  alt=""/>
 									</div>
 								)
 							})}
 						</Slider>
 						<Slider
 							{...settingThumbs}
+							slidesToShow={slides.length <= 3 ? slides.length : 3}
 							asNavFor={nav1}
 							ref={thumbs}
 							className={style.thumbWrapper}
@@ -154,7 +182,7 @@ const Carousel = ({
 							})}
 						</Slider>
 					</div>
-				</>
+
 			}
 
 			{related &&
@@ -162,11 +190,18 @@ const Carousel = ({
 					<h3 className={style.relatedTitle}>RELATED ITEMS</h3>
 					<Slider
 						{...settingRelated}
+						className={`${style.related}` }
+						slidesToShow={slides.length <= 3 ? slides.length : 3}
 					>
 						{slides?.map((slide) => {
 							return (
-								<div key={slide.customId}>
-									<img src={slide.imageUrl} className={style.thumb} alt=""/>
+								<div key={slide.customId} >
+									<img src={slide.imageUrl} className={style.thumb } style={{maxWidth:'380px',
+										maxHeight: '380px'}} alt=""/>
+									<div className={style.relatedTextBox}>
+										<p className={style.relatedText}>Mint Candy Bed Lilen</p>
+										<p className={style.relatedPrice}>$150</p>
+									</div>
 								</div>
 							)
 						})}
