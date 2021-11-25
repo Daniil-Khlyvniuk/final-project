@@ -1,28 +1,66 @@
 import React, { useEffect } from 'react'
-import { Container } from '@mui/material'
+import { Button, Container, Typography } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
-import CardList from '../../components/CardList/CardList'
-import favoritesActions, { favoritesSelectors } from '../../store/Favorites'
+// import CardList from '../../components/CardList/CardList'
+import { favoritesOperations, favoritesSelectors } from '../../store/Favorites'
+import { Box } from '@mui/system'
+import BackdropLoader from '../../components/UI/BackdropLoader/BackdropLoader'
+import { Link } from 'react-router-dom'
 
 const Favorites = () => {
-	const favorites = useSelector(favoritesSelectors.getFavorites())
+	// const favorites = useSelector(favoritesSelectors.getFavorites())
+	const isLoading = useSelector(favoritesSelectors.isLoading())
 	const dispatch = useDispatch()
+	let productID = JSON.parse(localStorage.getItem('favorites')) || []
 
 	useEffect(() => {
-		const favorites = JSON.parse(localStorage.getItem('favorites'))
-
-		if (favorites) {
-			dispatch(favoritesActions.addFavorites(favorites))
-		}
-	}, [dispatch])
+		favoritesOperations.fetchFavorites(productID)(dispatch)
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [productID.length])
 
 	return (
 		<Container maxWidth="lg">
-			<h1>Favorites</h1>
-			{favorites.length === 0 &&
-				<p>Nothing has been added to favorites...</p>
+			{isLoading && <BackdropLoader open={isLoading} />}
+			{!productID.length &&
+				<Box style={{ textAlign: 'center', margin: '7rem 0' }}>
+					<Typography
+						fontSize={32}
+						sx={{ mb: '14px', mt: '85px', textTransform: 'uppercase' }}
+						variant='h2'
+					>
+						Oops! Your wish list is empty
+					</Typography>
+					<Typography
+						fontSize={25}
+						variant='h4'
+					>
+						You can add items here if you haven&apos;t decided to buy them yet
+					</Typography>
+					<Link
+						to={'/shop/catalog'}
+						style={{ textDecoration: 'none' }}
+					>
+						<Button
+							variant='contained'
+							style={{ marginTop: '2rem' }}
+							textTransform='uppercase'
+						>
+							Continue shopping
+						</Button>
+					</Link>
+				</Box>}
+			{productID.length &&
+				<Box style={{ display: 'flex', justifyContent: 'space-between' }}>
+					<Typography
+						fontSize={32}
+						sx={{ mb: '14px', mt: '85px' }}
+						variant='h2'
+					>
+						Favorites
+					</Typography>
+				</Box>
 			}
-			<CardList />
+			{/* <CardList /> // ?? */}
 		</Container>
 	)
 }

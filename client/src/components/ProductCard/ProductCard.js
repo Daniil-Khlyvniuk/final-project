@@ -11,7 +11,7 @@ const ProductCard = ({ _id, image, title, price }) => {
 
 	return (
 		<Box className={classes.card}>
-			<Favoriteicon />
+			<Favoriteicon id={_id} />
 			<Link
 				to={`/product-details/${_id}`}
 				style={{ textDecoration: 'none' }}

@@ -25,9 +25,11 @@ const PriceRange = () => {
 			const res = await productsAPI.getMinMaxPrice()
 			// eslint-disable-next-line no-console
 			setValue([res.data[0].min, res.data[0].max])
+			// eslint-disable-next-line no-console
 			console.log('mmm',res.data)
 		}
 		catch(err){
+			// eslint-disable-next-line no-console
 			console.log('priceRange err', err)
 		}
 	}
