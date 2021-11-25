@@ -1,4 +1,5 @@
 import {createAsyncThunk} from '@reduxjs/toolkit'
+import queryString from 'query-string'
 import productsApi from '../../utils/API/productsAPI'
 
 const fetchProducts = createAsyncThunk(
@@ -11,9 +12,24 @@ const fetchProducts = createAsyncThunk(
 //only for filter
 const fetchProductsByFilter = createAsyncThunk(
 	'products/fetchProductsByFilter',
-	async (filterParams) => {
-		const res = await productsApi.getFilteredProducts(filterParams)
-		return res.data
+	async (_, {getState,rejectWithValue}) => {
+		try
+		{
+			const filters = getState().filter.data
+			const newQueryString = 
+				queryString.stringify(filters,{
+					arrayFormat: 'comma',
+					skipNull: true,
+					skipEmptyString: true,
+					parseNumbers: true
+				})
+			const res = await productsApi.getFilteredProducts(newQueryString)
+			return res.data
+		}
+		catch(error)
+		{
+			return rejectWithValue(error.message)
+		}
 	}
 )
 

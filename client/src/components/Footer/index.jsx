@@ -1,11 +1,12 @@
 import React, {useEffect} from 'react'
 import { makeStyles } from '@mui/styles'
-import { Box, Container, Grid } from '@mui/material'
+import { Box, Container, Grid, Typography } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
 import {linksSelectors, linksOperations} from '../../store/Links'
 import ContactUs from './ContactUs'
 import Subscribe from './Subscribe'
 import Credentials from './Credentials'
+import Loader from '../UI/Loader/Loader'
 
 import PageLinks from './PageLinks'
 
@@ -19,7 +20,7 @@ const Footer = () => {
 	const { blockStyle } = useStyles()
 
 	const dispatch = useDispatch()
-	const allLinks = useSelector(linksSelectors.getLinks())
+	const {data, error, isLoading} = useSelector(linksSelectors.getData())
 
 	useEffect(() => {
 		dispatch(linksOperations.fetchLinks())
@@ -38,9 +39,11 @@ const Footer = () => {
 				<Grid container columns={12} 
 					className={blockStyle}
 				>
+					{isLoading && (<Loader />)}
+					{error && (<Typography sx={{color: 'red'}}>{error}</Typography>)}
 					{
-						allLinks.length > 0 && 
-						allLinks.map(
+						data.length > 0 && 
+						data.map(
 							links => <PageLinks key={links._id} linksArr={links} />)
 					}
 					<ContactUs />
