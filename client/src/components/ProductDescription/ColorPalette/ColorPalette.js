@@ -29,9 +29,6 @@ const ColorPalette = () => {
 				const newProduct = variants.find(item => {
 					return item.color._id === newActiveColor
 				})
-				// eslint-disable-next-line no-console
-				console.log(newProduct)
-
 				history.push(`/product-details/${newProduct._id}`)
 			}
 		}
