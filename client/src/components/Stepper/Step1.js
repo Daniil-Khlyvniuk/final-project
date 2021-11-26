@@ -1,7 +1,6 @@
 import React from 'react'
-import { Button, Typography } from '@mui/material'
+import { Typography } from '@mui/material'
 import { useStyles } from './styles'
-import { Link } from 'react-router-dom'
 import ShoppingBagCard from '../../components/ShoppingBagCard/ShoppingBagCard'
 import useHandleShoppingBag from '../../hooks/shoppingBag/useHandleShoppingBag'
 

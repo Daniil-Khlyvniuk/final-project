@@ -40,7 +40,8 @@ const CartModal = ({ handleClose, openModal }) => {
 		<BasicModal
 			style={style.modal}
 			body={<>
-				<Typography fontSize={18} sx={{ mb: '14px', mt: '85px' }} variant={'p'} style={style.title}>TOTAL: USD
+				{shoppingBag?.length ? <><Typography fontSize={18} sx={{ mb: '14px', mt: '85px' }} variant={'p'}
+					style={style.title}>TOTAL: USD
           ${totalPrice}</Typography>
 				<Link exact to={'/cart'} style={style.link}>
 					<Button onClick={handleClose} variant={'contained'} style={style.button}>CHECKOUT</Button>
@@ -54,6 +55,10 @@ const CartModal = ({ handleClose, openModal }) => {
 					color={item?.color?.name}
 					amount={item?.amount}
 				/>)}</div>
+				</> : <div style={{margin: '3rem auto'}}>
+					<Typography fontSize={32} variant={'h2'} style={{textAlign: 'center', padding: '0 2rem'}}>Your bag is feeling lonely - add some beautiful new to it!</Typography>
+					<Button variant={'contained'} style={{ margin: '2rem auto 0', display: 'block' }} onClick={handleClose}>CONTINUE SHOPPING</Button>
+				</div>}
 			</>}
 			handleClose={handleClose}
 			openModal={openModal}

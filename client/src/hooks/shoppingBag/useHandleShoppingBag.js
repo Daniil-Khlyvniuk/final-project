@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import {shoppingBagSelectors} from '../../store/ShoppingBag'
 import * as shoppingBagActions from '../../store/ShoppingBag/shoppingBagSlice'
-import { useEffect } from 'react'
+// import { useEffect } from 'react'
 import cartAPI from '../../utils/API/cartAPI'
 
 export default function useHandleShoppingBag() {
@@ -44,17 +44,17 @@ export default function useHandleShoppingBag() {
 		dispatch(shoppingBagActions.removeFromShoppingBag(newShoppingBag))
 	}
 
-	useEffect(() => {
-		if(!shoppingBag?.length){
-			if(!localStorage.getItem('userToken')){
-				dispatch(shoppingBagActions.removeFromShoppingBag(JSON?.parse(localStorage?.getItem('shoppingBag') || '[]') || []))
-			}else{
-				cartAPI.getCart().then(res => {
-					dispatch(shoppingBagActions.removeFromShoppingBag(res))
-				})
-			}
-		}
-	}, [shoppingBag])// eslint-disable-line react-hooks/exhaustive-deps
+	// useEffect(() => {
+	// 	if(!shoppingBag?.length){
+	// 		if(!localStorage.getItem('userToken')){
+	// 			dispatch(shoppingBagActions.removeFromShoppingBag(JSON?.parse(localStorage?.getItem('shoppingBag') || '[]') || []))
+	// 		}else{
+	// 			cartAPI.getCart().then(res => {
+	// 				dispatch(shoppingBagActions.removeFromShoppingBag(res))
+	// 			})
+	// 		}
+	// 	}
+	// }, [shoppingBag])// eslint-disable-line react-hooks/exhaustive-deps
 
 	return {
 		add, remove, removeAll,
