@@ -6,11 +6,8 @@ import { Typography } from '@mui/material'
 import Favoriteicon from './FavotiteIcon/FavoriteIcon'
 import { Link } from 'react-router-dom'
 
-const ProductCard = ({ _id, image, title, price }) => {
+const FavoriteCard = ({ _id, image, title, price }) => {
 	const classes = useStyles()
-
-	// eslint-disable-next-line no-console
-	console.log('_id', _id)
 
 	return (
 		<Box className={classes.card}>
@@ -39,11 +36,11 @@ const ProductCard = ({ _id, image, title, price }) => {
 	)
 }
 
-ProductCard.propTypes = {
+FavoriteCard.propTypes = {
 	_id: PropTypes.string,
 	title: PropTypes.string,
 	image: PropTypes.string,
 	price: PropTypes.number,
 }
 
-export default ProductCard
+export default FavoriteCard

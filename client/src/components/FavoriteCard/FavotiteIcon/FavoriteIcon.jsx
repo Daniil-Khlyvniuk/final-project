@@ -1,13 +1,12 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import { IconButton } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
-// eslint-disable-next-line no-unused-vars
-import favoritesActions, { favoritesOperations, favoritesSelectors } from '../../../store/Favorites'
+import { favoritesOperations, favoritesSelectors } from '../../../store/Favorites'
 import PropTypes from 'prop-types'
 import modalActions from '../../../store/Modal'
-import LoginModal from '../../../components/Modal/LoginModal'
+import LoginModal from '../../Modal/LoginModal'
 import { userSelectors } from '../../../store/User'
 
 const Favoriteicon = ({ id }) => {
@@ -19,15 +18,6 @@ const Favoriteicon = ({ id }) => {
 	const dispatch = useDispatch()
 	const handleOpen = (content) => dispatch(modalActions.modalToggle(content))
 	const favoritesStorage = JSON.parse(localStorage.getItem('favorites')) || []
-
-	useEffect(() => {
-		const favoritesStorage = JSON.parse(localStorage.getItem('favorites'))
-
-		if (favoritesStorage) {
-			dispatch(favoritesActions.setFavorites(favoritesStorage))
-		}
-
-	}, [dispatch])
 
 	const addToFavorites = () => {
 		if (!localStorage.getItem('favorites')) localStorage.setItem('favorites', JSON.stringify([]))
@@ -51,7 +41,6 @@ const Favoriteicon = ({ id }) => {
 				position: 'absolute',
 				right: '10px',
 				top: '10px',
-				zIndex: 333
 			}}
 			onClick={!user
 				? () => handleOpen(<LoginModal />)

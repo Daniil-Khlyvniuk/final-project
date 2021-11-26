@@ -24,7 +24,7 @@ const Favoriteicon = ({ id }) => {
 		const favoritesStorage = JSON.parse(localStorage.getItem('favorites'))
 
 		if (favoritesStorage) {
-			dispatch(favoritesActions.setFavorites(favoritesStorage))
+			favoritesOperations.fetchFavorites(favoritesStorage)(dispatch)
 		}
 
 	}, [dispatch])
@@ -51,7 +51,6 @@ const Favoriteicon = ({ id }) => {
 				position: 'absolute',
 				right: '10px',
 				top: '10px',
-				zIndex: 333
 			}}
 			onClick={!user
 				? () => handleOpen(<LoginModal />)

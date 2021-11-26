@@ -5,14 +5,15 @@ import { favoritesOperations, favoritesSelectors } from '../../store/Favorites'
 import { Box } from '@mui/system'
 import BackdropLoader from '../../components/UI/BackdropLoader/BackdropLoader'
 import { Link } from 'react-router-dom'
-// import ProductCard from './ProductCard'
+import FavoriteCard from '../../components/FavoriteCard/FavoriteCard'
+import { useStyles } from './styles'
 
 const Favorites = () => {
 	const favorites = useSelector(favoritesSelectors.getFavorites())
-	// eslint-disable-next-line no-console
-	console.log('favorites', favorites)
 	const isLoading = useSelector(favoritesSelectors.isLoading())
 	const dispatch = useDispatch()
+	const classes = useStyles()
+
 	let productID = JSON.parse(localStorage.getItem('favorites')) || []
 
 	useEffect(() => {
@@ -45,7 +46,6 @@ const Favorites = () => {
 						<Button
 							variant='contained'
 							style={{ marginTop: '2rem' }}
-							textTransform='uppercase'
 						>
 							Continue shopping
 						</Button>
@@ -62,17 +62,17 @@ const Favorites = () => {
 					</Typography>
 				</Box>
 			}
-			{favorites.map((item) => {
-				// <ProductCard
-				// 	key={item._id}
-				// 	_id={item._id}
-				// 	image={'/' + item.imageUrls[0]}
-				// 	title={item.product.name}
-				// 	price={item.product.currentPrice}
-				// />
-				// eslint-disable-next-line no-console
-				console.log('favorites--item', item)
-			})}
+			<Box className={classes.container}>
+				{favorites?.map(item => (
+					<FavoriteCard
+						key={item.variants._id}
+						_id={item.variants._id}
+						image={'/' + item.variants.imageUrls[0]}
+						title={item.name}
+						price={item.variants.currentPrice}
+					/>
+				))}
+			</Box>
 		</Container>
 	)
 }
