@@ -1,3 +1,4 @@
+import queryString from 'query-string'
 import {actions} from './filterSlice'
 
 const setFiltersFromUri = (uriObject) => (dispatch,getState) => {
@@ -18,7 +19,26 @@ const setFiltersFromUri = (uriObject) => (dispatch,getState) => {
 	}
 }
 
+//sets filter value to store + update url search params
+const filtersHandler = (action, value, history) => (dispatch, getState) =>  {
+	if(actions[action])
+	{
+		dispatch(actions[action](value))
+		const filters = getState().filter.data
+		history.push({
+			pathname: history.location.pathname,
+			search: queryString.stringify(filters,{
+				arrayFormat: 'comma',
+				skipNull: true,
+				skipEmptyString: true,
+				parseNumbers: true
+			}),
+		})
+	}	
+}
+
 export default {
 	setFiltersFromUri,
+	filtersHandler,
 	...actions,
 }
