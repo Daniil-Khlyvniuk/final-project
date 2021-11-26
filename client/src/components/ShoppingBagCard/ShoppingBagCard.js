@@ -4,30 +4,38 @@ import {useStyles} from './styles'
 import PropTypes from 'prop-types'
 import icons from '../../utils/Icons/index'
 import useHandleShoppingBag from '../../hooks/shoppingBag/useHandleShoppingBag'
+// import { useSelector } from 'react-redux'
+// import { ProductSelector } from '../../store/Product'
 
 const ShoppingBagCard = ({ item }) => {
 	const classes = useStyles()
 	const handleShoppingBag = useHandleShoppingBag()
 
+	// const allColors = useSelector(ProductSelector.allColors())
+	// const color = allColors?.find(color => color._id === item.color)
+	//
+	// const allSizes = useSelector(ProductSelector.allSizes())
+	// const size = allSizes?.find(size => size._id === item.size)
+
 	return (
 		<div className={classes.container}>
 			<img className={classes.image} src={item?.imageUrls[0]} alt={'image'}/>
 			<div className={classes.desc}>
-				<Typography fontSize={24} sx={{mb: '14px', mt: '85px'}} variant={'h2'}>{item?.product?.name}</Typography>
-				<Typography fontSize={14} sx={{mb: '14px', mt: '85px'}}>
+				<Typography fontSize={24} variant={'h2'}>{item?.product.name}</Typography>
+				<Typography fontSize={14}>
 					This is the luxury bedding set with
 					absolutely everything in it,
 					at a price that won&apos;t keep you up at night.
 				</Typography>
-				<Typography fontSize={18} sx={{mb: '14px', mt: '85px'}}>${item?.currentPrice}</Typography>
+				<Typography fontSize={18}>${item?.currentPrice}</Typography>
 				<div className={classes.specificationsContainer}>
 					<div className={classes.specifications}>
-						<Typography fontSize={18} sx={{mb: '14px', mt: '85px'}}>Color: {item?.color?.name}</Typography>
-						<Typography fontSize={18} sx={{mb: '14px', mt: '85px'}}>Size: {item?.size?.name}</Typography>
+						<Typography fontSize={18}>Color: </Typography>
+						<Typography fontSize={18}>Size: </Typography>
 					</div>
 					<div className={classes.quantityContainer}>
 						<Typography
-							fontSize={18} sx={{mb: '14px', mt: '85px'}}
+							fontSize={18}
 							className={classes.quantity}>
 							{item?.amount}
 						</Typography>

@@ -9,7 +9,7 @@ import useHandleShoppingBag from '../../../hooks/shoppingBag/useHandleShoppingBa
 const ActionButtons = () => {
 	const handleShoppingBag = useHandleShoppingBag()
 	const activeProduct = useSelector(ProductSelector.getProduct())
-	const parent = useSelector(ProductSelector.getParent())
+	// const parent = useSelector(ProductSelector.getParent())
 	const user = useSelector(userSelectors.getToken())
 
 	return (
