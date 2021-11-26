@@ -23,8 +23,6 @@ const CardList = () => {
 	const dispatch = useDispatch()
 	const classes = useStyles()
 
-	console.log(products)
-
 	useEffect(() => {
 		// if (products.length) return
 		dispatch(productsOperations.fetchProducts('sort=-date&perPage=4&startPage=1'))

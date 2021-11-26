@@ -17,9 +17,7 @@ export default function useHandleShoppingBag() {
 			localStorage.setItem('shoppingBag', JSON.stringify(newShoppingBag))
 			dispatch(shoppingBagActions.addToShoppingBag(newShoppingBag))
 		}else{
-			await cartAPI.addProductToCart(product?.product?._id).then(res => {
-				console.log('RES --> ', res)
-			})
+			await cartAPI.addProductToCart(product?.product?._id)
 
 			// dispatch(shoppingBagActions.addToShoppingBag(newShoppingBag))
 		}

@@ -34,13 +34,12 @@ const style = {
 
 const CartModal = ({ handleClose, openModal }) => {
 	const { shoppingBag, totalPrice } = useHandleShoppingBag()
-	console.log(shoppingBag)
 
 	return (
 		<BasicModal
 			style={style.modal}
 			body={<>
-				{shoppingBag?.length ? <><Typography fontSize={18} sx={{ mb: '14px', mt: '85px' }} variant={'p'}
+				{shoppingBag?.length ? <><Typography fontSize={18} sx={{ mb: '14px', mt: '85px' }}
 					style={style.title}>TOTAL: USD
           ${totalPrice}</Typography>
 				<Link exact to={'/cart'} style={style.link}>

@@ -9,10 +9,16 @@ const CardInModal = ({ image, title, price, size, amount }) => {
 		<div className={classes.card}>
 			<img className={classes.image} src={image} alt='img'/>
 			<div className={classes.textContainer}>
-				<Typography fontSize={16} variant={'p'} className={classes.desc}>{title}</Typography>
-				<Typography fontSize={16} variant={'p'} className={classes.desc}>QUANTITY: {amount}</Typography>
-				<Typography fontSize={16} variant={'p'} className={classes.desc}>SIZE: {size}</Typography>
-				<Typography fontSize={16} variant={'p'} className={classes.desc}>USD ${price}</Typography>
+				<Typography fontSize={16} className={classes.desc}>{title}</Typography>
+				<Typography fontSize={16} className={classes.desc}>
+          QUANTITY: {amount}
+				</Typography>
+				<Typography fontSize={16} className={classes.desc}>
+          SIZE: {size}
+				</Typography>
+				<Typography fontSize={16} className={classes.desc}>
+          USD ${price}
+				</Typography>
 			</div>
 		</div>
 	)

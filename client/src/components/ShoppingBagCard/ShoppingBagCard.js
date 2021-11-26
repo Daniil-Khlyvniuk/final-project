@@ -14,21 +14,20 @@ const ShoppingBagCard = ({ item }) => {
 			<img className={classes.image} src={item?.imageUrls[0]} alt={'image'}/>
 			<div className={classes.desc}>
 				<Typography fontSize={24} sx={{mb: '14px', mt: '85px'}} variant={'h2'}>{item?.product?.name}</Typography>
-				<Typography fontSize={14} sx={{mb: '14px', mt: '85px'}} variant={'p'}>
+				<Typography fontSize={14} sx={{mb: '14px', mt: '85px'}}>
 					This is the luxury bedding set with
 					absolutely everything in it,
 					at a price that won&apos;t keep you up at night.
 				</Typography>
-				<Typography fontSize={18} sx={{mb: '14px', mt: '85px'}} variant={'p'}>${item?.currentPrice}</Typography>
+				<Typography fontSize={18} sx={{mb: '14px', mt: '85px'}}>${item?.currentPrice}</Typography>
 				<div className={classes.specificationsContainer}>
 					<div className={classes.specifications}>
-						<Typography fontSize={18} sx={{mb: '14px', mt: '85px'}} variant={'p'}>Color: {item?.color?.name}</Typography>
-						<Typography fontSize={18} sx={{mb: '14px', mt: '85px'}} variant={'p'}>Size: {item?.size?.name}</Typography>
+						<Typography fontSize={18} sx={{mb: '14px', mt: '85px'}}>Color: {item?.color?.name}</Typography>
+						<Typography fontSize={18} sx={{mb: '14px', mt: '85px'}}>Size: {item?.size?.name}</Typography>
 					</div>
 					<div className={classes.quantityContainer}>
 						<Typography
 							fontSize={18} sx={{mb: '14px', mt: '85px'}}
-							variant={'p'}
 							className={classes.quantity}>
 							{item?.amount}
 						</Typography>

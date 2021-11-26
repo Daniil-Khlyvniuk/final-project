@@ -57,9 +57,6 @@ const productsSlice = createSlice({
 		//for catalog page filters
 		[fetchProductsByFilter.fulfilled]: (state, action) => {
 
-			// eslint-disable-next-line no-console
-			console.log('aaa',action.payload)
-
 			state.data = action.payload
 			state.isLoading = false
 			state.error = null
