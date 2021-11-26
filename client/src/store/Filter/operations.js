@@ -8,12 +8,10 @@ const setFiltersFromUri = (uriObject) => (dispatch,getState) => {
 
 	if(Object.keys(uriObject).length)
 	{
-	
 		const state = getState().filter.data
 		const fromQuery = {}
 		for(let key in uriObject)
 		{
-			// if(state[key])
 			if(key in state)
 			{
 				if(arrayTypeFields.includes(key))
@@ -28,17 +26,24 @@ const setFiltersFromUri = (uriObject) => (dispatch,getState) => {
 				}
 			}
 		}
-		// eslint-disable-next-line no-console
-		// console.log('uri obj', fromQuery)
 		dispatch(actions.setNewStore(fromQuery))
 	}
 }
 
 //sets filter value to store + update url search params
 const filtersHandler = (action, value, history) => (dispatch, getState) =>  {
-	if(actions[action])
+	if(actions[action] || action === 'handlePriceRange')
 	{
-		dispatch(actions[action](value))
+		if(action !== 'handlePriceRange')
+		{
+			dispatch(actions[action](value))
+		}
+		else
+		{
+			const [minPrice, maxPrice] = value
+			dispatch(actions.handleMinPrice(minPrice))
+			dispatch(actions.handleMaxPrice(maxPrice))
+		}
 		const filters = getState().filter.data
 		history.push({
 			pathname: history.location.pathname,

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 
 import React, { useEffect, useState } from 'react'
 import { Box, } from '@mui/material'
@@ -12,10 +13,12 @@ import DropDownSelect from './DropDownSelect'
 
 const HeadSearch = () => {
 	const [handleFilterChange] = useFilterHandler()
-	const [perPage, setPerPage] = useState([])
-	const [sortBy, setSortBy] = useState([])
-	const perPageValue = useSelector(filterSelectors.getPerPage())
-	const sortValue = useSelector(filterSelectors.getSort())
+	const [perPageArray, setPerPageArray] = useState([])
+	const [sortByArray, setSortByArray] = useState([])
+	// const perPage = useSelector(filterSelectors.getPerPage())
+	// const sort = useSelector(filterSelectors.getSort())
+	const {perPage,sort: sort} =
+		useSelector(filterSelectors.getFilters())
 
 	const dispatch = useDispatch()
 
@@ -28,13 +31,21 @@ const HeadSearch = () => {
 
 	const getPerPageFilters = async () => {
 		const pageRes = await filterApi.getFiltersByType('perPage')
-		setPerPage(pageRes.data)
-		dispatch(filterOperations.handlePerPage(pageRes.data[0].value))
+		setPerPageArray(pageRes.data)
+		
+		// if(!perPage)
+		// {
+		// 	dispatch(filterOperations.handlePerPage(pageRes.data[0].value))
+		// }
 	}
 	const getSortByFilters = async () => {
 		const sortRes = await filterApi.getFiltersByType('sortBy')
-		setSortBy(sortRes.data)
-		dispatch(filterOperations.handleSort(sortRes.data[0].value))
+		setSortByArray(sortRes.data)
+		// console.log('sss',sort)
+		// if(!sort)
+		// {
+		// 	dispatch(filterOperations.handleSort(sortRes.data[0].value))
+		// }
 	}
 
 	useEffect(()=> {
@@ -47,18 +58,18 @@ const HeadSearch = () => {
 
 	return (
 		<Box style={BoxSearch}>
-			{perPage.length && (
+			{perPageArray.length && (
 				<DropDownSelect
-					arrayToIterate={perPage}
-					selectedValue={perPageValue}
+					arrayToIterate={perPageArray}
+					selectedValue={perPage}
 					selectHandler={handlePerPage}
 					label={'Show'}
 				/>
 			)}
-			{sortBy.length && (
+			{sortByArray.length && (
 				<DropDownSelect
-					arrayToIterate={sortBy}
-					selectedValue={sortValue}
+					arrayToIterate={sortByArray}
+					selectedValue={sort}
 					selectHandler={handleSort}
 					label={'Sort by'}
 				/>

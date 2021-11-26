@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 
 const StyledMenuItem = styled(MenuItem )(() => ({
 	padding: '5px 10px 5px 40px',
-	textTransform: 'capitalize',
+	// textTransform: 'capitalize',
 	boxShadow: 'none'
 }))
 
@@ -20,7 +20,7 @@ const DropDownSelect = ({
 	const [anchor, setAnchor] = useState(null)
 	const isOpened = Boolean(anchor)
 	const getNameByValue = (value) => {
-		const res = arrayToIterate.find(valueObj => valueObj.value === value)
+		const res = arrayToIterate.find(valueObj => valueObj.value == value)
 		return (res && res.name) ? res.name : ''
 	}
 	const handleClick = (event) => {
@@ -71,7 +71,7 @@ const DropDownSelect = ({
 
 DropDownSelect.propTypes = {
 	arrayToIterate: PropTypes.array,
-	selectedValue: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+	selectedValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	selectHandler: PropTypes.func,
 	label: PropTypes.string
 }
