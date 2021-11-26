@@ -173,7 +173,9 @@ const Carousel = ({
 						>
 							{slides?.map((slide, index) => {
 								return (
-									<img key={index} src={`/${slide}`} className={style.thumb} alt="" />
+									<div key={index}>
+										<img src={`/${slide}`} className={style.thumb} alt=""/>
+									</div>
 								)
 							})}
 						</Slider>

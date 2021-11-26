@@ -42,10 +42,10 @@ const Catalog = () => {
 			)}
 			{
 				!!products
-				&& products.map((item) => {
+				&& products.map((item, index) => {
 					return (
 						<CardInCatalog
-							key={item._id}
+							key={index} //костыль
 							_id={item.variants._id}
 							image={'/' + item.variants.imageUrls[0]}
 							title={item?.name || ''}

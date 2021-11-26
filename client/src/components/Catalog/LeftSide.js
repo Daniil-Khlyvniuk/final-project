@@ -14,7 +14,7 @@ const LeftSide = () => {
 	const filters = useSelector(filterSelectors.getFilters())
 
 	// eslint-disable-next-line no-console
-	console.log('expanded',filters)
+	// console.log('expanded',filters)
 
 	return(
 		<Box>
