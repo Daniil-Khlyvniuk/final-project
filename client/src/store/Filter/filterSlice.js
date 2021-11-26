@@ -56,10 +56,10 @@ export const filterSlice = createSlice({
 			state.isLoading = false
 	
 		},
-		setPerPage: (state, action) => {
+		handlePerPage: (state, action) => {
 			state.data.perPage = action.payload
 		},
-		setSort: (state, action) => {
+		handleSort: (state, action) => {
 			state.data.sort = action.payload
 		}
 	},

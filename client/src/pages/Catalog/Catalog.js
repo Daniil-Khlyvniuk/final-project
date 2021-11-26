@@ -21,7 +21,7 @@ const Catalog = () => {
 
 	return (
 		<Container maxWidth="lg">
-			<Grid  className={classes.MainGrd}>
+			<Grid className={classes.MainGrd}>
 				<Grid item className={classes.leftSide}>
 					<Typography
 						style={textStyle}
