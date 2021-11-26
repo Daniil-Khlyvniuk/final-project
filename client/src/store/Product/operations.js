@@ -17,8 +17,6 @@ const fetchAllColors = createAsyncThunk(
 	'product/getAllColors',
 	async (productId) => {
 		const response = await productsAPI.getColors(productId)
-		// eslint-disable-next-line no-console
-		console.log(response.data)
 		return response.data
 	}
 )
