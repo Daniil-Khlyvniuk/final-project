@@ -40,7 +40,7 @@ const Popular = () => {
 					sx={{p:'17px 48px',justifyContent: 'center',
 						alignItems: 'center', ':hover': {
 							backgroundColor: '#373F41',
-							color: 'white',
+							color: '#fff',
 						}  }}
 					variant='outlined'
 					endIcon={<ArrowForwardIosOutlinedIcon fontSize={'small'}/>}>
