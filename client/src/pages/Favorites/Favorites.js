@@ -1,21 +1,23 @@
 import React, { useEffect } from 'react'
 import { Button, Container, Typography } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
-// import CardList from '../../components/CardList/CardList'
 import { favoritesOperations, favoritesSelectors } from '../../store/Favorites'
 import { Box } from '@mui/system'
 import BackdropLoader from '../../components/UI/BackdropLoader/BackdropLoader'
 import { Link } from 'react-router-dom'
+// import ProductCard from './ProductCard'
 
 const Favorites = () => {
-	// const favorites = useSelector(favoritesSelectors.getFavorites())
+	const favorites = useSelector(favoritesSelectors.getFavorites())
+	// eslint-disable-next-line no-console
+	console.log('favorites', favorites)
 	const isLoading = useSelector(favoritesSelectors.isLoading())
 	const dispatch = useDispatch()
 	let productID = JSON.parse(localStorage.getItem('favorites')) || []
 
 	useEffect(() => {
 		favoritesOperations.fetchFavorites(productID)(dispatch)
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [productID.length])
 
 	return (
@@ -60,7 +62,17 @@ const Favorites = () => {
 					</Typography>
 				</Box>
 			}
-			{/* <CardList /> // ?? */}
+			{favorites.map((item) => {
+				// <ProductCard
+				// 	key={item._id}
+				// 	_id={item._id}
+				// 	image={'/' + item.imageUrls[0]}
+				// 	title={item.product.name}
+				// 	price={item.product.currentPrice}
+				// />
+				// eslint-disable-next-line no-console
+				console.log('favorites--item', item)
+			})}
 		</Container>
 	)
 }

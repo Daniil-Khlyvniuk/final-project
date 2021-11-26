@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import favoritesActions, { favoritesOperations, favoritesSelectors } from '../../../store/Favorites'
 import PropTypes from 'prop-types'
 import modalActions from '../../../store/Modal'
-import LoginModal from '../../Modal/LoginModal'
+import LoginModal from '../../../components/Modal/LoginModal'
 import { userSelectors } from '../../../store/User'
 
 const Favoriteicon = ({ id }) => {
