@@ -17,7 +17,7 @@ const ColorPalette = () => {
 	const variants = useSelector(ProductSelector.allVariants())
 
 	useEffect(() => {
-		setActiveColor(activeProduct.color._id)
+		setActiveColor(activeProduct.color)
 	}, [activeProduct])
 
 	const handleActiveColor = (event,newActiveColor) => {
@@ -25,6 +25,7 @@ const ColorPalette = () => {
 			setActiveColor(newActiveColor)
 			if(newActiveColor !== activeColor){
 				dispatch(productActions.clearSizes())
+
 				const newProduct = variants.find(item => {
 					return item.color._id === newActiveColor
 				})

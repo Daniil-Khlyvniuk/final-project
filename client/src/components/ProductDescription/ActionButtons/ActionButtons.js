@@ -9,7 +9,7 @@ import {userSelectors} from '../../../store/User'
 const ActionButtons = () => {
 	const dispatch = useDispatch()
 	const activeProduct = useSelector(ProductSelector.getProduct())
-
+	const parent = useSelector(ProductSelector.getParent())
 	const user = useSelector(userSelectors.getToken())
 	return (
 		<>
@@ -19,8 +19,9 @@ const ActionButtons = () => {
 				onClick={()=>{
 					// eslint-disable-next-line max-len
 					dispatch(shoppingBagReducer.addToShoppingBag(
+						// TODO - addToShoppingBag
 						[{
-							title: activeProduct.name,
+							title: parent.name,
 							image: activeProduct.imageUrls[0],
 							price:activeProduct.currentPrice,
 							_id:activeProduct._id,
