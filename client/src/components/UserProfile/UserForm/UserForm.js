@@ -44,19 +44,14 @@ const UserForm = () => {
 	useEffect(() => {
 		setIsLoading(true)
 		axios('/api/customers/customer')
-			// eslint-disable-next-line no-console
 			.then(res =>setUserData(res.data))
 		setIsLoading(false)
-		// eslint-disable-next-line no-console
-
 	}, [isLoading])
 
 
 
 	const user = useSelector(userSelectors.getData())
 	const token = useSelector(userSelectors.getToken())
-	// eslint-disable-next-line no-console
-	console.log('userData ----' , userData)
 
 	const INITIAL_FORM_STATE = {
 		firstName: user?.firstName || null,
@@ -71,8 +66,6 @@ const UserForm = () => {
 		confirmPass:''
 	}
 
-	// eslint-disable-next-line no-console
-	console.log('user ---', user)
 	if(!user){
 		return <Loader/>
 	}
