@@ -6,12 +6,12 @@ const Catalog = require("../models/Catalog");
 const Size = require("../models/Size");
 const fileService = require("../services/fileService");
 const notFoundError = require("../commonHelpers/notFoundError");
+const filterOneVariant = require("../commonHelpers/filterOneVariant");
 const isExist = require("../commonHelpers/isExist");
 const findOrCreate = require("../commonHelpers/findOrCreate");
 const ObjectId = mongoose.Types.ObjectId;
 const filterProductDuplicates = require("../commonHelpers/filterProductDuplicates");
 const getAggregateParamsForProductFilters = require("../commonHelpers/getAggregateParamsForProductFilters");
-
 const {
   getFilterConditions,
   getSortConditions,
@@ -22,6 +22,7 @@ const rand = uniqueRandom(0, 999999);
 const queryCreator = require("../commonHelpers/queryCreator");
 const filterParser = require("../commonHelpers/filterParser");
 const _ = require("lodash");
+
 
 exports.addProduct = async (req, res) => {
   const {
@@ -126,7 +127,6 @@ exports.getVariantById = async (req, res, next) => {
 										{ "$eq": [ "$_id", ObjectId(varId) ] },
 	                  { "$eq": [ "$product", "$$productId" ] },
                   ],
-
                 },
               },
             },
@@ -295,10 +295,7 @@ exports.getProducts = async (req, res, next) => {
         perDocumentLimit: 1,
       });
 
-    const result = products.map(({ _doc: product }) => ({
-      ...product,
-      variants: product.variants[0],
-    }));
+    const result = filterOneVariant(products)
 
     res.json(result);
   } catch (err) {
@@ -339,7 +336,7 @@ exports.getProductsFilterParams = async (req, res, next) => {
   try {
     const products = await Product.aggregate([
       { $skip: startPage * perPage - perPage },
-      // { $limit: 10},
+      { $limit: perPage },
       ...aggregateParams,
       {
         $project: {
@@ -356,7 +353,6 @@ exports.getProductsFilterParams = async (req, res, next) => {
           variants: 1,
         },
       },
-
       sortParam,
     ]);
 
@@ -376,25 +372,15 @@ exports.searchProducts = async (req, res, next) => {
 
   const query = req.body.query.toLowerCase().trim().replace(/\s\s+/g, " ");
 
-  let products = await Product.aggregate([
-    {
-      $match: {
-        $text: { $search: query },
-      },
-    },
-    {
-      $lookup: {
-        from: ProductVariant.collection.name,
-        localField: "_id",
-        foreignField: "product",
-        as: "variants",
-      },
-    },
-    {
-      $unwind: "$variants",
-    },
-  ]);
-  res.json(products);
+  let products = await Product.find(
+    { $text: { $search: query } }
+  ).populate({
+	  path: "variants",
+	  perDocumentLimit: 1,
+  }).populate("categories")
+
+	const result = filterOneVariant(products)
+	res.json(result);
 };
 
 exports.searchAutocomplete = async (req, res, next) => {
@@ -477,7 +463,6 @@ exports.searchAutocomplete = async (req, res, next) => {
         $unwind: "$variants",
       },
     ]);
-    console.log(foundProducts);
 
     // const result = foundProducts.reduce(
     // 	(acc, cur) =>

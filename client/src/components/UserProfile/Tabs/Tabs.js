@@ -7,14 +7,11 @@ import Box from '@mui/material/Box'
 import UserForm from '../UserForm/UserForm'
 import Orders from '../Orders/Orders'
 
-
-
 const TabPanel = (props) => {
 	const { children, value, index, ...other } = props
-
 	return (
 		<div
-			role="tabpanel"
+			role='tabpanel'
 			hidden={value !== index}
 			id={`simple-tabpanel-${index}`}
 			aria-labelledby={`simple-tab-${index}`}
@@ -57,20 +54,6 @@ export default function BasicTabs() {
 						width: '260px',
 						flexDirection:'column'
 					}},
-				// ['@media (max-width:600px)']: {
-				// 	width: '400px',
-				// 	padding: '5px 25px 10px'
-				// },
-				// ['@media (max-width:490px)']: {
-				// 	width: '350px',
-				// },
-				// ['@media (max-width:440px)']: {
-				// 	width: '300px',
-				// },
-				// ['@media (max-width:360px)']: {
-				// 	width: '260px',
-				// 	flexWrap:'wrap'
-				// }
 
 			}}>
 				<Tabs value={value} onChange={handleChange}
@@ -90,7 +73,7 @@ export default function BasicTabs() {
 				<Orders/>
 			</TabPanel>
 			<TabPanel value={value} index={2}>
-				Item Three
+				Favorites
 			</TabPanel>
 		</Box>
 	)
