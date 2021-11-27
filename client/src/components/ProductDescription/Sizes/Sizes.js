@@ -20,10 +20,7 @@ const Sizes = () => {
 	useEffect(() => {
 		if(activeProduct){
 			setActiveSize(activeProduct.size)
-			// eslint-disable-next-line no-console
-			console.log('Active size' ,activeProduct.size)
-		}
-	},[activeProduct])
+		}},[activeProduct])
 
 	const handleActiveSize = (event,newActiveSize) => {
 		setActiveSize(newActiveSize)
@@ -56,7 +53,7 @@ const Sizes = () => {
 		>
 			{ allSizes &&
 			allSizes.map(item => {
-		
+
 				return <Tab
 					key={item.size._id}
 					disableRipple
