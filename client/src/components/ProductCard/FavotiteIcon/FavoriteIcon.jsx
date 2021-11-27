@@ -3,8 +3,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import { IconButton } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
-// eslint-disable-next-line no-unused-vars
-import favoritesActions, { favoritesOperations, favoritesSelectors } from '../../../store/Favorites'
+import { favoritesOperations, favoritesSelectors } from '../../../store/Favorites'
 import PropTypes from 'prop-types'
 import modalActions from '../../../store/Modal'
 import LoginModal from '../../Modal/LoginModal'
@@ -12,10 +11,8 @@ import { userSelectors } from '../../../store/User'
 
 const Favoriteicon = ({ id }) => {
 	const user = useSelector(userSelectors.getToken())
+	// eslint-disable-next-line no-unused-vars
 	const favorites = useSelector(favoritesSelectors.getFavorites())
-	// eslint-disable-next-line no-console
-	console.log('favorites', favorites)
-
 	const dispatch = useDispatch()
 	const handleOpen = (content) => dispatch(modalActions.modalToggle(content))
 	const favoritesStorage = JSON.parse(localStorage.getItem('favorites')) || []

@@ -24,8 +24,8 @@ const Favorites = () => {
 	return (
 		<Container maxWidth="lg">
 			{isLoading && <BackdropLoader open={isLoading} />}
-			{!productID.length &&
-				<Box style={{ textAlign: 'center', margin: '7rem 0' }}>
+			{!productID.length
+				? <Box style={{ textAlign: 'center', margin: '7rem 0' }}>
 					<Typography
 						fontSize={32}
 						sx={{ mb: '14px', mt: '85px', textTransform: 'uppercase' }}
@@ -50,9 +50,8 @@ const Favorites = () => {
 							Continue shopping
 						</Button>
 					</Link>
-				</Box>}
-			{productID.length &&
-				<Box style={{ display: 'flex', justifyContent: 'space-between' }}>
+				</Box>
+				: <Box style={{ display: 'flex', justifyContent: 'space-between' }}>
 					<Typography
 						fontSize={32}
 						sx={{ mb: '14px', mt: '85px' }}
