@@ -5,12 +5,15 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import {useDispatch, useSelector} from 'react-redux'
 import {ProductSelector} from '../../../store/Product'
 import {userSelectors} from '../../../store/User'
+import LoginModal from '../../Modal/LoginModal'
+import modalActions from '../../../store/Modal'
 
 const ActionButtons = () => {
 	const dispatch = useDispatch()
 	const activeProduct = useSelector(ProductSelector.getProduct())
 	const parent = useSelector(ProductSelector.getParent())
 	const user = useSelector(userSelectors.getToken())
+	const handleOpen = (content) => dispatch(modalActions.modalToggle(content))
 	return (
 		<>
 			<Button disableRipple
@@ -31,7 +34,9 @@ const ActionButtons = () => {
 				ADD TO BAG
 			</Button>
 			<Button disableRipple
-				disabled={!user}
+				// disabled={!user}
+				//
+				onClick={() => !user ? handleOpen(<LoginModal />) : console.log('added to fav')}
 				sx={{ padding:{lg: '22px' ,md:'16px', sm:'12px', xs:'9px'}}} variant={'contained'}
 			>
 				<FavoriteBorderOutlinedIcon fontSize={'small'}/>

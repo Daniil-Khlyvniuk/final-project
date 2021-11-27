@@ -125,8 +125,8 @@ const theme = createTheme({
 					props: { variant: 'active'},
 					style: {
 						minWidth: 'calc(100% / 2)',
-						border: '1px solid #373F41',
-						borderBottom: 'none',
+						borderBottom: '1px solid #373F41',
+
 					}
 				},
 				{

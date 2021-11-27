@@ -172,8 +172,7 @@ const Carousel = ({
 							className={style.thumbWrapper}
 						>
 							{slides?.map((slide, index) => {
-								// eslint-disable-next-line no-console
-								console.log('slide_2', slide)
+
 								return (
 									<div key={index}>
 										<img src={`/${slide}`} className={style.thumb} alt=""/>
