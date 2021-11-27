@@ -27,13 +27,13 @@ router.post("/payment",
 	payment
 );
 
-
 // @route   PUT /cart
 // @desc    Update cart when adding / deleting products in cart
 // @access  Private
 router.put("/",
 	passport.authenticate("jwt", { session: false }),
-	updateCart);
+	updateCart
+);
 
 // @route   PUT /cart/:productId
 // @desc    Add one product to cart
