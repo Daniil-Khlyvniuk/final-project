@@ -1,18 +1,16 @@
 import React, { useEffect } from 'react'
-import { Button, Container, Typography } from '@mui/material'
+import { Button, Container, Grid, Typography } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { favoritesOperations, favoritesSelectors } from '../../store/Favorites'
 import { Box } from '@mui/system'
 import BackdropLoader from '../../components/UI/BackdropLoader/BackdropLoader'
 import { Link } from 'react-router-dom'
 import FavoriteCard from '../../components/FavoriteCard/FavoriteCard'
-import { useStyles } from './styles'
 
 const Favorites = () => {
 	const favorites = useSelector(favoritesSelectors.getFavorites())
 	const isLoading = useSelector(favoritesSelectors.isLoading())
 	const dispatch = useDispatch()
-	const classes = useStyles()
 
 	let productID = JSON.parse(localStorage.getItem('favorites')) || []
 
@@ -61,17 +59,19 @@ const Favorites = () => {
 					</Typography>
 				</Box>
 			}
-			<Box className={classes.container}>
+			<Grid container spacing={2} sx={{marginBottom: '40px'}} >
 				{favorites?.map(item => (
-					<FavoriteCard
-						key={item.variants._id}
-						_id={item.variants._id}
-						image={'/' + item.variants.imageUrls[0]}
-						title={item.name}
-						price={item.variants.currentPrice}
-					/>
+					<Grid item md={6} sm={6} xs={12} key={item.variants._id}>
+						<FavoriteCard
+							_id={item.variants._id}
+							sx={{ width: { sm: '580px' }, height: { sm: '545px' } }}
+							image={'/' + item.variants.imageUrls[0]}
+							title={item.name}
+							price={item.variants.currentPrice}
+						/>
+					</Grid>
 				))}
-			</Box>
+			</Grid>
 		</Container>
 	)
 }

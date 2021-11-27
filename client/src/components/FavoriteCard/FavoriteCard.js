@@ -20,7 +20,8 @@ const FavoriteCard = ({ _id, image, title, price }) => {
 				<Box className={classes.textContainer}>
 					<Typography
 						className={classes.title}
-						sx={{ fontSize: 24 }}>
+						sx={{ fontSize: { lg: '24px', l: '24px', md: '20px', sm: '16px', xs: '16px' } }}
+					>
 						{title}
 					</Typography>
 					<Box
