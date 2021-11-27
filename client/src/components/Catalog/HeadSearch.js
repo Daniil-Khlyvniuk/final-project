@@ -54,8 +54,6 @@ const HeadSearch = () => {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[])
 
-
-
 	return (
 		<Box style={BoxSearch}>
 			{perPageArray.length && (
