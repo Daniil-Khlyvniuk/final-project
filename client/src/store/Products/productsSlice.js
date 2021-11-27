@@ -5,6 +5,7 @@ const { fetchProducts, fetchProductsByFilter } = productsOperations
 
 const initialState = {
 	data: [],
+	catalog: [],
 	relatedArray: (localStorage.getItem('related') && JSON.parse(localStorage.getItem('related'))) || [],
 	relatedProductsList: [],
 	isLoading: true,
@@ -58,9 +59,9 @@ const productsSlice = createSlice({
 		[fetchProductsByFilter.fulfilled]: (state, action) => {
 
 			// eslint-disable-next-line no-console
-			console.log('aaa',action.payload)
+			console.log('productsByFilter',action.payload)
 
-			state.data = action.payload
+			state.catalog = [...state.catalog, ...action.payload]
 			state.isLoading = false
 			state.error = null
 		},

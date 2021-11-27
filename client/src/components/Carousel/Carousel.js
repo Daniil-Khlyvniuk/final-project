@@ -173,7 +173,9 @@ const Carousel = ({
 						>
 							{slides?.map((slide, index) => {
 								return (
-									<img key={index} src={`/${slide}`} className={style.thumb} alt="" />
+									<div key={index}>
+										<img src={`/${slide}`} className={style.thumb} alt=""/>
+									</div>
 								)
 							})}
 						</Slider>
@@ -195,8 +197,8 @@ const Carousel = ({
 									<img src={slide.imageUrl} className={style.thumb } style={{maxWidth:'380px',
 										maxHeight: '380px'}} alt=""/>
 									<div className={style.relatedTextBox}>
-										<p className={style.relatedText}>Mint Candy Bed Lilen</p>
-										<p className={style.relatedPrice}>$150</p>
+										<p className={style.relatedText}>{slide.name}</p>
+										<p className={style.relatedPrice}>{slide.price}</p>
 									</div>
 								</div>
 							)
