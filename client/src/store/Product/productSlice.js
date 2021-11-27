@@ -22,9 +22,9 @@ const productSlice = createSlice({
 	},
 	extraReducers:{
 		[fetchProductUrl.fulfilled]:(state, action) => {
-			state.activeProduct = action.payload
-			state.parent = action.payload.product
-			state.activeColor = action.payload.color._id
+			state.activeProduct = action.payload.variants
+			state.parent = action.payload
+			state.activeColor = action.payload?.variants?.color
 			state.isLoading = false
 		},
 		[fetchProductUrl.pending]:(state) => {

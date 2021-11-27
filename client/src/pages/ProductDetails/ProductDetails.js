@@ -5,7 +5,7 @@ import  {ProductOperations, ProductSelector} from '../../store/Product'
 import {Alert, Container, Grid} from '@mui/material'
 import ProductDescription from '../../components/ProductDescription/ProductDescription'
 import Carousel from '../../components/Carousel/Carousel'
-import RelatedItemsList from '../../components/RelatedItems/RelatedItemsList'
+// import RelatedItemsList from '../../components/RelatedItems/RelatedItemsList'
 import BackdropLoader from '../../components/UI/BackdropLoader/BackdropLoader'
 import { Helmet } from 'react-helmet'
 
@@ -27,8 +27,8 @@ const ProductDetails = () => {
 		if(activeProduct){
 			dispatch(ProductOperations.fetchAllColors(parent._id))
 			dispatch(ProductOperations.fetchSizes({
-				colorId: activeProduct.color._id,
-				productId: activeProduct.product._id}))
+				colorId: activeProduct.color,
+				productId: parent._id}))
 			dispatch(ProductOperations.fetchAllVariants(parent._id))
 
 		}
@@ -50,8 +50,8 @@ const ProductDetails = () => {
 				<Grid item md={6} xs={12}>
 					<ProductDescription />
 				</Grid>
-				<Grid sx={{mt:'80px'}} item md={12} xs={12}>
-					<RelatedItemsList />
+				<Grid sx={{mt:'80px'}} item md={12}>
+					{/*<RelatedItemsList />*/}
 				</Grid>
 			</Grid>}
 			<Helmet>
