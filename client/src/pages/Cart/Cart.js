@@ -3,7 +3,7 @@ import {Button, Container, Typography} from '@mui/material'
 import {useStyles} from './styles'
 import {Link} from 'react-router-dom'
 import ShoppingBagCard from '../../components/ShoppingBagCard/ShoppingBagCard'
-import useHandleShoppingBag from '../../hooks/shoppingBag/useHandleShoppingBag'
+import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
 
 const Cart = () => {
 	const classes = useStyles()
