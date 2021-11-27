@@ -16,6 +16,7 @@ import Cart from '../pages/Cart/Cart'
 import Page404 from '../pages/Page404/Page404'
 import Favorites from '../pages/Favorites/Favorites'
 import HandleSubscribe from '../pages/HandleSubscribe'
+import UserProfilePage from '../pages/UserProfile/UserProfile'
 
 const AppRoutes = () => {
 	return (
@@ -34,6 +35,7 @@ const AppRoutes = () => {
 			<Route exact path='/about/careers'><Careers /></Route>
 			<Route exact path='/about/contact-us'><ContactUs /></Route>
 			<Route exact path='/subscription/:email'><HandleSubscribe /></Route>
+			<Route exact path='/user-profile'><UserProfilePage/></Route>
 			<Route exact path='*'><Page404 /></Route>
 		</Switch>
 	)

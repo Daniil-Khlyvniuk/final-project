@@ -17,7 +17,7 @@ const Sizes = () => {
 
 
 	useEffect(() => {
-		setActiveSize(activeProduct.size._id)
+		setActiveSize(activeProduct.size)
 	},[activeProduct])
 
 	const handleActiveSize = (event,newActiveSize) => {
