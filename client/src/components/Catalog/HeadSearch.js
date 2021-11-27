@@ -10,7 +10,6 @@ import { filterOperations } from '../../store/Filter'
 import { useDispatch } from 'react-redux'
 import {BoxSearch, MenuSearch} from './style'
 
-
 const HeadSearch = () => {
 	const [perPage, setPerPage] = useState([])
 	const [sortBy, setSortBy] = useState([])
@@ -25,25 +24,19 @@ const HeadSearch = () => {
 	const handleClick = (event) => {
 		setAnchorEl(event.currentTarget)
 	}
-	const handleClose = () => {
-		setAnchorEl(null)
-	}
 
 	const openPer = Boolean(anchorPerP)
 	const handleClickPer = (event) => {
 		setAnchorPerP(event.currentTarget)
 	}
-	const handleClosePer = () => {
-		setAnchorPerP(null)
-	}
 
 	const handleShowCount = (item) => {
 		setCountSort(item)
-		handleClosePer()
+		setAnchorPerP(null)
 	}
 	const handleShowSort = (item) => {
 		setSort(item)
-		handleClose()
+		setAnchorEl(null)
 	}
 
 	const getPerPageFilters = async () => {
@@ -57,18 +50,14 @@ const HeadSearch = () => {
 		// dispatch(filterOperations.setSort(sortRes.data[0].value))
 	}
 
-
 	useEffect(()=> {
 		getPerPageFilters()
 		getSortByFilters()
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[])
 
-
-
 	return (
 		<Box style={BoxSearch}>
-
 			{perPage.length && (
 				<div>
 					<Button
@@ -85,14 +74,10 @@ const HeadSearch = () => {
 						anchorEl={anchorPerP}
 						open={openPer}
 						value={countSort}
-						onClose={handleClosePer}
-						MenuListProps={{
-							'aria-labelledby': 'basic-button',
-						}}
+						onClose={()=> {setAnchorPerP(null)}}
 					>
 						{perPage.map((item)=>
 							<MenuItem
-								style={{boxShadow: 'none'}}
 								onClick={()=>{ handleShowCount(item.name) }}
 								key={item._id} 
 								value={item.value}
@@ -115,10 +100,7 @@ const HeadSearch = () => {
 					id="basic-menu"
 					anchorEl={anchorEl}
 					open={open}
-					onClose={handleClose}
-					MenuListProps={{
-						'aria-labelledby': 'basic-button',
-					}}
+					onClose={() => {setAnchorEl(null)}}
 					onChange={(event) => 
 						dispatch(filterOperations.setPerPage(event.target.value))}
 				>
