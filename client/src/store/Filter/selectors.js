@@ -7,8 +7,8 @@ const checkCategory = (name) => state =>
 const checkColor = (name) => state => 
 	state.filter.data.color.includes(name)
 const checkSize = (name) => state => state.filter.data.size.includes(name)
-const getPerPage = () => state => state.filter.data.getPerPage
-const getSort = () => state => state.filter.data.sort
+// const getPerPage = () => state => state.filter.data.perPage
+// const getSort = () => state => state.filter.data.sort
 
 const forExport = {
 	getIsLaunchedByUser,
@@ -18,8 +18,8 @@ const forExport = {
 	checkCategory,
 	checkColor,
 	checkSize,
-	getPerPage,
-	getSort,
+	// getPerPage,
+	// getSort,
 }
 
 export default forExport
