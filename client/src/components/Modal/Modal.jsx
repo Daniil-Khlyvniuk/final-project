@@ -19,6 +19,7 @@ const BasicModal = ({ style, body }) => {
 				onClose={handleClose}
 				aria-labelledby="modal-modal-title"
 				aria-describedby="modal-modal-description"
+				sx={{ zIndex: 999999999999 }}
 			>
 				<Box sx={style}>
 					<StyledBox>

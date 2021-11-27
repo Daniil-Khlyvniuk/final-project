@@ -16,6 +16,7 @@ const RelatedItemsList = () => {
 
 	useEffect(() => {
 		dispatch(productsReducer.addRelatedId(id))
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [relatedList, dispatch])
 
 	useEffect(() => {
@@ -34,17 +35,17 @@ const RelatedItemsList = () => {
 		relatedList = relatedList.filter(prod => prod._id !== id).reverse()
 	}
 
-	
 	const slides = relatedList.reverse().map(prod => {
 		if (prod._id !== id) {
 			return {
-				imageUrl: `http://localhost:5000/${prod.imageUrls[0]}`,
-				customId: prod._id,
-				price: prod.currentPrice,
-				name: prod.product.name,
+				imageUrl: `http://localhost:5000/${prod.variants.imageUrls[0]}`,
+				customId: prod.variants._id,
+				price: prod.variants.currentPrice,
+				name: prod.name,
 			}
 		}
 	})
+
 
 	return (
 		<div>

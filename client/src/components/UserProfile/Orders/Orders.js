@@ -5,7 +5,7 @@ import OrderList from './OrderList/OrderList'
 
 const Orders = () => {
 	// eslint-disable-next-line no-unused-vars
-	const [orders , setOrders] = useState(true)
+	const [orders , setOrders] = useState(false)
 
 
 	if(!orders){
@@ -24,7 +24,7 @@ const Orders = () => {
 				>
 					Track your online orders to know where they are at any moment.
 				</Typography>
-				<Link exact to={'/shop/catalog'} style={{textDecoration: 'none'}}>
+				<Link to={'/shop/catalog'} style={{textDecoration: 'none'}}>
 					<Button
 						variant={'contained'}
 						style={{marginTop: '2rem'}}>

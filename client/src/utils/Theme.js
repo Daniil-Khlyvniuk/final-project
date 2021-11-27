@@ -3,10 +3,11 @@ import { createTheme } from '@mui/material/styles'
 
 const theme = createTheme({
 	breakpoints: {
-		keys: ['xs', 'sm', 'md', 'lg', 'xl'],
+		keys: ['xs', 'sm', 'md', 'l', 'lg', 'xl'],
 		values: {
 			xl: 1440,
 			lg: 1180,
+			l: 850,
 			md: 768,
 			sm: 480,
 			xs: 320,
@@ -125,8 +126,8 @@ const theme = createTheme({
 					props: { variant: 'active'},
 					style: {
 						minWidth: 'calc(100% / 2)',
-						border: '1px solid #373F41',
-						borderBottom: 'none',
+						borderBottom: '1px solid #373F41',
+
 					}
 				},
 				{
