@@ -44,7 +44,7 @@ const DropDownSelect = ({
 				onClick={handleClick}
 				endIcon={isOpened ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
 			>
-				{selectedValue ? getNameByValue(selectedValue) : label}
+				{getNameByValue(selectedValue) ? getNameByValue(selectedValue) : label}
 			</Button>
 			<Menu
 				id="select-page-menu"

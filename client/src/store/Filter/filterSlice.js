@@ -5,7 +5,7 @@ const initialState = {
 		category: [],
 		color: [],
 		size: [],
-		perPage: null,
+		perPage: 2,
 		sort: null,
 		startPage: 1,
 		minPrice: 0,
@@ -54,7 +54,6 @@ export const filterSlice = createSlice({
 		setNewStore: (state, action) => {	
 			state.data = {...state.data, ...action.payload}
 			state.isLoading = false
-	
 		},
 		handlePerPage: (state, action) => {
 			state.data.perPage = action.payload
@@ -68,6 +67,10 @@ export const filterSlice = createSlice({
 		handleMaxPrice: (state, action) => {
 			state.data.maxPrice = action.payload
 		},
+
+		handleStartPage: (state, action) => {
+			state.data.startPage = action.payload
+		}
 	},
 })
 

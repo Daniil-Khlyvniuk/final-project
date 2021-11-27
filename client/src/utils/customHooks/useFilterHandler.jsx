@@ -30,6 +30,8 @@ const useFilterHandler = () => {
 			})
 			dispatch(filterOperations.setFiltersFromUri(urlParams))
 			dispatch(productsOperations.fetchProductsByFilter())
+			// eslint-disable-next-line no-console
+			console.log('url params',urlParams)
 		}
 	}
 	return [handleFilterChange,onLoadingPage]
