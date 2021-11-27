@@ -22,7 +22,12 @@ const useFilterHandler = () => {
 	const onLoadingPage = () => {
 		if(!isLaunchedByUser)
 		{
-			const urlParams = queryString.parse(history.location.search,{arrayFormat: 'comma'})
+			const urlParams = queryString.parse(history.location.search,{
+				arrayFormat: 'comma',
+				skipNull: true,
+				skipEmptyString: true,
+				parseNumbers: true
+			})
 			dispatch(filterOperations.setFiltersFromUri(urlParams))
 			dispatch(productsOperations.fetchProductsByFilter())
 			// eslint-disable-next-line no-console
