@@ -32,6 +32,7 @@ const ProductDetails = () => {
 			dispatch(ProductOperations.fetchAllVariants(parent._id))
 
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeProduct])
 
 

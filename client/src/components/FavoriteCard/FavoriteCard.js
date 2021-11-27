@@ -6,7 +6,7 @@ import { Typography } from '@mui/material'
 import Favoriteicon from './FavotiteIcon/FavoriteIcon'
 import { Link } from 'react-router-dom'
 
-const ProductCard = ({ _id, image, title, price }) => {
+const FavoriteCard = ({ _id, image, title, price }) => {
 	const classes = useStyles()
 
 	return (
@@ -20,7 +20,8 @@ const ProductCard = ({ _id, image, title, price }) => {
 				<Box className={classes.textContainer}>
 					<Typography
 						className={classes.title}
-						sx={{ fontSize: 24 }}>
+						sx={{ fontSize: { lg: '24px', l: '24px', md: '20px', sm: '16px', xs: '16px' } }}
+					>
 						{title}
 					</Typography>
 					<Box
@@ -36,11 +37,11 @@ const ProductCard = ({ _id, image, title, price }) => {
 	)
 }
 
-ProductCard.propTypes = {
+FavoriteCard.propTypes = {
 	_id: PropTypes.string,
 	title: PropTypes.string,
 	image: PropTypes.string,
 	price: PropTypes.number,
 }
 
-export default ProductCard
+export default FavoriteCard

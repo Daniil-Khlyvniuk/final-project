@@ -16,6 +16,7 @@ const RelatedItemsList = () => {
 
 	useEffect(() => {
 		dispatch(productsReducer.addRelatedId(id))
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [relatedList, dispatch])
 
 	useEffect(() => {
