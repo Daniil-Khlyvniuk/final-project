@@ -172,6 +172,7 @@ const Carousel = ({
 							className={style.thumbWrapper}
 						>
 							{slides?.map((slide, index) => {
+
 								return (
 									<div key={index}>
 										<img src={`/${slide}`} className={style.thumb} alt=""/>
