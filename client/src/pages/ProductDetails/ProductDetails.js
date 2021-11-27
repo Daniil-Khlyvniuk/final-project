@@ -5,7 +5,7 @@ import  {ProductOperations, ProductSelector} from '../../store/Product'
 import {Alert, Container, Grid} from '@mui/material'
 import ProductDescription from '../../components/ProductDescription/ProductDescription'
 import Carousel from '../../components/Carousel/Carousel'
-// import RelatedItemsList from '../../components/RelatedItems/RelatedItemsList'
+import RelatedItemsList from '../../components/RelatedItems/RelatedItemsList'
 import BackdropLoader from '../../components/UI/BackdropLoader/BackdropLoader'
 import { Helmet } from 'react-helmet'
 
@@ -51,7 +51,7 @@ const ProductDetails = () => {
 					<ProductDescription />
 				</Grid>
 				<Grid sx={{mt:'80px'}} item md={12}>
-					{/*<RelatedItemsList />*/}
+					<RelatedItemsList />
 				</Grid>
 			</Grid>}
 			<Helmet>
