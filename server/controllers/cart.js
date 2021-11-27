@@ -346,7 +346,7 @@ exports.payment = async (req, res, next) => {
 		res.send({
 			clientSecret: paymentIntent.client_secret,
 		});
-		
+
 	} catch (err) {
 		res.status(400).json({
 			message: `Error happened on server: "${err}" `,
