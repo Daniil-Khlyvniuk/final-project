@@ -14,8 +14,7 @@ const Scroll = () => {
 			.then(res => {
 				setElem([...elem, ...res.data])
 				setIsLoading(false)
-			}
-			)
+			})
 
 	}, [nextPage])
 
@@ -26,7 +25,8 @@ const Scroll = () => {
 				next={() => {
 					setNextPage(nextPage + 1)
 				}}
-				hasMore={true}>
+				hasMore={true}
+				loader={null}>
 				endMessage={
 					<p style={{ textAlign: 'center' }}>
 						<b>That`s all, folks!</b>

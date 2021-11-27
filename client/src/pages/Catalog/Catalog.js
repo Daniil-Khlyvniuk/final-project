@@ -15,7 +15,7 @@ const Catalog = () => {
 	
 	//parse url on first page loading
 	useEffect(() => {
-		onLoadingPage()
+		// onLoadingPage()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[])
 

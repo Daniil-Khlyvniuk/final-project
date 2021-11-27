@@ -49,12 +49,12 @@ const HeadSearch = () => {
 	const getPerPageFilters = async () => {
 		const pageRes = await filterApi.getFiltersByType('perPage')
 		setPerPage(pageRes.data)
-		dispatch(filterOperations.setPerPage(pageRes.data[0].value))
+		// dispatch(filterOperations.setPerPage(pageRes.data[0].value))
 	}
 	const getSortByFilters = async () => {
 		const sortRes = await filterApi.getFiltersByType('sortBy')
 		setSortBy(sortRes.data)
-		dispatch(filterOperations.setSort(sortRes.data[0].value))
+		// dispatch(filterOperations.setSort(sortRes.data[0].value))
 	}
 
 
