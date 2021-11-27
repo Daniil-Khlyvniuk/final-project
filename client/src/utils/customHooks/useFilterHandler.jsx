@@ -25,6 +25,8 @@ const useFilterHandler = () => {
 			const urlParams = queryString.parse(history.location.search,{arrayFormat: 'comma'})
 			dispatch(filterOperations.setFiltersFromUri(urlParams))
 			dispatch(productsOperations.fetchProductsByFilter())
+			// eslint-disable-next-line no-console
+			console.log('url params',urlParams)
 		}
 	}
 	return [handleFilterChange,onLoadingPage]

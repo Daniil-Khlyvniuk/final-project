@@ -5,8 +5,9 @@ import  {ProductOperations, ProductSelector} from '../../store/Product'
 import {Alert, Container, Grid} from '@mui/material'
 import ProductDescription from '../../components/ProductDescription/ProductDescription'
 import Carousel from '../../components/Carousel/Carousel'
-// import RelatedItemsList from '../../components/RelatedItems/RelatedItemsList'
+import RelatedItemsList from '../../components/RelatedItems/RelatedItemsList'
 import BackdropLoader from '../../components/UI/BackdropLoader/BackdropLoader'
+import { Helmet } from 'react-helmet'
 
 const ProductDetails = () => {
 
@@ -51,9 +52,14 @@ const ProductDetails = () => {
 					<ProductDescription />
 				</Grid>
 				<Grid sx={{mt:'80px'}} item md={12}>
-					{/*<RelatedItemsList />*/}
+					<RelatedItemsList />
 				</Grid>
 			</Grid>}
+			<Helmet>
+				<html lang='en'/>
+				<meta name='description' content='Cotton Bed Linen'/>
+				<meta name='keywords' content='bed linen, Cotton bed linen, Cotton Dark Blue Bed Linen, bedspreads queen, queen size sheets, cotton comforter, king size bedspreads' />
+			</Helmet>
 		</Container>
 	)
 

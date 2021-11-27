@@ -87,7 +87,7 @@ export default function BasicTabs() {
 				<UserForm/>
 			</TabPanel>
 			<TabPanel value={value} index={1}>
-			  <Orders/>
+				<Orders/>
 			</TabPanel>
 			<TabPanel value={value} index={2}>
 				Item Three

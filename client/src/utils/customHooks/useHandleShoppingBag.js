@@ -1,7 +1,7 @@
-import {useSelector} from 'react-redux'
-import {shoppingBagSelectors} from '../../store/ShoppingBag'
+import { useSelector } from 'react-redux'
+import { shoppingBagSelectors } from '../../store/ShoppingBag'
 
-export default function useHandleShoppingBag() {
+export default function useHandleShoppingBag () {
 	const shoppingBag = useSelector(shoppingBagSelectors.getShoppingBag())
 	const totalPrice = shoppingBag?.reduce((acc, value) => acc + value.price, 0)
 
