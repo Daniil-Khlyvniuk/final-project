@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import {useSelector} from 'react-redux'
 import {Box, Typography} from '@mui/material'
@@ -32,9 +33,10 @@ const Catalog = () => {
 	const classes = useStyles()
 
 
-	useEffect(() => {
-		handleFilterChange('startPage', nextPage)
-	}, [nextPage])
+	// useEffect(() => {
+	// 	handleFilterChange('startPage', nextPage)
+	// // eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, [nextPage])
 
 	// eslint-disable-next-line no-console
 	console.log('products: ', products)

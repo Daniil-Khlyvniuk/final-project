@@ -1,13 +1,11 @@
-import React, {useEffect, useState} from 'react'
+import React, { useState} from 'react'
 
 import { Container, Grid, Typography , Box} from '@mui/material'
 import { Form, Formik} from 'formik'
 import * as Yup from 'yup'
 import TextInput from './FormUI/Textfield'
-// import DateInput from './FormUI/DateInput'
 import { phoneRegExp } from './data/Regex'
 import countries from './data/countries.json'
-// import gender from './data/gender.json'
 import SelectInput from './FormUI/SelectInput'
 import ButtonInput from './FormUI/ButtonInput'
 import {useSelector} from 'react-redux'
@@ -20,7 +18,6 @@ import axios from 'axios'
 const FORM_VALIDATION = Yup.object().shape({
 	firstName: Yup.string(),
 	lastName: Yup.string(),
-	// birthday: Yup.date(),
 	email: Yup.string().email('Invalid email'),
 	phone: Yup.string()
 		.matches(phoneRegExp, 'Please enter a valid phone number')
@@ -36,22 +33,11 @@ const FORM_VALIDATION = Yup.object().shape({
 
 const UserForm = () => {
 
-
-	// eslint-disable-next-line no-unused-vars
-	const [userData, setUserData] = useState({})
-	const [isLoading, setIsLoading] = useState(true)
-
-	useEffect(() => {
-		setIsLoading(true)
-		axios('/api/customers/customer')
-			.then(res =>setUserData(res.data))
-		setIsLoading(false)
-	}, [isLoading])
-
-
+	const [status,setStatus]=useState('')
 
 	const user = useSelector(userSelectors.getData())
 	const token = useSelector(userSelectors.getToken())
+
 
 	const INITIAL_FORM_STATE = {
 		firstName: user?.firstName || null,
@@ -104,20 +90,18 @@ const UserForm = () => {
 									}
 									axios.put('/api/customers', update , {
 										headers: {Authorization : token}
-									})
-									alert('Data saved')
-									if(values.password){
+									}).then(() => setStatus('Changes Saved'))
+
+									if(values.oldPass){
 										const passwords = {
-											'password': values?.oldPass,
-											'newPassword': values?.password
+											'password': values.oldPass,
+											'newPassword': values.password
 										}
-										axios.put('api/customers/password', passwords ,{
-											headers: {Authorization : token}
-										})
-										alert('Password changed')
+										// eslint-disable-next-line no-unused-vars,no-mixed-spaces-and-tabs
+										axios.put('/api/customers/password',passwords,{headers: {Autorization : token}}).then((res)=>setStatus(res.data.password = 'Wrong Password' || res.data.message))
 									}
 
-
+									setTimeout(() =>{ setStatus(null)}, 3000)
 								}}
 							>
 								<Form>
@@ -144,16 +128,6 @@ const UserForm = () => {
 												
 											/>
 										</Grid>
-										{/*<Grid item xs={12} md={6}>*/}
-										{/*	<SelectInput*/}
-										{/*		name="gender"*/}
-										{/*		label="Gender"*/}
-										{/*		options={gender}*/}
-										{/*	/>*/}
-										{/*</Grid>*/}
-										{/*<Grid item xs={12} md={6}>*/}
-										{/*	<DateInput name="birthday" label="Birthday date" />*/}
-										{/*</Grid>*/}
 										<Grid item xs={12}>
 											<Typography
 												variant='body1'
@@ -181,9 +155,6 @@ const UserForm = () => {
 												options={countries}
 											/>
 										</Grid>
-										{/*<Grid item xs={12} sx={{textAlign:'center', mt:'16px'}}>*/}
-										{/*	<ButtonInput>Save Changes</ButtonInput>*/}
-										{/*</Grid>*/}
 										<Grid item xs={12}>
 											<Typography
 												variant='body1'
@@ -203,6 +174,7 @@ const UserForm = () => {
 												name='oldPass'
 												label='Old Password'
 												type='password'
+
 											/>
 										</Grid>
 										<Grid item md={6} xs={12}>
@@ -210,6 +182,7 @@ const UserForm = () => {
 												name="password"
 												label="Password"
 												type='password'
+
 											/>
 										</Grid>
 										<Grid item md={6}  xs={12}>
@@ -220,8 +193,18 @@ const UserForm = () => {
 											/>
 										</Grid>
 										<Grid item xs={12} sx={{textAlign:'center', mt:'16px'}}>
-											<ButtonInput>
-												Save Changes </ButtonInput>
+											{status && (<Typography
+												variant={'body1'}
+												textAlign={'center'}
+												mb={'10px'}
+											>
+												{status}
+											</Typography>)}
+											<ButtonInput
+												disabled={!!status}
+											>
+												Save Changes
+											</ButtonInput>
 										</Grid>
 									</Grid>
 								</Form>
