@@ -52,7 +52,7 @@ const Favoriteicon = ({ id }) => {
 			onClick={!user
 				? async () => {
 					await handleOpen(<LoginModal />)
-					await addToFavorites()
+					await !favoritesStorage.includes(id) && addToFavorites()
 				}
 				: addToFavorites
 			}

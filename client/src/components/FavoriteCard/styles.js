@@ -8,8 +8,7 @@ export const useStyles = makeStyles({
 		}
 	},
 	imageWrapper: {
-		backgroundColor: '#f1f1f1',
-		// minHeight: '545px',
+		backgroundColor: '#fff9e900',
 		aspectRatio: 1,
 		display: 'flex',
 		justifyContent: 'center',
