@@ -86,7 +86,7 @@ mongoose.set("useCreateIndex", true);
 mongoose.set("useUnifiedTopology", true);
 // "mongodb+srv://forTest:forTest@cluster0.eeiyv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8000;
 mongoose
   .connect(db)
   .then(() => console.log("MongoDB Connected"))

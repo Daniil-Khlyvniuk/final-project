@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react'
-import useHandleShoppingBag from '../../hooks/shoppingBag/useHandleShoppingBag'
+import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
 import { Button, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 import Stepper from '../../components/Stepper/Stepper'

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from '@mui/material'
-import shoppingBagReducer from '../../../store/ShoppingBag'
+// import shoppingBagReducer from '../../../store/ShoppingBag'/
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined'
 import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined'
 import { useDispatch, useSelector } from 'react-redux'
@@ -9,10 +9,12 @@ import { userSelectors } from '../../../store/User'
 import modalActions from '../../../store/Modal'
 import { favoritesOperations, favoritesSelectors } from '../../../store/Favorites'
 import LoginModal from '../../Modal/LoginModal'
+import useHandleShoppingBag from '../../../utils/customHooks/useHandleShoppingBag'
 
 const ActionButtons = () => {
 	const handleShoppingBag = useHandleShoppingBag()
 	const activeProduct = useSelector(ProductSelector.getProduct())
+	const dispatch = useDispatch()
 	// const parent = useSelector(ProductSelector.getParent())
 	const user = useSelector(userSelectors.getToken())
 	// eslint-disable-next-line no-unused-vars

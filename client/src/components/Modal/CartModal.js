@@ -1,7 +1,7 @@
 import React from 'react'
 import BasicModal from './Modal'
 import PropTypes from 'prop-types'
-import useHandleShoppingBag from '../../hooks/shoppingBag/useHandleShoppingBag'
+import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
 import CardInModal from '../CardInModal/CardInModal'
 import { Button, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'

@@ -3,7 +3,7 @@ import {Typography} from '@mui/material'
 import {useStyles} from './styles'
 import PropTypes from 'prop-types'
 import icons from '../../utils/Icons/index'
-import useHandleShoppingBag from '../../hooks/shoppingBag/useHandleShoppingBag'
+import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
 // import { useSelector } from 'react-redux'
 // import { ProductSelector } from '../../store/Product'
 
