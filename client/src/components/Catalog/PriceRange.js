@@ -13,7 +13,7 @@ const minDistance = 100
 const PriceRange = () => {
 	const [handleFilterChange] = useFilterHandler()
 	// временно
-	const dispatch = useDispatch()
+	// const dispatch = useDispatch()
 	const {minPrice, maxPrice} = useSelector(filterSelectors.getFilters())
 
 	const [value, setValue] = useState([0,1000])
@@ -33,7 +33,7 @@ const PriceRange = () => {
 		}
 	}
 
-	const handleRange = (event, newValue, activeThumb) => {
+	const handleRange = (event, newValue) => {
 		// eslint-disable-next-line no-console
 		// console.log('range',event, newValue)
 		// setValue(newValue)

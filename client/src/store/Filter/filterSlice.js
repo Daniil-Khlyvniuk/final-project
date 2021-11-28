@@ -5,9 +5,9 @@ const initialState = {
 		category: [],
 		color: [],
 		size: [],
-		perPage: 2,
+		perPage: null,
 		sort: null,
-		startPage: 1,
+		startPage: 0,
 		minPrice: 0,
 		maxPrice: 0,
 	},
@@ -49,12 +49,6 @@ export const filterSlice = createSlice({
 				state.data.size.push(name)
 			}
 		},
-		
-		//for filter update from query string ONLY
-		setNewStore: (state, action) => {	
-			state.data = {...state.data, ...action.payload}
-			state.isLoading = false
-		},
 		handlePerPage: (state, action) => {
 			state.data.perPage = action.payload
 		},
@@ -67,10 +61,14 @@ export const filterSlice = createSlice({
 		handleMaxPrice: (state, action) => {
 			state.data.maxPrice = action.payload
 		},
-
 		handleStartPage: (state, action) => {
 			state.data.startPage = action.payload
-		}
+		},
+		//for filter update from query string ONLY
+		setNewStore: (state, action) => {	
+			state.data = {...state.data, ...action.payload}
+			state.isLoading = false
+		},
 	},
 })
 
