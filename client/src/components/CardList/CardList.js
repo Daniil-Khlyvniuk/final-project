@@ -24,15 +24,20 @@ const CardList = () => {
 	const classes = useStyles()
 
 	useEffect(() => {
-		// if (products.length) return
 		dispatch(productsOperations.fetchProducts('sort=-date&perPage=4&startPage=1'))
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
-
 	return (
 		<div>
-			<Typography fontSize={32} sx={{ mb: '14px', mt: '85px' }} variant={'h2'} className={classes.title}>NEW IN</Typography>
+			<Typography
+				fontSize={32}
+				sx={{ mb: '14px', mt: '85px' }}
+				variant={'h2'}
+				className={classes.title}
+			>
+				NEW IN
+			</Typography>
 			<div className={classes.container}>
 				{
 					!!products?.length
@@ -40,6 +45,7 @@ const CardList = () => {
 					products.map(item => (
 						<Card
 							key={item._id}
+							_id={item.variants._id}
 							image={'/' + item.variants.imageUrls[0]}
 							title={item?.name || ''}
 							price={item.variants.currentPrice}

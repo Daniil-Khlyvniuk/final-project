@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const getAllProducts = () => axios.get('/api/products').then(res => res.data).catch(() => null)
+const getAllProducts = (params='') => axios.get(`/api/products?${params}`).then(res => res.data)
 
 const getOneProduct = (productId) => axios.get(`/api/products/${productId}`)
 
@@ -8,7 +8,6 @@ const getMinMaxPrice = () => axios.get('/api/products/minMaxPrice')
 
 // eslint-disable-next-line max-len
 const getSizesNew = (colorId , productId) => axios.get(`/api/products/variant/color/${colorId}/${productId}`)
-
 
 // eslint-disable-next-line max-len
 const getColors = (productId) => axios.get(`/api/products/info/color/${productId}`)
@@ -33,7 +32,7 @@ const updateProduct = (productId, updatedProduct) => axios.put(`/api/products/${
 // 																									}
 
 const searchForProducts = (searchPhrases) => axios.post('/api/products/search', searchPhrases)
-// SearchPhrases has to be an object with a "query" key and searchwords separated by spaces: 
+// SearchPhrases has to be an object with a "query" key and search words separated by spaces:
 // 																								{
 //                                      						query: 'linen square beige'
 //                                      					}
@@ -68,8 +67,4 @@ export default {
 	searchAutocomplete,
 	getAllVariantsByProductId,
 	getSizesNew
-
-
-
-
 }

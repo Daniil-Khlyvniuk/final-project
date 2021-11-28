@@ -35,7 +35,7 @@ const AppRoutes = () => {
 			<Route exact path='/about/careers'><Careers /></Route>
 			<Route exact path='/about/contact-us'><ContactUs /></Route>
 			<Route exact path='/subscription/:email'><HandleSubscribe /></Route>
-			<Route exact path='/user-profile'><UserProfilePage/></Route>
+			<ProtectedRoute exact path='/user-profile'><UserProfilePage/></ProtectedRoute>
 			<Route exact path='*'><Page404 /></Route>
 		</Switch>
 	)

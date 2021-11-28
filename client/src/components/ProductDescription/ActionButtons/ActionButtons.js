@@ -1,16 +1,37 @@
 import React from 'react'
-import {Button} from '@mui/material'
+import { Button } from '@mui/material'
+import shoppingBagReducer from '../../../store/ShoppingBag'
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined'
-import {useSelector} from 'react-redux'
-import {ProductSelector} from '../../../store/Product'
-import {userSelectors} from '../../../store/User'
-import useHandleShoppingBag from '../../../hooks/shoppingBag/useHandleShoppingBag'
+import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined'
+import { useDispatch, useSelector } from 'react-redux'
+import { ProductSelector } from '../../../store/Product'
+import { userSelectors } from '../../../store/User'
+import modalActions from '../../../store/Modal'
+import { favoritesOperations, favoritesSelectors } from '../../../store/Favorites'
+import LoginModal from '../../Modal/LoginModal'
 
 const ActionButtons = () => {
 	const handleShoppingBag = useHandleShoppingBag()
 	const activeProduct = useSelector(ProductSelector.getProduct())
 	// const parent = useSelector(ProductSelector.getParent())
 	const user = useSelector(userSelectors.getToken())
+	// eslint-disable-next-line no-unused-vars
+	const favorites = useSelector(favoritesSelectors.getFavorites())
+	const handleOpen = (content) => dispatch(modalActions.modalToggle(content))
+	const favoritesStorage = JSON.parse(localStorage.getItem('favorites')) || []
+
+	const addToFavorites = () => {
+		if (!localStorage.getItem('favorites')) localStorage.setItem('favorites', JSON.stringify([]))
+
+		if (favoritesStorage.includes(activeProduct._id)) {
+			const index = favoritesStorage.indexOf(activeProduct._id)
+			favoritesStorage.splice(index, 1)
+		} else {
+			favoritesStorage.push(activeProduct._id)
+		}
+		favoritesOperations.fetchFavorites(favoritesStorage)(dispatch)
+		localStorage.setItem('favorites', JSON.stringify(favoritesStorage))
+	}
 
 	return (
 		<>
@@ -21,12 +42,18 @@ const ActionButtons = () => {
 				onClick={() => handleShoppingBag.add(activeProduct)}>
 				ADD TO BAG
 			</Button>
-			<Button
-				disableRipple
-				disabled={!user}
-				sx={{ padding:{lg: '22px' ,md:'16px', sm:'12px', xs:'9px'}}} variant={'contained'}
+			<Button disableRipple
+				title={favoritesStorage.includes(activeProduct._id) ? 'remove from favorites' : 'add to favorites'}
+				sx={{ padding: { lg: '22px', md: '16px', sm: '12px', xs: '9px' } }} variant={'contained'}
+				onClick={!user
+					? () => handleOpen(<LoginModal />)
+					: addToFavorites
+				}
 			>
-				<FavoriteBorderOutlinedIcon fontSize={'small'}/>
+				{favoritesStorage.includes(activeProduct._id)
+					? <FavoriteOutlinedIcon fontSize={'small'} />
+					: <FavoriteBorderOutlinedIcon fontSize={'small'} />
+				}
 			</Button>
 		</>
 	)
