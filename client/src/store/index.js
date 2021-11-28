@@ -7,8 +7,8 @@ import modalSlice from './Modal/modalSlice'
 import shoppingBagSlice from './ShoppingBag/shoppingBagSlice'
 import productSlice from './Product/productSlice'
 import filterSlice from './Filter'
-
 import userSlice from './User'
+import favoritesSlice from './Favorites/favoritesSlice'
 
 const store = configureStore({
 	reducer: {
@@ -19,9 +19,9 @@ const store = configureStore({
 		modal: modalSlice,
 		shoppingBag: shoppingBagSlice,
 		user: userSlice,
-		product : productSlice,
+		product: productSlice,
 		filter: filterSlice,
-
+		favorites: favoritesSlice
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({

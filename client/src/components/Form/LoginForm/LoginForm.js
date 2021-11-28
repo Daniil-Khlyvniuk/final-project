@@ -31,10 +31,8 @@ const LoginForm = () => {
 					dispatch(userOperations.setToken(res.data.token))
 
 					setServerResult({ success: 'You successfully Logged In' })
-					setTimeout(() => {
-						setServerResult(null)
-						dispatch(modalActions.modalToggle(false))
-					}, 5000)
+					setServerResult(null)
+					dispatch(modalActions.modalToggle(false))
 				}
 			}
 			catch (err) {

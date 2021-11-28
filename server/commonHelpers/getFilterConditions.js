@@ -1,5 +1,5 @@
 module.exports.getFilterConditions = (query) => {
-  return [
+	return [
     { "variants.currentPrice": query.currentPrice },
     ...(query?.category ? [{ "categories.name": query.category }] : [{}]),
     ...(query?.color ? [{ "variants.color.name": query.color }] : [{}]),

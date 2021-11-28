@@ -30,6 +30,7 @@
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "query-string": "^7.0.1",
+    "stripe": "^8.191.0",
     "unique-random": "^2.1.0",
     "validator": "^11.1.0"
   },
