@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { modalSelectors } from './store/Modal'
 import useAuthToken from './utils/customHooks/useAuthToken'
 import ScrollButton from './components/ScrollButton/ScrollButton'
-import { Helmet } from 'react-helmet'
+import { Helmet, HelmetProvider  } from 'react-helmet-async'
 import {settingsOperations} from './store/Settings'
 
 
@@ -32,11 +32,13 @@ const App = () => {
 			<Footer />
 			<ScrollButton/>
 			{modal}
-			<Helmet>
-				<html lang='en'/>
-				<meta name='description' content='Bedding Shop'/>
-				<meta name='keywords' content='bedroom, Kitchen, Loungewear, bedding store, luxury bedding sets, king size bedspreads, king bed sheets, comforters on sale' />
-			</Helmet>
+			<HelmetProvider>
+				<Helmet>
+					<html lang='en'/>
+					<meta name='description' content='Bedding Shop'/>
+					<meta name='keywords' content='bedroom, Kitchen, Loungewear, bedding store, luxury bedding sets, king size bedspreads, king bed sheets, comforters on sale' />
+				</Helmet>
+			</HelmetProvider>
 		</div>
 	)
 }

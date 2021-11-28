@@ -47,7 +47,6 @@ const useFilterHandler = () => {
 
 			dispatch(filterOperations.setFiltersFromUri({...settings,...urlParams}))
 			dispatch(productsOperations.fetchProductsByFilter())
-			// eslint-disable-next-line no-console
 		}
 	}
 	return [handleFilterChange, onLoadingPage]
