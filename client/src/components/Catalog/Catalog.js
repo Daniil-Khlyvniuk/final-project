@@ -39,10 +39,10 @@ const Catalog = () => {
 	// }, [nextPage])
 
 	// eslint-disable-next-line no-console
-	console.log('products: ', products)
+	// console.log('products: ', products)
 
 	// eslint-disable-next-line no-console
-	console.log('next page: ', nextPage)
+	// console.log('next page: ', nextPage)
 	//preloader
 	if(isLoading)
 	{

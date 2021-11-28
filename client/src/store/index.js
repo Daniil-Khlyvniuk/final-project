@@ -7,6 +7,7 @@ import modalSlice from './Modal/modalSlice'
 import shoppingBagSlice from './ShoppingBag/shoppingBagSlice'
 import productSlice from './Product/productSlice'
 import filterSlice from './Filter'
+import settingsSlice from './Settings'
 
 import userSlice from './User'
 
@@ -21,7 +22,7 @@ const store = configureStore({
 		user: userSlice,
 		product : productSlice,
 		filter: filterSlice,
-
+		settings: settingsSlice,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({
