@@ -58,8 +58,8 @@ const Favoriteicon = ({ id }) => {
 			}
 		>
 			{favoritesStorage.includes(id) && user
-				? <FavoriteIcon fontSize="large" />
-				: <FavoriteBorderIcon fontSize="large" />
+				? <FavoriteIcon sx={{ fontSize: { xl: '50px', lg: '50px', md: '40px', xs: '30px' } }} />
+				: <FavoriteBorderIcon sx={{ fontSize: { xl: '50px', lg: '50px', md: '40px', xs: '30px' } }} />
 			}
 		</IconButton>
 	)
