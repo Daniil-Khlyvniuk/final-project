@@ -6,10 +6,10 @@ import TextInput from '../../components/UserProfile/UserForm/FormUI/Textfield'
 import { phoneRegExp } from '../../components/UserProfile/UserForm/data/Regex'
 import countries from '../../components/UserProfile/UserForm/data/countries.json'
 import SelectInput from '../../components/UserProfile/UserForm/FormUI/SelectInput'
-import ButtonInput from '../../components/UserProfile/UserForm/FormUI/ButtonInput'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
 import { userSelectors } from '../../store/User'
+import Payment from '../../components/Stripe/Payment'
 
 
 
@@ -75,7 +75,7 @@ const Checkout = () => {
 				component={'div'}
 				sx={{mb:'25px', mt:'10px'}}
 			>
-        Personal information
+				SHIPPING DETAILS
 			</Typography>
 			<Box>
 				<Grid container>
@@ -128,35 +128,11 @@ const Checkout = () => {
 												label="Last Name"
 											/>
 										</Grid>
-										<Grid item xs={12} md={6}>
-											<TextInput name="phone" label="Phone number" />
-										</Grid>
-										<Grid item xs={12} md={6}>
-											<TextInput
-												name="email"
-												label="Email"
-
-											/>
-										</Grid>
-										<Grid item xs={12}>
-											<Typography
-												variant='body1'
-												component={'div'}
-												color='primary'
-												fontSize='16px'
-												fontWeight='700'
-												letterSpacing='3px'
-												textAlign='center'
-												sx={{my:'18px'}}
-											>
-                        Delivery Address
-											</Typography>
-										</Grid>
 										<Grid item xs={12} >
 											<TextInput name="address" label="Address" />
 										</Grid>
-										<Grid item xs={12} md={6}>
-											<TextInput name="city" label="City" />
+										<Grid item xs={12} >
+											<TextInput name="address2" label="Address 2" />
 										</Grid>
 										<Grid item xs={12} md={6}>
 											<SelectInput
@@ -165,6 +141,19 @@ const Checkout = () => {
 												options={countries}
 											/>
 										</Grid>
+										<Grid item xs={12} md={6}>
+											<TextInput name="city" label="City" />
+										</Grid>
+										<Grid item xs={12} md={6}>
+											<TextInput
+												name="Zip/Postal Code"
+												label="Zip/Postal Code"
+
+											/>
+										</Grid>
+										<Grid item xs={12} md={6}>
+											<TextInput name="phone" label="Phone number" />
+										</Grid>
 										<Grid item xs={12}>
 											<Typography
 												variant='body1'
@@ -176,33 +165,13 @@ const Checkout = () => {
 												textAlign='center'
 												sx={{my:'18px'}}
 											>
-                        Change Password
+                        BUY NOW
 											</Typography>
 										</Grid>
-										<Grid item md={12}>
-											<TextInput
-												name='oldPass'
-												label='Old Password'
-												type='password'
-											/>
-										</Grid>
-										<Grid item md={6} xs={12}>
-											<TextInput
-												name="password"
-												label="Password"
-												type='password'
-											/>
-										</Grid>
-										<Grid item md={6}  xs={12}>
-											<TextInput
-												name="confirmPass"
-												label="Confirm Password"
-												type='password'
-											/>
-										</Grid>
-										<Grid item xs={12} sx={{textAlign:'center', mt:'16px'}}>
-											<ButtonInput>
-                        Save Changes </ButtonInput>
+										<Grid item xs={12}>
+											<p>sss</p>
+											<Payment/>
+											<p>sass</p>
 										</Grid>
 									</Grid>
 								</Form>
