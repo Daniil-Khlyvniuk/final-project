@@ -169,9 +169,7 @@ const Checkout = () => {
 											</Typography>
 										</Grid>
 										<Grid item xs={12}>
-											<p>sss</p>
 											<Payment/>
-											<p>sass</p>
 										</Grid>
 									</Grid>
 								</Form>
