@@ -43,7 +43,11 @@ const Favoriteicon = ({ id }) => {
 				: addToFavorites
 			}
 		>
+<<<<<<< HEAD
 			{favoritesStorage.includes(id) && user
+=======
+			{favoritesStorage.includes(id)
+>>>>>>> develop
 				? <FavoriteIcon fontSize="large" />
 				: <FavoriteBorderIcon fontSize="large" />
 			}
