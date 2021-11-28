@@ -16,7 +16,9 @@ const FavoriteCard = ({ _id, image, title, price }) => {
 				to={`/product-details/${_id}`}
 				style={{ textDecoration: 'none' }}
 			>
-				<img className={classes.image} src={image} alt='img' />
+				<Box className={classes.imageWrapper}>
+					<img className={classes.image} src={image} alt='img' />
+				</Box>
 				<Box className={classes.textContainer}>
 					<Typography
 						className={classes.title}

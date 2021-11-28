@@ -7,6 +7,14 @@ export const useStyles = makeStyles({
 			opacity: 0.9
 		}
 	},
+	imageWrapper: {
+		backgroundColor: '#f1f1f1',
+		// minHeight: '545px',
+		aspectRatio: 1,
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
 	image: {
 		width: '100%',
 	},

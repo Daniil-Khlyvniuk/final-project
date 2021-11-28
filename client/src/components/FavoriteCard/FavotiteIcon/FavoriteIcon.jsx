@@ -43,7 +43,7 @@ const Favoriteicon = ({ id }) => {
 				: addToFavorites
 			}
 		>
-			{favoritesStorage.includes(id)
+			{favoritesStorage.includes(id) && user
 				? <FavoriteIcon fontSize="large" />
 				: <FavoriteBorderIcon fontSize="large" />
 			}
