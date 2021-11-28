@@ -21,6 +21,7 @@ const useFilterHandler = () => {
 		}
 		catch(err)
 		{
+			// eslint-disable-next-line no-console
 			console.log('settings request err', err)
 		}
 	}
@@ -47,7 +48,6 @@ const useFilterHandler = () => {
 
 			dispatch(filterOperations.setFiltersFromUri({...settings,...urlParams}))
 			dispatch(productsOperations.fetchProductsByFilter())
-			// eslint-disable-next-line no-console
 		}
 	}
 	return [handleFilterChange, onLoadingPage]
