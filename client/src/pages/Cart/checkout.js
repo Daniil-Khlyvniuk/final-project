@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Grid, Typography , Box} from '@mui/material'
+import { Container, Grid, Box} from '@mui/material'
 import axios from 'axios'
 import { border } from './styles'
 import PayCc from '../../components/PayCard/PayCC'
 import ShipAdr from '../../components/PayCard/ShipAdr'
+import Summary from '../../components/PayCard/Summary'
 
 
 
@@ -44,17 +45,7 @@ const Checkout = () => {
 					</Box>
 				</Grid>
 				<Grid item xs={4}>
-					<Typography
-						variant='body1'
-						component={'div'}
-						color='primary'
-						fontSize='40px'
-						fontWeight='700'
-						letterSpacing='3px'
-						sx={{my:'18px'}}
-					>
-						Summary
-					</Typography>
+					<Summary/>
 				</Grid>
 			</Grid>
 		</Box>

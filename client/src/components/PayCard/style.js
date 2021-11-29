@@ -10,12 +10,12 @@ export const PayElem = {
 
 export const checkboxPay = {
 	color: 'white',
-	margin: '50px 40px 35px 32px '
+	// marginTop: '50px',
 }
 
 export const PayCC = {
 	display: 'flex',
-	justifyContent: 'spaceBetween',
+	justifyContent: 'space-around',
 	alignItems: 'center',
 }
 
