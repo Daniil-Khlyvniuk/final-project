@@ -13,8 +13,10 @@ const setFiltersFromUri = (uriObject) => (dispatch,getState) => {
 		const fromQuery = {}
 		for(let key in uriObject)
 		{
+		
 			if(key in state)
 			{
+				
 				if(arrayTypeFields.includes(key))
 				{
 					fromQuery[key] = Array.isArray(uriObject[key]) 
@@ -23,7 +25,7 @@ const setFiltersFromUri = (uriObject) => (dispatch,getState) => {
 				}
 				else 
 				{
-					fromQuery[key] = uriObject[key]
+					fromQuery[key] = (key === 'startPage') ? 1 : uriObject[key]
 				}
 			}
 		}

@@ -1,6 +1,7 @@
 import {createAsyncThunk} from '@reduxjs/toolkit'
 import queryString from 'query-string'
 import productsApi from '../../utils/API/productsAPI'
+import { filterOperations } from '../Filter'
 
 const fetchProducts = createAsyncThunk(
 	'products/fetchProducts',
@@ -35,7 +36,7 @@ const fetchProductsByFilter = createAsyncThunk(
 
 const fetchProductsByNextPage = createAsyncThunk(
 	'products/fetchProductsByNextPage',
-	async (_, {getState,rejectWithValue}) => {
+	async (_, {getState,rejectWithValue,dispatch}) => {
 		try
 		{
 			const filters = getState().filter.data
@@ -47,6 +48,11 @@ const fetchProductsByNextPage = createAsyncThunk(
 					parseNumbers: true
 				})
 			const res = await productsApi.getFilteredProducts(newQueryString)
+			// eslint-disable-next-line no-console
+			console.log('www',filters)
+			dispatch(filterOperations.setInfinityScrollHasMore(
+				!res.data || res.data.length < filters.perPage ? false : true
+			))
 			return res.data
 		}
 		catch(error)
