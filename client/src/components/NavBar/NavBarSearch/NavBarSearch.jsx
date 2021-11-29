@@ -65,7 +65,7 @@ const HeaderSearch = () => {
 								).then(({ data }) => {
 									if (data.length > 0) {
 										dispatch(setAllProducts.setAllProducts(data))
-										history.push('/shop/catalog')
+										history.push('/search')
 									}
 								})
 							} catch (err) {
