@@ -29,12 +29,29 @@ export default function Payment() {
 	}, [])
 
 	const appearance = {
-		theme: 'stripe',
+		theme: 'none',
+		labels: 'floating',
 		variables: {
-			colorPrimary: '#373f41',
-			colorText: '#373f41',
+			colorPrimary: '#000000',
+			colorText: '#ffffff',
+			fontFamily: 'Mulish, sans-serif',
+			spacingUnit: '3px',
+			borderRadius: '2px',
+			border: 'none',
+			margin: '10px',
+			colorBackground: '#565658',
 		},
+		rules: {
+			'.Label--resting': {
+				fontSize: '11px',
+			},
+			'.Label--floating': {
+				fontSize: '0px',
+			}
+		}
 	}
+
+
 	const options = {
 		clientSecret,
 		appearance,

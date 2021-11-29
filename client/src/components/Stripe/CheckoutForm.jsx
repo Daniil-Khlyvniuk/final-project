@@ -4,6 +4,7 @@ import {
 	useStripe,
 	useElements
 } from '@stripe/react-stripe-js'
+import { button, form, textBtn } from './style'
 
 export default function CheckoutForm() {
 	const stripe = useStripe()
@@ -11,6 +12,9 @@ export default function CheckoutForm() {
 
 	const [message, setMessage] = useState(null)
 	const [isLoading, setIsLoading] = useState(false)
+
+
+
 
 	useEffect(() => {
 		if (!stripe) {
@@ -20,6 +24,7 @@ export default function CheckoutForm() {
 		const clientSecret = new URLSearchParams(window.location.search).get(
 			'payment_intent_client_secret'
 		)
+
 
 		if (!clientSecret) {
 			return
@@ -42,6 +47,7 @@ export default function CheckoutForm() {
 			}
 		})
 	}, [stripe])
+
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
@@ -77,11 +83,14 @@ export default function CheckoutForm() {
 	}
 
 	return (
-		<form id="payment-form" onSubmit={handleSubmit}>
+		<form id="payment-form" style={form} onSubmit={handleSubmit}>
 			<PaymentElement id="payment-element" />
-			<button disabled={isLoading || !stripe || !elements} id="submit">
-				<span id="button-text">
-					{isLoading ? <div className="spinner" id="spinner"></div> : 'Pay now'}
+			<button
+				style={button}
+				disabled={isLoading || !stripe || !elements} id="submit"
+			>
+				<span id="button-text" style={textBtn}>
+					{isLoading ? <div className="spinner" id="spinner"></div> : 'NEXT'}
 				</span>
 			</button>
 			{/* Show any error or success messages */}
