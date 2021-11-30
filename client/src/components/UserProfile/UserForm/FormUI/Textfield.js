@@ -1,6 +1,7 @@
 import React from 'react'
 import { TextField } from '@mui/material'
 import { useField } from 'formik'
+import PropTypes from 'prop-types'
 
 // eslint-disable-next-line react/prop-types
 const TextInput = ({ name,...rest }) => {
@@ -19,6 +20,10 @@ const TextInput = ({ name,...rest }) => {
 		configTextfield.helperText = meta.error
 	}
 	return <TextField {...configTextfield} />
+}
+
+TextInput.propTypes = {
+	name : PropTypes.string
 }
 
 export default TextInput

@@ -15,6 +15,7 @@ import axios from 'axios'
 
 
 
+
 const FORM_VALIDATION = Yup.object().shape({
 	firstName: Yup.string(),
 	lastName: Yup.string(),
@@ -26,7 +27,9 @@ const FORM_VALIDATION = Yup.object().shape({
 	city: Yup.string(),
 	country: Yup.string(),
 	oldPass: Yup.string(),
-	password: Yup.string(),
+	password: Yup.string()
+		.min(7,'Password must be 7 digits minimum')
+		.max(30,'Password must be 30 digits maximum'),
 	confirmPass: Yup.string().oneOf([Yup.ref('password')], 'Passwords do not match'),
 
 })
@@ -38,15 +41,14 @@ const UserForm = () => {
 	const user = useSelector(userSelectors.getData())
 	const token = useSelector(userSelectors.getToken())
 
-
 	const INITIAL_FORM_STATE = {
-		firstName: user?.firstName || null,
-		lastName: user?.lastName || null,
-		email: user?.email || null,
-		phone: user?.phone || null,
-		address: user?.address || null,
-		city: user?.city || null,
-		country: user?.country || null,
+		firstName: user?.firstName || '',
+		lastName: user?.lastName || '',
+		email: user?.email || '',
+		phone: user?.phone || '',
+		address: user?.address || '',
+		city: user?.city || '',
+		country: user?.country || '',
 		oldPass:'',
 		password:'',
 		confirmPass:''
