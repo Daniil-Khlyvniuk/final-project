@@ -23,7 +23,9 @@ const Summary = () => {
         Summary
 			</Typography>
 			<div style={border} />
+			{/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
 			<div>
+				//тут нужно посмотреть хорошо
 				{shoppingBag
 					?.map((item, key) => <ShoppingBagCard key={key} {...item}/>)}
 			</div>
