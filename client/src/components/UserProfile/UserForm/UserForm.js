@@ -28,7 +28,7 @@ const FORM_VALIDATION = Yup.object().shape({
 	country: Yup.string(),
 	oldPass: Yup.string(),
 	password: Yup.string(),
-	confirmPass: Yup.string(),
+	confirmPass: Yup.string().oneOf([Yup.ref('password')], 'Passwords do not match'),
 
 })
 
@@ -38,7 +38,6 @@ const UserForm = () => {
 
 	const user = useSelector(userSelectors.getData())
 	const token = useSelector(userSelectors.getToken())
-
 
 	const INITIAL_FORM_STATE = {
 		firstName: user?.firstName || null,
@@ -92,9 +91,6 @@ const UserForm = () => {
 									axios.put('/api/customers', update , {
 										headers: {Authorization : token}
 									}).then(() => setStatus('Changes Saved'))
-
-									// eslint-disable-next-line no-console
-									console.log(values)
 
 									if(values.oldPass){
 										const passwords = {
@@ -178,7 +174,6 @@ const UserForm = () => {
 												name='oldPass'
 												label='Old Password'
 												type='password'
-
 											/>
 										</Grid>
 										<Grid item md={6} xs={12}>

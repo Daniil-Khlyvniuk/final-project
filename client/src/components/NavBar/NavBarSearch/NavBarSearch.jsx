@@ -91,6 +91,7 @@ const HeaderSearch = () => {
 					/>}
 					size='small'
 					getOptionLabel={(option) => option.name}
+					isOptionEqualToValue={(option) => option.name}
 					renderOption={(props, option) => {
 						return (
 							<Link

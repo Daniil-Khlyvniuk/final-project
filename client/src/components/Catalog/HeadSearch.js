@@ -12,13 +12,10 @@ import useFilterHandler from '../../utils/customHooks/useFilterHandler'
 import DropDownSelect from './DropDownSelect'
 
 const HeadSearch = () => {
-	const [handleFilterChange] = useFilterHandler()
+	const {handleFilterChange} = useFilterHandler()
 	const [perPageArray, setPerPageArray] = useState([])
 	const [sortByArray, setSortByArray] = useState([])
-	// const perPage = useSelector(filterSelectors.getPerPage())
-	// const sort = useSelector(filterSelectors.getSort())
-	const {perPage,sort: sort} =
-		useSelector(filterSelectors.getFilters())
+	const {perPage, sort} = useSelector(filterSelectors.getFilters())
 
 	const dispatch = useDispatch()
 
@@ -32,20 +29,10 @@ const HeadSearch = () => {
 	const getPerPageFilters = async () => {
 		const pageRes = await filterApi.getFiltersByType('perPage')
 		setPerPageArray(pageRes.data)
-		
-		// if(!perPage)
-		// {
-		// 	dispatch(filterOperations.handlePerPage(pageRes.data[0].value))
-		// }
 	}
 	const getSortByFilters = async () => {
 		const sortRes = await filterApi.getFiltersByType('sortBy')
 		setSortByArray(sortRes.data)
-		// console.log('sss',sort)
-		// if(!sort)
-		// {
-		// 	dispatch(filterOperations.handleSort(sortRes.data[0].value))
-		// }
 	}
 
 	useEffect(()=> {

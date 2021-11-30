@@ -23,7 +23,6 @@ const CatalogAccordion = ({
 	return (
 		<Accordion
 			onChange={() => handleOpenAccordion()}
-			// defaultExpanded={expanded}
 			expanded={isOpen}
 			square={true}
 			sx={{
