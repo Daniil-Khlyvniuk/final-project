@@ -44,13 +44,13 @@ const UserForm = () => {
 	const token = useSelector(userSelectors.getToken())
 
 	const INITIAL_FORM_STATE = {
-		firstName: user?.firstName || null,
-		lastName: user?.lastName || null,
-		email: user?.email || null,
-		phone: user?.phone || null,
-		address: user?.address || null,
-		city: user?.city || null,
-		country: user?.country || null,
+		firstName: user?.firstName || '',
+		lastName: user?.lastName || '',
+		email: user?.email || '',
+		phone: user?.phone || '',
+		address: user?.address || '',
+		city: user?.city || '',
+		country: user?.country || '',
 		oldPass:'',
 		password:'',
 		confirmPass:''
