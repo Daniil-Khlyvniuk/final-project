@@ -7,7 +7,7 @@ import ProductDescription from '../../components/ProductDescription/ProductDescr
 import Carousel from '../../components/Carousel/Carousel'
 import RelatedItemsList from '../../components/RelatedItems/RelatedItemsList'
 import BackdropLoader from '../../components/UI/BackdropLoader/BackdropLoader'
-import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { Helmet } from 'react-helmet-async'
 
 const ProductDetails = () => {
 
@@ -40,32 +40,33 @@ const ProductDetails = () => {
 	}
 
 	return (
-		<Container maxWidth="lg" sx={{ mt: '80px' }}>
-			{isLoading && <BackdropLoader open={isLoading}/>}
-			{activeProduct && <><Grid container spacing={4}>
-				<Grid item md={6} xs={12}>
-					<Carousel slides={activeProduct.imageUrls} product={true}/>
+		<>
+			<Helmet>
+				<html lang="en"/>
+				<title>{parent ? parent.name : 'Product Details'}</title>
+				<meta name="description" content="Cotton Bed Linen"/>
+				<meta name="keywords"
+					content="bed linen, Cotton bed linen, Cotton Dark Blue Bed Linen, bedspreads queen, queen size sheets, cotton comforter, king size bedspreads"/>
+			</Helmet>
+			<Container maxWidth="lg" sx={{ mt: '80px' }}>
+				{isLoading && <BackdropLoader open={isLoading}/>}
+				{activeProduct && <><Grid container spacing={4}>
+					<Grid item md={6} xs={12}>
+						<Carousel slides={activeProduct.imageUrls} product={true}/>
+					</Grid>
+					<Grid item md={6} xs={12}>
+						<ProductDescription/>
+					</Grid>
+					{/*<Grid sx={{mt:'80px'}} item md={12}>*/}
+					{/*</Grid>*/}
 				</Grid>
-				<Grid item md={6} xs={12}>
-					<ProductDescription/>
-				</Grid>
-				{/*<Grid sx={{mt:'80px'}} item md={12}>*/}
-				{/*</Grid>*/}
-			</Grid>
-			<Box style={{marginTop: '80px'}}>
-				<RelatedItemsList/>
-			</Box>
-			</>
-			}
-			<HelmetProvider>
-				<Helmet>
-					<html lang="en"/>
-					<meta name="description" content="Cotton Bed Linen"/>
-					<meta name="keywords"
-						content="bed linen, Cotton bed linen, Cotton Dark Blue Bed Linen, bedspreads queen, queen size sheets, cotton comforter, king size bedspreads"/>
-				</Helmet>
-			</HelmetProvider>
-		</Container>
+				<Box style={{marginTop: '80px'}}>
+					<RelatedItemsList/>
+				</Box>
+				</>
+				}
+			</Container>
+		</>
 	)
 
 }

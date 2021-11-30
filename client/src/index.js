@@ -8,7 +8,7 @@ import {ThemeProvider} from '@mui/material/styles'
 import Theme from './utils/Theme'
 import { BrowserRouter } from 'react-router-dom'
 import store from './store/index'
-
+import { HelmetProvider  } from 'react-helmet-async'
 
 
 ReactDOM.render(
@@ -17,7 +17,9 @@ ReactDOM.render(
 			<Provider store={store}>
 				<BrowserRouter>
 					<ErrorBoundary>
-						<App/>
+						<HelmetProvider>
+							<App/>
+						</HelmetProvider>
 					</ErrorBoundary>
 				</BrowserRouter>
 			</Provider>
