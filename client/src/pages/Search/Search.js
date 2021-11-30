@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { productsSelectors } from '../../store/Products'
 import { Box } from '@mui/system'
 import BackdropLoader from '../../components/UI/BackdropLoader/BackdropLoader'
-import { Redirect } from 'react-router-dom'
+import { Redirect, useLocation } from 'react-router-dom'
 import Card from '../../components/ProductCard/ProductCard'
 import { makeStyles } from '@mui/styles'
 
@@ -24,6 +24,7 @@ const Search = () => {
 	const products = useSelector(productsSelectors.getProducts())
 	const isLoading = useSelector(productsSelectors.getIsLoading())
 	const classes = useStyles()
+	let location = useLocation()
 
 	return (
 		<Container maxWidth="lg" sx={{ minWidth: 320 }}>
@@ -36,7 +37,7 @@ const Search = () => {
 						sx={{ mb: '14px', mt: '85px' }}
 						variant='h2'
 					>
-						Search results
+						{`Search results for "${location.search.substr(location.search.lastIndexOf('=')+1)}"`}
 					</Typography>
 				</Box>
 			}
