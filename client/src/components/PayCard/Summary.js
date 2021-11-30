@@ -1,12 +1,16 @@
 import React from 'react'
-import { Typography } from '@mui/material'
+import { Typography, Box } from '@mui/material'
 import { border } from '../../pages/Cart/styles'
+import ShoppingBagCard from '../ShoppingBagCard/ShoppingBagCard'
+import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
+
 
 
 const Summary = () => {
-  
+	const {shoppingBag} = useHandleShoppingBag()
+
 	return (
-		<box>
+		<Box>
 			<Typography
 				variant='body1'
 				component={'div'}
@@ -19,7 +23,11 @@ const Summary = () => {
         Summary
 			</Typography>
 			<div style={border} />
-		</box>
+			<div>
+				{shoppingBag
+					?.map((item, key) => <ShoppingBagCard key={key} {...item}/>)}
+			</div>
+		</Box>
 	)
 }
 

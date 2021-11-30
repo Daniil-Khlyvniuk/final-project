@@ -12,20 +12,13 @@ import * as Yup from 'yup'
 import { phoneRegExp } from '../UserProfile/UserForm/data/Regex'
 
 const FORM_VALIDATION = Yup.object().shape({
-	firstName: Yup.string(),
-	lastName: Yup.string(),
-	// birthday: Yup.date(),
-	email: Yup.string().email('Invalid email'),
+	firstName: Yup.string().required('*'),
+	lastName: Yup.string().required('*'),
 	phone: Yup.string()
-		.matches(phoneRegExp, 'Please enter a valid phone number')
+		.matches(phoneRegExp, 'Please enter a valid phone number').required('*')
 	,
-	address: Yup.string(),
-	city: Yup.string(),
-	country: Yup.string(),
-	oldPass: Yup.string(),
-	password: Yup.string(),
-	confirmPass: Yup.string().oneOf([Yup.ref('password')], 'Passwords do not match'),
-
+	address: Yup.string().required('*'),
+	city: Yup.string().required('*'),
 })
 
 const ShipAdr = () => {
@@ -34,16 +27,12 @@ const ShipAdr = () => {
 	const token = useSelector(userSelectors.getToken())
 
 	const INITIAL_FORM_STATE = {
-		firstName: user?.firstName || null,
-		lastName: user?.lastName || null,
-		email: user?.email || null,
-		phone: user?.phone || null,
-		address: user?.address || null,
-		city: user?.city || null,
-		country: user?.country || null,
-		oldPass:'',
-		password:'',
-		confirmPass:''
+		firstName:user?.lastName || '',
+		lastName: user?.lastName ||'',
+		phone: user?.phone || '',
+		address: user?.address || '',
+		city: user?.city || '',
+		country: user?.country || '',
 	}
 	return (
 		<div>
@@ -99,6 +88,7 @@ const ShipAdr = () => {
 							<TextInput
 								name="firstName"
 								label="First Name"
+
 							/>
 						</Grid>
 						<Grid item xs={12} md={6}>
