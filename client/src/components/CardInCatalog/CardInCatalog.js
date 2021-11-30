@@ -28,9 +28,9 @@ const CardInCatalog = ({title, image, price, _id}) => {
 		<div>
 			<div className={classes.container}>
 				<img className={classes.img} src={image} alt='img'/>
-				<p className={classes.catalogTitle}>{title}</p>
+				<p className={classes.catalogTitle}>{title.slice(0, 40 ) +'...'}</p>
 				<div className={classes.blockHover}>
-					<p className={classes.title}>{title}</p>
+					<p className={classes.title}>{title.slice(0, 40 ) +'...'}</p>
 					<p className={classes.price}>{price} $</p>
 					{/* <button className={classes.btn} onClick={buy}>BUY NOW</button> */}
 					<Button

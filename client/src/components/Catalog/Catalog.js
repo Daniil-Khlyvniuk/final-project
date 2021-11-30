@@ -37,8 +37,9 @@ const Catalog = () => {
 	const hasMore = useSelector(filterSelectors.getInfinityScrollHasMore())
 	const classes = useStyles()
 
+	// eslint-disable-next-line no-console
+	console.log('prod: ', products)
 	const {startPage} = useSelector(filterSelectors.getFilters())
-
 	const handleScroll = () => {
 		// eslint-disable-next-line no-console
 		// console.log('startPage: ', startPage)
@@ -61,6 +62,7 @@ const Catalog = () => {
 				style={{
 					display: 'flex',
 					justifyContent: 'flex-start',
+					gap: '5px',
 					alignItems: 'center',
 					flexWrap: 'wrap',
 					overflow: 'visible',
