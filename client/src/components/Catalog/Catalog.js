@@ -73,6 +73,7 @@ const Catalog = () => {
 					justifyContent: 'flex-start',
 					alignItems: 'center',
 					flexWrap: 'wrap',
+					overflow: 'visible',
 				}}
 				dataLength={products.length}
 				next={
