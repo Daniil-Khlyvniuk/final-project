@@ -1,6 +1,7 @@
 import React from 'react'
 import { TextField, MenuItem } from '@mui/material'
 import { useField, useFormikContext } from 'formik'
+import PropTypes from 'prop-types'
 
 // eslint-disable-next-line react/prop-types
 const SelectInput = ({ name, options, ...rest }) => {
@@ -37,6 +38,11 @@ const SelectInput = ({ name, options, ...rest }) => {
 			})}
 		</TextField>
 	)
+}
+
+SelectInput.propTypes = {
+	name : PropTypes.string,
+	options : PropTypes.array,
 }
 
 export default SelectInput
