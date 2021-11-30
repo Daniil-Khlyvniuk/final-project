@@ -11,7 +11,6 @@ const useFilterHandler = () => {
 	const dispatch = useDispatch()
 	const history = useHistory()
 	const isLaunchedByUser = useSelector(filterSelectors.getIsLaunchedByUser())
-	// const settings = useSelector(settingsSelectors.getData())
 	
 	const getSettings = async () => {
 		try{
@@ -26,16 +25,37 @@ const useFilterHandler = () => {
 		}
 	}
 
-	const handleFilterChange = (action,value) => {
+	//handle action, handle user activity init, sets filter value via action
+	const registerUserActivity = (action,value) => {
 		if(!action || !value)
 		{
 			return
 		}
 		const actionName = 'handle'+ action[0].toUpperCase() + action.slice(1)
+		
+		//set defaults params every filters change
+		dispatch(filterOperations.handleStartPage(1))
 		dispatch(filterOperations.setIsLaunchedByUser(true))
+		dispatch(filterOperations.setInfinityScrollHasMore(true))
+
 		dispatch(filterOperations.filtersHandler(actionName,value,history))
-		dispatch(productsOperations.fetchProductsByFilter())
+		return true
 	}
+
+	const handleFilterChange = (action,value) => {
+		if(registerUserActivity(action,value))
+		{
+			dispatch(productsOperations.fetchProductsByFilter())
+		}
+	}
+
+	const handleInfinitiScroll = (action,value) => {
+		if(registerUserActivity(action,value))
+		{
+			dispatch(productsOperations.fetchProductsByNextPage())
+		}
+	}
+
 	const onLoadingPage = async () => {	
 		//get settings here, becouse from redux return null - async
 		let settings = await getSettings()
@@ -50,7 +70,7 @@ const useFilterHandler = () => {
 			dispatch(productsOperations.fetchProductsByFilter())
 		}
 	}
-	return [handleFilterChange, onLoadingPage]
+	return {handleFilterChange, onLoadingPage, handleInfinitiScroll}
 }
 
 export default useFilterHandler

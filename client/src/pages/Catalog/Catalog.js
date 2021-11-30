@@ -11,7 +11,7 @@ import { Helmet, HelmetProvider  } from 'react-helmet-async'
 
 const Catalog = () => {
 	// eslint-disable-next-line no-unused-vars
-	const [_,onLoadingPage] = useFilterHandler()
+	const {onLoadingPage} = useFilterHandler()
 	const classes = useStyles()
 	
 	//parse url on first page loading

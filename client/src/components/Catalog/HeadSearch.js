@@ -12,11 +12,10 @@ import useFilterHandler from '../../utils/customHooks/useFilterHandler'
 import DropDownSelect from './DropDownSelect'
 
 const HeadSearch = () => {
-	const [handleFilterChange] = useFilterHandler()
+	const {handleFilterChange} = useFilterHandler()
 	const [perPageArray, setPerPageArray] = useState([])
 	const [sortByArray, setSortByArray] = useState([])
-	const {perPage, sort} =
-		useSelector(filterSelectors.getFilters())
+	const {perPage, sort} = useSelector(filterSelectors.getFilters())
 
 	const dispatch = useDispatch()
 

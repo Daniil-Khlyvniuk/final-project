@@ -8,30 +8,43 @@ import {productsSelectors} from '../../store/Products'
 import useFilterHandler from '../../utils/customHooks/useFilterHandler'
 import BackdropLoader from '../UI/BackdropLoader/BackdropLoader'
 import InfiniteScroll from 'react-infinite-scroll-component'
+import { filterSelectors } from '../../store/Filter'
 
 const StyledTypography = styled(Typography)(() => ({
 	fontSize: '32px',
 	textTransform: 'uppercase',
 	fontWeight: 400,
+	margin: 'auto',
+	alignSelf: 'center',
 }))
 
 const useStyles = makeStyles({
 	container: {
 		display: 'flex',
-		flexWrap: 'wrap',
-		gap: '20px',
-		margin: '20px auto',
-		justifyContent: 'center',
+		flexDirection: 'column',
+		// alignItems: 'center',
+		// flexWrap: 'wrap',
+		// gap: '20px',
+		// margin: '20px auto',
+		// justifyContent: 'center',
 	}
 })
 
 const Catalog = () => {
 	const products = useSelector(productsSelectors.getCatalog())
-	const [handleFilterChange] = useFilterHandler()
+	const {handleInfinitiScroll} = useFilterHandler()
 	const [nextPage, setNextPage] = useState(1)
 	const isLoading = useSelector(productsSelectors.getIsLoading())
+	const hasMore = useSelector(filterSelectors.getInfinityScrollHasMore())
 	const classes = useStyles()
 
+	const {startPage} = useSelector(filterSelectors.getFilters())
+
+	const handleScroll = () => {
+		// eslint-disable-next-line no-console
+		console.log('startPage: ', startPage)
+		handleInfinitiScroll('startPage', +startPage + 1)
+	}
 
 	// useEffect(() => {
 	// 	handleFilterChange('startPage', nextPage)
@@ -55,30 +68,39 @@ const Catalog = () => {
 				<StyledTypography>no products by filter is found</StyledTypography>
 			)}
 			<InfiniteScroll
-				dataLength={products.length}
-				next={() => {
-					setNextPage(nextPage < 10 ? nextPage + 1 : nextPage)
+				style={{
+					display: 'flex',
+					justifyContent: 'flex-start',
+					alignItems: 'center',
+					flexWrap: 'wrap',
 				}}
+				dataLength={products.length}
+				next={
+					// () => {
+					// 	setNextPage(nextPage < 10 ? nextPage + 1 : nextPage)
+					// }
+					handleScroll
+				}
 				// scrollThreshold={'10'}
-				hasMore={true}
-				loader={null}
+				hasMore={hasMore}
+				// loader={null}
 				endMessage={
-					<p style={{ textAlign: 'center' }}>
-						<b>That`s all, folks!</b>
-					</p>}>
+					<StyledTypography>{'that\'s all, folks!'}</StyledTypography>
+				}
+			>
 				{
 					!!products
-				&& products.map((item, index) => {
-					return (
-						<CardInCatalog
-							key={index} //костыль
-							_id={item.variants._id}
-							image={'/' + item.variants.imageUrls[0]}
-							title={item?.name || ''}
-							price={item.variants.currentPrice}
-						/>
-					)
-				})
+					&& products.map((item, index) => {
+						return (
+							<CardInCatalog
+								key={index} //костыль
+								_id={item.variants._id}
+								image={'/' + item.variants.imageUrls[0]}
+								title={item?.name || ''}
+								price={item.variants.currentPrice}
+							/>
+						)
+					})
 				}
 			</InfiniteScroll>
 		</Box>

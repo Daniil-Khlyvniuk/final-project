@@ -6,7 +6,7 @@ import useFilterHandler from '../../utils/customHooks/useFilterHandler'
 import PropTypes from 'prop-types'
 
 const CategorySearchItem = ({catalog}) => {
-	const [handleFilterChange] = useFilterHandler()
+	const {handleFilterChange} = useFilterHandler()
 	const {name} = catalog
 	const isSelected = useSelector(filterSelectors.checkCategory(name))
 

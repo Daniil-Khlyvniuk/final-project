@@ -13,6 +13,7 @@ const initialState = {
 	},
 	isLoading: true,
 	isLaunchedByUser: false,
+	infinityScrollHasMore: true,
 }
 
 
@@ -22,6 +23,9 @@ export const filterSlice = createSlice({
 	reducers: {
 		setIsLaunchedByUser: (state, action) => {
 			state.isLaunchedByUser = action.payload
+		},
+		setInfinityScrollHasMore: (state, action) => {
+			state.infinityScrollHasMore = action.payload
 		},
 		handleCategory: (state, action) => {
 			const name = action.payload
@@ -49,7 +53,6 @@ export const filterSlice = createSlice({
 				state.data.size.push(name)
 			}
 		},
-		
 		handlePerPage: (state, action) => {
 			state.data.perPage = action.payload
 		},
@@ -63,6 +66,7 @@ export const filterSlice = createSlice({
 			state.data.maxPrice = action.payload
 		},
 		handleStartPage: (state, action) => {
+			if(action.payload < 1) return state
 			state.data.startPage = action.payload
 		},
 		//for filter update from query string ONLY

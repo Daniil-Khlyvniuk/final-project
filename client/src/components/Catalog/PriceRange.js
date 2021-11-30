@@ -12,7 +12,7 @@ import useFilterHandler from '../../utils/customHooks/useFilterHandler'
 const minDistance = 100
 
 const PriceRange = () => {
-	const [handleFilterChange] = useFilterHandler()
+	const {handleFilterChange} = useFilterHandler()
 	// временно
 	// const dispatch = useDispatch()
 	const {minPrice, maxPrice} = useSelector(filterSelectors.getFilters())
