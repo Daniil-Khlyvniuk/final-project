@@ -88,8 +88,12 @@ exports.loginCustomer = async (req, res, next) => {
     return res.status(400).json(errors);
   }
 
-  const loginOrEmail = req.body.loginOrEmail;
-  const password = req.body.password;
+	console.log(req.body)
+	const { subscribe, userData } = req.body
+
+
+	const loginOrEmail = userData.loginOrEmail;
+  const password = userData.password;
   const configs = await getConfigs();
 
   // Find customer by email
@@ -126,6 +130,11 @@ exports.loginCustomer = async (req, res, next) => {
               });
             }
           );
+
+					if (subscribe) [
+
+					]
+
         } else {
           errors.password = "Password incorrect";
           return res.status(400).json(errors);
