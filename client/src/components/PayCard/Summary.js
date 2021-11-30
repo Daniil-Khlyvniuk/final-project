@@ -6,8 +6,10 @@ import {PhotoSumm, SummBox, SummText, SummTotal} from './style'
 
 
 
+
 const Summary = () => {
 	const {shoppingBag, totalPrice} = useHandleShoppingBag()
+
 
 	return (
 		<Box>

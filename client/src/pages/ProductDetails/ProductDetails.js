@@ -57,8 +57,6 @@ const ProductDetails = () => {
 					<Grid item md={6} xs={12}>
 						<ProductDescription/>
 					</Grid>
-					{/*<Grid sx={{mt:'80px'}} item md={12}>*/}
-					{/*</Grid>*/}
 				</Grid>
 				<Box style={{marginTop: '80px'}}>
 					<RelatedItemsList/>

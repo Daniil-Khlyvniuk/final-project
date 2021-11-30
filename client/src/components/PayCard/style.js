@@ -54,6 +54,7 @@ export const CashTextSub = {
 	fontFamily: 'Mulish',
 	fontSize: '14px',
 	color: '#A1ADB0',
+
 }
 
 
