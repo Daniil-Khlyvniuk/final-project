@@ -8,6 +8,7 @@ import Carousel from '../../components/Carousel/Carousel'
 import RelatedItemsList from '../../components/RelatedItems/RelatedItemsList'
 import BackdropLoader from '../../components/UI/BackdropLoader/BackdropLoader'
 import { Helmet } from 'react-helmet-async'
+import { favoritesOperations } from '../../store/Favorites'
 
 const ProductDetails = () => {
 
@@ -17,6 +18,13 @@ const ProductDetails = () => {
 	const isLoading = useSelector(ProductSelector.isLoading())
 	const activeProduct = useSelector(ProductSelector.getProduct())
 	const parent = useSelector(ProductSelector.getParent())
+
+	const favorites = JSON.parse(localStorage.getItem('favorites'))
+
+	useEffect(() => {
+		favoritesOperations.fetchFavorites(favorites)(dispatch)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [favorites.length])
 
 	useEffect(() => {
 		dispatch(ProductOperations.fetchProductUrl(id))

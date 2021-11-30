@@ -1,13 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {Button, Container, Typography} from '@mui/material'
 import {useStyles} from './styles'
 import {Link} from 'react-router-dom'
 import ShoppingBagCard from '../../components/ShoppingBagCard/ShoppingBagCard'
 import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
+import { favoritesOperations } from '../../store/Favorites'
+import { useDispatch } from 'react-redux'
 
 const Cart = () => {
 	const classes = useStyles()
 	const {shoppingBag,totalPrice} = useHandleShoppingBag()
+	const dispatch = useDispatch()
+
+	const favorites = JSON.parse(localStorage.getItem('favorites'))
+
+	useEffect(() => {
+		favoritesOperations.fetchFavorites(favorites)(dispatch)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [favorites.length])
 
 	return (
 		<Container maxWidth="lg">

@@ -11,13 +11,12 @@ import Category from '../Category/Category'
 import LogoutIconHeader from './NavBarIcons/LogoutIcon/LogoutIcon'
 import { userSelectors } from '../../store/User'
 import { useSelector } from 'react-redux'
-// import {useParams} from 'react-router-dom'
 import ProfileIcon from './NavBarIcons/ProfileIcon/ProfileIcon'
-import {useLocation} from 'react-router'
+import { useLocation } from 'react-router'
 
 const Navbar = () => {
 	const classes = useStyles()
-	const {pathname} = useLocation()
+	const { pathname } = useLocation()
 	const user = useSelector(userSelectors.getData())
 	const isLoggedIn = !!user
 
@@ -31,7 +30,7 @@ const Navbar = () => {
 						<NavBarSearch />
 						<div className={classes.iconsWrapper}>
 							{!isLoggedIn ? <LoginIcon /> :
-								pathname === '/user-profile' ? <LogoutIconHeader/> :
+								pathname === '/user-profile' ? <LogoutIconHeader /> :
 									<ProfileIcon />}
 							{isLoggedIn && <FavoriteIcon />}
 							<CartIcon />

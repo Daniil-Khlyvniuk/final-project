@@ -26,6 +26,7 @@ export default function Payment() {
 		)
 			.then((data) => {
 				setClientSecret(data.data.clientSecret)})
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	const appearance = {

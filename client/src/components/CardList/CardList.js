@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Card from '../ProductCard/ProductCard'
+import ProductCard from '../ProductCard/ProductCard'
 import { makeStyles } from '@mui/styles'
-import { Container, Grid, Typography } from '@mui/material'
+import { Grid, Typography } from '@mui/material'
 import { productsOperations, productsSelectors } from '../../store/Products'
 import BackdropLoader from '../UI/BackdropLoader/BackdropLoader'
+import { Box } from '@mui/system'
 
 const useStyles = makeStyles((theme) => ({
 	title: theme.typography.sectionHeading,
@@ -22,7 +23,7 @@ const CardList = () => {
 	}, [])
 
 	return (
-		<Container maxWidth="lg" sx={{ minWidth: 320 }}>
+		<Box>
 			{isLoading && <BackdropLoader open={isLoading} />}
 			<Typography
 				fontSize={32}
@@ -30,23 +31,22 @@ const CardList = () => {
 				variant={'h2'}
 				className={classes.title}
 			>
-				NEW IN
+				New in
 			</Typography>
 			<Grid container spacing={2} sx={{ marginBottom: '40px' }} >
-				{
-					!!products?.length
-					&&
-					products.map(item => (
-						<Card
-							key={item._id}
+				{products?.map(item => (
+					<Grid item md={6} sm={6} xs={12} key={item.variants._id}>
+						<ProductCard
 							_id={item.variants._id}
+							sx={{ width: { sm: '580px' }, height: { sm: '545px' } }}
 							image={'/' + item.variants.imageUrls[0]}
-							title={item?.name || ''}
-							price={item.variants.currentPrice} />
-					))
-				}
+							title={item.name}
+							price={item.variants.currentPrice}
+						/>
+					</Grid>
+				))}
 			</Grid>
-		</Container>
+		</Box>
 	)
 }
 
