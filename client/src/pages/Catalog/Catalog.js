@@ -7,11 +7,11 @@ import ProductsCatalog from '../../components/Catalog/Catalog'
 import CategorySearch from '../../components/Catalog/CategorySearch'
 import HeadSearch from '../../components/Catalog/HeadSearch'
 import LeftSide from '../../components/Catalog/LeftSide'
-import { Helmet, HelmetProvider  } from 'react-helmet-async'
+import { Helmet } from 'react-helmet-async'
 
 const Catalog = () => {
 	// eslint-disable-next-line no-unused-vars
-	const [_,onLoadingPage] = useFilterHandler()
+	const {onLoadingPage} = useFilterHandler()
 	const classes = useStyles()
 	
 	//parse url on first page loading
@@ -21,35 +21,36 @@ const Catalog = () => {
 	},[])
 
 	return (
-		<Container maxWidth="lg">
-			<Grid className={classes.MainGrd}>
-				<Grid item className={classes.leftSide}>
-					<Typography
-						style={textStyle}
-						variant={'h2'}
-					>
+		<>
+			<Helmet>
+				<html lang='en'/>
+				<title>Catalog</title>
+				<meta name='description' content='Catalog Bed Linens'/>
+				<meta name='keywords' content='Bedroom, Bed linen, Kitchen, Bathroom, Loungewear, Towels, Blanket, Pillowcase, Sheet, Bathrobe, Sale bed linen ' />
+			</Helmet>
+			<Container maxWidth="lg">
+				<Grid className={classes.MainGrd}>
+					<Grid item className={classes.leftSide}>
+						<Typography
+							style={textStyle}
+							variant={'h2'}
+						>
 						Catalog
-					</Typography>
-					<LeftSide />
-				</Grid>
-				<Grid item className={classes.rightSide}>
-					<CategorySearch />
-					<Grid item xs={12}>
-						<HeadSearch />
+						</Typography>
+						<LeftSide />
 					</Grid>
-					<Grid item xs={12}>
-						<ProductsCatalog />
+					<Grid item className={classes.rightSide}>
+						<CategorySearch />
+						<Grid item xs={12}>
+							<HeadSearch />
+						</Grid>
+						<Grid item xs={12}>
+							<ProductsCatalog />
+						</Grid>
 					</Grid>
 				</Grid>
-			</Grid>
-			<HelmetProvider>
-				<Helmet>
-					<html lang='en'/>
-					<meta name='description' content='Catalog Bed Linens'/>
-					<meta name='keywords' content='Bedroom, Bed linen, Kitchen, Bathroom, Loungewear, Towels, Blanket, Pillowcase, Sheet, Bathrobe, Sale bed linen ' />
-				</Helmet>
-			</HelmetProvider>
-		</Container>
+			</Container>
+		</>
 	)
 }
 

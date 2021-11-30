@@ -1,5 +1,6 @@
-import queryString from 'query-string'
 import {actions} from './filterSlice'
+import {makeQueryStringFromObject} from '../../utils/helpers/stringHelper'
+import {returnObjectWithoutZeroVal} from '../../utils/helpers/objectHelper'
 
 const setFiltersFromUri = (uriObject) => (dispatch,getState) => {
 	
@@ -12,8 +13,10 @@ const setFiltersFromUri = (uriObject) => (dispatch,getState) => {
 		const fromQuery = {}
 		for(let key in uriObject)
 		{
+		
 			if(key in state)
 			{
+				
 				if(arrayTypeFields.includes(key))
 				{
 					fromQuery[key] = Array.isArray(uriObject[key]) 
@@ -22,7 +25,7 @@ const setFiltersFromUri = (uriObject) => (dispatch,getState) => {
 				}
 				else 
 				{
-					fromQuery[key] = uriObject[key]
+					fromQuery[key] = (key === 'startPage') ? 1 : uriObject[key]
 				}
 			}
 		}
@@ -44,18 +47,16 @@ const filtersHandler = (action, value, history) => (dispatch, getState) =>  {
 			dispatch(actions.handleMinPrice(minPrice))
 			dispatch(actions.handleMaxPrice(maxPrice))
 		}
-		const filters = getState().filter.data
+		//delete from object values with 0
+		const filters = returnObjectWithoutZeroVal(getState().filter.data)
+
 		history.push({
 			pathname: history.location.pathname,
-			search: queryString.stringify(filters,{
-				arrayFormat: 'comma',
-				skipNull: true,
-				skipEmptyString: true,
-				parseNumbers: true
-			}),
+			search: makeQueryStringFromObject(filters), //make query string from object
 		})
 	}	
 }
+
 
 export default {
 	setFiltersFromUri,

@@ -9,7 +9,7 @@ import Icon from '../UI/Icon'
 
 const ColorSearch = () => {
 	const [colors, setColors] =	useState([])
-	const [handleFilterChange] = useFilterHandler()
+	const {handleFilterChange} = useFilterHandler()
 	const selectedColors = useSelector(filterSelectors.getColors())
 
 	const getColorFilters = async () => {
