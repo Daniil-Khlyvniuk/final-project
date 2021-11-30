@@ -2,24 +2,17 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Card from '../ProductCard/ProductCard'
 import { makeStyles } from '@mui/styles'
-import { Typography } from '@mui/material'
+import { Container, Grid, Typography } from '@mui/material'
 import { productsOperations, productsSelectors } from '../../store/Products'
-
+import BackdropLoader from '../UI/BackdropLoader/BackdropLoader'
 
 const useStyles = makeStyles((theme) => ({
-	container: {
-		display: 'flex',
-		flexWrap: 'wrap',
-		gap: '20px',
-		maxWidth: '1180px',
-		margin: '0 auto',
-		justifyContent: 'space-between'
-	},
 	title: theme.typography.sectionHeading,
 }))
 
 const CardList = () => {
 	const products = useSelector(productsSelectors.getProducts())
+	const isLoading = useSelector(productsSelectors.getIsLoading())
 	const dispatch = useDispatch()
 	const classes = useStyles()
 
@@ -29,7 +22,8 @@ const CardList = () => {
 	}, [])
 
 	return (
-		<div>
+		<Container maxWidth="lg" sx={{ minWidth: 320 }}>
+			{isLoading && <BackdropLoader open={isLoading} />}
 			<Typography
 				fontSize={32}
 				sx={{ mb: '14px', mt: '85px' }}
@@ -38,7 +32,7 @@ const CardList = () => {
 			>
 				NEW IN
 			</Typography>
-			<div className={classes.container}>
+			<Grid container spacing={2} sx={{ marginBottom: '40px' }} >
 				{
 					!!products?.length
 					&&
@@ -51,8 +45,8 @@ const CardList = () => {
 							price={item.variants.currentPrice} />
 					))
 				}
-			</div>
-		</div>
+			</Grid>
+		</Container>
 	)
 }
 
