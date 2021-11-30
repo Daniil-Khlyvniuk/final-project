@@ -69,9 +69,6 @@ const Catalog = () => {
 				next={handleScroll}
 				hasMore={hasMore}
 				loader={products.length ? <Loader /> : null}
-				// endMessage={
-				// 	<StyledTypography>{'that\'s all, folks!'}</StyledTypography>
-				// }
 			>
 				{
 					!!products
