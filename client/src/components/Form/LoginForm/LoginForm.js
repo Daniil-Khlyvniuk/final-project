@@ -1,18 +1,18 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { useFormStyle } from '../../../utils/customHooks/useFormStyle'
 import { Field, Form, Formik } from 'formik'
-import {LOGIN_SCHEMA} from '../setting/Schemes'
+import { LOGIN_SCHEMA } from '../setting/Schemes'
 import CustomInput from '../setting/CustomInput'
 import { Box, Button, Checkbox } from '@mui/material'
 import { Link } from 'react-router-dom'
-import {loginUser} from '../../../utils/API/userAPI'
-import {useDispatch} from 'react-redux'
+import { loginUser } from '../../../utils/API/userAPI'
+import { useDispatch } from 'react-redux'
 import modalActions from '../../../store/Modal'
-import { userOperations} from '../../../store/User'
+import { userOperations } from '../../../store/User'
 
 const LoginForm = () => {
 	const classes = useFormStyle()
-	const [serverResult,setServerResult] = useState(null)
+	const [serverResult, setServerResult] = useState(null)
 	const dispatch = useDispatch()
 	return (
 		<Formik initialValues={{
@@ -22,29 +22,21 @@ const LoginForm = () => {
 		}}
 
 		validationSchema={LOGIN_SCHEMA}
-		onSubmit={ async values => {
-			// eslint-disable-next-line no-console
-			// console.log('values',values)
-			try{
+		onSubmit={async values => {
+			try {
 				const res = await loginUser(values)
 
-				// eslint-disable-next-line no-console
-				// console.log('res',res)
-
-				if(res.status === 200)
-				{
+				if (res.status === 200) {
 					//save token to store (and localStorage)
 					dispatch(userOperations.setToken(res.data.token))
 
-					setServerResult({success: 'You successfully Logged In'})
-					setTimeout(() => {
-						setServerResult(null)
-						dispatch(modalActions.modalToggle(false))
-					}, 5000)
+					setServerResult({ success: 'You successfully Logged In' })
+					setServerResult(null)
+					dispatch(modalActions.modalToggle(false))
 				}
 			}
-			catch(err) {
-				setServerResult({error:  Object.values(err.response.data)[0]})
+			catch (err) {
+				setServerResult({ error: Object.values(err.response.data)[0] })
 			}
 		}}
 		>
@@ -52,7 +44,6 @@ const LoginForm = () => {
 				return (
 					<Form noValidate
 						onSubmit={formikProps.handleSubmit}
-						// className={`${classes.form} ${classes.formAuth}`}
 					>
 						<Field
 							data-testid="loginOrEmail"
@@ -98,32 +89,32 @@ const LoginForm = () => {
 							</div>
 						)}
 
-						{serverResult && serverResult.success &&  (
+						{serverResult && serverResult.success && (
 							<div className={classes.formStatusBlock}>
 								<p className={classes.success}>{serverResult.success}</p>
 							</div>
 						)}
 
 						<Box sx={{ display: 'flex', justifyContent: 'center' }}>
-							<Button 
+							<Button
 								type='submit'
 								variant="contained"
 								sx={{
-									padding: '15px 95px',
+									padding: '10px 90px',
 									fontSize: '18px',
 									fontFamily: 'Abel',
 									fontWeight: '400',
 								}}
 								disabled={
 									!formikProps.isValid ||
-                formikProps.isSubmitting
+									formikProps.isSubmitting
 								}
 							>
-							log in
+								log in
 							</Button>
 						</Box>
 
-						<p className= {classes.alreadyIn}>
+						<p className={classes.alreadyIn}>
 							<Link to="/#">FORGOT PASSWORD?</Link>
 						</p>
 					</Form>

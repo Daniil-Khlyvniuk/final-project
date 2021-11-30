@@ -3,10 +3,11 @@ import { createTheme } from '@mui/material/styles'
 
 const theme = createTheme({
 	breakpoints: {
-		keys: ['xs', 'sm', 'md', 'lg', 'xl'],
+		keys: ['xs', 'sm', 'md', 'l', 'lg', 'xl'],
 		values: {
 			xl: 1440,
 			lg: 1180,
+			l: 850,
 			md: 768,
 			sm: 480,
 			xs: 320,
@@ -15,6 +16,7 @@ const theme = createTheme({
 	palette: {
 		primary: { main: '#373F41' },
 		secondary: { main: '#5C5E60' },
+		white: { main: '#FFFFFF' },
 		error: { main: '#8C8C8C' },
 		success: { main: '#388e3c' },
 		neutral: {
@@ -52,7 +54,10 @@ const theme = createTheme({
 			fontFamily: 'Mulish, sans-serif',
 			fontWeight: 400,
 			fontSize: '16px',
-			lineHeight: 'normal'
+			lineHeight: 'normal',
+			['@media (max-width:390px)']: {
+				paddingTop: '15px',
+			}
 		},
 		footerTextLight: {
 			textTransform: 'capitalize',
@@ -77,12 +82,12 @@ const theme = createTheme({
 					props: { variant: 'contained' },
 					style: {
 						backgroundColor: 'primary',
-						'@media (max-width:860px)': {
-							padding:'12px'
-						},
-						'@media (max-width:480px)': {
-							padding:'10px'
-						}
+						// '@media (max-width:860px)': {
+						// 	padding:'12px'
+						// },
+						// '@media (max-width:480px)': {
+						// 	padding:'10px'
+						// }
 					}
 				},
 				{
@@ -91,12 +96,12 @@ const theme = createTheme({
 						backgroundColor: 'primary',
 						borderTopLeftRadius: 0,
 						borderBottomLeftRadius: 0,
-						'@media (max-width:860px)': {
-							padding:'12px'
-						},
-						'@media (max-width:480px)': {
-							padding:'10px'
-						}
+						// '@media (max-width:860px)': {
+						// 	padding:'12px'
+						// },
+						// '@media (max-width:480px)': {
+						// 	padding:'10px'
+						// }
 					}
 				}
 			]
@@ -123,7 +128,7 @@ const theme = createTheme({
 						minWidth: 'calc(100% / 2)',
 						border: '1px solid #373F41',
 						borderBottom: 'none',
-						// padding: '5px 77px',
+
 					}
 				},
 				{
@@ -131,7 +136,6 @@ const theme = createTheme({
 					style: {
 						borderBottom: '1px solid #373F41',
 						minWidth: 'calc(100% / 2)',
-						// padding: '5px 77px',
 					}
 				},
 			]
@@ -139,7 +143,7 @@ const theme = createTheme({
 		MuiTabs:{
 			variants: [
 				{
-					props: { variant: 'form-tab' },
+					props: { variant: 'standard' },
 					style: {
 						'& span.MuiTabs-indicator': {
 							display: 'none',

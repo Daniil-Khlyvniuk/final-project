@@ -1,40 +1,62 @@
-import {makeStyles} from '@mui/styles'
+import { makeStyles } from '@mui/styles'
 
 export const useStyles = makeStyles({
-	image: {
-		width: '555px',
-		height: '545px'
-	},
 	card: {
-		position: 'relative'
+		position: 'relative',
+		'&:hover': {
+			opacity: 0.9
+		}
+	},
+	image: {
+		maxWidth: '400px',
+		width: '100%',
+		height: 'auto',
+		['@media(min-width: 600px)']: {
+			width: '555px',
+			height: '545px',
+			maxWidth: 'initial'
+		}
 	},
 	textContainer: {
 		position: 'absolute',
-		top: '400px',
-		left: '50px',
+		bottom: '10%',
+		left: '10%',
 		display: 'flex',
 		flexDirection: 'column',
-		gap: '5px'
+		gap: '5px',
+		['@media(min-width: 600px)']: {
+			top: '400px',
+			left: '50px',
+			bottom: '0'
+		}
 	},
 	title: {
 		background: '#373F41',
 		borderRadius: '2px',
-		fontSize: '24px',
 		lineHeight: '38px',
 		textAlign: 'center',
 		color: '#FFFFFF',
-		padding: '12px 15px',
-		margin: 0
+		margin: 0,
+		width: 'fit-content',
+		['@media(min-width: 600px)']: {
+			padding: '12px 15px',
+		}
 	},
 	price: {
-		fontSize: '32px',
+		fontFamily: 'Roboto',
+		fontWeight: 'bold',
+		fontSize: '22px',
 		lineHeight: '25px',
 		color: '#FFFFFF',
 		padding: '6px 15px',
 		margin: 0,
 		background: '#373F41',
-		maxWidth: '107px',
-		textAlign: 'center'
+		width: 'fit-content',
+		textAlign: 'center',
+		textShadow: '0px 4px 1px rgba(0, 0, 0, 0.25)',
+		['@media(min-width: 600px)']: {
+			fontSize: '32px',
+		}
 	}
 })
 

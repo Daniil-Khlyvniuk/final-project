@@ -1,9 +1,13 @@
 import axios from 'axios'
 
-const getAllProducts = (options) => axios.get(`/api/products${options ? `?${options}` : ''}`).then(res => res.data).catch(() => null)
+const getAllProducts = (params='') => axios.get(`/api/products?${params}`).then(res => res.data)
 
 const getOneProduct = (productId) => axios.get(`/api/products/${productId}`)
 
+const getMinMaxPrice = () => axios.get('/api/products/minMaxPrice')
+
+// eslint-disable-next-line max-len
+const getSizesNew = (colorId , productId) => axios.get(`/api/products/variant/color/${colorId}/${productId}`)
 
 // eslint-disable-next-line max-len
 const getColors = (productId) => axios.get(`/api/products/info/color/${productId}`)
@@ -28,7 +32,7 @@ const updateProduct = (productId, updatedProduct) => axios.put(`/api/products/${
 // 																									}
 
 const searchForProducts = (searchPhrases) => axios.post('/api/products/search', searchPhrases)
-// SearchPhrases has to be an object with a "query" key and searchwords separated by spaces: 
+// SearchPhrases has to be an object with a "query" key and search words separated by spaces:
 // 																								{
 //                                      						query: 'linen square beige'
 //                                      					}
@@ -39,13 +43,19 @@ const searchAutocomplete = (searchPhrases) => axios.post('/api/products/autocomp
 //                                      						query: 'linen square beige'
 //
 
-// eslint-disable-next-line max-len
-const getFilteredProducts = (filterParams) => axios.get(`/api/products/filter${filterParams}`)
+const getFilteredProducts = (filterParams) => 
+	axios.get(`/api/products/filter?${filterParams}`)
+	
 // please see documentaion for available and custom params
+const getAllVariantsByProductId = (productId) => (
+	axios.get(`/api/products/variant/${productId}`)
+)
+
 
 export default {
 	getAllProducts,
 	getOneProduct,
+	getMinMaxPrice,
 	getProductVariant,
 	addNewProduct,
 	updateProduct,
@@ -55,6 +65,6 @@ export default {
 	getSizes,
 	getNewVariant,
 	searchAutocomplete,
-
-
+	getAllVariantsByProductId,
+	getSizesNew
 }

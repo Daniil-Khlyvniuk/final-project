@@ -1,7 +1,10 @@
 const Cart = require('../models/Cart');
 const Product = require('../models/Product');
+const ProductVariant = require('../models/ProductVariant');
 const queryCreator = require('../commonHelpers/queryCreator');
 const _ = require('lodash');
+const stripe = require("stripe")('sk_test_dD0F5WI8ErNHnxffuzZYKVn5');
+const notFoundError = require("../commonHelpers/notFoundError");
 
 
 exports.createCart = (req, res, next) => {
@@ -41,11 +44,10 @@ exports.updateCart = (req, res, next) => {
         initialQuery.customerId = req.user.id;
 
         const newCart = new Cart(queryCreator(initialQuery));
-
         newCart
           .populate('products.product')
           .populate('customerId')
-          .execPopulate();
+          .execPopulate()
 
         newCart
           .save()
@@ -76,7 +78,7 @@ exports.updateCart = (req, res, next) => {
     })
     .catch((err) =>
       res.status(400).json({
-        message: `Error happened on server: "${err}" `,
+        message: `Error happened on server: "${err}"`,
       })
     );
 };
@@ -85,7 +87,7 @@ exports.addProductToCart = async (req, res, next) => {
   let productToAdd;
 
   try {
-    productToAdd = await Product.findOne({ _id: req.params.productId });
+    productToAdd = await ProductVariant.findOne({ _id: req.params.productId });
   } catch (err) {
     res.status(400).json({
       message: `Error happened on server: "${err}" `,
@@ -256,7 +258,7 @@ exports.deleteProductFromCart = async (req, res, next) => {
             (item) => item.product.toString() === req.params.productId
           )
         ) {
-          res.status(400).json({
+	        res.status(400).json({
             message: `Product with _id "${req.params.productId}" is absent in cart.`,
           });
 
@@ -265,12 +267,14 @@ exports.deleteProductFromCart = async (req, res, next) => {
 
         const cartData = {};
         cartData.products = cart.products.filter(
-          (item) => item.product.toString() !== req.params.productId
+          (item) => {
+	          return item.product.toString() !== req.params.productId
+          }
         );
 
         const updatedCart = queryCreator(cartData);
 
-        if (cartData.products.length === 0) {
+	      if (cartData.products.length === 0) {
           return Cart.deleteOne({ customerId: req.user.id })
             .then((deletedCount) =>
               res.status(200).json({
@@ -316,4 +320,36 @@ exports.getCart = (req, res, next) => {
         message: `Error happened on server: "${err}" `,
       })
     );
+};
+
+exports.payment = async (req, res, next) => {
+	const calculateOrderAmount = (products) => {
+		return products.reduce((acc, curr) =>
+		curr.product.currentPrice * curr.cartQuantity
+		, 0);
+	};
+
+	try {
+		const { products } = await Cart.findOne({ customerId: req.user.id })
+		.populate("products.product")
+
+		notFoundError(products, "cart")
+
+		const paymentIntent = await stripe.paymentIntents.create({
+			amount: calculateOrderAmount(products),
+			currency: "eur",
+			automatic_payment_methods: {
+				enabled: true,
+			},
+		});
+
+		res.send({
+			clientSecret: paymentIntent.client_secret,
+		});
+
+	} catch (err) {
+		res.status(400).json({
+			message: `Error happened on server: "${err}" `,
+		})
+	}
 };
