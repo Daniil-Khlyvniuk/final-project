@@ -42,7 +42,7 @@ const SelectInput = ({ name, options, ...rest }) => {
 
 SelectInput.propTypes = {
 	name : PropTypes.string,
-	options : PropTypes.array,
+	options : PropTypes.object,
 }
 
 export default SelectInput
