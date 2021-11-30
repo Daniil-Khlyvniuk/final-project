@@ -11,19 +11,18 @@ const Carousel = ({
 	slides,
 	main,
 	product,
-	related  }) => {
+	related
+}) => {
 	const style = useStyleCarousel()
 	const [nav1, setNav1] = useState()
 	const [nav2, setNav2] = useState()
 	const slider = useRef()
 	const thumbs = useRef()
 
-
 	useEffect(() => {
 		setNav1(slider.current)
 		setNav2(thumbs.current)
 	}, [])
-
 
 	const SampleNextArrow = (props) => {
 		const { className, onClick } = props
@@ -42,7 +41,7 @@ const Carousel = ({
 		)
 	}
 
-	const  SamplePrevArrow = (props) => {
+	const SamplePrevArrow = (props) => {
 		const { className, onClick } = props
 		return (
 			<div className={style.prevEl}>
@@ -51,7 +50,8 @@ const Carousel = ({
 					style={{
 						borderTop: '2px solid #5C5E60',
 						borderRight: '2px solid #5C5E60',
-						transform: 'rotate(-135deg)' }}
+						transform: 'rotate(-135deg)'
+					}}
 					onClick={onClick}
 				/>
 			</div>
@@ -125,7 +125,6 @@ const Carousel = ({
 		focusOnSelect: true,
 	}
 
-
 	return (
 		<>
 			{main &&
@@ -149,63 +148,67 @@ const Carousel = ({
 			}
 
 			{product &&
-					<div className={style.productsWrapper}>
-						<Slider
-							className={style.products}
-							{...settingsProducts}
-							asNavFor={nav2}
-							ref={slider}
-						>
-							{slides?.map((slide, index) => {
-								return (
-									<div key={index} className={style.slideContainer}>
-										<img src={`/${slide}`} className={style.productSlide}  alt=""/>
-									</div>
-								)
-							})}
-						</Slider>
-						<Slider
-							{...settingThumbs}
-							slidesToShow={slides.length <= 3 ? slides.length : 3}
-							asNavFor={nav1}
-							ref={thumbs}
-							className={style.thumbWrapper}
-						>
-							{slides?.map((slide, index) => {
+			<div className={style.productsWrapper}>
+				<Slider
+					className={style.products}
+					{...settingsProducts}
+					asNavFor={nav2}
+					ref={slider}
+				>
+					{slides?.map((slide, index) => {
+						return (
+							<div key={index} className={style.slideContainer}>
+								<img src={`/${slide}`} className={style.productSlide} alt=""/>
+							</div>
+						)
+					})}
+				</Slider>
+				<Slider
+					{...settingThumbs}
+					slidesToShow={slides.length <= 3 ? slides.length : 3}
+					asNavFor={nav1}
+					ref={thumbs}
+					className={style.thumbWrapper}
+				>
+					{slides?.map((slide, index) => {
 
-								return (
-									<div key={index}>
-										<img src={`/${slide}`} className={style.thumb} alt=""/>
-									</div>
-								)
-							})}
-						</Slider>
-					</div>
+						return (
+							<div key={index}>
+								<img src={`/${slide}`} className={style.thumb} alt=""/>
+							</div>
+						)
+					})}
+				</Slider>
+			</div>
 
 			}
 
 			{related &&
-				<>
-					<h3 className={style.relatedTitle}>RELATED ITEMS</h3>
-					<Slider
-						{...settingRelated}
-						className={`${style.related}` }
-						slidesToShow={slides.length <= 3 ? slides.length : 3}
-					>
-						{slides?.map((slide) => {
-							return (
-								<div key={slide.customId} >
-									<img src={slide.imageUrl} className={style.thumb } style={{maxWidth:'380px',
-										maxHeight: '380px'}} alt=""/>
+			<>
+				<h3 className={style.relatedTitle}>RELATED ITEMS</h3>
+				<Slider
+					{...settingRelated}
+					className={`${style.related}`}
+					slidesToShow={slides.length <= 3 ? slides.length : 3}
+				>
+					{slides?.map((slide) => {
+						return (
+							<div key={slide.customId}>
+								<div style={{ position: 'relative' }}>
+									<img src={slide.imageUrl} className={style.thumb} style={{
+										maxWidth: '380px',
+										maxHeight: '380px'
+									}} alt=""/>
 									<div className={style.relatedTextBox}>
 										<p className={style.relatedText}>{slide.name}</p>
-										<p className={style.relatedPrice}>{slide.price}</p>
+										<p className={style.relatedPrice}>${slide.price}</p>
 									</div>
 								</div>
-							)
-						})}
-					</Slider>
-				</>
+							</div>
+						)
+					})}
+				</Slider>
+			</>
 			}
 		</>
 	)
