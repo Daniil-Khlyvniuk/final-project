@@ -5,13 +5,13 @@ import Typography from '@mui/material/Typography'
 
 const Error500 = () => {
 	return (
-		<Grid container direction={ 'column' } alignItems="center">
+		<Grid mt={'80px'} container direction={ 'column' } alignItems="center">
 			<Grid item>
 				<ErrorOutlineIcon sx={ { fontSize: 80 } } color="disabled"/>
 			</Grid>
 			<Grid item>
 				<Typography variant={ 'h1' }>
-					Server Error
+					Error :(
 				</Typography>
 			</Grid>
 			<Grid item>
