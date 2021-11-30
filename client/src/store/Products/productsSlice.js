@@ -88,7 +88,7 @@ const productsSlice = createSlice({
 			state.error = null
 		},
 		[fetchProductsByNextPage.pending]: (state) => {
-			state.isLoading = true
+			// state.isLoading = true
 			state.error = null
 		},
 		[fetchProductsByNextPage.rejected]: (state) => {
