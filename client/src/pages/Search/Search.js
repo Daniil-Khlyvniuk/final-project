@@ -7,6 +7,8 @@ import BackdropLoader from '../../components/UI/BackdropLoader/BackdropLoader'
 import { Redirect, useLocation } from 'react-router-dom'
 import Card from '../../components/ProductCard/ProductCard'
 import { makeStyles } from '@mui/styles'
+import queryString from 'query-string'
+// import { makeQueryStringFromObject } from '../../utils/helpers/stringHelper'
 
 const useStyles = makeStyles((theme) => ({
 	container: {
@@ -26,6 +28,12 @@ const Search = () => {
 	const classes = useStyles()
 	let location = useLocation()
 
+	const { search_term } = queryString.parse(location.search)
+	// eslint-disable-next-line no-console
+	console.log(search_term)
+
+
+
 	return (
 		<Container maxWidth="lg" sx={{ minWidth: 320 }}>
 			{isLoading && <BackdropLoader open={isLoading} />}
@@ -37,7 +45,7 @@ const Search = () => {
 						sx={{ mb: '14px', mt: '85px' }}
 						variant='h2'
 					>
-						{`Search results for "${location.search.substr(location.search.lastIndexOf('=')+1)}"`}
+						{`Search results for "${location.search.substr(location.search.lastIndexOf('=') + 1)}"`}
 					</Typography>
 				</Box>
 			}
