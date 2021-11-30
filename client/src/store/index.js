@@ -34,6 +34,8 @@ const store = configureStore({
 					'user/fetchUser/fulfilled',
 					'filter/setFiltersFromQueryString',
 					'products/fetchProductsByFilter/fulfilled',
+					'favorites/setLoading',
+					'favorites/setFavorites'
 				],
 			},
 		}),
