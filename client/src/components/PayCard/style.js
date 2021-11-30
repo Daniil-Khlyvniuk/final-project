@@ -55,3 +55,26 @@ export const CashTextSub = {
 	fontSize: '14px',
 	color: '#A1ADB0',
 }
+
+
+export const PhotoSumm = {
+	width: '100px',
+	height: '100px',
+	marginRight: '30px',
+	borderRadius: '2px',
+}
+
+export const SummBox = {
+	display: 'flex',
+
+}
+
+export const SummText = {
+	flexDirection: 'column',
+}
+
+export const SummTotal = {
+	display: 'flex',
+	alignItems: 'center',
+	justifyContent: 'space-between',
+}

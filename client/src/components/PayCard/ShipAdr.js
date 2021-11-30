@@ -12,13 +12,13 @@ import * as Yup from 'yup'
 import { phoneRegExp } from '../UserProfile/UserForm/data/Regex'
 
 const FORM_VALIDATION = Yup.object().shape({
-	firstName: Yup.string().required('*'),
-	lastName: Yup.string().required('*'),
+	firstName: Yup.string().required('required'),
+	lastName: Yup.string().required('required'),
 	phone: Yup.string()
-		.matches(phoneRegExp, 'Please enter a valid phone number').required('*')
+		.matches(phoneRegExp, 'Please enter a valid phone number').required('required')
 	,
-	address: Yup.string().required('*'),
-	city: Yup.string().required('*'),
+	address: Yup.string().required('required'),
+	city: Yup.string().required('required'),
 })
 
 const ShipAdr = () => {
@@ -87,18 +87,18 @@ const ShipAdr = () => {
 						<Grid item xs={12} md={6}>
 							<TextInput
 								name="firstName"
-								label="First Name"
+								label="First Name *"
 
 							/>
 						</Grid>
 						<Grid item xs={12} md={6}>
 							<TextInput
 								name="lastName"
-								label="Last Name"
+								label="Last Name *"
 							/>
 						</Grid>
 						<Grid item xs={12} >
-							<TextInput name="address" label="Address" />
+							<TextInput name="address" label="Address *" />
 						</Grid>
 						<Grid item xs={12} >
 							<TextInput name="address2" label="Address 2" />
@@ -106,22 +106,22 @@ const ShipAdr = () => {
 						<Grid item xs={12} md={6}>
 							<SelectInput
 								name="country"
-								label="Country"
+								label="Country *"
 								options={countries}
 							/>
 						</Grid>
 						<Grid item xs={12} md={6}>
-							<TextInput name="city" label="City" />
+							<TextInput name="city" label="City *" />
 						</Grid>
 						<Grid item xs={12} md={6}>
 							<TextInput
 								name="Zip/Postal Code"
-								label="Zip/Postal Code"
+								label="Zip/Postal Code *"
 
 							/>
 						</Grid>
 						<Grid item xs={12} md={6}>
-							<TextInput name="phone" label="Phone number" />
+							<TextInput name="phone" label="Phone number *" />
 						</Grid>
 					</Grid>
 				</Form>
