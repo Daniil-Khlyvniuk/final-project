@@ -20,7 +20,7 @@ const Favorites = () => {
 	}, [productID.length])
 
 	return (
-		<Container maxWidth="lg">
+		<Container maxWidth="lg" sx={{ minWidth: 320 }}>
 			{isLoading && <BackdropLoader open={isLoading} />}
 			{!productID.length
 				? <Box style={{ textAlign: 'center', margin: '7rem 0' }}>
@@ -59,7 +59,7 @@ const Favorites = () => {
 					</Typography>
 				</Box>
 			}
-			<Grid container spacing={2} sx={{marginBottom: '40px'}} >
+			<Grid container spacing={2} sx={{ marginBottom: '40px' }} >
 				{favorites?.map(item => (
 					<Grid item md={6} sm={6} xs={12} key={item.variants._id}>
 						<FavoriteCard
