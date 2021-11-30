@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import UserForm from '../UserForm/UserForm'
 import Orders from '../Orders/Orders'
+import Favorites from '../../../pages/Favorites/Favorites'
 
 const TabPanel = (props) => {
 	const { children, value, index, ...other } = props
@@ -73,7 +74,7 @@ export default function BasicTabs() {
 				<Orders/>
 			</TabPanel>
 			<TabPanel value={value} index={2}>
-				Favorites
+				<Favorites/>
 			</TabPanel>
 		</Box>
 	)
