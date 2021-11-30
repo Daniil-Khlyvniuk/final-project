@@ -67,9 +67,8 @@ const Catalog = () => {
 				}}
 				dataLength={products.length}
 				next={handleScroll}
-				// scrollThreshold={'10'}
 				hasMore={hasMore}
-				loader={<Loader />}
+				loader={products.length ? <Loader /> : null}
 				// endMessage={
 				// 	<StyledTypography>{'that\'s all, folks!'}</StyledTypography>
 				// }
