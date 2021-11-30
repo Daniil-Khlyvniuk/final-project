@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import {useSelector} from 'react-redux'
 import {Box, Typography} from '@mui/material'
 import CardInCatalog from '../CardInCatalog/CardInCatalog'
@@ -7,6 +6,7 @@ import { makeStyles, styled } from '@mui/styles'
 import {productsSelectors} from '../../store/Products'
 import useFilterHandler from '../../utils/customHooks/useFilterHandler'
 import BackdropLoader from '../UI/BackdropLoader/BackdropLoader'
+import Loader from '../UI/Loader/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { filterSelectors } from '../../store/Filter'
 
@@ -33,7 +33,6 @@ const useStyles = makeStyles({
 const Catalog = () => {
 	const products = useSelector(productsSelectors.getCatalog())
 	const {handleInfinitiScroll} = useFilterHandler()
-	const [nextPage, setNextPage] = useState(1)
 	const isLoading = useSelector(productsSelectors.getIsLoading())
 	const hasMore = useSelector(filterSelectors.getInfinityScrollHasMore())
 	const classes = useStyles()
@@ -42,20 +41,11 @@ const Catalog = () => {
 
 	const handleScroll = () => {
 		// eslint-disable-next-line no-console
-		console.log('startPage: ', startPage)
+		// console.log('startPage: ', startPage)
 		handleInfinitiScroll('startPage', +startPage + 1)
 	}
 
-	// useEffect(() => {
-	// 	handleFilterChange('startPage', nextPage)
-	// // eslint-disable-next-line react-hooks/exhaustive-deps
-	// }, [nextPage])
 
-	// eslint-disable-next-line no-console
-	// console.log('products: ', products)
-
-	// eslint-disable-next-line no-console
-	// console.log('next page: ', nextPage)
 	//preloader
 	if(isLoading)
 	{
@@ -73,20 +63,12 @@ const Catalog = () => {
 					justifyContent: 'flex-start',
 					alignItems: 'center',
 					flexWrap: 'wrap',
+					overflow: 'visible',
 				}}
 				dataLength={products.length}
-				next={
-					// () => {
-					// 	setNextPage(nextPage < 10 ? nextPage + 1 : nextPage)
-					// }
-					handleScroll
-				}
-				// scrollThreshold={'10'}
+				next={handleScroll}
 				hasMore={hasMore}
-				// loader={null}
-				endMessage={
-					<StyledTypography>{'that\'s all, folks!'}</StyledTypography>
-				}
+				loader={products.length ? <Loader /> : null}
 			>
 				{
 					!!products

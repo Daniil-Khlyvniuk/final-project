@@ -16,8 +16,6 @@ import axios from 'axios'
 
 
 
-
-
 const FORM_VALIDATION = Yup.object().shape({
 	firstName: Yup.string(),
 	lastName: Yup.string(),
@@ -178,6 +176,7 @@ const UserForm = () => {
 												name='oldPass'
 												label='Old Password'
 												type='password'
+
 											/>
 										</Grid>
 										<Grid item md={6} xs={12}>
@@ -185,6 +184,7 @@ const UserForm = () => {
 												name="password"
 												label="Password"
 												type='password'
+
 											/>
 										</Grid>
 										<Grid item md={6}  xs={12}>

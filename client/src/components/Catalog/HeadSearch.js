@@ -1,10 +1,8 @@
-/* eslint-disable no-unused-vars */
-
 import React, { useEffect, useState } from 'react'
 import { Box, } from '@mui/material'
 import filterApi from '../../utils/API/filterApi'
-import { filterSelectors ,filterOperations } from '../../store/Filter'
-import { useDispatch, useSelector } from 'react-redux'
+import { filterSelectors } from '../../store/Filter'
+import { useSelector } from 'react-redux'
 import {BoxSearch} from './style' //MenuSearch
 
 import useFilterHandler from '../../utils/customHooks/useFilterHandler'
@@ -16,8 +14,6 @@ const HeadSearch = () => {
 	const [perPageArray, setPerPageArray] = useState([])
 	const [sortByArray, setSortByArray] = useState([])
 	const {perPage, sort} = useSelector(filterSelectors.getFilters())
-
-	const dispatch = useDispatch()
 
 	const handlePerPage = (item) => {
 		handleFilterChange('perPage', item)
