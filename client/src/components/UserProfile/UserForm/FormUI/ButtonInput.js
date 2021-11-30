@@ -1,8 +1,9 @@
 import React from 'react'
 import { Button } from '@mui/material'
 import { useFormikContext } from 'formik'
+import PropTypes from 'prop-types'
 
-// eslint-disable-next-line react/prop-types,no-unused-vars
+
 const ButtonInput = ({ children, ...rest }) => {
 	const { submitForm } = useFormikContext()
 
@@ -20,6 +21,10 @@ const ButtonInput = ({ children, ...rest }) => {
 	}
 
 	return <Button {...configButton}>{children}</Button>
+}
+
+ButtonInput.propTypes = {
+	children : PropTypes.string
 }
 
 export default ButtonInput
