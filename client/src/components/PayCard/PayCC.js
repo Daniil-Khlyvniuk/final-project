@@ -61,9 +61,8 @@ const PayCc = () => {
 							/>
 						</div>
 					</div>
-
-					{selectedValue === 'a' ? <Payment/> : null}
-					{selectedValue === 'b' ? <Btn /> : null}
+					{selectedValue === 'a' && <Payment/>}
+					{selectedValue === 'b' && <Btn />}
 				</section>
 				<div style={border} />
 			</Grid>
