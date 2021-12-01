@@ -67,8 +67,6 @@ export const PhotoSumm = {
 
 export const SummBox = {
 	display: 'flex',
-
-
 }
 
 export const SummText = {
