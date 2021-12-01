@@ -7,7 +7,7 @@ export const button = {
 	border: 'none',
 	position: 'absolute',
 	left: '77%',
-	top: '95%',
+	top: '102%',
 	cursor: 'pointer',
 }
 

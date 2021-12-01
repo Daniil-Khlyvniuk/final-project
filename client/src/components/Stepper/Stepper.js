@@ -7,6 +7,9 @@ import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import { useStyles } from './styles'
 import Step1 from './Step1'
+import Checkout from '../../pages/Cart/checkout'
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
+
 
 const steps = ['Shopping Bag', 'Shipping Details', 'Payment Options']
 
@@ -53,7 +56,7 @@ const HorizontalLinearStepper = () => {
 					)
 				})}
 			</Stepper>
-			{activeStep === steps.length ? (
+			{activeStep === steps.length && (
 				<React.Fragment>
 					<Typography sx={{ mt: 2, mb: 1 }}>
             All steps completed - you&apos;re finished
@@ -63,9 +66,14 @@ const HorizontalLinearStepper = () => {
 						<Button onClick={handleReset}>Reset</Button>
 					</Box>
 				</React.Fragment>
-			) : (
+			)}
+			{activeStep === 0 && (
 				<React.Fragment>
-					<Typography sx={{ mt: 2, mb: 1 }}>{activeStep === 0 ? <Step1/> : 'step2'}</Typography>
+					<Typography
+						sx={{ mt: 2, mb: 1 }}
+					>
+						{activeStep === 0 && <Step1/>}
+					</Typography>
 					<Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
 						<Button
 							style={{marginLeft: '4rem'}}
@@ -81,6 +89,33 @@ const HorizontalLinearStepper = () => {
 						<Button variant={'contained'} onClick={handleNext} style={{width: '200px', marginRight: '4rem'}}>
 							{activeStep === 0 ? 'Buy' : 'Next'}
 						</Button>
+					</Box>
+				</React.Fragment>
+			)}
+			{/*{activeStep === 1 ? <Checkout /> : null}*/}
+			{activeStep === 1 && (
+				<React.Fragment>
+					<Typography
+						sx={{ mt: 2, mb: 1 }}
+					>
+						{activeStep === 1 && <Checkout />}
+					</Typography>
+					<Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+						<Button
+							variant="text"
+							sx={{
+								marginLeft: '5rem',
+								fontSize: '18px',
+								color: '#373F41',
+							}}
+							disabled={activeStep === 0}
+							onClick={handleBack}
+						><ArrowBackIosNewIcon
+								sx={{
+									height: '17px',
+								}}
+							/> BACK</Button>
+						<Box sx={{ flex: '1 1 auto' }} />
 					</Box>
 				</React.Fragment>
 			)}

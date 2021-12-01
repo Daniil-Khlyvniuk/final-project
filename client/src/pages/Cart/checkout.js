@@ -6,6 +6,7 @@ import PayCc from '../../components/PayCard/PayCC'
 import ShipAdr from '../../components/PayCard/ShipAdr'
 import Summary from '../../components/PayCard/Summary'
 
+// eslint-disable-next-line react/prop-types
 const Checkout = () => {
 	// eslint-disable-next-line no-unused-vars
 	const [userData, setUserData] = useState({})

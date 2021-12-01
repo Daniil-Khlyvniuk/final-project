@@ -9,8 +9,8 @@ import {PhotoSumm, SummBox, SummText, SummTotal, SummCarts} from './style'
 
 
 const Summary = () => {
-	const {shoppingBag, totalPrice} = useHandleShoppingBag()
-
+	const { shoppingBag, totalPrice } = useHandleShoppingBag()
+	console.log(shoppingBag)
 
 	return (
 		<Box sx={{
@@ -32,7 +32,7 @@ const Summary = () => {
 			// eslint-disable-next-line react/jsx-key
 				<Box style={SummCarts}>
 					<Box style={SummBox}>
-						<img src={item.image} style={PhotoSumm} alt={'image'}/>
+						<img src={item.imageUrls[0]} style={PhotoSumm} alt={'image'}/>
 						<Box style={SummText}>
 							<Typography
 								fontSize={24}
@@ -42,7 +42,7 @@ const Summary = () => {
 							<Typography
 								fontSize={18}
 								sx={{mb: '14px', mt: '0px'}}
-								variant={'p'}>${item.price}
+								variant={'p'}>${item.currentPrice}
 							</Typography>
 						</Box>
 					</Box>
