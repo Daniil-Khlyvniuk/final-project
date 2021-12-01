@@ -12,7 +12,7 @@ const Favorites = () => {
 	const isLoading = useSelector(favoritesSelectors.isLoading())
 	const dispatch = useDispatch()
 
-	let productID = JSON.parse(localStorage.getItem('favorites')) || []
+	const productID = JSON.parse(localStorage.getItem('favorites'))
 
 	useEffect(() => {
 		favoritesOperations.fetchFavorites(productID)(dispatch)
