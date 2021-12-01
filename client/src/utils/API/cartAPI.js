@@ -1,12 +1,36 @@
 import axios from 'axios'
 
-const addProductToCart = (productId) => axios.put(`/cart/${productId}`)
+const getAuthHeader = () => ({
+	header: localStorage.getItem('userToken')
+})
 
-const deleteProductFromCart = (productId) => axios.delete(`/cart/${productId}`)
+const addProductToCart = (productId) => {
+	return axios
+		.put(`/api/cart/${productId}`, {}, getAuthHeader())
+		.then(res => res?.data)
+		.catch(() => null)
+}
 
-const getCart = () => axios.get('/cart')
+const deleteProductFromCart = (productId) => {
+	return axios
+		.delete(`/api/cart/${productId}`, getAuthHeader())
+		.then(res => res?.data)
+		.catch(() => null)
+}
 
-const deleteCart = () => axios.delete('/cart')
+const getCart = () => {
+	return axios
+		.get('/api/cart', getAuthHeader())
+		.then(res => res?.data)
+		.catch(() => null)
+}
+
+const deleteCart = () => {
+	return axios
+		.delete('/api/cart', getAuthHeader())
+		.then(res => res?.data)
+		.catch(() => null)
+}
 
 export default {
 	addProductToCart,
