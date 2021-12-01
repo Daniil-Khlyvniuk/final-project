@@ -1,5 +1,9 @@
 import React,{Component} from 'react'
 import Error500 from '../../pages/Error500/Error500'
+import PropTypes from 'prop-types'
+
+
+
 class ErrorBoundary extends Component {
 	constructor(props) {
 		super(props)
@@ -21,6 +25,10 @@ class ErrorBoundary extends Component {
 		// eslint-disable-next-line react/prop-types
 		return this.props.children
 	}
+}
+
+ErrorBoundary.propTypes = {
+	children : PropTypes.any,
 }
 
 export default ErrorBoundary

@@ -20,7 +20,12 @@ const Cart = () => {
 					{shoppingBag
 						?.map((item, key) => <ShoppingBagCard key={key} {...item}/>)}
 				</div>
-				<Button variant={'contained'} style={{display: 'block', margin: '0 auto 1rem'}}>PROCEED TO CHECKOUT</Button>
+				<Button
+					variant={'contained'}
+					style={{display: 'block', margin: '0 auto 1rem'}}
+					component={Link}
+					to='/checkout'
+				>PROCEED TO CHECKOUT</Button>
 			</>}
 			{shoppingBag?.length === 0 && <div style={{textAlign: 'center', margin: '7rem 0'}}>
 				<Typography fontSize={32} sx={{mb: '14px', mt: '85px'}} variant={'h2'}>YOUR BAG IS FEELING LONELY - ADD
