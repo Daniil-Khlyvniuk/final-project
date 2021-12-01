@@ -2,43 +2,40 @@ import React, { useState } from 'react'
 import { useFormStyle } from '../../../utils/customHooks/useFormStyle'
 import { Field, Form, Formik } from 'formik'
 import { LOGIN_SCHEMA } from '../setting/Schemes'
-import CustomInput from '../setting/CustomInput'
-import { Box, Button, Checkbox } from '@mui/material'
+import { Box, Typography, Button, Switch } from '@mui/material'
 import { Link } from 'react-router-dom'
-import { loginUser } from '../../../utils/API/userAPI'
-import { useDispatch } from 'react-redux'
-import modalActions from '../../../store/Modal'
-import { userOperations } from '../../../store/User'
+import CustomInput from '../setting/CustomInput'
+
+import useAuth from '../../../utils/customHooks/useAuth'
+
 
 const LoginForm = () => {
 	const classes = useFormStyle()
 	const [serverResult, setServerResult] = useState(null)
-	const dispatch = useDispatch()
+	const {login} = useAuth()
+
 	return (
-		<Formik initialValues={{
-			loginOrEmail: '',
-			password: '',
-			subscribe: false,
-		}}
+		<Formik 
+			initialValues = {{
+				loginOrEmail: '',
+				password: '',
+				rememberMe: false,
+			}}
+			validationSchema = {LOGIN_SCHEMA}
 
-		validationSchema={LOGIN_SCHEMA}
-		onSubmit={async values => {
-			try {
-				const res = await loginUser(values)
-
-				if (res.status === 200) {
-					//save token to store (and localStorage)
-					dispatch(userOperations.setToken(res.data.token))
-
-					setServerResult({ success: 'You successfully Logged In' })
-					setServerResult(null)
-					dispatch(modalActions.modalToggle(false))
+			onSubmit = {async values => {
+				try {
+					const res = await login(values)
+					if(res)
+					{
+						setServerResult({ success: 'You successfully Logged In' })
+					}
 				}
-			}
-			catch (err) {
-				setServerResult({ error: Object.values(err.response.data)[0] })
-			}
-		}}
+				catch (err) {
+				// setServerResult({ error: Object.values(err.response.data)[0] })
+					setServerResult({ error: 'wrong login or password' })
+				}
+			}}
 		>
 			{(formikProps) => {
 				return (
@@ -59,52 +56,45 @@ const LoginForm = () => {
 							type="password"
 							placeholder="Password"
 						/>
-						<div className={classes.ads}>
-							<Checkbox style={{
-								width: 20,
-								padding: 25,
-								height: 20,
-								color: '#6FB7AC',
-							}}
-							name="subscribe"
-							type="checkbox"
-							onBlur={formikProps.handleBlur}
-							onChange={formikProps.handleChange}
+						<Box 
+							sx={{
+								display: 'flex',
+								alignItems: 'center',
+								marginTop: '25px',
+								textTransform: 'capitalize',
+								padding: '5px',
+							}}>
+							<Typography>remember me</Typography>
+							<Field
+								component={Switch}
+								name="rememberMe"
+								id="rememberMe"
+								value={true}
+								onChange={formikProps.handleChange}
 							/>
-							<p>
-								Let`s get personal!
-								We`ll send you only the good stuff:
-								Exclusive early
-								access to Sale, new arrivals and promotions.
-								No nasties.
-							</p>
-						</div>
+						</Box>
+
 						<p className={classes.policy}>By signing up you agree to
 							<Link to="/termsOfService"> Terms of Service </Link>  and <Link to="/privacypolicy"> Privacy Policy </Link>
 						</p>
 
 						{serverResult && serverResult.error && (
-							<div className={classes.formStatusBlock}>
+							<Box className={classes.formStatusBlock}>
 								<p className={classes.error}>{serverResult.error}</p>
-							</div>
+							</Box>
 						)}
 
 						{serverResult && serverResult.success && (
-							<div className={classes.formStatusBlock}>
+							<Box className={classes.formStatusBlock}>
 								<p className={classes.success}>{serverResult.success}</p>
-							</div>
+							</Box>
 						)}
 
 						<Box sx={{ display: 'flex', justifyContent: 'center' }}>
 							<Button
 								type='submit'
 								variant="contained"
-								sx={{
-									padding: '10px 90px',
-									fontSize: '18px',
-									fontFamily: 'Abel',
-									fontWeight: '400',
-								}}
+								direction="form"
 								disabled={
 									!formikProps.isValid ||
 									formikProps.isSubmitting

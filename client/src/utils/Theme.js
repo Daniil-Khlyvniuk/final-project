@@ -103,7 +103,16 @@ const theme = createTheme({
 						// 	padding:'10px'
 						// }
 					}
-				}
+				},
+				{
+					props: { variant: 'contained', direction: 'form' },
+					style: {
+						padding: '10px 89px',
+						fontSize: '18px',
+						fontFamily: 'Abel',
+						fontWeight: '400',
+					}
+				},
 			]
 		},
 		MuiTextField: {
@@ -128,7 +137,6 @@ const theme = createTheme({
 						minWidth: 'calc(100% / 2)',
 						border: '1px solid #373F41',
 						borderBottom: 'none',
-
 					}
 				},
 				{

@@ -3,16 +3,15 @@ import { Formik, Form, Field } from 'formik'
 import { SING_UP_SCHEMA } from '../setting/Schemes'
 import CustomInput from '../setting/CustomInput'
 import { useFormStyle } from '../../../utils/customHooks/useFormStyle'
-import { Box, Checkbox, Button } from '@mui/material'
+import { Box, Typography, Checkbox, Button, Switch } from '@mui/material'
 import { Link } from 'react-router-dom'
-import { Facebook, Google } from '../setting/SocialIcons'
-import { registerUser } from '../../../utils/API/userAPI'
-import { useDispatch } from 'react-redux'
-import modalActions from '../../../store/Modal'
+import { Facebook, Google } from '../setting/SocialIcons'	
+
+import useAuth from '../../../utils/customHooks/useAuth'
 
 const SignInForm = () => {
 	const [serverResult, setServerResult] = useState(null)
-	const dispatch = useDispatch()
+	const {register} = useAuth()
 
 	const classes = useFormStyle()
 	return (
@@ -23,32 +22,31 @@ const SignInForm = () => {
 				paddingRight: '10px'
 			}}
 		>
-			<Formik initialValues={{
-				firstName: '',
-				lastName: '',
-				login: '',
-				email: '',
-				password: '',
-				confirmPass: '',
-				subscribe: false,
-			}}
-			onSubmit={async (values) => {
-				try {
-					delete (values.confirmPass)
-					const res = await registerUser(values)
-					if (res.status === 200) {
-						setServerResult({ success: 'You successfully registered. Now you need to login' })
-						setTimeout(() => {
-							setServerResult(null)
-							dispatch(modalActions.modalToggle(false))
-						}, 5000)
+			<Formik 
+				initialValues={{
+					firstName: '',
+					lastName: '',
+					login: '',
+					email: '',
+					password: '',
+					confirmPass: '',
+					subscribe: false,
+					rememberMe: false,
+				}}
+				validationSchema={SING_UP_SCHEMA}
+
+				onSubmit={async (values) => {
+					try {
+						const res = await register(values)
+						if(res)
+						{
+							setServerResult({ success: 'You successfully registered' })
+						}
 					}
-				}
-				catch (err) {
-					setServerResult({ error: Object.values(err.response.data)[0] })
-				}
-			}}
-			validationSchema={SING_UP_SCHEMA}
+					catch (err) {
+						setServerResult({ error: Object.values(err.response.data)[0] })
+					}
+				}}
 			>
 				{(formikProps) => {
 					return (
@@ -57,6 +55,7 @@ const SignInForm = () => {
 						>
 							<Field
 								component={CustomInput}
+								data-testid="firstName"
 								name="firstName"
 								type="text"
 								placeholder="First Name"
@@ -64,6 +63,7 @@ const SignInForm = () => {
 
 							<Field
 								component={CustomInput}
+								data-testid="lastName"
 								name="lastName"
 								type="text"
 								placeholder="Last Name"
@@ -71,6 +71,7 @@ const SignInForm = () => {
 
 							<Field
 								component={CustomInput}
+								data-testid="login"
 								name="login"
 								type="text"
 								placeholder="Login"
@@ -78,6 +79,7 @@ const SignInForm = () => {
 
 							<Field
 								component={CustomInput}
+								data-testid="email"
 								name="email"
 								type="email"
 								placeholder="Email"
@@ -85,6 +87,7 @@ const SignInForm = () => {
 
 							<Field
 								component={CustomInput}
+								data-testid="password"
 								name="password"
 								type="password"
 								placeholder="Password"
@@ -92,12 +95,31 @@ const SignInForm = () => {
 
 							<Field
 								component={CustomInput}
+								data-testid="confirmPass"
 								name="confirmPass"
 								type="password"
 								placeholder="Confirm Password"
 							/>
 
-							<div className={classes.ads}>
+							<Box 
+								sx={{
+									display: 'flex',
+									alignItems: 'center',
+									marginTop: '25px',
+									textTransform: 'capitalize',
+									padding: '5px',
+								}}>
+								<Typography>remember me</Typography>
+								<Field
+									component={Switch}
+									name="rememberMe"
+									id="rememberMe"
+									value={true}
+									onChange={formikProps.handleChange}
+								/>
+							</Box>
+
+							<Box className={classes.ads}>
 								<Checkbox
 									style={{
 										width: 20,
@@ -105,42 +127,38 @@ const SignInForm = () => {
 										height: 20,
 										color: '#6FB7AC',
 									}}
+									data-testid="subscribe"
 									name="subscribe"
 									type="checkbox"
-									onBlur={formikProps.handleBlur}
 									onChange={formikProps.handleChange}
 								/>
 								<p>Let`s get personal! We`ll send you only the good stuff:
 									Exclusive early access to Sale,
 									new arrivals and promotions. No nasties.
 								</p>
-							</div>
+							</Box>
+
 							<p className={classes.policy}>By signing up you agree to
 								<Link to="/termsOfService"> Terms of Service </Link> 
 								and <Link to="/privacypolicy"> Privacy Policy </Link>
 							</p>
 
 							{serverResult && serverResult.error && (
-								<div className={classes.formStatusBlock}>
+								<Box className={classes.formStatusBlock}>
 									<p className={classes.error}>{serverResult.error}</p>
-								</div>
+								</Box>
 							)}
 
 							{serverResult && serverResult.success && (
-								<div className={classes.formStatusBlock}>
+								<Box className={classes.formStatusBlock}>
 									<p className={classes.success}>{serverResult.success}</p>
-								</div>
+								</Box>
 							)}
 							<Box sx={{ display: 'flex', justifyContent: 'center' }}>
 								<Button
 									type='submit'
 									variant="contained"
-									sx={{
-										padding: '10px 89px',
-										fontSize: '18px',
-										fontFamily: 'Abel',
-										fontWeight: '400',
-									}}
+									direction="form"
 									disabled={
 										!formikProps.isValid ||
 										formikProps.isSubmitting
