@@ -11,14 +11,11 @@ import { Helmet } from 'react-helmet-async'
 import { favoritesOperations } from '../../store/Favorites'
 
 const ProductDetails = () => {
-
 	const { id } = useParams()
 	const dispatch = useDispatch()
-
 	const isLoading = useSelector(ProductSelector.isLoading())
 	const activeProduct = useSelector(ProductSelector.getProduct())
 	const parent = useSelector(ProductSelector.getParent())
-
 	const favorites = JSON.parse(localStorage.getItem('favorites'))
 
 	useEffect(() => {

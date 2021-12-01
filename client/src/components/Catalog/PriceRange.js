@@ -88,7 +88,7 @@ const PriceRange = () => {
 				}}
 			/>
 			<Box style={PriceRangeBlock}>
-        FROM
+				FROM
 				<FormControl fullWidth sx={{ m: 1 }}>
 					<OutlinedInput
 						style={PriceRng}
@@ -97,7 +97,7 @@ const PriceRange = () => {
 						startAdornment={<InputAdornment position="start"><p style={money}>$</p></InputAdornment>}
 					/>
 				</FormControl>
-        TO
+				TO
 				<FormControl fullWidth sx={{ m: 1 }}>
 					<OutlinedInput
 						style={PriceRng}
