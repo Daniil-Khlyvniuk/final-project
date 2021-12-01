@@ -3,7 +3,6 @@ import {Tab, Tabs} from '@mui/material'
 import {useSelector} from 'react-redux'
 import {ProductSelector} from '../../../store/Product'
 import {useHistory} from 'react-router'
-import Loader from '../../UI/Loader/Loader'
 
 
 const Sizes = () => {
