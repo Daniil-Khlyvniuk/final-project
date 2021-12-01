@@ -5,6 +5,7 @@ import {ProductSelector} from '../../../store/Product'
 import {useHistory} from 'react-router'
 import Loader from '../../UI/Loader/Loader'
 
+
 const Sizes = () => {
 
 	const history = useHistory()
@@ -32,7 +33,7 @@ const Sizes = () => {
 
 	return (
 		<>
-			{!activeProduct && <Loader/>}
+
 			{activeProduct &&
 		<Tabs
 			value={activeSize}

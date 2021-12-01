@@ -1,7 +1,8 @@
 import React from 'react'
 import { TextField } from '@mui/material'
 import { useField } from 'formik'
-// eslint-disable-next-line react/prop-types
+import PropTypes from 'prop-types'
+
 const DateInput = ({ name, ...rest }) => {
 	const [field, meta] = useField(name)
 
@@ -21,6 +22,10 @@ const DateInput = ({ name, ...rest }) => {
 	}
 
 	return <TextField {...configDateInput} />
+}
+
+DateInput.propTypes = {
+	name:PropTypes.string
 }
 
 export default DateInput

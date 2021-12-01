@@ -28,6 +28,8 @@ const CardList = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
+	console.log(products)
+
 	return (
 		<div>
 			<Typography

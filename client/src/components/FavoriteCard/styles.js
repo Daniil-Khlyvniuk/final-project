@@ -7,6 +7,13 @@ export const useStyles = makeStyles({
 			opacity: 0.9
 		}
 	},
+	imageWrapper: {
+		backgroundColor: '#fff9e900',
+		aspectRatio: 1,
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
 	image: {
 		width: '100%',
 	},
@@ -14,6 +21,7 @@ export const useStyles = makeStyles({
 		position: 'absolute',
 		bottom: '10%',
 		left: '10%',
+		right: '10%',
 		display: 'flex',
 		flexDirection: 'column',
 		gap: '5px',
@@ -39,11 +47,17 @@ export const useStyles = makeStyles({
 		width: 'fit-content',
 		textAlign: 'center',
 		textShadow: '0px 4px 1px rgba(0, 0, 0, 0.25)',
+		['@media (max-width:1180px)']: {
+			fontSize: '30px'
+		},
 		['@media (max-width:850px)']: {
 			fontSize: '25px'
 		},
 		['@media (max-width:768px)']: {
 			fontSize: '20px'
+		},
+		['@media (max-width:600px)']: {
+			fontSize: '18px'
 		},
 	}
 })

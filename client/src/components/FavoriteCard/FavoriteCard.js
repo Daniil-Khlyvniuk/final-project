@@ -16,13 +16,15 @@ const FavoriteCard = ({ _id, image, title, price }) => {
 				to={`/product-details/${_id}`}
 				style={{ textDecoration: 'none' }}
 			>
-				<img className={classes.image} src={image} alt='img' />
+				<Box className={classes.imageWrapper}>
+					<img className={classes.image} src={image} alt='img' />
+				</Box>
 				<Box className={classes.textContainer}>
 					<Typography
 						className={classes.title}
-						sx={{ fontSize: { lg: '24px', l: '24px', md: '20px', sm: '16px', xs: '16px' } }}
+						sx={{ fontSize: { xl: '24px', lg: '24px', l: '22px', md: '20px', sm: '16px', xs: '16px' } }}
 					>
-						{title}
+						{title.slice(0, 40) + '...'}
 					</Typography>
 					<Box
 						component="div"

@@ -48,11 +48,14 @@ const ActionButtons = () => {
 				title={favoritesStorage.includes(activeProduct._id) ? 'remove from favorites' : 'add to favorites'}
 				sx={{ padding: { lg: '22px', md: '16px', sm: '12px', xs: '9px' } }} variant={'contained'}
 				onClick={!user
-					? () => handleOpen(<LoginModal />)
+					? async () => {
+						await handleOpen(<LoginModal />)
+						await addToFavorites()
+					}
 					: addToFavorites
 				}
 			>
-				{favoritesStorage.includes(activeProduct._id)
+				{favoritesStorage.includes(activeProduct._id) && user
 					? <FavoriteOutlinedIcon fontSize={'small'} />
 					: <FavoriteBorderOutlinedIcon fontSize={'small'} />
 				}
