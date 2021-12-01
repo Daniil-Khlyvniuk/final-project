@@ -60,7 +60,7 @@ const CartModal = () => {
 									CHECKOUT
 								</Button>
 							</Link>
-							<Box style={{ overflowY: 'scroll' }}>
+							<Box>
 								{shoppingBag?.map((item, key) =>
 									(<CardInModal
 										price={item?.currentPrice}
