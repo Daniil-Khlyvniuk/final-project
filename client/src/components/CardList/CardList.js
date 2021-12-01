@@ -28,6 +28,8 @@ const CardList = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
+	console.log(products)
+
 	return (
 		<div>
 			<Typography
@@ -48,7 +50,9 @@ const CardList = () => {
 							_id={item.variants._id}
 							image={'/' + item.variants.imageUrls[0]}
 							title={item?.name || ''}
-							price={item.variants.currentPrice} />
+							price={item.variants.currentPrice}
+							inModal={false}
+						/>
 					))
 				}
 			</div>
