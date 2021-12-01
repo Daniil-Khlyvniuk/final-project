@@ -49,9 +49,9 @@ const CartModal = () => {
 							<Typography
 								fontSize={18}
 								style={style.title}>
-								TOTAL: USD${totalPrice}
+								TOTAL: USD ${totalPrice}.00
 							</Typography>
-							<Link exact to={'/cart'} style={style.link}>
+							<Link exact='true' to={'/cart'} style={style.link}>
 								<Button
 									onClick={handleClose}
 									variant={'contained'}
