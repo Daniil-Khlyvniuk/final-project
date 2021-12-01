@@ -7,8 +7,11 @@ import MoneyIcon from '@mui/icons-material/Money'
 import LocalMallIcon from '@mui/icons-material/LocalMall'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import { Link } from 'react-router-dom'
+import Btn from './Btn'
 
 
+
+// eslint-disable-next-line react/prop-types
 const PayCc = () => {
 	const [selectedValue, setSelectedValue] = useState('a')
 
@@ -60,6 +63,7 @@ const PayCc = () => {
 					</div>
 
 					{selectedValue === 'a' ? <Payment/> : null}
+					{selectedValue === 'b' ? <Btn /> : null}
 				</section>
 				<div style={border} />
 			</Grid>
@@ -100,5 +104,6 @@ const PayCc = () => {
 		</box>
 	)
 }
+
 
 export default PayCc

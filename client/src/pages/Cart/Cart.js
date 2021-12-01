@@ -8,6 +8,8 @@ import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
 const Cart = () => {
 	const classes = useStyles()
 	const {shoppingBag,totalPrice} = useHandleShoppingBag()
+	// localStorage.setItem('shoppingBag', shoppingBag)
+
 
 	return (
 		<Container maxWidth="lg">
@@ -22,7 +24,11 @@ const Cart = () => {
 				</div>
 				<Button
 					variant={'contained'}
-					style={{display: 'block', margin: '0 auto 1rem'}}
+					style={{
+						display: 'block',
+						margin: '0 auto 1rem',
+						width: '225px',
+					}}
 					component={Link}
 					to='/checkout'
 				>PROCEED TO CHECKOUT</Button>

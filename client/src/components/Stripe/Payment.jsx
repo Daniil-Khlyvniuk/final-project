@@ -8,9 +8,11 @@ import axios from 'axios'
 // loadStripe is initialized with a fake API key.
 const stripePromise = loadStripe('pk_test_YXhgLEwTTJdW2AfHsgJJNfAN')
 
+
 export default function Payment() {
 	const [clientSecret, setClientSecret] = useState('')
 	const userToken = localStorage.getItem('userToken')
+
 
 	useEffect(() => {
 		const data = JSON.stringify({})
@@ -61,7 +63,7 @@ export default function Payment() {
 		<box>
 			{clientSecret && (
 				<Elements options={options} stripe={stripePromise}>
-					<CheckoutForm />
+					<CheckoutForm/>
 				</Elements>
 			)}
 		</box>

@@ -6,8 +6,8 @@ export const button = {
 	borderRadius: '4px',
 	border: 'none',
 	position: 'absolute',
-	left: '80%',
-	top: '158%',
+	left: '77%',
+	top: '95%',
 	cursor: 'pointer',
 }
 
