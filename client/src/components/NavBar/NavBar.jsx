@@ -9,15 +9,13 @@ import NavBarSearch from './NavBarSearch/NavBarSearch'
 import { useStyles } from './styles'
 import Category from '../Category/Category'
 import LogoutIconHeader from './NavBarIcons/LogoutIcon/LogoutIcon'
-import { userSelectors } from '../../store/User'
-import { useSelector } from 'react-redux'
 import ProfileIcon from './NavBarIcons/ProfileIcon/ProfileIcon'
 import { useLocation } from 'react-router'
 
 const Navbar = () => {
 	const classes = useStyles()
 	const { pathname } = useLocation()
-	const user = useSelector(userSelectors.getData())
+	const user = localStorage.getItem('userToken')
 	const isLoggedIn = !!user
 
 	return (

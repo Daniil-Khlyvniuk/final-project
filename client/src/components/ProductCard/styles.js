@@ -33,7 +33,7 @@ export const useStyles = makeStyles({
 		color: '#FFFFFF',
 		margin: 0,
 		width: 'fit-content',
-		padding: '12px 15px',
+		padding: '7px 10px',
 	},
 	price: {
 		fontFamily: 'Roboto',
