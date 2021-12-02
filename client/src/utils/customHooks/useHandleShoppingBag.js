@@ -14,11 +14,11 @@ export default function useHandleShoppingBag() {
 			const shoppingBag = JSON.parse(localStorage.getItem('shoppingBag') || '[]') || []
 			const newShoppingBag = [...shoppingBag, ...[product]]
 
-
+			console.log(newShoppingBag)
 			localStorage.setItem('shoppingBag', JSON.stringify(newShoppingBag))
 			dispatch(shoppingBagActions.addToShoppingBag(newShoppingBag))
 		}else{
-			await cartAPI.addProductToCart(product)
+			await cartAPI.addProductToCart(product._id)
 
 			// dispatch(shoppingBagActions.addToShoppingBag(newShoppingBag))
 		}

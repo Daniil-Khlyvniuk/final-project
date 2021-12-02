@@ -38,7 +38,7 @@ const ActionButtons = () => {
 				disableRipple
 				sx={{ mx: '13px', padding: { lg: '21px 33px', md: '16px', sm: '10px' } }}
 				variant={'contained'}
-				onClick={() => handleShoppingBag.add(activeProduct._id)}
+				onClick={() => handleShoppingBag.add(activeProduct)}
 			>
 				ADD TO BAG
 			</Button>
@@ -49,7 +49,7 @@ const ActionButtons = () => {
 					? async () => {
 						await handleOpen(<LoginModal />)
 						await !favoritesStorage.includes(activeProduct._id)
-							&& addToFavorites()
+									&& addToFavorites()
 					}
 					: addToFavorites
 				}
