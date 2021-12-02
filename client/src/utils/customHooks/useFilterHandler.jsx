@@ -70,7 +70,17 @@ const useFilterHandler = () => {
 			dispatch(productsOperations.fetchProductsByFilter())
 		}
 	}
-	return {handleFilterChange, onLoadingPage, handleInfinitiScroll}
+
+	const restoreDefaults = () => {
+		dispatch(filterOperations.setIsLaunchedByUser(false))
+	}
+
+	return {
+		handleFilterChange,
+		onLoadingPage,
+		handleInfinitiScroll,
+		restoreDefaults
+	}
 }
 
 export default useFilterHandler

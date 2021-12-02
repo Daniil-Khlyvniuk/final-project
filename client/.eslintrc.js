@@ -23,8 +23,6 @@ module.exports = {
 		'@babel'
 	],
 	'rules': {
-		// 'react/jsx-uses-react': ['error'],
-		// 'react/jsx-uses-vars': ['error'],
 		'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
 		'react-hooks/exhaustive-deps': 'warn', // Checks effect dependencies
 		'no-duplicate-imports': ['error'],
@@ -44,14 +42,13 @@ module.exports = {
 				'ignorePattern': '^import .*'
 			}
 		],
-		// 'no-console': 'off',
 		'no-console': [
 			'warn',
 		],
 		'indent': [
 			'error',
 			'tab',
-			{'ignoredNodes': ['TemplateLiteral']}
+			{ 'ignoredNodes': ['TemplateLiteral'] }
 		],
 		'linebreak-style': [
 			'error',

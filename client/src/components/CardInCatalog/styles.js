@@ -1,4 +1,4 @@
-import {makeStyles} from '@mui/styles'
+import { makeStyles } from '@mui/styles'
 import theme from '../../utils/Theme'
 
 export const useStyles = makeStyles({
@@ -35,7 +35,6 @@ export const useStyles = makeStyles({
 		transition: 'visibility 0s, opacity 0.5s linear',
 		visibility: 'hidden',
 		opacity: 0,
-		// display: 'none',
 		background: 'rgba(0,0,0,0.5)',
 		width: '280px',
 		height: '280px',
@@ -78,6 +77,4 @@ export const useStyles = makeStyles({
 		display: 'block',
 		margin: '0 auto',
 	}
-
-
 })
