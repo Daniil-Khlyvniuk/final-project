@@ -18,6 +18,7 @@ import Favorites from '../pages/Favorites/Favorites'
 import HandleSubscribe from '../pages/HandleSubscribe'
 import UserProfilePage from '../pages/UserProfile/UserProfile'
 import Checkout from '../pages/Cart/checkout'
+import CompletePay from '../components/PayCard/CompletePay'
 
 const AppRoutes = () => {
 	return (
@@ -36,8 +37,10 @@ const AppRoutes = () => {
 			<Route exact path='/about/careers'><Careers /></Route>
 			<Route exact path='/about/contact-us'><ContactUs /></Route>
 			<Route exact path='/subscription/:email'><HandleSubscribe /></Route>
-			<Route exact path='/checkout'><Checkout/></Route>
+			<ProtectedRoute exact path='/checkout'><Checkout/></ProtectedRoute>
 			<ProtectedRoute exact path='/user-profile'><UserProfilePage/></ProtectedRoute>
+			{/*<ProtectedRoute exact path='/complete-order'><CompletePay /></ProtectedRoute>*/}
+			<Route exact path='/complete-order'><CompletePay /></Route>
 			<Route exact path='*'><Page404 /></Route>
 		</Switch>
 	)

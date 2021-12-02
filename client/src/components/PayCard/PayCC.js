@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 import { border, checkboxPay, PayCC, PayElem, PayText, PayTextSub, PayCash, CashText, CashTextHead, CashTextSub } from './style'
-import { Grid, Radio, Stack, Button } from '@mui/material'
+import { Grid, Radio } from '@mui/material'
 import Payment from '../Stripe/Payment'
 import CreditCardIcon from '@mui/icons-material/CreditCard'
 import MoneyIcon from '@mui/icons-material/Money'
 import LocalMallIcon from '@mui/icons-material/LocalMall'
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
-import { Link } from 'react-router-dom'
+import Btn from './Btn'
 
 
 const PayCc = () => {
@@ -58,8 +57,8 @@ const PayCc = () => {
 							/>
 						</div>
 					</div>
-
-					{selectedValue === 'a' ? <Payment/> : null}
+					{selectedValue === 'a' && <Payment/>}
+					{selectedValue === 'b' && <Btn />}
 				</section>
 				<div style={border} />
 			</Grid>
@@ -81,24 +80,10 @@ const PayCc = () => {
 						}}/>
 				</div>
 				<div style={border} />
-				<Stack spacing={2} direction="row">
-					<Button 
-						variant="text" 
-						sx={{
-							fontSize: '18px',
-							color: '#373F41',
-						}}
-						component={Link}
-						to='/cart'
-					><ArrowBackIosNewIcon
-							sx={{
-								height: '17px',
-							}}
-						/> BACK</Button>
-				</Stack>
 			</Grid>
 		</box>
 	)
 }
+
 
 export default PayCc

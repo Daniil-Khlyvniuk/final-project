@@ -41,6 +41,7 @@ const UserForm = () => {
 	const user = useSelector(userSelectors.getData())
 	const token = useSelector(userSelectors.getToken())
 
+
 	const INITIAL_FORM_STATE = {
 		firstName: user?.firstName || '',
 		lastName: user?.lastName || '',
