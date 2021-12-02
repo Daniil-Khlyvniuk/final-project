@@ -6,7 +6,7 @@ const initialState = {
 	token: localStorage.getItem('userToken') || null,
 	data: null,
 	error: null,
-	isLoading: true,
+	isLoading: false,
 }
 
 
@@ -15,8 +15,6 @@ export const fetchUser = createAsyncThunk(
 	'user/fetchUser',
 	async () => {
 		const response = await getUserByToken()
-		// eslint-disable-next-line no-console
-		// console.log('user',response)
 		return response.data
 	}
 )
