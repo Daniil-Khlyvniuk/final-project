@@ -3,10 +3,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
 const UseMakeFullProduct = () => {
-	const [ product, setProduct ] = useState([])
-	// const [] = useState([])
-	// eslint-disable-next-line no-console
-	// console.log('product', product)
+	const [product, setProduct] = useState([])
 
 	useEffect(() => {
 		axios('http://localhost:5000/api/products')
@@ -15,7 +12,7 @@ const UseMakeFullProduct = () => {
 			})
 			.catch(err => {
 				// eslint-disable-next-line no-console
-				console.log('ИДИ НАХУЙ', err)
+				console.log('err', err)
 			})
 	}, [])
 

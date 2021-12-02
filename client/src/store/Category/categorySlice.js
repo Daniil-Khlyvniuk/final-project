@@ -10,9 +10,6 @@ const categorySlice = createSlice({
 		isLoading: true,
 	},
 	reducers: {
-		// setCategory(state, action) {
-		// 	state.category = action.payload
-		// },
 		setCategoryTree(state, action) {
 			state.categoryTree = action.payload
 		}

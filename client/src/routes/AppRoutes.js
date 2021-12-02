@@ -2,7 +2,6 @@ import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import ProtectedRoute from '../components/ProtectedRoute/ProtectedRoute'
 import Main from '../pages/Main/Main'
-import ProductsList from '../pages/ProductsList/ProductsList'
 import ProductDetails from '../pages/ProductDetails/ProductDetails'
 import Catalog from '../pages/Catalog/Catalog'
 import PaymentAndDelivery from '../staticPages/PaymentAndDelivery/PaymentAndDelivery'
@@ -25,7 +24,6 @@ const AppRoutes = () => {
 		<Switch>
 			<Route exact path='/'><Main /></Route>
 			<ProtectedRoute exact path='/favorites'><Favorites /></ProtectedRoute>
-			<Route exact path='/products-list'><ProductsList /></Route>
 			<Route exact path='/product-details/:id'><ProductDetails /></Route>
 			<Route exact path='/cart'><Cart /></Route>
 			<Route exact path='/shop/catalog'><Catalog /></Route>

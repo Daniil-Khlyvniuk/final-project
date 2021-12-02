@@ -1,20 +1,16 @@
-import React, { useState} from 'react'
-
-import { Container, Grid, Typography , Box} from '@mui/material'
-import { Form, Formik} from 'formik'
+import React, { useState } from 'react'
+import { Container, Grid, Typography, Box } from '@mui/material'
+import { Form, Formik } from 'formik'
 import * as Yup from 'yup'
 import TextInput from './FormUI/Textfield'
 import { phoneRegExp } from './data/Regex'
 import countries from './data/countries.json'
 import SelectInput from './FormUI/SelectInput'
 import ButtonInput from './FormUI/ButtonInput'
-import {useSelector} from 'react-redux'
-import {userSelectors} from '../../../store/User'
+import { useSelector } from 'react-redux'
+import { userSelectors } from '../../../store/User'
 import Loader from '../../UI/Loader/Loader'
 import axios from 'axios'
-
-
-
 
 const FORM_VALIDATION = Yup.object().shape({
 	firstName: Yup.string(),
@@ -28,19 +24,16 @@ const FORM_VALIDATION = Yup.object().shape({
 	country: Yup.string(),
 	oldPass: Yup.string(),
 	password: Yup.string()
-		.min(7,'Password must be 7 digits minimum')
-		.max(30,'Password must be 30 digits maximum'),
+		.min(7, 'Password must be 7 digits minimum')
+		.max(30, 'Password must be 30 digits maximum'),
 	confirmPass: Yup.string().oneOf([Yup.ref('password')], 'Passwords do not match'),
 
 })
 
 const UserForm = () => {
-
-	const [status,setStatus]=useState('')
-
+	const [status, setStatus] = useState('')
 	const user = useSelector(userSelectors.getData())
 	const token = useSelector(userSelectors.getToken())
-
 
 	const INITIAL_FORM_STATE = {
 		firstName: user?.firstName || '',
@@ -50,13 +43,13 @@ const UserForm = () => {
 		address: user?.address || '',
 		city: user?.city || '',
 		country: user?.country || '',
-		oldPass:'',
-		password:'',
-		confirmPass:''
+		oldPass: '',
+		password: '',
+		confirmPass: ''
 	}
 
-	if(!user){
-		return <Loader/>
+	if (!user) {
+		return <Loader />
 	}
 	return (
 		<Box my='15px'>
@@ -68,7 +61,7 @@ const UserForm = () => {
 				letterSpacing='3px'
 				textAlign='center'
 				component={'div'}
-				sx={{mb:'25px', mt:'10px'}}
+				sx={{ mb: '25px', mt: '10px' }}
 			>
 				Personal information
 			</Typography>
@@ -81,30 +74,30 @@ const UserForm = () => {
 								validationSchema={FORM_VALIDATION}
 								onSubmit={(values) => {
 
-									const update ={
+									const update = {
 										firstName: values.firstName,
 										lastName: values.lastName,
-										email:values.email,
+										email: values.email,
 										phone: values.phone,
 										address: values.address,
 										city: values.city,
 										country: values.country,
 
 									}
-									axios.put('/api/customers', update , {
-										headers: {Authorization : token}
+									axios.put('/api/customers', update, {
+										headers: { Authorization: token }
 									}).then(() => setStatus('Changes Saved'))
 
-									if(values.oldPass){
+									if (values.oldPass) {
 										const passwords = {
 											'password': values.oldPass,
 											'newPassword': values.password
 										}
 										// eslint-disable-next-line no-unused-vars,no-mixed-spaces-and-tabs
-										axios.put('/api/customers/password',passwords,{headers: {Autorization : token}}).then((res)=>setStatus(res.data.password = 'Wrong Password' || res.data.message))
+										axios.put('/api/customers/password', passwords, { headers: { Autorization: token } }).then((res) => setStatus(res.data.password = 'Wrong Password' || res.data.message))
 									}
 
-									setTimeout(() =>{ setStatus(null)}, 3000)
+									setTimeout(() => { setStatus(null) }, 3000)
 								}}
 							>
 								<Form>
@@ -128,7 +121,7 @@ const UserForm = () => {
 											<TextInput
 												name="email"
 												label="Email"
-												
+
 											/>
 										</Grid>
 										<Grid item xs={12}>
@@ -140,9 +133,9 @@ const UserForm = () => {
 												fontWeight='700'
 												letterSpacing='3px'
 												textAlign='center'
-												sx={{my:'18px'}}
+												sx={{ my: '18px' }}
 											>
-													Delivery Address
+												Delivery Address
 											</Typography>
 										</Grid>
 										<Grid item xs={12} >
@@ -167,7 +160,7 @@ const UserForm = () => {
 												fontWeight='700'
 												letterSpacing='3px'
 												textAlign='center'
-												sx={{my:'18px'}}
+												sx={{ my: '18px' }}
 											>
 												Change Password
 											</Typography>
@@ -188,14 +181,14 @@ const UserForm = () => {
 
 											/>
 										</Grid>
-										<Grid item md={6}  xs={12}>
+										<Grid item md={6} xs={12}>
 											<TextInput
 												name="confirmPass"
 												label="Confirm Password"
 												type='password'
 											/>
 										</Grid>
-										<Grid item xs={12} sx={{textAlign:'center', mt:'16px'}}>
+										<Grid item xs={12} sx={{ textAlign: 'center', mt: '16px' }}>
 											{status && (<Typography
 												variant={'body1'}
 												textAlign={'center'}

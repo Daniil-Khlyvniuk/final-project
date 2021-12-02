@@ -11,14 +11,12 @@ import Category from '../Category/Category'
 import LogoutIconHeader from './NavBarIcons/LogoutIcon/LogoutIcon'
 import ProfileIcon from './NavBarIcons/ProfileIcon/ProfileIcon'
 import { useLocation } from 'react-router-dom'
-import {useSelector} from 'react-redux'
-import {userSelectors} from '../../store/User'
-
+import { useSelector } from 'react-redux'
+import { userSelectors } from '../../store/User'
 
 const Navbar = () => {
 	const classes = useStyles()
 	const { pathname } = useLocation()
-	// const user = localStorage.getItem('userToken')
 	const user = useSelector(userSelectors.getData())
 	const isLoggedIn = !!user
 
@@ -28,15 +26,15 @@ const Navbar = () => {
 				<AppBar className={classes.appbar} position="static" sx={{ boxShadow: 'none' }}>
 					<Toolbar className={classes.header}>
 						<NavBarLogo />
-						<Category />
+						{pathname !== '/shop/catalog' && <Category />}
 						<NavBarSearch />
-						<div className={classes.iconsWrapper}>
+						<Box className={classes.iconsWrapper}>
 							{!isLoggedIn ? <LoginIcon /> :
 								pathname === '/user-profile' ? <LogoutIconHeader /> :
 									<ProfileIcon />}
 							{isLoggedIn && <FavoriteIcon />}
 							<CartIcon />
-						</div>
+						</Box>
 					</Toolbar>
 				</AppBar>
 			</Container>
