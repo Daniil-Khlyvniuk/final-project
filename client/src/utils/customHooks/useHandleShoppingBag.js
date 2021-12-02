@@ -14,16 +14,17 @@ export default function useHandleShoppingBag() {
 			const shoppingBag = JSON.parse(localStorage.getItem('shoppingBag') || '[]') || []
 			const newShoppingBag = [...shoppingBag, ...[product]]
 
+
 			localStorage.setItem('shoppingBag', JSON.stringify(newShoppingBag))
 			dispatch(shoppingBagActions.addToShoppingBag(newShoppingBag))
 		}else{
-			await cartAPI.addProductToCart(product?.product?._id)
+			await cartAPI.addProductToCart(product)
 
 			// dispatch(shoppingBagActions.addToShoppingBag(newShoppingBag))
 		}
 	}
 
-	const remove = (id) => {
+	const remove = async (id) => {
 		const shoppingBag = JSON.parse(localStorage.getItem('shoppingBag'))
 		const newShoppingBag = [
 			...shoppingBag.filter(item => item?._id !== id),
@@ -32,14 +33,17 @@ export default function useHandleShoppingBag() {
 
 		localStorage.setItem('shoppingBag', JSON.stringify(newShoppingBag))
 		dispatch(shoppingBagActions.removeFromShoppingBag(newShoppingBag))
+		await cartAPI.deleteProductFromCart(id)
 	}
 
-	const removeAll = (id) => {
+
+	const removeAll = async (id) => {
 		const shoppingBag = JSON.parse(localStorage.getItem('shoppingBag'))
 		const newShoppingBag = shoppingBag.filter(item => item?._id !== id)
 
 		localStorage.setItem('shoppingBag', JSON.stringify(newShoppingBag))
 		dispatch(shoppingBagActions.removeFromShoppingBag(newShoppingBag))
+		await cartAPI.deleteCart(id)
 	}
 
 	const AfterBuy = () => {

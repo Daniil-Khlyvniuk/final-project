@@ -13,7 +13,7 @@ const addProductToCart = (productId) => {
 
 const deleteProductFromCart = (productId) => {
 	return axios
-		.delete(`/api/cart/${productId}`, getAuthHeader())
+		.delete(`/api/cart/product/${productId}`, getAuthHeader())
 		.then(res => res?.data)
 		.catch(() => null)
 }
@@ -25,9 +25,9 @@ const getCart = () => {
 		.catch(() => null)
 }
 
-const deleteCart = () => {
+const deleteCart = (productId) => {
 	return axios
-		.delete('/api/cart', getAuthHeader())
+		.delete(`/api/cart/${productId}`, getAuthHeader())
 		.then(res => res?.data)
 		.catch(() => null)
 }

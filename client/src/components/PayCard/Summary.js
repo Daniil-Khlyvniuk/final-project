@@ -34,7 +34,6 @@ const Summary = () => {
 				letterSpacing='3px'
 				sx={{ mb: '25px', mt: '10px' }}
 			>
-				{/* eslint-disable-next-line no-mixed-spaces-and-tabs */}
 				Summary
 			</Typography>
 			<div style={border}/>

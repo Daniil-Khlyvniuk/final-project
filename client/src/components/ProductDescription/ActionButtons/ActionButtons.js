@@ -38,7 +38,7 @@ const ActionButtons = () => {
 				disableRipple
 				sx={{ mx: '13px', padding: { lg: '21px 33px', md: '16px', sm: '10px' } }}
 				variant={'contained'}
-				onClick={() => handleShoppingBag.add(activeProduct)}
+				onClick={() => handleShoppingBag.add(activeProduct._id)}
 			>
 				ADD TO BAG
 			</Button>
