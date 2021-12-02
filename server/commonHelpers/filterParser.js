@@ -7,7 +7,7 @@ module.exports = function filterParser(filtersQueryString) {
     $gte: filtersQueryString?.minPrice
       ? Number(filtersQueryString.minPrice)
       : 0,
-    $lte: filtersQueryString?.maxPrice
+    $lte: !!filtersQueryString?.maxPrice
       ? Number(filtersQueryString.maxPrice)
       : Infinity,
   };
