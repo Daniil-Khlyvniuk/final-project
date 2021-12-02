@@ -5,7 +5,7 @@ import CustomInput from '../setting/CustomInput'
 import { useFormStyle } from '../../../utils/customHooks/useFormStyle'
 import { Box, Typography, Checkbox, Button, Switch } from '@mui/material'
 import { Link } from 'react-router-dom'
-import { Facebook, Google } from '../setting/SocialIcons'	
+import { Facebook, Google } from '../setting/SocialIcons'
 
 import useAuth from '../../../utils/customHooks/useAuth'
 
