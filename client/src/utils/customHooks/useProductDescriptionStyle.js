@@ -1,8 +1,6 @@
 import { makeStyles } from '@mui/styles'
 
-
 export const useProductDescriptionStyle = makeStyles((theme) => ({
-
 	header:{
 		display: 'flex' ,
 		alignItems: 'center' ,
@@ -30,7 +28,6 @@ export const useProductDescriptionStyle = makeStyles((theme) => ({
 			marginBottom: '15px'
 		}
 	},
-
 	productId : {
 		color:'rgba(92, 94, 96, 0.5)',
 		lineHeight: '18px',
@@ -39,7 +36,6 @@ export const useProductDescriptionStyle = makeStyles((theme) => ({
 			textAlign: 'end'
 		}
 	},
-	
 	optionText:{
 		color: theme.palette.primary,
 		textTransform: 'uppercase',
@@ -48,8 +44,6 @@ export const useProductDescriptionStyle = makeStyles((theme) => ({
 	stack:{
 		display:'flex',
 		alignItems:'center',
-
-
 		'& .MuiButton-root': {
 			fontSize: '14px',
 			padding: 0,
@@ -63,13 +57,10 @@ export const useProductDescriptionStyle = makeStyles((theme) => ({
 		padding: 0,
 		borderBottom: '1px',
 		borderColor:'black'
-
-
 	},
 	indicator:{
 		height: '1px',
 		bottom: '7px'
-
 	},
 	activeColorBtn:{
 		padding:'0',
@@ -86,5 +77,4 @@ export const useProductDescriptionStyle = makeStyles((theme) => ({
 			flexDirection:'row !important',
 		}
 	}
-
 }))

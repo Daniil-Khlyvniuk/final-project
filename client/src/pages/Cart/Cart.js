@@ -10,7 +10,7 @@ import { Box } from '@mui/system'
 const Cart = () => {
 	const { shoppingBag } = useHandleShoppingBag()
 	const dispatch = useDispatch()
-	const favorites = JSON.parse(localStorage.getItem('favorites'))
+	const favorites = JSON.parse(localStorage.getItem('favorites')) || []
 
 	useEffect(() => {
 		favoritesOperations.fetchFavorites(favorites)(dispatch)

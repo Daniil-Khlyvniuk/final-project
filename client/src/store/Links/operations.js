@@ -1,4 +1,4 @@
-import {actions, fetchLinks} from './linksSlice'
+import { actions, fetchLinks } from './linksSlice'
 
 export default {
 	...actions,
