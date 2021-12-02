@@ -157,6 +157,8 @@ export const useStyleCarousel = makeStyles({
 	thumb:{
 		width: '100%',
 		height: '100%',
+		maxWidth: '150px',
+		maxHeight: '150px',
 		textAlign: 'center'
 	},
 
