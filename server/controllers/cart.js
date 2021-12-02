@@ -323,20 +323,22 @@ exports.getCart = (req, res, next) => {
 };
 
 exports.payment = async (req, res, next) => {
-	const calculateOrderAmount = (products) => {
-		return products.reduce((acc, curr) =>
-		curr.product.currentPrice * curr.cartQuantity
-		, 0);
-	};
+	const {total} = req.body
 
+	if (!total) {
+		res.status(400).json({
+			message: `Payment error: "total price must be" `,
+		})
+	}
+
+	// const calculateOrderAmount = (products) => {
+	// 	return products.reduce((acc, curr) =>
+	// 	curr.product.currentPrice * curr.cartQuantity
+	// 	, 0);
+	// };
 	try {
-		const { products } = await Cart.findOne({ customerId: req.user.id })
-		.populate("products.product")
-
-		notFoundError(products, "cart")
-
 		const paymentIntent = await stripe.paymentIntents.create({
-			amount: calculateOrderAmount(products),
+			amount: total,
 			currency: "eur",
 			automatic_payment_methods: {
 				enabled: true,
@@ -349,7 +351,7 @@ exports.payment = async (req, res, next) => {
 
 	} catch (err) {
 		res.status(400).json({
-			message: `Error happened on server: "${err}" `,
+			message: `Payment error: "${err}" `,
 		})
 	}
 };

@@ -331,33 +331,96 @@ exports.getProductsFilterParams = async (req, res, next) => {
   const sortParam = getSortConditions(req.query.sort);
   const perPage = Number(req.query.perPage);
   const startPage = Number(req.query.startPage);
-  const aggregateParams = getAggregateParamsForProductFilters(filterParams);
+  // const aggregateParams = getAggregateParamsForProductFilters(filterParams);
 
   try {
-    const products = await Product.aggregate([
+    const products = await ProductVariant.aggregate([
       { $skip: startPage * perPage - perPage },
-      { $limit: perPage },
-      ...aggregateParams,
+			{
+				$lookup: {
+					from: Product.collection.name,
+					localField: "product",
+					foreignField: "_id",
+					as: "product",
+				},
+			},
+			{
+				$unwind: {
+					path: "$product",
+					preserveNullAndEmptyArrays: true,
+				},
+			},
+			{
+				$lookup: {
+					from: Catalog.collection.name,
+					localField: "product.categories",
+					foreignField: "_id",
+					as: "product.categories",
+				},
+			},
+			{
+				$unwind: "$product.categories",
+			},
+			{
+				$lookup: {
+					from: Color.collection.name,
+					localField: "color",
+					foreignField: "_id",
+					as: "color",
+				},
+			},
+			{
+				$unwind: "$color",
+			},
+			{
+				$lookup: {
+					from: Size.collection.name,
+					localField: "size",
+					foreignField: "_id",
+					as: "size",
+				},
+			},
+			{
+				$unwind: "$size",
+			},
       {
         $project: {
-          _id: 1,
-          name: 1,
-          categories: 1,
-          productUrl: 1,
-          brand: 1,
-          manufacturer: 1,
-          manufacturerCountry: 1,
-          seller: 1,
-          description: 1,
-          date: 1,
-          variants: 1,
+          _id: "$product._id",
+          name: "$product.name",
+          categories: "$product.categories",
+          productUrl: "$product.productUrl",
+          brand: "$product.brand",
+          manufacturer: "$product.manufacturer",
+          manufacturerCountry: "$product.manufacturerCountry",
+          seller: "$product.seller",
+          description: "$product.description",
+          date: "$product.date",
+          variants: {
+						_id: "$_id",
+						product: "$product._id",
+						itemNo: "$itemNo",
+						enabled: "$enabled",
+						currentPrice: "$currentPrice",
+						previousPrice: "$previousPrice",
+						imageUrls: "$imageUrls",
+						quantity: "$quantity",
+						color: "$color",
+						size: "$size",
+						date: "$date"
+					},
         },
       },
+			{
+				$match: {
+					$and: filterParams
+				}
+			},
       sortParam,
+			{ $limit: perPage },
     ]);
 
     const result = filterProductDuplicates(products, mongooseQuery);
-    res.json(result);
+    res.json(result.length);
   } catch (err) {
     res.status(400).json({
       message: `Error happened on server: "${err}" `,
