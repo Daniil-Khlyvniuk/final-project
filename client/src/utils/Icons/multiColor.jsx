@@ -20,5 +20,4 @@ export const multiColor = ({...rest}) => {
 
 multiColor.protoTypes = {
 	color: PropTypes.string,
-	// filled: PropTypes.bool,
 }

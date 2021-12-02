@@ -3,26 +3,18 @@ import { makeStyles } from '@mui/styles'
 
 export const useFormStyle = makeStyles({
 	form: {
-		// paddingLeft: 50,
-		// paddingRight: 50,
-		// maxWidth: '450px',
-		// width: '100%',
 		margin: 'auto',
-		// overflowY: 'auto ',
 	},
 	formAuth: {
 		maxHeight: 'calc(100vh - 200px)',
 	},
-	input:{
-		// width: 448.69,
-		// height: 26.06,
+	input: {
 		padding: '5px',
 		fontFamily: theme.typography.fontFamily,
 		fontStyle: 'normal',
 		fontWeight: 300,
 		fontSize: 20,
 		lineHeight: 24,
-		// marginTop: '50px',
 		marginTop: '25px',
 		transition: '0.5s'
 	},
@@ -49,7 +41,7 @@ export const useFormStyle = makeStyles({
 			color: '#000'
 		}
 	},
-	login:{
+	login: {
 		cursor: 'pointer',
 		fontFamily: theme.typography.fontFamily,
 		fontStyle: 'normal',
@@ -63,26 +55,26 @@ export const useFormStyle = makeStyles({
 		borderBottom: '1px solid #000'
 	},
 
-	signin:{
+	signin: {
 		textDecoration: 'none',
 		padding: '5px 77px',
 		border: '1px solid #000',
 		borderBottom: 'none'
 	},
-	socialBox:{
+	socialBox: {
 		marginTop: '30px',
 		display: 'flex',
 		justifyContent: 'center',
 		gap: 30
 	},
-	alreadyIn:{
+	alreadyIn: {
 		fontFamily: 'Mulish',
 		fontStyle: 'normal',
 		fontWeight: 300,
 		fontSize: 14,
 		lineHeight: '24px',
 		textDecorationLine: 'underline',
-		'& a':{color: '#373F41'}
+		'& a': { color: '#373F41' }
 	},
 	formStatusBlock: {
 		display: 'flex',
@@ -91,10 +83,10 @@ export const useFormStyle = makeStyles({
 		paddingTop: '10px',
 		paddingBottom: '10px',
 	},
-	error:{
+	error: {
 		color: 'red',
 		fontSize: 15,
-		
+
 	},
 	success: {
 		color: 'green',
