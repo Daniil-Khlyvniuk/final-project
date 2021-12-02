@@ -194,10 +194,11 @@ const Carousel = ({
 					{slides?.map((slide) => {
 						return (
 							<div key={slide.customId}>
-								<div style={{ position: 'relative' }}>
+								<div style={{ position: 'relative', margin: '0 10px' }}>
 									<img src={slide.imageUrl} className={style.thumb} style={{
 										maxWidth: '380px',
-										maxHeight: '380px'
+										maxHeight: '380px',
+										borderRadius: '5px'
 									}} alt=""/>
 									<div className={style.relatedTextBox}>
 										<p className={style.relatedText}>{slide.name}</p>

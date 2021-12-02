@@ -13,13 +13,14 @@ const BasicModal = ({ style, body }) => {
 	const handleClose = () => dispatch(modalActions.modalToggle(false))
 
 	return (
-		<div>
+		<Box>
 			<Modal
 				open={true}
 				onClose={handleClose}
 				aria-labelledby="modal-modal-title"
 				aria-describedby="modal-modal-description"
 				sx={{ zIndex: 999999999999 }}
+				style={{ overflowY: 'scroll', overflowX: 'hidden' }}
 			>
 				<Box sx={style}>
 					<StyledBox>
@@ -34,7 +35,7 @@ const BasicModal = ({ style, body }) => {
 					{body}
 				</Box>
 			</Modal>
-		</div>
+		</Box>
 	)
 }
 

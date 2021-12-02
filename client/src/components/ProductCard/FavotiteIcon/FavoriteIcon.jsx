@@ -7,10 +7,9 @@ import { favoritesOperations, favoritesSelectors } from '../../../store/Favorite
 import PropTypes from 'prop-types'
 import modalActions from '../../../store/Modal'
 import LoginModal from '../../Modal/LoginModal'
-import { userSelectors } from '../../../store/User'
 
 const Favoriteicon = ({ id }) => {
-	const user = useSelector(userSelectors.getToken())
+	const user = localStorage.getItem('userToken')
 	// eslint-disable-next-line no-unused-vars
 	const favorites = useSelector(favoritesSelectors.getFavorites())
 	const dispatch = useDispatch()

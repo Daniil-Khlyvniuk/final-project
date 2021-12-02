@@ -23,7 +23,7 @@ const Main = () => {
 				<meta name='description' content='Bedding Shop'/>
 				<meta name='keywords' content='bedroom, Kitchen, Loungewear, bedding store, luxury bedding sets, king size bedspreads, king bed sheets, comforters on sale' />
 			</Helmet>
-			<Container maxWidth="lg">
+			<Container maxWidth="lg" sx={{ minWidth: 320 }}>
 				<Carousel slides={slides} main={true}/>
 				<CardList />
 				<Popular/>
