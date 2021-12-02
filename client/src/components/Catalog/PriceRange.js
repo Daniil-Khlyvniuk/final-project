@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+
 import React, {useState, useEffect} from 'react'
 import { FormControl, InputAdornment, OutlinedInput, Slider, Box } from '@mui/material'
 import productsAPI from '../../utils/API/productsAPI'
