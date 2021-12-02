@@ -67,7 +67,6 @@ export const PhotoSumm = {
 
 export const SummBox = {
 	display: 'flex',
-
 }
 
 export const SummText = {
@@ -78,4 +77,11 @@ export const SummTotal = {
 	display: 'flex',
 	alignItems: 'center',
 	justifyContent: 'space-between',
+	margin: '-100px 0 120px 0',
+}
+
+export const SummCarts = {
+	display: 'flex',
+	flexDirection: 'column',
+	marginBottom: '20px',
 }
