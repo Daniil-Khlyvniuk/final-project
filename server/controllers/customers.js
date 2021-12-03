@@ -19,7 +19,9 @@ const queryCreator = require("../commonHelpers/queryCreator");
 // Controller for creating customer and saving to DB
 exports.createCustomer = (req, res, next) => {
   // Clone query object, because validator module mutates req.body, adding other fields to object
-  const initialQuery = _.cloneDeep(req.body);
+	console.log(req.body)
+  const { subscribe, initialQuery } = _.cloneDeep(req.body);
+	console.log(subscribe)
   initialQuery.customerNo = rand();
 
   // Check Validation
@@ -30,9 +32,9 @@ exports.createCustomer = (req, res, next) => {
   }
 
   Customer.findOne({
-    $or: [{ email: req.body.email }, { login: req.body.login }]
+    $or: [{ email: req.body.email }, { login: req.body.login }],
   })
-    .then(customer => {
+    .then((customer) => {
       if (customer) {
         if (customer.email === req.body.email) {
           return res
@@ -63,18 +65,18 @@ exports.createCustomer = (req, res, next) => {
           newCustomer.password = hash;
           newCustomer
             .save()
-            .then(customer => res.json(customer))
-            .catch(err =>
+            .then((customer) => res.json(customer))
+            .catch((err) =>
               res.status(400).json({
-                message: `Error happened on server: "${err}" `
+                message: `Error happened on server: "${err}" `,
               })
             );
         });
       });
     })
-    .catch(err =>
+    .catch((err) =>
       res.status(400).json({
-        message: `Error happened on server: "${err}" `
+        message: `Error happened on server: "${err}" `,
       })
     );
 };
@@ -88,8 +90,12 @@ exports.loginCustomer = async (req, res, next) => {
     return res.status(400).json(errors);
   }
 
-  const loginOrEmail = req.body.loginOrEmail;
-  const password = req.body.password;
+	console.log(req.body)
+	const { subscribe, userData } = req.body
+
+
+	const loginOrEmail = userData.loginOrEmail;
+  const password = userData.password;
   const configs = await getConfigs();
 
   // Find customer by email
@@ -126,6 +132,11 @@ exports.loginCustomer = async (req, res, next) => {
               });
             }
           );
+
+					if (subscribe) [
+
+					]
+
         } else {
           errors.password = "Password incorrect";
           return res.status(400).json(errors);
