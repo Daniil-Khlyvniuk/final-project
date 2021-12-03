@@ -1,10 +1,18 @@
+const filterParser = require("../commonHelpers/filterParser")
 module.exports.getFilterConditions = (query) => {
-	return [
-    { "variants.currentPrice": query.currentPrice },
-    ...(query?.category ? [{ "categories.name": query.category }] : [{}]),
-    ...(query?.color ? [{ "variants.color.name": query.color }] : [{}]),
-    ...(query?.size ? [{ "variants.size.name": query.size }] : [{}]),
-  ];
+	const { variantQuery, productQuery } = query
+
+	return {
+		productQuery: [
+			...((!!productQuery?.category && productQuery?.category !== "shop all") ? [{ "categories.name": productQuery.category }] : [{}]),
+			...(!!productQuery?.brand ? [{ "brand": productQuery.brand }] : [{}]),
+		],
+		variantQuery: [
+			{ "currentPrice": variantQuery.currentPrice },
+			...(!!variantQuery?.color ? [{ "color.name": variantQuery.color }] : [{}]),
+			...(!!variantQuery?.size ? [{ "size.name": variantQuery.size }] : [{}]),
+		]
+	}
 };
 
 module.exports.getSortConditions = (sortParam) => {
@@ -25,16 +33,4 @@ module.exports.getSortConditions = (sortParam) => {
         }
 				),
   };
-
-  // return {
-  // 	...(sortParam
-  // 		? { $sort: { ["variants." + sortParamValue]: sortType } }
-  // 		: {}),
-  // };
-  //
-  // {
-  //   $sort: {
-  //     ...(!!sortParam ? { ["variants." + sortParamValue]: sortType } : {}),
-  //   },
-  // };
 };
