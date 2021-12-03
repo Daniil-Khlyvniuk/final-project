@@ -327,16 +327,15 @@ exports.getVariantsByProductId = async (req, res, next) => {
 
 exports.getProductsFilterParams = async (req, res, next) => {
   const mongooseQuery = filterParser(req.query);
-  const filterParams = getFilterConditions(mongooseQuery);
+  const { variantQuery, productQuery } = getFilterConditions(mongooseQuery);
   const sortParam = getSortConditions(req.query.sort);
   const perPage = Number(req.query.perPage);
   const startPage = Number(req.query.startPage);
-	const query = req.body.test
-  const aggregateParams = getAggregateParamsForProductFilters(filterParams);
+	const query = req.body.query
 
-  try {
+	try {
     const products = await Product.aggregate([
-			{
+			...(!!query ? [     {
 				$search: {
 					index: "productSearch",
 					compound: {
@@ -366,89 +365,100 @@ exports.getProductsFilterParams = async (req, res, next) => {
 						],
 					},
 				},
-			},
-			{ $skip: startPage * perPage - perPage },
+			}
+			]
+			: []
+			),
 
-			// {
-			// 	$text: { $search: query }
-			// },
+      {
+        $lookup: {
+          from: Catalog.collection.name,
+          localField: "categories",
+          foreignField: "_id",
+          as: "categories",
+        },
+      },
+      {
+        $unwind: "$categories",
+      },
+      {
+        $match: {
+          $and: productQuery,
+        },
+      },
+      {
+        $lookup: {
+          from: ProductVariant.collection.name,
+          let: {
+            productId: "$_id",
+          },
+          pipeline: [
+            {
+              $lookup: {
+                from: Color.collection.name,
+                localField: "color",
+                foreignField: "_id",
+                as: "color",
+              },
+            },
+            {
+              $unwind: "$color",
+            },
+            {
+              $lookup: {
+                from: Size.collection.name,
+                localField: "size",
+                foreignField: "_id",
+                as: "size",
+              },
+            },
+            {
+              $unwind: "$size",
+            },
+            {
+              $match: {
+								$and: [
+									...variantQuery,
+									{
+										$expr: {
+											$eq: [ "$product", "$$productId" ],
+										},
+									},
+								]
+							}
+            },
+            { $limit: 1 },
+          ],
+          as: "variants",
+        },
+      },
 			{
-				$lookup: {
-					from: Catalog.collection.name,
-					localField: "categories",
-					foreignField: "_id",
-					as: "categories",
+				$unwind: {
+					path: "$variants",
 				},
 			},
-			{
-				$unwind: "$categories",
-			},
-			{
-				$lookup: {
-					from: ProductVariant.collection.name,
-					let: {
-						productId: "$_id",
-					},
-					pipeline: [
-						{
-							$lookup: {
-								from: Color.collection.name,
-								localField: "color",
-								foreignField: "_id",
-								as: "color",
-							},
-						},
-						{
-							$unwind: "$color",
-						},
-						{
-							$lookup: {
-								from: Size.collection.name,
-								localField: "size",
-								foreignField: "_id",
-								as: "size",
-							},
-						},
-						{
-							$unwind: "$size",
-						},
-						{
-							$match: {
-								$expr: {
-										 "$eq": [ "$product", "$$productId" ]
-								},
-							},
-						},
-						{$limit: 1}, // it works
-					],
-					as: "variants",
-				},
-			},
-			{
-				$project: {
-					_id: 1,
-					name: 1,
-					categories: 1,
-					productUrl: 1,
-					brand: 1,
-					manufacturer: 1,
-					manufacturerCountry: 1,
-					seller: 1,
-					description: 1,
-					date: 1,
-					variants: 1
-				},
-			},
-			{
-				$match: {
-					$and: filterParams
-				}
-			},
+      {
+        $project: {
+          _id: 1,
+          name: 1,
+          categories: 1,
+          productUrl: 1,
+          brand: 1,
+          manufacturer: 1,
+          manufacturerCountry: 1,
+          seller: 1,
+          description: 1,
+          date: 1,
+          variants: 1,
+        },
+      },
       sortParam,
-			{ $limit: perPage },
+			{
+				$skip: startPage * perPage - perPage
+			},
+      { $limit: perPage },
     ]);
 
-    // const result = filterProductDuplicates(products, mongooseQuery);
     res.json(products);
   } catch (err) {
     res.status(400).json({
@@ -559,6 +569,9 @@ exports.searchProducts = async (req, res, next) => {
 				],
 				as: "variants",
 			},
+		},
+		{
+			$unwind: "$variants",
 		},
 		{
 			$project: {
