@@ -1,20 +1,20 @@
 import React from 'react'
 import { Button } from '@mui/material'
-import shoppingBagReducer from '../../../store/ShoppingBag'
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined'
 import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined'
 import { useDispatch, useSelector } from 'react-redux'
 import { ProductSelector } from '../../../store/Product'
-import { userSelectors } from '../../../store/User'
 import modalActions from '../../../store/Modal'
 import { favoritesOperations, favoritesSelectors } from '../../../store/Favorites'
 import LoginModal from '../../Modal/LoginModal'
+import useHandleShoppingBag from '../../../utils/customHooks/useHandleShoppingBag'
+import { userSelectors } from '../../../store/User'
 
 const ActionButtons = () => {
-	const dispatch = useDispatch()
+	const handleShoppingBag = useHandleShoppingBag()
 	const activeProduct = useSelector(ProductSelector.getProduct())
-	const parent = useSelector(ProductSelector.getParent())
-	const user = useSelector(userSelectors.getToken())
+	const dispatch = useDispatch()
+	const user = useSelector(userSelectors.getData())
 	// eslint-disable-next-line no-unused-vars
 	const favorites = useSelector(favoritesSelectors.getFavorites())
 	const handleOpen = (content) => dispatch(modalActions.modalToggle(content))
@@ -35,21 +35,11 @@ const ActionButtons = () => {
 
 	return (
 		<>
-			<Button disableRipple
-				sx={{ mx: '13px', padding: { lg: '21px 33px', md: '14px', sm: '10px' } }}
+			<Button
+				disableRipple
+				sx={{ mx: '13px', padding: { lg: '21px 33px', md: '16px', sm: '10px' } }}
 				variant={'contained'}
-				onClick={() => {
-					// eslint-disable-next-line max-len
-					dispatch(shoppingBagReducer.addToShoppingBag(
-						// TODO - addToShoppingBag
-						[{
-							title: parent.name,
-							image: activeProduct.imageUrls[0],
-							price: activeProduct.currentPrice,
-							_id: activeProduct._id,
-							amount: 1
-						}]))
-				}}
+				onClick={() => handleShoppingBag.add(activeProduct)}
 			>
 				ADD TO BAG
 			</Button>
@@ -57,11 +47,15 @@ const ActionButtons = () => {
 				title={favoritesStorage.includes(activeProduct._id) ? 'remove from favorites' : 'add to favorites'}
 				sx={{ padding: { lg: '22px', md: '16px', sm: '12px', xs: '9px' } }} variant={'contained'}
 				onClick={!user
-					? () => handleOpen(<LoginModal />)
+					? async () => {
+						await handleOpen(<LoginModal />)
+						await !favoritesStorage.includes(activeProduct._id)
+							&& addToFavorites()
+					}
 					: addToFavorites
 				}
 			>
-				{favoritesStorage.includes(activeProduct._id)
+				{favoritesStorage.includes(activeProduct._id) && user
 					? <FavoriteOutlinedIcon fontSize={'small'} />
 					: <FavoriteBorderOutlinedIcon fontSize={'small'} />
 				}

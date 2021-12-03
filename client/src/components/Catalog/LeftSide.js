@@ -11,28 +11,30 @@ import {filterSelectors} from '../../store/Filter'
 
 
 const LeftSide = () => {
-	const filters = useSelector(filterSelectors.getFilters())
-
-	// eslint-disable-next-line no-console
-	// console.log('expanded',filters)
+	const {
+		size,
+		color,
+		minPrice,
+		maxPrice,
+	} = useSelector(filterSelectors.getFilters())
 
 	return(
 		<Box>
 			<Box>
 				<CatalogAccordion
-					expanded={false}
+					expanded={!!minPrice || !!maxPrice}
 					title={'price'}
 					details={<PriceRange />} />
 			</Box>
 			<Box>
 				<CatalogAccordion
-					expanded={filters.size.length ? true : false}
+					expanded={!!size.length}
 					title={'size'}
 					details={<SearchSize />} />
 			</Box>
 			<Box>
 				<CatalogAccordion
-					expanded={!!filters.color.length}
+					expanded={!!color.length}
 					title={'color'}
 					details={<ColorSearch />}
 					withBottomBorder={false} />
