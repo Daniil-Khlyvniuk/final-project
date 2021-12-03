@@ -1,6 +1,6 @@
 import React, { useState} from 'react'
 
-import { Container, Grid, Typography , Box} from '@mui/material'
+import {Container, Grid, Typography, Box} from '@mui/material'
 import { Form, Formik} from 'formik'
 import * as Yup from 'yup'
 import TextInput from './FormUI/Textfield'
@@ -12,13 +12,16 @@ import {useSelector} from 'react-redux'
 import {userSelectors} from '../../../store/User'
 import Loader from '../../UI/Loader/Loader'
 import axios from 'axios'
+import CheckboxInput from './FormUI/CheckboxInput'
+// import CheckboxInput from './FormUI/CheckboxInput'
+
 
 
 
 
 const FORM_VALIDATION = Yup.object().shape({
-	firstName: Yup.string(),
-	lastName: Yup.string(),
+	firstName: Yup.string().required('Required'),
+	lastName: Yup.string().required('Required'),
 	email: Yup.string().email('Invalid email'),
 	phone: Yup.string()
 		.matches(phoneRegExp, 'Please enter a valid phone number')
@@ -31,12 +34,15 @@ const FORM_VALIDATION = Yup.object().shape({
 		.min(7,'Password must be 7 digits minimum')
 		.max(30,'Password must be 30 digits maximum'),
 	confirmPass: Yup.string().oneOf([Yup.ref('password')], 'Passwords do not match'),
+	termsOfService : Yup.bool()
 
 })
 
 const UserForm = () => {
 
 	const [status,setStatus]=useState('')
+
+
 
 	const user = useSelector(userSelectors.getData())
 	const token = useSelector(userSelectors.getToken())
@@ -52,7 +58,8 @@ const UserForm = () => {
 		country: user?.country || '',
 		oldPass:'',
 		password:'',
-		confirmPass:''
+		confirmPass:'',
+		subscribe: user?.subscribe || false
 	}
 
 	if(!user){
@@ -81,6 +88,9 @@ const UserForm = () => {
 								validationSchema={FORM_VALIDATION}
 								onSubmit={(values) => {
 
+									// eslint-disable-next-line no-console
+									console.log(values)
+
 									const update ={
 										firstName: values.firstName,
 										lastName: values.lastName,
@@ -89,6 +99,7 @@ const UserForm = () => {
 										address: values.address,
 										city: values.city,
 										country: values.country,
+										subscribe: values.subscribe
 
 									}
 									axios.put('/api/customers', update , {
@@ -107,110 +118,123 @@ const UserForm = () => {
 									setTimeout(() =>{ setStatus(null)}, 3000)
 								}}
 							>
-								<Form>
-									<Grid container spacing={2}>
-										<Grid item xs={12} md={6}>
-											<TextInput
-												name="firstName"
-												label="First Name"
-											/>
-										</Grid>
-										<Grid item xs={12} md={6}>
-											<TextInput
-												name="lastName"
-												label="Last Name"
-											/>
-										</Grid>
-										<Grid item xs={12} md={6}>
-											<TextInput name="phone" label="Phone number" />
-										</Grid>
-										<Grid item xs={12} md={6}>
-											<TextInput
-												name="email"
-												label="Email"
-												
-											/>
-										</Grid>
-										<Grid item xs={12}>
-											<Typography
-												variant='body1'
-												component={'div'}
-												color='primary'
-												fontSize='16px'
-												fontWeight='700'
-												letterSpacing='3px'
-												textAlign='center'
-												sx={{my:'18px'}}
-											>
-													Delivery Address
-											</Typography>
-										</Grid>
-										<Grid item xs={12} >
-											<TextInput name="address" label="Address" />
-										</Grid>
-										<Grid item xs={12} md={6}>
-											<TextInput name="city" label="City" />
-										</Grid>
-										<Grid item xs={12} md={6}>
-											<SelectInput
-												name="country"
-												label="Country"
-												options={countries}
-											/>
-										</Grid>
-										<Grid item xs={12}>
-											<Typography
-												variant='body1'
-												component={'div'}
-												color='primary'
-												fontSize='16px'
-												fontWeight='700'
-												letterSpacing='3px'
-												textAlign='center'
-												sx={{my:'18px'}}
-											>
-												Change Password
-											</Typography>
-										</Grid>
-										<Grid item md={12}>
-											<TextInput
-												name='oldPass'
-												label='Old Password'
-												type='password'
+								{() => {
+									return (
+										<Form>
+											<Grid container spacing={2}>
+												<Grid item xs={12} md={6}>
+													<TextInput
+														name="firstName"
+														label="First Name"
+													/>
+												</Grid>
+												<Grid item xs={12} md={6}>
+													<TextInput
+														name="lastName"
+														label="Last Name"
+													/>
+												</Grid>
+												<Grid item xs={12} md={6}>
+													<TextInput name="phone" label="Phone number" />
+												</Grid>
+												<Grid item xs={12} md={6}>
+													<TextInput
+														name="email"
+														label="Email"
 
-											/>
-										</Grid>
-										<Grid item md={6} xs={12}>
-											<TextInput
-												name="password"
-												label="Password"
-												type='password'
+													/>
+												</Grid>
+												<Grid item xs={12}>
+													<Typography
+														variant='body1'
+														component={'div'}
+														color='primary'
+														fontSize='16px'
+														fontWeight='700'
+														letterSpacing='3px'
+														textAlign='center'
+														sx={{my:'18px'}}
+													>
+														Delivery Address
+													</Typography>
+												</Grid>
+												<Grid item xs={12} >
+													<TextInput name="address" label="Address" />
+												</Grid>
+												<Grid item xs={12} md={6}>
+													<TextInput name="city" label="City" />
+												</Grid>
+												<Grid item xs={12} md={6}>
+													<SelectInput
+														name="country"
+														label="Country"
+														options={countries}
+													/>
+												</Grid>
+												<Grid item xs={12}>
+													<Typography
+														variant='body1'
+														component={'div'}
+														color='primary'
+														fontSize='16px'
+														fontWeight='700'
+														letterSpacing='3px'
+														textAlign='center'
+														sx={{my:'18px'}}
+													>
+														Change Password
+													</Typography>
+												</Grid>
+												<Grid item md={12}>
+													<TextInput
+														name='oldPass'
+														label='Old Password'
+														type='password'
 
-											/>
-										</Grid>
-										<Grid item md={6}  xs={12}>
-											<TextInput
-												name="confirmPass"
-												label="Confirm Password"
-												type='password'
-											/>
-										</Grid>
-										<Grid item xs={12} sx={{textAlign:'center', mt:'16px'}}>
-											{status && (<Typography
-												variant={'body1'}
-												textAlign={'center'}
-												mb={'10px'}
-											>
-												{status}
-											</Typography>)}
-											<ButtonInput
-												disabled={!!status}
-											>
-												Save Changes
-											</ButtonInput>
-										</Grid>
-									</Grid>
-								</Form>
+													/>
+												</Grid>
+												<Grid item md={6} xs={12}>
+													<TextInput
+														name="password"
+														label="Password"
+														type='password'
+
+													/>
+												</Grid>
+												<Grid item md={6}  xs={12}>
+													<TextInput
+														name="confirmPass"
+														label="Confirm Password"
+														type='password'
+													/>
+												</Grid>
+
+												<Grid>
+													<CheckboxInput
+														name='subscribe'
+														label='subscribe'/>
+												</Grid>
+
+												<Grid item xs={12} sx={{textAlign:'center', mt:'16px'}}>
+													{status && (<Typography
+														variant={'body1'}
+														textAlign={'center'}
+														mb={'10px'}
+													>
+														{status}
+													</Typography>)}
+													<ButtonInput
+														disabled={!!status}
+													>
+														Save Changes
+													</ButtonInput>
+												</Grid>
+
+											</Grid>
+										</Form>
+									)
+								}}
+
 							</Formik>
 						</Container>
 					</Grid>
