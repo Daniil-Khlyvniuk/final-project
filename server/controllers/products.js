@@ -331,85 +331,114 @@ exports.getProductsFilterParams = async (req, res, next) => {
   const sortParam = getSortConditions(req.query.sort);
   const perPage = Number(req.query.perPage);
   const startPage = Number(req.query.startPage);
-  // const aggregateParams = getAggregateParamsForProductFilters(filterParams);
+	const query = req.body.test
+  const aggregateParams = getAggregateParamsForProductFilters(filterParams);
 
   try {
-    const products = await ProductVariant.aggregate([
-      { $skip: startPage * perPage - perPage },
+    const products = await Product.aggregate([
 			{
-				$lookup: {
-					from: Product.collection.name,
-					localField: "product",
-					foreignField: "_id",
-					as: "product",
+				$search: {
+					index: "productSearch",
+					compound: {
+						should: [
+							{
+								autocomplete: {
+									query: query,
+									path: "name",
+									fuzzy: {
+										maxEdits: 1,
+										prefixLength: 1,
+										maxExpansions: 256,
+									},
+								},
+							},
+							{
+								autocomplete: {
+									query: query,
+									path: "brand",
+									fuzzy: {
+										maxEdits: 1,
+										prefixLength: 1,
+										maxExpansions: 256,
+									},
+								},
+							},
+						],
+					},
 				},
 			},
-			{
-				$unwind: {
-					path: "$product",
-					preserveNullAndEmptyArrays: true,
-				},
-			},
+			{ $skip: startPage * perPage - perPage },
+
+			// {
+			// 	$text: { $search: query }
+			// },
 			{
 				$lookup: {
 					from: Catalog.collection.name,
-					localField: "product.categories",
+					localField: "categories",
 					foreignField: "_id",
-					as: "product.categories",
+					as: "categories",
 				},
 			},
 			{
-				$unwind: "$product.categories",
+				$unwind: "$categories",
 			},
 			{
 				$lookup: {
-					from: Color.collection.name,
-					localField: "color",
-					foreignField: "_id",
-					as: "color",
-				},
-			},
-			{
-				$unwind: "$color",
-			},
-			{
-				$lookup: {
-					from: Size.collection.name,
-					localField: "size",
-					foreignField: "_id",
-					as: "size",
-				},
-			},
-			{
-				$unwind: "$size",
-			},
-      {
-        $project: {
-          _id: "$product._id",
-          name: "$product.name",
-          categories: "$product.categories",
-          productUrl: "$product.productUrl",
-          brand: "$product.brand",
-          manufacturer: "$product.manufacturer",
-          manufacturerCountry: "$product.manufacturerCountry",
-          seller: "$product.seller",
-          description: "$product.description",
-          date: "$product.date",
-          variants: {
-						_id: "$_id",
-						product: "$product._id",
-						itemNo: "$itemNo",
-						enabled: "$enabled",
-						currentPrice: "$currentPrice",
-						previousPrice: "$previousPrice",
-						imageUrls: "$imageUrls",
-						quantity: "$quantity",
-						color: "$color",
-						size: "$size",
-						date: "$date"
+					from: ProductVariant.collection.name,
+					let: {
+						productId: "$_id",
 					},
-        },
-      },
+					pipeline: [
+						{
+							$lookup: {
+								from: Color.collection.name,
+								localField: "color",
+								foreignField: "_id",
+								as: "color",
+							},
+						},
+						{
+							$unwind: "$color",
+						},
+						{
+							$lookup: {
+								from: Size.collection.name,
+								localField: "size",
+								foreignField: "_id",
+								as: "size",
+							},
+						},
+						{
+							$unwind: "$size",
+						},
+						{
+							$match: {
+								$expr: {
+										 "$eq": [ "$product", "$$productId" ]
+								},
+							},
+						},
+						{$limit: 1}, // it works
+					],
+					as: "variants",
+				},
+			},
+			{
+				$project: {
+					_id: 1,
+					name: 1,
+					categories: 1,
+					productUrl: 1,
+					brand: 1,
+					manufacturer: 1,
+					manufacturerCountry: 1,
+					seller: 1,
+					description: 1,
+					date: 1,
+					variants: 1
+				},
+			},
 			{
 				$match: {
 					$and: filterParams
@@ -419,8 +448,8 @@ exports.getProductsFilterParams = async (req, res, next) => {
 			{ $limit: perPage },
     ]);
 
-    const result = filterProductDuplicates(products, mongooseQuery);
-    res.json(result.length);
+    // const result = filterProductDuplicates(products, mongooseQuery);
+    res.json(products);
   } catch (err) {
     res.status(400).json({
       message: `Error happened on server: "${err}" `,
@@ -435,154 +464,240 @@ exports.searchProducts = async (req, res, next) => {
 
   const query = req.body.query.toLowerCase().trim().replace(/\s\s+/g, " ");
 
-  let products = await Product.find(
-    { $text: { $search: query } }
-  ).populate({
-	  path: "variants",
-	  perDocumentLimit: 1,
-  }).populate("categories")
-
-	const result = filterOneVariant(products)
-	res.json(result);
+	try {
+	const foundProducts = await Product.aggregate([
+		{
+			$search: {
+				index: "productSearch",
+				compound: {
+					should: [
+						{
+							autocomplete: {
+								query: query,
+								path: "name",
+								fuzzy: {
+									maxEdits: 1,
+									prefixLength: 1,
+									maxExpansions: 256,
+								},
+							},
+						},
+						{
+							autocomplete: {
+								query: query,
+								path: "brand",
+								fuzzy: {
+									maxEdits: 1,
+									prefixLength: 1,
+									maxExpansions: 256,
+								},
+							},
+						},
+						{
+							autocomplete: {
+								query: query,
+								path: "description",
+								fuzzy: {
+									maxEdits: 1,
+									prefixLength: 1,
+									maxExpansions: 256,
+								},
+							},
+						},
+					],
+				},
+			},
+		},
+		{
+			$lookup: {
+				from: Catalog.collection.name,
+				localField: "categories",
+				foreignField: "_id",
+				as: "categories",
+			},
+		},
+		{
+			$unwind: "$categories",
+		},
+		{
+			$lookup: {
+				from: ProductVariant.collection.name,
+				let: {
+					productId: "$_id",
+				},
+				pipeline: [
+					{
+						$lookup: {
+							from: Color.collection.name,
+							localField: "color",
+							foreignField: "_id",
+							as: "color",
+						},
+					},
+					{
+						$unwind: "$color",
+					},
+					{
+						$lookup: {
+							from: Size.collection.name,
+							localField: "size",
+							foreignField: "_id",
+							as: "size",
+						},
+					},
+					{
+						$unwind: "$size",
+					},
+					{
+						$match: {
+							$expr: {
+								"$eq": [ "$product", "$$productId" ]
+							},
+						},
+					},
+					{$limit: 1},
+				],
+				as: "variants",
+			},
+		},
+		{
+			$project: {
+				_id: 1,
+				name: 1,
+				categories: 1,
+				productUrl: 1,
+				brand: 1,
+				manufacturer: 1,
+				manufacturerCountry: 1,
+				seller: 1,
+				description: 1,
+				date: 1,
+				variants: 1
+			},
+		},
+		{ $limit: 20 },
+	]);
+	res.json(foundProducts);
+	} catch (err) {
+		res.status(400).json({
+			message: `Error happened on server: "${err}" `,
+		});
+	}
 };
 
 exports.searchAutocomplete = async (req, res, next) => {
-  if (!req.body.query) {
-    res.status(400).json({ message: "Query string is empty" });
-  }
-  const query = req.body.query.toLowerCase().trim().replace(/\s\s+/g, " ");
-
-  try {
-    const foundProducts = await Product.aggregate([
-      {
-        $match: {
-          $expr: {
-            $search: {
-              index: "productSearch",
-              compound: {
-                should: [
-                  {
-                    autocomplete: {
-                      query: query,
-                      path: "name",
-                      fuzzy: {
-                        maxEdits: 1,
-                        prefixLength: 1,
-                        maxExpansions: 256,
-                      },
-                    },
-                  },
-                  {
-                    autocomplete: {
-                      query: query,
-                      path: "brand",
-                      fuzzy: {
-                        maxEdits: 1,
-                        prefixLength: 1,
-                        maxExpansions: 256,
-                      },
-                    },
-                  },
-                ],
-              },
-            },
-          },
-        },
-        // $search: {
-        //   index: "productSearch",
-        //   compound: {
-        //     should: [
-        //       {
-        //         autocomplete: {
-        //           query: query,
-        //           path: "name",
-        //           fuzzy: {
-        //             maxEdits: 1,
-        //           },
-        //         },
-        //       },
-        //       {
-        //         autocomplete: {
-        //           query: query,
-        //           path: "brand",
-        //           fuzzy: {
-        //             maxEdits: 1,
-        //           },
-        //         },
-        //       },
-        //     ],
-        //   },
-        // },
-      },
-      {
-        $lookup: {
-          from: ProductVariant.collection.name,
-          localField: "_id",
-          foreignField: "product",
-          as: "variants",
-        },
-      },
-      {
-        $unwind: "$variants",
-      },
-    ]);
-
-    // const result = foundProducts.reduce(
-    // 	(acc, cur) =>
-    // 		(acc = [
-    // 			...acc,
-    // 			...(cur.name.includes(query) ? [cur.name] : []),
-    // 			...(cur.brand.includes(query) ? [cur.brand] : []),
-    // 		]),
-    // 	[]
-    // );
-    res.json(foundProducts);
-  } catch (err) {
-    res.status(400).json({
-      message: `Error happened on server: "${err}" `,
-    });
-  }
-  // =======
-  //   const query = req.body.query.toLowerCase().trim().replace(/\s\s+/g, " ");
+  // if (!req.body.query) {
+  //   res.status(400).json({ message: "Query string is empty" });
+  // }
+  // const query = req.body.query.toLowerCase().trim().replace(/\s\s+/g, " ");
+	//
+  // try {
   //   const foundProducts = await Product.aggregate([
-  //     {
-  //       $search: {
-  //         index: "productSearch",
-  //         compound: {
-  //           should: [
-  //             {
-  //               autocomplete: {
-  //                 query: query,
-  //                 path: "name",
-  //                 fuzzy: {
-  //                   maxEdits: 1,
-  //                 },
-  //               },
-  //             },
-  //             {
-  //               autocomplete: {
-  //                 query: query,
-  //                 path: "brand",
-  //                 fuzzy: {
-  //                   maxEdits: 1,
-  //                 },
-  //               },
-  //             },
-  //           ],
-  //         },
-  //       },
-  //     },
+	// 		{
+	// 			$search: {
+	// 				index: "productSearch",
+	// 				compound: {
+	// 					should: [
+	// 						{
+	// 							autocomplete: {
+	// 								query: query,
+	// 								path: "name",
+	// 								fuzzy: {
+	// 									maxEdits: 1,
+	// 									prefixLength: 1,
+	// 									maxExpansions: 256,
+	// 								},
+	// 							},
+	// 						},
+	// 						{
+	// 							autocomplete: {
+	// 								query: query,
+	// 								path: "brand",
+	// 								fuzzy: {
+	// 									maxEdits: 1,
+	// 									prefixLength: 1,
+	// 									maxExpansions: 256,
+	// 								},
+	// 							},
+	// 						},
+	// 					],
+	// 				},
+	// 			},
+	// 		},
+	// 		{
+	// 			$lookup: {
+	// 				from: Catalog.collection.name,
+	// 				localField: "categories",
+	// 				foreignField: "_id",
+	// 				as: "categories",
+	// 			},
+	// 		},
+	// 		{
+	// 			$unwind: "$categories",
+	// 		},
+	// 		{
+	// 			$lookup: {
+	// 				from: ProductVariant.collection.name,
+	// 				let: {
+	// 					productId: "$_id",
+	// 				},
+	// 				pipeline: [
+	// 					{
+	// 						$lookup: {
+	// 							from: Color.collection.name,
+	// 							localField: "color",
+	// 							foreignField: "_id",
+	// 							as: "color",
+	// 						},
+	// 					},
+	// 					{
+	// 						$unwind: "$color",
+	// 					},
+	// 					{
+	// 						$lookup: {
+	// 							from: Size.collection.name,
+	// 							localField: "size",
+	// 							foreignField: "_id",
+	// 							as: "size",
+	// 						},
+	// 					},
+	// 					{
+	// 						$unwind: "$size",
+	// 					},
+	// 					{
+	// 						$match: {
+	// 							$expr: {
+	// 								"$eq": [ "$product", "$$productId" ]
+	// 							},
+	// 						},
+	// 					},
+	// 					{$limit: 1}, // it works
+	// 				],
+	// 				as: "variants",
+	// 			},
+	// 		},
+	// 		{
+	// 			$project: {
+	// 				_id: 1,
+	// 				name: 1,
+	// 				categories: 1,
+	// 				productUrl: 1,
+	// 				brand: 1,
+	// 				manufacturer: 1,
+	// 				manufacturerCountry: 1,
+	// 				seller: 1,
+	// 				description: 1,
+	// 				date: 1,
+	// 				variants: 1
+	// 			},
+	// 		},
+	// 		{ $limit: 15 },
   //   ]);
-  //
-  //   const result = foundProducts.reduce(
-  //     (acc, cur) =>
-  //       (acc = [
-  //         ...acc,
-  //         ...(cur.name.includes(query) ? [cur.name] : []),
-  //         ...(cur.brand.includes(query) ? [cur.brand] : []),
-  //       ]),
-  //     []
-  //   );
-  //   res.send([...new Set(result)]);
-  // >>>>>>> develop
+	//
+  //   res.json(foundProducts);
+  // } catch (err) {
+  //   res.status(400).json({
+  //     message: `Error happened on server: "${err}" `,
+  //   });
+  // }
 };
