@@ -93,7 +93,6 @@ const HeaderSearch = () => {
 					getOptionLabel={(option) => option.name}
 					isOptionEqualToValue={(option) => option.name}
 					renderOption={(props, option) => {
-						console.log(option)
 						return (
 							<Link
 								to={`/product-details/${option.variants._id}`}
