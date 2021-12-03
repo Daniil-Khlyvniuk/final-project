@@ -1,4 +1,5 @@
-import {makeStyles} from '@mui/styles'
+import { makeStyles } from '@mui/styles'
+import theme from '../../utils/Theme'
 
 export const useStyles = makeStyles({
 	container: {
@@ -10,11 +11,11 @@ export const useStyles = makeStyles({
 			display: 'none',
 		},
 		position: 'relative',
+		marginBottom: '20px'
 	},
 	img: {
 		width: 280,
 		height: 280,
-
 	},
 	catalogTitle: {
 		fontSize: '18px',
@@ -24,17 +25,16 @@ export const useStyles = makeStyles({
 		background: '#373F41',
 		borderRadius: '2px',
 		position: 'absolute',
-		top: '235px',
-		left: '13px',
+		bottom: '16px',
 		padding: '5px 10px',
-		margin: 0,
+		margin: '0 10px',
+		fontFamily: theme.typography.fontFamily
 	},
 	blockHover: {
 		cursor: 'pointer',
 		transition: 'visibility 0s, opacity 0.5s linear',
 		visibility: 'hidden',
 		opacity: 0,
-		// display: 'none',
 		background: 'rgba(0,0,0,0.5)',
 		width: '280px',
 		height: '280px',
@@ -48,6 +48,7 @@ export const useStyles = makeStyles({
 	},
 	title: {
 		fontWeight: 'bold',
+		fontFamily: theme.typography.fontFamily,
 		fontSize: 18,
 		lineHeight: '30px',
 		textAlign: 'center',
@@ -58,6 +59,8 @@ export const useStyles = makeStyles({
 		fontSize: 32,
 		lineHeight: '25px',
 		textAlign: 'center',
+		fontFamily: theme.typography.fontFamily,
+		fontWeight: 'bold',
 		color: '#FFFFFF',
 		margin: '0 0 20px',
 	},
@@ -68,11 +71,10 @@ export const useStyles = makeStyles({
 		fontSize: 16,
 		lineHeight: '16px',
 		textAlign: 'center',
+		fontFamily: theme.typography.h2,
 		color: '#373F41',
 		padding: '11px 35px',
 		display: 'block',
 		margin: '0 auto',
 	}
-
-
 })

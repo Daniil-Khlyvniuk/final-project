@@ -5,14 +5,11 @@ import { IconButton } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
 import { favoritesOperations } from '../../../store/Favorites'
 import PropTypes from 'prop-types'
-import modalActions from '../../../store/Modal'
-import LoginModal from '../../../components/Modal/LoginModal'
 import { userSelectors } from '../../../store/User'
 
 const Favoriteicon = ({ id }) => {
 	const user = useSelector(userSelectors.getToken())
 	const dispatch = useDispatch()
-	const handleOpen = (content) => dispatch(modalActions.modalToggle(content))
 	const favoritesStorage = JSON.parse(localStorage.getItem('favorites')) || []
 
 	const addToFavorites = () => {
@@ -38,14 +35,11 @@ const Favoriteicon = ({ id }) => {
 				right: '10px',
 				top: '10px',
 			}}
-			onClick={!user
-				? () => handleOpen(<LoginModal />)
-				: addToFavorites
-			}
+			onClick={addToFavorites}
 		>
-			{favoritesStorage.includes(id)
-				? <FavoriteIcon fontSize="large" />
-				: <FavoriteBorderIcon fontSize="large" />
+			{favoritesStorage.includes(id) && user
+				? <FavoriteIcon sx={{ fontSize: { xl: '50px', lg: '50px', md: '40px', xs: '30px' } }} />
+				: <FavoriteBorderIcon sx={{ fontSize: { xl: '50px', lg: '50px', md: '40px', xs: '30px' } }} />
 			}
 		</IconButton>
 	)

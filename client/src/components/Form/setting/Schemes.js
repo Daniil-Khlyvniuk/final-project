@@ -42,16 +42,20 @@ export const SING_UP_SCHEMA = yup.object().shape({
 		.required(IS_REQUIRED)
 		.oneOf([yup.ref('password')], 'Passwords do not match'),
 	subscribe: yup.bool(),
+	rememberMe: yup.bool(),
 })
 
 export const LOGIN_SCHEMA = yup.object().shape({
 	loginOrEmail: yup.string()
+		.strict(true)
+		.lowercase(isNotLowerCaseError)
 		.required(IS_REQUIRED),
 	password: yup.string()
 		.required(IS_REQUIRED)
 		.min(7,'Password must be 7 digits minimum')
 		.max(30,'Password must be 30 digits maximum'),
-	subscribe: yup.bool(),
+	// subscribe: yup.bool(),
+	rememberMe: yup.bool(),
 })
 
 export const SHIPPING_SCHEMA = yup.object().shape({

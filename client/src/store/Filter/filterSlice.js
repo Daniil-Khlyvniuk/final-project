@@ -5,16 +5,16 @@ const initialState = {
 		category: [],
 		color: [],
 		size: [],
-		perPage: 2,
+		perPage: null,
 		sort: null,
-		startPage: 1,
+		startPage: 0,
 		minPrice: 0,
 		maxPrice: 0,
 	},
 	isLoading: true,
 	isLaunchedByUser: false,
+	infinityScrollHasMore: true,
 }
-
 
 export const filterSlice = createSlice({
 	name: 'filter',
@@ -23,15 +23,16 @@ export const filterSlice = createSlice({
 		setIsLaunchedByUser: (state, action) => {
 			state.isLaunchedByUser = action.payload
 		},
+		setInfinityScrollHasMore: (state, action) => {
+			state.infinityScrollHasMore = action.payload
+		},
 		handleCategory: (state, action) => {
 			const name = action.payload
-			if(state.data.category.includes(name))
-			{
-				state.data.category = 
+			if (state.data.category.includes(name)) {
+				state.data.category =
 					state.data.category.filter(category => category !== name)
 			}
-			else
-			{
+			else {
 				state.data.category.push(name)
 			}
 		},
@@ -40,20 +41,12 @@ export const filterSlice = createSlice({
 		},
 		handleSize: (state, action) => {
 			const name = action.payload
-			if(state.data.size.includes(name))
-			{
+			if (state.data.size.includes(name)) {
 				state.data.size = state.data.size.filter(size => size !== name)
 			}
-			else
-			{
+			else {
 				state.data.size.push(name)
 			}
-		},
-		
-		//for filter update from query string ONLY
-		setNewStore: (state, action) => {	
-			state.data = {...state.data, ...action.payload}
-			state.isLoading = false
 		},
 		handlePerPage: (state, action) => {
 			state.data.perPage = action.payload
@@ -67,10 +60,15 @@ export const filterSlice = createSlice({
 		handleMaxPrice: (state, action) => {
 			state.data.maxPrice = action.payload
 		},
-
 		handleStartPage: (state, action) => {
+			if (action.payload < 1) return state
 			state.data.startPage = action.payload
-		}
+		},
+		//for filter update from query string ONLY
+		setNewStore: (state, action) => {
+			state.data = { ...state.data, ...action.payload }
+			state.isLoading = false
+		},
 	},
 })
 
