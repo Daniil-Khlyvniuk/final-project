@@ -10,6 +10,7 @@ import {PhotoSumm, SummBox, SummText, SummTotal, SummCarts} from './style'
 
 const Summary = () => {
 	const { shoppingBag, totalPrice } = useHandleShoppingBag()
+	// eslint-disable-next-line no-console
 	console.log(shoppingBag)
 
 	return (
