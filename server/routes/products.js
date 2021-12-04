@@ -10,7 +10,6 @@ const {
   getProductsInfo,
   getFilteredVariants,
   getProductsFilterParams,
-  searchAutocomplete,
   getVariantById,
   searchProducts,
   getVariantsByProductId,
@@ -62,7 +61,8 @@ router.get("/:varId", getVariantById);
 // @route   POST /products/search
 // @desc    POST appropriate to search query products
 // @access  Public
-router.post("/autocomplete", searchAutocomplete);
+
+// router.post("/autocomplete", searchAutocomplete);
 router.post("/search", searchProducts);
 
 // @route   GET /products/:id

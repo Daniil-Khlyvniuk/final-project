@@ -79,7 +79,6 @@ const PriceRange = () => {
 				disableSwap
 				sx={{
 					height: '2px',
-					width: 250,
 					color: '#373F41',
 					'& .MuiSlider-thumb': {
 						borderRadius: '1px',

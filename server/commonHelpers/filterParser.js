@@ -1,6 +1,6 @@
 const excludedParams = ["perPage", "startPage", "minPrice", "maxPrice", "sort"];
 
-module.exports = function filterParser(filtersQueryString) {
+module.exports = function filterParser(filtersQueryString, isProducts = false) {
   const mongooseQuery = {};
 
   mongooseQuery.currentPrice = {
@@ -12,7 +12,7 @@ module.exports = function filterParser(filtersQueryString) {
       : Infinity,
   };
 
-  return Object.keys(filtersQueryString).reduce(
+  const test = Object.keys(filtersQueryString).reduce(
     (mongooseQuery, filterParam) => {
       if (filtersQueryString[filterParam].includes(",")) {
         mongooseQuery[filterParam] = {
@@ -27,4 +27,21 @@ module.exports = function filterParser(filtersQueryString) {
     },
     mongooseQuery
   );
+
+	if (isProducts) return test
+
+	return {
+		variantQuery: {
+			currentPrice: test.currentPrice,
+			...(!!test.color ? {color: test.color} : {}),
+			...(!!test.size ? {size: test.size} : {}),
+		},
+		productQuery: {
+			...(!!test.brand ? {brand: test.brand,} : {}),
+			...(!!test.category ? {category: test.category,} : {}),
+			...(!!test.manufacturer ? {manufacturer: test.manufacturer,} : {}),
+			...(!!test.manufacturerCountry ? {manufacturerCountry: test.manufacturerCountry,} : {}),
+			...(!!test.seller ? {seller: test.seller,} : {}),
+		}
+	}
 };
