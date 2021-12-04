@@ -22,6 +22,7 @@ const productsSlice = createSlice({
 	reducers: {
 		setAllProducts(state, action) {
 			state.data = action.payload
+			state.isLoading = false
 		},
 		addRelatedId(state, action) {
 			const item = action.payload
