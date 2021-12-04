@@ -2,7 +2,7 @@ import React from 'react'
 import {useSelector} from 'react-redux'
 import {Box, Typography} from '@mui/material'
 import CardInCatalog from '../CardInCatalog/CardInCatalog'
-import { makeStyles, styled } from '@mui/styles'
+import { styled } from '@mui/styles'
 import {productsSelectors} from '../../store/Products'
 import useFilterHandler from '../../utils/customHooks/useFilterHandler'
 import BackdropLoader from '../UI/BackdropLoader/BackdropLoader'
@@ -18,34 +18,17 @@ const StyledTypography = styled(Typography)(() => ({
 	alignSelf: 'center',
 }))
 
-const useStyles = makeStyles({
-	container: {
-		display: 'flex',
-		flexDirection: 'column',
-		// alignItems: 'center',
-		// flexWrap: 'wrap',
-		// gap: '20px',
-		// margin: '20px auto',
-		// justifyContent: 'center',
-	}
-})
 
 const Catalog = () => {
 	const products = useSelector(productsSelectors.getCatalog())
 	const {handleInfinitiScroll} = useFilterHandler()
 	const isLoading = useSelector(productsSelectors.getIsLoading())
 	const hasMore = useSelector(filterSelectors.getInfinityScrollHasMore())
-	const classes = useStyles()
 
-	// eslint-disable-next-line no-console
-	console.log('prod: ', products)
 	const {startPage} = useSelector(filterSelectors.getFilters())
 	const handleScroll = () => {
-		// eslint-disable-next-line no-console
-		// console.log('startPage: ', startPage)
 		handleInfinitiScroll('startPage', +startPage + 1)
 	}
-
 
 	//preloader
 	if(isLoading)
@@ -54,7 +37,12 @@ const Catalog = () => {
 	}
 
 	return (
-		<Box className={classes.container}>
+		<Box 
+			sx={{
+				display: 'flex',
+				flexDirection: 'column',
+			}}
+		>
 			{!products.length && (
 				<StyledTypography>no products by filter is found</StyledTypography>
 			)}

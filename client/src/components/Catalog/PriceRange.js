@@ -1,11 +1,9 @@
-/* eslint-disable no-unused-vars */
-
 import React, {useState, useEffect} from 'react'
 import { FormControl, InputAdornment, OutlinedInput, Slider, Box } from '@mui/material'
 import productsAPI from '../../utils/API/productsAPI'
 import {PriceRng, PriceBox, PriceRangeBlock, money} from './style'
-import {useSelector, useDispatch} from 'react-redux'
-import {filterSelectors, filterOperations} from '../../store/Filter'
+import {useSelector} from 'react-redux'
+import {filterSelectors} from '../../store/Filter'
 
 import useFilterHandler from '../../utils/customHooks/useFilterHandler'
 
@@ -13,17 +11,11 @@ const minDistance = 100
 
 const PriceRange = () => {
 	const {handleFilterChange} = useFilterHandler()
-	// временно
-	// const dispatch = useDispatch()
 	const {minPrice, maxPrice} = useSelector(filterSelectors.getFilters())
-
+	const [defaultMaxPrice, setDefaultMaxPrice] = useState(0)
 	const [value, setValue] = useState([0,1000])
 
-	const [defaultMaxPrice, setDefaultMaxPrice] = useState(0)
-
 	const rangeSelector = (event, newValue, activeThumb) => {
-		// // eslint-disable-next-line no-console
-		// console.log('range',event, newValue)
 		if (!Array.isArray(newValue)) {
 			return
 		}
@@ -35,22 +27,13 @@ const PriceRange = () => {
 	}
 
 	const handleRange = (event, newValue) => {
-		// eslint-disable-next-line no-console
-		// console.log('range',event, newValue)
-		// setValue(newValue)
 		handleFilterChange('priceRange',newValue)
 	}
 
 	const getPriceFilters = async () => {
 		try{
 			const res = await productsAPI.getMinMaxPrice()
-			// setValue([res.data[0].min, res.data[0].max])
-			// setValue([0, res.data[0].max])
 			setDefaultMaxPrice(res.data[0].max)
-			// eslint-disable-next-line no-console
-			// console.log('mmm',res.data)
-			// dispatch(filterOperations.handleMinPrice(0))
-			// dispatch(filterOperations.handleMaxPrice(res.data[0].max))
 		}
 		catch(err){
 			// eslint-disable-next-line no-console
@@ -70,7 +53,6 @@ const PriceRange = () => {
 	return (
 		<Box style={PriceBox}>
 			<Slider
-				// getAriaLabel={() => 'Minimum distance shift'}
 				value={value}
 				min={0}
 				max={defaultMaxPrice}
@@ -79,7 +61,7 @@ const PriceRange = () => {
 				disableSwap
 				sx={{
 					height: '2px',
-					color: '#373F41',
+					color: 'primary.main',
 					'& .MuiSlider-thumb': {
 						borderRadius: '1px',
 						width: '17px',
