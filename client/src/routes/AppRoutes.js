@@ -20,10 +20,11 @@ const AppRoutes = () => {
 			<ProtectedRoute exact path='/favorites'><Favorites /></ProtectedRoute>
 			<Route exact path='/product-details/:id'><ProductDetails /></Route>
 			<Route exact path='/cart'><Cart /></Route>
+
 			<Route exact path='/shop/catalog'><Catalog/></Route>
 
 			<Route exact path='/info/:customId'><StaticPages /></Route>
-			
+
 			<Route exact path='/subscription/:email'><HandleSubscribe /></Route>
 			<ProtectedRoute exact path='/checkout'><Checkout/></ProtectedRoute>
 			<ProtectedRoute exact path='/user-profile'><UserProfilePage/></ProtectedRoute>

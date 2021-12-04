@@ -4,12 +4,14 @@ import Loader from '../UI/Loader/Loader'
 import { Container, Grid } from '@mui/material'
 import LeftMenu from '../CustomerPage/LeftMenu'
 import RightMenu from '../CustomerPage/RightMenu'
+import { useLocation } from 'react-router-dom'
 
 const StaticPages = () => {
 	const [data, setData] = useState(null)
 	const [loading, setLoading] = useState(false)
 
-	const page = location.pathname
+	const { pathname } = useLocation()
+	const page = pathname
 		.split('/')
 		.pop()
 
@@ -17,11 +19,9 @@ const StaticPages = () => {
 		axios(`/api/pages/${page}`)
 			.then(r => {
 				setData(r.data)
-				console.log(r.data)
 				setLoading(false)
 			})
 	}, [page])
-
 
 	return (
 		<Container>
