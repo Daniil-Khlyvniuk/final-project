@@ -5,11 +5,16 @@ import PropTypes from 'prop-types'
 import icons from '../../utils/Icons/index'
 import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
 // import { useSelector } from 'react-redux'
+// import { userSelectors } from '../../store/User'
+// import { useSelector } from 'react-redux'
 // import { ProductSelector } from '../../store/Product'
 
 const ShoppingBagCard = ({ item }) => {
 	const classes = useStyles()
 	const handleShoppingBag = useHandleShoppingBag()
+
+	// const user = useSelector(userSelectors.getData())
+	// const isLoggedIn = !!user
 
 	// const allColors = useSelector(ProductSelector.allColors())
 	// const color = allColors?.find(color => color._id === item.color)
@@ -42,7 +47,8 @@ const ShoppingBagCard = ({ item }) => {
 						<div>
 							<div
 								className={classes.quantityUp}
-								onClick={()=>handleShoppingBag.add(item?._id)}>
+								onClick={()=> handleShoppingBag.add(item)}
+							>
 								{icons.arrowUp()}
 							</div>
 							<div

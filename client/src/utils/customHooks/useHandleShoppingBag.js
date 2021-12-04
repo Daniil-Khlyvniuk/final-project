@@ -3,20 +3,22 @@ import {shoppingBagSelectors} from '../../store/ShoppingBag'
 import * as shoppingBagActions from '../../store/ShoppingBag/shoppingBagSlice'
 // import { useEffect } from 'react'
 import cartAPI from '../../utils/API/cartAPI'
+// import { ProductSelector } from '../../store/Product'
 
 export default function useHandleShoppingBag() {
 	const dispatch = useDispatch()
 	const shoppingBag = useSelector(shoppingBagSelectors.getShoppingBag())
 	const totalPrice = shoppingBag?.reduce((acc, value)=>acc+value.currentPrice,0)
+	// const activeProduct = useSelector(ProductSelector.getProduct())
 
 	const add = async (product) => {
 		if(!localStorage.getItem('userToken')) {
 			const shoppingBag = JSON.parse(localStorage.getItem('shoppingBag') || '[]') || []
 			const newShoppingBag = [...shoppingBag, ...[product]]
 
-			console.log(newShoppingBag)
 			localStorage.setItem('shoppingBag', JSON.stringify(newShoppingBag))
 			dispatch(shoppingBagActions.addToShoppingBag(newShoppingBag))
+			cartAPI.addProductToCart(product._id)
 		}else{
 			await cartAPI.addProductToCart(product._id)
 
