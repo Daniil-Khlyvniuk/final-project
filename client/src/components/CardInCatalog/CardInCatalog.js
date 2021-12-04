@@ -9,7 +9,6 @@ const CardInCatalog = ({ title, image, price, _id }) => {
 	const classes = useStyles()
 
 	return (
-		// <Box>
 		<Box className={classes.container}>
 			<img className={classes.img} src={image} alt='img' />
 			<p className={classes.catalogTitle}>{title.slice(0, 40) + '...'}</p>
@@ -26,7 +25,6 @@ const CardInCatalog = ({ title, image, price, _id }) => {
 				</Button>
 			</Box>
 		</Box>
-		// </Box/>
 	)
 }
 
