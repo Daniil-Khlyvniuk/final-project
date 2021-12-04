@@ -195,12 +195,91 @@ exports.getProductsInfo = async (req, res, next) => {
 };
 
 exports.getMinMaxPrice = async (req, res, next) => {
-  const mongooseQuery = filterParser(req.query);
-  const filterParams = getFilterConditions(mongooseQuery);
-  const aggregateParams = getAggregateParamsForProductFilters(filterParams);
+	const mongooseQuery = filterParser(req.query);
+	const { variantQuery, productQuery } = getFilterConditions(mongooseQuery);
   try {
     const minmax = await Product.aggregate([
-      ...aggregateParams,
+			{
+				$lookup: {
+					from: Catalog.collection.name,
+					localField: "categories",
+					foreignField: "_id",
+					as: "categories",
+				},
+			},
+			{
+				$unwind: "$categories",
+			},
+			{
+				$match: {
+					$and: productQuery,
+				},
+			},
+			{
+				$lookup: {
+					from: ProductVariant.collection.name,
+					let: {
+						productId: "$_id",
+					},
+					pipeline: [
+						{
+							$lookup: {
+								from: Color.collection.name,
+								localField: "color",
+								foreignField: "_id",
+								as: "color",
+							},
+						},
+						{
+							$unwind: "$color",
+						},
+						{
+							$lookup: {
+								from: Size.collection.name,
+								localField: "size",
+								foreignField: "_id",
+								as: "size",
+							},
+						},
+						{
+							$unwind: "$size",
+						},
+						{
+							$match: {
+								$and: [
+									...variantQuery,
+									{
+										$expr: {
+											$eq: [ "$product", "$$productId" ],
+										},
+									},
+								]
+							}
+						},
+					],
+					as: "variants",
+				},
+			},
+			{
+				$unwind: {
+					path: "$variants",
+				},
+			},
+			{
+				$project: {
+					_id: 1,
+					name: 1,
+					categories: 1,
+					productUrl: 1,
+					brand: 1,
+					manufacturer: 1,
+					manufacturerCountry: 1,
+					seller: 1,
+					description: 1,
+					date: 1,
+					variants: 1,
+				},
+			},
       {
         $group: {
           _id: null,
@@ -332,7 +411,8 @@ exports.getProductsFilterParams = async (req, res, next) => {
   const perPage = Number(req.query.perPage);
   const startPage = Number(req.query.startPage);
 	const query = req.body.query
-
+	// console.log("body", req.body)
+	// console.log("req", req)
 	try {
     const products = await Product.aggregate([
 			...(!!query ? [     {
