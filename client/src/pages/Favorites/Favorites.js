@@ -11,18 +11,17 @@ const Favorites = () => {
 	const favorites = useSelector(favoritesSelectors.getFavorites())
 	const isLoading = useSelector(favoritesSelectors.isLoading())
 	const dispatch = useDispatch()
-
-	const productID = JSON.parse(localStorage.getItem('favorites'))
+	const favoriteID = JSON.parse(localStorage.getItem('favorites')) || []
 
 	useEffect(() => {
-		favoritesOperations.fetchFavorites(productID)(dispatch)
+		favoritesOperations.fetchFavorites(favoriteID)(dispatch)
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [productID.length])
+	}, [favoriteID.length])
 
 	return (
 		<Container maxWidth="lg" sx={{ minWidth: 320 }}>
 			{isLoading && <BackdropLoader open={isLoading} />}
-			{!productID.length
+			{!favoriteID.length
 				? <Box style={{ textAlign: 'center', margin: '7rem 0' }}>
 					<Typography
 						fontSize={32}

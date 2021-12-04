@@ -10,13 +10,18 @@ import LeftSide from '../../components/Catalog/LeftSide'
 import { Helmet } from 'react-helmet-async'
 
 const Catalog = () => {
-	// eslint-disable-next-line no-unused-vars
-	const {onLoadingPage} = useFilterHandler()
+	const {onLoadingPage, restoreDefaults} = useFilterHandler()
 	const classes = useStyles()
 	
 	//parse url on first page loading
 	useEffect(() => {
 		onLoadingPage()
+
+		return () => {
+			//restore params to parse query string after return on page
+			restoreDefaults()
+		}
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[])
 

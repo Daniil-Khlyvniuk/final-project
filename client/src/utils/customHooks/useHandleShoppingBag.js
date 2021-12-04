@@ -51,6 +51,7 @@ export default function useHandleShoppingBag() {
 		dispatch(shoppingBagActions.removeFromShoppingBag([]))
 	}
 
+
 	// useEffect(() => {
 	// 	if(!shoppingBag?.length){
 	// 		if(!localStorage.getItem('userToken')){

@@ -4,6 +4,7 @@ import { border } from '../../pages/Cart/styles'
 import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
 import { PhotoSumm, SummBox, SummText, SummTotal, SummCarts } from './style'
 import axios from 'axios'
+	
 
 const Summary = () => {
 	const { shoppingBag, totalPrice } = useHandleShoppingBag()

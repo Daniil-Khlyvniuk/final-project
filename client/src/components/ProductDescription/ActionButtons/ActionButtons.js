@@ -8,12 +8,13 @@ import modalActions from '../../../store/Modal'
 import { favoritesOperations, favoritesSelectors } from '../../../store/Favorites'
 import LoginModal from '../../Modal/LoginModal'
 import useHandleShoppingBag from '../../../utils/customHooks/useHandleShoppingBag'
+import { userSelectors } from '../../../store/User'
 
 const ActionButtons = () => {
 	const handleShoppingBag = useHandleShoppingBag()
 	const activeProduct = useSelector(ProductSelector.getProduct())
 	const dispatch = useDispatch()
-	const user = localStorage.getItem('userToken')
+	const user = useSelector(userSelectors.getData())
 	// eslint-disable-next-line no-unused-vars
 	const favorites = useSelector(favoritesSelectors.getFavorites())
 	const handleOpen = (content) => dispatch(modalActions.modalToggle(content))
