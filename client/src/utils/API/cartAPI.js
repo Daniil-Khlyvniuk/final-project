@@ -32,9 +32,17 @@ const deleteCart = (productId) => {
 		.catch(() => null)
 }
 
+const clearCart = () => {
+	return axios
+		.delete('/api/cart', getAuthHeader())
+		.then(res => res?.data)
+		.catch(() => null)
+}
+
 export default {
 	addProductToCart,
 	deleteProductFromCart,
 	getCart,
-	deleteCart
+	deleteCart,
+	clearCart
 }
