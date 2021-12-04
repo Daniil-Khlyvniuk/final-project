@@ -193,10 +193,12 @@ const Carousel = ({
 						slidesToShow={slides.length <= 3 ? slides.length : 3}
 					>
 						{slides?.map((slide) => {
+							console.log('===============')
+							console.log(slide)
 							return (
 								<div key={slide.customId}>
 									<div style={{ position: 'relative', margin: '0 10px' }}>
-										<Link to={`/${slide?.prodId}`}>
+										<Link to={`${slide?.prodId}`}>
 											<img src={slide.imageUrl} className={style.thumb} style={{
 												maxWidth: '380px',
 												maxHeight: '380px',
