@@ -1,11 +1,8 @@
 import { makeStyles } from '@mui/styles'
-import theme from '../../utils/Theme'
 
-export const useStyles = makeStyles({
+export const useStyles = makeStyles(theme =>({
 	container: {
-		width: 'calc((100% / 3) - 20px)',
-		maxWidth: 280,
-		minWidth: 200,
+		width: '275px',
 		aspectRatio: 1,
 		'&:hover $blockHover': {
 			visibility: 'visible',
@@ -15,7 +12,16 @@ export const useStyles = makeStyles({
 			display: 'none',
 		},
 		position: 'relative',
-		marginBottom: '20px'
+		marginBottom: '10px',
+		[theme.breakpoints.down('600')]: {
+			margin: '0 auto',
+			width:'350px'
+		},
+		[theme.breakpoints.between('650','792')] :{
+			margin: '0 auto',
+			width:'350px'
+		}
+
 	},
 	img: {
 		width: '100%',
@@ -32,7 +38,8 @@ export const useStyles = makeStyles({
 		bottom: '16px',
 		padding: '5px 10px',
 		margin: '0 10px',
-		fontFamily: theme.typography.fontFamily
+		fontFamily: theme.typography.fontFamily,
+		textTransform: 'capitalize'
 	},
 	blockHover: {
 		cursor: 'pointer',
@@ -58,6 +65,8 @@ export const useStyles = makeStyles({
 		textAlign: 'center',
 		color: '#FFFFFF',
 		margin: '70px 0 20px',
+		textTransform:'capitalize'
+
 	},
 	price: {
 		fontSize: 32,
@@ -80,5 +89,6 @@ export const useStyles = makeStyles({
 		padding: '11px 35px',
 		display: 'block',
 		margin: '0 auto',
-	}
-})
+	},
+
+}))
