@@ -2,7 +2,6 @@ import React from 'react'
 import { Route, Switch, Router, useHistory  } from 'react-router-dom'
 import ProtectedRoute from '../components/ProtectedRoute/ProtectedRoute'
 import Main from '../pages/Main/Main'
-import ProductsList from '../pages/ProductsList/ProductsList'
 import ProductDetails from '../pages/ProductDetails/ProductDetails'
 import Catalog from '../pages/Catalog/Catalog'
 import PaymentAndDelivery from '../staticPages/PaymentAndDelivery/PaymentAndDelivery'
@@ -18,6 +17,7 @@ import Favorites from '../pages/Favorites/Favorites'
 import HandleSubscribe from '../pages/HandleSubscribe'
 import UserProfilePage from '../pages/UserProfile/UserProfile'
 import Checkout from '../pages/Cart/checkout'
+import CompletePay from '../components/PayCard/CompletePay'
 import StaticPages from '../components/StaticPages/StaticPages'
 
 const AppRoutes = () => {
@@ -34,7 +34,6 @@ const AppRoutes = () => {
 		<Switch>
 			<Route exact path='/'><Main /></Route>
 			<ProtectedRoute exact path='/favorites'><Favorites /></ProtectedRoute>
-			<Route exact path='/products-list'><ProductsList /></Route>
 			<Route exact path='/product-details/:id'><ProductDetails /></Route>
 			<Route exact path='/cart'><Cart /></Route>
 			<Route exact path='/shop/catalog'><Catalog /></Route>
@@ -55,8 +54,10 @@ const AppRoutes = () => {
 			</Router>
 
 			<Route exact path='/subscription/:email'><HandleSubscribe /></Route>
-			<Route exact path='/checkout'><Checkout/></Route>
+			<ProtectedRoute exact path='/checkout'><Checkout/></ProtectedRoute>
 			<ProtectedRoute exact path='/user-profile'><UserProfilePage/></ProtectedRoute>
+			{/*<ProtectedRoute exact path='/complete-order'><CompletePay /></ProtectedRoute>*/}
+			<Route exact path='/complete-order'><CompletePay /></Route>
 			<Route exact path='*'><Page404 /></Route>
 		</Switch>
 	)

@@ -3,12 +3,12 @@ import linksApi from '../../utils/API/linksApi'
 
 export const fetchLinks = createAsyncThunk(
 	'links/fetchLinks',
-	async (_,{rejectWithValue}) => {
-		try{
+	async (_, { rejectWithValue }) => {
+		try {
 			const response = await linksApi.getLinks()
 			return response.data
 		}
-		catch(error){ //error handle
+		catch (error) { 
 			return rejectWithValue(error.message)
 		}
 	}

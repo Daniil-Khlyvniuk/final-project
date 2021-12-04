@@ -43,6 +43,7 @@ const RelatedItemsList = () => {
 				customId: prod.variants._id,
 				price: prod.variants.currentPrice,
 				name: prod.name,
+				prodId: prod._id,
 			}
 		}
 	})

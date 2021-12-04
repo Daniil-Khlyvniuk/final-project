@@ -1,5 +1,5 @@
 import React from 'react'
-import {Box, Button, Card, CardMedia, Grid, Typography} from '@mui/material'
+import {Box, Button, Card, CardMedia, Grid, Typography, styled} from '@mui/material'
 import {makeStyles} from '@mui/styles'
 import PropTypes from 'prop-types'
 import {Link} from 'react-router-dom'
@@ -12,8 +12,14 @@ const useStyles = makeStyles({
 	}
 })
 
+const MyButtonLink = styled(Button)(() => ({
+	padding: '10px 40px', 
+	marginBottom: '15px',
+}))
+
 const PopularCard = ({data, index}) => {
 	const classes = useStyles()
+
 	if (index > 3) {
 		return null
 	} else {
@@ -40,14 +46,23 @@ const PopularCard = ({data, index}) => {
 									sx={{mt: '15px', mb: '15px'}} className={classes.popularHeader}>
 									{data.name}
 								</Typography>
-								<Button
-									color={'primary'}
+								<MyButtonLink
 									component={Link}
 									to={`/shop/catalog?category=${data.name}`}
-									sx={{paddingY: '10px', paddingX: '40px', mb: '15px'}}
-									variant={'outlined'}>
+									variant={'outlined'}
+									color={'primary'}
+								>
 									Shop
-								</Button>
+								</MyButtonLink>
+
+								{/* <Button
+										color={'primary'}
+										component={Link}
+										to={`/shop/catalog?category=${data.name}`}
+										sx={{paddingY: '10px', paddingX: '40px', mb: '15px'}}
+										variant={'outlined'}>
+									Shop
+									</Button> */}
 							</Box>
 						</Box>
 					</Box>

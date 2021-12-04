@@ -6,13 +6,13 @@ import {
 } from '@stripe/react-stripe-js'
 import { button, form, textBtn } from './style'
 
+
 export default function CheckoutForm() {
 	const stripe = useStripe()
 	const elements = useElements()
 
 	const [message, setMessage] = useState(null)
 	const [isLoading, setIsLoading] = useState(false)
-
 
 
 
@@ -29,6 +29,7 @@ export default function CheckoutForm() {
 		if (!clientSecret) {
 			return
 		}
+
 
 		stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
 			switch (paymentIntent.status) {
@@ -64,7 +65,7 @@ export default function CheckoutForm() {
 			elements,
 			confirmParams: {
 				// Make sure to change this to your payment completion page
-				return_url: 'http://localhost:3000',
+				return_url: 'http://localhost:3000/complete-order',
 			},
 		})
 
@@ -82,16 +83,22 @@ export default function CheckoutForm() {
 		setIsLoading(false)
 	}
 
+
+	// const pay = () => handleSubmit()
+
+
+
+
 	return (
-		<form id="payment-form" style={form} onSubmit={handleSubmit}>
+		<form id="payment-form" style={form}
+			onSubmit={handleSubmit}
+		>
 			<PaymentElement id="payment-element" />
 			<button
 				style={button}
 				disabled={isLoading || !stripe || !elements} id="submit"
 			>
-				<span id="button-text" style={textBtn}>
-					{isLoading ? <div className="spinner" id="spinner"></div> : 'NEXT'}
-				</span>
+				<span id="button-text" style={textBtn}>NEXT</span>
 			</button>
 			{/* Show any error or success messages */}
 			{message && <div id="payment-message">{message}</div>}

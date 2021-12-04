@@ -42,6 +42,11 @@ export default function useHandleShoppingBag() {
 		dispatch(shoppingBagActions.removeFromShoppingBag(newShoppingBag))
 	}
 
+	const AfterBuy = () => {
+		localStorage.setItem('shoppingBag', [])
+		dispatch(shoppingBagActions.removeFromShoppingBag([]))
+	}
+
 	// useEffect(() => {
 	// 	if(!shoppingBag?.length){
 	// 		if(!localStorage.getItem('userToken')){
@@ -55,7 +60,7 @@ export default function useHandleShoppingBag() {
 	// }, [shoppingBag])// eslint-disable-line react-hooks/exhaustive-deps
 
 	return {
-		add, remove, removeAll,
+		add, remove, removeAll, AfterBuy,
 		totalPrice,
 		shoppingBag: shoppingBag
 			?.reduce((acc, val) =>

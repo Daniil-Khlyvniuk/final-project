@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import productsAPI from '../../utils/API/productsAPI'
 
-
 const fetchProductUrl = createAsyncThunk(
 	'product/getProduct',
 	async (productId) => {
@@ -11,7 +10,6 @@ const fetchProductUrl = createAsyncThunk(
 		return response.data
 	}
 )
-
 
 const fetchAllColors = createAsyncThunk(
 	'product/getAllColors',
@@ -23,15 +21,16 @@ const fetchAllColors = createAsyncThunk(
 
 const fetchSizes = createAsyncThunk(
 	'product/getSizes',
-	async(params)=>{
-		const {colorId , productId} = params
+	async (params) => {
+		const { colorId, productId } = params
 		const response = await productsAPI.getSizesNew(colorId, productId)
 		return response.data
 	}
 )
+
 const fetchAllVariants = createAsyncThunk(
 	'product/getAllVariants',
-	async(variants)=>{
+	async (variants) => {
 		// eslint-disable-next-line max-len
 		const response = await productsAPI.getAllVariantsByProductId(variants)
 		return response.data
@@ -39,4 +38,4 @@ const fetchAllVariants = createAsyncThunk(
 	}
 )
 
-export default {fetchProductUrl,fetchAllColors,fetchSizes,fetchAllVariants}
+export default { fetchProductUrl, fetchAllColors, fetchSizes, fetchAllVariants }

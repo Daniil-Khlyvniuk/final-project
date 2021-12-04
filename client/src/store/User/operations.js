@@ -1,4 +1,4 @@
-import {actions, fetchUser} from './userSlice'
+import { actions, fetchUser } from './userSlice'
 
 export default {
 	...actions,

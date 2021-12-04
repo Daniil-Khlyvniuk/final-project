@@ -2,7 +2,7 @@ import React from 'react'
 import BasicModal from './Modal'
 import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
 import CardInModal from '../CardInModal/CardInModal'
-import { Button, Typography } from '@mui/material'
+import { Button, GlobalStyles, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { Box } from '@mui/system'
 import { useDispatch } from 'react-redux'
@@ -19,7 +19,7 @@ const style = {
 		transform: 'translate(-50%, -50%)',
 		bgcolor: '#fff',
 		padding: '15px 10px 0',
-		maxHeight: '80vh'
+		maxHeight: '80vh',
 	},
 	link: {
 		textDecoration: 'none',
@@ -47,6 +47,17 @@ const CartModal = () => {
 				<Box>
 					{shoppingBag?.length
 						? <Box>
+							<GlobalStyles
+								styles={{
+									'*::-webkit-scrollbar': {
+										width: '0.2em',
+									},
+									'*::-webkit-scrollbar-thumb': {
+										backgroundColor: '#373F41',
+										outline: '1px solid slategrey',
+									},
+								}}
+							/>
 							<Typography
 								fontSize={18}
 								style={style.title}>
