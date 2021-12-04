@@ -20,6 +20,9 @@ const userSlice = createSlice({
 	name: 'user',
 	initialState,
 	reducers: {
+		setNewData(state,action){
+			state.data = action.payload
+		},
 		setToken(state, action) {
 			const { token, rememberMe } = action.payload
 			state.token = token

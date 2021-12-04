@@ -8,8 +8,8 @@ import { phoneRegExp } from './data/Regex'
 import countries from './data/countries.json'
 import SelectInput from './FormUI/SelectInput'
 import ButtonInput from './FormUI/ButtonInput'
-import {useSelector} from 'react-redux'
-import {userSelectors} from '../../../store/User'
+import {useSelector , useDispatch} from 'react-redux'
+import {userOperations, userSelectors} from '../../../store/User'
 import Loader from '../../UI/Loader/Loader'
 import axios from 'axios'
 import CheckboxInput from './FormUI/CheckboxInput'
@@ -40,7 +40,7 @@ const FORM_VALIDATION = Yup.object().shape({
 const UserForm = () => {
 
 	const [status,setStatus]=useState('')
-
+	const dispatch = useDispatch()
 
 
 	const user = useSelector(userSelectors.getData())
@@ -87,22 +87,31 @@ const UserForm = () => {
 								validationSchema={FORM_VALIDATION}
 								onSubmit={(values) => {
 
-									const update = {
-										firstName: values.firstName,
-										lastName: values.lastName,
-										email:values.email,
-										phone: values.phone,
-										address: values.address,
-										city: values.city,
-										country: values.country,
-										subscribe: values.subscribe
+									if(!values.oldPass) {
+										const update = {...user,
+											firstName: values.firstName,
+											lastName: values.lastName,
+											email:values.email,
+											phone: values.phone,
+											address: values.address,
+											city: values.city,
+											country: values.country,
+											subscribe: values.subscribe
 
+										}
+										axios.put('/api/customers', update , {
+											headers: {Authorization : token}
+										}).then(() => {
+											setStatus('Changes Saved')
+											dispatch(userOperations.setNewData(update))
+										})
 									}
-									axios.put('/api/customers', update , {
-										headers: {Authorization : token}
-									}).then(() => setStatus('Changes Saved'))
 
-									if(values.oldPass){
+
+									if(values.oldPass && values.password === ''){
+										setStatus('Password not changed')
+									} else if(values.oldPass.length > 2 && values.password> 2){
+
 										const passwords = {
 											'password': values.oldPass,
 											'newPassword': values.password
@@ -111,7 +120,7 @@ const UserForm = () => {
 										axios.put('/api/customers/password',passwords,{headers: {Autorization : token}}).then((res)=>setStatus(res.data.password = 'Wrong Password' || res.data.message))
 									}
 
-									setTimeout(() =>{ setStatus(null)}, 3000)
+									setTimeout(() =>{ setStatus(null)}, 1500)
 								}}
 							>
 								{() => {
