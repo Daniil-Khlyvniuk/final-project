@@ -3,7 +3,7 @@
 import React, {useState, useEffect} from 'react'
 import { FormControl, InputAdornment, OutlinedInput, Slider, Box } from '@mui/material'
 import productsAPI from '../../utils/API/productsAPI'
-import {PriceRng, PriceBox, PriceRangeBlock, money} from './style'
+import {PriceRng, PriceRangeBlock, money} from './style'
 import {useSelector, useDispatch} from 'react-redux'
 import {filterSelectors, filterOperations} from '../../store/Filter'
 
@@ -13,8 +13,6 @@ const minDistance = 100
 
 const PriceRange = () => {
 	const {handleFilterChange} = useFilterHandler()
-	// временно
-	// const dispatch = useDispatch()
 	const {minPrice, maxPrice} = useSelector(filterSelectors.getFilters())
 
 	const [value, setValue] = useState([0,1000])
@@ -22,8 +20,6 @@ const PriceRange = () => {
 	const [defaultMaxPrice, setDefaultMaxPrice] = useState(0)
 
 	const rangeSelector = (event, newValue, activeThumb) => {
-		// // eslint-disable-next-line no-console
-		// console.log('range',event, newValue)
 		if (!Array.isArray(newValue)) {
 			return
 		}
@@ -68,7 +64,7 @@ const PriceRange = () => {
 	},[])
 
 	return (
-		<Box style={PriceBox}>
+		<Box>
 			<Slider
 				// getAriaLabel={() => 'Minimum distance shift'}
 				value={value}

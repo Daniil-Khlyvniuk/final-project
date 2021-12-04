@@ -10,10 +10,6 @@ export const PriceRng = {
 
 }
 
-export const PriceBox = {
-	marginLeft: '-50px',
-}
-
 export const PriceRangeBlock = {
 	display: 'flex',
 	// flexDirection: 'column',
