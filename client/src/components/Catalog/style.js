@@ -40,14 +40,6 @@ export const MenuSearch = {
 	boxShadow: 'none'
 }
 
-export const Category = {
-	flexWrap:'wrap',
-	display: 'flex',
-	justifyContent: 'flex-start',
-	margin: '20px auto',
-	gap: '15px',
-}
-
 export const FabrikBox = {
 	display: 'block',
 	width: 'fit-content'
