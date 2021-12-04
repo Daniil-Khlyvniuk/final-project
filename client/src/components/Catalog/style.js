@@ -16,7 +16,10 @@ export const PriceBox = {
 
 export const PriceRangeBlock = {
 	display: 'flex',
+	// flexDirection: 'column',
+	flexWrap: 'wrap',
 	alignItems: 'center',
+
 }
 
 export const money = {
