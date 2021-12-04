@@ -1,16 +1,21 @@
 import React from 'react'
 import { Typography, Box } from '@mui/material'
 import { border } from '../../pages/Cart/styles'
-import ShoppingBagCard from '../ShoppingBagCard/ShoppingBagCard'
 import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
+import {PhotoSumm, SummBox, SummText, SummTotal, SummCarts} from './style'
+
+
 
 
 
 const Summary = () => {
-	const {shoppingBag} = useHandleShoppingBag()
+	const { shoppingBag, totalPrice } = useHandleShoppingBag()
+	console.log(shoppingBag)
 
 	return (
-		<Box>
+		<Box sx={{
+			maxWidth: '370px',
+		}}>
 			<Typography
 				variant='body1'
 				component={'div'}
@@ -23,12 +28,35 @@ const Summary = () => {
         Summary
 			</Typography>
 			<div style={border} />
-			{/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
-			<div>
-				//тут нужно посмотреть хорошо
-				{shoppingBag
-					?.map((item, key) => <ShoppingBagCard key={key} {...item}/>)}
-			</div>
+			{shoppingBag.map( (item)=> (
+			// eslint-disable-next-line react/jsx-key
+				<Box style={SummCarts}>
+					<Box style={SummBox}>
+						<img src={item.imageUrls[0]} style={PhotoSumm} alt={'image'}/>
+						<Box style={SummText}>
+							<Typography
+								fontSize={24}
+								sx={{mb: '14px', mt: '0px'}}
+								variant={'h2'}>{item.title}
+							</Typography>
+							<Typography
+								fontSize={18}
+								sx={{mb: '14px', mt: '0px'}}
+								variant={'p'}>${item.currentPrice}
+							</Typography>
+						</Box>
+					</Box>
+				</Box>
+			))}
+			<Box>
+			</Box>
+			<Box>
+				<Box style={border} />
+				<Box style={SummTotal}>
+					<Typography fontSize={32} sx={{mb: '14px', mt: '85px'}} variant={'h2'}>TOTAL</Typography>
+					<Typography fontSize={32} sx={{mb: '14px', mt: '85px'}} variant={'h2'}>${totalPrice}</Typography>
+				</Box>
+			</Box>
 		</Box>
 	)
 }

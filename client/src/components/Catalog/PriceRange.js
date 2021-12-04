@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+
 import React, {useState, useEffect} from 'react'
 import { FormControl, InputAdornment, OutlinedInput, Slider, Box } from '@mui/material'
 import productsAPI from '../../utils/API/productsAPI'
@@ -88,7 +89,7 @@ const PriceRange = () => {
 				}}
 			/>
 			<Box style={PriceRangeBlock}>
-        FROM
+				FROM
 				<FormControl fullWidth sx={{ m: 1 }}>
 					<OutlinedInput
 						style={PriceRng}
@@ -97,7 +98,7 @@ const PriceRange = () => {
 						startAdornment={<InputAdornment position="start"><p style={money}>$</p></InputAdornment>}
 					/>
 				</FormControl>
-        TO
+				TO
 				<FormControl fullWidth sx={{ m: 1 }}>
 					<OutlinedInput
 						style={PriceRng}

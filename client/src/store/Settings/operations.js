@@ -1,4 +1,4 @@
-import {actions, fetchSettings} from './settingsSlice'
+import { actions, fetchSettings } from './settingsSlice'
 
 export default {
 	...actions,
