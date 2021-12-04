@@ -16,7 +16,7 @@ module.exports.getFilterConditions = (query) => {
 };
 
 module.exports.getSortConditions = (sortParam) => {
-  const sortType = sortParam?.includes("-") ? -1 : 1;
+  const sortType = sortParam?.includes("-") ? 1 : -1;
   const sortParamValue = sortParam?.trim()?.replace("-", "");
   // -1 -> small > big
   //1 -> big > small
