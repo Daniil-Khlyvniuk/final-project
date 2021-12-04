@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
 import { userOperations, userSelectors} from '../../store/User'
@@ -25,10 +23,10 @@ const useAuth = () => {
 	}
 
 	const login = async (values) => {
-		console.log('login',values)
-		const {rememberMe} = values
-		delete (values.rememberMe)
-		const res = await loginUser(values)
+		let formData = {...values}
+		const {rememberMe} = formData
+		delete (formData.rememberMe)
+		const res = await loginUser(formData)
 		if (res.status === 200) {
 			//save token to store (and localStorage)
 			dispatch(userOperations.setToken({token: res.data.token, rememberMe}))
@@ -39,18 +37,18 @@ const useAuth = () => {
 	}
 
 	const register = async (values) => {
-		console.log('register',values)
-		const {email: loginOrEmail,password,rememberMe} = values
-		delete (values.confirmPass)
-		delete (values.rememberMe)
+		let formData = {...values}
+		const {email: loginOrEmail,password,rememberMe} = formData
+		delete (formData.confirmPass)
+		delete (formData.rememberMe)
 
 		const res = await registerUser(values)
 		if (res.status === 200) {
-			return await login({loginOrEmail,password,rememberMe})
+			const loginRes = await login({loginOrEmail,password,rememberMe})
+			return loginRes
 		}
 		return false
 	}
-
 	return {checkToken, login, register}
 }
 

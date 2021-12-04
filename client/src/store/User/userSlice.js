@@ -1,50 +1,42 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import {getUserByToken} from '../../utils/API/userAPI'
-
+import { getUserByToken } from '../../utils/API/userAPI'
 
 const initialState = {
 	token: localStorage.getItem('userToken') || null,
 	data: null,
 	error: null,
-	isLoading: true,
+	isLoading: false,
 }
-
-
 
 export const fetchUser = createAsyncThunk(
 	'user/fetchUser',
 	async () => {
 		const response = await getUserByToken()
-		// eslint-disable-next-line no-console
-		// console.log('user',response)
 		return response.data
 	}
 )
-
 
 const userSlice = createSlice({
 	name: 'user',
 	initialState,
 	reducers: {
-		setToken(state, action)
-		{
-			const {token, rememberMe} = action.payload
+		setToken(state, action) {
+			const { token, rememberMe } = action.payload
 			state.token = token
-			if(rememberMe)
-			{
-				localStorage.setItem('userToken',token)
+			if (rememberMe) {
+				localStorage.setItem('userToken', token)
 			}
 		},
-		logOut(state)
-		{
+		logOut(state) {
 			localStorage.removeItem('userToken')
-			state = initialState
+			state.token = null
+			state.data = null
 			return state
 		},
 	},
 	extraReducers: {
 		[fetchUser.fulfilled]: (state, action) => {
-			delete(action.payload.password)
+			delete (action.payload.password)
 			state.data = action.payload
 			state.isLoading = false
 			state.error = null

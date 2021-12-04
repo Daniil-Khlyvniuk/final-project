@@ -47,7 +47,8 @@ const PopularCard = ({data, index}) => {
 									{data.name}
 								</Typography>
 								<MyButtonLink
-									component={Link} to={`/shop/catalog?category=${data.name}`}
+									component={Link}
+									to={`/shop/catalog?category=${data.name}`}
 									variant={'outlined'}
 									color={'primary'}
 								>

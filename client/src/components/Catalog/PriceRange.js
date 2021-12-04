@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 
 import React, {useState, useEffect} from 'react'
-import { FormControl, InputAdornment, OutlinedInput, Slider, Box } from '@mui/material'
+import { FormControl, InputAdornment, OutlinedInput, Slider, Box, Typography } from '@mui/material'
 import productsAPI from '../../utils/API/productsAPI'
 import {PriceRng, PriceBox, PriceRangeBlock, money} from './style'
 import {useSelector, useDispatch} from 'react-redux'
@@ -57,7 +57,6 @@ const PriceRange = () => {
 			console.log('priceRange err', err)
 		}
 	}
-
 	useEffect(() => {
 		setValue([minPrice,maxPrice])
 	},[minPrice,maxPrice])
@@ -79,7 +78,7 @@ const PriceRange = () => {
 				disableSwap
 				sx={{
 					height: '2px',
-					width: 250,
+					width: '100%',
 					color: '#373F41',
 					'& .MuiSlider-thumb': {
 						borderRadius: '1px',
@@ -88,8 +87,10 @@ const PriceRange = () => {
 					},
 				}}
 			/>
-			<Box style={PriceRangeBlock}>
+			<Box sx={{mt: 1}} style={PriceRangeBlock}>
+				<Typography variant={'p'}>
 				FROM
+				</Typography>
 				<FormControl fullWidth sx={{ m: 1 }}>
 					<OutlinedInput
 						style={PriceRng}
@@ -98,7 +99,9 @@ const PriceRange = () => {
 						startAdornment={<InputAdornment position="start"><p style={money}>$</p></InputAdornment>}
 					/>
 				</FormControl>
+				<Typography variant={'p'}>
 				TO
+				</Typography>
 				<FormControl fullWidth sx={{ m: 1 }}>
 					<OutlinedInput
 						style={PriceRng}

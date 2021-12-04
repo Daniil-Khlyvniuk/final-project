@@ -6,11 +6,13 @@ import settingsApi from '../API/settingsApi'
 import {returnObjectWithoutZeroVal} from '../../utils/helpers/objectHelper'
 
 import {parseQueryStringWithNoZero, returnMode} from '../helpers/stringHelper'
+import {settingsSelectors} from '../../store/Settings'
 
 const useFilterHandler = () => {
 	const dispatch = useDispatch()
 	const history = useHistory()
 	const isLaunchedByUser = useSelector(filterSelectors.getIsLaunchedByUser())
+	const settingsRedux = useSelector(settingsSelectors.getData())
 	
 	const getSettings = async () => {
 		try{
@@ -58,7 +60,15 @@ const useFilterHandler = () => {
 
 	const onLoadingPage = async () => {	
 		//get settings here, becouse from redux return null - async
-		let settings = await getSettings()
+		let settings
+		if(!settingsRedux)
+		{
+			settings = await getSettings()
+		}
+		else
+		{
+			settings = settingsRedux
+		}
 		if(!isLaunchedByUser && settings)
 		{
 			const urlParams = parseQueryStringWithNoZero(history.location.search)
