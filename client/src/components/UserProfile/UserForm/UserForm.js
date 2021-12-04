@@ -141,7 +141,6 @@ const UserForm = () => {
 													<TextInput
 														name="email"
 														label="Email"
-
 													/>
 												</Grid>
 												<Grid item xs={12}>
@@ -185,7 +184,7 @@ const UserForm = () => {
 														Change Password
 													</Typography>
 												</Grid>
-												<Grid item md={12}>
+												<Grid item md={12} xs={12}>
 													<TextInput
 														name='oldPass'
 														label='Old Password'
@@ -201,7 +200,9 @@ const UserForm = () => {
 
 													/>
 												</Grid>
-												<Grid item md={6}  xs={12}>
+												<Grid item md={6}
+													xs={12}
+													align='center'>
 													<TextInput
 														name="confirmPass"
 														label="Confirm Password"
@@ -209,10 +210,30 @@ const UserForm = () => {
 													/>
 												</Grid>
 
-												<Grid>
+												<Grid item md={6}  xs={12} sx={{mt:'15px'}} >
+													<Typography
+														fontSize={'12px'}
+														color={'#000'}
+														fontWeight={700}
+														lineHeight={'20px'}
+													>
+														Notification preferences
+													</Typography>
+													<Typography
+														fontSize={'12px'}
+														color={'#adafb2'}
+														lineHeight={'18px'}
+														letterSpacing={'.3px'}
+														maxWidth={'325px'}
+													>
+														Receive Postil promotions and news.
+														If you do not want to receive notifications,
+														uncheck box.
+													</Typography>
 													<CheckboxInput
 														name='subscribe'
-														label='subscribe'/>
+														label='E-mail'
+													/>
 												</Grid>
 
 												<Grid item xs={12} sx={{textAlign:'center', mt:'16px'}}>
