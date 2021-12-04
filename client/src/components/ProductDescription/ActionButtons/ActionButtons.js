@@ -50,7 +50,7 @@ const ActionButtons = () => {
 					? async () => {
 						await handleOpen(<LoginModal />)
 						await !favoritesStorage.includes(activeProduct._id)
-							&& addToFavorites()
+									&& addToFavorites()
 					}
 					: addToFavorites
 				}

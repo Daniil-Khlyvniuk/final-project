@@ -3,6 +3,7 @@ import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 import CheckoutForm from './CheckoutForm'
 import axios from 'axios'
+import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
 // loadStripe is initialized with a fake API key.
@@ -10,15 +11,17 @@ const stripePromise = loadStripe('pk_test_YXhgLEwTTJdW2AfHsgJJNfAN')
 
 
 export default function Payment() {
+	console.log('=================================')
 	const [clientSecret, setClientSecret] = useState('')
 	const userToken = localStorage.getItem('userToken')
+	const { totalPrice } = useHandleShoppingBag()
 
 
 	useEffect(() => {
-		const data = JSON.stringify({})
+		const price = totalPrice * 100
+		const data = {total: price}
 
 		axios.post('/api/cart/payment',
-
 			data,
 			{
 				headers: {

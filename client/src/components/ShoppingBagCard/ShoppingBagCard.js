@@ -5,6 +5,8 @@ import PropTypes from 'prop-types'
 import icons from '../../utils/Icons/index'
 import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
 // import { useSelector } from 'react-redux'
+// import { userSelectors } from '../../store/User'
+// import { useSelector } from 'react-redux'
 // import { ProductSelector } from '../../store/Product'
 
 // eslint-disable-next-line react/prop-types
@@ -12,6 +14,8 @@ const ShoppingBagCard = ({ item , card}) => {
 	const classes = useStyles()
 	const handleShoppingBag = useHandleShoppingBag()
 
+	// const user = useSelector(userSelectors.getData())
+	// const isLoggedIn = !!user
 
 	// const allColors = useSelector(ProductSelector.allColors())
 	// const color = allColors?.find(color => color._id === item.color)
@@ -30,30 +34,28 @@ const ShoppingBagCard = ({ item , card}) => {
 					at a price that won&apos;t keep you up at night.
 				</Typography>
 				<Typography fontSize={18}>${item?.currentPrice}</Typography>
-
-				{!card && (<>
-					<div className={classes.specificationsContainer}>
-						<div className={classes.specifications}>
-							<Typography fontSize={18}>Color: </Typography>
-							<Typography fontSize={18}>Size: </Typography>
-						</div>
-						<div className={classes.quantityContainer}>
-							<Typography
-								fontSize={18}
-								className={classes.quantity}>
-								{item?.amount}
-							</Typography>
-							<div>
-								<div
-									className={classes.quantityUp}
-									onClick={()=>handleShoppingBag.add(item)}>
-									{icons.arrowUp()}
-								</div>
-								<div
-									className={classes.quantityDown}
-									onClick={()=>handleShoppingBag.remove(item?._id)}>
-									{icons.arrowDown()}
-								</div>
+				<div className={classes.specificationsContainer}>
+					<div className={classes.specifications}>
+						<Typography fontSize={18}>Color: </Typography>
+						<Typography fontSize={18}>Size: </Typography>
+					</div>
+					<div className={classes.quantityContainer}>
+						<Typography
+							fontSize={18}
+							className={classes.quantity}>
+							{item?.amount}
+						</Typography>
+						<div>
+							<div
+								className={classes.quantityUp}
+								onClick={()=> handleShoppingBag.add(item)}
+							>
+								{icons.arrowUp()}
+							</div>
+							<div
+								className={classes.quantityDown}
+								onClick={()=>handleShoppingBag.remove(item?._id)}>
+								{icons.arrowDown()}
 							</div>
 						</div>
 					</div>
