@@ -3,6 +3,7 @@ import { makeStyles } from '@mui/styles'
 export const useStyles = makeStyles(theme =>({
 	container: {
 		width: '275px',
+		height: '275px',
 		aspectRatio: 1,
 		'&:hover $blockHover': {
 			visibility: 'visible',
@@ -15,11 +16,13 @@ export const useStyles = makeStyles(theme =>({
 		marginBottom: '10px',
 		[theme.breakpoints.down('600')]: {
 			margin: '0 auto',
-			width:'350px'
+			width:'350px',
+			height:'350px',
 		},
 		[theme.breakpoints.between('650','792')] :{
 			margin: '0 auto',
-			width:'350px'
+			width:'350px',
+			height:'350px',
 		}
 
 	},
@@ -47,15 +50,16 @@ export const useStyles = makeStyles(theme =>({
 		visibility: 'hidden',
 		opacity: 0,
 		background: 'rgba(0,0,0,0.5)',
-		width: '100%',
-		height: '100%',
 		position: 'absolute',
 		top: 0,
 		left: 0,
+		right: 0,
+		bottom: 0,
 		display: 'flex',
 		flexDirection: 'column',
 		justifyContent: 'center',
-		alignItems: 'center'
+		alignItems: 'center',
+		paddingTop: 70,
 	},
 	title: {
 		fontWeight: 'bold',
@@ -64,7 +68,7 @@ export const useStyles = makeStyles(theme =>({
 		lineHeight: '30px',
 		textAlign: 'center',
 		color: '#FFFFFF',
-		margin: '70px 0 20px',
+		margin: 0,
 		textTransform:'capitalize'
 
 	},
@@ -75,7 +79,9 @@ export const useStyles = makeStyles(theme =>({
 		fontFamily: theme.typography.fontFamily,
 		fontWeight: 'bold',
 		color: '#FFFFFF',
-		margin: '0 0 20px',
+		// margin: '0 0 20px',
+		marginTop: 20,
+		marginBottom: 20,
 	},
 	btn: {
 		background: '#FFFFFF',

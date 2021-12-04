@@ -1,11 +1,22 @@
 import React, {useState, useEffect} from 'react'
-import { FormControl, InputAdornment, OutlinedInput, Slider, Box } from '@mui/material'
+import { FormControl, InputAdornment, OutlinedInput, Slider, Box, styled, Typography } from '@mui/material'
 import productsAPI from '../../utils/API/productsAPI'
-import {PriceRng, PriceBox, PriceRangeBlock, money} from './style'
 import {useSelector} from 'react-redux'
 import {filterSelectors} from '../../store/Filter'
 
 import useFilterHandler from '../../utils/customHooks/useFilterHandler'
+
+const PriceRangeInput = styled(OutlinedInput)(() => ({
+	height: '22px',
+	width: '80px',
+	margin: '0px 5px',
+	borderRadius: '0px',
+	fontSize: '14px',
+}))
+
+const StyledBugs = styled(Typography)(() => ({
+	fontSize: '14px',
+}))
 
 const minDistance = 100
 
@@ -51,7 +62,7 @@ const PriceRange = () => {
 	},[])
 
 	return (
-		<Box style={PriceBox}>
+		<Box>
 			<Slider
 				value={value}
 				min={0}
@@ -69,23 +80,35 @@ const PriceRange = () => {
 					},
 				}}
 			/>
-			<Box style={PriceRangeBlock}>
+			<Box 
+				sx={{
+					display: 'flex',
+					flexWrap: 'wrap',
+					alignItems: 'center',
+				}}
+			>
 				FROM
 				<FormControl fullWidth sx={{ m: 1 }}>
-					<OutlinedInput
-						style={PriceRng}
+					<PriceRangeInput
 						id="min-amount"
 						value={minPrice}
-						startAdornment={<InputAdornment position="start"><p style={money}>$</p></InputAdornment>}
+						startAdornment={
+							<InputAdornment position="start">
+								<StyledBugs color="primary">$</StyledBugs>
+							</InputAdornment>
+						}
 					/>
 				</FormControl>
 				TO
 				<FormControl fullWidth sx={{ m: 1 }}>
-					<OutlinedInput
-						style={PriceRng}
+					<PriceRangeInput
 						id="max-amount"
 						value={maxPrice}
-						startAdornment={<InputAdornment position="start"><p style={money}>$</p></InputAdornment>}
+						startAdornment={
+							<InputAdornment position="start">
+								<StyledBugs color="primary">$</StyledBugs>
+							</InputAdornment>
+						}
 					/>
 				</FormControl>
 			</Box>

@@ -37,8 +37,6 @@ const Catalog = () => {
 		return <BackdropLoader open={isLoading} />
 	}
 
-
-
 	return (
 		<Box 
 			sx={{
@@ -67,10 +65,11 @@ const Catalog = () => {
 
 				{
 					!!products
+					// eslint-disable-next-line no-unused-vars
 					&& products.map((item, index) => {
 						return (
 							<CardInCatalog
-								key={index} //костыль
+								key={item.variants._id} //костыль
 								_id={item.variants._id}
 								image={'/' + item.variants.imageUrls[0]}
 								title={item?.name || ''}
