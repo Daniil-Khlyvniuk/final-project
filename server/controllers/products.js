@@ -172,6 +172,25 @@ exports.getVariantById = async (req, res, next) => {
   }
 };
 
+exports.decrementVariantQuantity = async (req, res, next) => {
+	const newQuantity = Math.max(0, req.body.quantity)
+	const id = req.params.varId
+
+	try{
+		const updatedVariant = await ProductVariant.findByIdAndUpdate(
+			id,
+			{
+				quantity: newQuantity,
+				enabled: !!newQuantity
+			},
+			{new: true}
+		)
+		res.json(updatedVariant)
+	}catch (err) {
+		res.status(400).json({ message: `Error happened on server: "${err}"` });
+	}
+}
+
 exports.getProductsInfo = async (req, res, next) => {
   const { productId, kindOfInfo } = req.params;
 
