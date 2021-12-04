@@ -1,8 +1,9 @@
 import { makeStyles } from '@mui/styles'
-import theme from '../../utils/Theme'
 
-export const useStyles = makeStyles({
+export const useStyles = makeStyles(theme =>({
 	container: {
+		width: '275px',
+		aspectRatio: 1,
 		'&:hover $blockHover': {
 			visibility: 'visible',
 			opacity: 1,
@@ -11,11 +12,20 @@ export const useStyles = makeStyles({
 			display: 'none',
 		},
 		position: 'relative',
-		marginBottom: '20px'
+		marginBottom: '10px',
+		[theme.breakpoints.down('600')]: {
+			margin: '0 auto',
+			width:'350px'
+		},
+		[theme.breakpoints.between('650','792')] :{
+			margin: '0 auto',
+			width:'350px'
+		}
+
 	},
 	img: {
-		width: 280,
-		height: 280,
+		width: '100%',
+		height: '100%',
 	},
 	catalogTitle: {
 		fontSize: '18px',
@@ -28,7 +38,8 @@ export const useStyles = makeStyles({
 		bottom: '16px',
 		padding: '5px 10px',
 		margin: '0 10px',
-		fontFamily: theme.typography.fontFamily
+		fontFamily: theme.typography.fontFamily,
+		textTransform: 'capitalize'
 	},
 	blockHover: {
 		cursor: 'pointer',
@@ -36,8 +47,8 @@ export const useStyles = makeStyles({
 		visibility: 'hidden',
 		opacity: 0,
 		background: 'rgba(0,0,0,0.5)',
-		width: '280px',
-		height: '280px',
+		width: '100%',
+		height: '100%',
 		position: 'absolute',
 		top: 0,
 		left: 0,
@@ -54,6 +65,8 @@ export const useStyles = makeStyles({
 		textAlign: 'center',
 		color: '#FFFFFF',
 		margin: '70px 0 20px',
+		textTransform:'capitalize'
+
 	},
 	price: {
 		fontSize: 32,
@@ -76,5 +89,6 @@ export const useStyles = makeStyles({
 		padding: '11px 35px',
 		display: 'block',
 		margin: '0 auto',
-	}
-})
+	},
+
+}))

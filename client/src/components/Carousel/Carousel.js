@@ -6,6 +6,7 @@ import Slider from 'react-slick'
 import './slick(costil).css'
 import './slick-theme(costil).css'
 import { useStyleCarousel } from '../../utils/customHooks/useStyleCarousel'
+import { Link } from 'react-router-dom'
 
 const Carousel = ({
 	slides,
@@ -128,88 +129,92 @@ const Carousel = ({
 	return (
 		<>
 			{main &&
-			<Slider
-				{...settingsMain}
-				className={style.show}
-			>
-				{slides?.map((slide) => {
-					return (
-						<div key={slide.customId} className={style.mainContainer}>
-							<img src={slide.imageUrl} className={style.slide} alt=""/>
-							<div className={style.textBlock}>
-								<p className={style.title}>{slide.title}</p>
-								{slide.description &&
-								<p className={style.desc}>{slide.description}</p>}
-							</div>
-						</div>
-					)
-				})}
-			</Slider>
-			}
-
-			{product &&
-			<div className={style.productsWrapper}>
 				<Slider
-					className={style.products}
-					{...settingsProducts}
-					asNavFor={nav2}
-					ref={slider}
-				>
-					{slides?.map((slide, index) => {
-						return (
-							<div key={index} className={style.slideContainer}>
-								<img src={`/${slide}`} className={style.productSlide} alt=""/>
-							</div>
-						)
-					})}
-				</Slider>
-				<Slider
-					{...settingThumbs}
-					slidesToShow={slides.length <= 3 ? slides.length : 3}
-					asNavFor={nav1}
-					ref={thumbs}
-					className={style.thumbWrapper}
-				>
-					{slides?.map((slide, index) => {
-
-						return (
-							<div key={index}>
-								<img src={`/${slide}`} className={style.thumb} alt=""/>
-							</div>
-						)
-					})}
-				</Slider>
-			</div>
-
-			}
-
-			{related &&
-			<>
-				<h3 className={style.relatedTitle}>RELATED ITEMS</h3>
-				<Slider
-					{...settingRelated}
-					className={`${style.related}`}
-					slidesToShow={slides.length <= 3 ? slides.length : 3}
+					{...settingsMain}
+					className={style.show}
 				>
 					{slides?.map((slide) => {
 						return (
-							<div key={slide.customId}>
-								<div style={{ position: 'relative', margin: '0 10px' }}>
-									<img src={slide.imageUrl} className={style.thumb} style={{
-										maxWidth: '380px',
-										maxHeight: '380px',
-										borderRadius: '5px'
-									}} alt=""/>
-									<div className={style.relatedTextBox}>
-										<p className={style.relatedText}>{slide.name}</p>
-										<p className={style.relatedPrice}>${slide.price}</p>
-									</div>
+							<div key={slide.customId} className={style.mainContainer}>
+								<img src={slide.imageUrl} className={style.slide} alt=""/>
+								<div className={style.textBlock}>
+									<p className={style.title}>{slide.title}</p>
+									{slide.description &&
+										<p className={style.desc}>{slide.description}</p>}
 								</div>
 							</div>
 						)
 					})}
 				</Slider>
-			</>
+			}
+
+			{product &&
+				<div className={style.productsWrapper}>
+					<Slider
+						className={style.products}
+						{...settingsProducts}
+						asNavFor={nav2}
+						ref={slider}
+					>
+						{slides?.map((slide, index) => {
+							return (
+								<div key={index} className={style.slideContainer}>
+									<img src={`/${slide}`} className={style.productSlide} alt=""/>
+								</div>
+							)
+						})}
+					</Slider>
+					<Slider
+						{...settingThumbs}
+						slidesToShow={slides.length <= 3 ? slides.length : 3}
+						asNavFor={nav1}
+						ref={thumbs}
+						className={style.thumbWrapper}
+					>
+						{slides?.map((slide, index) => {
+
+							return (
+								<div key={index}>
+									<img src={`/${slide}`} className={style.thumb} alt=""/>
+								</div>
+							)
+						})}
+					</Slider>
+				</div>
+
+			}
+
+			{related &&
+				<>
+					<h3 className={style.relatedTitle}>RELATED ITEMS</h3>
+					<Slider
+						{...settingRelated}
+						className={`${style.related}`}
+						slidesToShow={slides.length <= 3 ? slides.length : 3}
+					>
+						{slides?.map((slide) => {
+							console.log('===============')
+							console.log(slide)
+							return (
+								<div key={slide.customId}>
+									<div style={{ position: 'relative', margin: '0 10px' }}>
+										<Link to={`${slide?.prodId}`}>
+											<img src={slide.imageUrl} className={style.thumb} style={{
+												maxWidth: '380px',
+												maxHeight: '380px',
+												borderRadius: '5px'
+											}} alt=""/>
+											<div className={style.relatedTextBox}>
+												<p className={style.relatedText}>{slide.name}</p>
+												<p className={style.relatedPrice}>${slide.price}</p>
+											</div>
+										</Link>
+									</div>
+								</div>
+							)
+						})}
+					</Slider>
+				</>
 			}
 		</>
 	)

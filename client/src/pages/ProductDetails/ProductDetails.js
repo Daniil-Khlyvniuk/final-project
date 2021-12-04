@@ -12,6 +12,7 @@ import { favoritesOperations } from '../../store/Favorites'
 
 const ProductDetails = () => {
 	const { id } = useParams()
+	console.log('prod id',id)
 	const dispatch = useDispatch()
 	const isLoading = useSelector(ProductSelector.isLoading())
 	const activeProduct = useSelector(ProductSelector.getProduct())

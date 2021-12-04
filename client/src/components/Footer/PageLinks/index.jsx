@@ -6,6 +6,9 @@ import PropTypes from 'prop-types'
 
 const PageLinks = ({linksArr}) => 
 {
+	// eslint-disable-next-line no-console
+	console.log(linksArr)
+
 	return (
 		<Grid item xs={12} sm={6} lg={3}>
 			<List>
@@ -26,7 +29,7 @@ const PageLinks = ({linksArr}) =>
 						</Typography>
 					</ListItem>
 				)}
-				
+
 				{
 					linksArr.links.length > 0 && linksArr.links.map(link => 
 						(
@@ -49,6 +52,7 @@ const PageLinks = ({linksArr}) =>
 							</ListItem>
 						)
 					)
+
 				}
 			</List>
 		</Grid>
