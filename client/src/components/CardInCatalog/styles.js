@@ -3,6 +3,10 @@ import theme from '../../utils/Theme'
 
 export const useStyles = makeStyles({
 	container: {
+		width: 'calc((100% / 3) - 20px)',
+		maxWidth: 280,
+		minWidth: 200,
+		aspectRatio: 1,
 		'&:hover $blockHover': {
 			visibility: 'visible',
 			opacity: 1,
@@ -14,8 +18,8 @@ export const useStyles = makeStyles({
 		marginBottom: '20px'
 	},
 	img: {
-		width: 280,
-		height: 280,
+		width: '100%',
+		height: '100%',
 	},
 	catalogTitle: {
 		fontSize: '18px',
@@ -36,8 +40,8 @@ export const useStyles = makeStyles({
 		visibility: 'hidden',
 		opacity: 0,
 		background: 'rgba(0,0,0,0.5)',
-		width: '280px',
-		height: '280px',
+		width: '100%',
+		height: '100%',
 		position: 'absolute',
 		top: 0,
 		left: 0,
