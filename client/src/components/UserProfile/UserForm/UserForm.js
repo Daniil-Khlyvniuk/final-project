@@ -13,7 +13,6 @@ import {userSelectors} from '../../../store/User'
 import Loader from '../../UI/Loader/Loader'
 import axios from 'axios'
 import CheckboxInput from './FormUI/CheckboxInput'
-// import CheckboxInput from './FormUI/CheckboxInput'
 
 
 
@@ -31,10 +30,10 @@ const FORM_VALIDATION = Yup.object().shape({
 	country: Yup.string(),
 	oldPass: Yup.string(),
 	password: Yup.string()
-		.min(7,'Password must be 7 digits minimum')
-		.max(30,'Password must be 30 digits maximum'),
+		.min(7, 'Password must be 7 digits minimum')
+		.max(30, 'Password must be 30 digits maximum'),
 	confirmPass: Yup.string().oneOf([Yup.ref('password')], 'Passwords do not match'),
-	termsOfService : Yup.bool()
+	subscribe : Yup.bool()
 
 })
 
@@ -62,8 +61,8 @@ const UserForm = () => {
 		subscribe: user?.subscribe || false
 	}
 
-	if(!user){
-		return <Loader/>
+	if (!user) {
+		return <Loader />
 	}
 	return (
 		<Box my='15px'>
@@ -88,10 +87,7 @@ const UserForm = () => {
 								validationSchema={FORM_VALIDATION}
 								onSubmit={(values) => {
 
-									// eslint-disable-next-line no-console
-									console.log(values)
-
-									const update ={
+									const update = {
 										firstName: values.firstName,
 										lastName: values.lastName,
 										email:values.email,

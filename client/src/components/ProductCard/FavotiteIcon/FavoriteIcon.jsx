@@ -7,9 +7,10 @@ import { favoritesOperations, favoritesSelectors } from '../../../store/Favorite
 import PropTypes from 'prop-types'
 import modalActions from '../../../store/Modal'
 import LoginModal from '../../Modal/LoginModal'
+import { userSelectors } from '../../../store/User'
 
 const Favoriteicon = ({ id }) => {
-	const user = localStorage.getItem('userToken')
+	const user = useSelector(userSelectors.getData())
 	// eslint-disable-next-line no-unused-vars
 	const favorites = useSelector(favoritesSelectors.getFavorites())
 	const dispatch = useDispatch()
@@ -17,13 +18,9 @@ const Favoriteicon = ({ id }) => {
 	const favoritesStorage = JSON.parse(localStorage.getItem('favorites')) || []
 
 	useEffect(() => {
-		const favoritesStorage = JSON.parse(localStorage.getItem('favorites'))
-
-		if (favoritesStorage) {
-			favoritesOperations.fetchFavorites(favoritesStorage)(dispatch)
-		}
-
-	}, [dispatch])
+		favoritesOperations.fetchFavorites(favoritesStorage)(dispatch)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [favoritesStorage.length])
 
 	const addToFavorites = () => {
 		if (!localStorage.getItem('favorites')) localStorage.setItem('favorites', JSON.stringify([]))

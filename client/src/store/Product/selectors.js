@@ -6,12 +6,12 @@ const allColors = () => state => state.product.allColors
 const allSizes = () => state => state.product.allSizes
 const activeColor = () => state => state.product.activeColor
 
-export default{
+export default {
 	getProduct,
-	getParent ,
-	isLoading ,
+	getParent,
+	isLoading,
 	allColors,
 	allVariants,
-	allSizes ,
+	allSizes,
 	activeColor
 }

@@ -37,8 +37,7 @@ const Footer = () => {
 		>
 			<Container maxWidth="lg">
 				<Grid container columns={12} 
-					className={blockStyle}
-				>
+					className={blockStyle}>
 					{isLoading && (<Loader />)}
 					{error && (<Typography sx={{color: 'red'}}>{error}</Typography>)}
 					{
