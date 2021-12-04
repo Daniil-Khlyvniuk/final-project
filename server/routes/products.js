@@ -14,16 +14,17 @@ const {
   searchProducts,
   getVariantsByProductId,
   getMinMaxPrice,
+	decrementVariantQuantity
 } = require("../controllers/products");
 
 // @route   POST /products/images
 // @desc    Add images
 // @access  Private
 
-router.post(
-  "/",
+router.put(
+  "/decrement/:varId",
   // passport.authenticate("jwt-admin", { session: false }),
-  addProduct
+	decrementVariantQuantity
 );
 
 // @route   PUT /products/:id
@@ -33,6 +34,11 @@ router.put(
   "/:id",
   passport.authenticate("jwt-admin", { session: false }),
   updateProduct
+);
+
+router.put(
+	"/:id",
+	updateProduct
 );
 
 // @route   GET /products
