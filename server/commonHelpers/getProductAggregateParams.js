@@ -3,8 +3,8 @@ const Catalog = require("../models/Catalog")
 const Color = require("../models/Color")
 const Size = require("../models/Size")
 
-module.exports = (matchCondition = {}) => (
-	[
+module.exports = (matchCondition = {}) => {
+	return [
 		[
 			{
 				$lookup: {
@@ -18,9 +18,13 @@ module.exports = (matchCondition = {}) => (
 				$unwind: "$categories",
 			},
 			{
-				$match: {
-					$and: matchCondition.productQuery,
-				},
+				$match:{
+					...(
+						matchCondition?.productQuery
+						? { $and: matchCondition?.productQuery }
+							:{}
+					)
+				}
 			},
 			{
 				$lookup: {
@@ -53,14 +57,18 @@ module.exports = (matchCondition = {}) => (
 						},
 						{
 							$match: {
-								$and: [
-									...matchCondition.variantQuery,
-									{
-										$expr: {
-											$eq: [ "$product", "$$productId" ],
-										},
-									},
-								]
+								...(
+									matchCondition?.variantQuery
+										? { $and: [
+												...matchCondition?.variantQuery || {},
+												{
+													$expr: {
+														$eq: [ "$product", "$$productId" ],
+													},
+												},
+											] }
+										:{}
+								)
 							}
 						},
 						{ $limit: 1 },
@@ -91,49 +99,5 @@ module.exports = (matchCondition = {}) => (
 				},
 			},
 		]
-	])
-// 	{
-// 		$unwind: {
-// 			path: "$variants",
-// 			preserveNullAndEmptyArrays: true,
-// 		},
-// 	},
-// 	{
-// 		$lookup: {
-// 			from: Catalog.collection.name,
-// 			localField: "categories",
-// 			foreignField: "_id",
-// 			as: "categories",
-// 		},
-// 	},
-// 	{
-// 		$unwind: "$categories",
-// 	},
-// 	{
-// 		$lookup: {
-// 			from: Color.collection.name,
-// 			localField: "variants.color",
-// 			foreignField: "_id",
-// 			as: "variants.color",
-// 		},
-// 	},
-// 	{
-// 		$unwind: "$variants.color",
-// 	},
-// 	{
-// 		$lookup: {
-// 			from: Size.collection.name,
-// 			localField: "variants.size",
-// 			foreignField: "_id",
-// 			as: "variants.size",
-// 		},
-// 	},
-// 	{
-// 		$unwind: "$variants.size",
-// 	},
-// 	{
-// 		$match: {
-// 			$and: matchCondition,
-// 		},
-// 	},
-// ])
+	]
+}

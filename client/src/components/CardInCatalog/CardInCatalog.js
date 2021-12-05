@@ -9,7 +9,6 @@ const CardInCatalog = ({ title, image, price, _id }) => {
 	const classes = useStyles()
 
 	return (
-		// <Box>
 		<Box className={classes.container}>
 			<img className={classes.img} src={image} alt='img' />
 			<p className={classes.catalogTitle}>{title.slice(0, 40) + '...'}</p>
@@ -27,15 +26,12 @@ const CardInCatalog = ({ title, image, price, _id }) => {
 						paddingY: '10px',
 						paddingX: '40px',
 						margin:{xs:'0 0 40px 0 '},
-
-
 					}}
 					variant={'contained'}>
 						buy now
 				</Button>
 			</Box>
 		</Box>
-		// </Box/>
 	)
 }
 
