@@ -410,6 +410,7 @@ exports.searchProducts = async (req, res, next) => {
 	const perPage = Number(req.query.perPage);
 	const startPage = Number(req.query.startPage);
 
+
 	try {
 	const foundProducts = await Product.aggregate([
 		{
