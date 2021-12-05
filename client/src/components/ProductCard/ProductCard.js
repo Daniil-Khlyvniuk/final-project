@@ -28,7 +28,7 @@ const ProductCard = ({ _id, image, title, price }) => {
 							textTransform: 'capitalize'
 						}}
 					>
-						{stringSlice(title)}
+						{stringSlice(title, 30)}
 					</Typography>
 					<Box
 						component="div"

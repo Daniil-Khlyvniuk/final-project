@@ -23,7 +23,7 @@ const CardInCatalog = ({ title, image, price, _id }) => {
 				sx={{ fontSize: { sm: '10px' } }}
 			>
 				<p className={classes.title}>
-					{stringSlice(title)}
+					{stringSlice(title, 30)}
 				</p>
 				<p className={classes.price}>{price} $</p>
 				<Button

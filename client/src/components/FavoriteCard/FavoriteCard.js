@@ -25,7 +25,7 @@ const FavoriteCard = ({ _id, image, title, price }) => {
 						className={classes.title}
 						sx={{ fontSize: { xl: '24px', lg: '24px', l: '22px', md: '20px', sm: '16px', xs: '16px' } }}
 					>
-						{stringSlice(title)}
+						{stringSlice(title, 30)}
 					</Typography>
 					<Box
 						component="div"

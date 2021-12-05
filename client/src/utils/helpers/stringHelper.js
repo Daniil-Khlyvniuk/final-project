@@ -21,8 +21,10 @@ export const makeQueryStringFromObject = (object) => queryString.stringify(
 // eslint-disable-next-line no-undef
 export const returnMode = () => process.env.NODE_ENV ? process.env.NODE_ENV : 'development'
 
-export const stringSlice = (title) => {
-	title.length >= 30
-		? title.slice(0, 27) + '...'
+export const stringSlice = (title, length) => {
+	const stringLength = length - 3
+	
+	return title.length >= length
+		? title.slice(0, stringLength) + '...'
 		: title
 }
