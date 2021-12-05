@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import {shoppingBagSelectors} from '../../store/ShoppingBag'
 import * as shoppingBagActions from '../../store/ShoppingBag/shoppingBagSlice'
-// import { useEffect } from 'react'
 import cartAPI from '../../utils/API/cartAPI'
 // import { ProductSelector } from '../../store/Product'
 
@@ -46,25 +45,6 @@ export default function useHandleShoppingBag() {
 		dispatch(shoppingBagActions.removeFromShoppingBag([]))
 		await cartAPI.clearCart()
 	}
-
-	// const makeOrder = () => {
-	// 	dispatch(shoppingBagActions.addToShoppingBag(newShoppingBag))
-	// 	cartAPI.getCart()
-	// }
-
-
-
-	// useEffect(() => {
-	// 	if(!shoppingBag?.length){
-	// 		if(!localStorage.getItem('userToken')){
-	// 			dispatch(shoppingBagActions.removeFromShoppingBag(JSON?.parse(localStorage?.getItem('shoppingBag') || '[]') || []))
-	// 		}else{
-	// 			cartAPI.getCart().then(res => {
-	// 				dispatch(shoppingBagActions.removeFromShoppingBag(res))
-	// 			})
-	// 		}
-	// 	}
-	// }, [shoppingBag])// eslint-disable-line react-hooks/exhaustive-deps
 
 	return {
 		add, remove, removeAll, AfterBuy,
