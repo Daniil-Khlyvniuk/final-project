@@ -11,7 +11,6 @@ const stripePromise = loadStripe('pk_test_YXhgLEwTTJdW2AfHsgJJNfAN')
 
 
 export default function Payment() {
-	console.log('=================================')
 	const [clientSecret, setClientSecret] = useState('')
 	const userToken = localStorage.getItem('userToken')
 	const { totalPrice } = useHandleShoppingBag()
