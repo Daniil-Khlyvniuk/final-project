@@ -13,10 +13,7 @@ const CardInCatalog = ({ title, image, price, _id }) => {
 		<Box className={classes.container}>
 			<img className={classes.img} src={image} alt='img' />
 			<p className={classes.catalogTitle}>
-				{title.length >= 30
-					? title.slice(0, 27) + '...'
-					: title
-				}
+				{stringSlice(title, 30)}
 			</p>
 			<Box
 				className={classes.blockHover}
@@ -34,8 +31,6 @@ const CardInCatalog = ({ title, image, price, _id }) => {
 						paddingY: '10px',
 						paddingX: '40px',
 						margin: { xs: '0 0 40px 0 ' },
-
-
 					}}
 					variant={'contained'}>
 					buy now
