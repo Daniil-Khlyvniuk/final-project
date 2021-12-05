@@ -67,14 +67,16 @@ const LeftMenu = ({data}) => {
 							variant={'h6'}
 							fontSize={'18px'}
 							fontWeight={'700'}
-							sx={{lineHeight:'24px'}}>
-							{data.pageTitle}
+							sx={{lineHeight:'24px', textTransform:'uppercase'}}>
+							{data.title}
 						</Typography>
 						{data && data.tabs.map(tab => {
 							return (
 								<Typography
 									fontSize={'16px'}
-									sx={{letterSpacing:'0.04em' ,marginTop:'25px'}}
+									sx={{
+										textTransform:'uppercase',
+										letterSpacing:'0.04em' ,marginTop:'25px'}}
 									underline="none"
 									key={tab.tabTitle}>
 									{tab.tabTitle}
@@ -92,7 +94,7 @@ const LeftMenu = ({data}) => {
 							onClick={handleMobileMenuOpen}
 							color="inherit"
 						>
-							{data.pageTitle}
+							{data.title}
 						</Button>
 					</Box>
 				</Toolbar>
@@ -103,7 +105,7 @@ const LeftMenu = ({data}) => {
 }
 LeftMenu.propTypes = {
 	data : PropTypes.shape({
-		pageTitle: PropTypes.string,
+		title: PropTypes.string,
 		tabs: PropTypes.array
 	})
 }

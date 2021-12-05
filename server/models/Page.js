@@ -14,7 +14,6 @@ const PageSchema = new Schema(
     images: [String],
     htmlContent: {
       type: String,
-      required: true
     },
     date: {
       type: Date,
