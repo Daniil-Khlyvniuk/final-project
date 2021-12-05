@@ -4,6 +4,7 @@ import { Button } from '@mui/material'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { Box } from '@mui/system'
+import { stringSlice } from '../../utils/helpers/stringHelper'
 
 const CardInCatalog = ({ title, image, price, _id }) => {
 	const classes = useStyles()
@@ -22,10 +23,7 @@ const CardInCatalog = ({ title, image, price, _id }) => {
 				sx={{ fontSize: { sm: '10px' } }}
 			>
 				<p className={classes.title}>
-					{title.length >= 30
-						? title.slice(0, 27) + '...'
-						: title
-					}
+					{stringSlice(title)}
 				</p>
 				<p className={classes.price}>{price} $</p>
 				<Button

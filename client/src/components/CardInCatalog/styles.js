@@ -32,7 +32,6 @@ export const useStyles = makeStyles(theme =>({
 	catalogTitle: {
 		fontSize: '18px',
 		lineHeight: '30px',
-		// textAlign: 'center',
 		color: '#FFFFFF',
 		background: '#373F41',
 		borderRadius: '2px',
