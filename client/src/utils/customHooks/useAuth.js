@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { userOperations, userSelectors} from '../../store/User'
 import { loginUser, registerUser } from '../API/userAPI'
 import modalActions from '../../store/Modal'
+// import {subscribeTemlate} from '../emailTemplates'
 
 const useAuth = () => {
 	const dispatch = useDispatch()
@@ -38,10 +39,15 @@ const useAuth = () => {
 	}
 
 	const register = async (values) => {
-		let formData = {...values}
+		let formData = {
+			...values,
+			// letterSubject: 'Your subscription promo code',
+			// letterHtml: subscribeTemlate(values.email),
+		}
 		const {email: loginOrEmail,password,rememberMe} = formData
 		delete (formData.confirmPass)
 		delete (formData.rememberMe)
+		
 
 		const res = await registerUser(values)
 		if (res.status === 200) {

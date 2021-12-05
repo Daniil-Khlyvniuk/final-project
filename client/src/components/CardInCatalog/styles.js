@@ -3,7 +3,6 @@ import { makeStyles } from '@mui/styles'
 export const useStyles = makeStyles(theme =>({
 	container: {
 		width: '275px',
-		height: '275px',
 		aspectRatio: 1,
 		'&:hover $blockHover': {
 			visibility: 'visible',
@@ -17,12 +16,10 @@ export const useStyles = makeStyles(theme =>({
 		[theme.breakpoints.down('600')]: {
 			margin: '0 auto',
 			width:'350px',
-			height:'350px',
 		},
 		[theme.breakpoints.between('650','792')] :{
 			margin: '0 auto',
 			width:'350px',
-			height:'350px',
 		}
 
 	},
@@ -45,6 +42,7 @@ export const useStyles = makeStyles(theme =>({
 		textTransform: 'capitalize'
 	},
 	blockHover: {
+		aspectRatio: 1,
 		cursor: 'pointer',
 		transition: 'visibility 0s, opacity 0.5s linear',
 		visibility: 'hidden',
