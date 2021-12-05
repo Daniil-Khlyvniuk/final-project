@@ -9,6 +9,7 @@ import Page404 from '../pages/Page404/Page404'
 import Favorites from '../pages/Favorites/Favorites'
 import HandleSubscribe from '../pages/HandleSubscribe'
 import UserProfilePage from '../pages/UserProfile/UserProfile'
+import Search from '../pages/Search/Search'
 import Checkout from '../pages/Cart/checkout'
 import CompletePay from '../components/PayCard/CompletePay'
 import StaticPages from '../components/StaticPages/StaticPages'
@@ -22,7 +23,7 @@ const AppRoutes = () => {
 			<Route exact path='/cart'><Cart /></Route>
 
 			<Route exact path='/shop/catalog'><Catalog/></Route>
-
+			<Route exact path='/search'><Search /></Route>
 			<Route exact path='/info/:customId'><StaticPages /></Route>
 
 			<Route exact path='/subscription/:email'><HandleSubscribe /></Route>

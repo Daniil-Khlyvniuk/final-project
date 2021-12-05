@@ -45,7 +45,7 @@ const OrderList = () => {
 				</Typography>
 			</Box>
 			<Divider sx={{mt:'10px'}}/>
-			<ShoppingBagCard/>
+			<ShoppingBagCard card/>
 		</Box>
 
 	)
