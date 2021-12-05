@@ -49,9 +49,10 @@ const userSlice = createSlice({
 			state.error = null
 		},
 		[fetchUser.rejected]: (state) => {
-			state.isLoading = true
+			localStorage.removeItem('userToken')
+			state.isLoading = false
 			state.token = null
-			state.error = 'Error happened while links loading'
+			state.error = 'Error happened while user data loading. Relogin plz'
 		},
 	}
 })
