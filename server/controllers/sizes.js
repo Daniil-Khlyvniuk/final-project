@@ -17,7 +17,7 @@ exports.addSize = (req, res, next) => {
         .then(size => res.json(size))
         .catch(err =>
           res.status(400).json({
-            message: `Error happened on server: "${err}" `
+            message: `Error happened on server: "${ err }"`
           })
         );
     }

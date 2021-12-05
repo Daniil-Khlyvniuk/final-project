@@ -1,9 +1,36 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import Header from './components/NavBar/NavBar'
+import Footer from './components/Footer'
+import AppRoutes from './routes/AppRoutes'
+import { useSelector, useDispatch } from 'react-redux'
+import { modalSelectors } from './store/Modal'
+import useAuth from './utils/customHooks/useAuth'
+import ScrollButton from './components/ScrollButton/ScrollButton'
 
-function App() {
+import { settingsOperations } from './store/Settings'
+
+
+const App = () => {
+	const {checkToken} = useAuth()
+	const dispatch = useDispatch()
+	const modal = useSelector(modalSelectors.checkOpen())
+
+	useEffect(() => {
+		checkToken()
+	}, [checkToken])
+
+	useEffect(() => {
+		dispatch(settingsOperations.fetchSettings())
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
+
 	return (
-		<div className={ 'App' }>
-			<h1>F I N A L P R O J E C T</h1>
+		<div className={'App'}>
+			<Header />
+			<AppRoutes />
+			<Footer />
+			<ScrollButton />
+			{modal}
 		</div>
 	)
 }

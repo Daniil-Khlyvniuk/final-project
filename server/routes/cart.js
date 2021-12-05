@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
-
 //Import controllers
 const {
   createCart,
@@ -10,18 +9,31 @@ const {
   decreaseCartProductQuantity,
   deleteCart,
   deleteProductFromCart,
-  getCart
+  getCart,
+	payment
 } = require("../controllers/cart");
 
 // @route   POST /cart
 // @desc    Create cart
 // @access  Private
-router.post("/", passport.authenticate("jwt", { session: false }), createCart);
+router.post("/",
+	passport.authenticate("jwt", { session: false }),
+	createCart
+);
+
+
+router.post("/payment",
+	// passport.authenticate("jwt", { session: false }),
+	payment
+);
 
 // @route   PUT /cart
 // @desc    Update cart when adding / deleting products in cart
 // @access  Private
-router.put("/", passport.authenticate("jwt", { session: false }), updateCart);
+router.put("/",
+	passport.authenticate("jwt", { session: false }),
+	updateCart
+);
 
 // @route   PUT /cart/:productId
 // @desc    Add one product to cart
@@ -62,6 +74,9 @@ router.delete(
 // @route   GET /cart
 // @desc    Get cart for customer
 // @access  Private
-router.get("/", passport.authenticate("jwt", { session: false }), getCart);
+router.get("/",
+	passport.authenticate("jwt", { session: false }),
+	getCart
+);
 
 module.exports = router;
