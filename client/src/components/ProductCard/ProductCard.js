@@ -22,11 +22,15 @@ const ProductCard = ({ _id, image, title, price }) => {
 				<Box className={classes.textContainer}>
 					<Typography
 						className={classes.title}
-						sx={{ fontSize: { xl: '24px', lg: '24px', l: '22px', md: '20px', sm: '16px', xs: '16px' },
-							textTransform:'capitalize'
+						sx={{
+							fontSize: { xl: '24px', lg: '24px', l: '22px', md: '20px', sm: '16px', xs: '16px' },
+							textTransform: 'capitalize'
 						}}
 					>
-						{title.slice(0, 40) + '...'}
+						{title.length >= 40
+							? title.slice(0, 37) + '...'
+							: title
+						}
 					</Typography>
 					<Box
 						component="div"

@@ -9,15 +9,24 @@ const CardInCatalog = ({ title, image, price, _id }) => {
 	const classes = useStyles()
 
 	return (
-		// <Box>
 		<Box className={classes.container}>
 			<img className={classes.img} src={image} alt='img' />
-			<p className={classes.catalogTitle}>{title.slice(0, 40) + '...'}</p>
+			<p className={classes.catalogTitle}>
+				{title.length >= 30
+					? title.slice(0, 27) + '...'
+					: title
+				}
+			</p>
 			<Box
 				className={classes.blockHover}
-				sx={{fontSize:{sm : '10px'}}}
+				sx={{ fontSize: { sm: '10px' } }}
 			>
-				<p className={classes.title}>{title.slice(0, 40) + '...'}</p>
+				<p className={classes.title}>
+					{title.length >= 30
+						? title.slice(0, 27) + '...'
+						: title
+					}
+				</p>
 				<p className={classes.price}>{price} $</p>
 				<Button
 					color={'white'}
@@ -26,16 +35,15 @@ const CardInCatalog = ({ title, image, price, _id }) => {
 					sx={{
 						paddingY: '10px',
 						paddingX: '40px',
-						margin:{xs:'0 0 40px 0 '},
+						margin: { xs: '0 0 40px 0 ' },
 
 
 					}}
 					variant={'contained'}>
-						buy now
+					buy now
 				</Button>
 			</Box>
 		</Box>
-		// </Box/>
 	)
 }
 
