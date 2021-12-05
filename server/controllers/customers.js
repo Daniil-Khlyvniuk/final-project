@@ -145,11 +145,6 @@ exports.loginCustomer = async (req, res, next) => {
               });
             }
           );
-
-					// if (subscribe) [
-					//
-					// ]
-
         } else {
           errors.password = "Password incorrect";
           return res.status(400).json(errors);
