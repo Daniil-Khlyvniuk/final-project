@@ -110,7 +110,6 @@ exports.addProduct = async (req, res) => {
 exports.getVariantById = async (req, res, next) => {
   const varId = req.params.varId;
 	const [, projectGroup] = getProductAggregateParams()
-
 	try {
 		const variant = await Product.aggregate([
       {
