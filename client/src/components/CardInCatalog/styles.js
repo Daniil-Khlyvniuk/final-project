@@ -2,7 +2,9 @@ import { makeStyles } from '@mui/styles'
 
 export const useStyles = makeStyles(theme =>({
 	container: {
-		width: '275px',
+		width: 'calc((100% / 3) - 20px)',
+		maxWidth: 280,
+		minWidth: 200,
 		aspectRatio: 1,
 		'&:hover $blockHover': {
 			visibility: 'visible',
