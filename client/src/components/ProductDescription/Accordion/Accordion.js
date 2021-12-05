@@ -16,7 +16,7 @@ const AccordionProduct = ({description = 'Random string', accordionTitle = 'Prod
 
 	return(
 		<Box>
-			<Accordion sx={{boxShadow:'none'}} onChange={handleOpenAccordion} expanded={open}>
+			<Accordion sx={{boxShadow:'none'}} onChange={handleOpenAccordion} expanded={open} >
 				<AccordionSummary>
 					<Box sx={{display:'flex', alignItems:'center'}}>
 						{open ?
