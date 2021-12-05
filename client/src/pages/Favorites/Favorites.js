@@ -25,7 +25,7 @@ const Favorites = () => {
 				? <Box style={{ textAlign: 'center', margin: '7rem 0' }}>
 					<Typography
 						fontSize={32}
-						sx={{ mb: '14px', mt: '85px', textTransform: 'uppercase' }}
+						sx={{ mb: '14px', mt: '30px', textTransform: 'uppercase' }}
 						variant='h2'
 					>
 						Oops! Your wish list is empty
@@ -51,7 +51,7 @@ const Favorites = () => {
 				: <Box style={{ display: 'flex', justifyContent: 'space-between' }}>
 					<Typography
 						fontSize={32}
-						sx={{ mb: '14px', mt: '85px' }}
+						sx={{ mb: '14px', mt: '30px' }}
 						variant='h2'
 					>
 						Favorites

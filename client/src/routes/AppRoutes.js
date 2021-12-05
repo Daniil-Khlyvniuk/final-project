@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Switch, Router, useHistory  } from 'react-router-dom'
+import { Route, Switch} from 'react-router-dom'
 import ProtectedRoute from '../components/ProtectedRoute/ProtectedRoute'
 import Main from '../pages/Main/Main'
 import ProductDetails from '../pages/ProductDetails/ProductDetails'
@@ -16,20 +16,12 @@ import Page404 from '../pages/Page404/Page404'
 import Favorites from '../pages/Favorites/Favorites'
 import HandleSubscribe from '../pages/HandleSubscribe'
 import UserProfilePage from '../pages/UserProfile/UserProfile'
+import Search from '../pages/Search/Search'
 import Checkout from '../pages/Cart/checkout'
 import CompletePay from '../components/PayCard/CompletePay'
 import StaticPages from '../components/StaticPages/StaticPages'
 
 const AppRoutes = () => {
-
-	const history = useHistory()
-
-	const test = '/home'
-	history.push([history.location, test])
-
-
-	// eslint-disable-next-line no-console
-	console.log(history.location)
 	return (
 		<Switch>
 			<Route exact path='/'><Main /></Route>
@@ -38,20 +30,20 @@ const AppRoutes = () => {
 			<Route exact path='/cart'><Cart /></Route>
 			<Route exact path='/shop/catalog'><Catalog /></Route>
 
+			<Route exact path='/search'><Search /></Route>
+
 			<Route exact path='/shop/payment-and-delivery'><PaymentAndDelivery /></Route>
 			<Route exact path='/shop/returns'><Returns /></Route>
 			<Route exact path='/shop/privacy-policy'><PrivacyPolicy /></Route>
 			<Route exact path='/shop/terms-of-service'><TermsOfService /></Route>
 
+
 			<Route exact path='/about/about-us'><AboutUs /></Route>
 			<Route exact path='/about/careers'><Careers /></Route>
 			<Route exact path='/about/contact-us'><ContactUs /></Route>
 
-			<Route exact path="/shop :pageTitle"><StaticPages/></Route>
 
-			<Router history={history}>
-				<Route path="/shop/:pageTitle" component={StaticPages}/>
-			</Router>
+			<Route path="/shop/:pageTitle" component={StaticPages}/>
 
 			<Route exact path='/subscription/:email'><HandleSubscribe /></Route>
 			<ProtectedRoute exact path='/checkout'><Checkout/></ProtectedRoute>

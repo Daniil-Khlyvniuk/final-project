@@ -40,6 +40,7 @@ const CartModal = () => {
 	const dispatch = useDispatch()
 	const handleClose = () => dispatch(modalActions.modalToggle(false))
 
+	console.log(shoppingBag)
 	return (
 		<BasicModal
 			style={style.modal}
@@ -75,7 +76,7 @@ const CartModal = () => {
 								{shoppingBag?.map((item, key) =>
 									(<CardInModal
 										price={item?.currentPrice}
-										image={'/' + item?.imageUrls[0]}
+										image={'/' + item.imageUrls[0]}
 										title={item?.product?.name}
 										key={key}
 										size={item?.size?.name}

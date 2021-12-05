@@ -1,6 +1,6 @@
 const excludedParams = ["perPage", "startPage", "minPrice", "maxPrice", "sort"];
 
-module.exports = function filterParser(filtersQueryString) {
+module.exports = function filterParser(filtersQueryString, isProducts = false) {
   const mongooseQuery = {};
 
   mongooseQuery.currentPrice = {
@@ -27,6 +27,8 @@ module.exports = function filterParser(filtersQueryString) {
     },
     mongooseQuery
   );
+
+	if (isProducts) return test
 
 	return {
 		variantQuery: {
