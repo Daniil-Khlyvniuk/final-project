@@ -23,7 +23,7 @@ router.post("/",
 
 
 router.post("/payment",
-	passport.authenticate("jwt", { session: false }),
+	// passport.authenticate("jwt", { session: false }),
 	payment
 );
 
