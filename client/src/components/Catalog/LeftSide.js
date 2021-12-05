@@ -24,23 +24,29 @@ const LeftSide = () => {
 				<CatalogAccordion
 					expanded={!!minPrice || !!maxPrice}
 					title={'price'}
-					details={<PriceRange />} />
+				>
+					<PriceRange />
+				</CatalogAccordion>
 			</Box>
 			<Box>
 				<CatalogAccordion
 					expanded={!!size.length}
 					title={'size'}
-					details={<SearchSize />} />
+				>
+					<SearchSize />
+				</CatalogAccordion>
 			</Box>
 			<Box>
 				<CatalogAccordion
 					expanded={!!color.length}
 					title={'color'}
-					details={<ColorSearch />}
-					withBottomBorder={false} />
+					withBottomBorder={false} 
+				>
+					<ColorSearch />
+				</CatalogAccordion>	
 			</Box>
 			{/* <Box>
-				<CatalogAccordion expanded={false} title={'fabric'} details={<SearchFabrik />}/>
+				<CatalogAccordion expanded={false} title={'fabric'}><SearchFabrik /></CatalogAccordion>	
 			</Box> */}
 		</Box>
 	)

@@ -10,6 +10,7 @@ export default function useHandleShoppingBag() {
 	const totalPrice = shoppingBag?.reduce((acc, value)=>acc+value.currentPrice,0)
 	// const activeProduct = useSelector(ProductSelector.getProduct())
 
+
 	const add =  (product) => {
 		const shoppingBag = JSON.parse(localStorage.getItem('shoppingBag') || '[]') || []
 		const newShoppingBag = [...shoppingBag, ...[product]]

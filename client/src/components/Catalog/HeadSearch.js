@@ -3,7 +3,6 @@ import { Box, } from '@mui/material'
 import filterApi from '../../utils/API/filterApi'
 import { filterSelectors } from '../../store/Filter'
 import { useSelector } from 'react-redux'
-import {BoxSearch} from './style' //MenuSearch
 
 import useFilterHandler from '../../utils/customHooks/useFilterHandler'
 
@@ -38,7 +37,13 @@ const HeadSearch = () => {
 	},[])
 
 	return (
-		<Box style={BoxSearch}>
+		<Box 
+			sx={{
+				display: 'flex',
+				justifyContent: 'space-between',
+				margin: 'auto',
+			}}
+		>
 			{perPageArray.length && (
 				<DropDownSelect
 					arrayToIterate={perPageArray}

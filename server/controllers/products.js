@@ -10,18 +10,16 @@ const filterOneVariant = require("../commonHelpers/filterOneVariant");
 const isExist = require("../commonHelpers/isExist");
 const findOrCreate = require("../commonHelpers/findOrCreate");
 const ObjectId = mongoose.Types.ObjectId;
-const filterProductDuplicates = require("../commonHelpers/filterProductDuplicates");
-const getAggregateParamsForProductFilters = require("../commonHelpers/getAggregateParamsForProductFilters");
+const getProductAggregateParams = require("../commonHelpers/getProductAggregateParams");
+const uniqueRandom = require("unique-random");
+const rand = uniqueRandom(0, 999999);
+const queryCreator = require("../commonHelpers/queryCreator");
+const filterParser = require("../commonHelpers/filterParser");
+const _ = require("lodash");
 const {
   getFilterConditions,
   getSortConditions,
 } = require("../commonHelpers/getFilterConditions");
-const uniqueRandom = require("unique-random");
-const rand = uniqueRandom(0, 999999);
-
-const queryCreator = require("../commonHelpers/queryCreator");
-const filterParser = require("../commonHelpers/filterParser");
-const _ = require("lodash");
 
 
 exports.addProduct = async (req, res) => {
@@ -111,6 +109,7 @@ exports.addProduct = async (req, res) => {
 
 exports.getVariantById = async (req, res, next) => {
   const varId = req.params.varId;
+	const [, projectGroup] = getProductAggregateParams()
 	try {
 		const variant = await Product.aggregate([
       {
@@ -139,21 +138,7 @@ exports.getVariantById = async (req, res, next) => {
           path: "$variants",
         },
       },
-      {
-        $project: {
-          _id: 1,
-          name: 1,
-          categories: 1,
-          productUrl: 1,
-          brand: 1,
-          manufacturer: 1,
-          manufacturerCountry: 1,
-          seller: 1,
-          description: 1,
-          date: 1,
-          variants: 1,
-        },
-      },
+			...projectGroup
     ]);
 
     if (!variant)
@@ -176,14 +161,18 @@ exports.decrementVariantQuantity = async (req, res, next) => {
 	const newQuantity = Math.max(0, req.body.quantity)
 	const id = req.params.varId
 
+
 	try{
+		const variant = await ProductVariant.findById(id)
+		if (variant.quantity < newQuantity) throw new Error("insufficient quantity of goods in the store")
+
 		const updatedVariant = await ProductVariant.findByIdAndUpdate(
 			id,
-			{
-				quantity: newQuantity,
+		{
+			quantity: newQuantity,
 				enabled: !!newQuantity
-			},
-			{new: true}
+		},
+		{new: true}
 		)
 		res.json(updatedVariant)
 	}catch (err) {
@@ -335,49 +324,6 @@ exports.getFilteredVariants = async (req, res, next) => {
   }
 };
 
-exports.updateProduct = (req, res, next) => {
-  Product.findOne({ _id: req.params.id })
-    .then((product) => {
-      if (!product) {
-        return res.status(400).json({
-          message: `Product with id "${req.params.id}" is not found.`,
-        });
-      } else {
-        const productFields = _.cloneDeep(req.body);
-
-        try {
-          productFields.name = productFields.name
-            .toLowerCase()
-            .trim()
-            .replace(/\s\s+/g, " ");
-        } catch (err) {
-          res.status(400).json({
-            message: `Error happened on server: "${err}" `,
-          });
-        }
-
-        const updatedProduct = queryCreator(productFields);
-
-        Product.findOneAndUpdate(
-          { _id: req.params.id },
-          { $set: updatedProduct },
-          { new: true }
-        )
-          .then((product) => res.json(product))
-          .catch((err) =>
-            res.status(400).json({
-              message: `Error happened on server: "${err}" `,
-            })
-          );
-      }
-    })
-    .catch((err) =>
-      res.status(400).json({
-        message: `Error happened on server: "${err}" `,
-      })
-    );
-};
-
 exports.getProducts = async (req, res, next) => {
   const perPage = Number(req.query.perPage);
   const startPage = Number(req.query.startPage);
@@ -405,6 +351,8 @@ exports.getProducts = async (req, res, next) => {
 
 exports.getVariantsByProductId = async (req, res, next) => {
   const productId = req.params.productId;
+
+
   try {
     const variant = await ProductVariant.find({ product: productId })
       .populate("size")
@@ -425,132 +373,17 @@ exports.getVariantsByProductId = async (req, res, next) => {
 
 exports.getProductsFilterParams = async (req, res, next) => {
   const mongooseQuery = filterParser(req.query);
-  const { variantQuery, productQuery } = getFilterConditions(mongooseQuery);
+  const matchParams = getFilterConditions(mongooseQuery);
+	const [lookUpParams, projectGroup] = getProductAggregateParams(matchParams)
   const sortParam = getSortConditions(req.query.sort);
   const perPage = Number(req.query.perPage);
   const startPage = Number(req.query.startPage);
-	const query = req.body.query
-	// console.log("body", req.body)
-	// console.log("req", req)
+
+
 	try {
     const products = await Product.aggregate([
-			...(!!query ? [     {
-				$search: {
-					index: "productSearch",
-					compound: {
-						should: [
-							{
-								autocomplete: {
-									query: query,
-									path: "name",
-									fuzzy: {
-										maxEdits: 1,
-										prefixLength: 1,
-										maxExpansions: 256,
-									},
-								},
-							},
-							{
-								autocomplete: {
-									query: query,
-									path: "brand",
-									fuzzy: {
-										maxEdits: 1,
-										prefixLength: 1,
-										maxExpansions: 256,
-									},
-								},
-							},
-						],
-					},
-				},
-			}
-			]
-			: []
-			),
-
-      {
-        $lookup: {
-          from: Catalog.collection.name,
-          localField: "categories",
-          foreignField: "_id",
-          as: "categories",
-        },
-      },
-      {
-        $unwind: "$categories",
-      },
-      {
-        $match: {
-          $and: productQuery,
-        },
-      },
-      {
-        $lookup: {
-          from: ProductVariant.collection.name,
-          let: {
-            productId: "$_id",
-          },
-          pipeline: [
-            {
-              $lookup: {
-                from: Color.collection.name,
-                localField: "color",
-                foreignField: "_id",
-                as: "color",
-              },
-            },
-            {
-              $unwind: "$color",
-            },
-            {
-              $lookup: {
-                from: Size.collection.name,
-                localField: "size",
-                foreignField: "_id",
-                as: "size",
-              },
-            },
-            {
-              $unwind: "$size",
-            },
-            {
-              $match: {
-								$and: [
-									...variantQuery,
-									{
-										$expr: {
-											$eq: [ "$product", "$$productId" ],
-										},
-									},
-								]
-							}
-            },
-            { $limit: 1 },
-          ],
-          as: "variants",
-        },
-      },
-			{
-				$unwind: {
-					path: "$variants",
-				},
-			},
-      {
-        $project: {
-          _id: 1,
-          name: 1,
-          categories: 1,
-          productUrl: 1,
-          brand: 1,
-          manufacturer: 1,
-          manufacturerCountry: 1,
-          seller: 1,
-          description: 1,
-          date: 1,
-          variants: 1,
-        },
-      },
+			...lookUpParams,
+			...projectGroup,
       sortParam,
 			{
 				$skip: startPage * perPage - perPage
@@ -572,6 +405,10 @@ exports.searchProducts = async (req, res, next) => {
   }
 
   const query = req.body.query.toLowerCase().trim().replace(/\s\s+/g, " ");
+	const [, projectGroup] = getProductAggregateParams()
+	const perPage = Number(req.query.perPage);
+	const startPage = Number(req.query.startPage);
+
 
 	try {
 	const foundProducts = await Product.aggregate([
@@ -672,22 +509,11 @@ exports.searchProducts = async (req, res, next) => {
 		{
 			$unwind: "$variants",
 		},
+		...projectGroup,
 		{
-			$project: {
-				_id: 1,
-				name: 1,
-				categories: 1,
-				productUrl: 1,
-				brand: 1,
-				manufacturer: 1,
-				manufacturerCountry: 1,
-				seller: 1,
-				description: 1,
-				date: 1,
-				variants: 1
-			},
+			$skip: startPage * perPage - perPage
 		},
-		{ $limit: 20 },
+		{ $limit: perPage },
 	]);
 	res.json(foundProducts);
 	} catch (err) {
@@ -696,4 +522,47 @@ exports.searchProducts = async (req, res, next) => {
 		});
 	}
 };
+
+exports.updateProduct = (req, res, next) => {
+	Product.findOne({ _id: req.params.id })
+	.then((product) => {
+		if (!product) {
+			return res.status(400).json({
+				message: `Product with id "${ req.params.id }" is not found.`,
+			});
+		} else {
+			const productFields = _.cloneDeep(req.body);
+
+			try {
+				productFields.name = productFields.name
+				.toLowerCase()
+				.trim()
+				.replace(/\s\s+/g, " ");
+			} catch (err) {
+				res.status(400).json({
+					message: `Error happened on server: "${ err }" `,
+				});
+			}
+
+			const updatedProduct = queryCreator(productFields);
+
+			Product.findOneAndUpdate(
+				{ _id: req.params.id },
+				{ $set: updatedProduct },
+				{ new: true }
+			)
+			.then((product) => res.json(product))
+			.catch((err) =>
+				res.status(400).json({
+					message: `Error happened on server: "${ err }" `,
+				})
+			);
+		}
+	})
+	.catch((err) =>
+		res.status(400).json({
+			message: `Error happened on server: "${ err }" `,
+		})
+	);
+}
 
