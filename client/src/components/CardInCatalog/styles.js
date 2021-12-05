@@ -23,7 +23,6 @@ export const useStyles = makeStyles(theme =>({
 			margin: '0 auto',
 			width:'350px',
 		}
-
 	},
 	img: {
 		width: '100%',

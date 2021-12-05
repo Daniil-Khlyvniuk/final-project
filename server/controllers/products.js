@@ -110,7 +110,6 @@ exports.addProduct = async (req, res) => {
 exports.getVariantById = async (req, res, next) => {
   const varId = req.params.varId;
 	const [, projectGroup] = getProductAggregateParams()
-
 	try {
 		const variant = await Product.aggregate([
       {
@@ -407,6 +406,9 @@ exports.searchProducts = async (req, res, next) => {
 
   const query = req.body.query.toLowerCase().trim().replace(/\s\s+/g, " ");
 	const [, projectGroup] = getProductAggregateParams()
+	const perPage = Number(req.query.perPage);
+	const startPage = Number(req.query.startPage);
+
 
 	try {
 	const foundProducts = await Product.aggregate([
@@ -507,9 +509,11 @@ exports.searchProducts = async (req, res, next) => {
 		{
 			$unwind: "$variants",
 		},
-
 		...projectGroup,
-		{ $limit: 20 },
+		{
+			$skip: startPage * perPage - perPage
+		},
+		{ $limit: perPage },
 	]);
 	res.json(foundProducts);
 	} catch (err) {
