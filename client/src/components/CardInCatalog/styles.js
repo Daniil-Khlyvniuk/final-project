@@ -59,7 +59,7 @@ export const useStyles = makeStyles(theme =>({
 		flexDirection: 'column',
 		justifyContent: 'center',
 		alignItems: 'center',
-		paddingTop: 70,
+		// paddingTop: 70,
 	},
 	title: {
 		fontWeight: 'bold',
@@ -69,8 +69,9 @@ export const useStyles = makeStyles(theme =>({
 		textAlign: 'center',
 		color: '#FFFFFF',
 		margin: 0,
-		textTransform:'capitalize'
-
+		textTransform:'capitalize',
+		paddingLeft: 30,
+		paddingRight: 30,
 	},
 	price: {
 		fontSize: 32,
