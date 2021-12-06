@@ -1,27 +1,14 @@
 import { makeStyles } from '@mui/styles'
 
-export const useStyles = makeStyles(theme =>({
+export const useStyles = makeStyles(theme => ({
 	container: {
-		width: 'calc((100% / 3) - 20px)',
-		maxWidth: 280,
-		minWidth: 200,
-		aspectRatio: 1,
+		position: 'relative',
 		'&:hover $blockHover': {
 			visibility: 'visible',
 			opacity: 1,
 		},
 		'&:hover $catalogTitle': {
 			display: 'none',
-		},
-		position: 'relative',
-		marginBottom: '10px',
-		[theme.breakpoints.down('600')]: {
-			margin: '0 auto',
-			width:'350px',
-		},
-		[theme.breakpoints.between('650','792')] :{
-			margin: '0 auto',
-			width:'350px',
 		}
 	},
 	img: {
@@ -31,7 +18,6 @@ export const useStyles = makeStyles(theme =>({
 	catalogTitle: {
 		fontSize: '18px',
 		lineHeight: '30px',
-		textAlign: 'center',
 		color: '#FFFFFF',
 		background: '#373F41',
 		borderRadius: '2px',
@@ -40,7 +26,16 @@ export const useStyles = makeStyles(theme =>({
 		padding: '5px 10px',
 		margin: '0 10px',
 		fontFamily: theme.typography.fontFamily,
-		textTransform: 'capitalize'
+		textTransform: 'capitalize',
+		[theme.breakpoints.between('950', '1180')]: {
+			fontSize: '16px'
+		},
+		[theme.breakpoints.between('850', '950')]: {
+			fontSize: '14px'
+		},
+		[theme.breakpoints.between('480', '850')]: {
+			fontSize: '16px'
+		}
 	},
 	blockHover: {
 		aspectRatio: 1,
@@ -58,7 +53,6 @@ export const useStyles = makeStyles(theme =>({
 		flexDirection: 'column',
 		justifyContent: 'center',
 		alignItems: 'center',
-		// paddingTop: 70,
 	},
 	title: {
 		fontWeight: 'bold',
@@ -68,9 +62,17 @@ export const useStyles = makeStyles(theme =>({
 		textAlign: 'center',
 		color: '#FFFFFF',
 		margin: 0,
-		textTransform:'capitalize',
-		paddingLeft: 30,
-		paddingRight: 30,
+		textTransform: 'capitalize',
+		padding: '0 30px',
+		[theme.breakpoints.between('850', '1180')]: {
+			fontSize: 16
+		},
+		[theme.breakpoints.between('650', '750')]: {
+			fontSize: 16
+		},
+		[theme.breakpoints.between('650', '950')]: {
+			padding: '0 15px'
+		}
 	},
 	price: {
 		fontSize: 32,
@@ -79,22 +81,16 @@ export const useStyles = makeStyles(theme =>({
 		fontFamily: theme.typography.fontFamily,
 		fontWeight: 'bold',
 		color: '#FFFFFF',
-		// margin: '0 0 20px',
 		marginTop: 20,
 		marginBottom: 20,
-	},
-	btn: {
-		background: '#FFFFFF',
-		border: '1px solid #373F41',
-		borderRadius: '4px',
-		fontSize: 16,
-		lineHeight: '16px',
-		textAlign: 'center',
-		fontFamily: theme.typography.h2,
-		color: '#373F41',
-		padding: '11px 35px',
-		display: 'block',
-		margin: '0 auto',
-	},
-
+		[theme.breakpoints.between('950', '1180')]: {
+			fontSize: 28
+		},
+		[theme.breakpoints.between('850', '950')]: {
+			fontSize: 24
+		},
+		[theme.breakpoints.between('650', '750')]: {
+			fontSize: 24
+		},
+	}
 }))

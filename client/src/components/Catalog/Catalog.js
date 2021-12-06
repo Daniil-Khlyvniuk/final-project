@@ -1,15 +1,14 @@
 import React from 'react'
-import {useSelector} from 'react-redux'
-import {Box, Typography} from '@mui/material'
+import { useSelector } from 'react-redux'
+import { Box, Grid, Typography } from '@mui/material'
 import CardInCatalog from '../CardInCatalog/CardInCatalog'
 import { styled } from '@mui/styles'
-import {productsSelectors} from '../../store/Products'
+import { productsSelectors } from '../../store/Products'
 import useFilterHandler from '../../utils/customHooks/useFilterHandler'
 import BackdropLoader from '../UI/BackdropLoader/BackdropLoader'
 import Loader from '../UI/Loader/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { filterSelectors } from '../../store/Filter'
-
 
 const StyledTypography = styled(Typography)(() => ({
 	fontSize: '32px',
@@ -19,29 +18,27 @@ const StyledTypography = styled(Typography)(() => ({
 	alignSelf: 'center',
 }))
 
-
 const Catalog = () => {
 	const products = useSelector(productsSelectors.getCatalog())
-	const {handleInfinitiScroll} = useFilterHandler()
+	const { handleInfinitiScroll } = useFilterHandler()
 	const isLoading = useSelector(productsSelectors.getIsLoading())
 	const hasMore = useSelector(filterSelectors.getInfinityScrollHasMore())
 
-	const {startPage} = useSelector(filterSelectors.getFilters())
+	const { startPage } = useSelector(filterSelectors.getFilters())
 	const handleScroll = () => {
 		handleInfinitiScroll('startPage', +startPage + 1)
 	}
 
-	//preloader
-	if(isLoading)
-	{
+	if (isLoading) {
 		return <BackdropLoader open={isLoading} />
 	}
 
 	return (
-		<Box 
+		<Box
 			sx={{
 				display: 'flex',
 				flexDirection: 'column',
+				minWidth: 320
 			}}
 		>
 			{!products.length && (
@@ -55,30 +52,26 @@ const Catalog = () => {
 					alignItems: 'center',
 					flexWrap: 'wrap',
 					overflow: 'visible',
-					margin:'15px 0 0 0',
+					margin: '15px 0 0 0',
 				}}
 				dataLength={products.length}
 				next={handleScroll}
 				hasMore={hasMore}
 				loader={products.length ? <Loader /> : null}
 			>
-
-				{
-					!!products
-					// eslint-disable-next-line no-unused-vars
-					&& products.map((item, index) => {
-						return (
+				<Grid container spacing={2} sx={{ marginBottom: '40px' }} >
+					{products?.map(item => (
+						<Grid item l={4} md={6} sm={6} xs={12} key={item.variants._id}>
 							<CardInCatalog
-								key={item.variants._id} //костыль
 								_id={item.variants._id}
+								sx={{ width: { sm: '280px' }, height: { sm: '280px' } }}
 								image={'/' + item.variants.imageUrls[0]}
-								title={item?.name || ''}
+								title={item.name}
 								price={item.variants.currentPrice}
 							/>
-						)
-					})
-				}
-			
+						</Grid>
+					))}
+				</Grid>
 			</InfiniteScroll>
 		</Box>
 	)
