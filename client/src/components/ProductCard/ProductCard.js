@@ -24,7 +24,7 @@ const ProductCard = ({ _id, image, title, price }) => {
 					<Typography
 						className={classes.title}
 						sx={{
-							fontSize: { xl: '24px', lg: '24px', l: '22px', md: '20px', sm: '16px', xs: '16px' },
+							fontSize: { xl: '24px', lg: '24px', l: '22px', md: '20px', sm: '16px', xs: '18px' },
 							textTransform: 'capitalize'
 						}}
 					>
