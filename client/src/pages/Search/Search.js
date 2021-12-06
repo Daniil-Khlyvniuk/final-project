@@ -37,6 +37,9 @@ const Search = () => {
 						if (data.length > 0) {
 							dispatch(productActions.setAllProducts(data))
 						}
+						else {
+							dispatch(productActions.setAllProducts([]))
+						}
 						if (data.length < perPage) {
 							setHasMore(false)
 						}

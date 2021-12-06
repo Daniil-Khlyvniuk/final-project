@@ -11,6 +11,7 @@ const stripePromise = loadStripe('pk_test_YXhgLEwTTJdW2AfHsgJJNfAN')
 
 
 export default function Payment() {
+	// eslint-disable-next-line no-console
 	console.log('=================================')
 	const [clientSecret, setClientSecret] = useState('')
 	const userToken = localStorage.getItem('userToken')
