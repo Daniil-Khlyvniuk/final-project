@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import { useFormStyle } from '../../../utils/customHooks/useFormStyle'
 import { Field, Form, Formik } from 'formik'
 import { LOGIN_SCHEMA } from '../setting/Schemes'
-import { Box, Typography, Button, Switch } from '@mui/material'
+import { Box, Typography, Button } from '@mui/material'
 import { Link } from 'react-router-dom'
 import CustomInput from '../setting/CustomInput'
+import CustomSwitch from '../setting/CustomSwitch'
 
 import useAuth from '../../../utils/customHooks/useAuth'
 
@@ -32,7 +33,6 @@ const LoginForm = () => {
 					}
 				}
 				catch (err) {
-				// setServerResult({ error: Object.values(err.response.data)[0] })
 					setServerResult({ error: 'wrong login or password' })
 				}
 			}}
@@ -58,19 +58,33 @@ const LoginForm = () => {
 						/>
 						<Box 
 							sx={{
-								display: 'flex',
-								alignItems: 'center',
 								marginTop: '25px',
-								textTransform: 'capitalize',
-								padding: '5px',
-							}}>
-							<Typography>remember me</Typography>
-							<Field
-								component={Switch}
+								paddingLeft: '15px',
+							}}
+						>
+							<CustomSwitch 
+								data-testid="rememberMe"
 								name="rememberMe"
-								id="rememberMe"
-								value={true}
-								onChange={formikProps.handleChange}
+								label={
+									<Typography
+										component={'span'}
+										sx={{
+											fontSize: '14px',
+											fontWeight: 300,
+											lineHeight: '20px',
+										}}
+									>Remember me</Typography>
+								}
+								styles={{
+									'& .MuiSwitch-switchBase': {
+										'&.Mui-checked': {
+											color:'#6FB7AC',
+											'& + .MuiSwitch-track': {
+												backgroundColor: '#6FB7AC',
+											}
+										},
+									}}
+								}
 							/>
 						</Box>
 
