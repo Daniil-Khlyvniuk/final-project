@@ -1,15 +1,14 @@
 import React from 'react'
-import {useSelector} from 'react-redux'
-import {Box, Typography} from '@mui/material'
+import { useSelector } from 'react-redux'
+import { Box, Grid, Typography } from '@mui/material'
 import CardInCatalog from '../CardInCatalog/CardInCatalog'
-import { makeStyles, styled } from '@mui/styles'
-import {productsSelectors} from '../../store/Products'
+import { styled } from '@mui/styles'
+import { productsSelectors } from '../../store/Products'
 import useFilterHandler from '../../utils/customHooks/useFilterHandler'
 import BackdropLoader from '../UI/BackdropLoader/BackdropLoader'
 import Loader from '../UI/Loader/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { filterSelectors } from '../../store/Filter'
-
 
 const StyledTypography = styled(Typography)(() => ({
 	fontSize: '32px',
@@ -19,45 +18,29 @@ const StyledTypography = styled(Typography)(() => ({
 	alignSelf: 'center',
 }))
 
-const useStyles = makeStyles({
-	container: {
-		display: 'flex',
-		flexDirection: 'column',
-		// alignItems: 'center',
-		// flexWrap: 'wrap',
-		// gap: '20px',
-		// margin: '20px auto',
-		// justifyContent: 'center',
-	}
-})
-
 const Catalog = () => {
 	const products = useSelector(productsSelectors.getCatalog())
-	const {handleInfinitiScroll} = useFilterHandler()
+	const { handleInfinitiScroll } = useFilterHandler()
 	const isLoading = useSelector(productsSelectors.getIsLoading())
 	const hasMore = useSelector(filterSelectors.getInfinityScrollHasMore())
-	const classes = useStyles()
 
-	// eslint-disable-next-line no-console
-	console.log('prod: ', products)
-	const {startPage} = useSelector(filterSelectors.getFilters())
+	const { startPage } = useSelector(filterSelectors.getFilters())
 	const handleScroll = () => {
-		// eslint-disable-next-line no-console
-		// console.log('startPage: ', startPage)
 		handleInfinitiScroll('startPage', +startPage + 1)
 	}
 
-
-	//preloader
-	if(isLoading)
-	{
+	if (isLoading) {
 		return <BackdropLoader open={isLoading} />
 	}
 
-
-
 	return (
-		<Box className={classes.container}>
+		<Box
+			sx={{
+				display: 'flex',
+				flexDirection: 'column',
+				minWidth: 320
+			}}
+		>
 			{!products.length && (
 				<StyledTypography>no products by filter is found</StyledTypography>
 			)}
@@ -69,29 +52,26 @@ const Catalog = () => {
 					alignItems: 'center',
 					flexWrap: 'wrap',
 					overflow: 'visible',
-					margin:'15px 0 0 0',
+					margin: '15px 0 0 0',
 				}}
 				dataLength={products.length}
 				next={handleScroll}
 				hasMore={hasMore}
 				loader={products.length ? <Loader /> : null}
 			>
-
-				{
-					!!products
-					&& products.map((item, index) => {
-						return (
+				<Grid container spacing={2} sx={{ marginBottom: '40px' }} >
+					{products?.map(item => (
+						<Grid item l={4} md={6} sm={6} xs={12} key={item.variants._id}>
 							<CardInCatalog
-								key={index} //костыль
 								_id={item.variants._id}
+								sx={{ width: { sm: '280px' }, height: { sm: '280px' } }}
 								image={'/' + item.variants.imageUrls[0]}
-								title={item?.name || ''}
+								title={item.name}
 								price={item.variants.currentPrice}
 							/>
-						)
-					})
-				}
-			
+						</Grid>
+					))}
+				</Grid>
 			</InfiniteScroll>
 		</Box>
 	)

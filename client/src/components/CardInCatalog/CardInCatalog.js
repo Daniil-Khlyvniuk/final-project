@@ -27,13 +27,10 @@ const CardInCatalog = ({ title, image, price, _id }) => {
 					color={'white'}
 					component={Link}
 					to={`/product-details/${_id}`}
-					sx={{
-						paddingY: '10px',
-						paddingX: '40px',
-						margin: { xs: '0 0 40px 0 ' },
-					}}
-					variant={'contained'}>
-					buy now
+					sx={{ padding: '10px 40px' }}
+					variant={'contained'}
+				>
+					Buy now
 				</Button>
 			</Box>
 		</Box>
