@@ -39,10 +39,18 @@ const clearCart = () => {
 		.catch(() => null)
 }
 
+const addOrder = (test) => {
+	axios
+		.post('/api/orders', test, getAuthHeader())
+		.then(res => res?.data)
+		.catch(() => null)
+}
+
 export default {
 	addProductToCart,
 	deleteProductFromCart,
 	getCart,
 	deleteCart,
-	clearCart
+	clearCart,
+	addOrder,
 }
