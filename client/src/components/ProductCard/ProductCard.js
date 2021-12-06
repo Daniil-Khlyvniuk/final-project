@@ -5,6 +5,7 @@ import { Box } from '@mui/system'
 import { Typography } from '@mui/material'
 import Favoriteicon from './FavotiteIcon/FavoriteIcon'
 import { Link } from 'react-router-dom'
+import { stringSlice } from '../../utils/helpers/stringHelper'
 
 const ProductCard = ({ _id, image, title, price }) => {
 	const classes = useStyles()
@@ -22,11 +23,12 @@ const ProductCard = ({ _id, image, title, price }) => {
 				<Box className={classes.textContainer}>
 					<Typography
 						className={classes.title}
-						sx={{ fontSize: { xl: '24px', lg: '24px', l: '22px', md: '20px', sm: '16px', xs: '16px' },
-							textTransform:'capitalize'
+						sx={{
+							fontSize: { xl: '24px', lg: '24px', l: '22px', md: '20px', sm: '16px', xs: '16px' },
+							textTransform: 'capitalize'
 						}}
 					>
-						{title.slice(0, 40) + '...'}
+						{stringSlice(title, 30)}
 					</Typography>
 					<Box
 						component="div"

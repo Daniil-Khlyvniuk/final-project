@@ -6,9 +6,6 @@ import PropTypes from 'prop-types'
 
 const PageLinks = ({linksArr}) => 
 {
-	// eslint-disable-next-line no-console
-	console.log(linksArr)
-
 	return (
 		<Grid item xs={12} sm={6} lg={3}>
 			<List>

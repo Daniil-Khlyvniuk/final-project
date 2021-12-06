@@ -71,6 +71,7 @@ const PriceRange = () => {
 				onChangeCommitted={handleRange}
 				disableSwap
 				sx={{
+					maxWidth: 290,
 					height: '2px',
 					color: 'primary.main',
 					'& .MuiSlider-thumb': {
