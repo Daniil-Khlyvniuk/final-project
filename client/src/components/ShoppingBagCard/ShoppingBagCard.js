@@ -34,10 +34,6 @@ const ShoppingBagCard = ({ item }) => {
 				</Typography>
 				<Typography fontSize={18}>${item?.currentPrice}</Typography>
 				<div className={classes.specificationsContainer}>
-					<div className={classes.specifications}>
-						<Typography fontSize={18}>Color: </Typography>
-						<Typography fontSize={18}>Size: </Typography>
-					</div>
 					<div className={classes.quantityContainer}>
 						<Typography
 							fontSize={18}

@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import {shoppingBagSelectors} from '../../store/ShoppingBag'
 import * as shoppingBagActions from '../../store/ShoppingBag/shoppingBagSlice'
-// import { useEffect } from 'react'
 import cartAPI from '../../utils/API/cartAPI'
 // import { ProductSelector } from '../../store/Product'
 
@@ -11,10 +10,10 @@ export default function useHandleShoppingBag() {
 	const totalPrice = shoppingBag?.reduce((acc, value)=>acc+value.currentPrice,0)
 	// const activeProduct = useSelector(ProductSelector.getProduct())
 
-	const add = (product) => {
+
+	const add =  (product) => {
 		const shoppingBag = JSON.parse(localStorage.getItem('shoppingBag') || '[]') || []
 		const newShoppingBag = [...shoppingBag, ...[product]]
-
 		localStorage.setItem('shoppingBag', JSON.stringify(newShoppingBag))
 		dispatch(shoppingBagActions.addToShoppingBag(newShoppingBag))
 		cartAPI.addProductToCart(product._id)
@@ -42,23 +41,11 @@ export default function useHandleShoppingBag() {
 		await cartAPI.deleteCart(id)
 	}
 
-	const AfterBuy = () => {
+	const AfterBuy = async () => {
 		localStorage.setItem('shoppingBag', [])
 		dispatch(shoppingBagActions.removeFromShoppingBag([]))
+		await cartAPI.clearCart()
 	}
-
-
-	// useEffect(() => {
-	// 	if(!shoppingBag?.length){
-	// 		if(!localStorage.getItem('userToken')){
-	// 			dispatch(shoppingBagActions.removeFromShoppingBag(JSON?.parse(localStorage?.getItem('shoppingBag') || '[]') || []))
-	// 		}else{
-	// 			cartAPI.getCart().then(res => {
-	// 				dispatch(shoppingBagActions.removeFromShoppingBag(res))
-	// 			})
-	// 		}
-	// 	}
-	// }, [shoppingBag])// eslint-disable-line react-hooks/exhaustive-deps
 
 	return {
 		add, remove, removeAll, AfterBuy,
