@@ -19,6 +19,7 @@ const Summary = () => {
 			const products = res.map(({data}) => data)
 			setParent(products)
 		})
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 

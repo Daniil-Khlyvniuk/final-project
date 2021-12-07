@@ -6,12 +6,12 @@ import { useLocation } from 'react-router-dom'
 import queryString from 'query-string'
 import productsAPI from '../../utils/API/productsAPI'
 import filterApi from '../../utils/API/filterApi'
-
 import BackdropLoader from '../../components/UI/BackdropLoader/BackdropLoader'
 import ProductCard from '../../components/ProductCard/ProductCard'
 import DropDownSelect from '../../components/Catalog/DropDownSelect'
 import Loader from '../../components/UI/Loader/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
+import UseCeo from '../../utils/customHooks/useCeo'
 
 const Search = () => {
 	const [perPageArray, setPerPageArray] = useState([])
@@ -20,12 +20,10 @@ const Search = () => {
 	const [startPage, setStartPage] = useState(1)
 	const [hasMore, setHasMore] = useState(true)
 	const products = useSelector(productsSelectors.getProducts())
-
 	const isLoading = useSelector(productsSelectors.getIsLoading())
 	const dispatch = useDispatch()
 	let location = useLocation()
 	const { search_term } = queryString.parse(location.search)
-
 
 	const newProductsHandler = () => {
 		setHasMore(true)
@@ -40,6 +38,9 @@ const Search = () => {
 						if (data.length > 0) {
 							dispatch(productActions.setAllProducts(data))
 						}
+						else {
+							dispatch(productActions.setAllProducts([]))
+						}
 						if (data.length < perPage) {
 							setHasMore(false)
 						}
@@ -53,7 +54,6 @@ const Search = () => {
 			else {
 				dispatch(productActions.setAllProducts([]))
 			}
-			
 			return defPage
 		})
 	}
@@ -67,11 +67,11 @@ const Search = () => {
 				)
 					.then(({ data }) => {
 						if (data.length) {
-							if(data.length < perPage) setHasMore(false)
-							setHasMore(true)
+							// setHasMore(true)
+							if (data.length < perPage) setHasMore(false)
 							dispatch(productActions.addProductsToStore(data))
 						}
-						else{
+						else {
 							setHasMore(false)
 						}
 					})
@@ -93,79 +93,91 @@ const Search = () => {
 	useEffect(() => {
 		filterApi.getFiltersByType('perPage')
 			.then(resp => setPerPageArray(resp.data))
-		// eslint-disable-next-line no-console
-			.catch(err => console.log('Search Err',err))
+			// eslint-disable-next-line no-console
+			.catch(err => console.log('Search Err', err))
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
-	useEffect(() => {	
+	useEffect(() => {
 		newProductsHandler()
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [perPage])
 
-
-
 	return (
-		<Container maxWidth="lg" sx={{ minWidth: 320 }}>
-			{isLoading && <BackdropLoader open={isLoading} />}
-			{!products.length
-				? <Typography
-					fontSize={32}
-					sx={{ mb: '14px', mt: '30px' }}
-					variant='h2'
-				>
-					No products found
-				</Typography>
-				: <Box style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', }}>
-					<Typography
-						fontSize={32}
-						sx={{ mb: '14px', mt: '30px' }}
+		<>
+			<UseCeo 
+				title = {search_term ? `Search by word ${search_term}` : 'Search Page'}
+				description = {search_term ?  `Search products by word ${search_term}` : 'Search products'}
+				keywords = {
+					search_term 
+						? `${search_term}, ${'search products'}, search products by word ${search_term}` 
+						: null
+				}
+			/>
+			<Container maxWidth="lg" sx={{ minWidth: 320 }}>
+				{isLoading && <BackdropLoader open={isLoading} />}
+				{!products.length
+					? <Typography
+						sx={{ mb: '14px', mt: '30px', fontSize: { md: 32, xs: 25 } }}
 						variant='h2'
 					>
-						{`Search results for "${location.search.substr(location.search.lastIndexOf('=') + 1)}"`}
+					No products found
 					</Typography>
-					{/* <Box sx={{ display: 'flex', justifyContent: 'space-between', margin: 'auto' }}> */}
-					{perPageArray.length && (
-						<DropDownSelect
-							arrayToIterate={perPageArray}
-							selectedValue={perPage}
-							selectHandler={setPerPage}
-							label={'Show'}
-						/>
-					)}
-					{/* </Box> */}
-				</Box>
-			}
-			<InfiniteScroll
-				style={{
-					display: 'flex',
-					justifyContent: 'flex-start',
-					gap: '10px',
-					alignItems: 'center',
-					flexWrap: 'wrap',
-					overflow: 'visible',
-					margin:'15px 0 0 0',
-				}}
-				dataLength={products.length}
-				next={scrollProductsHandler}
-				hasMore={hasMore}
-				loader={hasMore ? <Loader /> : null}
-			>
-				<Grid container spacing={2} sx={{ marginBottom: '40px' }} >
-					{products?.map(item => (
-						<Grid item md={6} sm={6} xs={12} key={item.variants._id}>
-							<ProductCard
-								_id={item.variants._id}
-								sx={{ width: { sm: '580px' }, height: { sm: '545px' } }}
-								image={'/' + item.variants.imageUrls[0]}
-								title={item.name}
-								price={item.variants.currentPrice}
+					: <Box
+						sx={{
+							display: 'flex',
+							justifyContent: 'space-between',
+							alignItems: 'center',
+							mb: '14px',
+							mt: '30px'
+						}}>
+						<Typography
+							variant='h2'
+							sx={{ fontSize: { md: 32, xs: 25 } }}
+						>
+							{`Search results for "${search_term}"`}
+						</Typography>
+						{perPageArray.length && (
+							<DropDownSelect
+								arrayToIterate={perPageArray}
+								selectedValue={perPage}
+								selectHandler={setPerPage}
+								label={'Show'}
 							/>
-						</Grid>
-					))}
-				</Grid>
-			</InfiniteScroll>
-		</Container>
+						)}
+					</Box>
+				}
+				<InfiniteScroll
+					style={{
+						display: 'flex',
+						justifyContent: 'flex-start',
+						gap: '10px',
+						alignItems: 'center',
+						flexWrap: 'wrap',
+						overflow: 'visible',
+						margin: '15px 0 0 0',
+					}}
+					dataLength={products.length}
+					next={scrollProductsHandler}
+					hasMore={hasMore}
+					loader={hasMore ? <Loader /> : null}
+				>
+					<Grid container spacing={2} sx={{ marginBottom: '40px' }} >
+						{products?.map(item => (
+							<Grid item md={6} sm={6} xs={12} key={item.variants._id}>
+								<ProductCard
+									_id={item.variants._id}
+									sx={{ width: { sm: '580px' }, height: { sm: '545px' } }}
+									image={'/' + item.variants.imageUrls[0]}
+									title={item.name}
+									price={item.variants.currentPrice}
+								/>
+							</Grid>
+						))}
+					</Grid>
+				</InfiniteScroll>
+			</Container >
+		</>
 	)
 }
 

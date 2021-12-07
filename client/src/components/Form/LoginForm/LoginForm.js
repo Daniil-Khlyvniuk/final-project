@@ -89,7 +89,8 @@ const LoginForm = () => {
 						</Box>
 
 						<p className={classes.policy}>By signing up you agree to
-							<Link to="/termsOfService"> Terms of Service </Link>  and <Link to="/privacypolicy"> Privacy Policy </Link>
+							<Link to="/info/terms-of-service"> Terms of Service </Link> 
+							and <Link to="/info/privacy-policy"> Privacy Policy </Link>
 						</p>
 
 						{serverResult && serverResult.error && (
@@ -117,10 +118,6 @@ const LoginForm = () => {
 								log in
 							</Button>
 						</Box>
-
-						<p className={classes.alreadyIn}>
-							<Link to="/#">FORGOT PASSWORD?</Link>
-						</p>
 					</Form>
 				)
 			}}
