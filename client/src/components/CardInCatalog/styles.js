@@ -3,10 +3,6 @@ import { makeStyles } from '@mui/styles'
 export const useStyles = makeStyles(theme => ({
 	container: {
 		position: 'relative',
-		width: 'calc((100% / 3) - 20px)',
-		maxWidth: 280,
-		minWidth: 200,
-		aspectRatio: 1,
 		'&:hover $blockHover': {
 			visibility: 'visible',
 			opacity: 1,

@@ -19,12 +19,12 @@ router.post(
   addSlide
 );
 
-// @route   PUT /slides/:id
+// @route   PUT /slides/:id      upload/images/slide/0369dec9-7b95-42ae-a89b-7752aeaa0531.jpg
 // @desc    Update existing slide
 // @access  Private
 router.put(
   "/:customId",
-  passport.authenticate("jwt-admin", { session: false }),
+  // passport.authenticate("jwt-admin", { session: false }),
   updateSlide
 );
 
