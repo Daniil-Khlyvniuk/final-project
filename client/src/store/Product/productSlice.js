@@ -33,6 +33,7 @@ const productSlice = createSlice({
 			state.isLoading = true
 		},
 		[fetchProductUrl.rejected]: (state) => {
+			state.isLoading = false
 			state.hasError = true
 		},
 		[fetchAllColors.fulfilled]: (state, action) => {
@@ -43,6 +44,7 @@ const productSlice = createSlice({
 			state.isLoading = true
 		},
 		[fetchAllColors.rejected]: (state) => {
+			state.isLoading = false
 			state.hasError = true
 		},
 		[fetchSizes.fulfilled]: (state, action) => {
@@ -53,6 +55,7 @@ const productSlice = createSlice({
 			state.isLoading = true
 		},
 		[fetchSizes.rejected]: (state) => {
+			state.isLoading = false
 			state.hasError = true
 		},
 		[fetchAllVariants.fulfilled]: (state, action) => {
@@ -63,6 +66,7 @@ const productSlice = createSlice({
 			state.isLoading = true
 		},
 		[fetchAllVariants.rejected]: (state) => {
+			state.isLoading = false
 			state.hasError = true
 		},
 	}

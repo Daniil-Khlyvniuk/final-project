@@ -6,12 +6,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import { modalSelectors } from './store/Modal'
 import useAuth from './utils/customHooks/useAuth'
 import ScrollButton from './components/ScrollButton/ScrollButton'
-
 import { settingsOperations } from './store/Settings'
 
-
 const App = () => {
-	const {checkToken} = useAuth()
+	const { checkToken } = useAuth()
 	const dispatch = useDispatch()
 	const modal = useSelector(modalSelectors.checkOpen())
 

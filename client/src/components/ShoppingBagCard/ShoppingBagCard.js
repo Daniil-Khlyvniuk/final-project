@@ -12,7 +12,6 @@ const ShoppingBagCard = ({ item , card}) => {
 	const classes = useStyles()
 	const handleShoppingBag = useHandleShoppingBag()
 
-
 	// const allColors = useSelector(ProductSelector.allColors())
 	// const color = allColors?.find(color => color._id === item.color)
 	//
@@ -64,7 +63,7 @@ const ShoppingBagCard = ({ item , card}) => {
 					</svg>
 				</>)
 				}
-						
+
 			</div>
 		</div>
 	)

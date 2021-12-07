@@ -4,7 +4,7 @@ import productsOperations from './operations'
 const {
 	fetchProducts,
 	fetchProductsByFilter,
-	fetchProductsByNextPage
+	fetchProductsByNextPage,
 } = productsOperations
 
 const initialState = {
@@ -22,6 +22,12 @@ const productsSlice = createSlice({
 	reducers: {
 		setAllProducts(state, action) {
 			state.data = action.payload
+			state.isLoading = false
+		},
+		addProductsToStore(state, action)
+		{
+			state.data = [...state.data, ...action.payload]
+			state.isLoading = false
 		},
 		addRelatedId(state, action) {
 			const item = action.payload
@@ -61,10 +67,6 @@ const productsSlice = createSlice({
 
 		//for catalog page filters
 		[fetchProductsByFilter.fulfilled]: (state, action) => {
-			// eslint-disable-next-line no-console
-			console.log('productsByFilter', action.payload)
-
-			// state.catalog = [...state.catalog, ...action.payload]
 			state.catalog = action.payload
 			state.isLoading = false
 			state.error = null
@@ -80,9 +82,6 @@ const productsSlice = createSlice({
 
 		//for catalog next page same filters
 		[fetchProductsByNextPage.fulfilled]: (state, action) => {
-			// eslint-disable-next-line no-console
-			console.log('productsNextByFilter', action.payload)
-
 			state.catalog = [...state.catalog, ...action.payload]
 			state.isLoading = false
 			state.error = null
@@ -100,6 +99,7 @@ const productsSlice = createSlice({
 
 export const {
 	setAllProducts,
+	addProductsToStore,
 	addRelatedId,
 	setRelatedProductsList,
 } = productsSlice.actions

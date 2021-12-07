@@ -16,21 +16,21 @@ module.exports.getFilterConditions = (query) => {
 };
 
 module.exports.getSortConditions = (sortParam) => {
-  const sortType = sortParam?.includes("-") ? -1 : 1;
+  const sortType = sortParam?.includes("-") ? 1 : -1;
   const sortParamValue = sortParam?.trim()?.replace("-", "");
   // -1 -> small > big
   //1 -> big > small
   return {
-    ...(
+		...(
 			sortParam
-      ?
-				{ $sort: { ["variants." + sortParamValue]: sortType } }
-      :
-				{
-          $sort: {
-            date: -1,
-          },
-        }
-				),
+				?
+					{ $sort: { ["variants." + sortParamValue]: sortType } }
+				:
+					{
+						$sort: {
+							_id: 1,
+						},
+					}
+			),
   };
 };

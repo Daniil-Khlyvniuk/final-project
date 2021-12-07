@@ -5,13 +5,10 @@ import { Search, SearchIconWrapper, StyledAutocomplete, StyledBox } from './styl
 import productsAPI from '../../../utils/API/productsAPI'
 import { CircularProgress, Grid, Avatar, Typography } from '@mui/material'
 import { useHistory, Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import setAllProducts from '../../../store/Products'
 
 const HeaderSearch = () => {
 	const [options, setOptions] = useState([])
 	const [isLoading, setIsLoading] = useState(false)
-	const dispatch = useDispatch()
 	let history = useHistory()
 	let timer
 
@@ -64,14 +61,12 @@ const HeaderSearch = () => {
 									{ query: e.target.value }
 								).then(({ data }) => {
 									if (data.length > 0) {
-										dispatch(setAllProducts.setAllProducts(data))
-										history.push('/shop/catalog')
+										history.push(`/search?search_term=${e.target.value}`)
 									}
 								})
 							} catch (err) {
 								// eslint-disable-next-line no-console
 								console.error(err)
-								dispatch(setAllProducts.setAllProducts([]))
 							}
 						}
 					}}
@@ -111,19 +106,19 @@ const HeaderSearch = () => {
 									<Grid item xs zeroMinWidth>
 										<Typography
 											variant='menuBold'
-											sx={{ display: 'block' }}
+											sx={{ display: 'block', color: '#373F41' }}
 										>
 											{option.name}
 										</Typography>
 										<Typography
 											variant='footerTextMedium'
-											sx={{ display: 'block' }}
+											sx={{ display: 'block', color: '#373F41' }}
 										>
 											({option.variants.itemNo})
 										</Typography>
 										<Typography
 											variant='menuBold'
-											sx={{ display: 'block' }}
+											sx={{ display: 'block', color: '#373F41' }}
 										>
 											{'$' + option.variants.currentPrice}
 										</Typography>
