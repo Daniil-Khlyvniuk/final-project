@@ -40,6 +40,7 @@ const CartModal = () => {
 	const dispatch = useDispatch()
 	const handleClose = () => dispatch(modalActions.modalToggle(false))
 
+	// eslint-disable-next-line no-console
 	console.log(shoppingBag)
 	return (
 		<BasicModal
