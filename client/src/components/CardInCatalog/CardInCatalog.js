@@ -1,39 +1,105 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useStyles } from './styles'
-import { Button } from '@mui/material'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { Box } from '@mui/system'
 import { stringSlice } from '../../utils/helpers/stringHelper'
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
+import FavoriteIcon from '@mui/icons-material/Favorite'
+import Tooltip from '@mui/material/Tooltip'
+import { useDispatch, useSelector } from 'react-redux'
+import { userSelectors } from '../../store/User'
+import { favoritesOperations, favoritesSelectors } from '../../store/Favorites'
+import modalActions from '../../store/Modal'
+import { IconButton } from '@mui/material'
+import LoginModal from '../Modal/LoginModal'
+import { grey } from '@mui/material/colors'
 
 const CardInCatalog = ({ title, image, price, _id }) => {
 	const classes = useStyles()
+	const user = useSelector(userSelectors.getData())
+	// eslint-disable-next-line no-unused-vars
+	const favorites = useSelector(favoritesSelectors.getFavorites())
+	const dispatch = useDispatch()
+	const handleOpen = (content) => dispatch(modalActions.modalToggle(content))
+	const favoritesStorage = JSON.parse(localStorage.getItem('favorites')) || []
+
+	useEffect(() => {
+		favoritesOperations.fetchFavorites(favoritesStorage)(dispatch)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [favoritesStorage.length])
+
+	const addToFavorites = () => {
+		if (!localStorage.getItem('favorites')) localStorage.setItem('favorites', JSON.stringify([]))
+
+		if (favoritesStorage.includes(_id)) {
+			const index = favoritesStorage.indexOf(_id)
+			favoritesStorage.splice(index, 1)
+		} else {
+			favoritesStorage.push(_id)
+		}
+		favoritesOperations.fetchFavorites(favoritesStorage)(dispatch)
+		localStorage.setItem('favorites', JSON.stringify(favoritesStorage))
+	}
 
 	return (
 		<Box className={classes.container}>
 			<img className={classes.img} src={image} alt='img' />
-			<p className={classes.catalogTitle}>
-				{stringSlice(title, 30)}
+			<p className={classes.cardTitle}>
+				{stringSlice(title, 22)}
+				<p className={classes.cardPrice}>{price} $</p>
 			</p>
-			<Box
-				className={classes.blockHover}
-				sx={{ fontSize: { sm: '10px' } }}
-			>
-				<p className={classes.title}>
-					{stringSlice(title, 30)}
-				</p>
-				<p className={classes.price}>{price} $</p>
-				<Button
-					color={'white'}
-					component={Link}
-					to={`/product-details/${_id}`}
-					sx={{ padding: '10px 40px' }}
-					variant={'contained'}
+			<Tooltip title="Click for details">
+				<Box
+					className={classes.blockHover}
+					sx={{ fontSize: { sm: '10px' } }}
 				>
-					Buy now
-				</Button>
-			</Box>
-		</Box>
+					<IconButton
+						aria-label="favorites"
+						title={favoritesStorage.includes(_id) ? 'remove from favorites' : 'add to favorites'}
+						sx={{
+							padding: 0,
+							position: 'absolute',
+							right: '10px',
+							top: '10px',
+						}}
+						onClick={!user
+							? async () => {
+								await handleOpen(<LoginModal />)
+								await !favoritesStorage.includes(_id) && addToFavorites()
+							}
+							: addToFavorites
+						}
+					>
+						{favoritesStorage.includes(_id) && user
+							? <FavoriteIcon
+								sx={{
+									color: grey[50],
+									fontSize: { xl: '35px', lg: '35px', md: '30px', sm: '30px', xs: '40px' }
+								}}
+							/>
+							: <FavoriteBorderIcon
+								sx={{
+									color: grey[50],
+									fontSize: { xl: '35px', lg: '35px', md: '30px', sm: '30px', xs: '40px' }
+								}}
+							/>
+						}
+					</IconButton>
+					<Link
+						to={`/product-details/${_id}`}
+						style={{ textDecoration: 'none' }}
+					>
+						<Box className={classes.contentWrapper}>
+							<p className={classes.hoverTitle}>
+								{stringSlice(title, 25)}
+							</p>
+							<p className={classes.hoverPrice}>{price} $</p>
+						</Box>
+					</Link>
+				</Box>
+			</Tooltip>
+		</Box >
 	)
 }
 
