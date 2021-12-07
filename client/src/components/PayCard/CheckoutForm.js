@@ -2,16 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { Container, Grid, Box} from '@mui/material'
 import axios from 'axios'
 import { border, PayParent } from './styles'
-import PayCc from '../../components/PayCard/PayCC'
 import ShipAdr from '../../components/PayCard/ShipAdr'
 import Summary from '../../components/PayCard/Summary'
 
 // eslint-disable-next-line react/prop-types
-const Checkout = () => {
+const CheckoutForm = ({handleNext}) => {
 	// eslint-disable-next-line no-unused-vars
 	const [userData, setUserData] = useState({})
 	const [isLoading, setIsLoading] = useState(true)
-	
+
 
 	useEffect(() => {
 		setIsLoading(true)
@@ -29,11 +28,8 @@ const Checkout = () => {
 						<Grid container>
 							<Grid item xs={12}>
 								<Container maxWidth="md">
-									<ShipAdr/>
-									<div style={border}/>
-									<Grid item xs={12}>
-										<PayCc/>
-									</Grid>
+									<ShipAdr handleNext={handleNext}/>
+									<Box style={border}/>
 								</Container>
 							</Grid>
 						</Grid>
@@ -47,4 +43,4 @@ const Checkout = () => {
 	)
 }
 
-export default Checkout
+export default CheckoutForm
