@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Typography, Box } from '@mui/material'
-import { border } from '../../pages/Cart/styles'
+import { border } from './styles'
 import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
 import { PhotoSumm, SummBox, SummText, SummTotal, SummCarts } from './style'
 import axios from 'axios'
