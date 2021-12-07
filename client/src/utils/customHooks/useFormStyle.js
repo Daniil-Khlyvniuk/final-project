@@ -18,17 +18,17 @@ export const useFormStyle = makeStyles({
 		marginTop: '25px',
 		transition: '0.5s'
 	},
-	ads: {
-		display: 'flex',
-		alignItems: 'center',
-		alignContent: 'center',
-		fontStyle: 'normal',
-		fontFamily: theme.typography,
-		fontWeight: 300,
-		fontSize: '14px',
-		lineHeight: '20px',
-		marginBottom: 5
-	},
+	// ads: {
+	// 	display: 'flex',
+	// 	alignItems: 'center',
+	// 	alignContent: 'center',
+	// 	fontStyle: 'normal',
+	// 	fontFamily: theme.typography,
+	// 	fontWeight: 300,
+	// 	fontSize: '14px',
+	// 	lineHeight: '20px',
+	// 	marginBottom: 5
+	// },
 	policy: {
 		fontFamily: theme.typography.fontFamily,
 		fontStyle: 'normal',

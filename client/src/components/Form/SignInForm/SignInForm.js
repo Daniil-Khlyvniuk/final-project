@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Formik, Form, Field } from 'formik'
 import { SING_UP_SCHEMA } from '../setting/Schemes'
 import { useFormStyle } from '../../../utils/customHooks/useFormStyle'
-import { Box, Typography, Button } from '@mui/material'
+import { Box, Typography, Button, Link as LinkMui } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { Facebook, Google } from '../setting/SocialIcons'
 
@@ -14,7 +14,7 @@ import useAuth from '../../../utils/customHooks/useAuth'
 
 const SignInForm = () => {
 	const [serverResult, setServerResult] = useState(null)
-	const {register} = useAuth()
+	const { register } = useAuth()
 
 	const classes = useFormStyle()
 	return (
@@ -25,7 +25,7 @@ const SignInForm = () => {
 				paddingRight: '10px'
 			}}
 		>
-			<Formik 
+			<Formik
 				initialValues={{
 					firstName: '',
 					lastName: '',
@@ -41,8 +41,7 @@ const SignInForm = () => {
 				onSubmit={async (values) => {
 					try {
 						const res = await register(values)
-						if(res)
-						{
+						if (res) {
 							setServerResult({ success: 'You successfully registered' })
 						}
 					}
@@ -104,7 +103,7 @@ const SignInForm = () => {
 								placeholder="Confirm Password"
 							/>
 
-							<Box 
+							<Box
 								sx={{
 									marginTop: '25px',
 									paddingLeft: '15px',
@@ -169,8 +168,8 @@ const SignInForm = () => {
 							</Box>
 
 							<p className={classes.policy}>By signing up you agree to
-								<Link to="/termsOfService"> Terms of Service </Link> 
-								and <Link to="/privacypolicy"> Privacy Policy </Link>
+								<Link to="/info/terms-of-service"> Terms of Service </Link>
+								and <Link to="/info/privacy-policy"> Privacy Policy </Link>
 							</p>
 
 							{serverResult && serverResult.error && (
@@ -198,12 +197,19 @@ const SignInForm = () => {
 								</Button>
 							</Box>
 							<div className={classes.socialBox}>
-								<Link to="#"><Google /></Link>
-								<Link to="#"><Facebook /></Link>
+								<LinkMui
+									href="https://myaccount.google.com"
+									target="_blank"
+								>
+									<Google />
+								</LinkMui>
+								<LinkMui
+									href="https://www.facebook.com"
+									target="_blank"
+								>
+									<Facebook />
+								</LinkMui>
 							</div>
-							<p className={classes.alreadyIn}>
-								<Link to="/login">I HAVE AN ACCOUNT</Link>
-							</p>
 						</Form>
 					)
 				}}

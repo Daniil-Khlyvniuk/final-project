@@ -406,8 +406,8 @@ exports.searchProducts = async (req, res, next) => {
 
   const query = req.body.query.toLowerCase().trim().replace(/\s\s+/g, " ");
 	const [, projectGroup] = getProductAggregateParams()
-	const perPage = Number(req.query.perPage);
-	const startPage = Number(req.query.startPage);
+	const perPage = Number(req.body.perPage) || 1000;
+	const startPage = Number(req.body.startPage) || 1;
 
 
 	try {

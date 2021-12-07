@@ -8,6 +8,7 @@ const Step1 = () => {
 	const classes = useStyles()
 	const { shoppingBag, totalPrice } = useHandleShoppingBag()
 
+
 	return (
 		<div className={classes.containerStep1}>
 			<div className={classes.cards}>
