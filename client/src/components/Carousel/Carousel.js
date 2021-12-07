@@ -1,10 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import Slider from 'react-slick'
-// import 'slick-carousel/slick/slick.css'
-// import 'slick-carousel/slick/slick-theme.css'
-import './slick(costil).css'
-import './slick-theme(costil).css'
+import './slick(custom).css'
+import './slick-theme(custom).css'
 import { useStyleCarousel } from '../../utils/customHooks/useStyleCarousel'
 import { Link } from 'react-router-dom'
 
@@ -193,10 +191,6 @@ const Carousel = ({
 						slidesToShow={slides.length <= 3 ? slides.length : 3}
 					>
 						{slides?.map((slide) => {
-							// eslint-disable-next-line no-console
-							console.log('===============')
-							// eslint-disable-next-line no-console
-							console.log(slide)
 							return (
 								<div key={slide.customId}>
 									<div style={{ position: 'relative', margin: '0 10px' }}>
