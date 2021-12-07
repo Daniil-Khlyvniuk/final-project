@@ -41,7 +41,7 @@ const theme = createTheme({
 		},
 		menuBold: {
 			textTransform: 'capitalize',
-			color: '#373F41',
+			color: 'primary.main',
 			fontFamily: 'Mulish, sans-serif',
 			fontWeight: 700,
 			fontSize: '16px',
@@ -49,7 +49,7 @@ const theme = createTheme({
 		},
 		footerTextMedium: {
 			textTransform: 'capitalize',
-			color: '#373F41',
+			color: 'primary.main',
 			fontFamily: 'Mulish, sans-serif',
 			fontWeight: 400,
 			fontSize: '16px',
@@ -122,14 +122,14 @@ const theme = createTheme({
 					props: { variant: 'active'},
 					style: {
 						minWidth: 'calc(100% / 2)',
-						border: '1px solid #373F41',
+						border: '1px solid primary.main',
 						borderBottom: 'none',
 					}
 				},
 				{
 					props: {variant: 'default'},
 					style: {
-						borderBottom: '1px solid #373F41',
+						borderBottom: '1px solid primary.main',
 						minWidth: 'calc(100% / 2)',
 					}
 				},
@@ -155,7 +155,7 @@ const theme = createTheme({
 						underline: 'none',
 						textTransform: 'capitalize',
 						textDecoration: 'none',
-						color: '#373F41',
+						color: 'primary.main',
 						fontFamily: 'Mulish',
 						fontWeight: 700,
 						fontSize: '16px',
@@ -168,7 +168,7 @@ const theme = createTheme({
 						underline: 'none',
 						textTransform: 'capitalize',
 						textDecoration: 'none',
-						color: '#373F41',
+						color: 'primary.main',
 						fontFamily: 'Mulish',
 						fontWeight: 400,
 						fontSize: '16px',

@@ -6,5 +6,3 @@ module.exports = {
   NODEMAILER_PASSWORD:'Cactus*96',
   NODEMAILER_SERVICE:'gmail',
 };
-// const DB_URL = "mongodb+srv://finalProject:myAmazingPassword@cluster0.ciofz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
-// console.log(process.env)
