@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { ProductSelector } from '../../../store/Product'
 import modalActions from '../../../store/Modal'
 import { favoritesOperations, favoritesSelectors } from '../../../store/Favorites'
-import LoginModal from '../../Modal/LoginModal'
+import LoginModal from '../../Modal/LoginModal/LoginModal'
 import useHandleShoppingBag from '../../../utils/customHooks/useHandleShoppingBag'
 import { userSelectors } from '../../../store/User'
 

@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { userSelectors } from '../../store/User'
 import { favoritesOperations, favoritesSelectors } from '../../store/Favorites'
 import modalActions from '../../store/Modal'
-import LoginModal from '../Modal/LoginModal'
+import LoginModal from '../Modal/LoginModal/LoginModal'
 
 const ProductCard = ({ _id, image, title, price }) => {
 	const classes = useStyles()

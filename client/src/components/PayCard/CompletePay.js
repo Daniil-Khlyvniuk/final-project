@@ -11,9 +11,11 @@ const CompletePay = () => {
 	const handleShoppingBag = useHandleShoppingBag()
 
 	useEffect(()=> {
+		// eslint-disable-next-line no-console
 		console.log(newOrder)
 		cartAPI.addOrder(newOrder)
 		handleShoppingBag.AfterBuy()
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[])
 
 	return (

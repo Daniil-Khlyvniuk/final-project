@@ -19,6 +19,7 @@ const Checkout = () => {
 		setIsLoading(false)
 	}, [isLoading])
 
+	// eslint-disable-next-line no-console
 	console.log(userData)
 
 	return (

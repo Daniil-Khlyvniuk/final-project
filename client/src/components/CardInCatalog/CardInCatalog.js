@@ -12,7 +12,7 @@ import { userSelectors } from '../../store/User'
 import { favoritesOperations, favoritesSelectors } from '../../store/Favorites'
 import modalActions from '../../store/Modal'
 import { IconButton } from '@mui/material'
-import LoginModal from '../Modal/LoginModal'
+import LoginModal from '../Modal/LoginModal/LoginModal'
 import { grey } from '@mui/material/colors'
 
 const CardInCatalog = ({ title, image, price, _id }) => {
