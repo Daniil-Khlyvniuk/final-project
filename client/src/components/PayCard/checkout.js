@@ -19,6 +19,7 @@ const Checkout = () => {
 		setIsLoading(false)
 	}, [isLoading])
 
+	console.log(userData)
 
 	return (
 		<Box my='15px'>
