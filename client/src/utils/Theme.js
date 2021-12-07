@@ -122,14 +122,14 @@ const theme = createTheme({
 					props: { variant: 'active'},
 					style: {
 						minWidth: 'calc(100% / 2)',
-						border: '1px solid primary.main',
+						border: '1px solid #373F41',
 						borderBottom: 'none',
 					}
 				},
 				{
 					props: {variant: 'default'},
 					style: {
-						borderBottom: '1px solid primary.main',
+						borderBottom: '1px solid #373F41',
 						minWidth: 'calc(100% / 2)',
 					}
 				},
