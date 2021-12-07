@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
-const ScrollToTop = ( {exeptions = [], children } ) => {
+const UseScrollToTop = ( {exeptions = [], children } ) => {
 	let location = useLocation()
 	useEffect( () => {
 		if(!exeptions.find(except => except === location.pathname)){
@@ -12,4 +12,4 @@ const ScrollToTop = ( {exeptions = [], children } ) => {
 	return children
 }
 
-export default ScrollToTop
+export default UseScrollToTop

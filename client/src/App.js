@@ -8,7 +8,7 @@ import useAuth from './utils/customHooks/useAuth'
 import ScrollButton from './components/ScrollButton/ScrollButton'
 import { settingsOperations } from './store/Settings'
 
-import ScrollToTop from './utils/customHooks/useScrollToTop'
+import UseScrollToTop from './utils/customHooks/useScrollToTop'
 
 const App = () => {
 	const { checkToken } = useAuth()
@@ -29,9 +29,9 @@ const App = () => {
 	return (
 		<div className={'App'}>
 			<Header />
-			<ScrollToTop exeptions={exeptionScroll} >
+			<UseScrollToTop exeptions={exeptionScroll} >
 				<AppRoutes />
-			</ScrollToTop>
+			</UseScrollToTop>
 			<Footer />
 			<ScrollButton />
 			{modal}
