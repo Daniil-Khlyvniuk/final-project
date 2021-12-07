@@ -35,7 +35,9 @@ const CompletePay = () => {
 		ShoppingBag: BuyGoods
 
 	}]
+
 	localStorage.setItem('ORDER', JSON.stringify(newShoppingBag))
+
 
 
 
