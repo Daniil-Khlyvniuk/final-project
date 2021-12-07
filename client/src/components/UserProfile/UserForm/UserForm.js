@@ -13,6 +13,7 @@ import {userOperations, userSelectors} from '../../../store/User'
 import Loader from '../../UI/Loader/Loader'
 import axios from 'axios'
 import CheckboxInput from './FormUI/CheckboxInput'
+import SnackbarMess from '../../UI/SnackbarMess'
 
 
 
@@ -28,23 +29,30 @@ const FORM_VALIDATION = Yup.object().shape({
 	address: Yup.string(),
 	city: Yup.string(),
 	country: Yup.string(),
+	zip: Yup.string().matches(/^[0-9]+$/, 'Must be only numbers')
+		.max(6, 'Not valid zip code')
+		.min(4, 'Not valid zip code'),
 	oldPass: Yup.string(),
 	password: Yup.string()
 		.min(7, 'Password must be 7 digits minimum')
 		.max(30, 'Password must be 30 digits maximum'),
-	confirmPass: Yup.string().oneOf([Yup.ref('password')], 'Passwords do not match'),
+	confirmPass: Yup.string().oneOf([Yup.ref('password')], 'Passwords do not match').when('password', {
+		is: value => value && value.length > 0,
+		then: Yup.string().required('Field is required')
+	}),
 	subscribe : Yup.bool()
 
 })
 
 const UserForm = () => {
 
-	const [status,setStatus]=useState('')
+	const [status,setStatus]=useState({variant: null , message : null})
 	const dispatch = useDispatch()
 
 
 	const user = useSelector(userSelectors.getData())
 	const token = useSelector(userSelectors.getToken())
+
 
 
 	const INITIAL_FORM_STATE = {
@@ -55,6 +63,7 @@ const UserForm = () => {
 		address: user?.address || '',
 		city: user?.city || '',
 		country: user?.country || '',
+		zip: user?.zip || '',
 		oldPass:'',
 		password:'',
 		confirmPass:'',
@@ -87,7 +96,7 @@ const UserForm = () => {
 								validationSchema={FORM_VALIDATION}
 								onSubmit={(values) => {
 
-									if(!values.oldPass) {
+									if(values.oldPass === '') {
 										const update = {...user,
 											firstName: values.firstName,
 											lastName: values.lastName,
@@ -102,25 +111,47 @@ const UserForm = () => {
 										axios.put('/api/customers', update , {
 											headers: {Authorization : token}
 										}).then(() => {
-											setStatus('Changes Saved')
+											setStatus({
+												variant: 1 ,
+												message: 'Changes successfully changed'})
+
 											dispatch(userOperations.setNewData(update))
+
 										})
 									}
 
 
-									if(values.oldPass && values.password === ''){
-										setStatus('Password not changed')
-									} else if(values.oldPass.length > 2 && values.password> 2){
+									if(values.oldPass.length> 2 && values.password === ''){
+										setStatus({
+											variant: 2 ,
+											message: 'Enter new password'
+										})
+
+										// eslint-disable-next-line max-len
+									} else if(values.oldPass.length > 2 && values.password.length> 2){
 
 										const passwords = {
 											'password': values.oldPass,
 											'newPassword': values.password
 										}
 										// eslint-disable-next-line no-unused-vars,no-mixed-spaces-and-tabs
-										axios.put('/api/customers/password',passwords,{headers: {Autorization : token}}).then((res)=>setStatus(res.data.password = 'Wrong Password' || res.data.message))
+										axios.put('/api/customers/password',passwords,{headers: {Autorization : token}})
+											.then((res)=>{
+												if(res.data.password){
+													setStatus({
+														variant: 2 ,
+														message: 'Wrong Password'})
+												} else if(res.data.message){
+													setStatus({
+														variant: 1 ,
+														message: 'Successfully changed'})
+												}
+											})
 									}
 
-									setTimeout(() =>{ setStatus(null)}, 1500)
+									setTimeout(() =>{
+										setStatus({variant: null , message: null})
+									}, 1500)
 								}}
 							>
 								{() => {
@@ -162,8 +193,11 @@ const UserForm = () => {
 														Delivery Address
 													</Typography>
 												</Grid>
-												<Grid item xs={12} >
+												<Grid item md={10} xs={12} >
 													<TextInput name="address" label="Address" />
+												</Grid>
+												<Grid item md={2} xs={12} >
+													<TextInput name="zip" label="Zip" />
 												</Grid>
 												<Grid item xs={12} md={6}>
 													<TextInput name="city" label="City" />
@@ -240,17 +274,23 @@ const UserForm = () => {
 														label='E-mail'
 													/>
 												</Grid>
+												<Grid>
+													{status.variant === 1 && <SnackbarMess
+														open={true}
+														message={status.message}
+														variant={'success'}
+													/>}
+													{status.variant === 2 && <SnackbarMess
+														open={true}
+														message={status.message}
+														variant={'warning'}
+													/>}
+												</Grid>
 
 												<Grid item xs={12} sx={{textAlign:'center', mt:'16px'}}>
-													{status && (<Typography
-														variant={'body1'}
-														textAlign={'center'}
-														mb={'10px'}
-													>
-														{status}
-													</Typography>)}
+
 													<ButtonInput
-														disabled={!!status}
+														disabled={!!status.variant}
 													>
 														Save Changes
 													</ButtonInput>

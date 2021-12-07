@@ -10,7 +10,7 @@ import Favorites from '../pages/Favorites/Favorites'
 import HandleSubscribe from '../pages/HandleSubscribe'
 import UserProfilePage from '../pages/UserProfile/UserProfile'
 import Search from '../pages/Search/Search'
-import Checkout from '../pages/Cart/checkout'
+import Checkout from '../components/PayCard/checkout'
 import CompletePay from '../components/PayCard/CompletePay'
 import StaticPages from '../components/StaticPages/StaticPages'
 
