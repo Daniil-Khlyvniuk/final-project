@@ -5,6 +5,7 @@ import {
 	useElements
 } from '@stripe/react-stripe-js'
 import { button, form, textBtn } from './style'
+import Loader from '../UI/Loader/Loader'
 
 
 export default function CheckoutForm() {
@@ -56,7 +57,7 @@ export default function CheckoutForm() {
 		if (!stripe || !elements) {
 			// Stripe.js has not yet loaded.
 			// Make sure to disable form submission until Stripe.js has loaded.
-			return
+			return(<Loader />)
 		}
 
 		setIsLoading(true)
