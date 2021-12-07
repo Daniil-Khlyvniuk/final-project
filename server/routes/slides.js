@@ -15,7 +15,7 @@ const {
 // @access  Private
 router.post(
   "/",
-  // passport.authenticate("jwt-admin", { session: false }),
+  passport.authenticate("jwt-admin", { session: false }),
   addSlide
 );
 
@@ -24,7 +24,7 @@ router.post(
 // @access  Private
 router.put(
   "/:customId",
-  // passport.authenticate("jwt-admin", { session: false }),
+  passport.authenticate("jwt-admin", { session: false }),
   updateSlide
 );
 
