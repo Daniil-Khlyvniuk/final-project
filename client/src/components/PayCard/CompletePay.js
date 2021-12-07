@@ -5,11 +5,7 @@ import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
 import cartAPI from '../../utils/API/cartAPI'
 
 const CompletePay = () => {
-
 	const newOrder = cartAPI.getCart()
-
-
-
 
 	const OrderNum = Date.now()
 	const handleShoppingBag = useHandleShoppingBag()

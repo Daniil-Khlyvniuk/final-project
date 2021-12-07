@@ -6,11 +6,14 @@ import { favoritesOperations } from '../../store/Favorites'
 import { useDispatch } from 'react-redux'
 import Stepper from '../../components/Stepper/Stepper'
 import { Box } from '@mui/system'
+import UseCeo from '../../utils/customHooks/useCeo'
 
 const Cart = () => {
 	const { shoppingBag } = useHandleShoppingBag()
 	const dispatch = useDispatch()
 	const favorites = JSON.parse(localStorage.getItem('favorites')) || []
+
+	// console.log('checkout',shoppingBagкв)
 
 	useEffect(() => {
 		favoritesOperations.fetchFavorites(favorites)(dispatch)
@@ -19,6 +22,16 @@ const Cart = () => {
 
 	return (
 		<>
+			<UseCeo 
+				title = {'Shopping Cart'}
+				// description = {parent ? parent.description : 'Shopping cart'}
+				// keywords = {
+				// 	parent 
+				// 		? `${parent.name}, ${parent.manufacturer},  ${parent.brand}, 
+				// 		${parent.seller}, ${parent.manufacturerCountry}` 
+				// 		: null
+				// }
+			/>
 			{shoppingBag?.length === 0
 				? <Box style={{ textAlign: 'center', margin: '7rem 0' }}>
 					<Typography

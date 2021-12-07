@@ -7,7 +7,7 @@ import ProductDescription from '../../components/ProductDescription/ProductDescr
 import Carousel from '../../components/Carousel/Carousel'
 import RelatedItemsList from '../../components/RelatedItems/RelatedItemsList'
 import BackdropLoader from '../../components/UI/BackdropLoader/BackdropLoader'
-import { Helmet } from 'react-helmet-async'
+import UseCeo from '../../utils/customHooks/useCeo'
 import { favoritesOperations } from '../../store/Favorites'
 
 const ProductDetails = () => {
@@ -54,13 +54,16 @@ const ProductDetails = () => {
 
 	return (
 		<>
-			<Helmet>
-				<html lang="en"/>
-				<title>{parent ? parent.name : 'Product Details'}</title>
-				<meta name="description" content="Cotton Bed Linen"/>
-				<meta name="keywords"
-					content="bed linen, Cotton bed linen, Cotton Dark Blue Bed Linen, bedspreads queen, queen size sheets, cotton comforter, king size bedspreads"/>
-			</Helmet>
+			<UseCeo 
+				title = {parent ? parent.name : 'Product Details'}
+				description = {parent ? parent.description : 'Product details'}
+				keywords = {
+					parent 
+						? `${parent.name}, ${parent.manufacturer},  ${parent.brand}, 
+						${parent.seller}, ${parent.manufacturerCountry}` 
+						: null
+				}
+			/>
 			<Container maxWidth="lg" sx={{ mt: '80px' }}>
 				{!activeProduct && (
 					<StyledTypography>Product not found</StyledTypography>
