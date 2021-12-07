@@ -13,6 +13,10 @@ const Catalog = () => {
 	const {onLoadingPage, restoreDefaults} = useFilterHandler()
 	const classes = useStyles()
 	
+	useEffect(() => {
+		window.scrollTo(0, 0)
+	}, [])
+	
 	//parse url on first page loading
 	useEffect(() => {
 		onLoadingPage()

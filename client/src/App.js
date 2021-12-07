@@ -8,7 +8,7 @@ import useAuth from './utils/customHooks/useAuth'
 import ScrollButton from './components/ScrollButton/ScrollButton'
 import { settingsOperations } from './store/Settings'
 
-// import UseScrollToTop from './utils/customHooks/useScrollToTop'
+import ScrollToTop from './utils/customHooks/useScrollToTop'
 
 const App = () => {
 	const { checkToken } = useAuth()
@@ -24,11 +24,14 @@ const App = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
+	const exeptionScroll = ['/shop/catalog', '/search']
+
 	return (
 		<div className={'App'}>
 			<Header />
-			{/* <UseScrollToTop /> */}
-			<AppRoutes />
+			<ScrollToTop exeptions={exeptionScroll} >
+				<AppRoutes />
+			</ScrollToTop>
 			<Footer />
 			<ScrollButton />
 			{modal}
