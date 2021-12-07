@@ -33,14 +33,17 @@ const FORM_VALIDATION = Yup.object().shape({
 	password: Yup.string()
 		.min(7, 'Password must be 7 digits minimum')
 		.max(30, 'Password must be 30 digits maximum'),
-	confirmPass: Yup.string().oneOf([Yup.ref('password')], 'Passwords do not match'),
+	confirmPass: Yup.string().oneOf([Yup.ref('password')], 'Passwords do not match').when('password', {
+		is: value => value && value.length > 0,
+		then: Yup.string().required('Field is required')
+	}),
 	subscribe : Yup.bool()
 
 })
 
 const UserForm = () => {
 
-	const [status,setStatus]=useState(null)
+	const [status,setStatus]=useState({variant: null , message : null})
 	const dispatch = useDispatch()
 
 
@@ -104,7 +107,9 @@ const UserForm = () => {
 										axios.put('/api/customers', update , {
 											headers: {Authorization : token}
 										}).then(() => {
-											setStatus(1)
+											setStatus({
+												variant: 1 ,
+												message: 'Changes successfully changed'})
 
 											dispatch(userOperations.setNewData(update))
 
@@ -113,7 +118,10 @@ const UserForm = () => {
 
 
 									if(values.oldPass.length> 2 && values.password === ''){
-										setStatus(2)
+										setStatus({
+											variant: 2 ,
+											message: 'Enter new password'
+										})
 
 										// eslint-disable-next-line max-len
 									} else if(values.oldPass.length > 2 && values.password.length> 2){
@@ -126,14 +134,20 @@ const UserForm = () => {
 										axios.put('/api/customers/password',passwords,{headers: {Autorization : token}})
 											.then((res)=>{
 												if(res.data.password){
-													setStatus(2)
+													setStatus({
+														variant: 2 ,
+														message: 'Wrong Password'})
 												} else if(res.data.message){
-													setStatus(3)
+													setStatus({
+														variant: 1 ,
+														message: 'Successfully changed'})
 												}
 											})
 									}
 
-									setTimeout(() =>{ setStatus(null)}, 1500)
+									setTimeout(() =>{
+										setStatus({variant: null , message: null})
+									}, 1500)
 								}}
 							>
 								{() => {
@@ -254,28 +268,22 @@ const UserForm = () => {
 													/>
 												</Grid>
 												<Grid>
-													{status === 1 && <SnackbarMess
+													{status.variant === 1 && <SnackbarMess
 														open={true}
-														message={'Changes successfully changed'}
+														message={status.message}
 														variant={'success'}
 													/>}
-													{status === 2 && <SnackbarMess
+													{status.variant === 2 && <SnackbarMess
 														open={true}
-														message={'Wrong Password'}
+														message={status.message}
 														variant={'warning'}
 													/>}
-													{status === 3 && <SnackbarMess
-														open={true}
-														message={'Password changed'}
-														variant={'success'}
-													/>}
-
 												</Grid>
 
 												<Grid item xs={12} sx={{textAlign:'center', mt:'16px'}}>
 
 													<ButtonInput
-														disabled={!!status}
+														disabled={!!status.variant}
 													>
 														Save Changes
 													</ButtonInput>
