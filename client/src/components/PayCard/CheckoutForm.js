@@ -5,7 +5,6 @@ import { border, PayParent } from './styles'
 import ShipAdr from '../../components/PayCard/ShipAdr'
 import Summary from '../../components/PayCard/Summary'
 
-
 // eslint-disable-next-line react/prop-types
 const CheckoutForm = ({handleNext}) => {
 

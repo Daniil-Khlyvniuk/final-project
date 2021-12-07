@@ -16,7 +16,7 @@ const SliderSchema = new Schema(
     htmlContent: String,
     product: {
       type: Schema.Types.ObjectId,
-      ref: "products"
+      ref: "ProductVariant"
     },
     category: {
       type: Schema.Types.ObjectId,

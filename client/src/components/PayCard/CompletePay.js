@@ -7,7 +7,6 @@ import axios from 'axios'
 // import { useSelector } from 'react-redux'
 // import { userSelectors } from '../../store/User'
 
-
 const CompletePay = () => {
 	const newOrder = cartAPI.getCart()
 	const OrderNum = Date.now()

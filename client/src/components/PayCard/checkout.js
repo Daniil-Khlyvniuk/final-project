@@ -8,7 +8,6 @@ import Summary from './Summary'
 const Checkout = () => {
 	// eslint-disable-next-line no-unused-vars
 
-
 	return (
 		<Box my='15px'>
 			<Grid container style={PayParent} spacing={2}>
