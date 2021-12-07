@@ -30,12 +30,12 @@ const CompletePay = () => {
 		cartAPI.addOrder(newOrder)
 	},[])
 
-	const newShoppingBag = {
+	const newShoppingBag = [{
 		UserInfo: {...userData},
 		OrderNumber: OrderNum,
 		ShoppingBag: BuyGoods
 
-	}
+	}]
 	localStorage.setItem('ORDER2', JSON.stringify(newShoppingBag))
 
 
