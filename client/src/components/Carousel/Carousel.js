@@ -193,10 +193,6 @@ const Carousel = ({
 						slidesToShow={slides.length <= 3 ? slides.length : 3}
 					>
 						{slides?.map((slide) => {
-							// eslint-disable-next-line no-console
-							console.log('===============')
-							// eslint-disable-next-line no-console
-							console.log(slide)
 							return (
 								<div key={slide.customId}>
 									<div style={{ position: 'relative', margin: '0 10px' }}>
