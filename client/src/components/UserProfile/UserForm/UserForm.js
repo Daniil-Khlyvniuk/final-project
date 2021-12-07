@@ -13,6 +13,7 @@ import {userOperations, userSelectors} from '../../../store/User'
 import Loader from '../../UI/Loader/Loader'
 import axios from 'axios'
 import CheckboxInput from './FormUI/CheckboxInput'
+import SnackbarMess from '../../UI/SnackbarMess'
 
 
 
@@ -39,12 +40,13 @@ const FORM_VALIDATION = Yup.object().shape({
 
 const UserForm = () => {
 
-	const [status,setStatus]=useState('')
+	const [status,setStatus]=useState(null)
 	const dispatch = useDispatch()
 
 
 	const user = useSelector(userSelectors.getData())
 	const token = useSelector(userSelectors.getToken())
+
 
 
 	const INITIAL_FORM_STATE = {
@@ -87,7 +89,7 @@ const UserForm = () => {
 								validationSchema={FORM_VALIDATION}
 								onSubmit={(values) => {
 
-									if(!values.oldPass) {
+									if(values.oldPass === '') {
 										const update = {...user,
 											firstName: values.firstName,
 											lastName: values.lastName,
@@ -102,22 +104,33 @@ const UserForm = () => {
 										axios.put('/api/customers', update , {
 											headers: {Authorization : token}
 										}).then(() => {
-											setStatus('Changes Saved')
+											setStatus(1)
+
 											dispatch(userOperations.setNewData(update))
+
 										})
 									}
 
 
-									if(values.oldPass && values.password === ''){
-										setStatus('Password not changed')
-									} else if(values.oldPass.length > 2 && values.password> 2){
+									if(values.oldPass.length> 2 && values.password === ''){
+										setStatus(2)
+
+										// eslint-disable-next-line max-len
+									} else if(values.oldPass.length > 2 && values.password.length> 2){
 
 										const passwords = {
 											'password': values.oldPass,
 											'newPassword': values.password
 										}
 										// eslint-disable-next-line no-unused-vars,no-mixed-spaces-and-tabs
-										axios.put('/api/customers/password',passwords,{headers: {Autorization : token}}).then((res)=>setStatus(res.data.password = 'Wrong Password' || res.data.message))
+										axios.put('/api/customers/password',passwords,{headers: {Autorization : token}})
+											.then((res)=>{
+												if(res.data.password){
+													setStatus(2)
+												} else if(res.data.message){
+													setStatus(3)
+												}
+											})
 									}
 
 									setTimeout(() =>{ setStatus(null)}, 1500)
@@ -240,15 +253,27 @@ const UserForm = () => {
 														label='E-mail'
 													/>
 												</Grid>
+												<Grid>
+													{status === 1 && <SnackbarMess
+														open={true}
+														message={'Changes successfully changed'}
+														variant={'success'}
+													/>}
+													{status === 2 && <SnackbarMess
+														open={true}
+														message={'Wrong Password'}
+														variant={'warning'}
+													/>}
+													{status === 3 && <SnackbarMess
+														open={true}
+														message={'Password changed'}
+														variant={'success'}
+													/>}
+
+												</Grid>
 
 												<Grid item xs={12} sx={{textAlign:'center', mt:'16px'}}>
-													{status && (<Typography
-														variant={'body1'}
-														textAlign={'center'}
-														mb={'10px'}
-													>
-														{status}
-													</Typography>)}
+
 													<ButtonInput
 														disabled={!!status}
 													>
