@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useState} from 'react'
 import {Box, ToggleButton, ToggleButtonGroup} from '@mui/material'
 import CircleIcon from '@mui/icons-material/Circle'
 import productActions, {ProductSelector} from '../../../store/Product'
@@ -9,16 +9,11 @@ const ColorPalette = () => {
 	const dispatch = useDispatch()
 	const history = useHistory()
 
-	const [activeColor , setActiveColor] = useState(null)
-
-
 	const activeProduct = useSelector(ProductSelector.getProduct())
 	const allColors = useSelector(ProductSelector.allColors())
 	const variants = useSelector(ProductSelector.allVariants())
 
-	useEffect(() => {
-		setActiveColor(activeProduct.color)
-	}, [activeProduct])
+	const [activeColor , setActiveColor] = useState(activeProduct.color)
 
 	const handleActiveColor = (event,newActiveColor) => {
 		if(newActiveColor !== null){

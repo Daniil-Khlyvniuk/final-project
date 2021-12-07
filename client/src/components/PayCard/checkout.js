@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Container, Grid, Box} from '@mui/material'
-import axios from 'axios'
 import { PayParent } from './styles'
 import PayCc from './PayCC'
 import Summary from './Summary'
@@ -8,19 +7,6 @@ import Summary from './Summary'
 // eslint-disable-next-line react/prop-types
 const Checkout = () => {
 	// eslint-disable-next-line no-unused-vars
-	const [userData, setUserData] = useState({})
-	const [isLoading, setIsLoading] = useState(true)
-	
-
-	useEffect(() => {
-		setIsLoading(true)
-		axios('/api/customers/customer')
-			.then(res =>setUserData(res.data))
-		setIsLoading(false)
-	}, [isLoading])
-
-	// eslint-disable-next-line no-console
-	console.log(userData)
 
 	return (
 		<Box my='15px'>
