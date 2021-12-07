@@ -29,6 +29,9 @@ const FORM_VALIDATION = Yup.object().shape({
 	address: Yup.string(),
 	city: Yup.string(),
 	country: Yup.string(),
+	zip: Yup.string().matches(/^[0-9]+$/, 'Must be only numbers')
+		.max(6, 'Not valid zip code')
+		.min(4, 'Not valid zip code'),
 	oldPass: Yup.string(),
 	password: Yup.string()
 		.min(7, 'Password must be 7 digits minimum')
@@ -60,6 +63,7 @@ const UserForm = () => {
 		address: user?.address || '',
 		city: user?.city || '',
 		country: user?.country || '',
+		zip: user?.zip || '',
 		oldPass:'',
 		password:'',
 		confirmPass:'',
@@ -189,8 +193,11 @@ const UserForm = () => {
 														Delivery Address
 													</Typography>
 												</Grid>
-												<Grid item xs={12} >
+												<Grid item md={10} xs={12} >
 													<TextInput name="address" label="Address" />
+												</Grid>
+												<Grid item md={2} xs={12} >
+													<TextInput name="zip" label="Zip" />
 												</Grid>
 												<Grid item xs={12} md={6}>
 													<TextInput name="city" label="City" />
