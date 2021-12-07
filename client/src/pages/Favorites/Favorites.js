@@ -5,7 +5,8 @@ import { favoritesOperations, favoritesSelectors } from '../../store/Favorites'
 import { Box } from '@mui/system'
 import BackdropLoader from '../../components/UI/BackdropLoader/BackdropLoader'
 import { Link } from 'react-router-dom'
-import FavoriteCard from '../../components/FavoriteCard/FavoriteCard'
+// import FavoriteCard from '../../components/FavoriteCard/FavoriteCard'
+import ProductCard from '../../components/ProductCard/ProductCard'
 
 const Favorites = () => {
 	const favorites = useSelector(favoritesSelectors.getFavorites())
@@ -61,7 +62,7 @@ const Favorites = () => {
 			<Grid container spacing={2} sx={{ marginBottom: '40px' }} >
 				{favorites?.map(item => (
 					<Grid item md={6} sm={6} xs={12} key={item.variants._id}>
-						<FavoriteCard
+						<ProductCard
 							_id={item.variants._id}
 							sx={{ width: { sm: '580px' }, height: { sm: '545px' } }}
 							image={'/' + item.variants.imageUrls[0]}

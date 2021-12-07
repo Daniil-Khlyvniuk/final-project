@@ -1,10 +1,8 @@
 const Cart = require('../models/Cart');
-const Product = require('../models/Product');
 const ProductVariant = require('../models/ProductVariant');
 const queryCreator = require('../commonHelpers/queryCreator');
 const _ = require('lodash');
 const stripe = require("stripe")('sk_test_dD0F5WI8ErNHnxffuzZYKVn5');
-const notFoundError = require("../commonHelpers/notFoundError");
 
 
 exports.createCart = (req, res, next) => {
@@ -331,11 +329,6 @@ exports.payment = async (req, res, next) => {
 		})
 	}
 
-	// const calculateOrderAmount = (products) => {
-	// 	return products.reduce((acc, curr) =>
-	// 	curr.product.currentPrice * curr.cartQuantity
-	// 	, 0);
-	// };
 	try {
 		const paymentIntent = await stripe.paymentIntents.create({
 			amount: total,

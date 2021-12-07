@@ -17,9 +17,8 @@ const SearchSize = () => {
 		<Box>
 			<FormControl component="fieldset">
 				<RadioGroup
-					aria-label="gender"
-					defaultValue="SINGLE"
-					name="radio-buttons-group"
+					aria-label="size"
+					name="size-buttons-group"
 				>
 					{sizes && (sizes.map((size) => (
 						<SearchSizeItem key={size._id} size={size} />

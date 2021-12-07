@@ -34,7 +34,5 @@ module.exports = async (subscriberMail, letterSubject, letterHtml, res) => {
     html: letterHtml
   };
 
-  const result = await transporter.sendMail(mailOptions);
-
-  return result;
+	return await transporter.sendMail(mailOptions);
 };

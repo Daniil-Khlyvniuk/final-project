@@ -6,9 +6,6 @@ import PropTypes from 'prop-types'
 
 const PageLinks = ({linksArr}) => 
 {
-	// eslint-disable-next-line no-console
-	console.log(linksArr)
-
 	return (
 		<Grid item xs={12} sm={6} lg={3}>
 			<List>
@@ -31,9 +28,9 @@ const PageLinks = ({linksArr}) =>
 				)}
 
 				{
-					linksArr.links.length > 0 && linksArr.links.map(link => 
-						(
-							<ListItem key={link._id} 
+					linksArr.links.length > 0 && linksArr.links.map(link => {
+						return(
+							<ListItem key={link._id}
 								sx={{
 									justifyContent: {
 										xs: 'center',
@@ -41,16 +38,17 @@ const PageLinks = ({linksArr}) =>
 									}
 								}}
 							>
-								<Link 
-									to={link.url}
+								<Link
+									to= {link.customId === 'catalog' ? '/shop/catalog' : `/info/${link.customId}` }
 									component={RouterLink}
 									variant={'semiBold'}
-									dangerouslySetInnerHTML={{__html: link.description }} 
+									dangerouslySetInnerHTML={{ __html: link.description }}
 								>
 									{/* {link.description} */}
 								</Link>
 							</ListItem>
 						)
+					}
 					)
 
 				}
