@@ -29,13 +29,34 @@ const CompletePay = () => {
 		cartAPI.addOrder(newOrder)
 	},[])
 
-	const newShoppingBag = [{
-		UserInfo: {...userData},
-		OrderNumber: OrderNum,
-		ShoppingBag: BuyGoods
 
-	}]
-	localStorage.setItem('ORDER2', JSON.stringify(newShoppingBag))
+	// ShoppingBag: BuyGoods,
+
+	const customer = {...userData}
+	const order = {
+		products: BuyGoods,
+		canceled: false,
+		customerId: customer._id,
+		deliveryAddress: {
+			country: customer.country,
+			city: customer.city,
+			address: customer.address,
+			postal: customer.zip
+		},
+		orderNumber: OrderNum,
+		shipping: '',
+		paymentInfo: 'Credit card',
+		status: 'not shipped',
+		email: customer.email,
+		mobile: customer.phone,
+		letterSubject: 'Thank you for order! You are welcome!',
+		letterHtml:
+			`<h1>Your order is placed. OrderNo is ${OrderNum}.</h1>
+				<p>{Other details about order in your HTML}</p>`
+	}
+
+	localStorage.setItem('ORDER', JSON.stringify(order))
+
 
 
 
