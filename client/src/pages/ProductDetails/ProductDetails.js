@@ -2,7 +2,7 @@ import React, { useEffect  } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import productActions, { ProductOperations, ProductSelector } from '../../store/Product'
-import { Container, Grid, Box, Typography, styled } from '@mui/material'
+import {Container, Grid, Box, Typography, styled} from '@mui/material'
 import ProductDescription from '../../components/ProductDescription/ProductDescription'
 import Carousel from '../../components/Carousel/Carousel'
 import RelatedItemsList from '../../components/RelatedItems/RelatedItemsList'
@@ -17,7 +17,7 @@ const ProductDetails = () => {
 
 	const isLoading = useSelector(ProductSelector.isLoading())
 	const activeProduct = useSelector(ProductSelector.getProduct())
-	const parent = useSelector(ProductSelector.getParent())
+
 	const favorites = JSON.parse(localStorage.getItem('favorites')) || []
 
 	const StyledTypography = styled(Typography)(() => ({
@@ -77,17 +77,18 @@ const ProductDetails = () => {
 				}
 			/>
 			<Container maxWidth="lg" sx={{ mt: '80px' }}>
-				{activeProduct && <><Grid container spacing={4}>
-					<Grid item md={6} xs={12}>
-						<Carousel slides={activeProduct.imageUrls} product={true}/>
+				{activeProduct && <>
+					<Grid container spacing={4}>
+						<Grid item md={6} xs={12}>
+							<Carousel slides={activeProduct.imageUrls} product={true}/>
+						</Grid>
+						<Grid item md={6} xs={12}>
+							<ProductDescription/>
+						</Grid>
 					</Grid>
-					<Grid item md={6} xs={12}>
-						<ProductDescription/>
-					</Grid>
-				</Grid>
-				<Box style={{marginTop: '80px'}}>
-					<RelatedItemsList/>
-				</Box>
+					<Box style={{marginTop: '80px'}}>
+						<RelatedItemsList/>
+					</Box>
 				</>
 				}
 			</Container>
