@@ -30,6 +30,13 @@ export const useStyles = makeStyles(() => ({
 		right: '20px',
 		cursor: 'pointer'
 	},
+	crossModal: {
+		width: '20px',
+		position: 'absolute',
+		top: '20px',
+		right: '20px',
+		cursor: 'pointer'
+	},
 	desc: {
 		maxWidth: '400px',
 		display: 'flex',
