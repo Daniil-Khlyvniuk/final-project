@@ -41,16 +41,11 @@ export const useStyles = makeStyles(() => ({
 		alignItems: 'center',
 		border: '1px solid #373F41',
 		borderRadius: '2px',
-		width: 'fit-content'
+		width: 'fit-content',
+
 	},
 	quantity: {
 		padding: '0 15px',
-	},
-	quantityUp: {
-		padding: '5px 10px',
-		borderLeft: '1px solid #373F41',
-		borderBottom: '1px solid #373F41',
-		cursor: 'pointer'
 	},
 	quantityDown: {
 		padding: '5px 10px',
