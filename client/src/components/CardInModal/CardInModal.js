@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { Typography } from '@mui/material'
 import { Box } from '@mui/system'
 
+
 const CardInModal = ({ image, title, price,  amount }) => {
 	const classes = useStyles()
 	return (

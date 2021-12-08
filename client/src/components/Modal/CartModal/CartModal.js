@@ -5,10 +5,11 @@ import CardInModal from '../../CardInModal/CardInModal'
 import { Button, GlobalStyles, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { Box } from '@mui/system'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import modalActions from '../../../store/Modal'
 import { style } from './styles'
 import { useStyles } from '../../ShoppingBagCard/styles'
+import { shoppingBagSelectors } from '../../../store/ShoppingBag'
 
 const CartModal = () => {
 	const { shoppingBag, totalPrice } = useHandleShoppingBag()
@@ -16,8 +17,8 @@ const CartModal = () => {
 	const handleClose = () => dispatch(modalActions.modalToggle(false))
 	const handleShoppingBag = useHandleShoppingBag()
 	const classes = useStyles()
+	const shoppingBagItem = useSelector(shoppingBagSelectors.getShoppingBag())
 	// eslint-disable-next-line no-console
-	console.log(shoppingBag)
 	return (
 		<BasicModal
 			style={style.modal}
@@ -36,6 +37,11 @@ const CartModal = () => {
 									},
 								}}
 							/>
+							<Typography
+								fontSize={16}
+								style={style.title}>
+								BAG: ({shoppingBagItem.length})
+							</Typography>
 							<Typography
 								fontSize={18}
 								style={style.title}>
