@@ -20,6 +20,24 @@ describe('Test CardList.js', () => {
     )
   })
 
+  test('CardList title is rendering', () => {
+    const { getByText } = render(
+      <ThemeProvider theme={Theme}>
+        <CardList />
+      </ThemeProvider>
+    )
+    getByText('New in')
+  })
+
+  test('CardList products container is rendering', () => {
+    const { getByTestId } = render(
+      <ThemeProvider theme={Theme}>
+        <CardList />
+      </ThemeProvider>
+    )
+    getByTestId('product-container')
+  })
+
   // test('it should render products', () => {
   //   useSelector.mockImplementation(cb =>
   //     cb({
