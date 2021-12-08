@@ -41,7 +41,7 @@ const HeaderSearch = () => {
 	}
 
 	return (
-		<StyledBox>
+		<StyledBox data-testid='navbar-search'>
 			<Search>
 				<SearchIconWrapper>
 					<SearchIcon />
