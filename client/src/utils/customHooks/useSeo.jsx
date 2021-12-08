@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async'
 import PropTypes from 'prop-types'
 
 
-const UseCeo = ({
+const UseSeo = ({
 	lang = 'en',
 	title,
 	description = 'page description',
@@ -19,11 +19,11 @@ const UseCeo = ({
 	)
 }
 
-UseCeo.propTypes = {
+UseSeo.propTypes = {
 	lang: PropTypes.string,
 	title: PropTypes.string,
 	description: PropTypes.string,
 	keywords: PropTypes.string,
 }
 
-export default UseCeo
+export default UseSeo

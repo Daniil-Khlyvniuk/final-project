@@ -11,7 +11,7 @@ import ProductCard from '../../components/ProductCard/ProductCard'
 import DropDownSelect from '../../components/Catalog/DropDownSelect'
 import Loader from '../../components/UI/Loader/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import UseCeo from '../../utils/customHooks/useCeo'
+import UseSeo from '../../utils/customHooks/useSeo'
 
 const Search = () => {
 	const [perPageArray, setPerPageArray] = useState([])
@@ -105,7 +105,7 @@ const Search = () => {
 
 	return (
 		<>
-			<UseCeo 
+			<UseSeo 
 				title = {search_term ? `Search by word ${search_term}` : 'Search Page'}
 				description = {search_term ?  `Search products by word ${search_term}` : 'Search products'}
 				keywords = {
