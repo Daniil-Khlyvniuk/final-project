@@ -7,7 +7,7 @@ import ProductsCatalog from '../../components/Catalog/Catalog'
 import CategorySearch from '../../components/Catalog/CategorySearch'
 import HeadSearch from '../../components/Catalog/HeadSearch'
 import LeftSide from '../../components/Catalog/LeftSide'
-import UseCeo from '../../utils/customHooks/useCeo'
+import UseSeo from '../../utils/customHooks/useSeo'
 
 const Catalog = () => {
 	const {onLoadingPage, restoreDefaults} = useFilterHandler()
@@ -29,7 +29,7 @@ const Catalog = () => {
 
 	return (
 		<>
-			<UseCeo 
+			<UseSeo 
 				title = {'Product Catalog Page'}
 				description = {'Product catalog'}
 				keywords = {'product catalog, postil catalog, bed linen catalog'}

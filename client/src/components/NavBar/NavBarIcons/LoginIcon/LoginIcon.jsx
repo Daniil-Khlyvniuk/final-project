@@ -4,7 +4,7 @@ import { IconButton } from '@mui/material'
 import { useStyles } from './styles'
 import { useDispatch } from 'react-redux'
 import modalActions from '../../../../store/Modal'
-import LoginModal from '../../../Modal/LoginModal'
+import LoginModal from '../../../Modal/LoginModal/LoginModal'
 
 const LoginIcon = () => {
 	const classes = useStyles()

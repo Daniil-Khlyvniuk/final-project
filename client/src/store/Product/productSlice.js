@@ -20,6 +20,14 @@ const productSlice = createSlice({
 	reducers: {
 		clearSizes(state) {
 			state.allSizes = null
+		},
+		clearActiveProduct(state){
+			state.activeProduct = null
+			state.parent = null,
+			state.variants= null,
+			state.activeColor= null,
+			state.allColors= null,
+			state.allSizes= null
 		}
 	},
 	extraReducers: {
@@ -41,7 +49,7 @@ const productSlice = createSlice({
 			state.isLoading = false
 		},
 		[fetchAllColors.pending]: (state) => {
-			state.isLoading = true
+			state.isLoading = false
 		},
 		[fetchAllColors.rejected]: (state) => {
 			state.isLoading = false
@@ -52,7 +60,7 @@ const productSlice = createSlice({
 			state.isLoading = false
 		},
 		[fetchSizes.pending]: (state) => {
-			state.isLoading = true
+			state.isLoading = false
 		},
 		[fetchSizes.rejected]: (state) => {
 			state.isLoading = false
@@ -63,7 +71,7 @@ const productSlice = createSlice({
 			state.isLoading = false
 		},
 		[fetchAllVariants.pending]: (state) => {
-			state.isLoading = true
+			state.isLoading = false
 		},
 		[fetchAllVariants.rejected]: (state) => {
 			state.isLoading = false
@@ -72,5 +80,5 @@ const productSlice = createSlice({
 	}
 })
 
-export const { clearSizes } = productSlice.actions
+export const { clearSizes, clearActiveProduct } = productSlice.actions
 export default productSlice.reducer

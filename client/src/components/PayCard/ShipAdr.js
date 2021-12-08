@@ -40,6 +40,13 @@ const FORM_VALIDATION = Yup.object().shape({
 		.string()
 		.max(10, 'Write Real city')
 		.required('required'),
+	zip: Yup
+		.string()
+		.matches(/^[0-9]+$/, 'Must be only numbers')
+		.max(6, 'Not valid zip code')
+		.min(4, 'Not valid zip code')
+		.required('required'),
+
 })
 
 // eslint-disable-next-line react/prop-types
@@ -55,6 +62,7 @@ const ShipAdr = ({handleNext}) => {
 		address: user?.address || '',
 		city: user?.city || '',
 		country: user?.country || '',
+		zip: user?.zip || '' ,
 	}
 
 
@@ -73,12 +81,12 @@ const ShipAdr = ({handleNext}) => {
 						address: values.address,
 						city: values.city,
 						country: values.country,
+						zip: values.zip,
 
 					}
 					axios.put('/api/customers', update , {
 						headers: {Authorization : token}
 					})
-					alert('Data saved')
 				}}
 			>
 				{({ handleSubmit, isValid, dirty }) => (
@@ -130,7 +138,7 @@ const ShipAdr = ({handleNext}) => {
 							</Grid>
 							<Grid item xs={12} md={6}>
 								<TextInput
-									name="Zip/Postal Code"
+									name="zip"
 									label="Zip/Postal Code *"
 								/>
 							</Grid>

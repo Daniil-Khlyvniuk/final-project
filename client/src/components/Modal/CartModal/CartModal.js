@@ -1,39 +1,13 @@
 import React from 'react'
-import BasicModal from './Modal'
-import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
-import CardInModal from '../CardInModal/CardInModal'
+import BasicModal from '../Modal'
+import useHandleShoppingBag from '../../../utils/customHooks/useHandleShoppingBag'
+import CardInModal from '../../CardInModal/CardInModal'
 import { Button, GlobalStyles, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { Box } from '@mui/system'
 import { useDispatch } from 'react-redux'
-import modalActions from '../../store/Modal'
-
-const style = {
-	modal: {
-		position: 'absolute',
-		overflowY: 'scroll',
-		top: '50%',
-		left: '50%',
-		width: 320,
-		boxSizing: 'border-box',
-		transform: 'translate(-50%, -50%)',
-		bgcolor: '#fff',
-		padding: '15px 10px 0',
-		maxHeight: '80vh',
-	},
-	link: {
-		textDecoration: 'none',
-		display: 'block',
-		width: '100%',
-		margin: '1.5rem 0'
-	},
-	button: {
-		width: '100%'
-	},
-	title: {
-		margin: '1rem 0'
-	}
-}
+import modalActions from '../../../store/Modal'
+import { style } from './styles'
 
 const CartModal = () => {
 	const { shoppingBag, totalPrice } = useHandleShoppingBag()
