@@ -18,7 +18,7 @@ const CartModal = () => {
 	const handleShoppingBag = useHandleShoppingBag()
 	const classes = useStyles()
 	const shoppingBagItem = useSelector(shoppingBagSelectors.getShoppingBag())
-	// eslint-disable-next-line no-console
+
 	return (
 		<BasicModal
 			style={style.modal}
@@ -38,8 +38,7 @@ const CartModal = () => {
 								}}
 							/>
 							<Typography
-								fontSize={16}
-								style={style.title}>
+								fontSize={16}>
 								BAG: ({shoppingBagItem.length})
 							</Typography>
 							<Typography
