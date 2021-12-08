@@ -6,7 +6,7 @@ import { favoritesOperations } from '../../store/Favorites'
 import { useDispatch } from 'react-redux'
 import Stepper from '../../components/Stepper/Stepper'
 import { Box } from '@mui/system'
-import UseCeo from '../../utils/customHooks/useCeo'
+import UseSeo from '../../utils/customHooks/useSeo'
 
 const Cart = () => {
 	const { shoppingBag } = useHandleShoppingBag()
@@ -22,7 +22,7 @@ const Cart = () => {
 
 	return (
 		<>
-			<UseCeo 
+			<UseSeo 
 				title = {'Shopping Cart'}
 				// description = {parent ? parent.description : 'Shopping cart'}
 				// keywords = {
