@@ -77,4 +77,15 @@ describe('Test NavBar.jsx', () => {
     )
     getByTestId('navbar-cart-icon')
   })
+
+  test('NavBar Snapshot test', () => {
+    const container = render(
+      <Provider store={store}>
+        <BrowserRouter>
+          <NavBar />
+        </BrowserRouter>
+      </Provider>
+    )
+    expect(container).toMatchSnapshot()
+  })
 })
