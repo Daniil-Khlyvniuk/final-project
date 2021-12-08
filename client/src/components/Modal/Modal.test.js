@@ -13,13 +13,4 @@ describe('Test Modal.jsx', () => {
 			</Provider>
 		)
 	})
-  
-	// test('Matches the snapshot', () => {
-	// 	const modal = create(
-	// 		<Provider store={store}>
-	// 			<Modal />
-	// 		</Provider>
-	// 	)
-	// 	expect(modal.toJSON()).toMatchSnapshot()
-	// })
 })
