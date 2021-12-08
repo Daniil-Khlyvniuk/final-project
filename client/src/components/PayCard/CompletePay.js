@@ -43,13 +43,12 @@ const CompletePay = () => {
 			address: customer.address,
 			postal: customer.zip
 		},
-		userInfo: {...userData},
 		orderNumber: OrderNum,
 		shipping: '',
 		paymentInfo: 'Credit card',
 		status: 'not shipped',
-		email: 'saribeg@gmail.com',
-		mobile: '+380630000000',
+		email: customer.email,
+		mobile: customer.phone,
 		letterSubject: 'Thank you for order! You are welcome!',
 		letterHtml:
 			`<h1>Your order is placed. OrderNo is ${OrderNum}.</h1>
