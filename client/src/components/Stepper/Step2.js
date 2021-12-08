@@ -4,8 +4,7 @@ import { useStyles } from './styles'
 import ShoppingBagCard from '../../components/ShoppingBagCard/ShoppingBagCard'
 import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
 
-
-const Step1 = () => {
+const Step2 = () => {
 	const classes = useStyles()
 	const { shoppingBag, totalPrice } = useHandleShoppingBag()
 
@@ -24,10 +23,10 @@ const Step1 = () => {
 			<div style={{width: '30%', marginRight: '4rem'}}>
 				<Typography fontSize={32} variant={'h2'} className={classes.titleStep1}>Summary</Typography>
 				<Typography fontSize={32} variant={'h2'} className={classes.price}>TOTAL USD
-          ${totalPrice}</Typography>
+					${totalPrice}</Typography>
 			</div>
 		</div>
 	)
 }
 
-export default Step1
+export default Step2

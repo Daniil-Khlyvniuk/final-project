@@ -1,24 +1,64 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box, Button, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
 import cartAPI from '../../utils/API/cartAPI'
+import axios from 'axios'
+// import { useSelector } from 'react-redux'
+// import { userSelectors } from '../../store/User'
 
 const CompletePay = () => {
-
 	const newOrder = cartAPI.getCart()
-
-
-
-
 	const OrderNum = Date.now()
 	const handleShoppingBag = useHandleShoppingBag()
+	const [userData, setUserData] = useState({})
+	const [BuyGoods, setBuyGoods] = useState({})
+	const shoppingBag = JSON.parse(localStorage.getItem('shoppingBag') || '[]') || []
+	// const user = useSelector(userSelectors.getData())
+	// const isLoggedIn = !!user
+
+
+	useEffect(() => {
+		axios('/api/customers/customer')
+			.then(res =>setUserData(res.data))
+		setBuyGoods(shoppingBag)
+		handleShoppingBag.AfterBuy()
+	}, [])
 
 	useEffect(()=> {
-		console.log(newOrder)
 		cartAPI.addOrder(newOrder)
-		handleShoppingBag.AfterBuy()
 	},[])
+
+
+	// ShoppingBag: BuyGoods,
+
+	const customer = {...userData}
+	const order = {
+		products: BuyGoods,
+		canceled: false,
+		customerId: customer._id,
+		deliveryAddress: {
+			country: customer.country,
+			city: customer.city,
+			address: customer.address,
+			postal: customer.zip
+		},
+		orderNumber: OrderNum,
+		shipping: '',
+		paymentInfo: 'Credit card',
+		status: 'not shipped',
+		email: customer.email,
+		mobile: customer.phone,
+		letterSubject: 'Thank you for order! You are welcome!',
+		letterHtml:
+			`<h1>Your order is placed. OrderNo is ${OrderNum}.</h1>
+				<p>{Other details about order in your HTML}</p>`
+	}
+
+	localStorage.setItem('ORDER', JSON.stringify(order))
+
+
+
 
 	return (
 		<Box style={{textAlign: 'center', margin: '7rem 0'}}>

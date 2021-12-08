@@ -2,9 +2,8 @@ import React, { useState } from 'react'
 import { Formik, Form, Field } from 'formik'
 import { SING_UP_SCHEMA } from '../setting/Schemes'
 import { useFormStyle } from '../../../utils/customHooks/useFormStyle'
-import { Box, Typography, Button, Link as LinkMui } from '@mui/material'
+import { Box, Typography, Button } from '@mui/material'
 import { Link } from 'react-router-dom'
-import { Facebook, Google } from '../setting/SocialIcons'
 
 import CustomInput from '../setting/CustomInput'
 import CustomCheckBox from '../setting/CustomCheckBox'
@@ -196,20 +195,6 @@ const SignInForm = () => {
 									sign up
 								</Button>
 							</Box>
-							<div className={classes.socialBox}>
-								<LinkMui
-									href="https://myaccount.google.com"
-									target="_blank"
-								>
-									<Google />
-								</LinkMui>
-								<LinkMui
-									href="https://www.facebook.com"
-									target="_blank"
-								>
-									<Facebook />
-								</LinkMui>
-							</div>
 						</Form>
 					)
 				}}
