@@ -67,39 +67,6 @@ describe('Test NavBar.jsx', () => {
     getByTestId('navbar-login-icon')
   })
 
-  test('NavBar LogoutIcon is rendering', () => {
-    const { getByTestId } = render(
-      <Provider store={store}>
-        <BrowserRouter>
-          <NavBar />
-        </BrowserRouter>
-      </Provider>
-    )
-    getByTestId('navbar-logout-icon')
-  })
-
-  test('NavBar ProfileIcon is rendering', () => {
-    const { getByTestId } = render(
-      <Provider store={store}>
-        <BrowserRouter>
-          <NavBar />
-        </BrowserRouter>
-      </Provider>
-    )
-    getByTestId('navbar-profile-icon')
-  })
-
-  test('NavBar Favoriteicon is rendering', () => {
-    const { getByTestId } = render(
-      <Provider store={store}>
-        <BrowserRouter>
-          <NavBar />
-        </BrowserRouter>
-      </Provider>
-    )
-    getByTestId('navbar-favorite-icon')
-  })
-
   test('NavBar Carticon is rendering', () => {
     const { getByTestId } = render(
       <Provider store={store}>
