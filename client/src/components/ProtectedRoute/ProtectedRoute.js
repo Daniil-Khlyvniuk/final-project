@@ -3,14 +3,21 @@ import { Route, Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { userSelectors } from '../../store/User'
 import { useSelector } from 'react-redux'
+import BackdropLoader from '../UI/BackdropLoader/BackdropLoader'
 
 const ProtectedRoute = ({ children, ...rest }) => {
-	const user = useSelector(userSelectors.getData())
-	const isLoggedIn = !!user
+	const token = useSelector(userSelectors.getToken())
+	const isLoading = useSelector(userSelectors.getIsLoading())
+	// const user = useSelector(userSelectors.getData())
+	// const isLoggedIn = !!user
+
+	if(isLoading){
+		return <BackdropLoader open={isLoading}/>
+	}
 
 	return (
 		<Route {...rest}>
-			{isLoggedIn ? children : <Redirect to='/' />}
+			{token ? children : <Redirect to='/' />}
 		</Route>
 	)
 }
