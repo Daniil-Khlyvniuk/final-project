@@ -8,8 +8,7 @@ import BackdropLoader from '../UI/BackdropLoader/BackdropLoader'
 const ProtectedRoute = ({ children, ...rest }) => {
 	const token = useSelector(userSelectors.getToken())
 	const isLoading = useSelector(userSelectors.getIsLoading())
-	// const user = useSelector(userSelectors.getData())
-	// const isLoggedIn = !!user
+
 
 	if(isLoading){
 		return <BackdropLoader open={isLoading}/>
