@@ -13,7 +13,6 @@ const Cart = () => {
 	const dispatch = useDispatch()
 	const favorites = JSON.parse(localStorage.getItem('favorites')) || []
 
-	// console.log('checkout',shoppingBagкв)
 
 	useEffect(() => {
 		favoritesOperations.fetchFavorites(favorites)(dispatch)
