@@ -33,10 +33,6 @@ const CompletePay = () => {
 	},[])
 
 
-	// ShoppingBag: BuyGoods,
-	
-	// const customers = {...userData}
-	// eslint-disable-next-line no-mixed-spaces-and-tabs
 	
 	let customer = isLoggedIn ? {...userData} : unregistered
 
