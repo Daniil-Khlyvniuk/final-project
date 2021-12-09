@@ -5,17 +5,14 @@ import { favoritesOperations, favoritesSelectors } from '../../store/Favorites'
 import { Box } from '@mui/system'
 import BackdropLoader from '../../components/UI/BackdropLoader/BackdropLoader'
 import { Link } from 'react-router-dom'
-// import FavoriteCard from '../../components/FavoriteCard/FavoriteCard'
 import ProductCard from '../../components/ProductCard/ProductCard'
-import UseCeo from '../../utils/customHooks/useCeo'
+import UseSeo from '../../utils/customHooks/useSeo'
 
 const Favorites = () => {
 	const favorites = useSelector(favoritesSelectors.getFavorites())
 	const isLoading = useSelector(favoritesSelectors.isLoading())
 	const dispatch = useDispatch()
 	const favoriteID = JSON.parse(localStorage.getItem('favorites')) || []
-
-	console.log('favorites',favorites)
 
 	useEffect(() => {
 		favoritesOperations.fetchFavorites(favoriteID)(dispatch)
@@ -24,7 +21,7 @@ const Favorites = () => {
 
 	return (
 		<>
-			<UseCeo 
+			<UseSeo 
 				title = {'Product Favorites'}
 				description = {'Product favorites user liked'}
 				keywords = {

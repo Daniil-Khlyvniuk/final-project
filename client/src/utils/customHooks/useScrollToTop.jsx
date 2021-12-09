@@ -7,6 +7,7 @@ const UseScrollToTop = ( {exeptions = [], children } ) => {
 		if(!exeptions.find(except => except === location.pathname)){
 			window.scrollTo(0, 0)
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [ location ] )
 
 	return children
