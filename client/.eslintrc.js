@@ -2,8 +2,7 @@
 module.exports = {
 	'env': {
 		'browser': true,
-		'es2021': true,
-		'jest/globals': true
+		'es2021': true
 	},
 	'extends': [
 		'eslint:recommended',
@@ -21,8 +20,7 @@ module.exports = {
 	'plugins': [
 		'react',
 		'react-hooks',
-		'@babel',
-		'jest'
+		'@babel'
 	],
 	'rules': {
 		'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
