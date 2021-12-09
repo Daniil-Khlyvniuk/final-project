@@ -17,6 +17,7 @@ const LoginIcon = () => {
 			title='Login'
 			sx={{ padding: 0 }}
 			onClick={() => handleOpen(<LoginModal />)}
+			data-testid='navbar-login-icon'
 		>
 			<PersonOutlineIcon className={classes.navbarLink} />
 		</IconButton>

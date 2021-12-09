@@ -58,6 +58,7 @@ const ProductCard = ({ _id, image, title, price }) => {
 					}
 					: addToFavorites
 				}
+				data-testid='favorite-button-product-card'
 			>
 				{favoritesStorage.includes(_id) && user
 					? <FavoriteIcon sx={{ fontSize: { xl: '50px', lg: '50px', md: '40px', xs: '30px' } }} />
@@ -69,7 +70,11 @@ const ProductCard = ({ _id, image, title, price }) => {
 				style={{ textDecoration: 'none' }}
 			>
 				<Box className={classes.imageWrapper}>
-					<img className={classes.image} src={image} alt='img' />
+					<img
+						className={classes.image}
+						src={image} alt='img'
+						data-testid='image-product-card'
+					/>
 				</Box>
 				<Box className={classes.textContainer}>
 					<Typography
@@ -78,6 +83,7 @@ const ProductCard = ({ _id, image, title, price }) => {
 							fontSize: { xl: '24px', lg: '24px', l: '22px', md: '20px', sm: '16px', xs: '18px' },
 							textTransform: 'capitalize'
 						}}
+						data-testid='title-product-card'
 					>
 						{stringSlice(title, 30)}
 					</Typography>
@@ -85,6 +91,7 @@ const ProductCard = ({ _id, image, title, price }) => {
 						component="div"
 						display="inline"
 						className={classes.price}
+						data-testid='price-product-card'
 					>
 						${price}
 					</Box>
