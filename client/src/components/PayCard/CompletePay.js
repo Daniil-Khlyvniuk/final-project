@@ -6,14 +6,17 @@ import cartAPI from '../../utils/API/cartAPI'
 import axios from 'axios'
 // import { useSelector } from 'react-redux'
 // import { userSelectors } from '../../store/User'
+//
 
 const CompletePay = () => {
 	const newOrder = cartAPI.getCart()
 	const OrderNum = Date.now()
 	const handleShoppingBag = useHandleShoppingBag()
-	const [userData, setUserData] = useState({})
+	const [userData, setUserData] = useState(null)
 	const [BuyGoods, setBuyGoods] = useState({})
 	const shoppingBag = JSON.parse(localStorage.getItem('shoppingBag') || '[]') || []
+	// let unregistered = useSelector(userSelectors.getUnregistered())
+	
 	// const user = useSelector(userSelectors.getData())
 	// const isLoggedIn = !!user
 
@@ -31,7 +34,7 @@ const CompletePay = () => {
 
 
 	// ShoppingBag: BuyGoods,
-
+	
 	const customer = {...userData}
 	const order = {
 		products: BuyGoods,
@@ -56,8 +59,6 @@ const CompletePay = () => {
 	}
 
 	localStorage.setItem('ORDER', JSON.stringify(order))
-
-
 
 
 	return (
