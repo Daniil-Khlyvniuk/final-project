@@ -36,7 +36,6 @@ const CompletePay = () => {
 	// ShoppingBag: BuyGoods,
 	
 	const customer = {...userData}
-
 	const order = {
 		products: BuyGoods,
 		canceled: false,
