@@ -48,7 +48,6 @@ const LoginForm = () => {
 							label="Login or Email"
 							name="loginOrEmail"
 							type="text"
-							placeholder="Login or Email"
 						/>
 						<Field
 							data-testid="password"
@@ -56,7 +55,6 @@ const LoginForm = () => {
 							label="Password"
 							name="password"
 							type="password"
-							placeholder="Password"
 						/>
 						<Box 
 							sx={{

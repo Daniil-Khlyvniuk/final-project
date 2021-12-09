@@ -16,19 +16,15 @@ export const useFormStyle = makeStyles({
 		fontSize: 20,
 		lineHeight: 24,
 		marginTop: '25px',
-		transition: '0.5s'
+		transition: '0.5s',
+		'& .MuiOutlinedInput-root':{
+			'& fieldset': {
+				border: 'none',
+				borderBottom: '1px solid grey',
+				borderRadius: 0
+			}
+		}
 	},
-	// ads: {
-	// 	display: 'flex',
-	// 	alignItems: 'center',
-	// 	alignContent: 'center',
-	// 	fontStyle: 'normal',
-	// 	fontFamily: theme.typography,
-	// 	fontWeight: 300,
-	// 	fontSize: '14px',
-	// 	lineHeight: '20px',
-	// 	marginBottom: 5
-	// },
 	policy: {
 		fontFamily: theme.typography.fontFamily,
 		fontStyle: 'normal',
@@ -61,12 +57,6 @@ export const useFormStyle = makeStyles({
 		border: '1px solid #000',
 		borderBottom: 'none'
 	},
-	socialBox: {
-		marginTop: '30px',
-		display: 'flex',
-		justifyContent: 'center',
-		gap: 30
-	},
 	alreadyIn: {
 		fontFamily: 'Mulish',
 		fontStyle: 'normal',
@@ -86,7 +76,6 @@ export const useFormStyle = makeStyles({
 	error: {
 		color: 'red',
 		fontSize: 15,
-
 	},
 	success: {
 		color: 'green',
