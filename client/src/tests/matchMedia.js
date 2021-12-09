@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // export const matchMedia = Object.defineProperty(window, 'matchMedia', {
 //   writable: true,
 //   value: jest.fn().mockImplementation(query => ({
@@ -13,8 +14,8 @@
 // });
 
 export const matchMedia = global.matchMedia = global.matchMedia || function () {
-  return {
-    addListener: jest.fn(),
-    removeListener: jest.fn(),
-  };
-};
+	return {
+		addListener: jest.fn(),
+		removeListener: jest.fn(),
+	}
+}

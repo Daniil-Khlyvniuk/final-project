@@ -10,6 +10,7 @@ import filterSlice from './Filter'
 import settingsSlice from './Settings'
 import userSlice from './User'
 import favoritesSlice from './Favorites/favoritesSlice'
+import snackBar from './SnackBar'
 
 const store = configureStore({
 	reducer: {
@@ -23,7 +24,8 @@ const store = configureStore({
 		product: productSlice,
 		filter: filterSlice,
 		settings: settingsSlice,
-		favorites: favoritesSlice
+		favorites: favoritesSlice,
+		snackBar,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({
@@ -36,8 +38,11 @@ const store = configureStore({
 					'user/fetchUser/fulfilled',
 					'filter/setFiltersFromQueryString',
 					'products/fetchProductsByFilter/fulfilled',
+					'settings/fetchSettings/pending',
+					'settings/fetchSettings/fulfilled',
 					'favorites/setLoading',
-					'favorites/setFavorites'
+					'favorites/setFavorites',
+					'snackBar/snackToggle',
 				],
 			},
 		}),

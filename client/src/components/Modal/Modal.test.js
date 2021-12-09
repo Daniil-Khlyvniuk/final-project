@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React from 'react'
 import Modal from './Modal'
 import { render } from '@testing-library/react'
@@ -19,9 +20,9 @@ describe('Test Modal.jsx', () => {
 			<Provider store={store}>
 				<Modal />
 			</Provider>
-		);
+		)
 
-		const button = getByTestId('close-button');
-		userEvent.click(button);
+		const button = getByTestId('close-button')
+		userEvent.click(button)
 	})
 })
