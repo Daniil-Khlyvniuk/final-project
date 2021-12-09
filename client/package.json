@@ -34,6 +34,7 @@
     "react-router-hash-link": "^2.4.3",
     "react-scripts": "4.0.3",
     "react-slick": "^0.28.1",
+    "react-slick-test": "^0.17.2",
     "react-transition-group": "^4.4.2",
     "slick-carousel": "^1.8.1",
     "standard": "^16.0.4",
@@ -70,8 +71,10 @@
   "devDependencies": {
     "@babel/eslint-parser": "^7.16.3",
     "@babel/eslint-plugin": "^7.14.5",
+    "@types/jest": "^27.0.3",
     "axios": "^0.24.0",
-    "prettier": "2.4.1"
+    "prettier": "2.4.1",
+    "react-test-renderer": "^17.0.2"
   },
   "proxy": "http://localhost:5000"
 }

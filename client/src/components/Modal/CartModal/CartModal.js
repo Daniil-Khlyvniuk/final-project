@@ -23,7 +23,7 @@ const CartModal = () => {
 		<BasicModal
 			style={style.modal}
 			body={
-				<Box>
+				<Box data-testid='cart-modal-content'>
 					{shoppingBag?.length
 						? <Box>
 							<GlobalStyles
