@@ -20,6 +20,7 @@ const LogoutIconHeader = () => {
 				dispatch(userOperations.logOut())
 				handleSnack({message: 'Successfully logged out', style: 'success'})
 			}}
+			data-testid='navbar-logout-icon'
 		>
 			<LogoutIcon className={classes.navbarLink} />
 		</IconButton >
