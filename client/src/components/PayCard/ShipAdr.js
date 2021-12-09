@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { Form, Formik } from 'formik'
-import { Button, Grid, Typography } from '@mui/material'
+import { Box, Button, Grid, Typography } from '@mui/material'
 import { border } from './styles'
 import TextInput from '../UserProfile/UserForm/FormUI/Textfield'
 import SelectInput from '../UserProfile/UserForm/FormUI/SelectInput'
@@ -10,8 +10,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { userOperations, userSelectors } from '../../store/User'
 import * as Yup from 'yup'
 import { phoneRegExp } from '../UserProfile/UserForm/data/Regex'
-import { button } from '../Stripe/style'
 import PropTypes from 'prop-types'
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 
 
 
@@ -31,6 +31,9 @@ const FORM_VALIDATION = Yup.object().shape({
 	phone: Yup.string()
 		.matches(phoneRegExp, 'Please enter a valid phone number').required('required')
 	,
+	email: Yup
+		.string()
+		.email('Invalid email'),
 	address: Yup
 		.string()
 		.min(10, 'Write Real Address')
@@ -51,7 +54,7 @@ const FORM_VALIDATION = Yup.object().shape({
 		.required('required'),
 })
 
-const ShipAdr = ({handleNext}) => {
+const ShipAdr = ({handleNext, handleBack}) => {
 	const user = useSelector(userSelectors.getData())
 	const token = useSelector(userSelectors.getToken())
 	const dispatch = useDispatch()
@@ -60,6 +63,7 @@ const ShipAdr = ({handleNext}) => {
 	const INITIAL_FORM_STATE = {
 		firstName:user?.lastName || '',
 		lastName: user?.lastName ||'',
+		email: user?.email || '',
 		phone: user?.phone || '',
 		address: user?.address || '',
 		city: user?.city || '',
@@ -89,7 +93,8 @@ const ShipAdr = ({handleNext}) => {
 					{isLoggedIn ?
 						axios.put('/api/customers', update , {
 							headers: {Authorization : token}
-						}): dispatch(userOperations.setUnregistered(update))}
+						}): dispatch(userOperations.setUnregistered(update)) && localStorage.setItem('Unregistered' , JSON.stringify(update))}
+					console.log(update)
 				}}
 			>
 				{({ handleSubmit, isValid, dirty }) => (
@@ -125,8 +130,14 @@ const ShipAdr = ({handleNext}) => {
 							<Grid item xs={12} >
 								<TextInput name="address" label="Address *" />
 							</Grid>
-							<Grid item xs={12} >
+							<Grid item xs={6} >
 								<TextInput name="address2" label="Address 2" />
+							</Grid>
+							<Grid item xs={6} md={6}>
+								<TextInput
+									name="email"
+									label="Email"
+								/>
 							</Grid>
 							<Grid item xs={12} md={6}>
 								<SelectInput
@@ -149,18 +160,46 @@ const ShipAdr = ({handleNext}) => {
 								<TextInput name="phone" label="Phone number *" />
 							</Grid>
 						</Grid>
-						<Button
-							disabled={!isValid && !dirty}
-							type='submit'
-							style={button}
-							onClick={ () => {
-								handleSubmit()
-								{isValid &&  dirty && handleNext()}
-							}}
-							variant="contained"
-						>
+						<Box style={border}/>
+						<Box sx={{
+							display: 'flex',
+							justifyContent: 'space-between',
+						}}>
+							<Button
+								variant="text"
+								sx={{
+									fontSize: '18px',
+									color: '#373F41',
+								}}
+								onClick={()=> {
+									handleBack()
+								}}
+							><ArrowBackIosNewIcon
+									sx={{
+										height: '17px',
+									}}
+								/> BACK</Button>
+							<Button
+								disabled={!isValid && !dirty}
+								type='submit'
+								sx={{
+									width: '200px',
+									height: '50px',
+									background: '#373F41',
+									borderRadius: '4px',
+									border: 'none',
+									top: '102%',
+									cursor: 'pointer',
+								}}
+								onClick={ () => {
+									handleSubmit()
+									{isValid &&  dirty && handleNext()}
+								}}
+								variant="contained"
+							>
 							NEXT
-						</Button>
+							</Button>
+						</Box>
 					</Form>
 				)}
 			</Formik>
@@ -170,5 +209,6 @@ const ShipAdr = ({handleNext}) => {
 
 ShipAdr.propTypes = {
 	handleNext: PropTypes.func,
+	handleBack: PropTypes.func,
 }
 export default ShipAdr

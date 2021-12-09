@@ -15,7 +15,7 @@ const CompletePay = () => {
 	const [userData, setUserData] = useState(null)
 	const [BuyGoods, setBuyGoods] = useState({})
 	const shoppingBag = JSON.parse(localStorage.getItem('shoppingBag') || '[]') || []
-	let unregistered = useSelector(userSelectors.getUnregistered())
+	let unregistered =  JSON.parse(localStorage.getItem('Unregistered'))
 	
 	const user = useSelector(userSelectors.getData())
 	const isLoggedIn = !!user
@@ -33,25 +33,24 @@ const CompletePay = () => {
 	},[])
 
 
-	
 	let customer = isLoggedIn ? {...userData} : unregistered
 
 	const order = {
 		products: BuyGoods,
 		canceled: false,
-		customerId: customer._id,
+		customerId: customer?._id,
 		deliveryAddress: {
-			country: customer.country,
-			city: customer.city,
-			address: customer.address,
-			postal: customer.zip
+			country: customer?.country,
+			city: customer?.city,
+			address: customer?.address,
+			postal: customer?.zip
 		},
 		orderNumber: OrderNum,
 		shipping: '',
 		paymentInfo: 'Credit card',
 		status: 'not shipped',
-		email: customer.email,
-		mobile: customer.phone,
+		email: customer?.email,
+		mobile: customer?.phone,
 		letterSubject: 'Thank you for order! You are welcome!',
 		letterHtml:
 			`<h1>Your order is placed. OrderNo is ${OrderNum}.</h1>
