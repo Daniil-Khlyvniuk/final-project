@@ -44,6 +44,7 @@ const LoginForm = () => {
 							label="Login or Email"
 							name="loginOrEmail"
 							type="text"
+							aria-labelledby="loginOrEmail"
 						/>
 						<Field
 							data-testid="password"
