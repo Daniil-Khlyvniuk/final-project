@@ -38,10 +38,8 @@ const SignInForm = () => {
 
 				onSubmit={async (values) => {
 					try {
-						const res = await register(values)
-						if (res) {
-							setServerResult({ success: 'You successfully registered' })
-						}
+						await register(values)
+						setServerResult({ success: 'You successfully registered' })
 					}
 					catch (err) {
 						setServerResult({ error: Object.values(err.response.data)[0] })

@@ -3,7 +3,7 @@ import settingsApi from '../../utils/API/settingsApi'
 import { returnMode } from '../../utils/helpers/stringHelper'
 
 const initialState = {
-	data: {},
+	data: null,
 	isLoading: true,
 	error: null,
 }
