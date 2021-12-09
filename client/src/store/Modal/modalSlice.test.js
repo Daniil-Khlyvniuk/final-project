@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import reducer, { modalToggle } from './modalSlice'
 
 describe('Test modalSlice', () => {

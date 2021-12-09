@@ -1,5 +1,6 @@
+/* eslint-disable no-undef */
 import React from 'react'
-import { matchMedia } from '../../tests/matchMedia'
+// import { matchMedia } from '../../tests/matchMedia'
 import Carousel from './Carousel'
 import { render } from '@testing-library/react'
 import { Provider } from 'react-redux'
@@ -12,34 +13,34 @@ const product = true
 const related = true
 
 describe('Test Carousel component', () => {
-  test('Smoke test Carousel', () => {
-    render(
-      <Provider store={store}>
-        <BrowserRouter>
-          <Carousel
-            slides={slides}
-            main={main}
-            product={product}
-            related={related}
-          />
-        </BrowserRouter>
-      </Provider>
-    )
-  })
+	test('Smoke test Carousel', () => {
+		render(
+			<Provider store={store}>
+				<BrowserRouter>
+					<Carousel
+						slides={slides}
+						main={main}
+						product={product}
+						related={related}
+					/>
+				</BrowserRouter>
+			</Provider>
+		)
+	})
 
-  test('Carousel Snapshot test', () => {
-    const container = render(
-      <Provider store={store}>
-        <BrowserRouter>
-          <Carousel
-            slides={slides}
-            main={main}
-            product={product}
-            related={related}
-          />
-        </BrowserRouter>
-      </Provider>
-    )
-    expect(container).toMatchSnapshot()
-  })
+	test('Carousel Snapshot test', () => {
+		const container = render(
+			<Provider store={store}>
+				<BrowserRouter>
+					<Carousel
+						slides={slides}
+						main={main}
+						product={product}
+						related={related}
+					/>
+				</BrowserRouter>
+			</Provider>
+		)
+		expect(container).toMatchSnapshot()
+	})
 })

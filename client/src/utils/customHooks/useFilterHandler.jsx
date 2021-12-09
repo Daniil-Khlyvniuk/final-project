@@ -69,6 +69,7 @@ const useFilterHandler = () => {
 		{
 			settings = settingsRedux
 		}
+		
 		if(!isLaunchedByUser && settings)
 		{
 			const urlParams = parseQueryStringWithNoZero(history.location.search)
