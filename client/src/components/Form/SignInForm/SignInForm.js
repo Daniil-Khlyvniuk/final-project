@@ -4,9 +4,9 @@ import { SING_UP_SCHEMA } from '../setting/Schemes'
 import { useFormStyle } from '../../../utils/customHooks/useFormStyle'
 import { Box, Typography, Button } from '@mui/material'
 import { Link } from 'react-router-dom'
-import CustomInput from '../setting/CustomInput'
-import CustomCheckBox from '../setting/CustomCheckBox'
-import CustomSwitch from '../setting/CustomSwitch'
+import CustomInput from '../setting/customElements/CustomInput'
+import CustomCheckBox from '../setting/customElements/CustomCheckBox'
+import CustomSwitch from '../setting/customElements/CustomSwitch'
 import useAuth from '../../../utils/customHooks/useAuth'
 
 const SignInForm = () => {

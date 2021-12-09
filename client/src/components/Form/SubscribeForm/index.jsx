@@ -3,7 +3,7 @@ import { Formik, Form, Field } from 'formik'
 import { Button, Alert } from '@mui/material'
 
 import { SUBSCRIBE_SCHEMA } from '../setting/Schemes'
-import TextInput from '../setting/TextInput'
+import TextInput from '../setting/customElements/TextInput'
 
 import { addSubscribe } from '../../../utils/API/subscribersAPI'
 
