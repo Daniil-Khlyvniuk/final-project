@@ -26,10 +26,12 @@ const CompletePay = () => {
 			.then(res =>setUserData(res.data))
 		setBuyGoods(shoppingBag)
 		handleShoppingBag.AfterBuy()
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	useEffect(()=> {
 		cartAPI.addOrder(newOrder)
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[])
 
 
