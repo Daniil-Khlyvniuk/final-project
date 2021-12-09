@@ -35,12 +35,13 @@ const HeaderSearch = () => {
 				// eslint-disable-next-line no-console
 				console.error(err)
 				setOptions([])
+				setIsLoading(false)
 			}
 		}, 700)
 	}
 
 	return (
-		<StyledBox>
+		<StyledBox data-testid='navbar-search'>
 			<Search>
 				<SearchIconWrapper>
 					<SearchIcon />

@@ -1,10 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import Slider from 'react-slick'
-// import 'slick-carousel/slick/slick.css'
-// import 'slick-carousel/slick/slick-theme.css'
-import './slick(costil).css'
-import './slick-theme(costil).css'
+import './slick(custom).css'
+import './slick-theme(custom).css'
 import { useStyleCarousel } from '../../utils/customHooks/useStyleCarousel'
 import { Link } from 'react-router-dom'
 
@@ -28,7 +26,7 @@ const Carousel = ({
 	const SampleNextArrow = (props) => {
 		const { className, onClick } = props
 		return (
-			<div className={style.nextEl}>
+			<div className={style.nextEl} onClick={onClick}>
 				<div
 					className={className + style.nextEl}
 					style={{
@@ -36,7 +34,6 @@ const Carousel = ({
 						borderRight: '2px solid #5C5E60',
 						transform: 'rotate(45deg)'
 					}}
-					onClick={onClick}
 				/>
 			</div>
 		)
@@ -45,7 +42,7 @@ const Carousel = ({
 	const SamplePrevArrow = (props) => {
 		const { className, onClick } = props
 		return (
-			<div className={style.prevEl}>
+			<div className={style.prevEl} onClick={onClick}>
 				<div
 					className={className + style.prevEl}
 					style={{
@@ -53,7 +50,6 @@ const Carousel = ({
 						borderRight: '2px solid #5C5E60',
 						transform: 'rotate(-135deg)'
 					}}
-					onClick={onClick}
 				/>
 			</div>
 		)
@@ -62,7 +58,6 @@ const Carousel = ({
 	const settingsMain = {
 		dots: true,
 		infinite: true,
-		fade: true,
 		speed: 500,
 		arrows: true,
 		slidesToShow: 1,
@@ -133,21 +128,26 @@ const Carousel = ({
 					{...settingsMain}
 					className={style.show}
 				>
-					{slides?.map((slide) => {
+					{slides.map((slide) => {
 						return (
-							<div key={slide.customId} className={style.mainContainer}>
-								<img src={slide.imageUrl} className={style.slide} alt=""/>
-								<div className={style.textBlock}>
-									<p className={style.title}>{slide.title}</p>
-									{slide.description &&
-										<p className={style.desc}>{slide.description}</p>}
+							<Link
+								to = {slide.category?.name ?
+									`/shop/catalog?category=${slide.category?.name}`
+									: `/product-details/${slide?.product._id}`}
+								key={slide.customId}>
+								<div className={style.mainContainer} >
+									<img src={slide.imageUrl} className={style.slide} alt=""/>
+									<div className={style.textBlock}>
+										<p className={style.title}>{slide.title}</p>
+										{slide.description &&
+								<p className={style.desc}>{slide.description}</p>}
+									</div>
 								</div>
-							</div>
+							</Link>
 						)
 					})}
 				</Slider>
 			}
-
 			{product &&
 				<div className={style.productsWrapper}>
 					<Slider

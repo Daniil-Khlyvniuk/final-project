@@ -7,7 +7,7 @@ export const useStyles = makeStyles(theme => ({
 			visibility: 'visible',
 			opacity: 1,
 		},
-		'&:hover $catalogTitle': {
+		'&:hover $cardTitle': {
 			display: 'none',
 		}
 	},
@@ -15,7 +15,7 @@ export const useStyles = makeStyles(theme => ({
 		width: '100%',
 		height: '100%',
 	},
-	catalogTitle: {
+	cardTitle: {
 		fontSize: '18px',
 		lineHeight: '30px',
 		color: '#FFFFFF',
@@ -27,15 +27,17 @@ export const useStyles = makeStyles(theme => ({
 		margin: '0 10px',
 		fontFamily: theme.typography.fontFamily,
 		textTransform: 'capitalize',
-		[theme.breakpoints.between('950', '1180')]: {
-			fontSize: '16px'
-		},
-		[theme.breakpoints.between('850', '950')]: {
+		[theme.breakpoints.between('480', '1180')]: {
 			fontSize: '14px'
 		},
-		[theme.breakpoints.between('480', '850')]: {
-			fontSize: '16px'
+		[theme.breakpoints.between('320', '480')]: {
+			fontSize: '18px'
 		}
+	},
+	cardPrice: {
+		display: 'block',
+		margin: 0,
+		fontWeight: 'bold'
 	},
 	blockHover: {
 		aspectRatio: 1,
@@ -49,12 +51,15 @@ export const useStyles = makeStyles(theme => ({
 		left: 0,
 		right: 0,
 		bottom: 0,
+	},
+	contentWrapper: {
+		aspectRatio: 1,
 		display: 'flex',
 		flexDirection: 'column',
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
-	title: {
+	hoverTitle: {
 		fontWeight: 'bold',
 		fontFamily: theme.typography.fontFamily,
 		fontSize: 18,
@@ -74,7 +79,7 @@ export const useStyles = makeStyles(theme => ({
 			padding: '0 15px'
 		}
 	},
-	price: {
+	hoverPrice: {
 		fontSize: 32,
 		lineHeight: '25px',
 		textAlign: 'center',

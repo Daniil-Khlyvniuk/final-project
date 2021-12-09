@@ -6,12 +6,12 @@ import { border } from './styles'
 import TextInput from '../UserProfile/UserForm/FormUI/Textfield'
 import SelectInput from '../UserProfile/UserForm/FormUI/SelectInput'
 import countries from '../UserProfile/UserForm/data/countries.json'
-import { useSelector } from 'react-redux'
-import { userSelectors } from '../../store/User'
+import { useDispatch, useSelector } from 'react-redux'
+import { userOperations, userSelectors } from '../../store/User'
 import * as Yup from 'yup'
 import { phoneRegExp } from '../UserProfile/UserForm/data/Regex'
 import { button } from '../Stripe/style'
-
+import PropTypes from 'prop-types'
 
 
 
@@ -40,13 +40,22 @@ const FORM_VALIDATION = Yup.object().shape({
 		.string()
 		.max(10, 'Write Real city')
 		.required('required'),
+	zip: Yup
+		.string()
+		.matches(/^[0-9]+$/, 'Must be only numbers')
+		.max(6, 'Not valid zip code')
+		.min(4, 'Not valid zip code')
+		.required('required'),
+	country: Yup
+		.string()
+		.required('required'),
 })
 
-// eslint-disable-next-line react/prop-types
 const ShipAdr = ({handleNext}) => {
-
 	const user = useSelector(userSelectors.getData())
 	const token = useSelector(userSelectors.getToken())
+	const dispatch = useDispatch()
+	const isLoggedIn = !!user
 
 	const INITIAL_FORM_STATE = {
 		firstName:user?.lastName || '',
@@ -55,6 +64,7 @@ const ShipAdr = ({handleNext}) => {
 		address: user?.address || '',
 		city: user?.city || '',
 		country: user?.country || '',
+		zip: user?.zip || '' ,
 	}
 
 
@@ -73,12 +83,13 @@ const ShipAdr = ({handleNext}) => {
 						address: values.address,
 						city: values.city,
 						country: values.country,
+						zip: values.zip,
 
 					}
-					axios.put('/api/customers', update , {
-						headers: {Authorization : token}
-					})
-					alert('Data saved')
+					{isLoggedIn ?
+						axios.put('/api/customers', update , {
+							headers: {Authorization : token}
+						}): dispatch(userOperations.setUnregistered(update))}
 				}}
 			>
 				{({ handleSubmit, isValid, dirty }) => (
@@ -130,7 +141,7 @@ const ShipAdr = ({handleNext}) => {
 							</Grid>
 							<Grid item xs={12} md={6}>
 								<TextInput
-									name="Zip/Postal Code"
+									name="zip"
 									label="Zip/Postal Code *"
 								/>
 							</Grid>
@@ -157,4 +168,7 @@ const ShipAdr = ({handleNext}) => {
 	)
 }
 
+ShipAdr.propTypes = {
+	handleNext: PropTypes.func,
+}
 export default ShipAdr
