@@ -7,7 +7,7 @@ import ProductDescription from '../../components/ProductDescription/ProductDescr
 import Carousel from '../../components/Carousel/Carousel'
 import RelatedItemsList from '../../components/RelatedItems/RelatedItemsList'
 import BackdropLoader from '../../components/UI/BackdropLoader/BackdropLoader'
-import UseCeo from '../../utils/customHooks/useCeo'
+import UseSeo from '../../utils/customHooks/useSeo'
 import { favoritesOperations } from '../../store/Favorites'
 
 
@@ -66,7 +66,7 @@ const ProductDetails = () => {
 
 	return (
 		<>
-			<UseCeo 
+			<UseSeo
 				title = {parent ? parent.name : 'Product Details'}
 				description = {parent ? parent.description : 'Product details'}
 				keywords = {
