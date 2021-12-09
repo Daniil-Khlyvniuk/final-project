@@ -1,22 +1,18 @@
 import React, { useState} from 'react'
-
+import * as Yup from 'yup'
 import {Container, Grid, Typography, Box} from '@mui/material'
 import { Form, Formik} from 'formik'
-import * as Yup from 'yup'
-import TextInput from './FormUI/Textfield'
 import { phoneRegExp } from './data/Regex'
+import {userOperations, userSelectors} from '../../../store/User'
+import {useSelector , useDispatch} from 'react-redux'
+import {updateData, updatePassword} from '../../../utils/API/userAPI'
 import countries from './data/countries.json'
+import TextInput from './FormUI/Textfield'
 import SelectInput from './FormUI/SelectInput'
 import ButtonInput from './FormUI/ButtonInput'
-import {useSelector , useDispatch} from 'react-redux'
-import {userOperations, userSelectors} from '../../../store/User'
 import Loader from '../../UI/Loader/Loader'
-import axios from 'axios'
 import CheckboxInput from './FormUI/CheckboxInput'
-import SnackbarMess from '../../UI/SnackbarMess'
-
-
-
+import useSnack from '../../../utils/customHooks/useSnack'
 
 
 const FORM_VALIDATION = Yup.object().shape({
@@ -45,7 +41,7 @@ const FORM_VALIDATION = Yup.object().shape({
 })
 
 const UserForm = () => {
-
+	const {handleSnack} = useSnack()
 	const [status,setStatus]=useState({variant: null , message : null})
 	const dispatch = useDispatch()
 
@@ -104,13 +100,15 @@ const UserForm = () => {
 											subscribe: values.subscribe
 
 										}
-										axios.put('/api/customers', update).then(() => {
+										updateData(update).then(() => {
 											setStatus({
 												variant: 1 ,
 												message: 'Changes successfully changed'})
-
 											dispatch(userOperations.setNewData(update))
-
+											handleSnack({message: 'Successfully changed', style: 'success'})
+										}).catch((err) => {
+											const message = err.response.data.password ? err.response.data.password : 'Something wrong with your data'
+											handleSnack({message, style: 'warning'})
 										})
 									}
 
@@ -120,7 +118,7 @@ const UserForm = () => {
 											variant: 2 ,
 											message: 'Enter new password'
 										})
-
+										handleSnack({message: 'Enter new password', style: 'warning'})
 										// eslint-disable-next-line max-len
 									} else if(values.oldPass.length > 2 && values.password.length> 2){
 
@@ -129,17 +127,22 @@ const UserForm = () => {
 											'newPassword': values.password
 										}
 										// eslint-disable-next-line no-unused-vars,no-mixed-spaces-and-tabs
-										axios.put('/api/customers/password',passwords)
+										updatePassword(passwords)
 											.then((res)=>{
 												if(res.data.password){
 													setStatus({
 														variant: 2 ,
 														message: 'Wrong Password'})
+													handleSnack({message: 'Wrong Password', style: 'warning'})
 												} else if(res.data.message){
 													setStatus({
 														variant: 1 ,
 														message: 'Successfully changed'})
+													handleSnack({message: 'Successfully changed', style: 'success'})
 												}
+											}).catch((err) => {
+												const message = err.response.data.password ? err.response.data.password : 'Something wrong with your data'
+												handleSnack({message, style: 'warning'})
 											})
 									}
 
@@ -268,19 +271,7 @@ const UserForm = () => {
 														label='E-mail'
 													/>
 												</Grid>
-												<Grid>
-													{status.variant === 1 && <SnackbarMess
-														open={true}
-														message={status.message}
-														variant={'success'}
-													/>}
-													{status.variant === 2 && <SnackbarMess
-														open={true}
-														message={status.message}
-														variant={'warning'}
-													/>}
-												</Grid>
-
+										
 												<Grid item xs={12} sx={{textAlign:'center', mt:'16px'}}>
 
 													<ButtonInput

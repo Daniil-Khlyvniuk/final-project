@@ -2,12 +2,13 @@ import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
 import { userOperations, userSelectors} from '../../store/User'
 import { loginUser, registerUser } from '../API/userAPI'
-import modalActions from '../../store/Modal'
 import {subscribeTemlate} from '../emailTemplates'
-import { snackBarOperations } from '../../store/SnackBar'
+import modalActions from '../../store/Modal'
+import useSnack from './useSnack'
 
 const useAuth = () => {
 	const dispatch = useDispatch()
+	const {handleSnack} = useSnack()
 	const token = useSelector(userSelectors.getToken())
 	const checkToken = () => 
 	{
@@ -34,10 +35,10 @@ const useAuth = () => {
 			//save token to store (and localStorage)
 			dispatch(userOperations.setToken({token: res.data.token, rememberMe}))
 			dispatch(modalActions.modalToggle(false))
-			dispatch(snackBarOperations.snackSettings({message: 'You successfully Logged In', severity: 'success'}))
+			handleSnack({message: 'You successfully Logged In', style: 'success'})
 			return true
 		}
-		dispatch(snackBarOperations.snackSettings({message: 'wrong login or password', severity: 'warning'}))
+		handleSnack({message: 'wrong login or password', style: 'warning'})
 		return false	
 	}
 
@@ -54,8 +55,10 @@ const useAuth = () => {
 		const res = await registerUser(formData)
 		if (res.status === 200) {
 			const loginRes = await login({loginOrEmail,password,rememberMe})
+			handleSnack({message: 'You successfully registered', style: 'success'})
 			return loginRes
 		}
+		handleSnack({message: 'Troubles with register', style: 'warning'})
 		return false
 	}
 	return {checkToken, login, register}
