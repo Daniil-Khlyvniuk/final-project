@@ -1,24 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Container, Grid, Box} from '@mui/material'
-import axios from 'axios'
 import { border, PayParent } from './styles'
 import ShipAdr from '../../components/PayCard/ShipAdr'
 import Summary from '../../components/PayCard/Summary'
+import PropTypes from 'prop-types'
 
-// eslint-disable-next-line react/prop-types
+
+
 const CheckoutForm = ({handleNext}) => {
-	// eslint-disable-next-line no-unused-vars
-	const [userData, setUserData] = useState({})
-	const [isLoading, setIsLoading] = useState(true)
-
-
-	useEffect(() => {
-		setIsLoading(true)
-		axios('/api/customers/customer')
-			.then(res =>setUserData(res.data))
-		setIsLoading(false)
-	}, [isLoading])
-
 
 	return (
 		<Box my='15px'>
@@ -41,6 +30,10 @@ const CheckoutForm = ({handleNext}) => {
 			</Grid>
 		</Box>
 	)
+}
+
+CheckoutForm.propTypes = {
+	handleNext: PropTypes.func,
 }
 
 export default CheckoutForm

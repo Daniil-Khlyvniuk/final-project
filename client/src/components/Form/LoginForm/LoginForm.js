@@ -24,13 +24,9 @@ const LoginForm = () => {
 			}}
 			validationSchema = {LOGIN_SCHEMA}
 
-			onSubmit = {async values => {
+			onSubmit = {	values => {
 				try {
-					const res = await login(values)
-					if(res)
-					{
-						setServerResult({ success: 'You successfully Logged In' })
-					}
+					login(values)
 				}
 				catch (err) {
 					setServerResult({ error: 'wrong login or password' })
@@ -45,16 +41,16 @@ const LoginForm = () => {
 						<Field
 							data-testid="loginOrEmail"
 							component={CustomInput}
+							label="Login or Email"
 							name="loginOrEmail"
 							type="text"
-							placeholder="Login or Email"
 						/>
 						<Field
 							data-testid="password"
 							component={CustomInput}
+							label="Password"
 							name="password"
 							type="password"
-							placeholder="Password"
 						/>
 						<Box 
 							sx={{

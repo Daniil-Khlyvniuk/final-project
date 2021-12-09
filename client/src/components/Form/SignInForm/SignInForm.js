@@ -2,14 +2,11 @@ import React, { useState } from 'react'
 import { Formik, Form, Field } from 'formik'
 import { SING_UP_SCHEMA } from '../setting/Schemes'
 import { useFormStyle } from '../../../utils/customHooks/useFormStyle'
-import { Box, Typography, Button, Link as LinkMui } from '@mui/material'
+import { Box, Typography, Button } from '@mui/material'
 import { Link } from 'react-router-dom'
-import { Facebook, Google } from '../setting/SocialIcons'
-
 import CustomInput from '../setting/CustomInput'
 import CustomCheckBox from '../setting/CustomCheckBox'
 import CustomSwitch from '../setting/CustomSwitch'
-
 import useAuth from '../../../utils/customHooks/useAuth'
 
 const SignInForm = () => {
@@ -17,6 +14,7 @@ const SignInForm = () => {
 	const { register } = useAuth()
 
 	const classes = useFormStyle()
+
 	return (
 		<Box
 			sx={{
@@ -34,16 +32,14 @@ const SignInForm = () => {
 					password: '',
 					confirmPass: '',
 					subscribe: false,
-					rememberMe: false,
+					rememberMe: false
 				}}
 				validationSchema={SING_UP_SCHEMA}
 
 				onSubmit={async (values) => {
 					try {
-						const res = await register(values)
-						if (res) {
-							setServerResult({ success: 'You successfully registered' })
-						}
+						await register(values)
+						setServerResult({ success: 'You successfully registered' })
 					}
 					catch (err) {
 						setServerResult({ error: Object.values(err.response.data)[0] })
@@ -60,7 +56,7 @@ const SignInForm = () => {
 								data-testid="firstName"
 								name="firstName"
 								type="text"
-								placeholder="First Name"
+								label="First Name"
 							/>
 
 							<Field
@@ -68,7 +64,7 @@ const SignInForm = () => {
 								data-testid="lastName"
 								name="lastName"
 								type="text"
-								placeholder="Last Name"
+								label="Last Name"
 							/>
 
 							<Field
@@ -76,6 +72,7 @@ const SignInForm = () => {
 								data-testid="login"
 								name="login"
 								type="text"
+								label="Login"
 								placeholder="Login"
 							/>
 
@@ -84,7 +81,7 @@ const SignInForm = () => {
 								data-testid="email"
 								name="email"
 								type="email"
-								placeholder="Email"
+								label="Email"
 							/>
 
 							<Field
@@ -92,7 +89,7 @@ const SignInForm = () => {
 								data-testid="password"
 								name="password"
 								type="password"
-								placeholder="Password"
+								label="Password"
 							/>
 
 							<Field
@@ -100,7 +97,7 @@ const SignInForm = () => {
 								data-testid="confirmPass"
 								name="confirmPass"
 								type="password"
-								placeholder="Confirm Password"
+								label="Confirm Password"
 							/>
 
 							<Box
@@ -196,20 +193,6 @@ const SignInForm = () => {
 									sign up
 								</Button>
 							</Box>
-							<div className={classes.socialBox}>
-								<LinkMui
-									href="https://myaccount.google.com"
-									target="_blank"
-								>
-									<Google />
-								</LinkMui>
-								<LinkMui
-									href="https://www.facebook.com"
-									target="_blank"
-								>
-									<Facebook />
-								</LinkMui>
-							</div>
 						</Form>
 					)
 				}}

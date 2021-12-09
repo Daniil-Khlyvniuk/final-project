@@ -6,6 +6,7 @@ const initialState = {
 	data: null,
 	error: null,
 	isLoading: false,
+	unregistered: null,
 }
 
 export const fetchUser = createAsyncThunk(
@@ -36,6 +37,9 @@ const userSlice = createSlice({
 			state.data = null
 			return state
 		},
+		setUnregistered(state,action) {
+			state.unregistered = action.payload
+		}
 	},
 	extraReducers: {
 		[fetchUser.fulfilled]: (state, action) => {
