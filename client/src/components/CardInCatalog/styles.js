@@ -35,6 +35,7 @@ export const useStyles = makeStyles(theme => ({
 		}
 	},
 	cardPrice: {
+		display: 'block',
 		margin: 0,
 		fontWeight: 'bold'
 	},

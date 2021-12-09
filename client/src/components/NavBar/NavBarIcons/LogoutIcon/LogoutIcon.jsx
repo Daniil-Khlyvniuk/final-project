@@ -15,6 +15,7 @@ const LogoutIconHeader = () => {
 			title='Logout'
 			sx={{ padding: 0 }}
 			onClick={() => dispatch(userOperations.logOut())}
+			data-testid='navbar-logout-icon'
 		>
 			<LogoutIcon className={classes.navbarLink} />
 		</IconButton >

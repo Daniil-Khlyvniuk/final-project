@@ -44,10 +44,22 @@ const CardInCatalog = ({ title, image, price, _id }) => {
 
 	return (
 		<Box className={classes.container}>
-			<img className={classes.img} src={image} alt='img' />
-			<p className={classes.cardTitle}>
+			<img
+				className={classes.img}
+				src={image} alt='img'
+				data-testid='image-catalog-card'
+			/>
+			<p
+				className={classes.cardTitle}
+				data-testid='title-catalog-card-main'
+			>
 				{stringSlice(title, 22)}
-				<p className={classes.cardPrice}>{price} $</p>
+				<span
+					className={classes.cardPrice}
+					data-testid='price-catalog-card-main'
+				>
+					{price} $
+				</span>
 			</p>
 			<Tooltip title="Click for details">
 				<Box
@@ -70,6 +82,7 @@ const CardInCatalog = ({ title, image, price, _id }) => {
 							}
 							: addToFavorites
 						}
+						data-testid='favorite-button-catalog-card'
 					>
 						{favoritesStorage.includes(_id) && user
 							? <FavoriteIcon
@@ -91,10 +104,18 @@ const CardInCatalog = ({ title, image, price, _id }) => {
 						style={{ textDecoration: 'none' }}
 					>
 						<Box className={classes.contentWrapper}>
-							<p className={classes.hoverTitle}>
+							<p
+								className={classes.hoverTitle}
+								data-testid='title-catalog-card-hover'
+							>
 								{stringSlice(title, 25)}
 							</p>
-							<p className={classes.hoverPrice}>{price} $</p>
+							<p
+								className={classes.hoverPrice}
+								data-testid='price-catalog-card-hover'
+							>
+								{price} $
+							</p>
 						</Box>
 					</Link>
 				</Box>
