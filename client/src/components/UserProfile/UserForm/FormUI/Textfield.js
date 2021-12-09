@@ -12,9 +12,7 @@ const TextInput = ({ name,...rest }) => {
 		...rest,
 		fullWidth: true,
 		variant: 'outlined',
-
 	}
-
 	if (meta && meta.touched && meta.error) {
 		configTextfield.error = true
 		configTextfield.helperText = meta.error

@@ -112,6 +112,12 @@ const theme = createTheme({
 							borderTopRightRadius: 0,
 							borderBottomRightRadius: 0,
 						},
+						'& .MuiFilledInput-root':{
+							border: '5px solid',
+							'& hover':{
+								borderColor: 'blue'
+							}
+						}
 					}
 				}
 			]
@@ -135,6 +141,7 @@ const theme = createTheme({
 				},
 			]
 		},
+
 		MuiTabs:{
 			variants: [
 				{
