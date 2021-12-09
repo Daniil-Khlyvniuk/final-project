@@ -1,11 +1,12 @@
 import React from 'react'
 import { Container, Grid, Box} from '@mui/material'
-
 import { border, PayParent } from './styles'
 import ShipAdr from '../../components/PayCard/ShipAdr'
 import Summary from '../../components/PayCard/Summary'
+import PropTypes from 'prop-types'
 
-// eslint-disable-next-line react/prop-types
+
+
 const CheckoutForm = ({handleNext}) => {
 
 	return (
@@ -29,6 +30,10 @@ const CheckoutForm = ({handleNext}) => {
 			</Grid>
 		</Box>
 	)
+}
+
+CheckoutForm.propTypes = {
+	handleNext: PropTypes.func,
 }
 
 export default CheckoutForm
