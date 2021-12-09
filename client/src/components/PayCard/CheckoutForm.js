@@ -6,8 +6,8 @@ import PropTypes from 'prop-types'
 
 
 
-
 const CheckoutForm = ({handleNext, handleBack}) => {
+
 
 	return (
 		<Box my='15px'>

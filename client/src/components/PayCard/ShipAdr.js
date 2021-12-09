@@ -15,6 +15,7 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 
 
 
+
 const FORM_VALIDATION = Yup.object().shape({
 	firstName: Yup
 		.string()
@@ -94,7 +95,6 @@ const ShipAdr = ({handleNext, handleBack}) => {
 						axios.put('/api/customers', update , {
 							headers: {Authorization : token}
 						}): dispatch(userOperations.setUnregistered(update)) && localStorage.setItem('Unregistered' , JSON.stringify(update))}
-					console.log(update)
 				}}
 			>
 				{({ handleSubmit, isValid, dirty }) => (

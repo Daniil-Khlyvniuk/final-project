@@ -29,6 +29,7 @@ const Form = () => {
 					width: '260px',
 				}
 			}}
+			data-testid='login-form'
 		>
 			<Tabs
 				value={value}

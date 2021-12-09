@@ -7,7 +7,6 @@ import axios from 'axios'
 import { useSelector } from 'react-redux'
 import { userSelectors } from '../../store/User'
 
-
 const CompletePay = () => {
 	const newOrder = cartAPI.getCart()
 	const OrderNum = Date.now()
@@ -21,20 +20,22 @@ const CompletePay = () => {
 	const isLoggedIn = !!user
 
 
+
 	useEffect(() => {
 		axios('/api/customers/customer')
 			.then(res =>setUserData(res.data))
 		setBuyGoods(shoppingBag)
 		handleShoppingBag.AfterBuy()
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	useEffect(()=> {
 		cartAPI.addOrder(newOrder)
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[])
 
 
 	let customer = isLoggedIn ? {...userData} : unregistered
-
 	const order = {
 		products: BuyGoods,
 		canceled: false,
@@ -58,8 +59,6 @@ const CompletePay = () => {
 	}
 
 	localStorage.setItem('ORDER', JSON.stringify(order))
-
-
 
 	return (
 		<Box style={{textAlign: 'center', margin: '7rem 0'}}>
