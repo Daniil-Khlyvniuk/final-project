@@ -2,30 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="shortcut icon" href="./хуйПЭ_ЭН_ГЭ_2.png" type="image/png">
-    <title>хуеваяФормаДляЗаписиХуевыхКарточекХуевыхТоваров</title>
+    <title>Product form</title>
     <style>
       form {
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
       }
-
       label {
         display: block;
       }
     </style>
 </head>
-<body style="font-family: 'Comic Sans MS'; background:
-url('./хуйПЭ_ЭН_ГЭ_2.png') center no-repeat">
-<h1>ХУЙ__ХУЙ__ХУЙ__ХУЙ__ХУЙ__ХУЙ__ХУЙ__ХУЙ__ХУЙ__ХУЙ__ХУЙ__ХУЙ__ХУЙ__ХУЙ__ХУЙ__ХУЙ</h1>
+<body style="font-family: 'Comic Sans MS'">
+<h1 style="text-align: center;">Add new products</h1>
 <form style="font-family: 'Comic Sans MS'; width: 550px; margin: 150px auto;"
       action="http://localhost:5000/api/products"
       enctype="multipart/form-data"
       method="post">
     <!--    __________________________________________________________________________-->
     <h1 style="color: lime">Product</h1>
-
 
     <label>name
         <input style="font-family: 'Comic Sans MS';" type="text" placeholder="name" name="name">
@@ -50,7 +46,7 @@ url('./хуйПЭ_ЭН_ГЭ_2.png') center no-repeat">
         <input style="font-family: 'Comic Sans MS';" type="text" placeholder="description" name="description">
     </label>
     <!--    ________________________________________________________________-->
-    <h1 style="color: lime">======================================================================================</h1>
+    <h1 style="color: lime">======================================</h1>
     <h1 style="color: lime">Variant</h1>
     <label>currentPrice
         <input style="font-family: 'Comic Sans MS';" type="text" placeholder="currentPrice" name="currentPrice">

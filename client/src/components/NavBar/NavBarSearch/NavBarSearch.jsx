@@ -35,6 +35,7 @@ const HeaderSearch = () => {
 				// eslint-disable-next-line no-console
 				console.error(err)
 				setOptions([])
+				setIsLoading(false)
 			}
 		}, 700)
 	}
