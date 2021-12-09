@@ -38,17 +38,12 @@ describe('Test CardList.js', () => {
     getByTestId('product-container')
   })
 
-  // test('it should render products', () => {
-  //   useSelector.mockImplementation(cb =>
-  //     cb({
-  //       data: ['Product1', 'Product2']
-  //     })
-  //   )
-
-  //   const { getByTestId, getByText } = render(<CardList />)
-  //   const productsContainer = getByTestId('product-container')
-
-  //   expect(productsContainer).toContainElement(getByText('Product1'))
-  //   expect(productsContainer).toContainElement(getByText('Product2'))
-  // })
+  test('CardList Snapshot test', () => {
+    const container = render(
+      <ThemeProvider theme={Theme}>
+        <CardList />
+      </ThemeProvider>
+    )
+    expect(container).toMatchSnapshot()
+  })
 })
