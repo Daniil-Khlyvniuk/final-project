@@ -9,7 +9,7 @@ import ScrollButton from './components/ScrollButton/ScrollButton'
 import RootSnackBar from './components/UI/RootSnackBar'
 import { settingsOperations } from './store/Settings'
 
-import UseScrollToTop from './utils/customHooks/useScrollToTop'
+import UseScrollToTop from './utils/customHooks/UseScrollToTop'
 
 const App = () => {
 	const { checkToken } = useAuth()
