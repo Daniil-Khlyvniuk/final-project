@@ -1,19 +1,20 @@
 import React, { useState } from 'react'
 import { Formik, Form, Field } from 'formik'
 import { SING_UP_SCHEMA } from '../setting/Schemes'
-import CustomInput from '../setting/CustomInput'
 import { useFormStyle } from '../../../utils/customHooks/useFormStyle'
-import { Box, Typography, Checkbox, Button, Switch } from '@mui/material'
+import { Box, Typography, Button } from '@mui/material'
 import { Link } from 'react-router-dom'
-import { Facebook, Google } from '../setting/SocialIcons'
-
+import CustomInput from '../setting/CustomInput'
+import CustomCheckBox from '../setting/CustomCheckBox'
+import CustomSwitch from '../setting/CustomSwitch'
 import useAuth from '../../../utils/customHooks/useAuth'
 
 const SignInForm = () => {
 	const [serverResult, setServerResult] = useState(null)
-	const {register} = useAuth()
+	const { register } = useAuth()
 
 	const classes = useFormStyle()
+
 	return (
 		<Box
 			sx={{
@@ -22,7 +23,7 @@ const SignInForm = () => {
 				paddingRight: '10px'
 			}}
 		>
-			<Formik 
+			<Formik
 				initialValues={{
 					firstName: '',
 					lastName: '',
@@ -31,15 +32,14 @@ const SignInForm = () => {
 					password: '',
 					confirmPass: '',
 					subscribe: false,
-					rememberMe: false,
+					rememberMe: false
 				}}
 				validationSchema={SING_UP_SCHEMA}
 
 				onSubmit={async (values) => {
 					try {
 						const res = await register(values)
-						if(res)
-						{
+						if (res) {
 							setServerResult({ success: 'You successfully registered' })
 						}
 					}
@@ -58,7 +58,7 @@ const SignInForm = () => {
 								data-testid="firstName"
 								name="firstName"
 								type="text"
-								placeholder="First Name"
+								label="First Name"
 							/>
 
 							<Field
@@ -66,7 +66,7 @@ const SignInForm = () => {
 								data-testid="lastName"
 								name="lastName"
 								type="text"
-								placeholder="Last Name"
+								label="Last Name"
 							/>
 
 							<Field
@@ -74,6 +74,7 @@ const SignInForm = () => {
 								data-testid="login"
 								name="login"
 								type="text"
+								label="Login"
 								placeholder="Login"
 							/>
 
@@ -82,7 +83,7 @@ const SignInForm = () => {
 								data-testid="email"
 								name="email"
 								type="email"
-								placeholder="Email"
+								label="Email"
 							/>
 
 							<Field
@@ -90,7 +91,7 @@ const SignInForm = () => {
 								data-testid="password"
 								name="password"
 								type="password"
-								placeholder="Password"
+								label="Password"
 							/>
 
 							<Field
@@ -98,49 +99,76 @@ const SignInForm = () => {
 								data-testid="confirmPass"
 								name="confirmPass"
 								type="password"
-								placeholder="Confirm Password"
+								label="Confirm Password"
 							/>
+
+							<Box
+								sx={{
+									marginTop: '25px',
+									paddingLeft: '15px',
+								}}
+							>
+								<CustomSwitch 
+									data-testid="rememberMe"
+									name="rememberMe"
+									label={
+										<Typography
+											component={'span'}
+											sx={{
+												fontSize: '14px',
+												fontWeight: 300,
+												lineHeight: '20px',
+											}}
+										>Remember me</Typography>
+									}
+									styles={{
+										'& .MuiSwitch-switchBase': {
+											'&.Mui-checked': {
+												color:'#6FB7AC',
+												'& + .MuiSwitch-track': {
+													backgroundColor: '#6FB7AC',
+												}
+											},
+										}}
+									}
+								/>
+							</Box>
 
 							<Box 
 								sx={{
-									display: 'flex',
-									alignItems: 'center',
 									marginTop: '25px',
-									textTransform: 'capitalize',
-									padding: '5px',
-								}}>
-								<Typography>remember me</Typography>
-								<Field
-									component={Switch}
-									name="rememberMe"
-									id="rememberMe"
-									value={true}
-									onChange={formikProps.handleChange}
-								/>
-							</Box>
-
-							<Box className={classes.ads}>
-								<Checkbox
-									style={{
-										width: 20,
-										padding: 25,
-										height: 20,
-										color: '#6FB7AC',
-									}}
+									paddingLeft: '15px',
+								}}
+							>
+								<CustomCheckBox 
 									data-testid="subscribe"
 									name="subscribe"
-									type="checkbox"
-									onChange={formikProps.handleChange}
+									styles={{
+										color: '#6FB7AC',
+										'&.Mui-checked': {
+											color:'#6FB7AC',
+										}}
+									}
+									label={
+										<Typography
+											component={'span'}
+											sx={{
+												fontSize: '14px',
+												fontWeight: 300,
+												lineHeight: '20px',
+											}}
+										>
+											Let`s get personal! We`ll send you only the good 
+											stuff: Exclusive early access to Sale, new arrivals 
+											and promotions. No nasties.
+										</Typography>
+									}
 								/>
-								<p>Let`s get personal! We`ll send you only the good stuff:
-									Exclusive early access to Sale,
-									new arrivals and promotions. No nasties.
-								</p>
 							</Box>
 
 							<p className={classes.policy}>By signing up you agree to
-								<Link to="/termsOfService"> Terms of Service </Link> 
-								and <Link to="/privacypolicy"> Privacy Policy </Link>
+								<Link to="/info/terms-of-service"> Terms of Service </Link>
+								and <Link to="/info/privacy-policy"> Privacy Policy </Link>
 							</p>
 
 							{serverResult && serverResult.error && (
@@ -167,13 +195,6 @@ const SignInForm = () => {
 									sign up
 								</Button>
 							</Box>
-							<div className={classes.socialBox}>
-								<Link to="#"><Google /></Link>
-								<Link to="#"><Facebook /></Link>
-							</div>
-							<p className={classes.alreadyIn}>
-								<Link to="/login">I HAVE AN ACCOUNT</Link>
-							</p>
 						</Form>
 					)
 				}}

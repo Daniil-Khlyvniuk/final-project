@@ -4,9 +4,11 @@ import { useStyles } from './styles'
 import ShoppingBagCard from '../../components/ShoppingBagCard/ShoppingBagCard'
 import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
 
+
 const Step1 = () => {
 	const classes = useStyles()
 	const { shoppingBag, totalPrice } = useHandleShoppingBag()
+
 
 	return (
 		<div className={classes.containerStep1}>

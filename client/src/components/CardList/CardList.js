@@ -33,7 +33,7 @@ const CardList = () => {
 			>
 				New in
 			</Typography>
-			<Grid container spacing={2} sx={{ marginBottom: '40px' }} >
+			<Grid container spacing={2} sx={{ marginBottom: '40px' }} data-testid='product-container'>
 				{products?.map(item => (
 					<Grid item md={6} sm={6} xs={12} key={item.variants._id}>
 						<ProductCard

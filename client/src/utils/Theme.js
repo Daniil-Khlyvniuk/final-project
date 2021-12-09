@@ -41,7 +41,7 @@ const theme = createTheme({
 		},
 		menuBold: {
 			textTransform: 'capitalize',
-			color: '#373F41',
+			color: 'primary.main',
 			fontFamily: 'Mulish, sans-serif',
 			fontWeight: 700,
 			fontSize: '16px',
@@ -49,7 +49,7 @@ const theme = createTheme({
 		},
 		footerTextMedium: {
 			textTransform: 'capitalize',
-			color: '#373F41',
+			color: 'primary.main',
 			fontFamily: 'Mulish, sans-serif',
 			fontWeight: 400,
 			fontSize: '16px',
@@ -112,6 +112,7 @@ const theme = createTheme({
 							borderTopRightRadius: 0,
 							borderBottomRightRadius: 0,
 						},
+
 					}
 				}
 			]
@@ -135,6 +136,7 @@ const theme = createTheme({
 				},
 			]
 		},
+
 		MuiTabs:{
 			variants: [
 				{
@@ -155,7 +157,7 @@ const theme = createTheme({
 						underline: 'none',
 						textTransform: 'capitalize',
 						textDecoration: 'none',
-						color: '#373F41',
+						color: 'primary.main',
 						fontFamily: 'Mulish',
 						fontWeight: 700,
 						fontSize: '16px',
@@ -168,7 +170,7 @@ const theme = createTheme({
 						underline: 'none',
 						textTransform: 'capitalize',
 						textDecoration: 'none',
-						color: '#373F41',
+						color: 'primary.main',
 						fontFamily: 'Mulish',
 						fontWeight: 400,
 						fontSize: '16px',

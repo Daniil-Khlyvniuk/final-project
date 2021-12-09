@@ -6,6 +6,7 @@ const initialState = {
 	data: null,
 	error: null,
 	isLoading: false,
+	unregistered: null,
 }
 
 export const fetchUser = createAsyncThunk(
@@ -36,6 +37,9 @@ const userSlice = createSlice({
 			state.data = null
 			return state
 		},
+		setUnregistered(state,action) {
+			state.unregistered = action.payload
+		}
 	},
 	extraReducers: {
 		[fetchUser.fulfilled]: (state, action) => {
@@ -49,9 +53,10 @@ const userSlice = createSlice({
 			state.error = null
 		},
 		[fetchUser.rejected]: (state) => {
-			state.isLoading = true
+			localStorage.removeItem('userToken')
+			state.isLoading = false
 			state.token = null
-			state.error = 'Error happened while links loading'
+			state.error = 'Error happened while user data loading. Relogin plz'
 		},
 	}
 })

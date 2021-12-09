@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {Box} from '@mui/material'
 import categoriesAPI from '../../utils/API/categoriesApi'
 import CategorySearchItem from './CategorySearchItem'
-import {Category} from './style'
+
 
 const CategorySearch = () => {
 
@@ -17,7 +17,13 @@ const CategorySearch = () => {
 	},[])
 
 	return (
-		<Box style={Category}>
+		<Box sx={{
+			flexWrap:'wrap',
+			display: 'flex',
+			justifyContent: 'flex-start',
+			margin: '20px auto',
+			gap: '15px',
+		}}>
 			{catalogs.length && catalogs.map(catalog => (
 				<CategorySearchItem key={catalog._id} catalog={catalog} />
 			))}
