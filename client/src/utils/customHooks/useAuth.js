@@ -4,6 +4,7 @@ import { userOperations, userSelectors} from '../../store/User'
 import { loginUser, registerUser } from '../API/userAPI'
 import modalActions from '../../store/Modal'
 import {subscribeTemlate} from '../emailTemplates'
+import { snackBarOperations } from '../../store/SnackBar'
 
 const useAuth = () => {
 	const dispatch = useDispatch()
@@ -13,10 +14,10 @@ const useAuth = () => {
 		// eslint-disable-next-line no-console
 		console.log('axios.defaults',axios.defaults)
 		if (token) {
-			axios.defaults.headers.common['Authorization'] = token
+			axios.defaults.headers.Authorization = token
 			dispatch(userOperations.fetchUser())
 		} else {
-			axios.defaults.headers.common['Authorization'] = null
+			axios.defaults.headers.Authorization = null
 			/*if setting null does not remove `Authorization` header then try     
 					delete axios.defaults.headers.common['Authorization'];
 				*/
@@ -33,9 +34,11 @@ const useAuth = () => {
 			//save token to store (and localStorage)
 			dispatch(userOperations.setToken({token: res.data.token, rememberMe}))
 			dispatch(modalActions.modalToggle(false))
+			dispatch(snackBarOperations.snackSettings({message: 'You successfully Logged In', severity: 'success'}))
 			return true
 		}
-		return false
+		dispatch(snackBarOperations.snackSettings({message: 'wrong login or password', severity: 'warning'}))
+		return false	
 	}
 
 	const register = async (values) => {

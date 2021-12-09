@@ -49,11 +49,7 @@ const UserForm = () => {
 	const [status,setStatus]=useState({variant: null , message : null})
 	const dispatch = useDispatch()
 
-
 	const user = useSelector(userSelectors.getData())
-	const token = useSelector(userSelectors.getToken())
-
-
 
 	const INITIAL_FORM_STATE = {
 		firstName: user?.firstName || '',
@@ -108,9 +104,7 @@ const UserForm = () => {
 											subscribe: values.subscribe
 
 										}
-										axios.put('/api/customers', update , {
-											headers: {Authorization : token}
-										}).then(() => {
+										axios.put('/api/customers', update).then(() => {
 											setStatus({
 												variant: 1 ,
 												message: 'Changes successfully changed'})
@@ -135,7 +129,7 @@ const UserForm = () => {
 											'newPassword': values.password
 										}
 										// eslint-disable-next-line no-unused-vars,no-mixed-spaces-and-tabs
-										axios.put('/api/customers/password',passwords,{headers: {Autorization : token}})
+										axios.put('/api/customers/password',passwords)
 											.then((res)=>{
 												if(res.data.password){
 													setStatus({

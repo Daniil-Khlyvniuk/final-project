@@ -24,13 +24,9 @@ const LoginForm = () => {
 			}}
 			validationSchema = {LOGIN_SCHEMA}
 
-			onSubmit = {async values => {
+			onSubmit = {	values => {
 				try {
-					const res = await login(values)
-					if(res)
-					{
-						setServerResult({ success: 'You successfully Logged In' })
-					}
+					login(values)
 				}
 				catch (err) {
 					setServerResult({ error: 'wrong login or password' })
