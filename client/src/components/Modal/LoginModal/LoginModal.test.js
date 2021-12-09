@@ -3,7 +3,7 @@ import LoginModal from './LoginModal'
 import { render } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
 
-const mockDispatch = jest.fn();
+const mockDispatch = jest.fn()
 jest.mock('react-redux', () => ({
 	useSelector: jest.fn(),
 	useDispatch: () => mockDispatch

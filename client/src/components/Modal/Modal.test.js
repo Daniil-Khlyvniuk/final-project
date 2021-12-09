@@ -19,9 +19,9 @@ describe('Test Modal.jsx', () => {
 			<Provider store={store}>
 				<Modal />
 			</Provider>
-		);
+		)
 
-		const button = getByTestId('close-button');
-		userEvent.click(button);
+		const button = getByTestId('close-button')
+		userEvent.click(button)
 	})
 })
