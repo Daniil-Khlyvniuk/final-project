@@ -21,6 +21,7 @@ const Carticon = () => {
 			sx={{ padding: 0 }}
 			title='Cart'
 			onClick={() => handleOpen(<CartModal />)}
+			data-testid='navbar-cart-icon'
 		>
 			<Badge badgeContent={shoppingBag?.length} color="success">
 				<Box className={classes.navbarLink}>
