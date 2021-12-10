@@ -25,7 +25,7 @@ const Summary = () => {
 
 	return (
 		<Box sx={{
-			maxWidth: '370px',
+			margin:' 0px 24px',
 		}}>
 			<Typography
 				variant='body1'

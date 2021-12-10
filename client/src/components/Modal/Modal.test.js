@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import React from 'react'
 import Modal from './Modal'
 import { render } from '@testing-library/react'
