@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom'
 import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
 import cartAPI from '../../utils/API/cartAPI'
 import axios from 'axios'
-// import { useSelector } from 'react-redux'
-// import { userSelectors } from '../../store/User'
-//
+import { useSelector } from 'react-redux'
+import { userSelectors } from '../../store/User'
 
 const CompletePay = () => {
 	const newOrder = cartAPI.getCart()
@@ -15,10 +14,11 @@ const CompletePay = () => {
 	const [userData, setUserData] = useState(null)
 	const [BuyGoods, setBuyGoods] = useState({})
 	const shoppingBag = JSON.parse(localStorage.getItem('shoppingBag') || '[]') || []
-	// let unregistered = useSelector(userSelectors.getUnregistered())
+	let unregistered =  JSON.parse(localStorage.getItem('Unregistered'))
 	
-	// const user = useSelector(userSelectors.getData())
-	// const isLoggedIn = !!user
+	const user = useSelector(userSelectors.getData())
+	const isLoggedIn = !!user
+
 
 
 	useEffect(() => {
@@ -26,32 +26,32 @@ const CompletePay = () => {
 			.then(res =>setUserData(res.data))
 		setBuyGoods(shoppingBag)
 		handleShoppingBag.AfterBuy()
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	useEffect(()=> {
 		cartAPI.addOrder(newOrder)
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[])
 
 
-	// ShoppingBag: BuyGoods,
-	
-	const customer = {...userData}
+	let customer = isLoggedIn ? {...userData} : unregistered
 	const order = {
 		products: BuyGoods,
 		canceled: false,
-		customerId: customer._id,
+		customerId: customer?._id,
 		deliveryAddress: {
-			country: customer.country,
-			city: customer.city,
-			address: customer.address,
-			postal: customer.zip
+			country: customer?.country,
+			city: customer?.city,
+			address: customer?.address,
+			postal: customer?.zip
 		},
 		orderNumber: OrderNum,
 		shipping: '',
 		paymentInfo: 'Credit card',
 		status: 'not shipped',
-		email: customer.email,
-		mobile: customer.phone,
+		email: customer?.email,
+		mobile: customer?.phone,
 		letterSubject: 'Thank you for order! You are welcome!',
 		letterHtml:
 			`<h1>Your order is placed. OrderNo is ${OrderNum}.</h1>
@@ -59,7 +59,6 @@ const CompletePay = () => {
 	}
 
 	localStorage.setItem('ORDER', JSON.stringify(order))
-
 
 	return (
 		<Box style={{textAlign: 'center', margin: '7rem 0'}}>

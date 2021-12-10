@@ -5,7 +5,6 @@ import { ThemeProvider } from '@mui/material/styles'
 import Theme from '../../utils/Theme'
 import { BrowserRouter } from 'react-router-dom'
 import userEvent from '@testing-library/user-event'
-import jest from '@testing-library/jest-dom'
 
 const _id = ''
 const title = ''
@@ -18,9 +17,7 @@ jest.mock('react-redux', () => ({
 	useDispatch: () => mockDispatch
 }))
 
-// eslint-disable-next-line no-undef
 describe('Test CardInCatalog.js', () => {
-	// eslint-disable-next-line no-undef
 	test('Smoke test CardInCatalog', () => {
 		render(
 			<ThemeProvider theme={Theme}>
@@ -36,7 +33,6 @@ describe('Test CardInCatalog.js', () => {
 		)
 	})
 
-	// eslint-disable-next-line no-undef
 	test('CardInCatalog image is rendering', () => {
 		const { getByTestId } = render(
 			<ThemeProvider theme={Theme}>
@@ -53,7 +49,6 @@ describe('Test CardInCatalog.js', () => {
 		getByTestId('image-catalog-card')
 	})
 
-	// eslint-disable-next-line no-undef
 	test('CardInCatalog title is rendering (main)', () => {
 		const { getByTestId } = render(
 			<ThemeProvider theme={Theme}>
@@ -70,7 +65,6 @@ describe('Test CardInCatalog.js', () => {
 		getByTestId('title-catalog-card-main')
 	})
 
-	// eslint-disable-next-line no-undef
 	test('CardInCatalog price is rendering (main)', () => {
 		const { getByTestId } = render(
 			<ThemeProvider theme={Theme}>
@@ -87,7 +81,6 @@ describe('Test CardInCatalog.js', () => {
 		getByTestId('price-catalog-card-main')
 	})
 
-	// eslint-disable-next-line no-undef
 	test('CardInCatalog favorite icon is rendering', () => {
 		const { getByTestId } = render(
 			<ThemeProvider theme={Theme}>
@@ -104,7 +97,6 @@ describe('Test CardInCatalog.js', () => {
 		getByTestId('favorite-button-catalog-card')
 	})
 
-	// eslint-disable-next-line no-undef
 	test('CardInCatalog favorite icon click', () => {
 		const { getByTestId } = render(
 			<ThemeProvider theme={Theme}>
@@ -123,7 +115,6 @@ describe('Test CardInCatalog.js', () => {
 		userEvent.click(favoriteButtonCatalogCard)
 	})
 
-	// eslint-disable-next-line no-undef
 	test('CardInCatalog title is rendering (hover)', () => {
 		const { getByTestId } = render(
 			<ThemeProvider theme={Theme}>
@@ -140,7 +131,6 @@ describe('Test CardInCatalog.js', () => {
 		getByTestId('title-catalog-card-hover')
 	})
 
-	// eslint-disable-next-line no-undef
 	test('CardInCatalog price is rendering (hover)', () => {
 		const { getByTestId } = render(
 			<ThemeProvider theme={Theme}>

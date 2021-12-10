@@ -1,6 +1,7 @@
 const Cart = require("../models/Cart");
 const Order = require("../models/Order");
 const Product = require("../models/Product");
+const ProductVariant = require("../models/ProductVariant");
 const sendMail = require("../commonHelpers/mailSender");
 const validateOrderForm = require("../validation/validationHelper");
 const queryCreator = require("../commonHelpers/queryCreator");
@@ -18,15 +19,15 @@ exports.placeOrder = async (req, res, next) => {
     let cartProducts = [];
 
     if (req.body.deliveryAddress) {
-      order.deliveryAddress = JSON.parse(req.body.deliveryAddress);
+			// order.deliveryAddress = JSON.parse(req.body.deliveryAddress);
     }
 
     if (req.body.shipping) {
-      order.shipping = JSON.parse(req.body.shipping);
+      // order.shipping = JSON.parse(req.body.shipping);
     }
 
     if (req.body.paymentInfo) {
-      order.paymentInfo = JSON.parse(req.body.paymentInfo);
+      // order.paymentInfo = JSON.parse(req.body.paymentInfo);
     }
 
     if (req.body.customerId) {
@@ -56,6 +57,7 @@ exports.placeOrder = async (req, res, next) => {
     const productAvailibilityInfo = await productAvailibilityChecker(
       order.products
     );
+
 
     if (!productAvailibilityInfo.productsAvailibilityStatus) {
       res.json({
@@ -104,11 +106,11 @@ exports.placeOrder = async (req, res, next) => {
             res
           );
 
-          for (item of order.products){
+					for (let item of order.products){
             const id = item.product._id;
-            const product = await Product.findOne({ _id: id });
+            const product = await ProductVariant.findOne({ _id: id });
             const productQuantity = product.quantity;
-            await Product.findOneAndUpdate({ _id: id }, { quantity: productQuantity - item.product.quantity }, { new: true })
+            await ProductVariant.findOneAndUpdate({ _id: id }, { quantity: productQuantity - item.product.quantity }, { new: true })
           }
 
           res.json({ order, mailResult });
@@ -134,25 +136,26 @@ exports.updateOrder = (req, res, next) => {
         .json({ message: `Order with id ${req.params.id} is not found` });
     } else {
       const order = _.cloneDeep(req.body);
+			console.log(order)
 
-      if (req.body.deliveryAddress) {
-        order.deliveryAddress = JSON.parse(req.body.deliveryAddress);
+			if (req.body.deliveryAddress) {
+        // order.deliveryAddress = JSON.parse(req.body.deliveryAddress);
       }
 
       if (req.body.shipping) {
-        order.shipping = JSON.parse(req.body.shipping);
+        // order.shipping = JSON.parse(req.body.shipping);
       }
 
       if (req.body.paymentInfo) {
-        order.paymentInfo = JSON.parse(req.body.paymentInfo);
+        // order.paymentInfo = JSON.parse(req.body.paymentInfo);
       }
 
       if (req.body.customerId) {
-        order.customerId = req.body.customerId;
+        // order.customerId = req.body.customerId;
       }
 
       if (req.body.products) {
-        order.products = JSON.parse(req.body.products);
+        // order.products = JSON.parse(req.body.products);
 
         order.totalSum = order.products.reduce(
           (sum, cartItem) =>
@@ -199,7 +202,7 @@ exports.updateOrder = (req, res, next) => {
 
       Order.findOneAndUpdate(
         { _id: req.params.id },
-        { $set: order },
+        order,
         { new: true }
       )
         .populate("customerId")
@@ -278,6 +281,7 @@ exports.cancelOrder = (req, res, next) => {
     }
   });
 };
+
 exports.deleteOrder = (req, res, next) => {
   Order.findOne({ _id: req.params.id }).then(async order => {
     if (!order) {
@@ -305,7 +309,9 @@ exports.deleteOrder = (req, res, next) => {
 exports.getOrders = (req, res, next) => {
   Order.find({ customerId: req.user.id })
     .populate("customerId")
-    .then(orders => res.json(orders))
+    .then(orders => {
+			res.json(orders)
+		})
     .catch(err =>
       res.status(400).json({
         message: `Error happened on server: "${err}" `
