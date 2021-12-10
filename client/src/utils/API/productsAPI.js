@@ -42,6 +42,7 @@ const getAllVariantsByProductId = (productId) => (
 )
 
 
+
 export default {
 	getAllProducts,
 	getOneProduct,

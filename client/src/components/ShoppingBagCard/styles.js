@@ -69,5 +69,9 @@ export const useStyles = makeStyles(() => ({
 		flexDirection: 'column',
 		alignItems: 'flex-start',
 		gap: '5px'
+	},
+	textDesc :{
+		textTransform:'uppercase',
+		color:'#000'
 	}
 }))
