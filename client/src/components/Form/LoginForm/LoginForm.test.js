@@ -1,31 +1,46 @@
 import React from 'react'
-import { render, screen, waitFor } from '@testing-library/react'
+import LoginForm from './LoginForm'
+import { waitFor, render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { Provider } from 'react-redux'
 import store from '../../../store'
-import LoginForm from './LoginForm'
-
-jest.mock('react-router-dom', () => ({ Link: 'a' }))
+import { BrowserRouter } from 'react-router-dom'
 
 describe('Test LoginForm.js', () => {
-	test('Rendering and submitting LoginForm', async () => {
-		const handleSubmit = jest.fn()
+	test('Smoke test LoginForm', () => {
 		render(
 			<Provider store={store}>
-				<LoginForm />
+				<BrowserRouter>
+					<LoginForm />
+				</BrowserRouter>
+			</Provider>
+		)
+	})
+
+	test('Rendering and submitting LoginForm', async () => {
+		const handleSubmit = jest.fn()
+
+		const { getByTestId } = render(
+			<Provider store={store}>
+				<BrowserRouter>
+					<LoginForm onSubmit={handleSubmit} />
+				</BrowserRouter>
 			</Provider>
 		)
 
-		userEvent.type(screen.getByLabelText(/login or email/i), 'John')
-		userEvent.type(screen.getByLabelText(/password/i), '1234567')
+		const loginInput = getByTestId('loginOrEmail')
+		const passwordInput = getByTestId('password')
+		const buttonTest = getByTestId('btn')
 
-		userEvent.click(screen.getByRole('button', { name: /log in/i }))
+		await waitFor(() => {
+			userEvent.type(loginInput, 'user')
+			userEvent.type(passwordInput, 'password')
 
-		await waitFor(() =>
-			expect(handleSubmit).toHaveBeenCalledWith({
-				loginOrEmail: 'John',
-				password: '1234567',
-			}),
-		)
+			expect(handleSubmit).not.toHaveBeenCalled()
+
+			userEvent.click(buttonTest)
+
+			// expect(handleSubmit).toHaveBeenCalledTimes(1)
+		})
 	})
 })

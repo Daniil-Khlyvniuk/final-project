@@ -44,7 +44,6 @@ const LoginForm = () => {
 							label="Login or Email"
 							name="loginOrEmail"
 							type="text"
-							aria-labelledby="loginOrEmail"
 						/>
 						<Field
 							data-testid="password"
@@ -104,6 +103,7 @@ const LoginForm = () => {
 
 						<Box sx={{ display: 'flex', justifyContent: 'center' }}>
 							<Button
+								data-testid="btn"
 								type='submit'
 								variant="contained"
 								direction="form"
