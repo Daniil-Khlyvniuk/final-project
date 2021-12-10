@@ -78,6 +78,7 @@ const CardInCatalog = ({ title, image, price, _id, parentId, color }) => {
 						aria-label="favorites"
 						title={ favoritesStorage.includes(_id) ? 'remove from favorites' : 'add to favorites' }
 						sx={ {
+							pointerEvents: 'auto',
 							padding: 0,
 							position: 'absolute',
 							right: '10px',
