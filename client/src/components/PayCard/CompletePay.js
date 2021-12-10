@@ -20,7 +20,6 @@ const CompletePay = () => {
 	const isLoggedIn = !!user
 
 
-
 	useEffect(() => {
 		axios('/api/customers/customer')
 			.then(res =>setUserData(res.data))
@@ -36,9 +35,10 @@ const CompletePay = () => {
 
 
 	let customer = isLoggedIn ? {...userData} : unregistered
-	console.log(BuyGoods + BuyGoods.length)
 
-
+	const clear = () => {
+		localStorage.setItem('Unregistered',[])
+	}
 	const order = {
 		products: {
 			cartQuantity: BuyGoods.length,
@@ -76,6 +76,9 @@ const CompletePay = () => {
 				<Button
 					variant={'contained'}
 					style={{marginTop: '2rem'}}
+					onClick={()=> {
+						clear()
+					}}
 				>CONTINUE SHOPPING</Button></Link>
 		</Box>
 	)
