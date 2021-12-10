@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import React from 'react'
 import Footer from './index'
 import { render } from '@testing-library/react'

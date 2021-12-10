@@ -1,8 +1,10 @@
 // eslint-disable-next-line no-undef
 module.exports = {
+	'ignorePatterns': ['**/tests/*.test.js', '**/tests/**', '*.test.js'],
 	'env': {
 		'browser': true,
-		'es2021': true
+		'es2021': true,
+		'jest/globals': true
 	},
 	'extends': [
 		'eslint:recommended',
@@ -20,7 +22,8 @@ module.exports = {
 	'plugins': [
 		'react',
 		'react-hooks',
-		'@babel'
+		'@babel',
+		'jest'
 	],
 	'rules': {
 		'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks

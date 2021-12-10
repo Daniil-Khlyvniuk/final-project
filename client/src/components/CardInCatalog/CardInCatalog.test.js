@@ -1,6 +1,4 @@
-/* eslint-disable no-undef */
 import React from 'react'
-// import { useSelector, useDispatch } from 'react-redux'
 import CardInCatalog from './CardInCatalog'
 import { render } from '@testing-library/react'
 import { ThemeProvider } from '@mui/material/styles'
