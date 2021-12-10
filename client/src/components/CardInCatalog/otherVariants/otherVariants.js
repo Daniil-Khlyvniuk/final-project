@@ -13,7 +13,8 @@ const OtherVariants = ({ parentId, currColor }) => {
 		const isCurrentColor = (variant.colorID === currColor._id)
 
 		return (
-			<Link variant={'span'} key={ i } to={ `/product-details/${ variant.varId }` }>
+			<Link variant={ 'span' } key={ i }
+				to={ `/product-details/${ variant.varId }` }>
 				<Box
 					sx={ {
 						p: .5,
@@ -33,7 +34,8 @@ const OtherVariants = ({ parentId, currColor }) => {
 
 	return (
 		<Box
-			sx={ {
+			sx={{
+				pointerEvents: 'auto',
 				display: 'flex',
 				flexWrap: 'wrap',
 				gap: '3px'
