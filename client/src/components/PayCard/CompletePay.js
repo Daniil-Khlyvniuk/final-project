@@ -13,7 +13,7 @@ const CompletePay = () => {
 	const handleShoppingBag = useHandleShoppingBag()
 	const [userData, setUserData] = useState(null)
 	const [BuyGoods, setBuyGoods] = useState({})
-	const shoppingBag = JSON.parse(localStorage.getItem('shoppingBag') || '[]') || []
+	const shoppingBag = JSON.parse(localStorage.getItem('shoppingBag') || '[]')
 	let unregistered =  JSON.parse(localStorage.getItem('Unregistered'))
 	
 	const user = useSelector(userSelectors.getData())
@@ -25,19 +25,25 @@ const CompletePay = () => {
 		axios('/api/customers/customer')
 			.then(res =>setUserData(res.data))
 		setBuyGoods(shoppingBag)
-		handleShoppingBag.AfterBuy()
+		return handleShoppingBag.AfterBuy()
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	useEffect(()=> {
-		cartAPI.addOrder(newOrder)
+		return  cartAPI.addOrder(newOrder)
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[])
 
 
 	let customer = isLoggedIn ? {...userData} : unregistered
+	console.log(BuyGoods + BuyGoods.length)
+
+
 	const order = {
-		products: BuyGoods,
+		products: {
+			cartQuantity: BuyGoods.length,
+			product: BuyGoods,
+		},
 		canceled: false,
 		customerId: customer?._id,
 		deliveryAddress: {

@@ -137,6 +137,7 @@ const ShipAdr = ({handleNext, handleBack}) => {
 								<TextInput
 									name="email"
 									label="Email"
+									options={countries}
 								/>
 							</Grid>
 							<Grid item xs={12} md={6}>
