@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { getUserByToken } from '../../utils/API/userAPI'
+import { getUserByToken , getUserOrders } from '../../utils/API/userAPI'
 
 const initialState = {
 	token: localStorage.getItem('userToken') || null,
@@ -7,12 +7,21 @@ const initialState = {
 	error: null,
 	isLoading: false,
 	unregistered: null,
+	orders : null,
 }
 
 export const fetchUser = createAsyncThunk(
 	'user/fetchUser',
 	async () => {
 		const response = await getUserByToken()
+		return response.data
+	}
+)
+
+export const fetchUserOrders = createAsyncThunk(
+	'user/fetchUserOrders',
+	async () =>{
+		const response = await getUserOrders()
 		return response.data
 	}
 )
@@ -58,6 +67,19 @@ const userSlice = createSlice({
 			state.token = null
 			state.error = 'Error happened while user data loading. Relogin plz'
 		},
+		[fetchUserOrders.fulfilled]:(state,action) => {
+			state.orders = action.payload
+			state.isLoading = false
+			state.error = null
+		},
+		[fetchUserOrders.pending]:(state)=>{
+			state.isLoading =true
+			state.error = null
+		},
+		[fetchUserOrders.rejected]:(state)=>{
+			state.isLoading = false
+			state.error = 'Error happened while user data loading. Relogin plz'
+		}
 	}
 })
 

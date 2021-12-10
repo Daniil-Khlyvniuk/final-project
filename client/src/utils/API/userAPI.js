@@ -11,3 +11,5 @@ export const updatePassword = (data) => axios.put('/api/customers/password', dat
 
 export const getUserByToken = () => axios('/api/customers/customer')
 
+export const getUserOrders = () => axios('/api/orders')
+
