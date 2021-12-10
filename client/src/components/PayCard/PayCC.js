@@ -45,7 +45,7 @@ const PayCc = () => {
 				>
 					<div style={PayCC}>
 						<Radio {...controlProps('a')} style={checkboxPay} />
-						<div
+						<Box
 							sx={{
 								display: 'flex',
 								flexDirection: 'column',
@@ -58,7 +58,7 @@ const PayCc = () => {
 							<p
 								style={PayTextSub}
 							>Please enter your credit card details</p>
-						</div>
+						</Box>
 						<div>
 							<CreditCardIcon sx={{
 								fontSize: '80px',

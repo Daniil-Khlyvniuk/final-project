@@ -97,23 +97,11 @@ const HorizontalLinearStepper = () => {
 					<Typography
 						sx={{ mt: 2, mb: 1 }}
 					>
-						{activeStep === 1 &&<CheckoutForm handleNext={handleNext} />}
+						{activeStep === 1 &&<CheckoutForm
+							handleBack={handleBack}
+							handleNext={handleNext} />}
 					</Typography>
 					<Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-						<Button
-							variant="text"
-							sx={{
-								marginLeft: '5rem',
-								fontSize: '18px',
-								color: '#373F41',
-							}}
-							disabled={activeStep === 0}
-							onClick={handleBack}
-						><ArrowBackIosNewIcon
-								sx={{
-									height: '17px',
-								}}
-							/> BACK</Button>
 						<Box sx={{ flex: '1 1 auto' }} />
 					</Box>
 				</React.Fragment>
