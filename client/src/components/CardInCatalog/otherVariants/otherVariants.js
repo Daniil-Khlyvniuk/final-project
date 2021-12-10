@@ -11,6 +11,7 @@ const OtherVariants = ({ parentId, currColor }) => {
 
 	const variantsComponents = otherVariants.map((variant, i) => {
 		const isCurrentColor = (variant.colorID === currColor._id)
+
 		return (
 			<Link variant={'span'} key={ i } to={ `/product-details/${ variant.varId }` }>
 				<Box

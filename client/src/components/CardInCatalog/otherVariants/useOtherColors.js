@@ -20,6 +20,9 @@ const UseOtherColors = (parentId) => {
 				setVariants(vars)
 			})
 
+		return () => {
+			setVariants([])
+		}
 	}, [ parentId ])
 
 	const filterDuplicate = (variantData) => {

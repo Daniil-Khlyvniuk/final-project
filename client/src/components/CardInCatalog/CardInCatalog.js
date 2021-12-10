@@ -46,26 +46,30 @@ const CardInCatalog = ({ title, image, price, _id, parentId, color }) => {
 
 	return (
 		<Box className={ classes.container }>
-			<img
-				className={ classes.img }
-				src={ image } alt="img"
-				data-testid="image-catalog-card"
-			/>
-			<p
-				className={ classes.cardTitle }
-				data-testid="title-catalog-card-main"
+			<Link
+				to={ `/product-details/${ _id }` }
+				style={ { textDecoration: 'none' } }
 			>
-				{ stringSlice(title, 22) }
-				<span
-					className={ classes.cardPrice }
-					data-testid="price-catalog-card-main"
+				<img
+					className={ classes.img }
+					src={ image } alt="img"
+					data-testid="image-catalog-card"
+				/>
+				<p
+					className={ classes.cardTitle }
+					data-testid="title-catalog-card-main"
 				>
-					{ price } $
-				</span>
-			</p>
+					{ stringSlice(title, 22) }
+					<span
+						className={ classes.cardPrice }
+						data-testid="price-catalog-card-main"
+					>
+						{ price } $
+					</span>
+				</p>
+			</Link>
+
 			<Tooltip title="Click for details">
-
-
 				<Box
 					className={ classes.blockHover }
 					sx={ { fontSize: { sm: '10px' } } }
@@ -115,27 +119,24 @@ const CardInCatalog = ({ title, image, price, _id, parentId, color }) => {
 							/>
 						}
 					</IconButton>
-					<Link
-						to={ `/product-details/${ _id }` }
-						style={ { textDecoration: 'none' } }
-					>
-						<Box className={ classes.contentWrapper }>
-							<p
-								className={ classes.hoverTitle }
-								data-testid="title-catalog-card-hover"
-							>
-								{ stringSlice(title, 25) }
-							</p>
-							<p
-								className={ classes.hoverPrice }
-								data-testid="price-catalog-card-hover"
-							>
-								{ price } $
-							</p>
 
-							<OtherVariants currColor={ color } parentId={ parentId } />
-						</Box>
-					</Link>
+					<Box className={ classes.contentWrapper }>
+						<p
+							className={ classes.hoverTitle }
+							data-testid="title-catalog-card-hover"
+						>
+							{ stringSlice(title, 25) }
+						</p>
+						<p
+							className={ classes.hoverPrice }
+							data-testid="price-catalog-card-hover"
+						>
+							{ price } $
+						</p>
+
+						<OtherVariants currColor={ color } parentId={ parentId } />
+					</Box>
+
 				</Box>
 			</Tooltip>
 		</Box>
