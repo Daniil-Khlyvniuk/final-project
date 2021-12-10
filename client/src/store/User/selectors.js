@@ -3,5 +3,11 @@ const getIsLoading = () => state => state.user.isLoading
 const getError = () => state => state.user.error
 const getToken = () => state => state.user.token
 const getUnregistered = () => state => state.user.unregistered
+const getUserOrders = () => state => state.user.orders
 
-export default {getData, getIsLoading, getError, getToken, getUnregistered}
+export default {getData,
+	getIsLoading,
+	getError,
+	getToken,
+	getUnregistered,
+	getUserOrders}
