@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography } from '@mui/material'
+import { Box, Grid, Typography } from '@mui/material'
 import { useStyles } from './styles'
 import ShoppingBagCard from '../../components/ShoppingBagCard/ShoppingBagCard'
 import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
@@ -11,22 +11,22 @@ const Step1 = () => {
 
 
 	return (
-		<div className={classes.containerStep1}>
-			<div className={classes.cards}>
+		<Grid className={classes.containerStep1}>
+			<Box className={classes.cards}>
 				{shoppingBag?.length > 0 && <>
 					<Typography fontSize={32} variant={'h2'} className={classes.titleStep1}>Shopping Bag</Typography>
-					<div>
+					<Box>
 						{shoppingBag
 							?.map((item, key) => <ShoppingBagCard key={key} item={item}/>)}
-					</div>
+					</Box>
 				</>}
-			</div>
-			<div style={{width: '30%', marginRight: '4rem'}}>
+			</Box>
+			<Box>
 				<Typography fontSize={32} variant={'h2'} className={classes.titleStep1}>Summary</Typography>
 				<Typography fontSize={32} variant={'h2'} className={classes.price}>TOTAL USD
           ${totalPrice}</Typography>
-			</div>
-		</div>
+			</Box>
+		</Grid>
 	)
 }
 

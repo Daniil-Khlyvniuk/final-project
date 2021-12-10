@@ -1,11 +1,12 @@
 const Product = require("../models/Product");
+const ProductVariant = require("../models/ProductVariant");
 
 module.exports = async orderProducts => {
-  try {
+	try {
     const productsAvailibilityDetails = await orderProducts.reduce(
       async (resultPromise, orderItem) => {
         const result = await resultPromise;
-        const dbProduct = await Product.findOne({ _id: orderItem.product._id });
+        const dbProduct = await ProductVariant.findOne({ _id: orderItem.product._id });
         const orderedQuantity = orderItem.cartQuantity;
         const realQuantity = dbProduct.quantity;
         result.push({
@@ -26,7 +27,7 @@ module.exports = async orderProducts => {
       .filter(item => !item.available)
       .map(item => item.productId);
 
-    const unavailableProducts = await Product.find({
+    const unavailableProducts = await ProductVariant.find({
       _id: { $in: unavailableProductIds }
     });
 

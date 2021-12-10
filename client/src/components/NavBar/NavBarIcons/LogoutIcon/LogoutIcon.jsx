@@ -9,7 +9,7 @@ import useSnack from '../../../../utils/customHooks/useSnack'
 const LogoutIconHeader = () => {
 	const classes = useStyles()
 	const dispatch = useDispatch()
-	const {handleSnack} = useSnack()
+	const { handleSnack } = useSnack()
 
 	return (
 		<IconButton
@@ -18,7 +18,7 @@ const LogoutIconHeader = () => {
 			sx={{ padding: 0 }}
 			onClick={() => {
 				dispatch(userOperations.logOut())
-				handleSnack({message: 'Successfully logged out', style: 'success'})
+				handleSnack({ message: 'Successfully logged out', style: 'success' })
 			}}
 			data-testid='navbar-logout-icon'
 		>

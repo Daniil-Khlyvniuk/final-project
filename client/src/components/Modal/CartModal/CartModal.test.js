@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import React from 'react'
 import CartModal from './CartModal'
 import { render } from '@testing-library/react'

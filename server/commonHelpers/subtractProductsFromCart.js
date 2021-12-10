@@ -1,4 +1,5 @@
 const Product = require("../models/Product");
+const ProductVariant = require("../models/ProductVariant");
 const Cart = require("../models/Cart");
 const mongoose = require("mongoose");
 
@@ -9,7 +10,7 @@ module.exports = async customerId => {
 		return await cart.products.reduce(
 			async (resultPromise, cartItem) => {
 				const result = await resultPromise;
-				const dbProduct = await Product.findOne({
+				const dbProduct = await ProductVariant.findOne({
 					_id: cartItem.product._id
 				});
 				result.push({

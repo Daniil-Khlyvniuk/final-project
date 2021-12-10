@@ -14,9 +14,23 @@ export const useStyles = makeStyles({
 		}
 	},
 	containerStep1: {
-		display: 'flex',
-		justifyContent: 'space-between',
-		gap: '4rem'
+		display: 'grid',
+		columnGap: '5%',
+		rowGap: 1,
+		gridTemplateColumns: 'repeat(1, 1fr)',
+		['@media(min-width: 1000px)']: {
+			columnGap: '0%',
+			rowGap: 1,
+			gridTemplateColumns: '75% 20%',
+			['@media(min-width: 650px)']: {
+				columnGap: '0%',
+				rowGap: 1,
+				gridTemplateColumns: '65% 30%',
+				// width: '852px''
+			},
+		// width: '852px''
+		},
+
 	},
 	cards: {
 		borderBottom: '1px solid grey',

@@ -1,6 +1,6 @@
-/* eslint-disable no-undef */
 import React from 'react'
-// import { matchMedia } from '../../tests/matchMedia'
+// eslint-disable-next-line no-unused-vars
+import { matchMedia } from '../../tests/matchMedia'
 import Carousel from './Carousel'
 import { render } from '@testing-library/react'
 import { Provider } from 'react-redux'
