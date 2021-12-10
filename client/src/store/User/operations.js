@@ -1,6 +1,7 @@
-import { actions, fetchUser } from './userSlice'
+import { actions, fetchUser, fetchUserOrders } from './userSlice'
 
 export default {
 	...actions,
 	fetchUser,
+	fetchUserOrders
 }
