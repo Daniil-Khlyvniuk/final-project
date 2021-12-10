@@ -182,6 +182,7 @@ const SignInForm = () => {
 							)}
 							<Box sx={{ display: 'flex', justifyContent: 'center' }}>
 								<Button
+									data-testid='submit'
 									type='submit'
 									variant="contained"
 									direction="form"

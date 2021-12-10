@@ -48,28 +48,3 @@ describe('Test Carousel component', () => {
 
 })
 
-//
-// describe('Test props on Carousel', ()=>{
-// 	let component
-// 	it('should render Carousel on related with props',  () => {
-// 		let mockProps = {
-// 			main: false,
-// 			slides: {},
-// 			related: true,
-// 			product: false
-// 		}
-// 		component = setUp(mockProps)
-// 		component.toMatchSnapshot()
-// 	})
-// 	it('should render Carousel on related without props',  () => {
-// 		let mockProps = {
-// 			main: false,
-// 			slides: {},
-// 			related: false,
-// 			product: false
-// 		}
-// 		component = setUp(mockProps)
-// 		component.toMatchSnapshot()
-// 	})
-// })
-//

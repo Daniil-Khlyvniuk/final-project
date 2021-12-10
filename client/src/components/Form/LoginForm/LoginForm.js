@@ -103,6 +103,7 @@ const LoginForm = () => {
 
 						<Box sx={{ display: 'flex', justifyContent: 'center' }}>
 							<Button
+								data-testid="button"
 								type='submit'
 								variant="contained"
 								direction="form"

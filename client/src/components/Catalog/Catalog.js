@@ -25,6 +25,7 @@ const Catalog = () => {
 	const hasMore = useSelector(filterSelectors.getInfinityScrollHasMore())
 
 	const { startPage } = useSelector(filterSelectors.getFilters())
+
 	const handleScroll = () => {
 		handleInfinitiScroll('startPage', +startPage + 1)
 	}
