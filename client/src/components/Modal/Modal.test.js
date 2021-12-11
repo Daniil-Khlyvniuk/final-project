@@ -5,9 +5,7 @@ import { Provider } from 'react-redux'
 import store from '../../store'
 import userEvent from '@testing-library/user-event'
 
-// eslint-disable-next-line no-undef
 describe('Test Modal.jsx', () => {
-	// eslint-disable-next-line no-undef
 	test('Smoke test Modal', () => {
 		render(
 			<Provider store={store}>
@@ -16,7 +14,6 @@ describe('Test Modal.jsx', () => {
 		)
 	})
 
-	// eslint-disable-next-line no-undef
 	test('close-button click', () => {
 		const { getByTestId } = render(
 			<Provider store={store}>
