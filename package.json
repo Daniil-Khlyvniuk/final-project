@@ -3,6 +3,7 @@
   "version": "1.0.1",
   "description": "Final Project - Online shop \"Postil' bedding\"",
   "main": "index.js",
+  "prepare": "husky install",
   "scripts": {
     "start": "\"npm install --prefix client && npm install --prefix server && npm run build --prefix mail-client && cp -a mail-client/build/. server/public/\"",
     "start:client": "npm start --prefix client",
