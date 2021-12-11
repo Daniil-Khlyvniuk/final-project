@@ -11,6 +11,7 @@ const StaticPages = () => {
 	const [loading, setLoading] = useState(false)
 
 	const { pathname } = useLocation()
+
 	const page = pathname
 		.split('/')
 		.pop()
@@ -22,7 +23,6 @@ const StaticPages = () => {
 				setLoading(false)
 			})
 	}, [page])
-
 	return (
 		<Container>
 			{loading && <Loader/>}
