@@ -4,8 +4,8 @@ import { Field, Form, Formik } from 'formik'
 import { LOGIN_SCHEMA } from '../setting/Schemes'
 import { Box, Typography, Button } from '@mui/material'
 import { Link } from 'react-router-dom'
-import CustomInput from '../setting/CustomInput'
-import CustomSwitch from '../setting/CustomSwitch'
+import CustomInput from '../setting/customElements/CustomInput'
+import CustomSwitch from '../setting/customElements/CustomSwitch'
 
 import useAuth from '../../../utils/customHooks/useAuth'
 
@@ -103,6 +103,7 @@ const LoginForm = () => {
 
 						<Box sx={{ display: 'flex', justifyContent: 'center' }}>
 							<Button
+								data-testid="button"
 								type='submit'
 								variant="contained"
 								direction="form"
