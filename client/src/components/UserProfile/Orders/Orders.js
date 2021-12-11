@@ -90,7 +90,6 @@ const Orders = () => {
 							</Typography>
 						</Box>
 						<Divider sx={{mt:'10px'}}/>
-						{console.log(order.products[0].product)}
 						{order.products.map((single,index) => {
 							return (<ShoppingBagCard
 								key={index}
