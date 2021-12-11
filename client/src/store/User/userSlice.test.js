@@ -8,7 +8,8 @@ describe('Test userSlice', () => {
 				data: null,
 				error: null,
 				isLoading: false,
-				unregistered: null
+				unregistered: null,
+				orders: null
 			}
 		)
 	})

@@ -4,27 +4,25 @@ import { Field, Form, Formik } from 'formik'
 import { LOGIN_SCHEMA } from '../setting/Schemes'
 import { Box, Typography, Button } from '@mui/material'
 import { Link } from 'react-router-dom'
-import CustomInput from '../setting/CustomInput'
-import CustomSwitch from '../setting/CustomSwitch'
-
+import CustomInput from '../setting/customElements/CustomInput'
+import CustomSwitch from '../setting/customElements/CustomSwitch'
 import useAuth from '../../../utils/customHooks/useAuth'
-
 
 const LoginForm = () => {
 	const classes = useFormStyle()
 	const [serverResult, setServerResult] = useState(null)
-	const {login} = useAuth()
+	const { login } = useAuth()
 
 	return (
-		<Formik 
-			initialValues = {{
+		<Formik
+			initialValues={{
 				loginOrEmail: '',
 				password: '',
 				rememberMe: false,
 			}}
-			validationSchema = {LOGIN_SCHEMA}
+			validationSchema={LOGIN_SCHEMA}
 
-			onSubmit = {	values => {
+			onSubmit={values => {
 				try {
 					login(values)
 				}
@@ -52,13 +50,13 @@ const LoginForm = () => {
 							name="password"
 							type="password"
 						/>
-						<Box 
+						<Box
 							sx={{
 								marginTop: '25px',
 								paddingLeft: '15px',
 							}}
 						>
-							<CustomSwitch 
+							<CustomSwitch
 								data-testid="rememberMe"
 								name="rememberMe"
 								label={
@@ -74,18 +72,19 @@ const LoginForm = () => {
 								styles={{
 									'& .MuiSwitch-switchBase': {
 										'&.Mui-checked': {
-											color:'#6FB7AC',
+											color: '#6FB7AC',
 											'& + .MuiSwitch-track': {
 												backgroundColor: '#6FB7AC',
 											}
 										},
-									}}
+									}
+								}
 								}
 							/>
 						</Box>
 
 						<p className={classes.policy}>By signing up you agree to
-							<Link to="/info/terms-of-service"> Terms of Service </Link> 
+							<Link to="/info/terms-of-service"> Terms of Service </Link>
 							and <Link to="/info/privacy-policy"> Privacy Policy </Link>
 						</p>
 
@@ -103,7 +102,7 @@ const LoginForm = () => {
 
 						<Box sx={{ display: 'flex', justifyContent: 'center' }}>
 							<Button
-								data-testid="btn"
+								data-testid="button"
 								type='submit'
 								variant="contained"
 								direction="form"

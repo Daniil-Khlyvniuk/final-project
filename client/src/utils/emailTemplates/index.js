@@ -20,7 +20,7 @@ export const subscribeTemlate = (email) => `<!DOCTYPE html>
     margin:15px auto;background-color:#fff">
         <tbody>
             <tr style="font-weight:300">
-                <td style="padding:0;font-weight:300;margin:0;
+         	       <td style="padding:0;font-weight:300;margin:0;
                 text-align:center">
                     <div style="padding:25px 0;font-size:14px;
                     font-weight:300;border-bottom:1px solid #dee7eb">
@@ -39,7 +39,7 @@ export const subscribeTemlate = (email) => `<!DOCTYPE html>
                     <div style="padding:20px;max-width:610px;font-weight:300;
                     margin:0 auto;text-align:center;
                     background:
-                     url(${domain}subscription/subscibe_email.jpg)
+                     url(``${domain}` + 'subscription/subscibe_email.jpg'`)
                       no-repeat center;
                     background-size: cover">
                         <div style="padding:25px 0;font-weight:300;">
@@ -136,7 +136,7 @@ export const unSubscribeTemlate = (email) => `<!DOCTYPE html>
                     <div style="padding:20px;max-width:610px;font-weight:300;
                     margin:0 auto;text-align:center;
                     background:
-                     url(${domain}subscription/subscibe_email.jpg)
+                     url(``${domain}`+ 'subscription/subscibe_email.jpg'`)
                       no-repeat center;
                     background-size: cover">
                         <div style="padding:25px 0;font-weight:300;">
