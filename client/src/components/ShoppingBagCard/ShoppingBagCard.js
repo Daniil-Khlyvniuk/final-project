@@ -22,7 +22,6 @@ const ShoppingBagCard = ({ item , card}) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
-
 	let Storquantity = parent.variants?.quantity - item.amount
 
 	return (
