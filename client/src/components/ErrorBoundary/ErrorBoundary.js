@@ -20,7 +20,6 @@ class ErrorBoundary extends Component {
 			return <Error500 />
 		}
 
-		// eslint-disable-next-line react/prop-types
 		return this.props.children
 	}
 }

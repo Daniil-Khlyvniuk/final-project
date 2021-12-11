@@ -26,7 +26,7 @@ const CardInModal = ({ image, title, price,  amount }) => {
 CardInModal.propTypes = {
 	title: PropTypes.string,
 	image: PropTypes.string,
-	price: PropTypes.number,
+	price: PropTypes.string,
 	color: PropTypes.string,
 	size: PropTypes.string,
 	amount: PropTypes.number

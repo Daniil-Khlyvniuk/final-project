@@ -2,7 +2,6 @@ import reducer, { modalToggle } from './modalSlice'
 
 describe('Test modalSlice', () => {
 	test('should return the initial state', () => {
-		// eslint-disable-next-line no-undef
 		expect(reducer(undefined, {})).toEqual(
 			{
 				modal: false

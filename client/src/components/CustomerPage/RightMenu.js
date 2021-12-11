@@ -3,13 +3,10 @@ import AccordionProduct from '../ProductDescription/Accordion/Accordion'
 import {Divider, Typography} from '@mui/material'
 import PropTypes from 'prop-types'
 
-
-// eslint-disable-next-line react/prop-types
 const RightMenu = ({tabs}) => {
 
 	return (
 		<div>
-			{/* eslint-disable-next-line react/prop-types */}
 			{tabs && tabs.map(tab => {
 				return (
 					<>

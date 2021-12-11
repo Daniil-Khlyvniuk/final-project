@@ -1,12 +1,10 @@
 import React from 'react'
-import {Alert, Snackbar} from '@mui/material'
+import { Alert, Snackbar } from '@mui/material'
+import PropTypes from 'prop-types'
 
-// eslint-disable-next-line react/prop-types
-const SnackbarMess = ({open, message , variant}) => {
+const SnackbarMess = ({ open, message, variant }) => {
 
 	const [openSnack, setOpen] = React.useState(open)
-
-
 
 	const handleClose = (event, reason) => {
 		if (reason === 'clickaway') {
@@ -23,6 +21,12 @@ const SnackbarMess = ({open, message , variant}) => {
 			</Alert>
 		</Snackbar>
 	)
+}
+
+SnackbarMess.propTypes = {
+	open: PropTypes.bool,
+	message: PropTypes.string,
+	variant: PropTypes.object
 }
 
 export default SnackbarMess
