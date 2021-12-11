@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React from 'react'
 import * as Yup from 'yup'
 import {Container, Grid, Typography, Box} from '@mui/material'
 import { Form, Formik} from 'formik'
@@ -42,7 +42,6 @@ const FORM_VALIDATION = Yup.object().shape({
 
 const UserForm = () => {
 	const {handleSnack} = useSnack()
-	const [status,setStatus]=useState({variant: null , message : null})
 	const dispatch = useDispatch()
 
 	const user = useSelector(userSelectors.getData())
@@ -101,9 +100,7 @@ const UserForm = () => {
 
 										}
 										updateData(update).then(() => {
-											setStatus({
-												variant: 1 ,
-												message: 'Changes successfully changed'})
+
 											dispatch(userOperations.setNewData(update))
 											handleSnack({message: 'Successfully changed', style: 'success'})
 										}).catch((err) => {
@@ -114,10 +111,7 @@ const UserForm = () => {
 
 
 									if(values.oldPass.length> 2 && values.password === ''){
-										setStatus({
-											variant: 2 ,
-											message: 'Enter new password'
-										})
+
 										handleSnack({message: 'Enter new password', style: 'warning'})
 										// eslint-disable-next-line max-len
 									} else if(values.oldPass.length > 2 && values.password.length> 2){
@@ -130,14 +124,8 @@ const UserForm = () => {
 										updatePassword(passwords)
 											.then((res)=>{
 												if(res.data.password){
-													setStatus({
-														variant: 2 ,
-														message: 'Wrong Password'})
 													handleSnack({message: 'Wrong Password', style: 'warning'})
 												} else if(res.data.message){
-													setStatus({
-														variant: 1 ,
-														message: 'Successfully changed'})
 													handleSnack({message: 'Successfully changed', style: 'success'})
 												}
 											}).catch((err) => {
@@ -146,9 +134,7 @@ const UserForm = () => {
 											})
 									}
 
-									setTimeout(() =>{
-										setStatus({variant: null , message: null})
-									}, 1500)
+
 								}}
 							>
 								{() => {
@@ -276,7 +262,7 @@ const UserForm = () => {
 												<Grid item xs={12} sx={{textAlign:'center', mt:'16px'}}>
 
 													<ButtonInput
-														disabled={!!status.variant}
+
 													>
 														Save Changes
 													</ButtonInput>
