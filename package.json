@@ -4,7 +4,7 @@
   "description": "Final Project - Online shop \"Postil' bedding\"",
   "main": "index.js",
   "scripts": {
-    "start": "npm-run-all -p start:client  start:server",
+    "start": "\"npm install --prefix client && npm install --prefix server && npm run build --prefix mail-client && cp -a mail-client/build/. server/public/\"",
     "start:client": "npm start --prefix client",
     "lint:client": "npm run lint --fix --prefix client",
     "start:server": "npm run server --prefix server",

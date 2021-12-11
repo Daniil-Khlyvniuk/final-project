@@ -21,23 +21,45 @@ const ShoppingBagCard = ({ item , card}) => {
 			})
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
-
-	let Storquantity = parent.variants?.quantity - item.amount
+	let Storquantity
+	if(!card){
+		Storquantity = parent.variants?.quantity - item.amount
+	}
 
 	return (
 		<Box className={classes.container}>
-			<img className={classes.image} src={item?.imageUrls[0]} alt={'image'}/>
+			<img className={classes.image} src={card ? item?.product.imageUrls[0] : item?.imageUrls[0] } alt={'image'}/>
 			<Box className={classes.desc}>
-				<Typography fontSize={24} variant={'h2'}>{parent.name}</Typography>
-				<Typography fontSize={14}>
+				<Typography
+					className={classes.textDesc}
+					fontSize={24}
+					variant={'h2'}>{card ? item.product.title : parent.name}</Typography>
+				{!card && <Typography fontSize={14}>
 					{parent.manufacturer}
+				</Typography> }
+
+				<Typography fontSize={18}>
+					${card ? item.product.currentPrice : item?.currentPrice}
+					{card && ` X ${item.cartQuantity}`}
 				</Typography>
-				<Typography fontSize={18}>${item?.currentPrice}</Typography>
+
+				{card && <>
+					<Typography
+						fontSize={12}
+						className={classes.textDesc}>
+						color : {item.product.color}
+					</Typography>
+					<Typography
+						fontSize={12}
+						className={classes.textDesc}>
+						size : {item.product.size}
+					</Typography>
+				</>}
 
 				{!card && (<>
 					<Box className={classes.specificationsContainer}>
 						<Box className={classes.specifications}>
-							<Typography fontSize={18}>in stock: {Storquantity <= 0 ? 'Out of stok': Storquantity}</Typography>
+							<Typography fontSize={18}>in stock: {Storquantity <= 0 ? 'Out of stock': Storquantity}</Typography>
 						</Box>
 						<Box className={classes.quantityContainer}>
 							<Typography

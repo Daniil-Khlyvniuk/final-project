@@ -337,7 +337,7 @@ exports.getProducts = async (req, res, next) => {
       .populate({
         path: "variants",
         perDocumentLimit: 1,
-      });
+      })
 
     const result = filterOneVariant(products)
 
@@ -564,5 +564,20 @@ exports.updateProduct = (req, res, next) => {
 			message: `Error happened on server: "${ err }" `,
 		})
 	);
+}
+
+exports.getVariants = async (req, res, next) => {
+	try {
+	const parentId = req.params.parentId
+	const variants = await ProductVariant.find({ product: parentId })
+	.populate("color")
+
+		res.json(variants)
+
+	}catch (err) {
+		res.status(400).json({
+			message: `Error happened on server: "${ err }" `,
+		})
+	}
 }
 

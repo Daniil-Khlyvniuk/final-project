@@ -40,6 +40,7 @@ export const useStyles = makeStyles(theme => ({
 		fontWeight: 'bold'
 	},
 	blockHover: {
+		pointerEvents: 'none',
 		aspectRatio: 1,
 		cursor: 'pointer',
 		transition: 'visibility 0s, opacity 0.5s linear',
