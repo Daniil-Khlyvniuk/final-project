@@ -8,7 +8,6 @@ import axios from 'axios'
 // import { useSelector } from 'react-redux'
 // import { ProductSelector } from '../../store/Product'
 
-// eslint-disable-next-line react/prop-types
 const ShoppingBagCard = ({ item , card}) => {
 	const classes = useStyles()
 	const handleShoppingBag = useHandleShoppingBag()
@@ -107,6 +106,7 @@ const ShoppingBagCard = ({ item , card}) => {
 
 ShoppingBagCard.propTypes = {
 	item: PropTypes.object,
+	card: PropTypes.bool
 }
 
 export default ShoppingBagCard
