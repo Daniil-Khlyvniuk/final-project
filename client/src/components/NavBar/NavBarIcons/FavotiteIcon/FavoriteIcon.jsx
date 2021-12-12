@@ -14,7 +14,10 @@ const Favoriteicon = () => {
 		<IconButton
 			aria-label="favorites" title='Favorites'
 			sx={{ padding: 0 }}
+<<<<<<< HEAD
+=======
 			data-testid='navbar-favorite-icon'
+>>>>>>> develop
 		>
 			<Badge badgeContent={favorites?.length} color="success">
 				<NavLink exact to='/favorites' className={classes.navbarLink}>

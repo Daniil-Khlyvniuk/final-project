@@ -11,10 +11,6 @@ const Orders = () => {
 	const userOrders = useSelector(userSelectors.getUserOrders())
 	const isLoading = useSelector(userSelectors.getIsLoading())
 
-
-	// eslint-disable-next-line no-console
-	console.log(userOrders)
-
 	if(isLoading){
 		return <Loader/>
 	}
@@ -58,9 +54,9 @@ const Orders = () => {
 			</Typography>
 			<Divider sx={{mt:'15px'}}/>
 			{/* eslint-disable-next-line no-unused-vars */}
-			{userOrders.map((order) => {
+			{userOrders.map((order , index) => {
 				return (
-					<>
+					<Box key={index}>
 						<Box
 							sx={{display:'flex',
 								justifyContent:'space-between',
@@ -94,14 +90,13 @@ const Orders = () => {
 							</Typography>
 						</Box>
 						<Divider sx={{mt:'10px'}}/>
-						{console.log(order.products[0].product)}
-						{order.products.map((single) => {
+						{order.products.map((single,index) => {
 							return (<ShoppingBagCard
-								key={single._id}
+								key={index}
 								card item={single} />)
 						})}
 						<Divider sx={{mt:'20px'}}/>
-					</>
+					</Box>
 				)
 			})}
 

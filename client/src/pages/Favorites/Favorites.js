@@ -33,7 +33,8 @@ const Favorites = () => {
 						: null
 				}
 			/>
-			<Container maxWidth="lg" sx={{ minWidth: 320 }}>
+			<Container maxWidth={'lg'} sx={{ minWidth: 320
+			}}>
 				{isLoading && <BackdropLoader open={isLoading} />}
 				{!favoriteID.length
 					? <Box style={{ textAlign: 'center', margin: '7rem 0' }}>

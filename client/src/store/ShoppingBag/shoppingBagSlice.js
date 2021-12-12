@@ -13,7 +13,11 @@ const shoppingBagSlice = createSlice({
 		},
 		removeFromShoppingBag(state, action) {
 			state.data = action.payload
+<<<<<<< HEAD
+		}
+=======
 		},
+>>>>>>> develop
 	},
 })
 

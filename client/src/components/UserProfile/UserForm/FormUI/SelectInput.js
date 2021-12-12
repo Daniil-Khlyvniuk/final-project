@@ -11,7 +11,6 @@ const SelectInput = ({ name, options, ...rest }) => {
 	const configSelect = {
 		...field,
 		...rest,
-		select: true,
 		variant: 'outlined',
 		fullWidth: true,
 		value: field.value
@@ -26,7 +25,7 @@ const SelectInput = ({ name, options, ...rest }) => {
 		<Autocomplete
 			{...configSelect}
 			disablePortal
-			id='combo-box-demo'
+			id='combo-box'
 			options={option}
 			getOptionLabel={option => option}
 			onChange={(e, value) => {

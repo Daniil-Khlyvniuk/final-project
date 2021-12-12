@@ -48,6 +48,11 @@ const fetchProductsByNextPage = createAsyncThunk(
 					parseNumbers: true
 				})
 			const res = await productsApi.getFilteredProducts(newQueryString)
+<<<<<<< HEAD
+			// eslint-disable-next-line no-console
+			console.log('www',filters)
+=======
+>>>>>>> develop
 			dispatch(filterOperations.setInfinityScrollHasMore(
 				!res.data || res.data.length < filters.perPage ? false : true
 			))

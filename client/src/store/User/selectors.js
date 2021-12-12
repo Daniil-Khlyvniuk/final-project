@@ -2,6 +2,10 @@ const getData = () => state => state.user.data
 const getIsLoading = () => state => state.user.isLoading
 const getError = () => state => state.user.error
 const getToken = () => state => state.user.token
+<<<<<<< HEAD
+
+export default {getData, getIsLoading, getError, getToken}
+=======
 const getUnregistered = () => state => state.user.unregistered
 const getUserOrders = () => state => state.user.orders
 
@@ -11,3 +15,4 @@ export default {getData,
 	getToken,
 	getUnregistered,
 	getUserOrders}
+>>>>>>> develop

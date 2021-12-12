@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import * as Yup from 'yup'
 import { Container, Grid, Typography, Box } from '@mui/material'
 import { Form, Formik } from 'formik'
@@ -41,8 +41,7 @@ const FORM_VALIDATION = Yup.object().shape({
 })
 
 const UserForm = () => {
-	const { handleSnack } = useSnack()
-	const [status, setStatus] = useState({ variant: null, message: null })
+	const {handleSnack} = useSnack()
 	const dispatch = useDispatch()
 
 	const user = useSelector(userSelectors.getData())
@@ -102,10 +101,7 @@ const UserForm = () => {
 
 										}
 										updateData(update).then(() => {
-											setStatus({
-												variant: 1,
-												message: 'Changes successfully changed'
-											})
+
 											dispatch(userOperations.setNewData(update))
 											handleSnack({ message: 'Successfully changed', style: 'success' })
 										}).catch((err) => {
@@ -115,12 +111,9 @@ const UserForm = () => {
 									}
 
 
-									if (values.oldPass.length > 2 && values.password === '') {
-										setStatus({
-											variant: 2,
-											message: 'Enter new password'
-										})
-										handleSnack({ message: 'Enter new password', style: 'warning' })
+									if(values.oldPass.length> 2 && values.password === ''){
+
+										handleSnack({message: 'Enter new password', style: 'warning'})
 										// eslint-disable-next-line max-len
 									} else if (values.oldPass.length > 2 && values.password.length > 2) {
 
@@ -130,19 +123,11 @@ const UserForm = () => {
 										}
 										// eslint-disable-next-line no-unused-vars,no-mixed-spaces-and-tabs
 										updatePassword(passwords)
-											.then((res) => {
-												if (res.data.password) {
-													setStatus({
-														variant: 2,
-														message: 'Wrong Password'
-													})
-													handleSnack({ message: 'Wrong Password', style: 'warning' })
-												} else if (res.data.message) {
-													setStatus({
-														variant: 1,
-														message: 'Successfully changed'
-													})
-													handleSnack({ message: 'Successfully changed', style: 'success' })
+											.then((res)=>{
+												if(res.data.password){
+													handleSnack({message: 'Wrong Password', style: 'warning'})
+												} else if(res.data.message){
+													handleSnack({message: 'Successfully changed', style: 'success'})
 												}
 											}).catch((err) => {
 												const message = err.response.data.password ? err.response.data.password : 'Something wrong with your data'
@@ -150,9 +135,7 @@ const UserForm = () => {
 											})
 									}
 
-									setTimeout(() => {
-										setStatus({ variant: null, message: null })
-									}, 1500)
+
 								}}
 							>
 								{() => {
@@ -251,6 +234,7 @@ const UserForm = () => {
 														name='oldPass'
 														label='Old Password'
 														type='password'
+														autoComplete='on'
 
 													/>
 												</Grid>
@@ -260,6 +244,7 @@ const UserForm = () => {
 														name="password"
 														label="Password"
 														type='password'
+														autoComplete='on'
 
 													/>
 												</Grid>
@@ -271,6 +256,7 @@ const UserForm = () => {
 														name="confirmPass"
 														label="Confirm Password"
 														type='password'
+														autoComplete='on'
 													/>
 												</Grid>
 
@@ -303,8 +289,7 @@ const UserForm = () => {
 												<Grid item xs={12} sx={{ textAlign: 'center', mt: '16px' }}>
 
 													<ButtonInput
-														disabled={!!status.variant}
-														data-testid="submit"
+
 													>
 														Save Changes
 													</ButtonInput>

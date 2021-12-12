@@ -55,17 +55,19 @@ const CartModal = () => {
 								</Button>
 							</Link>
 							<Box>
-								{shoppingBag?.map((item, key) => 
+								{shoppingBag?.map((item, index) =>
 									(
 										// eslint-disable-next-line react/jsx-key
-										<Box sx={{
-											position: 'relative',
-										}}>
+										<Box
+											key={index}
+											sx={{
+												position: 'relative',
+											}}>
 											<CardInModal
 												price={item?.currentPrice + '.00'}
 												image={'/' + item.imageUrls[0]}
 												title={item?.title}
-												key={key}
+
 												color={item?.color?.name}
 												amount={item?.amount}
 											/>

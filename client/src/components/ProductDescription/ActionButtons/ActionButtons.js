@@ -9,6 +9,7 @@ import { favoritesOperations, favoritesSelectors } from '../../../store/Favorite
 import LoginModal from '../../Modal/LoginModal/LoginModal'
 import useHandleShoppingBag from '../../../utils/customHooks/useHandleShoppingBag'
 import { userSelectors } from '../../../store/User'
+import useSnack from '../../../utils/customHooks/useSnack'
 
 const ActionButtons = () => {
 	// eslint-disable-next-line no-unused-vars
@@ -23,6 +24,7 @@ const ActionButtons = () => {
 	const allSizes = useSelector(ProductSelector.allSizes())
 	const allColors = useSelector(ProductSelector.allColors())
 	const parent = useSelector(ProductSelector.getParent())
+	const {handleSnack} = useSnack()
 
 
 
@@ -51,7 +53,7 @@ const ActionButtons = () => {
 					// eslint-disable-next-line max-len
 					const activeColorName = allColors.filter(i => i._id === activeProduct.color)
 					// eslint-disable-next-line no-console
-					console.log('ActiveSizeName',activeColorName)
+
 					handleShoppingBag.add({
 						...activeProduct,
 						size:activeSizeName[0].size.name,
@@ -60,6 +62,7 @@ const ActionButtons = () => {
 						description: parent.description
 
 					})
+					handleSnack({message: 'Successfully added to shopping bug', style: 'success'})
 				}}
 			>
 				ADD TO BAG
