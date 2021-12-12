@@ -7,7 +7,7 @@ const RightMenu = ({tabs}) => {
 
 	return (
 		<div>
-			{tabs && tabs.map(tab => {
+			{tabs && tabs.map((tab,index) => {
 				return (
 					<Box key={index}>
 						<Typography

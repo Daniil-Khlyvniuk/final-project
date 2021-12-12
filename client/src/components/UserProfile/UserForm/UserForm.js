@@ -234,6 +234,7 @@ const UserForm = () => {
 														name='oldPass'
 														label='Old Password'
 														type='password'
+														autoComplete='on'
 
 													/>
 												</Grid>
@@ -243,6 +244,7 @@ const UserForm = () => {
 														name="password"
 														label="Password"
 														type='password'
+														autoComplete='on'
 
 													/>
 												</Grid>
@@ -254,6 +256,7 @@ const UserForm = () => {
 														name="confirmPass"
 														label="Confirm Password"
 														type='password'
+														autoComplete='on'
 													/>
 												</Grid>
 
