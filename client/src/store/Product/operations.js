@@ -4,7 +4,13 @@ import productsAPI from '../../utils/API/productsAPI'
 const fetchProductUrl = createAsyncThunk(
 	'product/getProduct',
 	async (productId) => {
+<<<<<<< HEAD
+
 		const response = await productsAPI.getOneProduct(productId)
+
+=======
+		const response = await productsAPI.getOneProduct(productId)
+>>>>>>> develop
 		return response.data
 	}
 )

@@ -4,7 +4,11 @@ import { IconButton } from '@mui/material'
 import { useStyles } from './styles'
 import { useDispatch } from 'react-redux'
 import modalActions from '../../../../store/Modal'
+<<<<<<< HEAD
+import LoginModal from '../../../Modal/LoginModal'
+=======
 import LoginModal from '../../../Modal/LoginModal/LoginModal'
+>>>>>>> develop
 
 const LoginIcon = () => {
 	const classes = useStyles()
@@ -17,7 +21,10 @@ const LoginIcon = () => {
 			title='Login'
 			sx={{ padding: 0 }}
 			onClick={() => handleOpen(<LoginModal />)}
+<<<<<<< HEAD
+=======
 			data-testid='navbar-login-icon'
+>>>>>>> develop
 		>
 			<PersonOutlineIcon className={classes.navbarLink} />
 		</IconButton>

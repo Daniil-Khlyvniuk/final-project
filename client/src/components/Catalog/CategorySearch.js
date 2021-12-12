@@ -3,7 +3,6 @@ import {Box} from '@mui/material'
 import categoriesAPI from '../../utils/API/categoriesApi'
 import CategorySearchItem from './CategorySearchItem'
 
-
 const CategorySearch = () => {
 
 	const [catalogs, setCatalogs] = useState([])
