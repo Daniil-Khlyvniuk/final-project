@@ -19,7 +19,6 @@ export const useStyles = makeStyles({
 			columnGap: '5%',
 			rowGap: 1,
 			gridTemplateColumns: '20% 75%',
-			// width: '852px''
 		}
 	},
 	leftSide: {
@@ -33,16 +32,6 @@ export const useStyles = makeStyles({
 	rightSide: {
 		margin: 'auto',
 		width: '100%'
-		// ['@media(min-width: 720px)']: {
-		// 	width: '400px',
-		// },
-		// ['@media(min-width: 860px)']: {
-		// 	width: '552px',
-		// },
-		// ['@media(min-width: 1180px)']: {
-		// 	width: '852px',
-		// }
 	}
-
 })
 

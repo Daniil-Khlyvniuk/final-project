@@ -1,31 +1,32 @@
-import React, { useEffect } from 'react'
 import { Container } from '@mui/material'
-import CardList from '../../components/CardList/CardList'
-import Popular from '../../components/Popular/Popular'
-import Carousel from '../../components/Carousel/Carousel'
-import { slidesOperations, slidesSelectors } from '../../store/Slider'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import CardList from '../../components/CardList/CardList'
+import Carousel from '../../components/Carousel/Carousel'
+import Popular from '../../components/Popular/Popular'
+import { slidesOperations, slidesSelectors } from '../../store/Slider'
 import UseSeo from '../../utils/customHooks/useSeo'
+
 
 const Main = () => {
 	const slides = useSelector(slidesSelectors.getSlides())
 
 	const dispatch = useDispatch()
-	useEffect( () =>  {
+	useEffect(() => {
 		dispatch(slidesOperations.fetchSliders())
-	}, [dispatch])
+	}, [ dispatch ])
 
-	return (	
+	return (
 		<>
-			<UseSeo 
-				title = {'Bedding Shop'}
-				description = {'Bedding Shop, all for '}
-				keywords = {'bedroom, Kitchen, Loungewear, bedding store, luxury bedding sets, king size bedspreads, king bed sheets, comforters on sale'}
+			<UseSeo
+				title={ 'Bedding Shop' }
+				description={ 'Bedding Shop, all for ' }
+				keywords={ 'bedroom, Kitchen, Loungewear, bedding store, luxury bedding sets, king size bedspreads, king bed sheets, comforters on sale' }
 			/>
-			<Container maxWidth="lg" sx={{ minWidth: 320 }}>
-				<Carousel slides={slides} main={true}/>
+			<Container maxWidth="lg" sx={ { minWidth: 320 } }>
+				<Carousel slides={ slides } main={ true } />
 				<CardList />
-				<Popular/>
+				<Popular />
 			</Container>
 		</>
 	)

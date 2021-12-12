@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 import useOtherColors from './useOtherColors'
 
 
-// eslint-disable-next-line react/prop-types
 const OtherVariants = ({ parentId, currColor }) => {
 	const otherVariants = useOtherColors(parentId)
 
@@ -17,7 +16,7 @@ const OtherVariants = ({ parentId, currColor }) => {
 				to={ `/product-details/${ variant.varId }` }>
 				<Box
 					sx={ {
-						p: .5,
+						p: .2,
 						clipPath: 'circle(50%)',
 						bgcolor: () => isCurrentColor ? '#cfcfcfce' : '#3f3f3f'
 					} }>
