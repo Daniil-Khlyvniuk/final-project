@@ -5,7 +5,7 @@ import Popular from '../../components/Popular/Popular'
 import Carousel from '../../components/Carousel/Carousel'
 import { slidesOperations, slidesSelectors } from '../../store/Slider'
 import { useDispatch, useSelector } from 'react-redux'
-import { Helmet } from 'react-helmet-async'
+import UseSeo from '../../utils/customHooks/useSeo'
 
 const Main = () => {
 	const slides = useSelector(slidesSelectors.getSlides())
@@ -17,12 +17,11 @@ const Main = () => {
 
 	return (	
 		<>
-			<Helmet>
-				<html lang='en'/>
-				<title>Bedding Shop</title>
-				<meta name='description' content='Bedding Shop'/>
-				<meta name='keywords' content='bedroom, Kitchen, Loungewear, bedding store, luxury bedding sets, king size bedspreads, king bed sheets, comforters on sale' />
-			</Helmet>
+			<UseSeo 
+				title = {'Bedding Shop'}
+				description = {'Bedding Shop, all for '}
+				keywords = {'bedroom, Kitchen, Loungewear, bedding store, luxury bedding sets, king size bedspreads, king bed sheets, comforters on sale'}
+			/>
 			<Container maxWidth="lg" sx={{ minWidth: 320 }}>
 				<Carousel slides={slides} main={true}/>
 				<CardList />

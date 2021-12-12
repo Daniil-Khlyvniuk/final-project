@@ -7,7 +7,6 @@ import PropTypes from 'prop-types'
 
 const StyledMenuItem = styled(MenuItem )(() => ({
 	padding: '5px 10px 5px 40px',
-	// textTransform: 'capitalize',
 	boxShadow: 'none'
 }))
 

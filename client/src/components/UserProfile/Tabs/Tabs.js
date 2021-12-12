@@ -48,9 +48,10 @@ export default function BasicTabs() {
 	}
 
 	return (
-		<Box sx={{ width: '100%', my:'15px' }}>
+		<Box sx={{ width: '100%', my:'15px' ,  }}>
 			<Box sx={{ borderBottom: 1, borderColor: 'divider',
 				'&.MuiBox-root':{display:'flex', justifyContent:'center',
+
 					['@media (max-width:360px)']: {
 						width: '260px',
 						flexDirection:'column'
@@ -74,7 +75,12 @@ export default function BasicTabs() {
 				<Orders/>
 			</TabPanel>
 			<TabPanel value={value} index={2}>
-				<Favorites/>
+				<Box sx={{display: 'flex',
+					alignItems:'center',
+					justifyContent: 'center'}}>
+					<Favorites />
+				</Box>
+
 			</TabPanel>
 		</Box>
 	)

@@ -6,12 +6,13 @@ import { useSelector, useDispatch } from 'react-redux'
 import { modalSelectors } from './store/Modal'
 import useAuth from './utils/customHooks/useAuth'
 import ScrollButton from './components/ScrollButton/ScrollButton'
-
+import RootSnackBar from './components/UI/RootSnackBar'
 import { settingsOperations } from './store/Settings'
 
+import UseScrollToTop from './utils/customHooks/useScrollToTop'
 
 const App = () => {
-	const {checkToken} = useAuth()
+	const { checkToken } = useAuth()
 	const dispatch = useDispatch()
 	const modal = useSelector(modalSelectors.checkOpen())
 
@@ -24,11 +25,16 @@ const App = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
+	const exeptionScroll = ['/shop/catalog', '/search']
+
 	return (
 		<div className={'App'}>
 			<Header />
-			<AppRoutes />
+			<UseScrollToTop exeptions={exeptionScroll} >
+				<AppRoutes />
+			</UseScrollToTop>
 			<Footer />
+			<RootSnackBar />
 			<ScrollButton />
 			{modal}
 		</div>

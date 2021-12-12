@@ -7,8 +7,9 @@ import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import { useStyles } from './styles'
 import Step1 from './Step1'
-import Checkout from '../../pages/Cart/checkout'
+import Checkout from '../PayCard/checkout'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
+import CheckoutForm from '../PayCard/CheckoutForm'
 
 
 const steps = ['Shopping Bag', 'Shipping Details', 'Payment Options']
@@ -17,7 +18,6 @@ const HorizontalLinearStepper = () => {
 	const classes = useStyles()
 	const [activeStep, setActiveStep] = React.useState(0)
 	const [skipped, setSkipped] = React.useState(new Set())
-
 	const isStepSkipped = (step) => {
 		return skipped.has(step)
 	}
@@ -87,18 +87,31 @@ const HorizontalLinearStepper = () => {
 						<Box sx={{ flex: '1 1 auto' }} />
 
 						<Button variant={'contained'} onClick={handleNext} style={{width: '200px', marginRight: '4rem'}}>
-							{activeStep === 0 ? 'Buy' : 'Next'}
+							NEXT
 						</Button>
 					</Box>
 				</React.Fragment>
 			)}
-			{/*{activeStep === 1 ? <Checkout /> : null}*/}
 			{activeStep === 1 && (
 				<React.Fragment>
 					<Typography
 						sx={{ mt: 2, mb: 1 }}
 					>
-						{activeStep === 1 && <Checkout />}
+						{activeStep === 1 &&<CheckoutForm
+							handleBack={handleBack}
+							handleNext={handleNext} />}
+					</Typography>
+					<Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+						<Box sx={{ flex: '1 1 auto' }} />
+					</Box>
+				</React.Fragment>
+			)}
+			{activeStep === 2 && (
+				<React.Fragment>
+					<Typography
+						sx={{ mt: 2, mb: 1 }}
+					>
+						{activeStep === 2 && <Checkout />}
 					</Typography>
 					<Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
 						<Button

@@ -2,37 +2,31 @@ import React, { useState } from 'react'
 import { useFormStyle } from '../../../utils/customHooks/useFormStyle'
 import { Field, Form, Formik } from 'formik'
 import { LOGIN_SCHEMA } from '../setting/Schemes'
-import { Box, Typography, Button, Switch } from '@mui/material'
+import { Box, Typography, Button } from '@mui/material'
 import { Link } from 'react-router-dom'
-import CustomInput from '../setting/CustomInput'
-
+import CustomInput from '../setting/customElements/CustomInput'
+import CustomSwitch from '../setting/customElements/CustomSwitch'
 import useAuth from '../../../utils/customHooks/useAuth'
-
 
 const LoginForm = () => {
 	const classes = useFormStyle()
 	const [serverResult, setServerResult] = useState(null)
-	const {login} = useAuth()
+	const { login } = useAuth()
 
 	return (
-		<Formik 
-			initialValues = {{
+		<Formik
+			initialValues={{
 				loginOrEmail: '',
 				password: '',
 				rememberMe: false,
 			}}
-			validationSchema = {LOGIN_SCHEMA}
+			validationSchema={LOGIN_SCHEMA}
 
-			onSubmit = {async values => {
+			onSubmit={values => {
 				try {
-					const res = await login(values)
-					if(res)
-					{
-						setServerResult({ success: 'You successfully Logged In' })
-					}
+					login(values)
 				}
 				catch (err) {
-				// setServerResult({ error: Object.values(err.response.data)[0] })
 					setServerResult({ error: 'wrong login or password' })
 				}
 			}}
@@ -45,37 +39,53 @@ const LoginForm = () => {
 						<Field
 							data-testid="loginOrEmail"
 							component={CustomInput}
+							label="Login or Email"
 							name="loginOrEmail"
 							type="text"
-							placeholder="Login or Email"
 						/>
 						<Field
 							data-testid="password"
 							component={CustomInput}
+							label="Password"
 							name="password"
 							type="password"
-							placeholder="Password"
 						/>
-						<Box 
+						<Box
 							sx={{
-								display: 'flex',
-								alignItems: 'center',
 								marginTop: '25px',
-								textTransform: 'capitalize',
-								padding: '5px',
-							}}>
-							<Typography>remember me</Typography>
-							<Field
-								component={Switch}
+								paddingLeft: '15px',
+							}}
+						>
+							<CustomSwitch
+								data-testid="rememberMe"
 								name="rememberMe"
-								id="rememberMe"
-								value={true}
-								onChange={formikProps.handleChange}
+								label={
+									<Typography
+										component={'span'}
+										sx={{
+											fontSize: '14px',
+											fontWeight: 300,
+											lineHeight: '20px',
+										}}
+									>Remember me</Typography>
+								}
+								styles={{
+									'& .MuiSwitch-switchBase': {
+										'&.Mui-checked': {
+											color: '#6FB7AC',
+											'& + .MuiSwitch-track': {
+												backgroundColor: '#6FB7AC',
+											}
+										},
+									}
+								}
+								}
 							/>
 						</Box>
 
 						<p className={classes.policy}>By signing up you agree to
-							<Link to="/termsOfService"> Terms of Service </Link>  and <Link to="/privacypolicy"> Privacy Policy </Link>
+							<Link to="/info/terms-of-service"> Terms of Service </Link>
+							and <Link to="/info/privacy-policy"> Privacy Policy </Link>
 						</p>
 
 						{serverResult && serverResult.error && (
@@ -92,6 +102,7 @@ const LoginForm = () => {
 
 						<Box sx={{ display: 'flex', justifyContent: 'center' }}>
 							<Button
+								data-testid="button"
 								type='submit'
 								variant="contained"
 								direction="form"
@@ -103,10 +114,6 @@ const LoginForm = () => {
 								log in
 							</Button>
 						</Box>
-
-						<p className={classes.alreadyIn}>
-							<Link to="/#">FORGOT PASSWORD?</Link>
-						</p>
 					</Form>
 				)
 			}}

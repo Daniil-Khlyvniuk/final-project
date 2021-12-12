@@ -4,7 +4,11 @@ import productsOperations from './operations'
 const {
 	fetchProducts,
 	fetchProductsByFilter,
+<<<<<<< HEAD
 	fetchProductsByNextPage
+=======
+	fetchProductsByNextPage,
+>>>>>>> develop
 } = productsOperations
 
 const initialState = {
@@ -24,6 +28,14 @@ const productsSlice = createSlice({
 			state.data = action.payload
 			state.isLoading = false
 		},
+<<<<<<< HEAD
+=======
+		addProductsToStore(state, action)
+		{
+			state.data = [...state.data, ...action.payload]
+			state.isLoading = false
+		},
+>>>>>>> develop
 		addRelatedId(state, action) {
 			const item = action.payload
 			if (!state.relatedArray.find((id) => item === id)) {
@@ -62,10 +74,13 @@ const productsSlice = createSlice({
 
 		//for catalog page filters
 		[fetchProductsByFilter.fulfilled]: (state, action) => {
+<<<<<<< HEAD
 			// eslint-disable-next-line no-console
 			console.log('productsByFilter', action.payload)
 
 			// state.catalog = [...state.catalog, ...action.payload]
+=======
+>>>>>>> develop
 			state.catalog = action.payload
 			state.isLoading = false
 			state.error = null
@@ -81,9 +96,12 @@ const productsSlice = createSlice({
 
 		//for catalog next page same filters
 		[fetchProductsByNextPage.fulfilled]: (state, action) => {
+<<<<<<< HEAD
 			// eslint-disable-next-line no-console
 			console.log('productsNextByFilter', action.payload)
 
+=======
+>>>>>>> develop
 			state.catalog = [...state.catalog, ...action.payload]
 			state.isLoading = false
 			state.error = null
@@ -101,6 +119,10 @@ const productsSlice = createSlice({
 
 export const {
 	setAllProducts,
+<<<<<<< HEAD
+=======
+	addProductsToStore,
+>>>>>>> develop
 	addRelatedId,
 	setRelatedProductsList,
 } = productsSlice.actions

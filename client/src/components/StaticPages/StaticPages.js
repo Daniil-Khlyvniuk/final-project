@@ -22,7 +22,6 @@ const StaticPages = () => {
 				setLoading(false)
 			})
 	}, [page])
-
 	return (
 		<Container>
 			{loading && <Loader/>}

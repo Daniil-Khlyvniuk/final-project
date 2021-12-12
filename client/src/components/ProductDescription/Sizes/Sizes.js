@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useState} from 'react'
 import {Tab, Tabs} from '@mui/material'
 import {useSelector} from 'react-redux'
 import {ProductSelector} from '../../../store/Product'
@@ -9,18 +9,14 @@ const Sizes = () => {
 
 	const history = useHistory()
 
-	const [activeSize , setActiveSize ] = useState(null)
 
 	const activeProduct = useSelector(ProductSelector.getProduct())
 	const allSizes = useSelector(ProductSelector.allSizes())
 	const variants = useSelector(ProductSelector.allVariants())
 	const activeColor = useSelector(ProductSelector.activeColor())
 
+	const [activeSize , setActiveSize ] = useState(activeProduct.size)
 
-	useEffect(() => {
-		if(activeProduct){
-			setActiveSize(activeProduct.size)
-		}},[activeProduct])
 
 	const handleActiveSize = (event,newActiveSize) => {
 		setActiveSize(newActiveSize)
@@ -33,9 +29,9 @@ const Sizes = () => {
 	return (
 		<>
 
-			{activeProduct &&
+			{activeProduct && activeSize &&
 		<Tabs
-			value={activeSize}
+			value={ activeSize}
 			onChange={handleActiveSize}
 			extcolor='primary'
 			indicatorColor="primary"

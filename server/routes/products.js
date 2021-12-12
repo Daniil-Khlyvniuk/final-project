@@ -14,7 +14,8 @@ const {
   searchProducts,
   getVariantsByProductId,
   getMinMaxPrice,
-	decrementVariantQuantity
+	decrementVariantQuantity,
+	getVariants
 } = require("../controllers/products");
 
 // @route   POST /products/images
@@ -45,6 +46,7 @@ router.put(
 // @desc    GET existing products
 // @access  Public
 router.get("/", getProducts);
+router.get("/variants/:parentId", getVariants);
 router.get("/minMaxPrice", getMinMaxPrice);
 router.get("/filter", getProductsFilterParams);
 router.get("/info/:kindOfInfo/:productId", getProductsInfo);
