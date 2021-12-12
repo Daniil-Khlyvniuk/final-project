@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { Box, Button, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
-// import cartAPI from '../../utils/API/cartAPI'
+import cartAPI from '../../utils/API/cartAPI'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
 import { userSelectors } from '../../store/User'
 import ordersAPI from '../../utils/API/ordersAPI'
 
 const CompletePay = () => {
-	// const newOrder = cartAPI.getCart()
+	const newOrder = cartAPI.getCart()
 	// const Order = ordersAPI.placeOrder()
 	const OrderNum = Date.now()
 	const handleShoppingBag = useHandleShoppingBag()
@@ -17,24 +17,17 @@ const CompletePay = () => {
 	const [BuyGoods, setBuyGoods] = useState({})
 	const shoppingBag = JSON.parse(localStorage.getItem('shoppingBag') || '[]')
 	let unregistered =  JSON.parse(localStorage.getItem('Unregistered')|| '[]')
-	
 	const user = useSelector(userSelectors.getData())
 	const isLoggedIn = !!user
 
 
-	useEffect(() => {
+	useEffect( () => {
 		axios('/api/customers/customer')
 			.then(res =>setUserData(res.data))
 		setBuyGoods(shoppingBag)
-		return handleShoppingBag.AfterBuy()
+		return cartAPI.addOrder(newOrder) || handleShoppingBag.AfterBuy()
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
-
-	// useEffect(()=> {
-	// 	return  cartAPI.addOrder(newOrder)
-	// // eslint-disable-next-line react-hooks/exhaustive-deps
-	// },[])
-
 
 	let customer = isLoggedIn ? {...userData} : unregistered
 
@@ -42,10 +35,10 @@ const CompletePay = () => {
 		localStorage.setItem('Unregistered','[]')
 	}
 	const order = {
-		products: {
+		products: [{
 			cartQuantity: BuyGoods.length,
 			product: BuyGoods,
-		},
+		}],
 		canceled: false,
 		customerId: customer?._id,
 		deliveryAddress: {
@@ -66,9 +59,9 @@ const CompletePay = () => {
 				<p>{Other details about order in your HTML}</p>`
 	}
 
-	localStorage.setItem('ORDER', JSON.stringify(order))
+
 	const sendOrder = () => {
-		return ordersAPI.placeOrder(order)
+		return ordersAPI.placeOrder(order) || localStorage.setItem('ORDER', JSON.stringify(order))
 	}
 
 	sendOrder()
