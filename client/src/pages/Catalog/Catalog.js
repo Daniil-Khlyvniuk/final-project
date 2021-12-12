@@ -7,32 +7,33 @@ import ProductsCatalog from '../../components/Catalog/Catalog'
 import CategorySearch from '../../components/Catalog/CategorySearch'
 import HeadSearch from '../../components/Catalog/HeadSearch'
 import LeftSide from '../../components/Catalog/LeftSide'
-import { Helmet } from 'react-helmet-async'
+import UseSeo from '../../utils/customHooks/useSeo'
 
 const Catalog = () => {
 	const {onLoadingPage, restoreDefaults} = useFilterHandler()
 	const classes = useStyles()
 	
+	// useEffect(() => {
+	// 	window.scrollTo(0, 0)
+	// }, [])
+	
 	//parse url on first page loading
 	useEffect(() => {
 		onLoadingPage()
-
 		return () => {
 			//restore params to parse query string after return on page
 			restoreDefaults()
 		}
-
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[])
 
 	return (
 		<>
-			<Helmet>
-				<html lang='en'/>
-				<title>Catalog</title>
-				<meta name='description' content='Catalog Bed Linens'/>
-				<meta name='keywords' content='Bedroom, Bed linen, Kitchen, Bathroom, Loungewear, Towels, Blanket, Pillowcase, Sheet, Bathrobe, Sale bed linen ' />
-			</Helmet>
+			<UseSeo 
+				title = {'Product Catalog Page'}
+				description = {'Product catalog'}
+				keywords = {'product catalog, postil catalog, bed linen catalog'}
+			/>
 			<Container maxWidth="lg">
 				<Grid className={classes.MainGrd}>
 					<Grid item className={classes.leftSide}>

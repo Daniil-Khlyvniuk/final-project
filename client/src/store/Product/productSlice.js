@@ -20,6 +20,17 @@ const productSlice = createSlice({
 	reducers: {
 		clearSizes(state) {
 			state.allSizes = null
+<<<<<<< HEAD
+=======
+		},
+		clearActiveProduct(state){
+			state.activeProduct = null
+			state.parent = null,
+			state.variants= null,
+			state.activeColor= null,
+			state.allColors= null,
+			state.allSizes= null
+>>>>>>> develop
 		}
 	},
 	extraReducers: {
@@ -33,6 +44,10 @@ const productSlice = createSlice({
 			state.isLoading = true
 		},
 		[fetchProductUrl.rejected]: (state) => {
+<<<<<<< HEAD
+=======
+			state.isLoading = false
+>>>>>>> develop
 			state.hasError = true
 		},
 		[fetchAllColors.fulfilled]: (state, action) => {
@@ -40,9 +55,16 @@ const productSlice = createSlice({
 			state.isLoading = false
 		},
 		[fetchAllColors.pending]: (state) => {
+<<<<<<< HEAD
 			state.isLoading = true
 		},
 		[fetchAllColors.rejected]: (state) => {
+=======
+			state.isLoading = false
+		},
+		[fetchAllColors.rejected]: (state) => {
+			state.isLoading = false
+>>>>>>> develop
 			state.hasError = true
 		},
 		[fetchSizes.fulfilled]: (state, action) => {
@@ -50,9 +72,16 @@ const productSlice = createSlice({
 			state.isLoading = false
 		},
 		[fetchSizes.pending]: (state) => {
+<<<<<<< HEAD
 			state.isLoading = true
 		},
 		[fetchSizes.rejected]: (state) => {
+=======
+			state.isLoading = false
+		},
+		[fetchSizes.rejected]: (state) => {
+			state.isLoading = false
+>>>>>>> develop
 			state.hasError = true
 		},
 		[fetchAllVariants.fulfilled]: (state, action) => {
@@ -60,13 +89,24 @@ const productSlice = createSlice({
 			state.isLoading = false
 		},
 		[fetchAllVariants.pending]: (state) => {
+<<<<<<< HEAD
 			state.isLoading = true
 		},
 		[fetchAllVariants.rejected]: (state) => {
+=======
+			state.isLoading = false
+		},
+		[fetchAllVariants.rejected]: (state) => {
+			state.isLoading = false
+>>>>>>> develop
 			state.hasError = true
 		},
 	}
 })
 
+<<<<<<< HEAD
 export const { clearSizes } = productSlice.actions
+=======
+export const { clearSizes, clearActiveProduct } = productSlice.actions
+>>>>>>> develop
 export default productSlice.reducer

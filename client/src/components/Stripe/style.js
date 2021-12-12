@@ -6,7 +6,7 @@ export const button = {
 	borderRadius: '4px',
 	border: 'none',
 	position: 'absolute',
-	left: '77%',
+	left: 'calc(100% - 300px)',
 	top: '102%',
 	cursor: 'pointer',
 }

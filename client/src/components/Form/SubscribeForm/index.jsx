@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
 import { Formik, Form, Field } from 'formik'
 import { Button, Alert } from '@mui/material'
-
 import { SUBSCRIBE_SCHEMA } from '../setting/Schemes'
-import TextInput from '../setting/TextInput'
-
+import TextInput from '../setting/customElements/TextInput'
+import useSnack from '../../../utils/customHooks/useSnack'
 import { addSubscribe } from '../../../utils/API/subscribersAPI'
-
 import { styled } from '@mui/material/styles'
 
 const StyledForm = styled(Form)(() => ({
@@ -19,16 +17,19 @@ const StyledAlert = styled(Alert)(() => ({
 }))
 
 const SubscribeForm = () => {
+	const { handleSnack } = useSnack()
 	const [subscribeStatus, setSubscribeStatus] = useState(null)
 	const handleSubmit = async ({ email }, formikFunctions) => {
 		try {
 			const res = await addSubscribe(email)
 			if (res.status === 200) {
 				setSubscribeStatus({ success: 'You successfully subscribed!' })
+				handleSnack({ message: 'You successfully subscribed', style: 'success' })
 			}
 		}
 		catch (er) {
 			setSubscribeStatus({ error: er.response.data.message })
+			handleSnack({ message: er.response.data.message, style: 'warning' })
 		}
 		formikFunctions.resetForm()
 		setTimeout(() => setSubscribeStatus(null), 5000)
@@ -44,6 +45,7 @@ const SubscribeForm = () => {
 				<>
 					<StyledForm noValidate>
 						<Field
+							data-testid="email"
 							component={TextInput}
 							type="email"
 							placeholder="e-mail"
@@ -56,6 +58,7 @@ const SubscribeForm = () => {
 						/>
 
 						<Button
+							data-testid="button"
 							type='submit'
 							variant="contained"
 							disabled={

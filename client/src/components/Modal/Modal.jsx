@@ -28,6 +28,10 @@ const BasicModal = ({ style, body }) => {
 							onClick={handleClose}
 							aria-label="close"
 							sx={{ padding: 0 }}
+<<<<<<< HEAD
+=======
+							data-testid='close-button'
+>>>>>>> develop
 						>
 							<CloseIcon />
 						</IconButton>

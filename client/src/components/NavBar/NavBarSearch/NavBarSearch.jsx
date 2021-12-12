@@ -35,12 +35,20 @@ const HeaderSearch = () => {
 				// eslint-disable-next-line no-console
 				console.error(err)
 				setOptions([])
+<<<<<<< HEAD
+=======
+				setIsLoading(false)
+>>>>>>> develop
 			}
 		}, 700)
 	}
 
 	return (
+<<<<<<< HEAD
 		<StyledBox>
+=======
+		<StyledBox data-testid='navbar-search'>
+>>>>>>> develop
 			<Search>
 				<SearchIconWrapper>
 					<SearchIcon />
@@ -106,19 +114,31 @@ const HeaderSearch = () => {
 									<Grid item xs zeroMinWidth>
 										<Typography
 											variant='menuBold'
+<<<<<<< HEAD
 											sx={{ display: 'block' }}
+=======
+											sx={{ display: 'block', color: '#373F41' }}
+>>>>>>> develop
 										>
 											{option.name}
 										</Typography>
 										<Typography
 											variant='footerTextMedium'
+<<<<<<< HEAD
 											sx={{ display: 'block' }}
+=======
+											sx={{ display: 'block', color: '#373F41' }}
+>>>>>>> develop
 										>
 											({option.variants.itemNo})
 										</Typography>
 										<Typography
 											variant='menuBold'
+<<<<<<< HEAD
 											sx={{ display: 'block' }}
+=======
+											sx={{ display: 'block', color: '#373F41' }}
+>>>>>>> develop
 										>
 											{'$' + option.variants.currentPrice}
 										</Typography>

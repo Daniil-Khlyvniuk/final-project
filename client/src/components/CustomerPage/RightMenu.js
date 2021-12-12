@@ -1,24 +1,21 @@
 import React from 'react'
 import AccordionProduct from '../ProductDescription/Accordion/Accordion'
-import {Divider, Typography} from '@mui/material'
+import {Divider, Typography, Box} from '@mui/material'
 import PropTypes from 'prop-types'
 
-
-// eslint-disable-next-line react/prop-types
 const RightMenu = ({tabs}) => {
 
 	return (
 		<div>
-			{/* eslint-disable-next-line react/prop-types */}
-			{tabs && tabs.map(tab => {
+			{tabs && tabs.map((tab,index) => {
 				return (
-					<>
+					<Box key={index}>
 						<Typography
 							id={tab.id}
 							color={'rgba(140, 140, 140, 1)'}
 							fontSize={'16px'}
 							fontWeight={'700'}
-							sx={{lineHeight:'24px',textTransform:'uppercase', paddingY:'10px',  '&:first-child':{padding:'0 0 10px 0'}}}
+							sx={{lineHeight:'24px',textTransform:'uppercase', paddingY:'10px',  ':first-child':{padding:'0 0 10px 0'}}}
 						>
 							{!!tab.subject && tab.tabTitle}
 						</Typography>
@@ -32,9 +29,9 @@ const RightMenu = ({tabs}) => {
 						{!!tab.subject && <Divider/>}
 						{
 							tab.subject &&
-					tab.subject.map(item => {
+					tab.subject.map((item, index) => {
 						return (
-							<div key={item.title}>
+							<div key={index}>
 								<AccordionProduct
 									expanded={true}
 									key={item.title}
@@ -44,7 +41,7 @@ const RightMenu = ({tabs}) => {
 							</div>)
 					})
 						}
-					</>
+					</Box>
 				)
 			})}
 		</div>

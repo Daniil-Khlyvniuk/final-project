@@ -1,0 +1,610 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test Footer component Footer Snapshot test 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="MuiBox-root css-1hozi5r"
+      >
+        <div
+          class="MuiContainer-root MuiContainer-maxWidthLg css-aspcf0-MuiContainer-root"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-undefined makeStyles-blockStyle-4 css-11lq3yg-MuiGrid-root"
+          >
+            <span
+              class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorInherit css-62e83j-MuiCircularProgress-root"
+              role="progressbar"
+              style="width: 40px; height: 40px;"
+            >
+              <svg
+                class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+                viewBox="22 22 44 44"
+              >
+                <circle
+                  class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+                  cx="44"
+                  cy="44"
+                  fill="none"
+                  r="20.2"
+                  stroke-width="3.6"
+                />
+              </svg>
+            </span>
+            <div
+              class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-lg-3 css-qnw9j3-MuiGrid-root"
+            >
+              <ul
+                class="MuiList-root MuiList-padding css-h4y409-MuiList-root"
+              >
+                <li
+                  class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-tzvpbd-MuiListItem-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiTypography-menuBold css-37jdci-MuiTypography-root"
+                  >
+                    contact us
+                  </span>
+                </li>
+                <li
+                  class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-tzvpbd-MuiListItem-root"
+                >
+                  <a
+                    capitalize="on"
+                    class="MuiTypography-root MuiTypography-semiBold MuiLink-root MuiLink-underlineAlways css-1iwtne7-MuiTypography-root-MuiLink-root"
+                    href="mailto:hello@gmail.com"
+                    target="_blank"
+                  >
+                    hello@gmail.com
+                  </a>
+                </li>
+                <li
+                  class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-tzvpbd-MuiListItem-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiTypography-footerTextMedium css-1y5ghfm-MuiTypography-root"
+                  >
+                    Studio M, 4th Floor8 Lower Manchester street, M1 5QF
+                  </span>
+                </li>
+                <li
+                  class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-tzvpbd-MuiListItem-root"
+                >
+                  <a
+                    capitalize="on"
+                    class="MuiTypography-root MuiTypography-semiBold MuiLink-root MuiLink-underlineAlways css-1iwtne7-MuiTypography-root-MuiLink-root"
+                    href="tel:380938759922"
+                    target="_blank"
+                  >
+                    +38 093 875 9922
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-lg-3 css-qnw9j3-MuiGrid-root"
+            >
+              <ul
+                class="MuiList-root MuiList-padding css-h4y409-MuiList-root"
+              >
+                <li
+                  class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-tzvpbd-MuiListItem-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiTypography-menuBold css-37jdci-MuiTypography-root"
+                  >
+                    subscribe
+                  </span>
+                </li>
+                <li
+                  class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-tzvpbd-MuiListItem-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiTypography-footerTextLight css-1y5ghfm-MuiTypography-root"
+                  >
+                    Subscribe now and get 15% off on your first order
+                  </span>
+                </li>
+                <li
+                  class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-605f9o-MuiListItem-root"
+                >
+                  <form
+                    action="#"
+                    class="css-hboir5"
+                    novalidate=""
+                  >
+                    <div
+                      asyncborderradius="on"
+                      class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
+                      data-testid="email"
+                      form="[object Object]"
+                    >
+                      <div
+                        class="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary Mui-error MuiInputBase-fullWidth MuiInputBase-formControl css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
+                      >
+                        <input
+                          aria-invalid="true"
+                          class="MuiOutlinedInput-input MuiInputBase-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
+                          name="email"
+                          placeholder="e-mail"
+                          type="email"
+                          value=""
+                        />
+                        <fieldset
+                          aria-hidden="true"
+                          class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+                        >
+                          <legend
+                            class="css-nnbavb"
+                          >
+                            <span
+                              class="notranslate"
+                            >
+                              ​
+                            </span>
+                          </legend>
+                        </fieldset>
+                      </div>
+                    </div>
+                    <button
+                      asyncborderradius="on"
+                      class="MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-wnvib0-MuiButtonBase-root-MuiButton-root"
+                      data-testid="button"
+                      tabindex="0"
+                      type="submit"
+                    >
+                      send
+                      <span
+                        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                      />
+                    </button>
+                  </form>
+                </li>
+                <li
+                  class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-1l6lo0n-MuiListItem-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiTypography-menuBold MuiTypography-alignLeft MuiTypography-noWrap css-1ohl7z3-MuiTypography-root"
+                  >
+                    follow us
+                  </span>
+                  <ul
+                    class="MuiList-root css-1j8k74g-MuiList-root"
+                  >
+                    <li
+                      class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-cbbxfa-MuiListItem-root"
+                    >
+                      <a
+                        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1iwtne7-MuiTypography-root-MuiLink-root"
+                        href="https://facebook.com"
+                        target="_blank"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                          data-testid="FacebookIcon"
+                          focusable="false"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2m13 2h-2.5A3.5 3.5 0 0 0 12 8.5V11h-2v3h2v7h3v-7h3v-3h-3V9a1 1 0 0 1 1-1h2V5z"
+                          />
+                        </svg>
+                      </a>
+                    </li>
+                    <li
+                      class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-cbbxfa-MuiListItem-root"
+                    >
+                      <a
+                        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1iwtne7-MuiTypography-root-MuiLink-root"
+                        href="https://twitter.com"
+                        target="_blank"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                          data-testid="TwitterIcon"
+                          focusable="false"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"
+                          />
+                        </svg>
+                      </a>
+                    </li>
+                    <li
+                      class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-cbbxfa-MuiListItem-root"
+                    >
+                      <a
+                        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1iwtne7-MuiTypography-root-MuiLink-root"
+                        href="https://instagram.com"
+                        target="_blank"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                          data-testid="InstagramIcon"
+                          focusable="false"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"
+                          />
+                        </svg>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div
+          class="MuiBox-root css-1hozi5r"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-undefined css-1gbhsy4-MuiGrid-root"
+          >
+            <div
+              class="MuiContainer-root MuiContainer-maxWidthLg css-cgvpk2-MuiContainer-root"
+            >
+              <a
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-medfbw-MuiTypography-root-MuiLink-root"
+                href="/"
+              >
+                <img
+                  alt="Company"
+                  class="makeStyles-logoBottomLeft-5"
+                  src="/logo/bottom_logo1.png"
+                />
+                <img
+                  alt="Postil logo"
+                  class="makeStyles-logoBottomRight-6"
+                  src="/logo/bottom_logo2.png"
+                />
+              </a>
+              <span
+                class="MuiTypography-root MuiTypography-footerTextMedium css-37jdci-MuiTypography-root"
+              >
+                © 2010 — 2020  Simple Studio
+              </span>
+              <p
+                class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="MuiBox-root css-1hozi5r"
+    >
+      <div
+        class="MuiContainer-root MuiContainer-maxWidthLg css-aspcf0-MuiContainer-root"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-undefined makeStyles-blockStyle-4 css-11lq3yg-MuiGrid-root"
+        >
+          <span
+            class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorInherit css-62e83j-MuiCircularProgress-root"
+            role="progressbar"
+            style="width: 40px; height: 40px;"
+          >
+            <svg
+              class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+              viewBox="22 22 44 44"
+            >
+              <circle
+                class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+                cx="44"
+                cy="44"
+                fill="none"
+                r="20.2"
+                stroke-width="3.6"
+              />
+            </svg>
+          </span>
+          <div
+            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-lg-3 css-qnw9j3-MuiGrid-root"
+          >
+            <ul
+              class="MuiList-root MuiList-padding css-h4y409-MuiList-root"
+            >
+              <li
+                class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-tzvpbd-MuiListItem-root"
+              >
+                <span
+                  class="MuiTypography-root MuiTypography-menuBold css-37jdci-MuiTypography-root"
+                >
+                  contact us
+                </span>
+              </li>
+              <li
+                class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-tzvpbd-MuiListItem-root"
+              >
+                <a
+                  capitalize="on"
+                  class="MuiTypography-root MuiTypography-semiBold MuiLink-root MuiLink-underlineAlways css-1iwtne7-MuiTypography-root-MuiLink-root"
+                  href="mailto:hello@gmail.com"
+                  target="_blank"
+                >
+                  hello@gmail.com
+                </a>
+              </li>
+              <li
+                class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-tzvpbd-MuiListItem-root"
+              >
+                <span
+                  class="MuiTypography-root MuiTypography-footerTextMedium css-1y5ghfm-MuiTypography-root"
+                >
+                  Studio M, 4th Floor8 Lower Manchester street, M1 5QF
+                </span>
+              </li>
+              <li
+                class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-tzvpbd-MuiListItem-root"
+              >
+                <a
+                  capitalize="on"
+                  class="MuiTypography-root MuiTypography-semiBold MuiLink-root MuiLink-underlineAlways css-1iwtne7-MuiTypography-root-MuiLink-root"
+                  href="tel:380938759922"
+                  target="_blank"
+                >
+                  +38 093 875 9922
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div
+            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-lg-3 css-qnw9j3-MuiGrid-root"
+          >
+            <ul
+              class="MuiList-root MuiList-padding css-h4y409-MuiList-root"
+            >
+              <li
+                class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-tzvpbd-MuiListItem-root"
+              >
+                <span
+                  class="MuiTypography-root MuiTypography-menuBold css-37jdci-MuiTypography-root"
+                >
+                  subscribe
+                </span>
+              </li>
+              <li
+                class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-tzvpbd-MuiListItem-root"
+              >
+                <span
+                  class="MuiTypography-root MuiTypography-footerTextLight css-1y5ghfm-MuiTypography-root"
+                >
+                  Subscribe now and get 15% off on your first order
+                </span>
+              </li>
+              <li
+                class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-605f9o-MuiListItem-root"
+              >
+                <form
+                  action="#"
+                  class="css-hboir5"
+                  novalidate=""
+                >
+                  <div
+                    asyncborderradius="on"
+                    class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
+                    data-testid="email"
+                    form="[object Object]"
+                  >
+                    <div
+                      class="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary Mui-error MuiInputBase-fullWidth MuiInputBase-formControl css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
+                    >
+                      <input
+                        aria-invalid="true"
+                        class="MuiOutlinedInput-input MuiInputBase-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
+                        name="email"
+                        placeholder="e-mail"
+                        type="email"
+                        value=""
+                      />
+                      <fieldset
+                        aria-hidden="true"
+                        class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+                      >
+                        <legend
+                          class="css-nnbavb"
+                        >
+                          <span
+                            class="notranslate"
+                          >
+                            ​
+                          </span>
+                        </legend>
+                      </fieldset>
+                    </div>
+                  </div>
+                  <button
+                    asyncborderradius="on"
+                    class="MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-wnvib0-MuiButtonBase-root-MuiButton-root"
+                    data-testid="button"
+                    tabindex="0"
+                    type="submit"
+                  >
+                    send
+                    <span
+                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                    />
+                  </button>
+                </form>
+              </li>
+              <li
+                class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-1l6lo0n-MuiListItem-root"
+              >
+                <span
+                  class="MuiTypography-root MuiTypography-menuBold MuiTypography-alignLeft MuiTypography-noWrap css-1ohl7z3-MuiTypography-root"
+                >
+                  follow us
+                </span>
+                <ul
+                  class="MuiList-root css-1j8k74g-MuiList-root"
+                >
+                  <li
+                    class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-cbbxfa-MuiListItem-root"
+                  >
+                    <a
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1iwtne7-MuiTypography-root-MuiLink-root"
+                      href="https://facebook.com"
+                      target="_blank"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                        data-testid="FacebookIcon"
+                        focusable="false"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2m13 2h-2.5A3.5 3.5 0 0 0 12 8.5V11h-2v3h2v7h3v-7h3v-3h-3V9a1 1 0 0 1 1-1h2V5z"
+                        />
+                      </svg>
+                    </a>
+                  </li>
+                  <li
+                    class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-cbbxfa-MuiListItem-root"
+                  >
+                    <a
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1iwtne7-MuiTypography-root-MuiLink-root"
+                      href="https://twitter.com"
+                      target="_blank"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                        data-testid="TwitterIcon"
+                        focusable="false"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"
+                        />
+                      </svg>
+                    </a>
+                  </li>
+                  <li
+                    class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-cbbxfa-MuiListItem-root"
+                  >
+                    <a
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1iwtne7-MuiTypography-root-MuiLink-root"
+                      href="https://instagram.com"
+                      target="_blank"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                        data-testid="InstagramIcon"
+                        focusable="false"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"
+                        />
+                      </svg>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div
+        class="MuiBox-root css-1hozi5r"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-undefined css-1gbhsy4-MuiGrid-root"
+        >
+          <div
+            class="MuiContainer-root MuiContainer-maxWidthLg css-cgvpk2-MuiContainer-root"
+          >
+            <a
+              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-medfbw-MuiTypography-root-MuiLink-root"
+              href="/"
+            >
+              <img
+                alt="Company"
+                class="makeStyles-logoBottomLeft-5"
+                src="/logo/bottom_logo1.png"
+              />
+              <img
+                alt="Postil logo"
+                class="makeStyles-logoBottomRight-6"
+                src="/logo/bottom_logo2.png"
+              />
+            </a>
+            <span
+              class="MuiTypography-root MuiTypography-footerTextMedium css-37jdci-MuiTypography-root"
+            >
+              © 2010 — 2020  Simple Studio
+            </span>
+            <p
+              class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

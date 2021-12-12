@@ -30,6 +30,13 @@ export const useStyles = makeStyles(() => ({
 		right: '20px',
 		cursor: 'pointer'
 	},
+	crossModal: {
+		width: '20px',
+		position: 'absolute',
+		top: '20px',
+		right: '20px',
+		cursor: 'pointer'
+	},
 	desc: {
 		maxWidth: '400px',
 		display: 'flex',
@@ -41,16 +48,11 @@ export const useStyles = makeStyles(() => ({
 		alignItems: 'center',
 		border: '1px solid #373F41',
 		borderRadius: '2px',
-		width: 'fit-content'
+		width: 'fit-content',
+
 	},
 	quantity: {
 		padding: '0 15px',
-	},
-	quantityUp: {
-		padding: '5px 10px',
-		borderLeft: '1px solid #373F41',
-		borderBottom: '1px solid #373F41',
-		cursor: 'pointer'
 	},
 	quantityDown: {
 		padding: '5px 10px',
@@ -67,5 +69,9 @@ export const useStyles = makeStyles(() => ({
 		flexDirection: 'column',
 		alignItems: 'flex-start',
 		gap: '5px'
+	},
+	textDesc :{
+		textTransform:'uppercase',
+		color:'#000'
 	}
 }))

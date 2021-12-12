@@ -7,7 +7,7 @@ import AddOutlinedIcon from '@mui/icons-material/AddOutlined'
 const CatalogAccordion = ({
 	expanded,
 	title,
-	details,
+	children,
 	withBottomBorder = true
 }) => {
 	const [isOpen, setIsOpen] = useState(false)
@@ -50,7 +50,7 @@ const CatalogAccordion = ({
 
 			</AccordionSummary>
 			<AccordionDetails sx={{pl:'54px', color: '#373F41'}}>
-				{details}
+				{children}
 			</AccordionDetails>
 		</Accordion>
 	)
@@ -59,7 +59,7 @@ const CatalogAccordion = ({
 CatalogAccordion.propTypes = {
 	expanded: PropTypes.bool.isRequired,
 	title: PropTypes.string.isRequired,
-	details: PropTypes.element,
+	children: PropTypes.element,
 	withBottomBorder: PropTypes.bool,
 }
 

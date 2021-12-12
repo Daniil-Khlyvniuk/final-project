@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Typography, Box } from '@mui/material'
-import { border } from '../../pages/Cart/styles'
+import { border } from './styles'
 import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
 import { PhotoSumm, SummBox, SummText, SummTotal, SummCarts } from './style'
 import axios from 'axios'
@@ -19,12 +19,13 @@ const Summary = () => {
 			const products = res.map(({data}) => data)
 			setParent(products)
 		})
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 
 	return (
 		<Box sx={{
-			maxWidth: '370px',
+			margin:' 0px 24px',
 		}}>
 			<Typography
 				variant='body1'

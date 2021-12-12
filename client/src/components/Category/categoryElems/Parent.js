@@ -44,7 +44,7 @@ const ParentMenuList = ({
 	}, [open])
 
 	return (
-		<Box style={{ zIndex: '99999999999999' }}>
+		<Box style={{ zIndex: '99999999999999' }} data-testid='navbar-category'>
 			{parent ?
 				<Link
 					to={`/shop/catalog?category=${text}`}

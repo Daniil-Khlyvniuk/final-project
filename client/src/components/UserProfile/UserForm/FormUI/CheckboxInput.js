@@ -7,14 +7,11 @@ import {
 	FormLabel, Typography,
 } from '@mui/material'
 import { useField, useFormikContext } from 'formik'
+import PropTypes from 'prop-types'
 
-
-
-// eslint-disable-next-line react/prop-types,no-unused-vars
-const CheckboxInput = ({ name, label, legend,checked , ...rest }) => {
+const CheckboxInput = ({ name, label, legend }) => {
 	const { setFieldValue } = useFormikContext()
 	const [field, meta] = useField(name)
-
 
 	const handleChange = (e) => {
 		const { checked } = e.target
@@ -23,9 +20,9 @@ const CheckboxInput = ({ name, label, legend,checked , ...rest }) => {
 
 	const configCheckbox = {
 		...field,
-		checked : field.value,
+		checked: field.value,
 		onChange: handleChange,
-		size:'small',
+		size: 'small',
 	}
 
 	const configFormControl = {}
@@ -44,11 +41,17 @@ const CheckboxInput = ({ name, label, legend,checked , ...rest }) => {
 						{...configCheckbox} />}
 					label={<Typography fontSize={'12px'}>{label}</Typography>}
 					labelPlacement='end'
-					sx={{'&.MuiFormControlLabel-label' :{fontSize:'10px'}}}
+					sx={{ '&.MuiFormControlLabel-label': { fontSize: '10px' } }}
 				/>
 			</FormGroup>
 		</FormControl>
 	)
+}
+
+CheckboxInput.propTypes = {
+	name: PropTypes.string.isRequired,
+	label: PropTypes.string.isRequired,
+	legend: PropTypes.element,
 }
 
 export default CheckboxInput

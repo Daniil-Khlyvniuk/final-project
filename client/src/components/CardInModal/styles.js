@@ -18,10 +18,11 @@ export const useStyles = makeStyles({
 	},
 	desc: {
 		display: 'block',
+		borderRadius: '1px',
 		background: '#373F41',
 		width: 'fit-content',
 		color: 'white',
-		padding: '5px',
-		textTransform: 'uppercase'
+		padding: '2px',
+		textTransform: 'uppercase',
 	},
 })
