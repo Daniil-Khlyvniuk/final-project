@@ -16,10 +16,7 @@ const ProfileIcon = () => {
 			title='personalProfile'
 			sx={{ padding: 0 }}
 			onClick={()=> history.push('/user-profile')}
-<<<<<<< HEAD
-=======
 			data-testid='navbar-profile-icon'
->>>>>>> develop
 		>
 			<PersonIcon
 				className={classes.navbarLink}

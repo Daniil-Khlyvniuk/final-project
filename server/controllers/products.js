@@ -68,7 +68,6 @@ exports.addProduct = async (req, res) => {
         categories: category,
       }
     );
-<<<<<<< HEAD
 
     const color = await Color.findOne({ name: colorName });
     notFoundError(color, colorName);
@@ -91,30 +90,7 @@ exports.addProduct = async (req, res) => {
       product,
     });
 
-=======
 
-    const color = await Color.findOne({ name: colorName });
-    notFoundError(color, colorName);
-
-    const size = await Size.findOne({ name: sizeName });
-    notFoundError(size, sizeName);
-
-    const isVarExist = await ProductVariant.findOne({
-      product: product._id,
-      color: color._id,
-      size: size._id,
-    });
-
-    isExist(isVarExist, "variant");
-
-    const newVariant = await ProductVariant.create({
-      ...variantData,
-      size: size,
-      color: color,
-      product,
-    });
-
->>>>>>> develop
     product.variants.push(newVariant);
     const updatedProduct = await Product.findByIdAndUpdate(
       product._id,
@@ -181,7 +157,6 @@ exports.getVariantById = async (req, res, next) => {
     });
   }
 };
-<<<<<<< HEAD
 
 exports.decrementVariantQuantity = async (req, res, next) => {
 	const newQuantity = Math.max(0, req.body.quantity)
@@ -209,35 +184,6 @@ exports.decrementVariantQuantity = async (req, res, next) => {
 exports.getProductsInfo = async (req, res, next) => {
   const { productId, kindOfInfo } = req.params;
 
-=======
-
-exports.decrementVariantQuantity = async (req, res, next) => {
-	const newQuantity = Math.max(0, req.body.quantity)
-	const id = req.params.varId
-
-
-	try{
-		const variant = await ProductVariant.findById(id)
-		if (variant.quantity < newQuantity) throw new Error("insufficient quantity of goods in the store")
-
-		const updatedVariant = await ProductVariant.findByIdAndUpdate(
-			id,
-		{
-			quantity: newQuantity,
-				enabled: !!newQuantity
-		},
-		{new: true}
-		)
-		res.json(updatedVariant)
-	}catch (err) {
-		res.status(400).json({ message: `Error happened on server: "${err}"` });
-	}
-}
-
-exports.getProductsInfo = async (req, res, next) => {
-  const { productId, kindOfInfo } = req.params;
-
->>>>>>> develop
   try {
     const variant = await ProductVariant.find({
       product: productId,
@@ -392,11 +338,8 @@ exports.getProducts = async (req, res, next) => {
       .populate({
         path: "variants",
         perDocumentLimit: 1,
-<<<<<<< HEAD
-      });
-=======
       })
->>>>>>> develop
+
 
     const result = filterOneVariant(products)
 
@@ -465,17 +408,11 @@ exports.searchProducts = async (req, res, next) => {
 
   const query = req.body.query.toLowerCase().trim().replace(/\s\s+/g, " ");
 	const [, projectGroup] = getProductAggregateParams()
-<<<<<<< HEAD
-	const perPage = Number(req.query.perPage);
-	const startPage = Number(req.query.startPage);
-
-
-=======
 	const perPage = Number(req.body.perPage) || 1000;
 	const startPage = Number(req.body.startPage) || 1;
 
 
->>>>>>> develop
+
 	try {
 	const foundProducts = await Product.aggregate([
 		{
@@ -632,8 +569,6 @@ exports.updateProduct = (req, res, next) => {
 	);
 }
 
-<<<<<<< HEAD
-=======
 exports.getVariants = async (req, res, next) => {
 	try {
 	const parentId = req.params.parentId
@@ -649,4 +584,4 @@ exports.getVariants = async (req, res, next) => {
 	}
 }
 
->>>>>>> develop
+

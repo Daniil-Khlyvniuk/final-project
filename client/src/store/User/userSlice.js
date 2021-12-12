@@ -1,20 +1,14 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-<<<<<<< HEAD
-import { getUserByToken } from '../../utils/API/userAPI'
-=======
 import { getUserByToken , getUserOrders } from '../../utils/API/userAPI'
->>>>>>> develop
+
 
 const initialState = {
 	token: localStorage.getItem('userToken') || null,
 	data: null,
 	error: null,
 	isLoading: false,
-<<<<<<< HEAD
-=======
 	unregistered: null,
 	orders : null,
->>>>>>> develop
 }
 
 export const fetchUser = createAsyncThunk(
@@ -25,8 +19,7 @@ export const fetchUser = createAsyncThunk(
 	}
 )
 
-<<<<<<< HEAD
-=======
+
 export const fetchUserOrders = createAsyncThunk(
 	'user/fetchUserOrders',
 	async () =>{
@@ -35,7 +28,6 @@ export const fetchUserOrders = createAsyncThunk(
 	}
 )
 
->>>>>>> develop
 const userSlice = createSlice({
 	name: 'user',
 	initialState,
@@ -56,12 +48,10 @@ const userSlice = createSlice({
 			state.data = null
 			return state
 		},
-<<<<<<< HEAD
-=======
+
 		setUnregistered(state,action) {
 			state.unregistered = action.payload
 		}
->>>>>>> develop
 	},
 	extraReducers: {
 		[fetchUser.fulfilled]: (state, action) => {
@@ -75,12 +65,6 @@ const userSlice = createSlice({
 			state.error = null
 		},
 		[fetchUser.rejected]: (state) => {
-<<<<<<< HEAD
-			state.isLoading = true
-			state.token = null
-			state.error = 'Error happened while links loading'
-		},
-=======
 			localStorage.removeItem('userToken')
 			state.isLoading = false
 			state.token = null
@@ -99,7 +83,6 @@ const userSlice = createSlice({
 			state.isLoading = false
 			state.error = 'Error happened while user data loading. Relogin plz'
 		}
->>>>>>> develop
 	}
 })
 

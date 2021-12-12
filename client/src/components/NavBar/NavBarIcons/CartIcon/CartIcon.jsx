@@ -5,11 +5,8 @@ import LocalMallIcon from '@mui/icons-material/LocalMall'
 import { useStyles } from './styles'
 import { useSelector, useDispatch } from 'react-redux'
 import modalActions from '../../../../store/Modal'
-<<<<<<< HEAD
-import CartModal from '../../../Modal/CartModal'
-=======
 import CartModal from '../../../Modal/CartModal/CartModal'
->>>>>>> develop
+
 import { shoppingBagSelectors } from '../../../../store/ShoppingBag'
 import { Box } from '@mui/system'
 
@@ -25,10 +22,7 @@ const Carticon = () => {
 			sx={{ padding: 0 }}
 			title='Cart'
 			onClick={() => handleOpen(<CartModal />)}
-<<<<<<< HEAD
-=======
 			data-testid='navbar-cart-icon'
->>>>>>> develop
 		>
 			<Badge badgeContent={shoppingBag?.length} color="success">
 				<Box className={classes.navbarLink}>
