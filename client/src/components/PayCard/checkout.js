@@ -4,10 +4,7 @@ import { PayParent } from './styles'
 import PayCc from './PayCC'
 import Summary from './Summary'
 
-// eslint-disable-next-line react/prop-types
 const Checkout = () => {
-	// eslint-disable-next-line no-unused-vars
-
 	return (
 		<Box my='15px'>
 			<Grid container style={PayParent} spacing={2}>
