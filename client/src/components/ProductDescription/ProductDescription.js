@@ -18,11 +18,13 @@ const ProductDescription = () => {
 
 	const classes = useProductDescriptionStyle()
 
+	const sale = activeProduct.currentPrice + 1 < activeProduct.previousPrice
+
 
 	useEffect(()=>{
-		if(activeProduct.quantity === 0){
+		if(activeProduct.quantity <= 0){
 			setAvailable('pre-order')
-		}else if(activeProduct.quantity < 5){
+		}else if(activeProduct.quantity < 5 && activeProduct.quantity > 0 ){
 			setAvailable(`low on stock! 
 			 ${activeProduct.quantity} left`)
 		} else {
@@ -76,6 +78,16 @@ const ProductDescription = () => {
 						fontWeight={600}>
 						USD ${activeProduct.currentPrice}.00
 					</Typography>
+					{sale && <Typography
+						sx={{
+							textTransform:'uppercase',
+							textDecoration: 'line-through',
+							color:'#B8B8B8'
+						}}
+						fontSize={18}
+						fontWeight={600}>
+						USD ${activeProduct.previousPrice}.00
+					</Typography>}
 					<Typography
 						sx={{textTransform:'uppercase'}}
 						fontSize={14}

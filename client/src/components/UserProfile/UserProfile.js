@@ -6,7 +6,7 @@ import BasicTabs from '../../components/UserProfile/Tabs/Tabs'
 const UserProfile = () => {
 
 	return (
-		<Container>
+		<Container maxWidth={'lg'}>
 			<Box sx={{py:'40px', mt:'20px'}}>
 				<Typography
 					variant='h2'
@@ -22,7 +22,7 @@ const UserProfile = () => {
 					variant='body1'
 					component={'div'}
 					color='primary'
-					fontSize='12px'
+					fontSize='14px'
 					textAlign='center'
 					sx={{mt:'5px'}}
 				>
@@ -31,7 +31,9 @@ const UserProfile = () => {
 					edit your details or manage your returns.
 				</Typography>
 			</Box>
-			<Box>
+			<Box
+
+			>
 				<BasicTabs/>
 			</Box>
 		</Container>

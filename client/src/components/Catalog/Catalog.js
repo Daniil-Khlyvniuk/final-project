@@ -25,6 +25,7 @@ const Catalog = () => {
 	const hasMore = useSelector(filterSelectors.getInfinityScrollHasMore())
 
 	const { startPage } = useSelector(filterSelectors.getFilters())
+
 	const handleScroll = () => {
 		handleInfinitiScroll('startPage', +startPage + 1)
 	}
@@ -64,10 +65,12 @@ const Catalog = () => {
 						<Grid item l={4} md={6} sm={6} xs={12} key={item.variants._id}>
 							<CardInCatalog
 								_id={item.variants._id}
+								parentId={item._id}
 								sx={{ width: { sm: '280px' }, height: { sm: '280px' } }}
 								image={'/' + item.variants.imageUrls[0]}
 								title={item.name}
 								price={item.variants.currentPrice}
+								color={item.variants.color}
 							/>
 						</Grid>
 					))}

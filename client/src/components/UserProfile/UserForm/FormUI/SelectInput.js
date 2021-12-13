@@ -1,23 +1,19 @@
 import React from 'react'
-import { TextField ,Autocomplete } from '@mui/material'
+import { TextField, Autocomplete } from '@mui/material'
 import { useField, useFormikContext } from 'formik'
 import PropTypes from 'prop-types'
 
-
-// eslint-disable-next-line react/prop-types
-const SelectInput = ({ name, options,  ...rest }) => {
-	const {setFieldValue} = useFormikContext()
+const SelectInput = ({ name, options, ...rest }) => {
+	const { setFieldValue } = useFormikContext()
 	const [field, meta] = useField(name)
 	const option = Object.keys(options).map((item) => options[item])
-
 
 	const configSelect = {
 		...field,
 		...rest,
-		select: true,
 		variant: 'outlined',
 		fullWidth: true,
-		value : field.value
+		value: field.value
 	}
 
 	if (meta && meta.error && meta.touched) {
@@ -29,7 +25,7 @@ const SelectInput = ({ name, options,  ...rest }) => {
 		<Autocomplete
 			{...configSelect}
 			disablePortal
-			id='combo-box-demo'
+			id='combo-box'
 			options={option}
 			getOptionLabel={option => option}
 			onChange={(e, value) => {
@@ -39,16 +35,15 @@ const SelectInput = ({ name, options,  ...rest }) => {
 				)
 			}}
 			renderInput={(params) => (
-				<TextField {...params}  />
+				<TextField {...params} />
 			)}
 		/>
 	)
 }
 
-
 SelectInput.propTypes = {
 	name: PropTypes.string,
-	options : PropTypes.object,
+	options: PropTypes.object,
 }
 
 export default SelectInput

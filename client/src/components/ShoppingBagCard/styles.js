@@ -25,7 +25,7 @@ export const useStyles = makeStyles(() => ({
 		}
 	},
 	cross: {
-		position: 'absolute',
+		// position: 'absolute',
 		top: '20px',
 		right: '20px',
 		cursor: 'pointer'
@@ -38,7 +38,7 @@ export const useStyles = makeStyles(() => ({
 		cursor: 'pointer'
 	},
 	desc: {
-		maxWidth: '400px',
+		width: '100%',
 		display: 'flex',
 		flexDirection: 'column',
 		gap: '1rem'
@@ -71,6 +71,8 @@ export const useStyles = makeStyles(() => ({
 		gap: '5px'
 	},
 	textDesc :{
+		display: 'flex',
+		justifyContent: 'space-between',
 		textTransform:'uppercase',
 		color:'#000'
 	}

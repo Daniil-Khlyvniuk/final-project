@@ -43,6 +43,8 @@ const store = configureStore({
 					'favorites/setLoading',
 					'favorites/setFavorites',
 					'snackBar/snackToggle',
+					'user/fetchUserOrders/fulfilled',
+					'user/fetchUserOrders/pending'
 				],
 			},
 		}),

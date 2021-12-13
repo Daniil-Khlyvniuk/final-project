@@ -3,8 +3,9 @@
   "version": "1.0.1",
   "description": "Final Project - Online shop \"Postil' bedding\"",
   "main": "index.js",
+  "presentation": "https://docs.google.com/presentation/d/1CBFV4Z9PBZjipS-x3z4KodsS_i2IgTSlwFx6lEovX9I/edit?usp=sharing",
   "scripts": {
-    "start": "npm-run-all -p start:client  start:server",
+    "start": "npm-run-all -p start:client start:server",
     "start:client": "npm start --prefix client",
     "lint:client": "npm run lint --fix --prefix client",
     "start:server": "npm run server --prefix server",
