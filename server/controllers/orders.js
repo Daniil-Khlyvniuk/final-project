@@ -19,7 +19,7 @@ exports.placeOrder = async (req, res, next) => {
     let cartProducts = [];
 
     if (req.body.deliveryAddress) {
-			// order.deliveryAddress = JSON.parse(req.body.deliveryAddress);
+      // order.deliveryAddress = JSON.parse(req.body.deliveryAddress);
     }
 
     if (req.body.shipping) {
@@ -106,7 +106,7 @@ exports.placeOrder = async (req, res, next) => {
             res
           );
 
-					for (let item of order.products){
+          for (let item of order.products){
             const id = item.product._id;
             const product = await ProductVariant.findOne({ _id: id });
             const productQuantity = product.quantity;

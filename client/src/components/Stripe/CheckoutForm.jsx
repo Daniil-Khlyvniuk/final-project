@@ -6,15 +6,16 @@ import {
 } from '@stripe/react-stripe-js'
 import { button, form, textBtn } from './style'
 import Loader from '../UI/Loader/Loader'
-
+import useSnack from '../../utils/customHooks/useSnack'
 
 
 export default function CheckoutForm() {
 	const stripe = useStripe()
 	const elements = useElements()
-
+	const {handleSnack} = useSnack()
 	const [message, setMessage] = useState(null)
 	const [isLoading, setIsLoading] = useState(false)
+	const [disable, setDisable] = useState(false)
 
 
 
@@ -36,19 +37,24 @@ export default function CheckoutForm() {
 		stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
 			switch (paymentIntent.status) {
 			case 'succeeded':
+				handleSnack({message: 'Payment succeeded!', style: 'success'})
 				setMessage('Payment succeeded!')
 				break
 			case 'processing':
+				handleSnack({message: 'Your payment is processing.', style: 'info'})
 				setMessage('Your payment is processing.')
 				break
 			case 'requires_payment_method':
+				handleSnack({message: 'Your payment was not successful, please try again.', style: 'warning'})
 				setMessage('Your payment was not successful, please try again.')
 				break
 			default:
+				handleSnack({message: 'Something went wrong.', style: 'error'})
 				setMessage('Something went wrong.')
 				break
 			}
 		})
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [stripe])
 
 
@@ -69,7 +75,6 @@ export default function CheckoutForm() {
 				// Make sure to change this to your payment completion page
 				return_url: 'http://localhost:3000/complete-order',
 			},
-
 		})
 
 		// This point will only be reached if there is an immediate error when
@@ -79,8 +84,10 @@ export default function CheckoutForm() {
 		// redirected to the `return_url`.
 		if (error.type === 'card_error' || error.type === 'validation_error') {
 			setMessage(error.message)
+			handleSnack({message: 'Something went wrong.', style: 'error'})
 		} else {
 			setMessage('An unexpected error occured.')
+			handleSnack({message: 'An unexpected error occured.', style: 'error'})
 		}
 
 		setIsLoading(false)
@@ -99,12 +106,17 @@ export default function CheckoutForm() {
 			<PaymentElement id="payment-element" />
 			<button
 				style={button}
-				disabled={isLoading || !stripe || !elements} id="submit"
+				onClick={()=> {
+					setDisable(true)
+					setTimeout(function() {setDisable(false)}, 2000)
+				}}
+				disabled={disable && isLoading || !stripe || !elements} id="submit"
 			>
 				<span id="button-text" style={textBtn}>NEXT</span>
 			</button>
 			{/* Show any error or success messages */}
-			{message && <div id="payment-message">{message}</div>}
+			{message && <div sx={{color: 'white'}} id="payment-message">{message}</div>}
+
 		</form>
 	)
 }

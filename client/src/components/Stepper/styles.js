@@ -6,17 +6,25 @@ export const useStyles = makeStyles({
 	},
 	containerTitle: {
 		background: '#373F41',
-		padding: '2rem 4rem'
+		['@media(min-width: 768px)']: {
+			padding: '2rem 4rem'
+		},
+
 	},
 	title: {
 		'& span': {
-			color: 'white !important'
+			color: 'white !important',
+			fontSize: '12px',
+			['@media(min-width: 425px)']: {
+				fontSize: '1em',
+			}
 		}
 	},
 	containerStep1: {
 		display: 'grid',
 		columnGap: '5%',
 		rowGap: 1,
+		maxWidth: '1180px',
 		gridTemplateColumns: 'repeat(1, 1fr)',
 		['@media(min-width: 1000px)']: {
 			columnGap: '0%',
@@ -26,7 +34,6 @@ export const useStyles = makeStyles({
 				columnGap: '0%',
 				rowGap: 1,
 				gridTemplateColumns: '65% 30%',
-				// width: '852px''
 			},
 		// width: '852px''
 		},

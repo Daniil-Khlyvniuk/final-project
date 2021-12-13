@@ -118,6 +118,7 @@ Object {
                     <div
                       asyncborderradius="on"
                       class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
+                      data-testid="email"
                       form="[object Object]"
                     >
                       <div
@@ -150,6 +151,7 @@ Object {
                     <button
                       asyncborderradius="on"
                       class="MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-wnvib0-MuiButtonBase-root-MuiButton-root"
+                      data-testid="button"
                       tabindex="0"
                       type="submit"
                     >
@@ -392,6 +394,7 @@ Object {
                   <div
                     asyncborderradius="on"
                     class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
+                    data-testid="email"
                     form="[object Object]"
                   >
                     <div
@@ -424,6 +427,7 @@ Object {
                   <button
                     asyncborderradius="on"
                     class="MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-wnvib0-MuiButtonBase-root-MuiButton-root"
+                    data-testid="button"
                     tabindex="0"
                     type="submit"
                   >

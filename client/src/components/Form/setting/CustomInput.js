@@ -1,17 +1,14 @@
 import React from 'react'
-// import Input from '@mui/material/Input'
+import Input from '@mui/material/Input'
 import PropTypes from 'prop-types'
 import { useFormStyle } from '../../../utils/customHooks/useFormStyle'
-import { TextField } from '@mui/material'
 
 const CustomInput = ({field, form, ...rest}) => {
-	const {name, placeholder} = field
+	const {name} = field
 	const classes = useFormStyle()
 	return (
-		<div style={{margin: '15px 0'}}>
-			<TextField className={classes.input} label={placeholder}
-				{...rest}
-				{...field} fullWidth={true}/>
+		<div>
+			<Input className={classes.input} {...rest} {...field} fullWidth={true}/>
 			<div>
 				{form.touched[name] && form.errors[name] && (
 					<div className={classes.error}>{form.errors[name]}</div>

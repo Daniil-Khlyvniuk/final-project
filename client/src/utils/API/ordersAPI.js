@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const placeOrder = (newOrder) => axios.post('/orders', newOrder)
+const placeOrder = (newOrder) => axios.post('/api/orders', newOrder)
 // please look up in docs what to put in newOrder
 
 // eslint-disable-next-line max-len
