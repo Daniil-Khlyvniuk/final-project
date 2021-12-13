@@ -4,8 +4,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import useOtherColors from './useOtherColors'
 
-
-// eslint-disable-next-line react/prop-types
 const OtherVariants = ({ parentId, currColor }) => {
 	const otherVariants = useOtherColors(parentId)
 
@@ -47,8 +45,8 @@ const OtherVariants = ({ parentId, currColor }) => {
 
 
 OtherVariants.propTypes = {
-	parentId: PropTypes.string.isRequired,
-	currColor: PropTypes.object.isRequired
+	parentId: PropTypes.string,
+	currColor: PropTypes.object
 }
 
 export default OtherVariants
