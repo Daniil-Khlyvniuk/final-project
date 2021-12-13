@@ -28,7 +28,6 @@ const ActionButtons = () => {
 	const {handleSnack} = useSnack()
 	const theme = useTheme()
 
-	console.log(222,activeProduct)
 	const addToFavorites = () => {
 		if (!localStorage.getItem('favorites')) localStorage.setItem('favorites', JSON.stringify([]))
 
