@@ -28,7 +28,6 @@ const ActionButtons = () => {
 	const {handleSnack} = useSnack()
 	const theme = useTheme()
 
-
 	const addToFavorites = () => {
 		if (!localStorage.getItem('favorites')) localStorage.setItem('favorites', JSON.stringify([]))
 
@@ -46,6 +45,7 @@ const ActionButtons = () => {
 		<>
 			<Button
 				disableRipple
+				disabled={activeProduct.quantity < 1}
 				sx={{ mx: '13px',
 					padding: { lg: '21px 33px', md: '16px', sm: '10px' },
 					[theme.breakpoints.between('766', '860')] : {fontSize :'9px'}
