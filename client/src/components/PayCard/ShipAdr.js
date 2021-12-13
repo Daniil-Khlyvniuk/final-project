@@ -64,6 +64,7 @@ const ShipAdr = ({handleNext, handleBack}) => {
 	const user = useSelector(userSelectors.getData())
 	const isLoggedIn = !!user
 
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect( async() => {
 		setBuyGoods(shoppingBag)
 		try {
@@ -115,7 +116,6 @@ const ShipAdr = ({handleNext, handleBack}) => {
 	const sendOrder = () => {
 		localStorage.setItem('ORDER', JSON.stringify(order))
 	}
-
 
 	return (
 		<div>
