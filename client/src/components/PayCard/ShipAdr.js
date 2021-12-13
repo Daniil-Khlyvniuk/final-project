@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import axios from 'axios'
 import { Form, Formik } from 'formik'
 import { Box, Button, Grid, Typography } from '@mui/material'
@@ -72,6 +72,10 @@ const ShipAdr = ({handleNext, handleBack}) => {
 		zip: user?.zip || '' ,
 	}
 
+	useEffect(()=> {
+
+	},[])
+
 
 	return (
 		<div>
@@ -137,6 +141,7 @@ const ShipAdr = ({handleNext, handleBack}) => {
 								<TextInput
 									name="email"
 									label="Email"
+									options={countries}
 								/>
 							</Grid>
 							<Grid item xs={12} md={6}>
@@ -193,7 +198,7 @@ const ShipAdr = ({handleNext, handleBack}) => {
 								}}
 								onClick={ () => {
 									handleSubmit()
-									{isValid &&  dirty && handleNext()}
+									{isValid &&  handleNext()}
 								}}
 								variant="contained"
 							>
