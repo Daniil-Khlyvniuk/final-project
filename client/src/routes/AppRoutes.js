@@ -13,6 +13,7 @@ import Search from '../pages/Search/Search'
 import Checkout from '../components/PayCard/checkout'
 import CompletePay from '../components/PayCard/CompletePay'
 import StaticPages from '../components/StaticPages/StaticPages'
+import PaymentResult from '../components/Stripe/PaymentResult'
 
 const AppRoutes = () => {
 	return (
@@ -28,6 +29,7 @@ const AppRoutes = () => {
 			<ProtectedRoute exact path='/checkout'><Checkout /></ProtectedRoute>
 			<ProtectedRoute exact path='/user-profile'><UserProfilePage /></ProtectedRoute>
 			<Route exact path='/complete-order'><CompletePay /></Route>
+			<Route exact path='/payment-result'><PaymentResult /></Route>
 			<Route exact path='*'><Page404 /></Route>
 		</Switch>
 	)

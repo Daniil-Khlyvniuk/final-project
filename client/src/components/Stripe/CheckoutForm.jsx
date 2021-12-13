@@ -15,6 +15,7 @@ export default function CheckoutForm() {
 	const {handleSnack} = useSnack()
 	const [message, setMessage] = useState(null)
 	const [isLoading, setIsLoading] = useState(false)
+	const [disable, setDisable] = useState(false)
 
 
 
@@ -104,7 +105,11 @@ export default function CheckoutForm() {
 			<PaymentElement id="payment-element" />
 			<button
 				style={button}
-				disabled={isLoading || !stripe || !elements} id="submit"
+				onClick={()=> {
+					setDisable(true)
+					setTimeout(function() {setDisable(false)}, 2000)
+				}}
+				disabled={disable && isLoading || !stripe || !elements} id="submit"
 			>
 				<span id="button-text" style={textBtn}>NEXT</span>
 			</button>

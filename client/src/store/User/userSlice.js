@@ -7,7 +7,7 @@ const initialState = {
 	data: null,
 	error: null,
 	isLoading: false,
-	unregistered: null,
+	order: null,
 	orders : null,
 }
 
@@ -49,8 +49,8 @@ const userSlice = createSlice({
 			return state
 		},
 
-		setUnregistered(state,action) {
-			state.unregistered = action.payload
+		setOrder(state,action) {
+			state.order = action.payload
 		}
 	},
 	extraReducers: {
