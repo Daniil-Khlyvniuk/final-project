@@ -33,5 +33,5 @@ Final Project - Online shop "Postil' bedding"
 ... to be added later
 
 
-## Project presentation:
-... to be added later
+## Link to project presentation:
+https://docs.google.com/presentation/d/1CBFV4Z9PBZjipS-x3z4KodsS_i2IgTSlwFx6lEovX9I/edit?usp=sharing

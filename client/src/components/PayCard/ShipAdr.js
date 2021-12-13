@@ -86,6 +86,7 @@ const ShipAdr = ({handleNext, handleBack}) => {
 		zip: user?.zip || '' ,
 	}
 
+
 	let customer = isLoggedIn ? {...userData} : unregistered
 	let canceled = isLoggedIn ? false : ''
 	const order = {
