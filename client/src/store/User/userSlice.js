@@ -1,12 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { getUserByToken , getUserOrders } from '../../utils/API/userAPI'
 
+
 const initialState = {
 	token: localStorage.getItem('userToken') || null,
 	data: null,
 	error: null,
 	isLoading: false,
-	unregistered: null,
+	order: null,
 	orders : null,
 }
 
@@ -17,6 +18,7 @@ export const fetchUser = createAsyncThunk(
 		return response.data
 	}
 )
+
 
 export const fetchUserOrders = createAsyncThunk(
 	'user/fetchUserOrders',
@@ -46,8 +48,9 @@ const userSlice = createSlice({
 			state.data = null
 			return state
 		},
-		setUnregistered(state,action) {
-			state.unregistered = action.payload
+
+		setOrder(state,action) {
+			state.order = action.payload
 		}
 	},
 	extraReducers: {

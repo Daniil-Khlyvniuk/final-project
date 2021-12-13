@@ -12,6 +12,7 @@ import userSlice from './User'
 import favoritesSlice from './Favorites/favoritesSlice'
 import snackBar from './SnackBar'
 
+
 const store = configureStore({
 	reducer: {
 		slides: sliderSlice,
