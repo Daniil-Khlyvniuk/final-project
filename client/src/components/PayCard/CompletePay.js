@@ -13,8 +13,6 @@ const CompletePay = () => {
 
 
 
-
-
 	const clear = () => {
 		localStorage.setItem('Unregistered','[]')
 	}

@@ -115,7 +115,6 @@ const ShipAdr = ({handleNext, handleBack}) => {
 		localStorage.setItem('ORDER', JSON.stringify(order))
 	}
 
-
 	return (
 		<div>
 			<Formik
