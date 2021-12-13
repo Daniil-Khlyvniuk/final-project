@@ -23,7 +23,7 @@ export default function BasicTabs() {
 		if(pathname === '/user-profile'  ) {
 			setValue(0)
 		} else if(pathname === '/purchase' ){setValue(1)}
-		else if(pathname === '/favorite'){setValue(2)}
+		else if(pathname === '/favorites'){setValue(2)}
 		else {
 			setValue(0)
 		}
@@ -51,7 +51,7 @@ export default function BasicTabs() {
 				>
 					<Tab label="My Profile" component={Link} to={'/user-profile'} {...a11yProps(0)} />
 					<Tab label="My purchases" component={Link} to={'/purchase'} {...a11yProps(1)} />
-					<Tab label="Favorites" component={Link} to={'/favorite'} {...a11yProps(2)} />
+					<Tab label="Favorites" component={Link} to={'/favorites'} {...a11yProps(2)} />
 				</Tabs>
 			</Box>
 			<Switch>
@@ -61,7 +61,7 @@ export default function BasicTabs() {
 				<Route exact path={'/purchase'}>
 					<Orders/>
 				</Route>
-				<Route exact path={'/favorite'}>
+				<Route exact path={'/favorites'}>
 					<Box sx={{display: 'flex',
 						alignItems:'center',
 						justifyContent: 'center'}}>
