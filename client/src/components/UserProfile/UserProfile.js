@@ -22,7 +22,7 @@ const UserProfile = () => {
 					variant='body1'
 					component={'div'}
 					color='primary'
-					fontSize='12px'
+					fontSize='14px'
 					textAlign='center'
 					sx={{mt:'5px'}}
 				>
