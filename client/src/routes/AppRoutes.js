@@ -27,6 +27,8 @@ const AppRoutes = () => {
 			<Route exact path='/subscription/:email'><HandleSubscribe /></Route>
 			<ProtectedRoute exact path='/checkout'><Checkout /></ProtectedRoute>
 			<ProtectedRoute exact path='/user-profile'><UserProfilePage /></ProtectedRoute>
+			<ProtectedRoute exact path='/purchase'><UserProfilePage /></ProtectedRoute>
+			<ProtectedRoute exact path='/favorite'><UserProfilePage /></ProtectedRoute>
 			<Route exact path='/complete-order'><CompletePay /></Route>
 			<Route exact path='*'><Page404 /></Route>
 		</Switch>

@@ -74,7 +74,7 @@ const UserForm = () => {
 				letterSpacing='3px'
 				textAlign='center'
 				component={'div'}
-				sx={{ mb: '25px', mt: '10px' }}
+				sx={{ mb: '25px', mt: '30px' }}
 			>
 				Personal information
 			</Typography>
