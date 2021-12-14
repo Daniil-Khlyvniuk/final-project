@@ -56,9 +56,9 @@ const FORM_VALIDATION = Yup.object().shape({
 		.required('required'),
 })
 
-const ShipAdr = ({handleNext, handleBack}) => {
+const ShipAdr = ({ handleNext, handleBack }) => {
 	const token = useSelector(userSelectors.getToken())
-	let unregistered =  JSON.parse(localStorage.getItem('Unregistered')|| '[]')
+	let unregistered = JSON.parse(localStorage.getItem('Unregistered') || '[]')
 	const shoppingBag = JSON.parse(localStorage.getItem('shoppingBag') || '[]')
 	const [userData, setUserData] = useState(null)
 	const [BuyGoods, setBuyGoods] = useState({})
@@ -67,38 +67,41 @@ const ShipAdr = ({handleNext, handleBack}) => {
 	const { handleSnack } = UseSnack()
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect( async() => {
+	useEffect(async () => {
 		setBuyGoods(shoppingBag)
-		try {
-			const res = await axios('/api/customers/customer')
-			const data = await res.data
-			await setUserData(data)
-		} catch (e) {
-			handleSnack({ message: 'Price range error', style: 'warning' })
+		if (isLoggedIn === true) {
+			try {
+				const res = await axios('/api/customers/customer')
+				const data = await res.data
+				await setUserData(data)
+			} catch (e) {
+				handleSnack({ message: 'Price range error', style: 'warning' })
+			}
 		}
-	},[])
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
 	const INITIAL_FORM_STATE = {
-		firstName:user?.lastName || '',
-		lastName: user?.lastName ||'',
+		firstName: user?.lastName || '',
+		lastName: user?.lastName || '',
 		email: user?.email || '',
 		phone: user?.phone || '',
 		address: user?.address || '',
 		city: user?.city || '',
 		country: user?.country || '',
-		zip: user?.zip || '' ,
+		zip: user?.zip || '',
 	}
 
 
-	let customer = isLoggedIn ? {...userData} : unregistered
-	let canceled = isLoggedIn ? false : ''
+	let customer = isLoggedIn ? { ...userData } : unregistered
+	let userId = isLoggedIn ? customer._id : '61b8813806744e13c4efc6a0'
 	const order = {
 		products: [{
 			cartQuantity: BuyGoods.length,
 			product: BuyGoods,
 		}],
-		canceled: canceled,
-		customerId:	customer._id,
+		canceled: false,
+		customerId: userId,
 		deliveryAddress: {
 			country: customer.country,
 			city: customer.city,
@@ -126,10 +129,10 @@ const ShipAdr = ({handleNext, handleBack}) => {
 				validationSchema={FORM_VALIDATION}
 				onSubmit={(values) => {
 
-					const update ={
+					const update = {
 						firstName: values.firstName,
 						lastName: values.lastName,
-						email:values.email,
+						email: values.email,
 						phone: values.phone,
 						address: values.address,
 						city: values.city,
@@ -137,10 +140,12 @@ const ShipAdr = ({handleNext, handleBack}) => {
 						zip: values.zip,
 
 					}
-					{isLoggedIn ?
-						axios.put('/api/customers', update , {
-							headers: {Authorization : token}
-						}): localStorage.setItem('Unregistered' , JSON.stringify(update))}
+					{
+						isLoggedIn ?
+							axios.put('/api/customers', update, {
+								headers: { Authorization: token }
+							}) : localStorage.setItem('Unregistered', JSON.stringify(update))
+					}
 				}}
 			>
 				{({ handleSubmit, isValid, dirty }) => (
@@ -153,9 +158,9 @@ const ShipAdr = ({handleNext, handleBack}) => {
 							letterSpacing='3px'
 							// textAlign='center'
 							component={'div'}
-							sx={{mb:'25px', mt:'10px'}}
+							sx={{ mb: '25px', mt: '10px' }}
 						>
-						Shipping Details
+							Shipping Details
 						</Typography>
 						<div style={border} />
 						<Grid container spacing={2}>
@@ -207,7 +212,7 @@ const ShipAdr = ({handleNext, handleBack}) => {
 								<TextInput name="phone" label="Phone number *" />
 							</Grid>
 						</Grid>
-						<Box style={border}/>
+						<Box style={border} />
 						<Box sx={{
 							display: 'flex',
 							justifyContent: 'space-between',
@@ -218,7 +223,7 @@ const ShipAdr = ({handleNext, handleBack}) => {
 									fontSize: '18px',
 									color: '#373F41',
 								}}
-								onClick={()=> {
+								onClick={() => {
 									handleBack()
 								}}
 							><ArrowBackIosNewIcon
@@ -238,14 +243,14 @@ const ShipAdr = ({handleNext, handleBack}) => {
 									top: '102%',
 									cursor: 'pointer',
 								}}
-								onClick={ async () => {
+								onClick={async () => {
 									await sendOrder()
 									handleSubmit()
-									{isValid &&  handleNext()}
+									{ isValid && handleNext() }
 								}}
 								variant="contained"
 							>
-							NEXT
+								NEXT
 							</Button>
 						</Box>
 					</Form>

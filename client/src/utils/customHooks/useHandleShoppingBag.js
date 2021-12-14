@@ -2,13 +2,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import {shoppingBagSelectors} from '../../store/shoppingBag'
 import * as shoppingBagActions from '../../store/shoppingBag/shoppingBagSlice'
 import cartAPI from '../../utils/API/cartAPI'
-// import { ProductSelector } from '../../store/product'
+import { userSelectors } from '../../store/user'
+// import { ProductSelector } from '../../store/Product'
 
 export default function useHandleShoppingBag() {
 	const dispatch = useDispatch()
 	const shoppingBag = useSelector(shoppingBagSelectors.getShoppingBag())
 	const totalPrice = shoppingBag?.reduce((acc, value)=>acc+value.currentPrice,0)
 	// const activeProduct = useSelector(ProductSelector.getProduct())
+	const user = useSelector(userSelectors.getData())
+	const isLoggedIn = !!user
 
 
 	const add =  (product) => {
@@ -16,7 +19,7 @@ export default function useHandleShoppingBag() {
 		const newShoppingBag = [...shoppingBag, ...[product]]
 		localStorage.setItem('shoppingBag', JSON.stringify(newShoppingBag))
 		dispatch(shoppingBagActions.addToShoppingBag(newShoppingBag))
-		cartAPI.addProductToCart(product._id)
+		{isLoggedIn ? cartAPI.addProductToCart(product._id): null}
 	}
 
 	const remove = async (id) => {
@@ -28,7 +31,7 @@ export default function useHandleShoppingBag() {
 
 		localStorage.setItem('shoppingBag', JSON.stringify(newShoppingBag))
 		dispatch(shoppingBagActions.removeFromShoppingBag(newShoppingBag))
-		await cartAPI.deleteProductFromCart(id)
+		{isLoggedIn ? await cartAPI.deleteProductFromCart(id) : null}
 	}
 
 
@@ -38,11 +41,11 @@ export default function useHandleShoppingBag() {
 
 		localStorage.setItem('shoppingBag', JSON.stringify(newShoppingBag))
 		dispatch(shoppingBagActions.removeFromShoppingBag(newShoppingBag))
-		await cartAPI.deleteCart(id)
+		{isLoggedIn ? await cartAPI.deleteCart(id) : null}
 	}
 
 	const AfterBuy = async () => {
-		await cartAPI.clearCart()
+		{isLoggedIn ? await cartAPI.clearCart() : null}
 		localStorage.setItem('shoppingBag', [])
 		dispatch(shoppingBagActions.removeFromShoppingBag([]))
 	}
