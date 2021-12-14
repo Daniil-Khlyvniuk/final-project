@@ -17,7 +17,7 @@ export const SING_UP_SCHEMA = yup.object().shape({
 		.strict(true)
 		.trim(isNotTrimmedError)
 		.min(3, 'Must be longer than 3 characters')
-		.max(20, 'Nice try, nobody has a first name that long')
+		.max(20, 'Nice try, nobody has a last name that long')
 		.required(IS_REQUIRED)
 		.matches(STR_REGEX, 'Invalid symbols, use only character'),
 	lastName: yup.string()

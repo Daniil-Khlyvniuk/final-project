@@ -6,7 +6,7 @@ import { Button, GlobalStyles, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { Box } from '@mui/system'
 import { useDispatch } from 'react-redux'
-import modalActions from '../../store/Modal'
+import modalActions from '../../store/modal'
 
 const style = {
 	modal: {

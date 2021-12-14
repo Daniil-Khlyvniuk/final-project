@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Box, Grid, Typography } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
-import productActions, { productsSelectors } from '../../store/Products'
+import productActions, { productsSelectors } from '../../store/products'
 import { useLocation } from 'react-router-dom'
 import queryString from 'query-string'
 import productsAPI from '../../utils/API/productsAPI'

@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import productsReducer, { productsSelectors } from '../../store/Products'
+import productsReducer, { productsSelectors } from '../../store/products'
 import axios from 'axios'
 import Carousel from '../Carousel/Carousel'
-import { ProductSelector } from '../../store/Product'
+import { ProductSelector } from '../../store/product'
 
 
 const RelatedItemsList = () => {

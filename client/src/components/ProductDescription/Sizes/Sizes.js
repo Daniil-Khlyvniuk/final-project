@@ -1,7 +1,7 @@
 import React, { useState} from 'react'
 import {Tab, Tabs} from '@mui/material'
 import {useSelector} from 'react-redux'
-import {ProductSelector} from '../../../store/Product'
+import {ProductSelector} from '../../../store/product'
 import {useHistory} from 'react-router'
 
 

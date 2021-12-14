@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { FormControl, InputAdornment, OutlinedInput, Slider, Box, styled, Typography } from '@mui/material'
 import productsAPI from '../../utils/API/productsAPI'
 import {useSelector} from 'react-redux'
-import {filterSelectors} from '../../store/Filter'
+import {filterSelectors} from '../../store/filter'
 
 import useFilterHandler from '../../utils/customHooks/useFilterHandler'
 

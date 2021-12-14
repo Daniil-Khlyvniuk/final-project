@@ -1,12 +1,12 @@
 import {useHistory} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
-import {filterSelectors, filterOperations} from '../../store/Filter'
-import {productsOperations} from '../../store/Products'
+import {filterSelectors, filterOperations} from '../../store/filter'
+import {productsOperations} from '../../store/products'
 import settingsApi from '../API/settingsApi'
 import {returnObjectWithoutZeroVal} from '../helpers/objectHelper'
 
 import {parseQueryStringWithNoZero, returnMode} from '../helpers/stringHelper'
-import {settingsSelectors} from '../../store/Settings'
+import {settingsSelectors} from '../../store/settings'
 
 const useFilterHandler = () => {
 	const dispatch = useDispatch()

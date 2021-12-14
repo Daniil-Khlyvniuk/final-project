@@ -4,10 +4,10 @@ import IconButton from '@mui/material/IconButton'
 import LocalMallIcon from '@mui/icons-material/LocalMall'
 import { useStyles } from './styles'
 import { useSelector, useDispatch } from 'react-redux'
-import modalActions from '../../../../store/Modal'
+import modalActions from '../../../../store/modal'
 import CartModal from '../../../Modal/CartModal/CartModal'
 
-import { shoppingBagSelectors } from '../../../../store/ShoppingBag'
+import { shoppingBagSelectors } from '../../../../store/shoppingBag'
 import { Box } from '@mui/system'
 
 const Carticon = () => {

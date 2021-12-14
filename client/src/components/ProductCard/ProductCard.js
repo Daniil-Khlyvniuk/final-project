@@ -8,9 +8,9 @@ import FavoriteIcon from '@mui/icons-material/Favorite'
 import { Link } from 'react-router-dom'
 import { stringSlice } from '../../utils/helpers/stringHelper'
 import { useDispatch, useSelector } from 'react-redux'
-import { userSelectors } from '../../store/User'
-import { favoritesOperations, favoritesSelectors } from '../../store/Favorites'
-import modalActions from '../../store/Modal'
+import { userSelectors } from '../../store/user'
+import { favoritesOperations, favoritesSelectors } from '../../store/favorites'
+import modalActions from '../../store/modal'
 import LoginModal from '../Modal/LoginModal/LoginModal'
 
 const ProductCard = ({ _id, image, title, price }) => {

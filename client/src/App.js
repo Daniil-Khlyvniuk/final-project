@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
 import Header from './components/NavBar/NavBar'
 import Footer from './components/Footer'
-import AppRoutes from './routes/AppRoutes'
+import AppRoutes from './routes/appRoutes'
 import { useSelector, useDispatch } from 'react-redux'
-import { modalSelectors } from './store/Modal'
+import { modalSelectors } from './store/modal'
 import useAuth from './utils/customHooks/useAuth'
 import ScrollButton from './components/ScrollButton/ScrollButton'
 import RootSnackBar from './components/UI/RootSnackBar'
-import { settingsOperations } from './store/Settings'
+import { settingsOperations } from './store/settings'
 
 import UseScrollToTop from './utils/customHooks/useScrollToTop'
 

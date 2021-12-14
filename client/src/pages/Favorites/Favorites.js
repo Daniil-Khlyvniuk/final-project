@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Button, Container, Grid, Typography } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
-import { favoritesOperations, favoritesSelectors } from '../../store/Favorites'
+import { favoritesOperations, favoritesSelectors } from '../../store/favorites'
 import { Box } from '@mui/system'
 import BackdropLoader from '../../components/UI/BackdropLoader/BackdropLoader'
 import { Link } from 'react-router-dom'

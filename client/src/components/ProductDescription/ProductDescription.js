@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {useSelector} from 'react-redux'
-import {ProductSelector} from '../../store/Product'
+import {ProductSelector} from '../../store/product'
 import SocialLinks from '../SocialLInks'
 import AccordionProduct from './Accordion/Accordion'
 import ColorPalette from './ColorPalette/ColorPalette'

@@ -12,7 +12,7 @@ import LogoutIconHeader from './NavBarIcons/LogoutIcon/LogoutIcon'
 import ProfileIcon from './NavBarIcons/ProfileIcon/ProfileIcon'
 import { useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { userSelectors } from '../../store/User'
+import { userSelectors } from '../../store/user'
 
 const Navbar = () => {
 	const classes = useStyles()
