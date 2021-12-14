@@ -7,6 +7,7 @@ import ColorPalette from './ColorPalette/ColorPalette'
 import Sizes from './Sizes/Sizes'
 import ActionButtons from './ActionButtons/ActionButtons'
 import {Box, Typography, Divider} from '@mui/material'
+import UseSeo from '../../utils/customHooks/useSeo'
 
 import{useProductDescriptionStyle} from '../../utils/customHooks/useProductDescriptionStyle'
 
@@ -19,7 +20,6 @@ const ProductDescription = () => {
 	const classes = useProductDescriptionStyle()
 
 	const sale = activeProduct.currentPrice + 1 < activeProduct.previousPrice
-
 
 	useEffect(()=>{
 		if(activeProduct.quantity <= 0){
@@ -35,6 +35,16 @@ const ProductDescription = () => {
 
 	return (
 		<Box>
+			<UseSeo
+				title = {parent ? parent.name : 'Product Details'}
+				description = {parent ? parent.description : 'Product details'}
+				keywords = {
+					parent 
+						? `${parent.name}, ${parent.manufacturer},  ${parent.brand}, 
+						${parent.seller}, ${parent.manufacturerCountry}` 
+						: null
+				}
+			/>
 			<Box className={classes.header}>
 				<Typography
 					color={'primary'}
