@@ -1,9 +1,16 @@
 import { Box, Typography } from '@mui/material'
+import PropTypes from 'prop-types'
 import React from 'react'
 import DropDownSelect from '../../../components/Catalog/DropDownSelect'
 
 
-const MatchedProducts = () => {
+const MatchedProducts = (
+	{
+		search_term,
+		perPageArray,
+		perPage,
+		setPerPage
+	}) => {
 	return (
 		<Box
 			sx={ {
@@ -17,23 +24,25 @@ const MatchedProducts = () => {
 				variant="h2"
 				sx={ { fontSize: { md: 32, xs: 25 } } }
 			>
-				{/* eslint-disable-next-line no-undef */ }
 				{ `Search results for "${ search_term }"` }
 			</Typography>
-			{/* eslint-disable-next-line no-undef */ }
 			{ perPageArray.length && (
 				<DropDownSelect
-					/* eslint-disable-next-line no-undef */
 					arrayToIterate={ perPageArray }
-					/* eslint-disable-next-line no-undef */
 					selectedValue={ perPage }
-					/* eslint-disable-next-line no-undef */
 					selectHandler={ setPerPage }
 					label={ 'Show' }
 				/>
 			) }
 		</Box>
 	)
+}
+
+MatchedProducts.propTypes = {
+	search_term: PropTypes.string.isRequired,
+	perPageArray: PropTypes.array.isRequired,
+	perPage: PropTypes.number.isRequired,
+	setPerPage: PropTypes.func.isRequired
 }
 
 export default MatchedProducts

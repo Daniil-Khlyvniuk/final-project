@@ -15,8 +15,8 @@ import MatchedProductsTitle from './SearchComponent/MatchedProductsTitle'
 
 
 const Search = () => {
-	const [  setPerPageArray ] = useState([])
-	const [ perPage ] = useState(5)
+	const [  perPageArray, setPerPageArray ] = useState([])
+	const [ perPage, setPerPage ] = useState(5)
 	const [ , setStartPage ] = useState(1)
 	const [ hasMore, setHasMore ] = useState(true)
 	const products = useSelector(productsSelectors.getProducts())
@@ -24,6 +24,12 @@ const Search = () => {
 	const dispatch = useDispatch()
 	let location = useLocation()
 	const { search_term } = queryString.parse(location.search)
+	const title = search_term ? `Search by word ${ search_term }` : 'Search Page'
+	const description = search_term ? `Search products by word ${ search_term }` : 'Search products'
+	const keywords = search_term
+		? `${ search_term }, ${ 'search products' }, search products by word ${ search_term }`
+		: null
+
 	const matchedProducts = products?.map(item => (
 		<Grid item md={ 6 } sm={ 6 } xs={ 12 } key={ item.variants._id }>
 			<ProductCard
@@ -35,10 +41,6 @@ const Search = () => {
 			/>
 		</Grid>
 	))
-
-	const keywords = search_term
-		? `${ search_term }, ${ 'search products' }, search products by word ${ search_term }`
-		: null
 
 	const newProductsHandler = () => {
 		setHasMore(true)
@@ -59,8 +61,7 @@ const Search = () => {
 							setHasMore(false)
 						}
 					})
-					.catch(err => {
-						console.error(err)
+					.catch(() => {
 						dispatch(productActions.setAllProducts([]))
 					})
 			} else {
@@ -85,10 +86,8 @@ const Search = () => {
 							setHasMore(false)
 						}
 					})
-					.catch(err => {
+					.catch(() => {
 						setHasMore(true)
-						// eslint-disable-next-line no-console
-						console.error(err)
 						dispatch(productActions.setAllProducts([]))
 					})
 			} else {
@@ -102,7 +101,7 @@ const Search = () => {
 	useEffect(() => {
 		filterApi.getFiltersByType('perPage')
 			.then(resp => setPerPageArray(resp.data))
-			.catch(err => console.log('Search Err', err))
+			// .catch(err => console.log('Search Err', err))
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
@@ -114,8 +113,8 @@ const Search = () => {
 	return (
 		<>
 			<UseSeo
-				title={ search_term ? `Search by word ${ search_term }` : 'Search Page' }
-				description={ search_term ? `Search products by word ${ search_term }` : 'Search products' }
+				title={ title }
+				description={ description }
 				keywords={ keywords }
 			/>
 			<Container maxWidth="lg" sx={ { minWidth: 320 } }>
@@ -124,7 +123,12 @@ const Search = () => {
 					&&
 					<BackdropLoader open={ isLoading } />
 				}
-				<MatchedProductsTitle isAnyMatched={ !products.length } />
+				<MatchedProductsTitle
+					search_term={search_term}
+					perPageArray={perPageArray}
+					perPage={perPage}
+					setPerPage={setPerPage}
+					isAnyMatched={ !!products.length  } />
 				<InfiniteScroll
 					style={ {
 						display: 'flex',

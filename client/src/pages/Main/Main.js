@@ -10,6 +10,7 @@ import UseSeo from '../../utils/customHooks/useSeo'
 
 const Main = () => {
 	const slides = useSelector(slidesSelectors.getSlides())
+	const seoWords = 'bedroom, Kitchen, Loungewear, bedding store, luxury bedding sets, king size bedspreads, king bed sheets, comforters on sale'
 
 	const dispatch = useDispatch()
 	useEffect(() => {
@@ -21,7 +22,7 @@ const Main = () => {
 			<UseSeo
 				title={ 'Bedding Shop' }
 				description={ 'Bedding Shop, all for ' }
-				keywords={ 'bedroom, Kitchen, Loungewear, bedding store, luxury bedding sets, king size bedspreads, king bed sheets, comforters on sale' }
+				keywords={ seoWords }
 			/>
 			<Container maxWidth="lg" sx={ { minWidth: 320 } }>
 				<Carousel slides={ slides } main={ true } />

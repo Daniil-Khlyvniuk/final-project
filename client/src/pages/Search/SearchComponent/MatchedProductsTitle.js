@@ -4,18 +4,19 @@ import MatchedProducts from './matchedProducts'
 import NotMatched from './NotMatched'
 
 
-const MatchedProductsTitle = ({ isAnyMatched }) => {
+const MatchedProductsTitle = ({ isAnyMatched, ...rest }) => {
 	return (
-		!isAnyMatched
+		isAnyMatched
 			?
-			<NotMatched/>
+			<MatchedProducts { ...rest }/>
 			:
-			<MatchedProducts />
+			<NotMatched  />
 	)
 }
 
 MatchedProductsTitle.propTypes = {
-	isAnyMatched: PropTypes.bool.isRequired
+	isAnyMatched: PropTypes.bool.isRequired,
+	rest: PropTypes.object.isRequired,
 }
 
 export default MatchedProductsTitle

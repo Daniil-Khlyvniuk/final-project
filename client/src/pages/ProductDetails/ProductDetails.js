@@ -3,8 +3,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import Carousel from '../../components/Carousel/Carousel'
-import ProductDescription
-	from '../../components/ProductDescription/ProductDescription'
+import ProductDescription from '../../components/ProductDescription/ProductDescription'
 import RelatedItemsList from '../../components/RelatedItems/RelatedItemsList'
 import BackdropLoader from '../../components/UI/BackdropLoader/BackdropLoader'
 import { favoritesOperations } from '../../store/Favorites'
@@ -48,7 +47,6 @@ const ProductDetails = () => {
 					productId: res.payload._id
 				}))
 				dispatch(ProductOperations.fetchAllVariants(res.payload._id))
-
 			})
 
 		return function cleanup() {
