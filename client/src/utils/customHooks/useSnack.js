@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux'
-import {snackBarOperations} from '../../store/SnackBar'
+import {snackBarOperations} from '../../store/snackBar'
 
 const UseSnack = () => 
 {

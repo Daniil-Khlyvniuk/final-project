@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { userSelectors } from '../../store/User'
+import { userSelectors } from '../../store/user'
 import { useSelector } from 'react-redux'
 import BackdropLoader from '../UI/BackdropLoader/BackdropLoader'
 

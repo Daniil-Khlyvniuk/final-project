@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux'
-import {shoppingBagSelectors} from '../../store/ShoppingBag'
-import * as shoppingBagActions from '../../store/ShoppingBag/shoppingBagSlice'
+import {shoppingBagSelectors} from '../../store/shoppingBag'
+import * as shoppingBagActions from '../../store/shoppingBag/shoppingBagSlice'
 import cartAPI from '../../utils/API/cartAPI'
-import { userSelectors } from '../../store/User'
+import { userSelectors } from '../../store/user'
 // import { ProductSelector } from '../../store/Product'
 
 export default function useHandleShoppingBag() {

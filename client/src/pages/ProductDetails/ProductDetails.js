@@ -1,13 +1,13 @@
 import React, { useEffect  } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import productActions, { ProductOperations, ProductSelector } from '../../store/Product'
+import productActions, { ProductOperations, ProductSelector } from '../../store/product'
 import {Container, Grid, Box, Typography, styled} from '@mui/material'
 import ProductDescription from '../../components/ProductDescription/ProductDescription'
 import Carousel from '../../components/Carousel/Carousel'
 import RelatedItemsList from '../../components/RelatedItems/RelatedItemsList'
 import BackdropLoader from '../../components/UI/BackdropLoader/BackdropLoader'
-import { favoritesOperations } from '../../store/Favorites'
+import { favoritesOperations } from '../../store/favorites'
 
 const ProductDetails = () => {
 	const { id } = useParams()

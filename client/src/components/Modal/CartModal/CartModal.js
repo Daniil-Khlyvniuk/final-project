@@ -6,10 +6,10 @@ import { Button, GlobalStyles, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { Box } from '@mui/system'
 import { useDispatch, useSelector } from 'react-redux'
-import modalActions from '../../../store/Modal'
+import modalActions from '../../../store/modal'
 import { style } from './styles'
 import { useStyles } from '../../ShoppingBagCard/styles'
-import { shoppingBagSelectors } from '../../../store/ShoppingBag'
+import { shoppingBagSelectors } from '../../../store/shoppingBag'
 
 const CartModal = () => {
 	const { shoppingBag, totalPrice } = useHandleShoppingBag()

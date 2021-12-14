@@ -3,7 +3,7 @@ import { Container } from '@mui/material'
 import CardList from '../../components/CardList/CardList'
 import Popular from '../../components/Popular/Popular'
 import Carousel from '../../components/Carousel/Carousel'
-import { slidesOperations, slidesSelectors } from '../../store/Slider'
+import { slidesOperations, slidesSelectors } from '../../store/slider'
 import { useDispatch, useSelector } from 'react-redux'
 import UseSeo from '../../utils/customHooks/useSeo'
 

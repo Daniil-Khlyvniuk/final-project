@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Box, } from '@mui/material'
 import filterApi from '../../utils/API/filterApi'
-import { filterSelectors } from '../../store/Filter'
+import { filterSelectors } from '../../store/filter'
 import { useSelector } from 'react-redux'
 
 import useFilterHandler from '../../utils/customHooks/useFilterHandler'

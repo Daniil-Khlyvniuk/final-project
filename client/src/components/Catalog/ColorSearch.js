@@ -3,7 +3,7 @@ import { ToggleButtonGroup,ToggleButton 	} from '@mui/material'
 import CircleIcon from '@mui/icons-material/Circle'
 import colorAPI from '../../utils/API/colorAPI'
 import {useSelector} from 'react-redux'
-import {filterSelectors} from '../../store/Filter'
+import {filterSelectors} from '../../store/filter'
 import useFilterHandler from '../../utils/customHooks/useFilterHandler'
 import Icon from '../UI/Icon'
 
