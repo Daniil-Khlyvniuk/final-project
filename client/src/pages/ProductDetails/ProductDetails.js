@@ -3,15 +3,17 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import Carousel from '../../components/Carousel/Carousel'
-import ProductDescription from '../../components/ProductDescription/ProductDescription'
+import ProductDescription
+	from '../../components/ProductDescription/ProductDescription'
 import RelatedItemsList from '../../components/RelatedItems/RelatedItemsList'
 import BackdropLoader from '../../components/UI/BackdropLoader/BackdropLoader'
-import { favoritesOperations } from '../../store/Favorites'
+import { favoritesOperations } from '../../store/favorites'
 import productActions, {
 	ProductOperations,
 	ProductSelector
-} from '../../store/Product'
+} from '../../store/product'
 import UseSeo from '../../utils/customHooks/useSeo'
+
 
 const ProductDetails = () => {
 	const { id } = useParams()

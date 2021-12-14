@@ -3,9 +3,9 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import { IconButton } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
-import { favoritesOperations } from '../../../store/Favorites'
+import { favoritesOperations } from '../../../store/favorites'
 import PropTypes from 'prop-types'
-import { userSelectors } from '../../../store/User'
+import { userSelectors } from '../../../store/user'
 
 const Favoriteicon = ({ id }) => {
 	const user = useSelector(userSelectors.getToken())

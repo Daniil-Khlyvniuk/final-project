@@ -1,7 +1,7 @@
 import React, { useState} from 'react'
 import {Box, ToggleButton, ToggleButtonGroup} from '@mui/material'
 import CircleIcon from '@mui/icons-material/Circle'
-import productActions, {ProductSelector} from '../../../store/Product'
+import productActions, {ProductSelector} from '../../../store/product'
 import {useDispatch, useSelector} from 'react-redux'
 import {useHistory} from 'react-router'
 

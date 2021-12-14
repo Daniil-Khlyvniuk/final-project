@@ -6,7 +6,7 @@ import CatalogAccordion from './CatalogAccordion'
 import PriceRange from './PriceRange'
 import SearchSize from './SearchSize'
 import { useSelector } from 'react-redux'
-import {filterSelectors} from '../../store/Filter'
+import {filterSelectors} from '../../store/filter'
 // import SearchFabrik from './SearchFabrik'
 
 

@@ -1,13 +1,12 @@
+import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import { filterSelectors, filterOperations } from '../../store/Filter'
-import { productsOperations } from '../../store/Products'
+import { filterOperations, filterSelectors } from '../../store/filter'
+import { productsOperations } from '../../store/products'
+import { settingsSelectors } from '../../store/settings'
 import settingsApi from '../API/settingsApi'
 import { returnObjectWithoutZeroVal } from '../helpers/objectHelper'
-
 import { parseQueryStringWithNoZero, returnMode } from '../helpers/stringHelper'
-import { settingsSelectors } from '../../store/Settings'
-
+import UseSnack from './useSnack'
 
 
 const useFilterHandler = () => {
@@ -15,6 +14,7 @@ const useFilterHandler = () => {
 	const history = useHistory()
 	const isLaunchedByUser = useSelector(filterSelectors.getIsLaunchedByUser())
 	const settingsRedux = useSelector(settingsSelectors.getData())
+	const { handleSnack } = UseSnack()
 
 	const getSettings = async () => {
 		try {
@@ -22,8 +22,7 @@ const useFilterHandler = () => {
 			const mode = returnMode()
 			return settingsRes.data[0][mode]['settings']
 		} catch (err) {
-			// eslint-disable-next-line no-console
-			console.log('settings request err', err)
+			handleSnack({ message: 'Settings request err', style: 'warning' })
 		}
 	}
 
@@ -71,8 +70,8 @@ const useFilterHandler = () => {
 			settings = returnObjectWithoutZeroVal(settings)
 
 			dispatch(filterOperations.setFiltersFromUri(
-				{ ...settings, ...urlParams })
-			)
+				{ ...settings, ...urlParams }
+			))
 			dispatch(productsOperations.fetchProductsByFilter())
 		}
 	}

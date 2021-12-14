@@ -1,9 +1,9 @@
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
-import { userOperations, userSelectors} from '../../store/User'
+import { userOperations, userSelectors} from '../../store/user'
 import { loginUser, registerUser } from '../API/userAPI'
 import {subscribeTemlate} from '../emailTemplates'
-import modalActions from '../../store/Modal'
+import modalActions from '../../store/modal'
 import useSnack from './useSnack'
 
 const useAuth = () => {
@@ -12,8 +12,6 @@ const useAuth = () => {
 	const token = useSelector(userSelectors.getToken())
 	const checkToken = () => 
 	{
-		// eslint-disable-next-line no-console
-		console.log('axios.defaults',axios.defaults)
 		if (token) {
 			axios.defaults.headers.Authorization = token
 			dispatch(userOperations.fetchUser())

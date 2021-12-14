@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import CardList from '../../components/CardList/CardList'
 import Carousel from '../../components/Carousel/Carousel'
 import Popular from '../../components/Popular/Popular'
-import { slidesOperations, slidesSelectors } from '../../store/Slider'
+import { slidesOperations, slidesSelectors } from '../../store/slider'
 import UseSeo from '../../utils/customHooks/useSeo'
 
 

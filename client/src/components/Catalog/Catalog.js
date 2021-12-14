@@ -3,12 +3,12 @@ import { useSelector } from 'react-redux'
 import { Box, Grid, Typography } from '@mui/material'
 import CardInCatalog from '../CardInCatalog/CardInCatalog'
 import { styled } from '@mui/styles'
-import { productsSelectors } from '../../store/Products'
+import { productsSelectors } from '../../store/products'
 import useFilterHandler from '../../utils/customHooks/useFilterHandler'
 import BackdropLoader from '../UI/BackdropLoader/BackdropLoader'
 import Loader from '../UI/Loader/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import { filterSelectors } from '../../store/Filter'
+import { filterSelectors } from '../../store/filter'
 
 
 const StyledTypography = styled(Typography)(() => ({

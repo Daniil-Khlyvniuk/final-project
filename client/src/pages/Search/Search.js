@@ -11,11 +11,12 @@ import productActions, { productsSelectors } from '../../store/Products'
 import filterApi from '../../utils/API/filterApi'
 import productsAPI from '../../utils/API/productsAPI'
 import UseSeo from '../../utils/customHooks/useSeo'
+import UseSnack from '../../utils/customHooks/useSnack'
 import MatchedProductsTitle from './SearchComponent/MatchedProductsTitle'
 
 
 const Search = () => {
-	const [  perPageArray, setPerPageArray ] = useState([])
+	const [ perPageArray, setPerPageArray ] = useState([])
 	const [ perPage, setPerPage ] = useState(5)
 	const [ , setStartPage ] = useState(1)
 	const [ hasMore, setHasMore ] = useState(true)
@@ -41,6 +42,7 @@ const Search = () => {
 			/>
 		</Grid>
 	))
+	const { handleSnack } = UseSnack()
 
 	const newProductsHandler = () => {
 		setHasMore(true)
@@ -60,15 +62,16 @@ const Search = () => {
 						if (data.length < perPage) {
 							setHasMore(false)
 						}
-					})
-					.catch(() => {
+					}).catch(err => {
+						handleSnack({ message: err, style: 'warning' })
 						dispatch(productActions.setAllProducts([]))
 					})
 			} else {
 				dispatch(productActions.setAllProducts([]))
 			}
 			return defPage
-		})
+		}
+		)
 	}
 
 	const scrollProductsHandler = () => {
@@ -86,8 +89,13 @@ const Search = () => {
 							setHasMore(false)
 						}
 					})
-					.catch(() => {
+					.catch((err) => {
 						setHasMore(true)
+						handleSnack({
+							message: err,
+							style: 'warning'
+						}
+						)
 						dispatch(productActions.setAllProducts([]))
 					})
 			} else {
@@ -101,7 +109,7 @@ const Search = () => {
 	useEffect(() => {
 		filterApi.getFiltersByType('perPage')
 			.then(resp => setPerPageArray(resp.data))
-			// .catch(err => console.log('Search Err', err))
+			.catch(err => handleSnack({ message: err, style: 'warning' }))
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
@@ -124,11 +132,11 @@ const Search = () => {
 					<BackdropLoader open={ isLoading } />
 				}
 				<MatchedProductsTitle
-					search_term={search_term}
-					perPageArray={perPageArray}
-					perPage={perPage}
-					setPerPage={setPerPage}
-					isAnyMatched={ !!products.length  } />
+					search_term={ search_term }
+					perPageArray={ perPageArray }
+					perPage={ perPage }
+					setPerPage={ setPerPage }
+					isAnyMatched={ !!products.length } />
 				<InfiniteScroll
 					style={ {
 						display: 'flex',

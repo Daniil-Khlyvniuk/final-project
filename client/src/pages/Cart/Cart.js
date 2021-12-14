@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import Stepper from '../../components/Stepper/Stepper'
-import { favoritesOperations } from '../../store/Favorites'
+import { favoritesOperations } from '../../store/favorites'
 import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
 import UseSeo from '../../utils/customHooks/useSeo'
 import EmptyBag from './emptybag'

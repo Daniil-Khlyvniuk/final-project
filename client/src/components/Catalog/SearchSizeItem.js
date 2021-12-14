@@ -3,7 +3,7 @@ import {Checkbox, FormControlLabel} from '@mui/material'
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked'
 import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked'
 import { useSelector } from 'react-redux'
-import { filterSelectors } from '../../store/Filter'
+import { filterSelectors } from '../../store/filter'
 import useFilterHandler from '../../utils/customHooks/useFilterHandler'
 import PropTypes from 'prop-types'
 

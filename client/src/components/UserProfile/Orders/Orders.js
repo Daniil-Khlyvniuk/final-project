@@ -1,7 +1,7 @@
 import React from 'react'
 import {Button, Typography, Box, Chip, Divider} from '@mui/material'
 import {Link} from 'react-router-dom'
-import { userSelectors} from '../../../store/User'
+import { userSelectors} from '../../../store/user'
 import { useSelector} from 'react-redux'
 import Loader from '../../UI/Loader/Loader'
 import ShoppingBagCard from '../../ShoppingBagCard/ShoppingBagCard'
