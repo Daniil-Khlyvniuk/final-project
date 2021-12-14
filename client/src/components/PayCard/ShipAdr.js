@@ -12,6 +12,7 @@ import * as Yup from 'yup'
 import { phoneRegExp } from '../UserProfile/UserForm/data/Regex'
 import PropTypes from 'prop-types'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
+import UseSnack from '../../utils/customHooks/useSnack'
 
 
 
@@ -63,6 +64,7 @@ const ShipAdr = ({handleNext, handleBack}) => {
 	const [BuyGoods, setBuyGoods] = useState({})
 	const user = useSelector(userSelectors.getData())
 	const isLoggedIn = !!user
+	const { handleSnack } = UseSnack()
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect( async() => {
@@ -72,7 +74,7 @@ const ShipAdr = ({handleNext, handleBack}) => {
 			const data = await res.data
 			await setUserData(data)
 		} catch (e) {
-			console.log('ee',e)
+			handleSnack({ message: 'Price range error', style: 'warning' })
 		}
 	},[])
 

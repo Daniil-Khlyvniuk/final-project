@@ -9,9 +9,7 @@ import Btn from './Btn'
 import { useSelector } from 'react-redux'
 import { userSelectors } from '../../store/user'
 import axios from 'axios'
-
-
-
+import UseSnack from '../../utils/customHooks/useSnack'
 
 const PayCc = () => {
 	const [selectedValue, setSelectedValue] = useState('a')
@@ -21,9 +19,8 @@ const PayCc = () => {
 	const [BuyGoods, setBuyGoods] = useState({})
 	const user = useSelector(userSelectors.getData())
 	const isLoggedIn = !!user
+	const { handleSnack } = UseSnack()
 
-
-	console.log('sadasd',unregistered)
 	useEffect( async() => {
 		setBuyGoods(shoppingBag)
 		try {
@@ -31,7 +28,7 @@ const PayCc = () => {
 			const data = await res.data
 			await setUserData(data)
 		} catch (e) {
-			console.log('ee',e)
+			handleSnack({ message: 'Server response error', style: 'warning' })
 		}
 	},[])
 

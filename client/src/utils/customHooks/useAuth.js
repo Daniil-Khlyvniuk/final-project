@@ -12,8 +12,6 @@ const useAuth = () => {
 	const token = useSelector(userSelectors.getToken())
 	const checkToken = () => 
 	{
-		// eslint-disable-next-line no-console
-		console.log('axios.defaults',axios.defaults)
 		if (token) {
 			axios.defaults.headers.Authorization = token
 			dispatch(userOperations.fetchUser())

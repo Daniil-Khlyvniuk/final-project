@@ -40,7 +40,6 @@ const CartModal = () => {
 	const dispatch = useDispatch()
 	const handleClose = () => dispatch(modalActions.modalToggle(false))
 
-	console.log(shoppingBag)
 	return (
 		<BasicModal
 			style={style.modal}

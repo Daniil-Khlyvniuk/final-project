@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { FormControl, InputAdornment, OutlinedInput, Slider, Box, styled, Typography } from '@mui/material'
 import productsAPI from '../../utils/API/productsAPI'
-import {useSelector} from 'react-redux'
-import {filterSelectors} from '../../store/filter'
-
+import { useSelector } from 'react-redux'
+import { filterSelectors } from '../../store/filter'
 import useFilterHandler from '../../utils/customHooks/useFilterHandler'
+import UseSnack from '../../utils/customHooks/useSnack'
 
 const PriceRangeInput = styled(OutlinedInput)(() => ({
 	height: '22px',
@@ -21,10 +21,11 @@ const StyledBugs = styled(Typography)(() => ({
 const minDistance = 100
 
 const PriceRange = () => {
-	const {handleFilterChange} = useFilterHandler()
-	const {minPrice, maxPrice} = useSelector(filterSelectors.getFilters())
+	const { handleFilterChange } = useFilterHandler()
+	const { minPrice, maxPrice } = useSelector(filterSelectors.getFilters())
 	const [defaultMaxPrice, setDefaultMaxPrice] = useState(0)
-	const [value, setValue] = useState([0,1000])
+	const [value, setValue] = useState([0, 1000])
+	const { handleSnack } = UseSnack()
 
 	const rangeSelector = (event, newValue, activeThumb) => {
 		if (!Array.isArray(newValue)) {
@@ -38,27 +39,26 @@ const PriceRange = () => {
 	}
 
 	const handleRange = (event, newValue) => {
-		handleFilterChange('priceRange',newValue)
+		handleFilterChange('priceRange', newValue)
 	}
 
 	const getPriceFilters = async () => {
-		try{
+		try {
 			const res = await productsAPI.getMinMaxPrice()
 			setDefaultMaxPrice(res.data[0].max)
 		}
-		catch(err){
-			// eslint-disable-next-line no-console
-			console.log('priceRange err', err)
+		catch (err) {
+			handleSnack({ message: 'Price range error', style: 'warning' })
 		}
 	}
 	useEffect(() => {
-		setValue([minPrice,maxPrice])
-	},[minPrice,maxPrice])
+		setValue([minPrice, maxPrice])
+	}, [minPrice, maxPrice])
 
-	useEffect(()=>{
+	useEffect(() => {
 		getPriceFilters()
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	},[])
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
 	return (
 		<Box>
@@ -80,7 +80,7 @@ const PriceRange = () => {
 					},
 				}}
 			/>
-			<Box 
+			<Box
 				sx={{
 					display: 'flex',
 					flexWrap: 'wrap',

@@ -1,9 +1,11 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import useSnack from '../../utils/customHooks/useSnack'
 
 const UseMakeFullProduct = () => {
 	const [product, setProduct] = useState([])
+	const { handleSnack } = useSnack()
 
 	useEffect(() => {
 		axios('http://localhost:5000/api/products')
@@ -11,9 +13,9 @@ const UseMakeFullProduct = () => {
 				setProduct(res.data)
 			})
 			.catch(err => {
-				// eslint-disable-next-line no-console
-				console.log('err', err)
+				handleSnack({ message: err, style: 'warning' })
 			})
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	useEffect(() => {

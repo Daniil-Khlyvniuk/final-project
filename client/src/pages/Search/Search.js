@@ -12,6 +12,7 @@ import DropDownSelect from '../../components/Catalog/DropDownSelect'
 import Loader from '../../components/UI/Loader/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import UseSeo from '../../utils/customHooks/useSeo'
+import UseSnack from '../../utils/customHooks/useSnack'
 
 const Search = () => {
 	const [perPageArray, setPerPageArray] = useState([])
@@ -24,6 +25,7 @@ const Search = () => {
 	const dispatch = useDispatch()
 	let location = useLocation()
 	const { search_term } = queryString.parse(location.search)
+	const { handleSnack } = UseSnack()
 
 	const newProductsHandler = () => {
 		setHasMore(true)
@@ -46,8 +48,7 @@ const Search = () => {
 						}
 					})
 					.catch(err => {
-						// eslint-disable-next-line no-console
-						console.error(err)
+						handleSnack({ message: err, style: 'warning' })
 						dispatch(productActions.setAllProducts([]))
 					})
 			}
@@ -77,8 +78,7 @@ const Search = () => {
 					})
 					.catch(err => {
 						setHasMore(true)
-						// eslint-disable-next-line no-console
-						console.error(err)
+						handleSnack({ message: err, style: 'warning' })
 						dispatch(productActions.setAllProducts([]))
 					})
 			}
@@ -93,8 +93,7 @@ const Search = () => {
 	useEffect(() => {
 		filterApi.getFiltersByType('perPage')
 			.then(resp => setPerPageArray(resp.data))
-			// eslint-disable-next-line no-console
-			.catch(err => console.log('Search Err', err))
+			.catch(err => handleSnack({ message: err, style: 'warning' }))
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
