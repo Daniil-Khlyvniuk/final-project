@@ -7,9 +7,7 @@ import ProductDescription from '../../components/ProductDescription/ProductDescr
 import Carousel from '../../components/Carousel/Carousel'
 import RelatedItemsList from '../../components/RelatedItems/RelatedItemsList'
 import BackdropLoader from '../../components/UI/BackdropLoader/BackdropLoader'
-import UseSeo from '../../utils/customHooks/useSeo'
 import { favoritesOperations } from '../../store/Favorites'
-
 
 const ProductDetails = () => {
 	const { id } = useParams()
@@ -51,6 +49,8 @@ const ProductDetails = () => {
 	}, [id, dispatch])
 
 
+
+
 	if(isLoading){
 		return (
 			<Container
@@ -65,34 +65,22 @@ const ProductDetails = () => {
 	}
 
 	return (
-		<>
-			<UseSeo
-				title = {parent ? parent.name : 'Product Details'}
-				description = {parent ? parent.description : 'Product details'}
-				keywords = {
-					parent 
-						? `${parent.name}, ${parent.manufacturer},  ${parent.brand}, 
-						${parent.seller}, ${parent.manufacturerCountry}` 
-						: null
-				}
-			/>
-			<Container maxWidth="lg" sx={{ mt: '80px' }}>
-				{activeProduct && <>
-					<Grid container spacing={4}>
-						<Grid item md={6} xs={12}>
-							<Carousel slides={activeProduct.imageUrls} product={true}/>
-						</Grid>
-						<Grid item md={6} xs={12}>
-							<ProductDescription/>
-						</Grid>
+		<Container maxWidth="lg" sx={{ mt: '80px' }}>
+			{activeProduct && <>
+				<Grid container spacing={4}>
+					<Grid item md={6} xs={12}>
+						<Carousel slides={activeProduct.imageUrls} product={true}/>
 					</Grid>
-					<Box style={{marginTop: '80px'}}>
-						<RelatedItemsList/>
-					</Box>
-				</>
-				}
-			</Container>
-		</>
+					<Grid item md={6} xs={12}>
+						<ProductDescription/>
+					</Grid>
+				</Grid>
+				<Box style={{marginTop: '80px'}}>
+					<RelatedItemsList/>
+				</Box>
+			</>
+			}
+		</Container>
 	)
 
 }

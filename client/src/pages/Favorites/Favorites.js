@@ -6,7 +6,7 @@ import { Box } from '@mui/system'
 import BackdropLoader from '../../components/UI/BackdropLoader/BackdropLoader'
 import { Link } from 'react-router-dom'
 import ProductCard from '../../components/ProductCard/ProductCard'
-import UseSeo from '../../utils/customHooks/useHelmet'
+import UseSeo from '../../utils/customHooks/useSeo'
 
 const Favorites = () => {
 	const favorites = useSelector(favoritesSelectors.getFavorites())
