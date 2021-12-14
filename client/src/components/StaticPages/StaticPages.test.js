@@ -10,6 +10,7 @@ const mockFetchData =  async page => {
 	const url = `/api/pages/${page}`
 	return await axios.get(url)
 }
+
 const setUp = () => {
 	return render(
 		<Provider store={store}>
@@ -42,7 +43,6 @@ describe('Testing static pages', () => {
 		it('good response',  async () => {
 			const data = {}
 			jest.spyOn(axios, 'get').mockResolvedValue({})
-
 			await  expect(mockFetchData('careers')).toMatchObject(data)
 		})
 		it('bad response', async ()=>{
