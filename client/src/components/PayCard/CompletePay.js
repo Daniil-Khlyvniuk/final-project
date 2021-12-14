@@ -50,12 +50,6 @@ const CompletePay = () => {
 
 	sendOrder()
 
-	const sendOrder = () => {
-		localStorage.setItem('ORDER', JSON.stringify(order))
-		ordersAPI.placeOrder(order)
-	}
-
-	sendOrder()
 	return (
 		<Box style={{textAlign: 'center', margin: '7rem 0'}}>
 			<Typography fontSize={32} sx={{mb: '14px', mt: '85px'}} variant={'h2'}>

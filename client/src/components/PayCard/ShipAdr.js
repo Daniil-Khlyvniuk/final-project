@@ -67,13 +67,14 @@ const ShipAdr = ({handleNext, handleBack}) => {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect( async() => {
 		setBuyGoods(shoppingBag)
-		try {
-			const res = await axios('/api/customers/customer')
-			const data = await res.data
-			await setUserData(data)
-		} catch (e) {
-			console.log('ee',e)
-		}
+		if (isLoggedIn === true) {
+			try {
+				const res = await axios('/api/customers/customer')
+				const data = await res.data
+				await setUserData(data)
+			} catch (e) {
+				console.log('ee',e)
+			} }
 	},[])
 
 	const INITIAL_FORM_STATE = {
@@ -89,14 +90,14 @@ const ShipAdr = ({handleNext, handleBack}) => {
 
 
 	let customer = isLoggedIn ? {...userData} : unregistered
-	let canceled = isLoggedIn ? false : ''
+	let userId = isLoggedIn ? customer._id : '61b8813806744e13c4efc6a0'
 	const order = {
 		products: [{
 			cartQuantity: BuyGoods.length,
 			product: BuyGoods,
 		}],
-		canceled: canceled,
-		customerId:	customer._id,
+		canceled: false,
+		customerId:	userId,
 		deliveryAddress: {
 			country: customer.country,
 			city: customer.city,
