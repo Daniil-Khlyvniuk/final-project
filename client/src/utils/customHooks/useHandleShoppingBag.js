@@ -42,9 +42,9 @@ export default function useHandleShoppingBag() {
 	}
 
 	const AfterBuy = async () => {
+		await cartAPI.clearCart()
 		localStorage.setItem('shoppingBag', [])
 		dispatch(shoppingBagActions.removeFromShoppingBag([]))
-		await cartAPI.clearCart()
 	}
 
 	return {

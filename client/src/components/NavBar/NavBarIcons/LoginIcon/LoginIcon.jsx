@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux'
 import modalActions from '../../../../store/Modal'
 import LoginModal from '../../../Modal/LoginModal/LoginModal'
 
+
 const LoginIcon = () => {
 	const classes = useStyles()
 	const dispatch = useDispatch()

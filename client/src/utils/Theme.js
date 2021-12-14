@@ -112,7 +112,6 @@ const theme = createTheme({
 							borderTopRightRadius: 0,
 							borderBottomRightRadius: 0,
 						},
-
 					}
 				}
 			]
@@ -136,7 +135,6 @@ const theme = createTheme({
 				},
 			]
 		},
-
 		MuiTabs:{
 			variants: [
 				{
