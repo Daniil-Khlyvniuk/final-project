@@ -90,6 +90,7 @@ exports.addProduct = async (req, res) => {
       product,
     });
 
+
     product.variants.push(newVariant);
     const updatedProduct = await Product.findByIdAndUpdate(
       product._id,
@@ -339,6 +340,7 @@ exports.getProducts = async (req, res, next) => {
         perDocumentLimit: 1,
       })
 
+
     const result = filterOneVariant(products)
 
     res.json(result);
@@ -408,6 +410,7 @@ exports.searchProducts = async (req, res, next) => {
 	const [, projectGroup] = getProductAggregateParams()
 	const perPage = Number(req.body.perPage) || 1000;
 	const startPage = Number(req.body.startPage) || 1;
+
 
 
 	try {
@@ -580,4 +583,5 @@ exports.getVariants = async (req, res, next) => {
 		})
 	}
 }
+
 

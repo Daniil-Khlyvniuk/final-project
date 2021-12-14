@@ -10,7 +10,6 @@ const Sizes = () => {
 	const history = useHistory()
 
 
-
 	const activeProduct = useSelector(ProductSelector.getProduct())
 	const allSizes = useSelector(ProductSelector.allSizes())
 	const variants = useSelector(ProductSelector.allVariants())

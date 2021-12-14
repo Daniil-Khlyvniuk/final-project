@@ -9,6 +9,7 @@ import useSnack from '../../../../utils/customHooks/useSnack'
 const LogoutIconHeader = () => {
 	const classes = useStyles()
 	const dispatch = useDispatch()
+
 	const { handleSnack } = useSnack()
 
 	return (

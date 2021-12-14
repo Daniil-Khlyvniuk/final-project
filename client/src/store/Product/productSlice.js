@@ -80,5 +80,6 @@ const productSlice = createSlice({
 	}
 })
 
+
 export const { clearSizes, clearActiveProduct } = productSlice.actions
 export default productSlice.reducer

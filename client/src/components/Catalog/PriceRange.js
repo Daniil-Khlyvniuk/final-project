@@ -51,7 +51,6 @@ const PriceRange = () => {
 			console.log('priceRange err', err)
 		}
 	}
-
 	useEffect(() => {
 		setValue([minPrice,maxPrice])
 	},[minPrice,maxPrice])

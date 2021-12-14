@@ -25,7 +25,7 @@ const getCart = () => {
 		.catch(() => null)
 }
 
-const deleteCart = (productId) => {
+const 	deleteCart = (productId) => {
 	return axios
 		.delete(`/api/cart/${productId}`, getAuthHeader())
 		.then(res => res?.data)
