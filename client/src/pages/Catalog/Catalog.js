@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { filterSelectors } from '../../store/Filter'
+import { filterSelectors } from '../../store/filter'
 import { textStyle, useStyles } from './styles'
 import useFilterHandler from '../../utils/customHooks/useFilterHandler'
 

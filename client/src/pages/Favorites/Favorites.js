@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import ProductCard from '../../components/ProductCard/ProductCard'
 import BackdropLoader from '../../components/UI/BackdropLoader/BackdropLoader'
-import { favoritesOperations, favoritesSelectors } from '../../store/Favorites'
+import { favoritesOperations, favoritesSelectors } from '../../store/favorites'
 import UseSeo from '../../utils/customHooks/useSeo'
 import FavoritesTitle from './FavoritesElems/FavoritesTitle'
 
