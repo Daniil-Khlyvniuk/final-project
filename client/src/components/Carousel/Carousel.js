@@ -186,7 +186,7 @@ const Carousel = ({
 
 			{related &&
 				<>
-					<h3 className={style.relatedTitle}>RELATED ITEMS</h3>
+					<h3 className={style.relatedTitle}>RECENTLY VIEWED ITEMS</h3>
 					<Slider
 						{...settingRelated}
 						className={`${style.related}`}
