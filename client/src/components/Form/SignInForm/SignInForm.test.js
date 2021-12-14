@@ -11,7 +11,7 @@ describe('Smoke test SignInForm', () => {
 		render(
 			<Provider store={store}>
 				<BrowserRouter>
-					<SignInForm/>
+					<SignInForm />
 				</BrowserRouter>
 			</Provider>
 		)
@@ -30,26 +30,26 @@ describe('Smoke test SignInForm', () => {
 })
 
 describe("Testing formik on SignInForm", () => {
-	it('should rendering and submitting a basic Formik form',   () => {
+	it('should rendering and submitting a basic Formik form', () => {
 		const handleSubmit = jest.fn()
 		render(
 			<Provider store={store}>
 				<BrowserRouter>
-					<SignInForm/>
+					<SignInForm />
 				</BrowserRouter>
 			</Provider>
 		)
 
-		userEvent.type(screen.getByLabelText(/First Name/i), 'Gogi')
-		userEvent.type(screen.getByLabelText(/Last Name/i), 'GogiSurname')
-		userEvent.type(screen.getByLabelText(/Login/i), 'nickname')
-		userEvent.type(screen.getByLabelText(/Email/i), 'gogi123@gmail.com')
-		userEvent.type(screen.getByTestId(/password/i), 'qwerty12345')
-		userEvent.type(screen.getByLabelText(/Confirm Passwor/i), 'qwerty12345')
+		userEvent.type(screen.getByTestId('firstName'), 'Gogi')
+		userEvent.type(screen.getByTestId('lastName'), 'GogiSurname')
+		userEvent.type(screen.getByTestId('login'), 'nickname')
+		userEvent.type(screen.getByTestId('email'), 'gogi123@gmail.com')
+		userEvent.type(screen.getByTestId('password'), 'qwerty12345')
+		userEvent.type(screen.getByTestId('confirmPass'), 'qwerty12345')
 
-		userEvent.click(screen.getByTestId('submit', {type: /submit/i}))
+		userEvent.click(screen.getByTestId('submit', { type: /submit/i }))
 
-		 waitFor(() =>
+		waitFor(() =>
 			expect(handleSubmit).toHaveBeenCalledWith({
 				firstname: 'Gogi',
 				lastname: 'GogiSurname',

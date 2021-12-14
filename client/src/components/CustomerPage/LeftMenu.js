@@ -29,12 +29,12 @@ const LeftMenu = ({data}) => {
 			open={isMobileMenuOpen}
 			onClose={handleMobileMenuClose}
 		>
-			{data && data.tabs.map(tab => {
+			{data && data.tabs.map((tab, index) => {
 				if(tab.id){
 					return (
 						<MenuItem
 							onClick={handleMobileMenuClose}
-							key={tab.tabTitle}>
+							key={index}>
 							<HashLink
 								style={{color:'black', textDecoration:'none'}}
 								smooth
@@ -70,7 +70,7 @@ const LeftMenu = ({data}) => {
 							sx={{lineHeight:'24px', textTransform:'uppercase'}}>
 							{data.title}
 						</Typography>
-						{data && data.tabs.map(tab => {
+						{data && data.tabs.map((tab, index) => {
 							return (
 								<Typography
 									fontSize={'16px'}
@@ -78,7 +78,7 @@ const LeftMenu = ({data}) => {
 										textTransform:'uppercase',
 										letterSpacing:'0.04em' ,marginTop:'25px'}}
 									underline="none"
-									key={tab.tabTitle}>
+									key={index}>
 									{tab.tabTitle}
 								</Typography>
 							)

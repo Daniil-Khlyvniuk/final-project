@@ -3,7 +3,6 @@ import { TextField } from '@mui/material'
 import { useField } from 'formik'
 import PropTypes from 'prop-types'
 
-// eslint-disable-next-line react/prop-types
 const TextInput = ({ name,...rest }) => {
 	const [field, meta] = useField(name)
 

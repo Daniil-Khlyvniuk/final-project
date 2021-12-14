@@ -3,10 +3,11 @@ import { useSelector, useDispatch } from 'react-redux'
 import { filterSelectors, filterOperations } from '../../store/Filter'
 import { productsOperations } from '../../store/Products'
 import settingsApi from '../API/settingsApi'
-import { returnObjectWithoutZeroVal } from '../../utils/helpers/objectHelper'
+import { returnObjectWithoutZeroVal } from '../helpers/objectHelper'
 
 import { parseQueryStringWithNoZero, returnMode } from '../helpers/stringHelper'
 import { settingsSelectors } from '../../store/Settings'
+
 
 
 const useFilterHandler = () => {

@@ -12,7 +12,6 @@ const Cart = () => {
 	const dispatch = useDispatch()
 	const favorites = JSON.parse(localStorage.getItem('favorites')) || []
 
-
 	useEffect(() => {
 		favoritesOperations.fetchFavorites(favorites)(dispatch)
 		// eslint-disable-next-line react-hooks/exhaustive-deps

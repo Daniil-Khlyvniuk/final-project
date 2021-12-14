@@ -49,6 +49,7 @@ const Favorites = () => {
 					isLoading
 					&&
 					<BackdropLoader open={ isLoading } />
+
 				}
 				<FavoritesTitle isEmpty={ !favoriteID.length } />
 				<Grid container spacing={ 2 } sx={ { marginBottom: '40px' } }>

@@ -9,6 +9,8 @@ import { favoritesOperations, favoritesSelectors } from '../../../store/Favorite
 import LoginModal from '../../Modal/LoginModal/LoginModal'
 import useHandleShoppingBag from '../../../utils/customHooks/useHandleShoppingBag'
 import { userSelectors } from '../../../store/User'
+import useSnack from '../../../utils/customHooks/useSnack'
+import { useTheme } from '@mui/styles'
 
 const ActionButtons = () => {
 	// eslint-disable-next-line no-unused-vars
@@ -23,8 +25,8 @@ const ActionButtons = () => {
 	const allSizes = useSelector(ProductSelector.allSizes())
 	const allColors = useSelector(ProductSelector.allColors())
 	const parent = useSelector(ProductSelector.getParent())
-
-
+	const {handleSnack} = useSnack()
+	const theme = useTheme()
 
 	const addToFavorites = () => {
 		if (!localStorage.getItem('favorites')) localStorage.setItem('favorites', JSON.stringify([]))
@@ -43,7 +45,11 @@ const ActionButtons = () => {
 		<>
 			<Button
 				disableRipple
-				sx={{ mx: '13px', padding: { lg: '21px 33px', md: '16px', sm: '10px' } }}
+				disabled={activeProduct.quantity < 1}
+				sx={{ mx: '13px',
+					padding: { lg: '21px 33px', md: '16px', sm: '10px' },
+					[theme.breakpoints.between('766', '860')] : {fontSize :'9px'}
+				}}
 				variant={'contained'}
 				onClick={() => {
 					// eslint-disable-next-line max-len
@@ -51,7 +57,7 @@ const ActionButtons = () => {
 					// eslint-disable-next-line max-len
 					const activeColorName = allColors.filter(i => i._id === activeProduct.color)
 					// eslint-disable-next-line no-console
-					console.log('ActiveSizeName',activeColorName)
+
 					handleShoppingBag.add({
 						...activeProduct,
 						size:activeSizeName[0].size.name,
@@ -60,13 +66,17 @@ const ActionButtons = () => {
 						description: parent.description
 
 					})
+					handleSnack({message: 'Successfully added to shopping bug', style: 'success'})
 				}}
 			>
 				ADD TO BAG
 			</Button>
 			<Button disableRipple
 				title={favoritesStorage.includes(activeProduct._id) ? 'remove from favorites' : 'add to favorites'}
-				sx={{ padding: { lg: '22px', md: '16px', sm: '12px', xs: '9px' } }} variant={'contained'}
+				sx={{
+					padding: { lg: '22px', md: '16px', sm: '12px', xs: '9px' },
+					[theme.breakpoints.between('766', '860')] : {padding :'12px'}
+				}} variant={'contained'}
 				onClick={!user
 					? async () => {
 						await handleOpen(<LoginModal />)

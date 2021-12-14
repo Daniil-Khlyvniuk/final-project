@@ -7,6 +7,7 @@ import ColorPalette from './ColorPalette/ColorPalette'
 import Sizes from './Sizes/Sizes'
 import ActionButtons from './ActionButtons/ActionButtons'
 import {Box, Typography, Divider} from '@mui/material'
+import UseSeo from '../../utils/customHooks/useSeo'
 
 import{useProductDescriptionStyle} from '../../utils/customHooks/useProductDescriptionStyle'
 
@@ -18,11 +19,12 @@ const ProductDescription = () => {
 
 	const classes = useProductDescriptionStyle()
 
+	const sale = activeProduct.currentPrice + 1 < activeProduct.previousPrice
 
 	useEffect(()=>{
-		if(activeProduct.quantity === 0){
+		if(activeProduct.quantity <= 0){
 			setAvailable('pre-order')
-		}else if(activeProduct.quantity < 5){
+		}else if(activeProduct.quantity < 5 && activeProduct.quantity > 0 ){
 			setAvailable(`low on stock! 
 			 ${activeProduct.quantity} left`)
 		} else {
@@ -33,6 +35,16 @@ const ProductDescription = () => {
 
 	return (
 		<Box>
+			<UseSeo
+				title = {parent ? parent.name : 'Product Details'}
+				description = {parent ? parent.description : 'Product details'}
+				keywords = {
+					parent 
+						? `${parent.name}, ${parent.manufacturer},  ${parent.brand}, 
+						${parent.seller}, ${parent.manufacturerCountry}` 
+						: null
+				}
+			/>
 			<Box className={classes.header}>
 				<Typography
 					color={'primary'}
@@ -76,6 +88,16 @@ const ProductDescription = () => {
 						fontWeight={600}>
 						USD ${activeProduct.currentPrice}.00
 					</Typography>
+					{sale && <Typography
+						sx={{
+							textTransform:'uppercase',
+							textDecoration: 'line-through',
+							color:'#B8B8B8'
+						}}
+						fontSize={18}
+						fontWeight={600}>
+						USD ${activeProduct.previousPrice}.00
+					</Typography>}
 					<Typography
 						sx={{textTransform:'uppercase'}}
 						fontSize={14}

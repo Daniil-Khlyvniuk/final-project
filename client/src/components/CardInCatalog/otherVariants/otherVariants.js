@@ -46,8 +46,8 @@ const OtherVariants = ({ parentId, currColor }) => {
 
 
 OtherVariants.propTypes = {
-	parentId: PropTypes.string.isRequired,
-	currColor: PropTypes.object.isRequired
+	parentId: PropTypes.string,
+	currColor: PropTypes.object
 }
 
 export default OtherVariants

@@ -13,7 +13,6 @@ import productActions, {
 } from '../../store/Product'
 import UseSeo from '../../utils/customHooks/useSeo'
 
-
 const ProductDetails = () => {
 	const { id } = useParams()
 	const dispatch = useDispatch()

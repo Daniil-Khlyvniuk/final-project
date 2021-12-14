@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Form, Formik } from 'formik'
 import { Box, Button, Grid, Typography } from '@mui/material'
@@ -6,8 +6,8 @@ import { border } from './styles'
 import TextInput from '../UserProfile/UserForm/FormUI/Textfield'
 import SelectInput from '../UserProfile/UserForm/FormUI/SelectInput'
 import countries from '../UserProfile/UserForm/data/countries.json'
-import { useDispatch, useSelector } from 'react-redux'
-import { userOperations, userSelectors } from '../../store/User'
+import { useSelector } from 'react-redux'
+import { userSelectors } from '../../store/User'
 import * as Yup from 'yup'
 import { phoneRegExp } from '../UserProfile/UserForm/data/Regex'
 import PropTypes from 'prop-types'
@@ -56,10 +56,26 @@ const FORM_VALIDATION = Yup.object().shape({
 })
 
 const ShipAdr = ({handleNext, handleBack}) => {
-	const user = useSelector(userSelectors.getData())
 	const token = useSelector(userSelectors.getToken())
-	const dispatch = useDispatch()
+	let unregistered =  JSON.parse(localStorage.getItem('Unregistered')|| '[]')
+	const shoppingBag = JSON.parse(localStorage.getItem('shoppingBag') || '[]')
+	const [userData, setUserData] = useState(null)
+	const [BuyGoods, setBuyGoods] = useState({})
+	const user = useSelector(userSelectors.getData())
 	const isLoggedIn = !!user
+
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	useEffect( async() => {
+		setBuyGoods(shoppingBag)
+		if (isLoggedIn === true) {
+			try {
+				const res = await axios('/api/customers/customer')
+				const data = await res.data
+				await setUserData(data)
+			} catch (e) {
+				console.log('ee',e)
+			} }
+	},[])
 
 	const INITIAL_FORM_STATE = {
 		firstName:user?.lastName || '',
@@ -72,6 +88,35 @@ const ShipAdr = ({handleNext, handleBack}) => {
 		zip: user?.zip || '' ,
 	}
 
+
+	let customer = isLoggedIn ? {...userData} : unregistered
+	let userId = isLoggedIn ? customer._id : '61b8813806744e13c4efc6a0'
+	const order = {
+		products: [{
+			cartQuantity: BuyGoods.length,
+			product: BuyGoods,
+		}],
+		canceled: false,
+		customerId:	userId,
+		deliveryAddress: {
+			country: customer.country,
+			city: customer.city,
+			address: customer.address,
+			postal: customer.zip
+		},
+		orderNumber: null,
+		shipping: '',
+		paymentInfo: 'Credit card',
+		status: 'not shipped',
+		email: customer?.email,
+		mobile: customer.phone,
+		letterSubject: 'Thank you for order! You are welcome!',
+		letterHtml: null,
+	}
+
+	const sendOrder = () => {
+		localStorage.setItem('ORDER', JSON.stringify(order))
+	}
 
 	return (
 		<div>
@@ -94,7 +139,7 @@ const ShipAdr = ({handleNext, handleBack}) => {
 					{isLoggedIn ?
 						axios.put('/api/customers', update , {
 							headers: {Authorization : token}
-						}): dispatch(userOperations.setUnregistered(update)) && localStorage.setItem('Unregistered' , JSON.stringify(update))}
+						}): localStorage.setItem('Unregistered' , JSON.stringify(update))}
 				}}
 			>
 				{({ handleSubmit, isValid, dirty }) => (
@@ -137,6 +182,7 @@ const ShipAdr = ({handleNext, handleBack}) => {
 								<TextInput
 									name="email"
 									label="Email"
+									options={countries}
 								/>
 							</Grid>
 							<Grid item xs={12} md={6}>
@@ -191,9 +237,10 @@ const ShipAdr = ({handleNext, handleBack}) => {
 									top: '102%',
 									cursor: 'pointer',
 								}}
-								onClick={ () => {
+								onClick={ async () => {
+									await sendOrder()
 									handleSubmit()
-									{isValid &&  dirty && handleNext()}
+									{isValid &&  handleNext()}
 								}}
 								variant="contained"
 							>

@@ -1,64 +1,52 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Box, Button, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
 import cartAPI from '../../utils/API/cartAPI'
-import axios from 'axios'
-import { useSelector } from 'react-redux'
-import { userSelectors } from '../../store/User'
+// import ordersAPI from '../../utils/API/ordersAPI'
 
 const CompletePay = () => {
-	const newOrder = cartAPI.getCart()
+	// const Order = ordersAPI.placeOrder()
 	const OrderNum = Date.now()
 	const handleShoppingBag = useHandleShoppingBag()
-	const [userData, setUserData] = useState(null)
-	const [BuyGoods, setBuyGoods] = useState({})
-	const shoppingBag = JSON.parse(localStorage.getItem('shoppingBag') || '[]') || []
-	let unregistered =  JSON.parse(localStorage.getItem('Unregistered'))
-	
-	const user = useSelector(userSelectors.getData())
-	const isLoggedIn = !!user
+	const Order = JSON.parse(localStorage.getItem('ORDER') || '[]')
 
-
-
-	useEffect(() => {
-		axios('/api/customers/customer')
-			.then(res =>setUserData(res.data))
-		setBuyGoods(shoppingBag)
-		handleShoppingBag.AfterBuy()
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
-
-	useEffect(()=> {
-		cartAPI.addOrder(newOrder)
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	},[])
-
-
-	let customer = isLoggedIn ? {...userData} : unregistered
+	const clear = () => {
+		localStorage.setItem('Unregistered','[]')
+	}
 	const order = {
-		products: BuyGoods,
+		products: Order.products,
 		canceled: false,
-		customerId: customer?._id,
-		deliveryAddress: {
-			country: customer?.country,
-			city: customer?.city,
-			address: customer?.address,
-			postal: customer?.zip
-		},
+		customerId: Order.customerId,
+		deliveryAddress: Order.deliveryAddress,
 		orderNumber: OrderNum,
 		shipping: '',
 		paymentInfo: 'Credit card',
 		status: 'not shipped',
-		email: customer?.email,
-		mobile: customer?.phone,
+		email: Order.email,
+		mobile: Order.mobile,
 		letterSubject: 'Thank you for order! You are welcome!',
 		letterHtml:
 			`<h1>Your order is placed. OrderNo is ${OrderNum}.</h1>
 				<p>{Other details about order in your HTML}</p>`
 	}
 
-	localStorage.setItem('ORDER', JSON.stringify(order))
+
+	useEffect( async() =>	{
+		try {
+			await cartAPI.addOrder(order)
+			await handleShoppingBag.AfterBuy()
+		}
+		catch(error){
+			console.log('ee',error)
+		}
+	}, [])
+
+	const sendOrder = () => {
+		localStorage.setItem('ORDER', JSON.stringify(order))
+	}
+
+	sendOrder()
 
 	return (
 		<Box style={{textAlign: 'center', margin: '7rem 0'}}>
@@ -70,6 +58,9 @@ const CompletePay = () => {
 				<Button
 					variant={'contained'}
 					style={{marginTop: '2rem'}}
+					onClick={()=> {
+						clear()
+					}}
 				>CONTINUE SHOPPING</Button></Link>
 		</Box>
 	)

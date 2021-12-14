@@ -41,8 +41,8 @@ describe("Testing formik on LoginForm", () => {
 			</Provider>
 		)
 
-		userEvent.type(screen.getByLabelText(/Login or Emai/i), 'john.dee@someemail.com')
-		userEvent.type(screen.getByLabelText(/Password/i), 'qwerty1234')
+		userEvent.type(screen.getByTestId("loginOrEmail"), 'john.dee@someemail.com')
+		userEvent.type(screen.getByTestId("password"), 'qwerty1234')
 
 		userEvent.click(screen.getByTestId('button', {type: /submit/i}))
 
