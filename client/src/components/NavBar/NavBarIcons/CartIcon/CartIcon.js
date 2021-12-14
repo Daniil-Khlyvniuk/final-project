@@ -6,6 +6,7 @@ import { useStyles } from './styles'
 import { useSelector, useDispatch } from 'react-redux'
 import modalActions from '../../../../store/Modal'
 import CartModal from '../../../Modal/CartModal/CartModal'
+
 import { shoppingBagSelectors } from '../../../../store/ShoppingBag'
 import { Box } from '@mui/system'
 

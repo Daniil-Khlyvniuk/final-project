@@ -13,6 +13,9 @@ module.exports = async customerId => {
 				const dbProduct = await ProductVariant.findOne({
 					_id: cartItem.product._id
 				});
+
+
+
 				result.push({
 					_id: new mongoose.Types.ObjectId(),
 					product: dbProduct,

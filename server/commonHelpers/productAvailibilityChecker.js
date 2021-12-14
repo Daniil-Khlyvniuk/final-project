@@ -12,6 +12,8 @@ module.exports = async orderProducts => {
         result.push({
           productId: dbProduct._id,
           itemNo: dbProduct.itemNo,
+          color: dbProduct.color._id,
+          size: dbProduct.size._id,
           orderedQuantity,
           realQuantity,
           diff: realQuantity - orderedQuantity,

@@ -22,7 +22,7 @@ const SocialLinks = () =>
 		<StyledList 
 			disablePadding={true}
 		>
-			<StyledListItem>
+			<StyledListItem sx={{px: 2}}>
 				<LinkMui
 					href="https://facebook.com" 
 					target="_blank"
