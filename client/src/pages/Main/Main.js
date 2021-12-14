@@ -5,7 +5,7 @@ import Popular from '../../components/Popular/Popular'
 import Carousel from '../../components/Carousel/Carousel'
 import { slidesOperations, slidesSelectors } from '../../store/Slider'
 import { useDispatch, useSelector } from 'react-redux'
-import UseSeo from '../../utils/customHooks/useSeo'
+import UseSeo from '../../utils/customHooks/useHelmet'
 
 const Main = () => {
 	const slides = useSelector(slidesSelectors.getSlides())

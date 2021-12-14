@@ -1,6 +1,6 @@
 import React from 'react'
 
-const UseHelmet = () => {
+const UseSeo = () => {
 
 	const returnCeo = ({lang, title, description, keywords}) => {
 		return (
@@ -16,4 +16,4 @@ const UseHelmet = () => {
 	return {returnCeo}
 }
 
-export default UseHelmet
+export default UseSeo

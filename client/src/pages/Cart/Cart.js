@@ -6,7 +6,7 @@ import { favoritesOperations } from '../../store/Favorites'
 import { useDispatch } from 'react-redux'
 import Stepper from '../../components/Stepper/Stepper'
 import { Box } from '@mui/system'
-import UseSeo from '../../utils/customHooks/useSeo'
+import UseSeo from '../../utils/customHooks/useHelmet'
 
 const Cart = () => {
 	const { shoppingBag } = useHandleShoppingBag()
