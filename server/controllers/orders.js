@@ -130,6 +130,7 @@ exports.placeOrder = async (req, res, next) => {
 	}
 }
 
+
 exports.updateOrder = (req, res, next) => {
 	Order.findOne({ _id: req.params.id }).then(async currentOrder => {
 		if (!currentOrder) {

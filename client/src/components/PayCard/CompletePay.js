@@ -11,8 +11,6 @@ const CompletePay = () => {
 	const handleShoppingBag = useHandleShoppingBag()
 	const Order = JSON.parse(localStorage.getItem('ORDER') || '[]')
 
-
-
 	const clear = () => {
 		localStorage.setItem('Unregistered','[]')
 	}
