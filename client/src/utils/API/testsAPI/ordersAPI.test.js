@@ -16,7 +16,7 @@ const mockUpdateOrder = async (orderId, updatedOrder)=>{
 }
 const mockCancelOrder = async (orderId)=>{
 	const url = `/orders/${orderId}`
-	return await axios.delete(`/orders/${orderId}`)
+	return await axios.delete(url)
 }
 
 
@@ -120,15 +120,5 @@ describe('testing orders api request', () => {
 			"message": "Order witn id \"5dac45d53c026f0dac1b3465\" is successfully deletes from DB. Order Details: { products: \n   [ { _id: '5dac20058b2cb420e0af4677',\n       product: [Object],\n       cartQuantity: 33 },\n     { _id: '5dac20058b2cb420e0af4676',\n       product: [Object],\n       cartQuantity: 3 } ],\n  canceled: true,\n  _id: 5dac45d53c026f0dac1b3465,\n  customerId: 5d99ce196d40fb1b747bc5f5,\n  deliveryAddress: \n   { country: 'Ukraine',\n     city: 'Kiev',\n     address: 'Kreshchatic Street 56//A',\n     postal: '01044' },\n  shipping: 'Kiev 50UAH',\n  paymentInfo: 'Credit card',\n  status: 'shipped',\n  email: 'saribeg@gmail.com',\n  mobile: '+380630000000',\n  letterSubject: 'Thank you for order! You are welcome!',\n  letterHtml: 'sfsdfsdfsdfsdf',\n  orderNo: '7553616',\n  totalSum: 4140,\n  date: 2019-10-20T11:32:37.035Z,\n  __v: 0 }"
 		})
 		await expect(mockCancelOrder(prodId)).resolves.toMatchObject({})
-	})
-
-	it('bad delete response', async () => {
-		axios.delete.mockImplementation(() => Promise.reject({}))
-	})
-	it('bad GET response', async () => {
-		axios.get.mockImplementation(() => Promise.reject({}))
-	})
-	it('bad PUT response', async () => {
-		axios.put.mockImplementation(() => Promise.reject({}))
 	})
 })
