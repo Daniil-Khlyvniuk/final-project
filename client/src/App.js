@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import Header from './components/NavBar/NavBar'
 import Footer from './components/Footer'
-import AppRoutes from './routes/appRoutes'
+import AppRoutes from './routes/AppRoutes'
 import { useSelector, useDispatch } from 'react-redux'
 import { modalSelectors } from './store/modal'
 import useAuth from './utils/customHooks/useAuth'
