@@ -1,12 +1,13 @@
+import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import { filterSelectors, filterOperations } from '../../store/filter'
+import { filterOperations, filterSelectors } from '../../store/filter'
 import { productsOperations } from '../../store/products'
+import { settingsSelectors } from '../../store/settings'
 import settingsApi from '../API/settingsApi'
 import { returnObjectWithoutZeroVal } from '../helpers/objectHelper'
 import { parseQueryStringWithNoZero, returnMode } from '../helpers/stringHelper'
-import { settingsSelectors } from '../../store/settings'
 import UseSnack from './useSnack'
+
 
 const useFilterHandler = () => {
 	const dispatch = useDispatch()
@@ -20,8 +21,7 @@ const useFilterHandler = () => {
 			const settingsRes = await settingsApi.getSettings()
 			const mode = returnMode()
 			return settingsRes.data[0][mode]['settings']
-		}
-		catch (err) {
+		} catch (err) {
 			handleSnack({ message: 'Settings request err', style: 'warning' })
 		}
 	}
@@ -59,8 +59,7 @@ const useFilterHandler = () => {
 		let settings
 		if (!settingsRedux) {
 			settings = await getSettings()
-		}
-		else {
+		} else {
 			settings = settingsRedux
 		}
 
