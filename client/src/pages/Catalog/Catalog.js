@@ -7,7 +7,7 @@ import ProductsCatalog from '../../components/Catalog/Catalog'
 import CategorySearch from '../../components/Catalog/CategorySearch'
 import HeadSearch from '../../components/Catalog/HeadSearch'
 import LeftSide from '../../components/Catalog/LeftSide'
-import UseSeo from '../../utils/customHooks/useHelmet'
+import UseSeo from '../../utils/customHooks/useSeo'
 
 const Catalog = () => {
 	const {onLoadingPage, restoreDefaults} = useFilterHandler()

@@ -7,7 +7,7 @@ import ProductDescription from '../../components/ProductDescription/ProductDescr
 import Carousel from '../../components/Carousel/Carousel'
 import RelatedItemsList from '../../components/RelatedItems/RelatedItemsList'
 import BackdropLoader from '../../components/UI/BackdropLoader/BackdropLoader'
-import UseSeo from '../../utils/customHooks/useHelmet'
+import UseSeo from '../../utils/customHooks/useSeo'
 import { favoritesOperations } from '../../store/Favorites'
 
 
