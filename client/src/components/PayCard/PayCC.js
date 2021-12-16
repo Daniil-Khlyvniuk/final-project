@@ -82,7 +82,7 @@ const PayCc = () => {
 		inputProps: { 'aria-label': item },
 	})
 	return (
-		<box>
+		<Box>
 			<Grid item xs={12}>
 				<Typography
 					variant='body1'
@@ -153,7 +153,7 @@ const PayCc = () => {
 				</div>
 				<Box style={border} />
 			</Grid>
-		</box>
+		</Box>
 	)
 }
 
