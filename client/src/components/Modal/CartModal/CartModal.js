@@ -46,7 +46,7 @@ const CartModal = () => {
 								style={style.title}>
 								TOTAL: USD ${totalPrice}.00
 							</Typography>
-							<Link exact='true' to={'/cart'} style={style.link}>
+							<Link to={'/cart'} style={style.link}>
 								<Button
 									onClick={handleClose}
 									variant={'contained'}
@@ -57,7 +57,6 @@ const CartModal = () => {
 							<Box>
 								{shoppingBag?.map((item, index) =>
 									(
-										// eslint-disable-next-line react/jsx-key
 										<Box
 											key={index}
 											sx={{
