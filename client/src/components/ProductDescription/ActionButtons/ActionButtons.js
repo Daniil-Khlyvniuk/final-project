@@ -3,17 +3,16 @@ import { Button } from '@mui/material'
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined'
 import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined'
 import { useDispatch, useSelector } from 'react-redux'
-import { ProductSelector } from '../../../store/Product'
-import modalActions from '../../../store/Modal'
-import { favoritesOperations, favoritesSelectors } from '../../../store/Favorites'
+import { ProductSelector } from '../../../store/product'
+import modalActions from '../../../store/modal'
+import { favoritesOperations, favoritesSelectors } from '../../../store/favorites'
 import LoginModal from '../../Modal/LoginModal/LoginModal'
 import useHandleShoppingBag from '../../../utils/customHooks/useHandleShoppingBag'
-import { userSelectors } from '../../../store/User'
+import { userSelectors } from '../../../store/user'
 import useSnack from '../../../utils/customHooks/useSnack'
 import { useTheme } from '@mui/styles'
 
 const ActionButtons = () => {
-	// eslint-disable-next-line no-unused-vars
 	const handleShoppingBag = useHandleShoppingBag()
 	const activeProduct = useSelector(ProductSelector.getProduct())
 	const dispatch = useDispatch()
@@ -25,7 +24,7 @@ const ActionButtons = () => {
 	const allSizes = useSelector(ProductSelector.allSizes())
 	const allColors = useSelector(ProductSelector.allColors())
 	const parent = useSelector(ProductSelector.getParent())
-	const {handleSnack} = useSnack()
+	const { handleSnack } = useSnack()
 	const theme = useTheme()
 
 	const addToFavorites = () => {
@@ -46,27 +45,29 @@ const ActionButtons = () => {
 			<Button
 				disableRipple
 				disabled={activeProduct.quantity < 1}
-				sx={{ mx: '13px',
+				sx={{
+					mx: '13px',
 					padding: { lg: '21px 33px', md: '16px', sm: '10px' },
-					[theme.breakpoints.between('766', '860')] : {fontSize :'9px'}
+					[theme.breakpoints.between('766', '860')]: { fontSize: '9px' }
 				}}
 				variant={'contained'}
 				onClick={() => {
-					// eslint-disable-next-line max-len
-					const activeSizeName = allSizes.filter(i => i.size._id === activeProduct.size)
-					// eslint-disable-next-line max-len
-					const activeColorName = allColors.filter(i => i._id === activeProduct.color)
-					// eslint-disable-next-line no-console
+					const activeSizeName = allSizes.filter(
+						i => i.size._id === activeProduct.size
+					)
+					const activeColorName = allColors.filter(
+						i => i._id === activeProduct.color
+					)
 
 					handleShoppingBag.add({
 						...activeProduct,
-						size:activeSizeName[0].size.name,
-						color:activeColorName[0].name,
-						title : parent.name,
+						size: activeSizeName[0].size.name,
+						color: activeColorName[0].name,
+						title: parent.name,
 						description: parent.description
 
 					})
-					handleSnack({message: 'Successfully added to shopping bug', style: 'success'})
+					handleSnack({ message: 'Successfully added to shopping bag', style: 'success' })
 				}}
 			>
 				ADD TO BAG
@@ -75,13 +76,13 @@ const ActionButtons = () => {
 				title={favoritesStorage.includes(activeProduct._id) ? 'remove from favorites' : 'add to favorites'}
 				sx={{
 					padding: { lg: '22px', md: '16px', sm: '12px', xs: '9px' },
-					[theme.breakpoints.between('766', '860')] : {padding :'12px'}
+					[theme.breakpoints.between('766', '860')]: { padding: '12px' }
 				}} variant={'contained'}
 				onClick={!user
 					? async () => {
 						await handleOpen(<LoginModal />)
 						await !favoritesStorage.includes(activeProduct._id)
-									&& addToFavorites()
+							&& addToFavorites()
 					}
 					: addToFavorites
 				}

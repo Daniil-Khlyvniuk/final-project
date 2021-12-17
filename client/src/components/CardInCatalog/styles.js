@@ -2,6 +2,7 @@ import { makeStyles } from '@mui/styles'
 
 export const useStyles = makeStyles(theme => ({
 	container: {
+		minHeight: '200px',
 		position: 'relative',
 		'&:hover $blockHover': {
 			visibility: 'visible',

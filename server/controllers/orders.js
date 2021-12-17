@@ -90,8 +90,6 @@ exports.placeOrder = async (req, res, next) => {
 						'This operation involves sending a letter to the client. Please provide field \'letterHtml\' for the letter.'
 				})
 			}
-			console.log('==================')
-			console.log(order)
 			const newOrder = new Order(order)
 
 			if (order.customerId) {
@@ -139,7 +137,6 @@ exports.updateOrder = (req, res, next) => {
 				.json({ message: `Order with id ${req.params.id} is not found` })
 		} else {
 			const order = _.cloneDeep(req.body)
-			console.log(order)
 
 			if (req.body.deliveryAddress) {
 				// order.deliveryAddress = JSON.parse(req.body.deliveryAddress);

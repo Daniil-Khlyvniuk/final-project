@@ -1,7 +1,7 @@
 import {createAsyncThunk} from '@reduxjs/toolkit'
 import queryString from 'query-string'
 import productsApi from '../../utils/API/productsAPI'
-import { filterOperations } from '../Filter'
+import { filterOperations } from '../filter'
 
 const fetchProducts = createAsyncThunk(
 	'products/fetchProducts',

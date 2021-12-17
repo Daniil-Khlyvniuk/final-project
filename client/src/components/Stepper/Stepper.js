@@ -59,7 +59,7 @@ const HorizontalLinearStepper = () => {
 			{activeStep === steps.length && (
 				<React.Fragment>
 					<Typography sx={{ mt: 2, mb: 1 }}>
-            All steps completed - you&apos;re finished
+						All steps completed - you&apos;re finished
 					</Typography>
 					<Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
 						<Box sx={{ flex: '1 1 auto' }} />
@@ -69,24 +69,24 @@ const HorizontalLinearStepper = () => {
 			)}
 			{activeStep === 0 && (
 				<React.Fragment>
-					<Typography
+					<Box
 						sx={{ mt: 2, mb: 1 }}
 					>
-						{activeStep === 0 && <Step1/>}
-					</Typography>
+						{activeStep === 0 && <Step1 />}
+					</Box>
 					<Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
 						<Button
-							style={{marginLeft: '4rem'}}
+							style={{ marginLeft: '4rem' }}
 							color="inherit"
 							disabled={activeStep === 0}
 							onClick={handleBack}
 							sx={{ mr: 1 }}
 						>
-              Back
+							Back
 						</Button>
 						<Box sx={{ flex: '1 1 auto' }} />
 
-						<Button variant={'contained'} onClick={handleNext} style={{width: '200px', marginRight: '4rem'}}>
+						<Button variant={'contained'} onClick={handleNext} style={{ width: '200px', marginRight: '4rem' }}>
 							NEXT
 						</Button>
 					</Box>
@@ -94,13 +94,13 @@ const HorizontalLinearStepper = () => {
 			)}
 			{activeStep === 1 && (
 				<React.Fragment>
-					<Typography
+					<Box
 						sx={{ mt: 2, mb: 1 }}
 					>
-						{activeStep === 1 &&<CheckoutForm
+						{activeStep === 1 && <CheckoutForm
 							handleBack={handleBack}
 							handleNext={handleNext} />}
-					</Typography>
+					</Box>
 					<Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
 						<Box sx={{ flex: '1 1 auto' }} />
 					</Box>
@@ -108,11 +108,11 @@ const HorizontalLinearStepper = () => {
 			)}
 			{activeStep === 2 && (
 				<React.Fragment>
-					<Typography
+					<Box
 						sx={{ mt: 2, mb: 1 }}
 					>
 						{activeStep === 2 && <Checkout />}
-					</Typography>
+					</Box>
 					<Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
 						<Button
 							variant="text"

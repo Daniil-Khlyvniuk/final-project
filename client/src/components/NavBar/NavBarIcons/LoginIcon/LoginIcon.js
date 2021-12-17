@@ -3,7 +3,7 @@ import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
 import { IconButton } from '@mui/material'
 import { useStyles } from './styles'
 import { useDispatch } from 'react-redux'
-import modalActions from '../../../../store/Modal'
+import modalActions from '../../../../store/modal'
 import LoginModal from '../../../Modal/LoginModal/LoginModal'
 
 

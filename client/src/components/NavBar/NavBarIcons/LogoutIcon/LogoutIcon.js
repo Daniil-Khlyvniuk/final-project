@@ -3,7 +3,7 @@ import LogoutIcon from '@mui/icons-material/Logout'
 import { IconButton } from '@mui/material'
 import { useStyles } from './styles'
 import { useDispatch } from 'react-redux'
-import { userOperations } from '../../../../store/User'
+import { userOperations } from '../../../../store/user'
 import useSnack from '../../../../utils/customHooks/useSnack'
 
 const LogoutIconHeader = () => {

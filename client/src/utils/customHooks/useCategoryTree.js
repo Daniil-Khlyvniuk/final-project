@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from 'react'
 import API from '../API/categoriesApi'
 import { useDispatch, useSelector } from 'react-redux'
-import { categorySelectors } from '../../store/Category'
-import * as categoryActions from '../../store/Category/categorySlice'
+import { categorySelectors } from '../../store/category'
+import * as categoryActions from '../../store/category/categorySlice'
 
 const UseCategoryTree = () => {
 	const [ category, setCategory ] = useState([])

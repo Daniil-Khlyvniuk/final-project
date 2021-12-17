@@ -1,7 +1,7 @@
 import React from 'react'
 import {Snackbar, Alert as MuiAlert} from '@mui/material'
 import {useSelector, useDispatch} from 'react-redux'
-import {snackBarSelectors, snackBarOperations} from '../../store/SnackBar'
+import {snackBarSelectors, snackBarOperations} from '../../store/snackBar'
 
 const Alert = React.forwardRef(function Alert(props, ref) {
 	return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />

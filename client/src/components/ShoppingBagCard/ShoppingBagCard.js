@@ -6,7 +6,7 @@ import icons from '../../utils/Icons/index'
 import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
 import axios from 'axios'
 // import { useSelector } from 'react-redux'
-// import { ProductSelector } from '../../store/Product'
+// import { ProductSelector } from '../../store/product'
 
 const ShoppingBagCard = ({ item , card}) => {
 	const classes = useStyles()

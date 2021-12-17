@@ -12,7 +12,7 @@ Object {
           class="MuiContainer-root MuiContainer-maxWidthLg css-aspcf0-MuiContainer-root"
         >
           <div
-            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-undefined makeStyles-blockStyle-4 css-11lq3yg-MuiGrid-root"
+            class="MuiGrid-root MuiGrid-container makeStyles-blockStyle-4 css-11lq3yg-MuiGrid-root"
           >
             <span
               class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorInherit css-62e83j-MuiCircularProgress-root"
@@ -127,6 +127,7 @@ Object {
                         <input
                           aria-invalid="true"
                           class="MuiOutlinedInput-input MuiInputBase-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
+                          id="mui-2"
                           name="email"
                           placeholder="e-mail"
                           type="email"
@@ -174,7 +175,7 @@ Object {
                     class="MuiList-root css-1j8k74g-MuiList-root"
                   >
                     <li
-                      class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-cbbxfa-MuiListItem-root"
+                      class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-730o7b-MuiListItem-root"
                     >
                       <a
                         class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1iwtne7-MuiTypography-root-MuiLink-root"
@@ -246,7 +247,7 @@ Object {
           class="MuiBox-root css-1hozi5r"
         >
           <div
-            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-undefined css-1gbhsy4-MuiGrid-root"
+            class="MuiGrid-root MuiGrid-container css-1gbhsy4-MuiGrid-root"
           >
             <div
               class="MuiContainer-root MuiContainer-maxWidthLg css-cgvpk2-MuiContainer-root"
@@ -288,7 +289,7 @@ Object {
         class="MuiContainer-root MuiContainer-maxWidthLg css-aspcf0-MuiContainer-root"
       >
         <div
-          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-undefined makeStyles-blockStyle-4 css-11lq3yg-MuiGrid-root"
+          class="MuiGrid-root MuiGrid-container makeStyles-blockStyle-4 css-11lq3yg-MuiGrid-root"
         >
           <span
             class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorInherit css-62e83j-MuiCircularProgress-root"
@@ -403,6 +404,7 @@ Object {
                       <input
                         aria-invalid="true"
                         class="MuiOutlinedInput-input MuiInputBase-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
+                        id="mui-2"
                         name="email"
                         placeholder="e-mail"
                         type="email"
@@ -450,7 +452,7 @@ Object {
                   class="MuiList-root css-1j8k74g-MuiList-root"
                 >
                   <li
-                    class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-cbbxfa-MuiListItem-root"
+                    class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-730o7b-MuiListItem-root"
                   >
                     <a
                       class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1iwtne7-MuiTypography-root-MuiLink-root"
@@ -522,7 +524,7 @@ Object {
         class="MuiBox-root css-1hozi5r"
       >
         <div
-          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-undefined css-1gbhsy4-MuiGrid-root"
+          class="MuiGrid-root MuiGrid-container css-1gbhsy4-MuiGrid-root"
         >
           <div
             class="MuiContainer-root MuiContainer-maxWidthLg css-cgvpk2-MuiContainer-root"

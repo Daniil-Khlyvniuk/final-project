@@ -16,11 +16,15 @@ export const SING_UP_SCHEMA = yup.object().shape({
 	firstName: yup.string()
 		.strict(true)
 		.trim(isNotTrimmedError)
+		.min(3, 'Must be longer than 3 characters')
+		.max(20, 'Nice try, nobody has a last name that long')
 		.required(IS_REQUIRED)
 		.matches(STR_REGEX, 'Invalid symbols, use only character'),
 	lastName: yup.string()
 		.strict(true)
 		.trim(isNotTrimmedError)
+		.min(3, 'Must be longer than 3 characters')
+		.max(20, 'Nice try, nobody has a second name that long')
 		.required(IS_REQUIRED)
 		.matches(STR_REGEX, 'Invalid symbols, use only character'),
 	login: yup.string()
@@ -36,8 +40,8 @@ export const SING_UP_SCHEMA = yup.object().shape({
 		.email('Enter correct email'),
 	password: yup.string()
 		.required(IS_REQUIRED)
-		.min(7,'Password must be 7 digits minimum')
-		.max(30,'Password must be 30 digits maximum'),
+		.min(7, 'Password must be 7 digits minimum')
+		.max(30, 'Password must be 30 digits maximum'),
 	confirmPass: yup.string()
 		.required(IS_REQUIRED)
 		.oneOf([yup.ref('password')], 'Passwords do not match'),
@@ -52,8 +56,8 @@ export const LOGIN_SCHEMA = yup.object().shape({
 		.required(IS_REQUIRED),
 	password: yup.string()
 		.required(IS_REQUIRED)
-		.min(7,'Password must be 7 digits minimum')
-		.max(30,'Password must be 30 digits maximum'),
+		.min(7, 'Password must be 7 digits minimum')
+		.max(30, 'Password must be 30 digits maximum'),
 	// subscribe: yup.bool(),
 	rememberMe: yup.bool(),
 })

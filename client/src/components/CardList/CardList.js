@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import ProductCard from '../ProductCard/ProductCard'
 import { makeStyles } from '@mui/styles'
 import { Grid, Typography } from '@mui/material'
-import { productsOperations, productsSelectors } from '../../store/Products'
+import { productsOperations, productsSelectors } from '../../store/products'
 import BackdropLoader from '../UI/BackdropLoader/BackdropLoader'
 import { Box } from '@mui/system'
 
