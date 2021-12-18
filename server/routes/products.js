@@ -22,6 +22,13 @@ const {
 // @desc    Add images
 // @access  Private
 
+
+router.post(
+  "/",
+  // passport.authenticate("jwt-admin", { session: false }),
+	addProduct
+);
+
 router.put(
   "/decrement/:varId",
   // passport.authenticate("jwt-admin", { session: false }),
