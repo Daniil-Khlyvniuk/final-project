@@ -17,12 +17,12 @@ module.exports = {
 		},
 		'ecmaVersion': 2020,
 		'sourceType': 'module',
-		'parser': '@babel/eslint-parser',
+		// 'parser': '@babel/eslint-parser',
 	},
 	'plugins': [
 		'react',
 		'react-hooks',
-		'@babel',
+		// '@babel',
 		'jest'
 	],
 	'rules': {
