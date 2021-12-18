@@ -1,6 +1,9 @@
 const Cart = require("../models/Cart")
 const Order = require("../models/Order")
 const Product = require("../models/Product")
+const Color = require("../models/Color")
+const Size = require("../models/Size")
+const Customer = require("../models/Customer")
 const ProductVariant = require("../models/ProductVariant")
 const sendMail = require("../commonHelpers/mailSender")
 const validateOrderForm = require("../validation/validationHelper")
@@ -10,6 +13,7 @@ const subtractProductsFromCart = require("../commonHelpers/subtractProductsFromC
 const _ = require("lodash")
 
 const uniqueRandom = require("unique-random")
+const Catalog = require("../models/Catalog")
 const rand = uniqueRandom(1000000, 9999999)
 
 exports.placeOrder = async (req, res, next) => {
@@ -114,10 +118,14 @@ exports.placeOrder = async (req, res, next) => {
 					const { quantity } = item.product
 					const { cartQuantity } = item
 					const newQuantity = quantity - cartQuantity
+					const enabled = newQuantity > 0
 
 					await ProductVariant.findOneAndUpdate(
 						{ _id: id },
-						{ quantity: newQuantity },
+						{
+							quantity: newQuantity,
+							enabled: enabled
+						},
 						{ new: true }
 					)
 				}
@@ -315,8 +323,55 @@ exports.deleteOrder = (req, res, next) => {
 }
 
 exports.getOrders = (req, res, next) => {
-	Order.find({ customerId: req.user.id })
-	.populate("customerId")
+	const customerId =  req.user.id
+
+	Order.aggregate([
+		{
+			$lookup: {
+				from: Customer.collection.name,
+				localField: "customerId",
+				foreignField: "_id",
+				as: "customerId",
+			},
+		},
+		{
+			$unwind: "$customerId",
+		},
+
+		{
+			$lookup: {
+				from: Color.collection.name,
+				localField: "products.product.color",
+				foreignField: "_id",
+				as: "products.product.color",
+			},
+		},
+		{
+			$unwind: "$products.product.color",
+		},
+
+		{
+			$lookup: {
+				from: Size.collection.name,
+				localField: "products.product.size",
+				foreignField: "_id",
+				as: "products.product.size",
+			},
+		},
+		{
+			$unwind: "$products.product.size",
+		},
+		//
+		// {
+		// 	$project: {
+		// 		_id: 1,
+		// 		products: 1
+		// 	},
+		// },
+	])
+	// .populate("customerId")
+	// .populate("products.product.size")
+	// .populate("products.product.color")
 	.then(orders => {
 		res.json(orders)
 	})
