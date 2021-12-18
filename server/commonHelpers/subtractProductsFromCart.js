@@ -14,8 +14,6 @@ module.exports = async customerId => {
 					_id: cartItem.product._id
 				});
 
-
-
 				result.push({
 					_id: new mongoose.Types.ObjectId(),
 					product: dbProduct,

@@ -24,13 +24,13 @@ const PayCc = () => {
 
 
 	console.log('sadasd',unregistered)
-	useEffect( async() => {
+	useEffect( () => {
 		setBuyGoods(shoppingBag)
 		if (isLoggedIn === true) {
 			try {
-				const res = await axios('/api/customers/customer')
-				const data = await res.data
-				await setUserData(data)
+				axios('/api/customers/customer').then(res => {
+					setUserData(res.data)
+				})
 			} catch (e) {
 				console.log('ee',e)
 			}}

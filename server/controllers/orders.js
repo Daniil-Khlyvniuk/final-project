@@ -54,6 +54,7 @@ exports.placeOrder = async (req, res, next) => {
 			0
 		)
 
+
 		const productAvailibilityInfo = await productAvailibilityChecker(
 			order.products
 
@@ -111,10 +112,11 @@ exports.placeOrder = async (req, res, next) => {
 					for (let item of order.products) {
 						const id = item.product._id
 						const product = await ProductVariant.findOne({ _id: id })
-						const productQuantity = product.quantity
-						await ProductVariant.findOneAndUpdate({ _id: id }, { quantity: productQuantity - item.product.quantity }, { new: true })
+						const test = await ProductVariant.findOneAndUpdate(
+							{ _id: id },
+							{ quantity: item.product.diff  },
+							{ new: true })
 					}
-
 					res.json({ order, mailResult })
 				})
 				.catch(err =>

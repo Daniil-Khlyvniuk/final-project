@@ -6,16 +6,19 @@ module.exports = async orderProducts => {
     const productsAvailibilityDetails = await orderProducts.reduce(
       async (resultPromise, orderItem) => {
         const result = await resultPromise;
-        const dbProduct = await ProductVariant.findOne({ _id: orderItem.product._id });
+        const dbProduct = await ProductVariant.findOne({ _id: orderItem.product._id })
+          .populate("color")
+          .populate("size")
         const orderedQuantity = orderItem.cartQuantity;
         const realQuantity = dbProduct.quantity;
         result.push({
           productId: dbProduct._id,
           itemNo: dbProduct.itemNo,
-          color: dbProduct.color._id,
-          size: dbProduct.size._id,
+          color: dbProduct.color.name,
+          size: dbProduct.size.name,
           orderedQuantity,
           realQuantity,
+          quantity: realQuantity,
           diff: realQuantity - orderedQuantity,
           available: realQuantity >= orderedQuantity
         });
