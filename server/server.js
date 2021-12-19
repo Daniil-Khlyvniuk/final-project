@@ -29,8 +29,6 @@ const mainRoute = require("./routes/index");
 
 const app = express();
 
-app.use(express.static(__dirname + '/public'));
-
 app.use(cors());
 
 // Body parser middleware
@@ -85,10 +83,6 @@ mongoose.set("useFindAndModify", false);
 mongoose.set("useCreateIndex", true);
 mongoose.set("useUnifiedTopology", true);
 // "mongodb+srv://forTest:forTest@cluster0.eeiyv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
-
-app.get('*', (req, res) => {
-  res.sendFile(__dirname + '/public/index.html')
-});
 
 const port = process.env.PORT || 5000;
 mongoose
