@@ -24,7 +24,7 @@ export const StyledAutocomplete = styled(Autocomplete)(() => ({
 		width: '88vw',
 	},
 	position: 'relative',
-	'& .css-y2vtlc-MuiFormLabel-root-MuiInputLabel-root': {
+	'& .css-y2vtlc-MuiFormLabel-root-MuiInputLabel-root, .css-t6p8nw': {
 		fontWeight: 600,
 		fontSize: '16px',
 		color: '#373F41',
