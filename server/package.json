@@ -5,8 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon server.js",
-    "start": "node server.js"
+    "server": "nodemon server.js  "
   },
   "repository": {
     "type": "git",
@@ -33,10 +32,10 @@
     "query-string": "^7.0.1",
     "stripe": "^8.191.0",
     "unique-random": "^2.1.0",
-    "uuid": "^8.3.2",
     "validator": "^11.1.0"
   },
   "devDependencies": {
-    "nodemon": "^1.19.1"
+    "nodemon": "^1.19.1",
+    "uuid": "^8.3.2"
   }
 }
