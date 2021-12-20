@@ -77,5 +77,9 @@
     "prettier": "2.4.1",
     "react-test-renderer": "^17.0.2"
   },
-  "proxy": "http://localhost:5000"
+  "proxy": {
+    "/auth/google": {
+      "target": "http://localhost:5000/"
+    }
+  }
 }
