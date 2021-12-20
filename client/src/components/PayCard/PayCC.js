@@ -7,7 +7,7 @@ import MoneyIcon from '@mui/icons-material/Money'
 import LocalMallIcon from '@mui/icons-material/LocalMall'
 import Btn from './Btn'
 import { useSelector } from 'react-redux'
-import { userSelectors } from '../../store/user'
+import { userSelectors} from '../../store/user'
 import axios from 'axios'
 import UseSnack from '../../utils/customHooks/useSnack'
 

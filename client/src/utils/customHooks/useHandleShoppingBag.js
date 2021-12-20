@@ -48,6 +48,7 @@ export default function useHandleShoppingBag() {
 		{isLoggedIn ? await cartAPI.clearCart() : null}
 		localStorage.setItem('shoppingBag', [])
 		dispatch(shoppingBagActions.removeFromShoppingBag([]))
+
 	}
 
 	return {

@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom'
 import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
 import cartAPI from '../../utils/API/cartAPI'
 import UseSnack from '../../utils/customHooks/useSnack'
-// import ordersAPI from '../../utils/API/ordersAPI'
+
+
+
 
 const CompletePay = () => {
 	// const Order = ordersAPI.placeOrder()
@@ -36,6 +38,7 @@ const CompletePay = () => {
 
 	useEffect(async () => {
 		try {
+
 			await cartAPI.addOrder(order)
 			await handleShoppingBag.AfterBuy()
 		}
@@ -48,7 +51,9 @@ const CompletePay = () => {
 		localStorage.setItem('ORDER', JSON.stringify(order))
 	}
 
+
 	sendOrder()
+
 
 	return (
 		<Box style={{ textAlign: 'center', margin: '7rem 0' }}>

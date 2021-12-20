@@ -34,16 +34,21 @@ export default function BasicTabs() {
 	}
 
 	return (
-		<Box sx={{ width: '100%', my:'15px' ,  }}>
-			<Box sx={{ borderBottom: 1, borderColor: 'divider',
-				'&.MuiBox-root':{display:'flex', justifyContent:'center',
-
-					['@media (max-width:360px)']: {
-						width: '260px',
-						flexDirection:'column'
-					}},
-
+		<Box
+			sx={{
+				width: '100%',
+				my:'15px'
 			}}>
+			<Box
+				sx={{ borderBottom: 1,
+					borderColor: 'divider',
+					'&.MuiBox-root':{display:'flex', justifyContent:'center',
+						['@media (max-width:360px)']: {
+							width: '260px',
+							flexDirection:'column'
+						}},
+
+				}}>
 				<Tabs value={value} onChange={handleChange}
 					aria-label="basic tabs example"
 					variant="scrollable"

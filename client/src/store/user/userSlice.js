@@ -32,6 +32,11 @@ const userSlice = createSlice({
 	name: 'user',
 	initialState,
 	reducers: {
+
+		clearOrder(state){
+			state.orders= null
+		},
+
 		setNewData(state,action){
 			state.data = action.payload
 		},
@@ -86,6 +91,6 @@ const userSlice = createSlice({
 	}
 })
 
-export const { actions } = userSlice
+export const { actions} = userSlice
 
 export default userSlice.reducer
