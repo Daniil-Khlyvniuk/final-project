@@ -7,23 +7,20 @@ import MoneyIcon from '@mui/icons-material/Money'
 import LocalMallIcon from '@mui/icons-material/LocalMall'
 import Btn from './Btn'
 import { useSelector } from 'react-redux'
-import { userSelectors } from '../../store/User'
+import { userSelectors } from '../../store/user'
 import axios from 'axios'
-
-
-
+import UseSnack from '../../utils/customHooks/useSnack'
 
 const PayCc = () => {
 	const [selectedValue, setSelectedValue] = useState('a')
-	let unregistered =  JSON.parse(localStorage.getItem('Unregistered')|| '[]')
+	let unregistered = JSON.parse(localStorage.getItem('Unregistered') || '[]')
 	const shoppingBag = JSON.parse(localStorage.getItem('shoppingBag') || '[]')
 	const [userData, setUserData] = useState(null)
 	const [BuyGoods, setBuyGoods] = useState({})
 	const user = useSelector(userSelectors.getData())
 	const isLoggedIn = !!user
-
-
-	console.log('sadasd',unregistered)
+	const { handleSnack } = UseSnack()
+	
 	useEffect( () => {
 		setBuyGoods(shoppingBag)
 		if (isLoggedIn === true) {
@@ -32,7 +29,7 @@ const PayCc = () => {
 					setUserData(res.data)
 				})
 			} catch (e) {
-				console.log('ee',e)
+				handleSnack({ message: 'Server response error', style: 'warning' })
 			}}
 	},[])
 
@@ -84,7 +81,7 @@ const PayCc = () => {
 		inputProps: { 'aria-label': item },
 	})
 	return (
-		<box>
+		<Box>
 			<Grid item xs={12}>
 				<Typography
 					variant='body1'
@@ -94,7 +91,7 @@ const PayCc = () => {
 					letterSpacing='3px'
 					// textAlign='center'
 					component={'div'}
-					sx={{mb:'25px', mt:'10px'}}
+					sx={{ mb: '25px', mt: '10px' }}
 				>
 					Payment Details
 				</Typography>
@@ -131,7 +128,7 @@ const PayCc = () => {
 							/>
 						</div>
 					</div>
-					{selectedValue === 'a' && <Payment/>}
+					{selectedValue === 'a' && <Payment />}
 					{selectedValue === 'b' && <Btn />}
 				</section>
 				<Box style={border} />
@@ -141,21 +138,21 @@ const PayCc = () => {
 					<Radio {...controlProps('b')} color="default" />
 					<div style={CashText}>
 						<p style={CashTextHead}>
-						Payment to the courier
+							Payment to the courier
 						</p>
 						<p style={CashTextSub}>
-						Cash or card payment to the courier upon delivery
+							Cash or card payment to the courier upon delivery
 						</p>
 					</div>
-					<LocalMallIcon 
+					<LocalMallIcon
 						sx={{
 							fontSize: '80px',
 							color: '#828788',
-						}}/>
+						}} />
 				</div>
 				<Box style={border} />
 			</Grid>
-		</box>
+		</Box>
 	)
 }
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import {Button, Typography, Box, Chip, Divider} from '@mui/material'
 import {Link} from 'react-router-dom'
-import { userSelectors} from '../../../store/User'
+import { userSelectors} from '../../../store/user'
 import { useSelector} from 'react-redux'
 import Loader from '../../UI/Loader/Loader'
 import ShoppingBagCard from '../../ShoppingBagCard/ShoppingBagCard'
@@ -41,7 +41,6 @@ const Orders = () => {
 			</Box>
 		)}
 	return (
-
 		<Box mt={'25px'}>
 			<Typography
 				variant={'h1'}
@@ -53,7 +52,6 @@ const Orders = () => {
 				My purchases
 			</Typography>
 			<Divider sx={{mt:'15px'}}/>
-			{/* eslint-disable-next-line no-unused-vars */}
 			{userOrders.map((order , index) => {
 				return (
 					<Box key={index}>
@@ -90,7 +88,7 @@ const Orders = () => {
 							</Typography>
 						</Box>
 						<Divider sx={{mt:'10px'}}/>
-						{order.products.map((single,index) => {
+						{order.products.map((single, index) => {
 							return (<ShoppingBagCard
 								key={index}
 								card item={single} />)

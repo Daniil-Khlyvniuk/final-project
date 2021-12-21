@@ -1,16 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit'
-import productsSlice from './Products/productsSlice'
-import linksSlice from './Links/'
-import categorySlice from './Category/categorySlice'
-import sliderSlice from './Slider'
-import modalSlice from './Modal/modalSlice'
-import shoppingBagSlice from './ShoppingBag/shoppingBagSlice'
-import productSlice from './Product/productSlice'
-import filterSlice from './Filter'
-import settingsSlice from './Settings'
-import userSlice from './User'
-import favoritesSlice from './Favorites/favoritesSlice'
-import snackBar from './SnackBar'
+import productsSlice from './products/productsSlice'
+import linksSlice from './links/'
+import categorySlice from './category/categorySlice'
+import sliderSlice from './slider'
+import modalSlice from './modal/modalSlice'
+import shoppingBagSlice from './shoppingBag/shoppingBagSlice'
+import productSlice from './product/productSlice'
+import filterSlice from './filter'
+import settingsSlice from './settings'
+import userSlice from './user'
+import favoritesSlice from './favorites/favoritesSlice'
+import snackBar from './snackBar'
 
 
 const store = configureStore({
@@ -45,7 +45,9 @@ const store = configureStore({
 					'favorites/setFavorites',
 					'snackBar/snackToggle',
 					'user/fetchUserOrders/fulfilled',
-					'user/fetchUserOrders/pending'
+					'user/fetchUserOrders/pending',
+					'shoppingBag/removeFromShoppingBag',
+					'links/fetchLinks/fulfilled'
 				],
 			},
 		}),

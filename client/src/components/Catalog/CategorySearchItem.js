@@ -1,7 +1,7 @@
 import React from 'react'
 import {Button} from '@mui/material'
 import {useSelector} from 'react-redux'
-import {filterSelectors} from '../../store/Filter'
+import {filterSelectors} from '../../store/filter'
 import useFilterHandler from '../../utils/customHooks/useFilterHandler'
 import PropTypes from 'prop-types'
 

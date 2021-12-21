@@ -4,7 +4,6 @@ import { border } from './styles'
 import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
 import { PhotoSumm, SummBox, SummText, SummTotal, SummCarts } from './style'
 import axios from 'axios'
-	
 
 const Summary = () => {
 	const { shoppingBag, totalPrice } = useHandleShoppingBag()
@@ -16,16 +15,15 @@ const Summary = () => {
 				p => axios(`api/products/${p._id}`)
 			)
 		).then(res => {
-			const products = res.map(({data}) => data)
+			const products = res.map(({ data }) => data)
 			setParent(products)
 		})
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
-
 
 	return (
 		<Box sx={{
-			margin:' 0px 24px',
+			margin: ' 0px 24px',
 		}}>
 			<Typography
 				variant='body1'
@@ -38,12 +36,15 @@ const Summary = () => {
 			>
 				Summary
 			</Typography>
-			<div style={border}/>
-			{parent?.map((item) => (
-				// eslint-disable-next-line react/jsx-key
-				<Box style={SummCarts}>
+			<div style={border} />
+			{parent?.map((item, index) => (
+				<Box style={SummCarts} key={index}>
 					<Box style={SummBox}>
-						<img src={item.variants.imageUrls[0]} style={PhotoSumm} alt={'image'}/>
+						<img
+							src={item.variants.imageUrls[0]}
+							style={PhotoSumm}
+							alt={'image'}
+						/>
 						<Box style={SummText}>
 							<Typography
 								fontSize={24}
@@ -53,7 +54,9 @@ const Summary = () => {
 							<Typography
 								fontSize={18}
 								sx={{ mb: '14px', mt: '0px' }}
-								variant={'p'}>${item.variants.currentPrice}
+								variant={'p'}
+							>
+								${item.variants.currentPrice}
 							</Typography>
 						</Box>
 					</Box>
@@ -62,10 +65,22 @@ const Summary = () => {
 			<Box>
 			</Box>
 			<Box>
-				<Box style={border}/>
+				<Box style={border} />
 				<Box style={SummTotal}>
-					<Typography fontSize={32} sx={{ mb: '14px', mt: '85px' }} variant={'h2'}>TOTAL</Typography>
-					<Typography fontSize={32} sx={{ mb: '14px', mt: '85px' }} variant={'h2'}>${totalPrice}</Typography>
+					<Typography
+						fontSize={32}
+						sx={{ mb: '14px', mt: '85px' }}
+						variant={'h2'}
+					>
+						TOTAL
+					</Typography>
+					<Typography
+						fontSize={32}
+						sx={{ mb: '14px', mt: '85px' }}
+						variant={'h2'}
+					>
+						${totalPrice}
+					</Typography>
 				</Box>
 			</Box>
 		</Box>
