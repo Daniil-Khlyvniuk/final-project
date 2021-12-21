@@ -16,7 +16,6 @@ import LoginModal from '../Modal/LoginModal/LoginModal'
 const ProductCard = ({ _id, image, title, price }) => {
 	const classes = useStyles()
 	const user = useSelector(userSelectors.getData())
-	// eslint-disable-next-line no-unused-vars
 	const favorites = useSelector(favoritesSelectors.getFavorites())
 	const dispatch = useDispatch()
 	const handleOpen = (content) => dispatch(modalActions.modalToggle(content))
@@ -25,7 +24,7 @@ const ProductCard = ({ _id, image, title, price }) => {
 	useEffect(() => {
 		favoritesOperations.fetchFavorites(favoritesStorage)(dispatch)
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [favoritesStorage.length])
+	}, [favoritesStorage.length, favorites])
 
 	const addToFavorites = () => {
 		if (!localStorage.getItem('favorites')) localStorage.setItem('favorites', JSON.stringify([]))
