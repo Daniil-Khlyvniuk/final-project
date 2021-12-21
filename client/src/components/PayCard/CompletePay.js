@@ -37,7 +37,7 @@ const CompletePay = () => {
 	useEffect( async() =>	{
 		try {
 			await cartAPI.addOrder(order)
-			await handleShoppingBag.AfterBuy()
+			await handleShoppingBag.afterBuy()
 		}
 		catch(error){
 			console.log('ee',error)
