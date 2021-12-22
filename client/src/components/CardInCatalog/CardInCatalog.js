@@ -20,7 +20,6 @@ import { grey } from '@mui/material/colors'
 const CardInCatalog = ({ title, image, price, _id, parentId, color }) => {
 	const classes = useStyles()
 	const user = useSelector(userSelectors.getData())
-	// eslint-disable-next-line no-unused-vars
 	const favorites = useSelector(favoritesSelectors.getFavorites())
 	const dispatch = useDispatch()
 	const handleOpen = (content) => dispatch(modalActions.modalToggle(content))
@@ -29,7 +28,7 @@ const CardInCatalog = ({ title, image, price, _id, parentId, color }) => {
 	useEffect(() => {
 		favoritesOperations.fetchFavorites(favoritesStorage)(dispatch)
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [ favoritesStorage.length ])
+	}, [ favoritesStorage.length, favorites ])
 
 	const addToFavorites = () => {
 		if (!localStorage.getItem('favorites')) localStorage.setItem('favorites', JSON.stringify([]))
