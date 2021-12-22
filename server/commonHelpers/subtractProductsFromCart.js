@@ -6,7 +6,6 @@ const mongoose = require("mongoose");
 module.exports = async (customerId) => {
   try {
     const cart = await Cart.findOne({ customerId: customerId });
-
     return await cart.products.reduce(async (resultPromise, cartItem) => {
       const result = await resultPromise;
       const dbProduct = await ProductVariant.findOne({

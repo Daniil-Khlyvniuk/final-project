@@ -19,6 +19,7 @@ module.exports = async (orderProducts) => {
           size: dbProduct.size,
           orderedQuantity,
           realQuantity,
+          quantity: realQuantity,
           diff: realQuantity - orderedQuantity,
           available: realQuantity >= orderedQuantity,
         });
