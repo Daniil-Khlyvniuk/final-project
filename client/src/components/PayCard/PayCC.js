@@ -20,21 +20,20 @@ const PayCc = () => {
 	const user = useSelector(userSelectors.getData())
 	const isLoggedIn = !!user
 	const { handleSnack } = UseSnack()
-
-	useEffect(async () => {
+	
+	useEffect( () => {
 		setBuyGoods(shoppingBag)
 		if (isLoggedIn === true) {
 			try {
-				const res = await axios('/api/customers/customer')
-				const data = await res.data
-				await setUserData(data)
+				axios('/api/customers/customer').then(res => {
+					setUserData(res.data)
+				})
 			} catch (e) {
 				handleSnack({ message: 'Server response error', style: 'warning' })
-			}
-		}
-	}, [])
+			}}
+	},[])
 
-	let customer = isLoggedIn ? { ...userData } : unregistered
+	let customer = isLoggedIn ? {...userData} : unregistered
 	let userId = isLoggedIn ? customer._id : '61b8813806744e13c4efc6a0'
 	const order = {
 		products: [{
@@ -42,7 +41,7 @@ const PayCc = () => {
 			product: BuyGoods,
 		}],
 		canceled: false,
-		customerId: userId,
+		customerId:	userId,
 		deliveryAddress: {
 			country: customer.country,
 			city: customer.city,

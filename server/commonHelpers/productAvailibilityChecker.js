@@ -1,23 +1,27 @@
 const Product = require("../models/Product");
 const ProductVariant = require("../models/ProductVariant");
 
-module.exports = async orderProducts => {
-	try {
+module.exports = async (orderProducts) => {
+  try {
     const productsAvailibilityDetails = await orderProducts.reduce(
       async (resultPromise, orderItem) => {
         const result = await resultPromise;
-        const dbProduct = await ProductVariant.findOne({ _id: orderItem.product._id });
+        const dbProduct = await ProductVariant.findOne({
+          _id: orderItem.product._id,
+        });
+        console.log("dbProduct", dbProduct);
         const orderedQuantity = orderItem.cartQuantity;
         const realQuantity = dbProduct.quantity;
         result.push({
           productId: dbProduct._id,
           itemNo: dbProduct.itemNo,
-          color: dbProduct.color._id,
-          size: dbProduct.size._id,
+          color: dbProduct.color,
+          size: dbProduct.size,
           orderedQuantity,
           realQuantity,
+          quantity: realQuantity,
           diff: realQuantity - orderedQuantity,
-          available: realQuantity >= orderedQuantity
+          available: realQuantity >= orderedQuantity,
         });
 
         return result;
@@ -26,23 +30,23 @@ module.exports = async orderProducts => {
     );
 
     const unavailableProductIds = productsAvailibilityDetails
-      .filter(item => !item.available)
-      .map(item => item.productId);
+      .filter((item) => !item.available)
+      .map((item) => item.productId);
 
     const unavailableProducts = await ProductVariant.find({
-      _id: { $in: unavailableProductIds }
+      _id: { $in: unavailableProductIds },
     });
 
     return {
       productsAvailibilityStatus: productsAvailibilityDetails.every(
-        product => product.available
+        (product) => product.available
       ),
       productsAvailibilityDetails,
-      unavailableProducts
+      unavailableProducts,
     };
   } catch (err) {
     return {
-      message: `Error happened on server: "${err}" `
+      message: `Error happened on server: "${err}" `,
     };
   }
 };

@@ -92,8 +92,7 @@ const ShipAdr = ({ handleNext, handleBack }) => {
 		zip: user?.zip || '',
 	}
 
-
-	let customer = isLoggedIn ? { ...userData } : unregistered
+	let customer = isLoggedIn ? {...userData} : unregistered
 	let userId = isLoggedIn ? customer._id : '61b8813806744e13c4efc6a0'
 	const order = {
 		products: [{
@@ -101,7 +100,7 @@ const ShipAdr = ({ handleNext, handleBack }) => {
 			product: BuyGoods,
 		}],
 		canceled: false,
-		customerId: userId,
+		customerId:	userId,
 		deliveryAddress: {
 			country: customer.country,
 			city: customer.city,
