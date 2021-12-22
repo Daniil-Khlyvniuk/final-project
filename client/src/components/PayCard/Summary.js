@@ -23,7 +23,11 @@ const Summary = () => {
 
 	return (
 		<Box sx={{
-			margin: ' 0px 24px',
+			['@media(max-width: 1180px)']: {
+				width: '728px',
+				padding: '0 17px 0 17px',
+				marginLeft: '0 4rem',
+			}
 		}}>
 			<Typography
 				variant='body1'

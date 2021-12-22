@@ -19,7 +19,14 @@ const Checkout = () => {
 						</Grid>
 					</Box>
 				</Grid>
-				<Grid item xs={12} lg={4} sm={12}>
+				<Grid item xs={12} lg={4} sm={12}
+					sx={{
+						['@media(max-width: 1180px)']: {
+							display: 'flex',
+							justifyContent: 'center',
+						}
+					}}
+				>
 					<Summary/>
 				</Grid>
 			</Grid>
