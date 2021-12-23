@@ -1,4 +1,5 @@
 export const style = {
+	outline: 'none',
 	position: 'absolute',
 	top: '50%',
 	left: '50%',

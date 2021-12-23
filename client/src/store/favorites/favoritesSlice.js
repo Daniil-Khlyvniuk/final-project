@@ -4,6 +4,7 @@ const favoritesSlice = createSlice({
 	name: 'favorites',
 	initialState: {
 		data: [],
+		id: JSON.parse(localStorage.getItem('favorites')) || [],
 		isLoading: false,
 	},
 	reducers: {
@@ -12,9 +13,19 @@ const favoritesSlice = createSlice({
 		},
 		setLoading(state, action) {
 			state.isLoading = action.payload
-		}
+		},
+		handleOneFavorite(state, action) {
+			state.id.includes(action.payload)
+				? state.id = state.id.filter(product => product !== action.payload)
+				: state.id.push(action.payload)
+			localStorage.setItem('favorites', JSON.stringify(state.id))
+		},
 	},
 })
 
-export const { setFavorites, setLoading } = favoritesSlice.actions
+export const {
+	setFavorites,
+	setLoading,
+	handleOneFavorite
+} = favoritesSlice.actions
 export default favoritesSlice.reducer
