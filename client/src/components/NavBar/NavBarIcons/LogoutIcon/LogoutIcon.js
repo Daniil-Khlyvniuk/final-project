@@ -5,6 +5,7 @@ import { useStyles } from './styles'
 import { useDispatch } from 'react-redux'
 import { userOperations } from '../../../../store/user'
 import useSnack from '../../../../utils/customHooks/useSnack'
+import favoritesActions from '../../../../store/favorites'
 
 const LogoutIconHeader = () => {
 	const classes = useStyles()
@@ -19,6 +20,7 @@ const LogoutIconHeader = () => {
 			sx={{ padding: 0 }}
 			onClick={() => {
 				dispatch(userOperations.logOut())
+				dispatch(favoritesActions.clearFavorites())
 				handleSnack({ message: 'Successfully logged out', style: 'success' })
 			}}
 			data-testid='navbar-logout-icon'

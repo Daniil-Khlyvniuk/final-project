@@ -20,12 +20,19 @@ const favoritesSlice = createSlice({
 				: state.id.push(action.payload)
 			localStorage.setItem('favorites', JSON.stringify(state.id))
 		},
+		clearFavorites(state) {
+			localStorage.removeItem('favorites')
+			state.data = []
+			state.id = []
+		}
 	},
 })
 
 export const {
 	setFavorites,
 	setLoading,
-	handleOneFavorite
+	handleOneFavorite,
+	clearFavorites
 } = favoritesSlice.actions
+
 export default favoritesSlice.reducer
