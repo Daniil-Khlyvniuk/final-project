@@ -51,6 +51,16 @@ export const useStyles = makeStyles({
 	},
 	price: {
 		marginTop: '2rem !important'
+	},
+	summary: {
+		['@media(max-width: 650px)']: {
+			width: '70%',
+			marginLeft: '4rem',
+			borderBottom: '1px solid grey'
+		}
 	}
 })
+
+
+
 
