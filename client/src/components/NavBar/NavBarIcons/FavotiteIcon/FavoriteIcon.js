@@ -8,7 +8,7 @@ import { favoritesSelectors } from '../../../../store/favorites'
 
 const Favoriteicon = () => {
 	const classes = useStyles()
-	const favorites = useSelector(favoritesSelectors.getFavorites())
+	const favorites = useSelector(favoritesSelectors.getFavoritesID())
 
 	return (
 		<IconButton

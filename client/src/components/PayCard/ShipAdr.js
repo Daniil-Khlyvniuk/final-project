@@ -245,7 +245,7 @@ const ShipAdr = ({ handleNext, handleBack }) => {
 								onClick={async () => {
 									await sendOrder()
 									handleSubmit()
-									{ isValid && handleNext() }
+									{dirty && isValid && handleNext() }
 								}}
 								variant="contained"
 							>

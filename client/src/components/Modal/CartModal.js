@@ -10,6 +10,7 @@ import modalActions from '../../store/Modal'
 
 const style = {
 	modal: {
+		outline: 'none',
 		position: 'absolute',
 		overflowY: 'scroll',
 		top: '50%',

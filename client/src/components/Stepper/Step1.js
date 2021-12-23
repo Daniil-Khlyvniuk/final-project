@@ -26,7 +26,14 @@ const Step1 = () => {
 					</Box>
 				</>}
 			</Box>
-			<Box>
+			<Box sx={{
+				['@media(max-width: 1000px)']: {
+					width: '70%',
+					// marginLeft: '4rem',
+					borderBottom: '1px solid grey',
+					margin: ' 0px 24px 0px 4rem',
+				}
+			}}>
 				<Typography
 					fontSize={32}
 					variant={'h2'}
