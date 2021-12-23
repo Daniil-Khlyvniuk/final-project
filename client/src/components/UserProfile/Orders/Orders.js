@@ -65,45 +65,60 @@ const Orders = () => {
 						>
 							<Box
 								sx={{display:'flex',
-									flexDirection:'column',
 									alignItems:'center',
+									justifyContent:'center'
 								}}
 							>
-								<Typography
-									variant={'body1'}
-									component={'span'}
-									fontSize={'18px'}
-									color={'primary'}
-									fontWeight='600'
-									sx={{textTransform:'uppercase'}}
+								<Box
+									sx={{display:'flex',
+										flexDirection:'column',
+										alignItems:'center',
+									}}
 								>
+									<Typography
+										variant={'body1'}
+										component={'span'}
+										fontSize={'18px'}
+										color={'primary'}
+										fontWeight='600'
+										sx={{
+											textTransform:'uppercase',
+											fontSize:{xs:'12px', sm:'18px'}
+										}}
+									>
 									Order : #{order.orderNo}
-								</Typography>
-								<Typography
-									variant={'body1'}
-									component={'span'}
-									fontSize={'18px'}
-									color={'primary'}
-									fontWeight='600'
-									sx={{textTransform:'uppercase'}}
-								>
+									</Typography>
+									<Typography
+										variant={'body1'}
+										component={'span'}
+										fontSize={'18px'}
+										color={'primary'}
+										fontWeight='600'
+										sx={{
+											textTransform:'uppercase',
+											fontSize:{xs:'12px', sm:'18px'}
+										}}
+									>
 									Date : {order.date.toLocaleString().split('T')[0]}
-								</Typography>
-							</Box>
+									</Typography>
+								</Box>
 							
-							<Chip label="New" variant="outlined"
-								sx={{
-									ml:'10px',
-									display:{xs:'none', sm:'inline-block'}}}
-								size="small"
-							/>
-
+								<Chip label="New" variant="outlined"
+									sx={{
+										ml:'18px',
+										display:{xs:'none', sm:'inline-block'}}}
+									size="small"
+								/>
+							</Box>
 							<Typography
 								variant={'body1'}
 								fontSize={'18px'}
 								color={'primary'}
 								fontWeight='600'
-								sx={{textTransform:'uppercase'}}
+								sx={{
+									textTransform:'uppercase',
+									fontSize:{xs:'14px', sm:'18px'}
+								}}
 							>
 							Price : ${order.totalSum}
 							</Typography>
