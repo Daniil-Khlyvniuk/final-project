@@ -1,5 +1,6 @@
 export const style = {
 	modal: {
+		outline: 'none',
 		position: 'absolute',
 		overflowY: 'scroll',
 		top: '50%',
