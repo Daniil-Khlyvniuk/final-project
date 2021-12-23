@@ -1,4 +1,4 @@
-const domain = 'https://fp-postil-bedding.herokuapp.com/'
+const domain = 'http://localhost:3000/'
 const promoCode = Math.round(Math.random() * 1000000)
 
 export const subscribeTemlate = (email) => `<!DOCTYPE html>
