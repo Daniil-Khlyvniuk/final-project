@@ -79,7 +79,10 @@ const ActionButtons = () => {
 						}
 						await handleOpen(<LoginModal />)
 					}
-					: addToFavorites
+					: () => {
+						addToFavorites()
+						handleSnack({ message: 'Successfully added to favorites', style: 'success' })
+					}
 				}
 			>
 				{isFavorite && user
