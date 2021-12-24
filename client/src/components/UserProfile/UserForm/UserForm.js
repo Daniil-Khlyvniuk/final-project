@@ -2,7 +2,7 @@ import React from 'react'
 import * as Yup from 'yup'
 import { Container, Grid, Typography, Box } from '@mui/material'
 import { Form, Formik } from 'formik'
-import { phoneRegExp } from './data/Regex'
+import { phoneRegExp , alphabetReg} from './data/Regex'
 import { userOperations, userSelectors } from '../../../store/user'
 import { useSelector, useDispatch } from 'react-redux'
 import { updateData, updatePassword } from '../../../utils/API/userAPI'
@@ -16,8 +16,8 @@ import useSnack from '../../../utils/customHooks/useSnack'
 
 
 const FORM_VALIDATION = Yup.object().shape({
-	firstName: Yup.string().required('Required'),
-	lastName: Yup.string().required('Required'),
+	firstName: Yup.string().matches(alphabetReg, 'Only alphabet characters are allowed ').min(2, 'Enter a valid name').max(30,'Enter a valid name').required('Required'),
+	lastName: Yup.string().matches(alphabetReg, 'Only alphabet characters are allowed ').min(2, 'Enter a valid lastname').max(30,'Enter a valid lastname').required('Required'),
 	email: Yup.string().email('Invalid email'),
 	phone: Yup.string()
 		.matches(phoneRegExp, 'Please enter a valid phone number')
@@ -65,16 +65,12 @@ const UserForm = () => {
 		return <Loader />
 	}
 	return (
-		<Box my='15px'>
+		<Box my={2}>
 			<Typography
-				variant='body1'
-				color='primary'
-				fontSize='16px'
-				fontWeight='700'
-				letterSpacing='3px'
-				textAlign='center'
+				variant={'h6'}
+				fontSize={'16px'}
 				component={'div'}
-				sx={{ mb: '25px', mt: '30px' }}
+				sx={{ mb: 3, mt: 3.5 }}
 			>
 				Personal information
 			</Typography>
@@ -172,14 +168,10 @@ const UserForm = () => {
 												</Grid>
 												<Grid item xs={12}>
 													<Typography
-														variant='body1'
+														variant={'h6'}
+														fontSize={'16px'}
 														component={'div'}
-														color='primary'
-														fontSize='16px'
-														fontWeight='700'
-														letterSpacing='3px'
-														textAlign='center'
-														sx={{ my: '18px' }}
+														sx={{ my: 2 }}
 													>
 														Delivery Address
 													</Typography>
@@ -216,14 +208,10 @@ const UserForm = () => {
 												</Grid>
 												<Grid item xs={12}>
 													<Typography
-														variant='body1'
+														variant={'h6'}
+														fontSize={'16px'}
 														component={'div'}
-														color='primary'
-														fontSize='16px'
-														fontWeight='700'
-														letterSpacing='3px'
-														textAlign='center'
-														sx={{ my: '18px' }}
+														sx={{ my: 2}}
 													>
 														Change Password
 													</Typography>
@@ -260,19 +248,17 @@ const UserForm = () => {
 													/>
 												</Grid>
 
-												<Grid item md={6} xs={12} sx={{ mt: '15px' }} >
+												<Grid item md={6} xs={12} sx={{ mt: 2 }} >
 													<Typography
-														fontSize={'12px'}
-														color={'#000'}
+														fontSize={12}
+														color={'primary.dark'}
 														fontWeight={700}
-														lineHeight={'20px'}
 													>
 														Notification preferences
 													</Typography>
 													<Typography
-														fontSize={'12px'}
-														color={'#adafb2'}
-														lineHeight={'18px'}
+														fontSize={12}
+														color={'primary.light'}
 														letterSpacing={'.3px'}
 														maxWidth={'325px'}
 													>
@@ -286,7 +272,7 @@ const UserForm = () => {
 													/>
 												</Grid>
 
-												<Grid item xs={12} sx={{ textAlign: 'center', mt: '16px' }}>
+												<Grid item xs={12} sx={{ textAlign: 'center', mt: 2}}>
 
 													<ButtonInput
 
