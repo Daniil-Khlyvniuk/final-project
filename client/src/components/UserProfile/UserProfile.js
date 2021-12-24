@@ -6,17 +6,13 @@ import BasicTabs from '../../components/UserProfile/Tabs/Tabs'
 
 
 const UserProfile = () => {
-
 	return (
 		<Container maxWidth={'lg'}>
-			<Box sx={{py:'40px', mt:'20px'}}>
+			<Box sx={{py:5, mt:2.6}}>
 				<Typography
-					variant='h2'
+					variant='h4'
+					fontSize={'32px'}
 					component={'div'}
-					color='primary'
-					fontSize='32px'
-					textAlign='center'
-					sx={{textTransform:'uppercase'}}
 				>
 					My account
 				</Typography>

@@ -6,9 +6,8 @@ import PopularList from './PopularList/PopularList'
 import { Link } from 'react-router-dom'
 
 
-const useStyles = makeStyles( (theme) => ({
+const useStyles = makeStyles( () => ({
 
-	sectionHeading : theme.typography.sectionHeading,
 
 	buttonWrapper : {
 		background:'#FFFFFF',
@@ -28,7 +27,7 @@ const Popular = () => {
 		<Container disableGutters sx={{mt:'80px' }}>
 			<Typography fontSize={32}
 				sx={{mb:'14px'}}
-				variant={'h2'} className={classes.sectionHeading}>
+				variant={'h4'} >
 				Popular
 			</Typography>
 			<PopularList/>

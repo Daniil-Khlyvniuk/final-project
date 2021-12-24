@@ -31,7 +31,9 @@ const Navbar = () => {
 						<Box className={classes.iconsWrapper}>
 							{!isLoggedIn ? <LoginIcon /> :
 								pathname === '/user-profile' ? <LogoutIconHeader /> :
-									<ProfileIcon />}
+									pathname === '/purchase' ? <LogoutIconHeader /> :
+										pathname === '/favorites' ? <LogoutIconHeader /> :
+											<ProfileIcon />}
 							{isLoggedIn && <FavoriteIcon />}
 							<CartIcon />
 						</Box>

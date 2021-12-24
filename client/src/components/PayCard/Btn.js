@@ -12,6 +12,7 @@ export default function Btn() {
 			style={button}
 			component={Link}
 			to='/complete-order'
+
 		>
       NEXT
 		</Button>
