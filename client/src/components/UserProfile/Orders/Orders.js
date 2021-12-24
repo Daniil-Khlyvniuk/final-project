@@ -1,108 +1,143 @@
-import React from 'react'
-import {Button, Typography, Box, Chip, Divider} from '@mui/material'
-import {Link} from 'react-router-dom'
-import { userSelectors} from '../../../store/user'
-import { useSelector} from 'react-redux'
-import Loader from '../../UI/Loader/Loader'
+import React, {memo, useEffect} from 'react'
+import {Typography, Box, Chip, Divider} from '@mui/material'
+import {userOperations, userSelectors} from '../../../store/user'
+import {useDispatch, useSelector} from 'react-redux'
 import ShoppingBagCard from '../../ShoppingBagCard/ShoppingBagCard'
+
+import OrderList from './OrderList/OrderList'
+import BackdropLoader from '../../UI/BackdropLoader/BackdropLoader'
+
 
 
 const Orders = () => {
-	const userOrders = useSelector(userSelectors.getUserOrders())
-	const isLoading = useSelector(userSelectors.getIsLoading())
 
-	if(isLoading){
-		return <Loader/>
+	const dispatch = useDispatch()
+	const loading = useSelector(userSelectors.getIsLoading())
+	const orders = useSelector(userSelectors.getUserOrders())
+
+
+	useEffect(() => {
+		if (!orders.length) {
+			dispatch(userOperations.fetchUserOrders())
+		}
+
+	}, [orders.length, loading])
+
+
+	useEffect(() =>
+		() => {
+			dispatch(userOperations.clearOrder())
+		},
+	[])
+
+
+	if(!orders && !loading){
+		return <OrderList/>
+	}
+	if(loading){
+		return <BackdropLoader open={loading}/>
 	}
 
-	if(!userOrders){
-		return (
-			<Box sx={{textAlign: 'center', margin: '7rem 0'}}>
-				<Typography
-					fontSize={32}
-					sx={{mb: '14px', mt: '85px', textTransform:'uppercase'}}
-					variant={'h2'}>
-					You still do not have any purchases
-				</Typography>
-				<Typography
-					fontSize={16}
-					variant={'body1'}
-					sx={{mt:'25px'}}
-				>
-					Track your online orders to know where they are at any moment.
-				</Typography>
-				<Link to={'/shop/catalog'} style={{textDecoration: 'none'}}>
-					<Button
-						variant={'contained'}
-						style={{marginTop: '2rem'}}>
-					CONTINUE SHOPPING
-					</Button>
-				</Link>
-			</Box>
-		)}
 	return (
-		<Box mt={'25px'}>
-			<Typography
-				variant={'h1'}
-				fontSize={'32px'}
-				color={'primary'}
-				textAlign={'center'}
-				sx={{textTransform:'uppercase'}}
-			>
-				My purchases
-			</Typography>
-			<Divider sx={{mt:'15px'}}/>
-			{userOrders.map((order , index) => {
-				return (
-					<Box key={index}>
-						<Box
-							sx={{display:'flex',
-								justifyContent:'space-between',
-								alignItems:'center',
-								mt:'25px'}}
-						>
-							<Typography
-								variant={'body1'}
-								component={'span'}
-								fontSize={'18px'}
-								color={'primary'}
-								fontWeight='600'
-								sx={{textTransform:'uppercase'}}
+		<>
+
+			<Box mt={'25px'}>
+				<Typography
+					variant={'h1'}
+					fontSize={'32px'}
+					color={'primary'}
+					textAlign={'center'}
+					sx={{textTransform:'uppercase'}}
+				>
+			My purchases
+				</Typography>
+				<Divider sx={{mt:'15px'}}/>
+				{/* eslint-disable-next-line no-unused-vars */}
+				{orders.map((order , index) => {
+					return (
+						<Box key={index}>
+							<Box
+								sx={{display:'flex',
+									justifyContent:'space-between',
+									alignItems:'center',
+									mt:'20px'
+								}}
 							>
-								Order : #{order.orderNo}
-								<Chip label="New" variant="outlined"
+								<Box
+									sx={{display:'flex',
+										alignItems:'center',
+										justifyContent:'center'
+									}}
+								>
+									<Box
+										sx={{display:'flex',
+											flexDirection:'column',
+											alignItems:'center',
+										}}
+									>
+										<Typography
+											variant={'body1'}
+											component={'span'}
+											fontSize={'18px'}
+											color={'primary'}
+											fontWeight='600'
+											sx={{
+												textTransform:'uppercase',
+												fontSize:{xs:'12px', sm:'18px'}
+											}}
+										>
+									Order : #{order.orderNo}
+										</Typography>
+										<Typography
+											variant={'body1'}
+											component={'span'}
+											fontSize={'18px'}
+											color={'primary'}
+											fontWeight='600'
+											sx={{
+												textTransform:'uppercase',
+												fontSize:{xs:'12px', sm:'18px'}
+											}}
+										>
+									Date : {order.date.toLocaleString().split('T')[0]}
+										</Typography>
+									</Box>
+							
+									<Chip label="New" variant="outlined"
+										sx={{
+											ml:'18px',
+											display:{xs:'none', sm:'inline-block'}}}
+										size="small"
+									/>
+								</Box>
+								<Typography
+									variant={'body1'}
+									fontSize={'18px'}
+									color={'primary'}
+									fontWeight='600'
 									sx={{
-										ml:'10px',
-										display:{xs:'none', sm:'inline-block'}}}
-									size="small"
-								/>
-							</Typography>
-							<Typography
-								variant={'body1'}
-								fontSize={'18px'}
-								color={'primary'}
-								fontWeight='600'
-								sx={{textTransform:'uppercase'}}
-							>
-								Price : ${order.totalSum}
-							</Typography>
+										textTransform:'uppercase',
+										fontSize:{xs:'14px', sm:'18px'}
+									}}
+								>
+							Price : ${order.totalSum}
+								</Typography>
+							</Box>
+							<Divider sx={{mt:'10px'}}/>
+							{order.products.map((single,index) => {
+								return (<ShoppingBagCard
+									key={index}
+									card item={single} />)
+							})}
+							<Divider sx={{mt:'20px'}}/>
 						</Box>
-						<Divider sx={{mt:'10px'}}/>
-						{order.products.map((single, index) => {
-							return (<ShoppingBagCard
-								key={index}
-								card item={single} />)
-						})}
-						<Divider sx={{mt:'20px'}}/>
-					</Box>
-				)
-			})}
+					)
+				})}
+			</Box>
+		</>
 
-
-
-		</Box>
 
 	)
 }
 
-export default Orders
+export default memo(Orders)

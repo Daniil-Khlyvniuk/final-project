@@ -1,4 +1,4 @@
-import React , {useEffect , useState} from 'react'
+import React, {memo, useEffect, useState} from 'react'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import Box from '@mui/material/Box'
@@ -15,7 +15,7 @@ const a11yProps = (index) => {
 	}
 }
 
-export default function BasicTabs() {
+const BasicTabs = () => {
 	const [value, setValue] = useState(0)
 	const {pathname} = useLocation()
 
@@ -34,16 +34,21 @@ export default function BasicTabs() {
 	}
 
 	return (
-		<Box sx={{ width: '100%', my:'15px' ,  }}>
-			<Box sx={{ borderBottom: 1, borderColor: 'divider',
-				'&.MuiBox-root':{display:'flex', justifyContent:'center',
-
-					['@media (max-width:360px)']: {
-						width: '260px',
-						flexDirection:'column'
-					}},
-
+		<Box
+			sx={{
+				width: '100%',
+				my:'15px'
 			}}>
+			<Box
+				sx={{ borderBottom: 1,
+					borderColor: 'divider',
+					'&.MuiBox-root':{display:'flex', justifyContent:'center',
+						['@media (max-width:360px)']: {
+							width: '260px',
+							flexDirection:'column'
+						}},
+
+				}}>
 				<Tabs value={value} onChange={handleChange}
 					aria-label="basic tabs example"
 					variant="scrollable"
@@ -72,3 +77,5 @@ export default function BasicTabs() {
 		</Box>
 	)
 }
+
+export default memo(BasicTabs)

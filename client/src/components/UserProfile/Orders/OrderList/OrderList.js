@@ -1,51 +1,30 @@
 import React from 'react'
-import {Box, Divider, Typography, Chip} from '@mui/material'
-import ShoppingBagCard from '../../../ShoppingBagCard/ShoppingBagCard'
+import {Box,  Typography, Button} from '@mui/material'
+import {Link} from 'react-router-dom'
 
 const OrderList = () => {
 	return (
-		<Box mt={'25px'}>
+		<Box sx={{textAlign: 'center', margin: '7rem 0'}}>
 			<Typography
-				variant={'h1'}
-				fontSize={'32px'}
-				color={'primary'}
-				textAlign={'center'}
-				sx={{textTransform:'uppercase'}}
-			>
-				My purchases
+				fontSize={32}
+				sx={{mb: '14px', mt: '85px', textTransform:'uppercase'}}
+				variant={'h2'}>
+				You still do not have any purchases
 			</Typography>
-			<Box
-				sx={{display:'flex',
-					justifyContent:'space-between',
-					alignItems:'center',
-					mt:'25px'}}
+			<Typography
+				fontSize={16}
+				variant={'body1'}
+				sx={{mt:'25px'}}
 			>
-				<Typography
-					variant={'body1'}
-					component={'span'}
-					fontSize={'18px'}
-					color={'primary'}
-					fontWeight='600'
-					sx={{textTransform:'uppercase'}}
-				>
-					Order : #12345
-					<Chip label="status" variant="outlined"
-						sx={{ml:'10px'}}
-						size="small"
-					/>
-				</Typography>
-				<Typography
-					variant={'body1'}
-					fontSize={'18px'}
-					color={'primary'}
-					fontWeight='600'
-					sx={{textTransform:'uppercase'}}
-				>
-					Price : $123
-				</Typography>
-			</Box>
-			<Divider sx={{mt:'10px'}}/>
-			<ShoppingBagCard card/>
+				Track your online orders to know where they are at any moment.
+			</Typography>
+			<Link to={'/shop/catalog'} style={{textDecoration: 'none'}}>
+				<Button
+					variant={'contained'}
+					style={{marginTop: '2rem'}}>
+					CONTINUE SHOPPING
+				</Button>
+			</Link>
 		</Box>
 
 	)

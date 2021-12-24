@@ -17,7 +17,6 @@ const useAuth = () => {
 		if (token) {
 			axios.defaults.headers.Authorization = token
 			dispatch(userOperations.fetchUser())
-			dispatch(userOperations.fetchUserOrders())
 		} else {
 			axios.defaults.headers.Authorization = null
 			/*if setting null does not remove `Authorization` header then try     
