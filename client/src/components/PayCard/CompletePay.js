@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom'
 import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
 import cartAPI from '../../utils/API/cartAPI'
 import UseSnack from '../../utils/customHooks/useSnack'
-
-
-
+import SubscribeTemlate from '../../utils/emailTemplates/order'
+// import ordersAPI from '../../utils/API/ordersAPI'
 
 const CompletePay = () => {
 	// const Order = ordersAPI.placeOrder()
@@ -14,6 +13,7 @@ const CompletePay = () => {
 	const handleShoppingBag = useHandleShoppingBag()
 	const { handleSnack } = UseSnack()
 	const Order = JSON.parse(localStorage.getItem('ORDER') || '[]')
+
 
 	const clear = () => {
 		localStorage.setItem('Unregistered', '[]')
@@ -32,28 +32,26 @@ const CompletePay = () => {
 		letterSubject: 'Thank you for order! You are welcome!',
 		letterHtml:
 			`<h1>Your order is placed. OrderNo is ${OrderNum}.</h1>
-				<p>{Other details about order in your HTML}</p>`
+				${SubscribeTemlate(OrderNum)}`
 	}
 
 
 	useEffect(async () => {
 		try {
-
 			await cartAPI.addOrder(order)
-			await handleShoppingBag.AfterBuy()
+			await handleShoppingBag.afterBuy()
 		}
 		catch (error) {
 			handleSnack({ message: 'Server response error', style: 'warning' })
 		}
 	}, [])
 
+
 	const sendOrder = () => {
 		localStorage.setItem('ORDER', JSON.stringify(order))
 	}
 
-
 	sendOrder()
-
 
 	return (
 		<Box style={{ textAlign: 'center', margin: '7rem 0' }}>

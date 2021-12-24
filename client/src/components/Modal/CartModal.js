@@ -6,10 +6,11 @@ import { Button, GlobalStyles, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { Box } from '@mui/system'
 import { useDispatch } from 'react-redux'
-import modalActions from '../../store/modal'
+import modalActions from '../../store/Modal'
 
 const style = {
 	modal: {
+		outline: 'none',
 		position: 'absolute',
 		overflowY: 'scroll',
 		top: '50%',

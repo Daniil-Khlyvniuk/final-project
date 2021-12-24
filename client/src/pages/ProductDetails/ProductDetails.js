@@ -6,7 +6,6 @@ import Carousel from '../../components/Carousel/Carousel'
 import ProductDescription from '../../components/ProductDescription/ProductDescription'
 import RelatedItemsList from '../../components/RelatedItems/RelatedItemsList'
 import BackdropLoader from '../../components/UI/BackdropLoader/BackdropLoader'
-import { favoritesOperations } from '../../store/favorites'
 import productActions, {
 	ProductOperations,
 	ProductSelector
@@ -19,7 +18,6 @@ const ProductDetails = () => {
 	const dispatch = useDispatch()
 	const isLoading = useSelector(ProductSelector.isLoading())
 	const activeProduct = useSelector(ProductSelector.getProduct())
-	const favorites = JSON.parse(localStorage.getItem('favorites')) || []
 	const keywords = parent
 		? `${ parent.name }, ${ parent.manufacturer },  ${ parent.brand }, 
 						${ parent.seller }, ${ parent.manufacturerCountry }`
@@ -32,11 +30,6 @@ const ProductDetails = () => {
 		margin: 'auto',
 		alignSelf: 'center'
 	}))
-
-	useEffect(() => {
-		favoritesOperations.fetchFavorites(favorites)(dispatch)
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [ favorites.length ])
 
 	useEffect(() => {
 		dispatch(ProductOperations.fetchProductUrl(id))

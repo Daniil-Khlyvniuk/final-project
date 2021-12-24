@@ -44,7 +44,8 @@ export default function useHandleShoppingBag() {
 		{isLoggedIn ? await cartAPI.deleteCart(id) : null}
 	}
 
-	const AfterBuy = async () => {
+
+	const afterBuy = async () => {
 		{isLoggedIn ? await cartAPI.clearCart() : null}
 		localStorage.setItem('shoppingBag', [])
 		dispatch(shoppingBagActions.removeFromShoppingBag([]))
@@ -52,7 +53,7 @@ export default function useHandleShoppingBag() {
 	}
 
 	return {
-		add, remove, removeAll, AfterBuy,
+		add, remove, removeAll, afterBuy,
 		totalPrice,
 		shoppingBag: shoppingBag
 			?.reduce((acc, val) =>

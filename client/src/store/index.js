@@ -45,7 +45,9 @@ const store = configureStore({
 					'favorites/setFavorites',
 					'snackBar/snackToggle',
 					'user/fetchUserOrders/fulfilled',
-					'user/fetchUserOrders/pending'
+					'user/fetchUserOrders/pending',
+					'shoppingBag/removeFromShoppingBag',
+					'links/fetchLinks/fulfilled'
 				],
 			},
 		}),

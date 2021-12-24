@@ -13,17 +13,41 @@ const Step1 = () => {
 		<Grid className={classes.containerStep1}>
 			<Box className={classes.cards}>
 				{shoppingBag?.length > 0 && <>
-					<Typography fontSize={32} variant={'h2'} className={classes.titleStep1}>Shopping Bag</Typography>
+					<Typography
+						fontSize={32}
+						variant={'h2'}
+						className={classes.titleStep1}
+					>
+						Shopping Bag
+					</Typography>
 					<Box>
 						{shoppingBag
-							?.map((item, key) => <ShoppingBagCard key={key} item={item}/>)}
+							?.map((item, key) => <ShoppingBagCard key={key} item={item} />)}
 					</Box>
 				</>}
 			</Box>
-			<Box>
-				<Typography fontSize={32} variant={'h2'} className={classes.titleStep1}>Summary</Typography>
-				<Typography fontSize={32} variant={'h2'} className={classes.price}>TOTAL USD
-          ${totalPrice}</Typography>
+			<Box sx={{
+				['@media(max-width: 1000px)']: {
+					width: '70%',
+					// marginLeft: '4rem',
+					borderBottom: '1px solid grey',
+					margin: ' 0px 24px 0px 4rem',
+				}
+			}}>
+				<Typography
+					fontSize={32}
+					variant={'h2'}
+					className={classes.titleStep1}
+				>
+					Summary
+				</Typography>
+				<Typography
+					fontSize={32}
+					variant={'h2'}
+					className={classes.price}
+				>
+					TOTAL USD ${totalPrice}
+				</Typography>
 			</Box>
 		</Grid>
 	)

@@ -91,7 +91,7 @@ Object {
                   </div>
                   <div
                     aria-expanded="false"
-                    class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-1b1ycep-MuiAutocomplete-root"
+                    class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-oyi2zz-MuiAutocomplete-root"
                     role="combobox"
                   >
                     <div
@@ -304,7 +304,7 @@ Object {
                 </div>
                 <div
                   aria-expanded="false"
-                  class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-1b1ycep-MuiAutocomplete-root"
+                  class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-oyi2zz-MuiAutocomplete-root"
                   role="combobox"
                 >
                   <div
