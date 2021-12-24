@@ -1,7 +1,7 @@
-import React, {memo, useEffect} from 'react'
-import {Typography, Box, Chip, Divider} from '@mui/material'
-import {userOperations, userSelectors} from '../../../store/user'
-import {useDispatch, useSelector} from 'react-redux'
+import React, { memo, useEffect } from 'react'
+import { Typography, Box, Chip, Divider } from '@mui/material'
+import { userOperations, userSelectors } from '../../../store/user'
+import { useDispatch, useSelector } from 'react-redux'
 import ShoppingBagCard from '../../ShoppingBagCard/ShoppingBagCard'
 
 import OrderList from './OrderList/OrderList'
@@ -20,7 +20,7 @@ const Orders = () => {
 		if (!orders.length) {
 			dispatch(userOperations.fetchUserOrders())
 		}
-
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [orders.length, loading])
 
 
@@ -28,14 +28,15 @@ const Orders = () => {
 		() => {
 			dispatch(userOperations.clearOrder())
 		},
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	[])
 
 
-	if(!orders && !loading){
-		return <OrderList/>
+	if (!orders && !loading) {
+		return <OrderList />
 	}
-	if(loading){
-		return <BackdropLoader open={loading}/>
+	if (loading) {
+		return <BackdropLoader open={loading} />
 	}
 
 	return (
@@ -47,32 +48,35 @@ const Orders = () => {
 					fontSize={'32px'}
 					color={'primary'}
 					textAlign={'center'}
-					sx={{textTransform:'uppercase'}}
+					sx={{ textTransform: 'uppercase' }}
 				>
-			My purchases
+					My purchases
 				</Typography>
-				<Divider sx={{mt:'15px'}}/>
+				<Divider sx={{ mt: '15px' }} />
 				{/* eslint-disable-next-line no-unused-vars */}
-				{orders.map((order , index) => {
+				{orders.map((order, index) => {
 					return (
 						<Box key={index}>
 							<Box
-								sx={{display:'flex',
-									justifyContent:'space-between',
-									alignItems:'center',
-									mt:'20px'
+								sx={{
+									display: 'flex',
+									justifyContent: 'space-between',
+									alignItems: 'center',
+									mt: '20px'
 								}}
 							>
 								<Box
-									sx={{display:'flex',
-										alignItems:'center',
-										justifyContent:'center'
+									sx={{
+										display: 'flex',
+										alignItems: 'center',
+										justifyContent: 'center'
 									}}
 								>
 									<Box
-										sx={{display:'flex',
-											flexDirection:'column',
-											alignItems:'center',
+										sx={{
+											display: 'flex',
+											flexDirection: 'column',
+											alignItems: 'center',
 										}}
 									>
 										<Typography
@@ -82,11 +86,11 @@ const Orders = () => {
 											color={'primary'}
 											fontWeight='600'
 											sx={{
-												textTransform:'uppercase',
-												fontSize:{xs:'12px', sm:'18px'}
+												textTransform: 'uppercase',
+												fontSize: { xs: '12px', sm: '18px' }
 											}}
 										>
-									Order : #{order.orderNo}
+											Order : #{order.orderNo}
 										</Typography>
 										<Typography
 											variant={'body1'}
@@ -95,18 +99,19 @@ const Orders = () => {
 											color={'primary'}
 											fontWeight='600'
 											sx={{
-												textTransform:'uppercase',
-												fontSize:{xs:'12px', sm:'18px'}
+												textTransform: 'uppercase',
+												fontSize: { xs: '12px', sm: '18px' }
 											}}
 										>
-									Date : {order.date.toLocaleString().split('T')[0]}
+											Date : {order.date.toLocaleString().split('T')[0]}
 										</Typography>
 									</Box>
-							
+
 									<Chip label="New" variant="outlined"
 										sx={{
-											ml:'18px',
-											display:{xs:'none', sm:'inline-block'}}}
+											ml: '18px',
+											display: { xs: 'none', sm: 'inline-block' }
+										}}
 										size="small"
 									/>
 								</Box>
@@ -116,20 +121,20 @@ const Orders = () => {
 									color={'primary'}
 									fontWeight='600'
 									sx={{
-										textTransform:'uppercase',
-										fontSize:{xs:'14px', sm:'18px'}
+										textTransform: 'uppercase',
+										fontSize: { xs: '14px', sm: '18px' }
 									}}
 								>
-							Price : ${order.totalSum}
+									Price : ${order.totalSum}
 								</Typography>
 							</Box>
-							<Divider sx={{mt:'10px'}}/>
-							{order.products.map((single,index) => {
+							<Divider sx={{ mt: '10px' }} />
+							{order.products.map((single, index) => {
 								return (<ShoppingBagCard
 									key={index}
 									card item={single} />)
 							})}
-							<Divider sx={{mt:'20px'}}/>
+							<Divider sx={{ mt: '20px' }} />
 						</Box>
 					)
 				})}

@@ -36,6 +36,7 @@ const CompletePay = () => {
 	}
 
 
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(async () => {
 		try {
 			await cartAPI.addOrder(order)
@@ -44,6 +45,7 @@ const CompletePay = () => {
 		catch (error) {
 			handleSnack({ message: 'Server response error', style: 'warning' })
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 
