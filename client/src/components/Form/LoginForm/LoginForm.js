@@ -28,7 +28,6 @@ const LoginForm = () => {
 					await login(values)
 				}
 				catch (err) {
-					console.log('aaaa')
 					setServerResult({ error: 'wrong login or password' })
 					snackActions.warning('Wrong login or password')
 				}
