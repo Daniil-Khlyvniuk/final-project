@@ -6,7 +6,7 @@ import { settingsSelectors } from '../../store/settings'
 import settingsApi from '../API/settingsApi'
 import { returnObjectWithoutZeroVal } from '../helpers/objectHelper'
 import { parseQueryStringWithNoZero, returnMode } from '../helpers/stringHelper'
-import UseSnack from './useSnack'
+import {snackActions} from './useSnackBarUtils'
 
 
 const useFilterHandler = () => {
@@ -14,7 +14,6 @@ const useFilterHandler = () => {
 	const history = useHistory()
 	const isLaunchedByUser = useSelector(filterSelectors.getIsLaunchedByUser())
 	const settingsRedux = useSelector(settingsSelectors.getData())
-	const { handleSnack } = UseSnack()
 
 	const getSettings = async () => {
 		try {
@@ -22,7 +21,7 @@ const useFilterHandler = () => {
 			const mode = returnMode()
 			return settingsRes.data[0][mode]['settings']
 		} catch (err) {
-			handleSnack({ message: 'Settings request err', style: 'warning' })
+			snackActions.warning('Settings request err')
 		}
 	}
 
