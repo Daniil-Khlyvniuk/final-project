@@ -5,6 +5,7 @@ import LoginModal from '../Modal/LoginModal/LoginModal'
 import { useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { userSelectors } from '../../store/user'
+import useSnack from '../../utils/customHooks/useSnack'
 import modalActions from '../../store/modal'
 import PropTypes from 'prop-types'
 
@@ -13,6 +14,7 @@ const FavoriteButton = ({ id, dataTestid, children }) => {
 	const isFavorite = useSelector(favoritesSelectors.isFavorite(id))
 	const location = useLocation()
 	const dispatch = useDispatch()
+	const { handleSnack } = useSnack()
 	const handleOpen = (content) => dispatch(modalActions.modalToggle(content))
 	const favoriteID = JSON.parse(localStorage.getItem('favorites')) || []
 
@@ -41,7 +43,10 @@ const FavoriteButton = ({ id, dataTestid, children }) => {
 					location.state = { ...location.state, productToFavorite: id }
 					await handleOpen(<LoginModal />)
 				}
-				: addToFavorites
+				: () => {
+					addToFavorites()
+					handleSnack({ message: 'Successfully added to favorites', style: 'success' })
+				}
 			}
 			data-testid={dataTestid}
 		>

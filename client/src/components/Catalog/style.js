@@ -6,10 +6,6 @@ export const PriceRng = {
 	fontSize: '14px',
 }
 
-export const PriceBox = {
-	marginLeft: '-50px',
-}
-
 export const PriceRangeBlock = {
 	display: 'flex',
 	flexWrap: 'wrap',
