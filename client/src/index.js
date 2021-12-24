@@ -9,6 +9,8 @@ import Theme from './utils/Theme'
 import { BrowserRouter } from 'react-router-dom'
 import store from './store/index'
 import { HelmetProvider } from 'react-helmet-async'
+import { SnackbarProvider } from 'notistack'
+import { SnackbarUtilsConfigurator } from './utils/customHooks/useSnackBarUtils'
 
 
 ReactDOM.render(
@@ -18,7 +20,10 @@ ReactDOM.render(
 				<BrowserRouter>
 					<ErrorBoundary>
 						<HelmetProvider>
-							<App />
+							<SnackbarProvider>
+								<SnackbarUtilsConfigurator />
+								<App />
+							</SnackbarProvider>
 						</HelmetProvider>
 					</ErrorBoundary>
 				</BrowserRouter>

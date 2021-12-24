@@ -8,7 +8,7 @@ const initialState = {
 	error: null,
 	isLoading: false,
 	order: null,
-	orders : null,
+	orders : [],
 }
 
 export const fetchUser = createAsyncThunk(
@@ -32,6 +32,11 @@ const userSlice = createSlice({
 	name: 'user',
 	initialState,
 	reducers: {
+
+		clearOrder(state){
+			state.orders= []
+		},
+
 		setNewData(state,action){
 			state.data = action.payload
 		},
@@ -86,6 +91,6 @@ const userSlice = createSlice({
 	}
 })
 
-export const { actions } = userSlice
+export const { actions} = userSlice
 
 export default userSlice.reducer

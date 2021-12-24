@@ -5,39 +5,34 @@ import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined'
 import { useDispatch, useSelector } from 'react-redux'
 import { ProductSelector } from '../../../store/product'
 import modalActions from '../../../store/modal'
-import { favoritesOperations, favoritesSelectors } from '../../../store/favorites'
+import favoritesActions, { favoritesSelectors } from '../../../store/favorites'
+import { useLocation } from 'react-router-dom'
 import LoginModal from '../../Modal/LoginModal/LoginModal'
 import useHandleShoppingBag from '../../../utils/customHooks/useHandleShoppingBag'
 import { userSelectors } from '../../../store/user'
-import useSnack from '../../../utils/customHooks/useSnack'
+import { snackActions } from '../../../utils/customHooks/useSnackBarUtils'
 import { useTheme } from '@mui/styles'
+import favoritesAPI from '../../../utils/API/favoritesAPI'
 
 const ActionButtons = () => {
 	const handleShoppingBag = useHandleShoppingBag()
 	const activeProduct = useSelector(ProductSelector.getProduct())
 	const dispatch = useDispatch()
+	const location = useLocation()
 	const user = useSelector(userSelectors.getData())
-	// eslint-disable-next-line no-unused-vars
-	const favorites = useSelector(favoritesSelectors.getFavorites())
+	const isFavorite = useSelector(
+		favoritesSelectors.isFavorite(activeProduct._id)
+	)
 	const handleOpen = (content) => dispatch(modalActions.modalToggle(content))
-	const favoritesStorage = JSON.parse(localStorage.getItem('favorites')) || []
 	const allSizes = useSelector(ProductSelector.allSizes())
 	const allColors = useSelector(ProductSelector.allColors())
 	const parent = useSelector(ProductSelector.getParent())
-	const { handleSnack } = useSnack()
 	const theme = useTheme()
 
 	const addToFavorites = () => {
-		if (!localStorage.getItem('favorites')) localStorage.setItem('favorites', JSON.stringify([]))
-
-		if (favoritesStorage.includes(activeProduct._id)) {
-			const index = favoritesStorage.indexOf(activeProduct._id)
-			favoritesStorage.splice(index, 1)
-		} else {
-			favoritesStorage.push(activeProduct._id)
-		}
-		favoritesOperations.fetchFavorites(favoritesStorage)(dispatch)
-		localStorage.setItem('favorites', JSON.stringify(favoritesStorage))
+		favoritesAPI.toggleFavorites(activeProduct._id).then(res => {
+			dispatch(favoritesActions.setFavoritesIds(res.data.products))
+		})
 	}
 
 	return (
@@ -65,29 +60,32 @@ const ActionButtons = () => {
 						color: activeColorName[0].name,
 						title: parent.name,
 						description: parent.description
-
 					})
-					handleSnack({ message: 'Successfully added to shopping bag', style: 'success' })
+					snackActions.success('Successfully added to shopping bag')
 				}}
 			>
 				ADD TO BAG
 			</Button>
 			<Button disableRipple
-				title={favoritesStorage.includes(activeProduct._id) ? 'remove from favorites' : 'add to favorites'}
+				title={isFavorite ? 'remove from favorites' : 'add to favorites'}
 				sx={{
 					padding: { lg: '22px', md: '16px', sm: '12px', xs: '9px' },
 					[theme.breakpoints.between('766', '860')]: { padding: '12px' }
 				}} variant={'contained'}
 				onClick={!user
 					? async () => {
+						location.state = {
+							...location.state,
+							productToFavorite: activeProduct._id
+						}
 						await handleOpen(<LoginModal />)
-						await !favoritesStorage.includes(activeProduct._id)
-							&& addToFavorites()
 					}
-					: addToFavorites
+					: () => {
+						addToFavorites()
+					}
 				}
 			>
-				{favoritesStorage.includes(activeProduct._id) && user
+				{isFavorite && user
 					? <FavoriteOutlinedIcon fontSize={'small'} />
 					: <FavoriteBorderOutlinedIcon fontSize={'small'} />
 				}

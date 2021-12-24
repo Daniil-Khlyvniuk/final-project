@@ -13,7 +13,7 @@ const theme = createTheme({
 		},
 	},
 	palette: {
-		primary: { main: '#373F41' },
+		primary: { main: '#373F41' , dark:'#2b3233' , light:'#adafb2;' },
 		secondary: { main: '#5C5E60' },
 		white: { main: '#FFFFFF' },
 		error: { main: '#8C8C8C' },
@@ -35,7 +35,25 @@ const theme = createTheme({
 				fontSize: '16px',
 				margin:'6px 0px',
 			},},
-		h4: {},
+		h4: {
+			textTransform:'uppercase',
+			textAlign:'center',
+			color:'#373F41',
+			fontFamily: 'Abel, sans-serif',
+			letterSpacing: '5px'
+		},
+		h5:{
+			textAlign:'center',
+			color:'#373F41',
+			fontFamily: 'Mulish, sans-serif',
+		},
+		h6:{
+			color: '#373F41',
+			fontWeight:'700',
+			textAlign:'center',
+			fontFamily: 'Mulish, sans-serif',
+		},
+
 		p: {
 			fontFamily: 'Mulish, sans-serif',
 		},
@@ -66,12 +84,7 @@ const theme = createTheme({
 			fontSize: '14px',
 			lineHeight: 'normal'
 		},
-		sectionHeading : {
-			textTransform: 'uppercase' ,
-			letterSpacing : '5px',
-			color:'primary',
-			textAlign:'center'
-		},
+
 	},
 	components: {
 

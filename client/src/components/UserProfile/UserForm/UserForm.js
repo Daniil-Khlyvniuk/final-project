@@ -2,7 +2,7 @@ import React from 'react'
 import * as Yup from 'yup'
 import { Container, Grid, Typography, Box } from '@mui/material'
 import { Form, Formik } from 'formik'
-import { phoneRegExp } from './data/Regex'
+import { phoneRegExp , alphabetReg} from './data/Regex'
 import { userOperations, userSelectors } from '../../../store/user'
 import { useSelector, useDispatch } from 'react-redux'
 import { updateData, updatePassword } from '../../../utils/API/userAPI'
@@ -12,12 +12,11 @@ import SelectInput from './FormUI/SelectInput'
 import ButtonInput from './FormUI/ButtonInput'
 import Loader from '../../UI/Loader/Loader'
 import CheckboxInput from './FormUI/CheckboxInput'
-import useSnack from '../../../utils/customHooks/useSnack'
-
+import {snackActions} from '../../../utils/customHooks/useSnackBarUtils'
 
 const FORM_VALIDATION = Yup.object().shape({
-	firstName: Yup.string().required('Required'),
-	lastName: Yup.string().required('Required'),
+	firstName: Yup.string().matches(alphabetReg, 'Only alphabet characters are allowed ').min(2, 'Enter a valid name').max(30,'Enter a valid name').required('Required'),
+	lastName: Yup.string().matches(alphabetReg, 'Only alphabet characters are allowed ').min(2, 'Enter a valid lastname').max(30,'Enter a valid lastname').required('Required'),
 	email: Yup.string().email('Invalid email'),
 	phone: Yup.string()
 		.matches(phoneRegExp, 'Please enter a valid phone number')
@@ -41,9 +40,7 @@ const FORM_VALIDATION = Yup.object().shape({
 })
 
 const UserForm = () => {
-	const {handleSnack} = useSnack()
 	const dispatch = useDispatch()
-
 	const user = useSelector(userSelectors.getData())
 
 	const INITIAL_FORM_STATE = {
@@ -65,16 +62,12 @@ const UserForm = () => {
 		return <Loader />
 	}
 	return (
-		<Box my='15px'>
+		<Box my={2}>
 			<Typography
-				variant='body1'
-				color='primary'
-				fontSize='16px'
-				fontWeight='700'
-				letterSpacing='3px'
-				textAlign='center'
+				variant={'h6'}
+				fontSize={'16px'}
 				component={'div'}
-				sx={{ mb: '25px', mt: '30px' }}
+				sx={{ mb: 3, mt: 3.5 }}
 			>
 				Personal information
 			</Typography>
@@ -103,17 +96,16 @@ const UserForm = () => {
 										updateData(update).then(() => {
 
 											dispatch(userOperations.setNewData(update))
-											handleSnack({ message: 'Successfully changed', style: 'success' })
+											snackActions.success('Successfully changed')
 										}).catch((err) => {
 											const message = err.response.data.password ? err.response.data.password : 'Something wrong with your data'
-											handleSnack({ message, style: 'warning' })
+											snackActions.error(message)
 										})
 									}
 
 
 									if(values.oldPass.length> 2 && values.password === ''){
-
-										handleSnack({message: 'Enter new password', style: 'warning'})
+										snackActions.warning('Enter new password')
 										// eslint-disable-next-line max-len
 									} else if (values.oldPass.length > 2 && values.password.length > 2) {
 
@@ -125,13 +117,14 @@ const UserForm = () => {
 										updatePassword(passwords)
 											.then((res)=>{
 												if(res.data.password){
-													handleSnack({message: 'Wrong Password', style: 'warning'})
+													snackActions.warning('Wrong Password')
 												} else if(res.data.message){
-													handleSnack({message: 'Successfully changed', style: 'success'})
+													snackActions.success('Successfully changed')
 												}
 											}).catch((err) => {
 												const message = err.response.data.password ? err.response.data.password : 'Something wrong with your data'
-												handleSnack({ message, style: 'warning' })
+												snackActions.warning(message)
+
 											})
 									}
 
@@ -172,14 +165,10 @@ const UserForm = () => {
 												</Grid>
 												<Grid item xs={12}>
 													<Typography
-														variant='body1'
+														variant={'h6'}
+														fontSize={'16px'}
 														component={'div'}
-														color='primary'
-														fontSize='16px'
-														fontWeight='700'
-														letterSpacing='3px'
-														textAlign='center'
-														sx={{ my: '18px' }}
+														sx={{ my: 2 }}
 													>
 														Delivery Address
 													</Typography>
@@ -216,14 +205,10 @@ const UserForm = () => {
 												</Grid>
 												<Grid item xs={12}>
 													<Typography
-														variant='body1'
+														variant={'h6'}
+														fontSize={'16px'}
 														component={'div'}
-														color='primary'
-														fontSize='16px'
-														fontWeight='700'
-														letterSpacing='3px'
-														textAlign='center'
-														sx={{ my: '18px' }}
+														sx={{ my: 2}}
 													>
 														Change Password
 													</Typography>
@@ -260,19 +245,17 @@ const UserForm = () => {
 													/>
 												</Grid>
 
-												<Grid item md={6} xs={12} sx={{ mt: '15px' }} >
+												<Grid item md={6} xs={12} sx={{ mt: 2 }} >
 													<Typography
-														fontSize={'12px'}
-														color={'#000'}
+														fontSize={12}
+														color={'primary.dark'}
 														fontWeight={700}
-														lineHeight={'20px'}
 													>
 														Notification preferences
 													</Typography>
 													<Typography
-														fontSize={'12px'}
-														color={'#adafb2'}
-														lineHeight={'18px'}
+														fontSize={12}
+														color={'primary.light'}
 														letterSpacing={'.3px'}
 														maxWidth={'325px'}
 													>
@@ -286,7 +269,7 @@ const UserForm = () => {
 													/>
 												</Grid>
 
-												<Grid item xs={12} sx={{ textAlign: 'center', mt: '16px' }}>
+												<Grid item xs={12} sx={{ textAlign: 'center', mt: 2}}>
 
 													<ButtonInput
 

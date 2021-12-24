@@ -7,53 +7,52 @@ import { favoritesOperations, favoritesSelectors } from '../../store/favorites'
 import UseSeo from '../../utils/customHooks/useSeo'
 import FavoritesTitle from './FavoritesElems/FavoritesTitle'
 
-
 const Favorites = () => {
 	const favorites = useSelector(favoritesSelectors.getFavorites())
+	const favoritesIds = useSelector(favoritesSelectors.getFavoritesID())
 	const isLoading = useSelector(favoritesSelectors.isLoading())
 	const dispatch = useDispatch()
-	const favoriteID = JSON.parse(localStorage.getItem('favorites')) || []
+
+	useEffect(() => {
+		favoritesOperations.fetchFavorites()(dispatch)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [favoritesIds.length])
+
 	const favoritesCards = favorites?.map(item => (
-		<Grid item md={ 6 } sm={ 6 } xs={ 12 } key={ item.variants._id }>
+		<Grid item md={6} sm={6} xs={12} key={item._id}>
 			<ProductCard
-				_id={ item.variants._id }
-				sx={ { width: { sm: '580px' }, height: { sm: '545px' } } }
-				image={ '/' + item.variants.imageUrls[0] }
-				title={ item.name }
-				price={ item.variants.currentPrice }
+				_id={item._id}
+				sx={{ width: { sm: '580px' }, height: { sm: '545px' } }}
+				image={'/' + item.imageUrls[0]}
+				title={item.product.name}
+				price={item.currentPrice}
 			/>
 		</Grid>
 	))
+
 	const SeoWords = favorites ? favorites.map(
-		favorite => `${ favorite.name }, ${ favorite.manufacturer }, 
-						${ favorite.brand }, ${ favorite.seller }, 
-						${ favorite.manufacturerCountry }`)
+		favorite => `${favorite.name}, ${favorite.manufacturer}, 
+						${favorite.brand}, ${favorite.seller}, 
+						${favorite.manufacturerCountry}`)
 		.join(', ')
 		: null
-
-
-	useEffect(() => {
-		favoritesOperations.fetchFavorites(favoriteID)(dispatch)
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [ favoriteID.length ])
 
 	return (
 		<>
 			<UseSeo
-				title={ 'Product Favorites' }
-				description={ 'Product favorites user liked' }
-				keywords={ SeoWords }
+				title={'Product Favorites'}
+				description={'Product favorites user liked'}
+				keywords={SeoWords}
 			/>
-			<Container maxWidth="lg" sx={ { minWidth: 320 } }>
+			<Container maxWidth="lg" sx={{ minWidth: 320 }}>
 				{
 					isLoading
 					&&
-					<BackdropLoader open={ isLoading } />
-
+					<BackdropLoader open={isLoading} />
 				}
-				<FavoritesTitle isEmpty={ !favoriteID.length } />
-				<Grid container spacing={ 2 } sx={ { marginBottom: '40px' } }>
-					{ favoritesCards }
+				<FavoritesTitle isEmpty={!favorites.length} />
+				<Grid container spacing={2} sx={{ marginBottom: '40px' }}>
+					{favoritesCards}
 				</Grid>
 			</Container>
 		</>

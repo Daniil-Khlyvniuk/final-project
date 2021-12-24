@@ -19,7 +19,7 @@ const BasicModal = ({ style, body }) => {
 				onClose={handleClose}
 				aria-labelledby="modal-modal-title"
 				aria-describedby="modal-modal-description"
-				sx={{ zIndex: 999999999999 }}
+				sx={{ zIndex: 1100 }}
 				style={{ overflowY: 'scroll', overflowX: 'hidden' }}
 			>
 				<Box sx={style}>

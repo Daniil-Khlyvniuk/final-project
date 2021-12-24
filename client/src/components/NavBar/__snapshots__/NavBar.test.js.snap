@@ -39,7 +39,7 @@ Object {
               <div
                 class="MuiBox-root css-0"
                 data-testid="navbar-category"
-                style="z-index: 99999999999999;"
+                style="z-index: 1000;"
               >
                 <li
                   aria-controls="false"
@@ -91,7 +91,7 @@ Object {
                   </div>
                   <div
                     aria-expanded="false"
-                    class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-1b1ycep-MuiAutocomplete-root"
+                    class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-oyi2zz-MuiAutocomplete-root"
                     role="combobox"
                   >
                     <div
@@ -252,7 +252,7 @@ Object {
             <div
               class="MuiBox-root css-0"
               data-testid="navbar-category"
-              style="z-index: 99999999999999;"
+              style="z-index: 1000;"
             >
               <li
                 aria-controls="false"
@@ -304,7 +304,7 @@ Object {
                 </div>
                 <div
                   aria-expanded="false"
-                  class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-1b1ycep-MuiAutocomplete-root"
+                  class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-oyi2zz-MuiAutocomplete-root"
                   role="combobox"
                 >
                   <div

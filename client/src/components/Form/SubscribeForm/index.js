@@ -3,7 +3,7 @@ import { Formik, Form, Field } from 'formik'
 import { Button, Alert } from '@mui/material'
 import { SUBSCRIBE_SCHEMA } from '../setting/Schemes'
 import TextInput from '../setting/customElements/TextInput'
-import useSnack from '../../../utils/customHooks/useSnack'
+import {snackActions} from '../../../utils/customHooks/useSnackBarUtils'
 import { addSubscribe } from '../../../utils/API/subscribersAPI'
 import { styled } from '@mui/material/styles'
 
@@ -17,19 +17,18 @@ const StyledAlert = styled(Alert)(() => ({
 }))
 
 const SubscribeForm = () => {
-	const { handleSnack } = useSnack()
 	const [subscribeStatus, setSubscribeStatus] = useState(null)
 	const handleSubmit = async ({ email }, formikFunctions) => {
 		try {
 			const res = await addSubscribe(email)
 			if (res.status === 200) {
 				setSubscribeStatus({ success: 'You successfully subscribed!' })
-				handleSnack({ message: 'You successfully subscribed', style: 'success' })
+				snackActions.success('You successfully subscribed')
 			}
 		}
 		catch (er) {
 			setSubscribeStatus({ error: er.response.data.message })
-			handleSnack({ message: er.response.data.message, style: 'warning' })
+			snackActions.warning(er.response.data.message)
 		}
 		formikFunctions.resetForm()
 		setTimeout(() => setSubscribeStatus(null), 5000)

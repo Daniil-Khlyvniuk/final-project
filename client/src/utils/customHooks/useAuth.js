@@ -1,21 +1,23 @@
+import { useCallback } from 'react'
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
-import { userOperations, userSelectors} from '../../store/user'
+import { userOperations, userSelectors } from '../../store/user'
 import { loginUser, registerUser } from '../API/userAPI'
-import {subscribeTemlate} from '../emailTemplates'
+import { subscribeTemlate } from '../emailTemplates'
 import modalActions from '../../store/modal'
-import useSnack from './useSnack'
+import { snackActions } from './useSnackBarUtils'
+import { useLocation } from 'react-router-dom'
+import favoritesActions from '../../store/favorites'
+import favoritesAPI from '../API/favoritesAPI'
 
 const useAuth = () => {
 	const dispatch = useDispatch()
-	const {handleSnack} = useSnack()
+	const location = useLocation()
 	const token = useSelector(userSelectors.getToken())
-	const checkToken = () => 
-	{
+	const checkToken = useCallback(() => {
 		if (token) {
 			axios.defaults.headers.Authorization = token
 			dispatch(userOperations.fetchUser())
-			dispatch(userOperations.fetchUserOrders())
 		} else {
 			axios.defaults.headers.Authorization = null
 			/*if setting null does not remove `Authorization` header then try     
@@ -23,22 +25,37 @@ const useAuth = () => {
 				*/
 		}
 		return token
-	}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [token])
 
 	const login = async (values) => {
-		let formData = {...values}
-		const {rememberMe} = formData
+		let formData = { ...values }
+		const { rememberMe } = formData
 		delete (formData.rememberMe)
 		const res = await loginUser(formData)
 		if (res.status === 200) {
 			//save token to store (and localStorage)
-			dispatch(userOperations.setToken({token: res.data.token, rememberMe}))
+			dispatch(userOperations.setToken({ token: res.data.token, rememberMe }))
 			dispatch(modalActions.modalToggle(false))
-			handleSnack({message: 'You successfully Logged In', style: 'success'})
+			snackActions.success('You successfully Logged In')
+			if (location.state?.productToFavorite) {
+				favoritesAPI.getFavoritesIds().then((res) => {
+					const favIds = res.data.products
+
+					if (favIds.includes(location.state.productToFavorite)) return 
+
+					favoritesAPI.toggleFavorites(location.state.productToFavorite)
+						.then(res => {
+							dispatch(favoritesActions.setFavoritesIds(res.data.products))
+							location.state.productToFavorite = null
+						})
+				})
+			}
+
 			return true
 		}
-		handleSnack({message: 'wrong login or password', style: 'warning'})
-		return false	
+		snackActions.warning('Wrong login or password')
+		return false
 	}
 
 	const register = async (values) => {
@@ -47,20 +64,20 @@ const useAuth = () => {
 			letterSubject: 'Your subscription promo code',
 			letterHtml: subscribeTemlate(values.email),
 		}
-		const {email: loginOrEmail,password,rememberMe} = formData
+		const { email: loginOrEmail, password, rememberMe } = formData
 		delete (formData.confirmPass)
 		delete (formData.rememberMe)
-		
+
 		const res = await registerUser(formData)
 		if (res.status === 200) {
-			const loginRes = await login({loginOrEmail,password,rememberMe})
-			handleSnack({message: 'You successfully registered', style: 'success'})
+			const loginRes = await login({ loginOrEmail, password, rememberMe })
+			snackActions.success('You successfully registered')
 			return loginRes
 		}
-		handleSnack({message: 'Troubles with register', style: 'warning'})
+		snackActions.warning('Troubles with register')
 		return false
 	}
-	return {checkToken, login, register}
+	return { checkToken, login, register }
 }
 
 export default useAuth
