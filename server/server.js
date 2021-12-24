@@ -48,7 +48,7 @@ const db = require("./config/keys").mongoURI;
 app.use(passport.initialize());
 
 app.use(fileUpload({}));
-// app.use(express.static("static"));
+app.use(express.static("static"));
 
 // Passport Config
 require("./config/passport")(passport);
