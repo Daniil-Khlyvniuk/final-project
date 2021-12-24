@@ -39,12 +39,19 @@ const useAuth = () => {
 			dispatch(modalActions.modalToggle(false))
 			snackActions.success('You successfully Logged In')
 			if (location.state?.productToFavorite) {
-				favoritesAPI.toggleFavorites(location.state.productToFavorite)
-					.then(res => {
-						dispatch(favoritesActions.setFavoritesIds(res.data.products))
-					})
-				location.state.productToFavorite = null
+				favoritesAPI.getFavoritesIds().then((res) => {
+					const favIds = res.data.products
+
+					if (favIds.includes(location.state.productToFavorite)) return 
+
+					favoritesAPI.toggleFavorites(location.state.productToFavorite)
+						.then(res => {
+							dispatch(favoritesActions.setFavoritesIds(res.data.products))
+							location.state.productToFavorite = null
+						})
+				})
 			}
+
 			return true
 		}
 		snackActions.warning('Wrong login or password')
