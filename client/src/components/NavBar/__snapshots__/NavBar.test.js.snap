@@ -39,7 +39,7 @@ Object {
               <div
                 class="MuiBox-root css-0"
                 data-testid="navbar-category"
-                style="z-index: 99999999999999;"
+                style="z-index: 1000;"
               >
                 <li
                   aria-controls="false"
@@ -252,7 +252,7 @@ Object {
             <div
               class="MuiBox-root css-0"
               data-testid="navbar-category"
-              style="z-index: 99999999999999;"
+              style="z-index: 1000;"
             >
               <li
                 aria-controls="false"
