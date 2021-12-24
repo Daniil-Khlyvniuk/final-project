@@ -4,7 +4,8 @@ import { IconButton } from '@mui/material'
 import { useStyles } from './styles'
 import { useDispatch } from 'react-redux'
 import { userOperations } from '../../../../store/user'
-import {snackActions} from '../../../../utils/customHooks/useSnackBarUtils'
+import { snackActions } from '../../../../utils/customHooks/useSnackBarUtils'
+import favoritesActions from '../../../../store/favorites'
 
 const LogoutIconHeader = () => {
 	const classes = useStyles()
@@ -17,6 +18,7 @@ const LogoutIconHeader = () => {
 			sx={{ padding: 0 }}
 			onClick={() => {
 				dispatch(userOperations.logOut())
+				dispatch(favoritesActions.clearFavorites())
 				snackActions.success('Successfully logged out')
 			}}
 			data-testid='navbar-logout-icon'

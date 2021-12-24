@@ -1,13 +1,14 @@
-import {useCallback} from 'react'
+import { useCallback } from 'react'
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
 import { userOperations, userSelectors } from '../../store/user'
 import { loginUser, registerUser } from '../API/userAPI'
 import { subscribeTemlate } from '../emailTemplates'
 import modalActions from '../../store/modal'
-import {snackActions} from './useSnackBarUtils'
+import { snackActions } from './useSnackBarUtils'
 import { useLocation } from 'react-router-dom'
 import favoritesActions from '../../store/favorites'
+import favoritesAPI from '../API/favoritesAPI'
 
 const useAuth = () => {
 	const dispatch = useDispatch()
@@ -24,8 +25,8 @@ const useAuth = () => {
 				*/
 		}
 		return token
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	},[token])
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [token])
 
 	const login = async (values) => {
 		let formData = { ...values }
@@ -38,9 +39,10 @@ const useAuth = () => {
 			dispatch(modalActions.modalToggle(false))
 			snackActions.success('You successfully Logged In')
 			if (location.state?.productToFavorite) {
-				dispatch(favoritesActions.handleOneFavorite(
-					location.state.productToFavorite
-				))
+				favoritesAPI.toggleFavorites(location.state.productToFavorite)
+					.then(res => {
+						dispatch(favoritesActions.setFavoritesIds(res.data.products))
+					})
 				location.state.productToFavorite = null
 			}
 			return true
