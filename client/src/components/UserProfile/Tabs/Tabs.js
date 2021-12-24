@@ -1,4 +1,4 @@
-import React , {useEffect , useState} from 'react'
+import React, {memo, useEffect, useState} from 'react'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import Box from '@mui/material/Box'
@@ -15,7 +15,7 @@ const a11yProps = (index) => {
 	}
 }
 
-export default function BasicTabs() {
+const BasicTabs = () => {
 	const [value, setValue] = useState(0)
 	const {pathname} = useLocation()
 
@@ -77,3 +77,5 @@ export default function BasicTabs() {
 		</Box>
 	)
 }
+
+export default memo(BasicTabs)
