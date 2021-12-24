@@ -37,7 +37,7 @@ const useAuth = () => {
 			dispatch(userOperations.setToken({ token: res.data.token, rememberMe }))
 			dispatch(modalActions.modalToggle(false))
 			handleSnack({ message: 'You successfully Logged In', style: 'success' })
-			if (location.state.productToFavorite) {
+			if (location.state?.productToFavorite) {
 				dispatch(favoritesActions.handleOneFavorite(
 					location.state.productToFavorite
 				))
