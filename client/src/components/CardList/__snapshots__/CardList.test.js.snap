@@ -8,11 +8,11 @@ Object {
       <div
         class="MuiBox-root css-0"
       >
-        <h2
-          class="MuiTypography-root MuiTypography-h2 makeStyles-title-4 css-rz4i4a-MuiTypography-root"
+        <h4
+          class="MuiTypography-root MuiTypography-h4 css-1vtlzj0-MuiTypography-root"
         >
           New in
-        </h2>
+        </h4>
         <div
           class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-4zz9y7-MuiGrid-root"
           data-testid="product-container"
@@ -24,11 +24,11 @@ Object {
     <div
       class="MuiBox-root css-0"
     >
-      <h2
-        class="MuiTypography-root MuiTypography-h2 makeStyles-title-4 css-rz4i4a-MuiTypography-root"
+      <h4
+        class="MuiTypography-root MuiTypography-h4 css-1vtlzj0-MuiTypography-root"
       >
         New in
-      </h2>
+      </h4>
       <div
         class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-4zz9y7-MuiGrid-root"
         data-testid="product-container"

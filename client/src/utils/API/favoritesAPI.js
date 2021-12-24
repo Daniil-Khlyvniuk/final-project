@@ -1,10 +1,16 @@
 import axios from 'axios'
 
-const toggleFavorites = (productId) => axios.post(`/api/favorites/${productId}`)
+const getAuthHeader = () => ({
+	header: localStorage.getItem('userToken')
+})
 
-const getFavorites = () => axios('/api/favorites/')
+const toggleFavorites = (productId) => axios.post(
+	`/api/favorites/${productId}`, {}, getAuthHeader()
+)
 
-const getFavoritesIds = () => axios('/api/favorites/ids')
+const getFavorites = () => axios('/api/favorites/', getAuthHeader())
+
+const getFavoritesIds = () => axios('/api/favorites/ids', getAuthHeader())
 
 export default {
 	toggleFavorites,

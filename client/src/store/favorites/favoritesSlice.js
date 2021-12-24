@@ -4,24 +4,20 @@ const favoritesSlice = createSlice({
 	name: 'favorites',
 	initialState: {
 		data: [],
-		id: JSON.parse(localStorage.getItem('favorites')) || [],
+		id: [],
 		isLoading: false,
 	},
 	reducers: {
 		setFavorites(state, action) {
 			state.data = action.payload
 		},
+		setFavoritesIds(state, action) {
+			state.id = action.payload
+		},
 		setLoading(state, action) {
 			state.isLoading = action.payload
 		},
-		handleOneFavorite(state, action) {
-			state.id.includes(action.payload)
-				? state.id = state.id.filter(product => product !== action.payload)
-				: state.id.push(action.payload)
-			localStorage.setItem('favorites', JSON.stringify(state.id))
-		},
 		clearFavorites(state) {
-			localStorage.removeItem('favorites')
 			state.data = []
 			state.id = []
 		}
@@ -30,6 +26,7 @@ const favoritesSlice = createSlice({
 
 export const {
 	setFavorites,
+	setFavoritesIds,
 	setLoading,
 	handleOneFavorite,
 	clearFavorites

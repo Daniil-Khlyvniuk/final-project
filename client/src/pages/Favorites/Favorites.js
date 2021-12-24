@@ -9,23 +9,23 @@ import FavoritesTitle from './FavoritesElems/FavoritesTitle'
 
 const Favorites = () => {
 	const favorites = useSelector(favoritesSelectors.getFavorites())
+	const favoritesIds = useSelector(favoritesSelectors.getFavoritesID())
 	const isLoading = useSelector(favoritesSelectors.isLoading())
 	const dispatch = useDispatch()
-	const favoriteID = JSON.parse(localStorage.getItem('favorites')) || []
 
 	useEffect(() => {
-		favoritesOperations.fetchFavorites(favoriteID)(dispatch)
+		favoritesOperations.fetchFavorites()(dispatch)
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [favoriteID.length])
+	}, [favoritesIds.length])
 
 	const favoritesCards = favorites?.map(item => (
-		<Grid item md={6} sm={6} xs={12} key={item.variants._id}>
+		<Grid item md={6} sm={6} xs={12} key={item._id}>
 			<ProductCard
-				_id={item.variants._id}
+				_id={item._id}
 				sx={{ width: { sm: '580px' }, height: { sm: '545px' } }}
-				image={'/' + item.variants.imageUrls[0]}
-				title={item.name}
-				price={item.variants.currentPrice}
+				image={'/' + item.imageUrls[0]}
+				title={item.product.name}
+				price={item.currentPrice}
 			/>
 		</Grid>
 	))
@@ -50,7 +50,7 @@ const Favorites = () => {
 					&&
 					<BackdropLoader open={isLoading} />
 				}
-				<FavoritesTitle isEmpty={!favoriteID.length} />
+				<FavoritesTitle isEmpty={!favorites.length} />
 				<Grid container spacing={2} sx={{ marginBottom: '40px' }}>
 					{favoritesCards}
 				</Grid>

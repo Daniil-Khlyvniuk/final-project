@@ -1,14 +1,29 @@
 import favoritesActions from '.'
-import productAPI from '../../utils/API/productAPI'
+import favoritesAPI from '../../utils/API/favoritesAPI'
 
-const fetchFavorites = (productID) => dispatch => {
+const fetchFavoritesIds = () => dispatch => {
 	dispatch(favoritesActions.setLoading(true))
 
-	Promise.all(productID.map(id => productAPI.getProduct(id)))
+	favoritesAPI.getFavoritesIds()
 		.then(res => {
-			dispatch(favoritesActions.setFavorites(res.map(r => r.data)))
+			dispatch(favoritesActions.setFavoritesIds(res.data.products))
 			dispatch(favoritesActions.setLoading(false))
-		})
+		}
+		)
 }
 
-export default { fetchFavorites }
+const fetchFavorites = () => dispatch => {
+	dispatch(favoritesActions.setLoading(true))
+
+	favoritesAPI.getFavorites()
+		.then(res => {
+			dispatch(favoritesActions.setFavorites(res.data.products))
+			dispatch(favoritesActions.setLoading(false))
+		}
+		)
+}
+
+export default {
+	fetchFavoritesIds,
+	fetchFavorites
+}

@@ -12,6 +12,7 @@ import useHandleShoppingBag from '../../../utils/customHooks/useHandleShoppingBa
 import { userSelectors } from '../../../store/user'
 import { snackActions } from '../../../utils/customHooks/useSnackBarUtils'
 import { useTheme } from '@mui/styles'
+import favoritesAPI from '../../../utils/API/favoritesAPI'
 
 const ActionButtons = () => {
 	const handleShoppingBag = useHandleShoppingBag()
@@ -29,7 +30,9 @@ const ActionButtons = () => {
 	const theme = useTheme()
 
 	const addToFavorites = () => {
-		dispatch(favoritesActions.handleOneFavorite(activeProduct._id))
+		favoritesAPI.toggleFavorites(activeProduct._id).then(res => {
+			dispatch(favoritesActions.setFavoritesIds(res.data.products))
+		})
 	}
 
 	return (

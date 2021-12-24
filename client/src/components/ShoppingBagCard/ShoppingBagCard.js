@@ -22,6 +22,7 @@ const ShoppingBagCard = ({ item, card }) => {
 		return() => {
 			setParent([])
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 	let Storquantity
 	if (!card) {

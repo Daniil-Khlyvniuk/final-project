@@ -8,13 +8,15 @@ import useAuth from './utils/customHooks/useAuth'
 import ScrollButton from './components/ScrollButton/ScrollButton'
 // import RootSnackBar from './components/UI/RootSnackBar' //удалить потом 
 import { settingsOperations } from './store/settings'
-
 import UseScrollToTop from './utils/customHooks/useScrollToTop'
+import { userSelectors } from './store/user'
+import { favoritesOperations } from './store/favorites'
 
 const App = () => {
 	const { checkToken } = useAuth()
 	const dispatch = useDispatch()
 	const modal = useSelector(modalSelectors.checkOpen())
+	const token = useSelector(userSelectors.getToken())
 
 	useEffect(() => {
 		checkToken()
@@ -24,6 +26,12 @@ const App = () => {
 		dispatch(settingsOperations.fetchSettings())
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
+
+	useEffect(() => {
+		if (!token) return
+		favoritesOperations.fetchFavoritesIds()(dispatch)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [token])
 
 	const exeptionScroll = ['/shop/catalog', '/search']
 
