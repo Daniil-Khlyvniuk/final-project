@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import CustomInput from '../setting/customElements/CustomInput'
 import CustomSwitch from '../setting/customElements/CustomSwitch'
 import useAuth from '../../../utils/customHooks/useAuth'
+import {snackActions} from '../../../utils/customHooks/useSnackBarUtils'
 
 const LoginForm = () => {
 	const classes = useFormStyle()
@@ -22,12 +23,13 @@ const LoginForm = () => {
 			}}
 			validationSchema={LOGIN_SCHEMA}
 
-			onSubmit={values => {
+			onSubmit={async (values) => {
 				try {
-					login(values)
+					await login(values)
 				}
 				catch (err) {
 					setServerResult({ error: 'wrong login or password' })
+					snackActions.warning('Wrong login or password')
 				}
 			}}
 		>
