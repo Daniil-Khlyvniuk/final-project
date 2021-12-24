@@ -12,8 +12,7 @@ import SelectInput from './FormUI/SelectInput'
 import ButtonInput from './FormUI/ButtonInput'
 import Loader from '../../UI/Loader/Loader'
 import CheckboxInput from './FormUI/CheckboxInput'
-import useSnack from '../../../utils/customHooks/useSnack'
-
+import {snackActions} from '../../../utils/customHooks/useSnackBarUtils'
 
 const FORM_VALIDATION = Yup.object().shape({
 	firstName: Yup.string().matches(alphabetReg, 'Only alphabet characters are allowed ').min(2, 'Enter a valid name').max(30,'Enter a valid name').required('Required'),
@@ -41,9 +40,7 @@ const FORM_VALIDATION = Yup.object().shape({
 })
 
 const UserForm = () => {
-	const {handleSnack} = useSnack()
 	const dispatch = useDispatch()
-
 	const user = useSelector(userSelectors.getData())
 
 	const INITIAL_FORM_STATE = {
@@ -99,17 +96,16 @@ const UserForm = () => {
 										updateData(update).then(() => {
 
 											dispatch(userOperations.setNewData(update))
-											handleSnack({ message: 'Successfully changed', style: 'success' })
+											snackActions.success('Successfully changed')
 										}).catch((err) => {
 											const message = err.response.data.password ? err.response.data.password : 'Something wrong with your data'
-											handleSnack({ message, style: 'warning' })
+											snackActions.error(message)
 										})
 									}
 
 
 									if(values.oldPass.length> 2 && values.password === ''){
-
-										handleSnack({message: 'Enter new password', style: 'warning'})
+										snackActions.warning('Enter new password')
 										// eslint-disable-next-line max-len
 									} else if (values.oldPass.length > 2 && values.password.length > 2) {
 
@@ -121,13 +117,14 @@ const UserForm = () => {
 										updatePassword(passwords)
 											.then((res)=>{
 												if(res.data.password){
-													handleSnack({message: 'Wrong Password', style: 'warning'})
+													snackActions.warning('Wrong Password')
 												} else if(res.data.message){
-													handleSnack({message: 'Successfully changed', style: 'success'})
+													snackActions.success('Successfully changed')
 												}
 											}).catch((err) => {
 												const message = err.response.data.password ? err.response.data.password : 'Something wrong with your data'
-												handleSnack({ message, style: 'warning' })
+												snackActions.warning(message)
+
 											})
 									}
 
