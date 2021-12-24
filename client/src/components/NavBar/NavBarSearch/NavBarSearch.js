@@ -5,14 +5,13 @@ import { Search, SearchIconWrapper, StyledAutocomplete, StyledBox } from './styl
 import productsAPI from '../../../utils/API/productsAPI'
 import { CircularProgress, Grid, Avatar, Typography } from '@mui/material'
 import { useHistory, Link } from 'react-router-dom'
-import useSnack from '../../../utils/customHooks/useSnack'
+import {snackActions} from '../../../utils/customHooks/useSnackBarUtils'
 
 const HeaderSearch = () => {
 	const [options, setOptions] = useState([])
 	const [isLoading, setIsLoading] = useState(false)
 	let history = useHistory()
 	let timer
-	const { handleSnack } = useSnack()
 
 	const onSearch = (e) => {
 		clearTimeout(timer)
@@ -34,7 +33,7 @@ const HeaderSearch = () => {
 					}
 				})
 			} catch (err) {
-				handleSnack({ message: 'Server response error', style: 'warning' })
+				snackActions.warning('Server response error')
 				setOptions([])
 				setIsLoading(false)
 			}
@@ -67,7 +66,7 @@ const HeaderSearch = () => {
 									}
 								})
 							} catch (err) {
-								handleSnack({ message: 'Server response error', style: 'warning' })
+								snackActions.warning('Server response error')
 							}
 						}
 					}}

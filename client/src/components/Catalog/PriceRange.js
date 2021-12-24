@@ -4,7 +4,7 @@ import productsAPI from '../../utils/API/productsAPI'
 import { useSelector } from 'react-redux'
 import { filterSelectors } from '../../store/filter'
 import useFilterHandler from '../../utils/customHooks/useFilterHandler'
-import UseSnack from '../../utils/customHooks/useSnack'
+import {snackActions} from '../../utils/customHooks/useSnackBarUtils'
 
 const PriceRangeInput = styled(OutlinedInput)(() => ({
 	height: '22px',
@@ -25,7 +25,6 @@ const PriceRange = () => {
 	const { minPrice, maxPrice } = useSelector(filterSelectors.getFilters())
 	const [defaultMaxPrice, setDefaultMaxPrice] = useState(0)
 	const [value, setValue] = useState([0, 1000])
-	const { handleSnack } = UseSnack()
 
 	const rangeSelector = (event, newValue, activeThumb) => {
 		if (!Array.isArray(newValue)) {
@@ -48,7 +47,7 @@ const PriceRange = () => {
 			setDefaultMaxPrice(res.data[0].max)
 		}
 		catch (err) {
-			handleSnack({ message: 'Price range error', style: 'warning' })
+			snackActions.warning('Price range error')
 		}
 	}
 	useEffect(() => {
