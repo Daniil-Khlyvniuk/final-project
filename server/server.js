@@ -37,6 +37,8 @@ app.use(cors());
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(passport.initialize());
+
 // DB Config
 // const db = require("./config/keys").mongoURI;
 const db = require("./config/keys").mongoURI;
