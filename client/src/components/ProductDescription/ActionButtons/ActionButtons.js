@@ -10,7 +10,7 @@ import { useLocation } from 'react-router-dom'
 import LoginModal from '../../Modal/LoginModal/LoginModal'
 import useHandleShoppingBag from '../../../utils/customHooks/useHandleShoppingBag'
 import { userSelectors } from '../../../store/user'
-import {snackActions} from '../../../utils/customHooks/useSnackBarUtils'
+import { snackActions } from '../../../utils/customHooks/useSnackBarUtils'
 import { useTheme } from '@mui/styles'
 
 const ActionButtons = () => {
@@ -77,7 +77,9 @@ const ActionButtons = () => {
 						}
 						await handleOpen(<LoginModal />)
 					}
-					: addToFavorites
+					: () => {
+						addToFavorites()
+					}
 				}
 			>
 				{isFavorite && user

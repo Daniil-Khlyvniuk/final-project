@@ -39,8 +39,8 @@ const theme = createTheme({
 			textTransform:'uppercase',
 			textAlign:'center',
 			color:'#373F41',
-			fontFamily: 'Mulish, sans-serif',
-
+			fontFamily: 'Abel, sans-serif',
+			letterSpacing: '5px'
 		},
 		h5:{
 			textAlign:'center',
