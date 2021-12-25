@@ -35,11 +35,14 @@ const CompletePay = () => {
 				${SubscribeTemlate(OrderNum)}`
 	}
 
+	const getData = async () => {
+		await cartAPI.addOrder(order)
+		await handleShoppingBag.afterBuy()
+	}
 
-	useEffect(async () => {
+	useEffect( () => {
 		try {
-			await cartAPI.addOrder(order)
-			await handleShoppingBag.afterBuy()
+			getData()
 		}
 		catch (error) {
 			handleSnack({ message: 'Server response error', style: 'warning' })
