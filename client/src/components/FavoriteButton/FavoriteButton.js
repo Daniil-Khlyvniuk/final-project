@@ -1,28 +1,27 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { IconButton } from '@mui/material'
-import favoritesActions, { favoritesSelectors, favoritesOperations } from '../../store/favorites'
+import favoritesActions, { favoritesSelectors } from '../../store/favorites'
 import LoginModal from '../Modal/LoginModal/LoginModal'
 import { useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { userSelectors } from '../../store/user'
+import useSnack from '../../utils/customHooks/useSnack'
 import modalActions from '../../store/modal'
 import PropTypes from 'prop-types'
+import favoritesAPI from '../../utils/API/favoritesAPI'
 
 const FavoriteButton = ({ id, dataTestid, children }) => {
 	const user = useSelector(userSelectors.getData())
 	const isFavorite = useSelector(favoritesSelectors.isFavorite(id))
 	const location = useLocation()
 	const dispatch = useDispatch()
+	const { handleSnack } = useSnack()
 	const handleOpen = (content) => dispatch(modalActions.modalToggle(content))
-	const favoriteID = JSON.parse(localStorage.getItem('favorites')) || []
-
-	useEffect(() => {
-		favoritesOperations.fetchFavorites(favoriteID)(dispatch)
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [favoriteID.length])
 
 	const addToFavorites = () => {
-		dispatch(favoritesActions.handleOneFavorite(id))
+		favoritesAPI.toggleFavorites(id).then(res => {
+			dispatch(favoritesActions.setFavoritesIds(res.data.products))
+		})
 	}
 
 	return (
@@ -41,7 +40,10 @@ const FavoriteButton = ({ id, dataTestid, children }) => {
 					location.state = { ...location.state, productToFavorite: id }
 					await handleOpen(<LoginModal />)
 				}
-				: addToFavorites
+				: () => {
+					addToFavorites()
+					handleSnack({ message: 'Successfully added to favorites', style: 'success' })
+				}
 			}
 			data-testid={dataTestid}
 		>

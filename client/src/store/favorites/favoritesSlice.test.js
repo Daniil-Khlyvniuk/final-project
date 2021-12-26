@@ -5,7 +5,7 @@ describe('Test favoritesSlice', () => {
 		expect(reducer(undefined, {})).toEqual(
 			{
 				data: [],
-				id: JSON.parse(localStorage.getItem('favorites')) || [],
+				id: [],
 				isLoading: false,
 			}
 		)

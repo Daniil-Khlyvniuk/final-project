@@ -10,8 +10,9 @@ import { useLocation } from 'react-router-dom'
 import LoginModal from '../../Modal/LoginModal/LoginModal'
 import useHandleShoppingBag from '../../../utils/customHooks/useHandleShoppingBag'
 import { userSelectors } from '../../../store/user'
-import useSnack from '../../../utils/customHooks/useSnack'
+import { snackActions } from '../../../utils/customHooks/useSnackBarUtils'
 import { useTheme } from '@mui/styles'
+import favoritesAPI from '../../../utils/API/favoritesAPI'
 
 const ActionButtons = () => {
 	const handleShoppingBag = useHandleShoppingBag()
@@ -26,11 +27,12 @@ const ActionButtons = () => {
 	const allSizes = useSelector(ProductSelector.allSizes())
 	const allColors = useSelector(ProductSelector.allColors())
 	const parent = useSelector(ProductSelector.getParent())
-	const { handleSnack } = useSnack()
 	const theme = useTheme()
 
 	const addToFavorites = () => {
-		dispatch(favoritesActions.handleOneFavorite(activeProduct._id))
+		favoritesAPI.toggleFavorites(activeProduct._id).then(res => {
+			dispatch(favoritesActions.setFavoritesIds(res.data.products))
+		})
 	}
 
 	return (
@@ -58,9 +60,8 @@ const ActionButtons = () => {
 						color: activeColorName[0].name,
 						title: parent.name,
 						description: parent.description
-
 					})
-					handleSnack({ message: 'Successfully added to shopping bag', style: 'success' })
+					snackActions.success('Successfully added to shopping bag')
 				}}
 			>
 				ADD TO BAG
@@ -79,7 +80,9 @@ const ActionButtons = () => {
 						}
 						await handleOpen(<LoginModal />)
 					}
-					: addToFavorites
+					: () => {
+						addToFavorites()
+					}
 				}
 			>
 				{isFavorite && user

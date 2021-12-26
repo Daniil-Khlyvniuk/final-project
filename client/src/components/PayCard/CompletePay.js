@@ -40,6 +40,7 @@ const CompletePay = () => {
 		await handleShoppingBag.afterBuy()
 	}
 
+
 	useEffect( () => {
 		try {
 			getData()
@@ -47,6 +48,7 @@ const CompletePay = () => {
 		catch (error) {
 			handleSnack({ message: 'Server response error', style: 'warning' })
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 

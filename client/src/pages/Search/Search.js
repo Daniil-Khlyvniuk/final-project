@@ -11,7 +11,7 @@ import productActions, { productsSelectors } from '../../store/products'
 import filterApi from '../../utils/API/filterApi'
 import productsAPI from '../../utils/API/productsAPI'
 import UseSeo from '../../utils/customHooks/useSeo'
-import UseSnack from '../../utils/customHooks/useSnack'
+import {snackActions} from '../../utils/customHooks/useSnackBarUtils'
 import MatchedProductsTitle from './SearchComponent/MatchedProductsTitle'
 
 
@@ -42,7 +42,6 @@ const Search = () => {
 			/>
 		</Grid>
 	))
-	const { handleSnack } = UseSnack()
 
 	const newProductsHandler = () => {
 		setHasMore(true)
@@ -63,7 +62,7 @@ const Search = () => {
 							setHasMore(false)
 						}
 					}).catch(err => {
-						handleSnack({ message: err, style: 'warning' })
+						snackActions.warning(err)
 						dispatch(productActions.setAllProducts([]))
 					})
 			} else {
@@ -91,12 +90,8 @@ const Search = () => {
 					})
 					.catch((err) => {
 						setHasMore(true)
-						handleSnack({
-							message: err,
-							style: 'warning'
-						}
-						)
 						dispatch(productActions.setAllProducts([]))
+						snackActions.warning(err)
 					})
 			} else {
 				setHasMore(true)
@@ -109,7 +104,7 @@ const Search = () => {
 	useEffect(() => {
 		filterApi.getFiltersByType('perPage')
 			.then(resp => setPerPageArray(resp.data))
-			.catch(err => handleSnack({ message: err, style: 'warning' }))
+			.catch(err => 	snackActions.warning(err))
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 

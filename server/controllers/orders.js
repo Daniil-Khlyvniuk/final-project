@@ -15,7 +15,6 @@ exports.placeOrder = async (req, res, next) => {
   try {
     let order = _.cloneDeep(req.body);
 
-    console.log("1========1", order);
     order.orderNo = String(rand());
     let cartProducts = [];
 
