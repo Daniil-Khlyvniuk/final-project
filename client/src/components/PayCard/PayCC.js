@@ -31,6 +31,7 @@ const PayCc = () => {
 			} catch (e) {
 				handleSnack({ message: 'Server response error', style: 'warning' })
 			}}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[])
 
 	let customer = isLoggedIn ? {...userData} : unregistered

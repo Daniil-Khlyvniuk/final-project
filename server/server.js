@@ -26,6 +26,7 @@ const shippingMethods = require("./routes/shippingMethods");
 const paymentMethods = require("./routes/paymentMethods");
 const partners = require("./routes/partners");
 const mainRoute = require("./routes/index");
+const favorites = require("./routes/favorites");
 
 const app = express();
 
@@ -50,6 +51,7 @@ require("./config/passport")(passport);
 
 // Use Routes
 app.use("/api/configs", globalConfigs);
+app.use("/api/favorites", favorites);
 app.use("/api/customers", customers);
 app.use("/api/catalog", catalog);
 app.use("/api/products", products);
