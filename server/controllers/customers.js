@@ -6,6 +6,7 @@ const getConfigs = require("../config/getConfigs");
 const passport = require("passport");
 const uniqueRandom = require("unique-random");
 const rand = uniqueRandom(10000000, 99999999);
+require('../config/passport')(passport)
 
 // Load Customer model
 const Customer = require("../models/Customer");
