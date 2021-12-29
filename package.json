@@ -9,7 +9,7 @@
   "prepare": "husky install",
   "presentation": "https://docs.google.com/presentation/d/1CBFV4Z9PBZjipS-x3z4KodsS_i2IgTSlwFx6lEovX9I/edit?usp=sharing",
   "scripts": {
-    "build": "npm install --prefix client && npm install --prefix server && npm run build --prefix client && rm -rf server/public && cp -a client/build/. server/public/ && rm -rf server/static/static && rm server/static/asset-manifest.json && rm server/static/index.html &&  cp -a server/public/. server/static",
+    "build": "npm install --prefix client && npm install --prefix server && npm run build --prefix client && rm -rf server/public && cp -a client/build/. server/public/ && rm -rf server/static/static && rm server/static/index.html &&  cp -a server/public/. server/static",
     "start": "npm start --prefix server",
     "start-dev": "npm-run-all -p start:client start:server",
     "start:client": "npm start --prefix client",
