@@ -1,7 +1,9 @@
 {
   "name": "final-project",
   "version": "1.0.1",
-  "node": "14.15.5",
+  "engines": {
+    "node": "14.x"
+  },
   "description": "Final Project - Online shop \"Postil' bedding\"",
   "main": "index.js",
   "prepare": "husky install",
