@@ -35,12 +35,15 @@ const CompletePay = () => {
 				${SubscribeTemlate(OrderNum)}`
 	}
 
+	const getData = async () => {
+		await cartAPI.addOrder(order)
+		await handleShoppingBag.afterBuy()
+	}
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(async () => {
+
+	useEffect( () => {
 		try {
-			await cartAPI.addOrder(order)
-			await handleShoppingBag.afterBuy()
+			getData()
 		}
 		catch (error) {
 			handleSnack({ message: 'Server response error', style: 'warning' })
