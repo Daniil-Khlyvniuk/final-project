@@ -22,7 +22,7 @@ module.exports = async (subscriberMail, letterSubject, letterHtml, res) => {
           ? configs.production.email.mailPassword
           : configs.development.email.mailPassword
     },
-    host: "https://fp-postil-bedding.herokuapp.com",
+    host: "smtp.gmail.com",
     ignoreTLS: false,
     secure: false
   });
