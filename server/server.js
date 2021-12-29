@@ -47,11 +47,15 @@ const db = require("./config/keys").mongoURI;
 // Passport middleware
 app.use(passport.initialize());
 
+setTimeout(function() {
+  require("./config/passport")(passport);
+}, 3000);
+
 app.use(fileUpload({}));
 app.use(express.static("static"));
 
 // Passport Config
-require("./config/passport")(passport);
+// require("./config/passport")(passport);
 
 // Use Routes
 app.use("/api/configs", globalConfigs);
