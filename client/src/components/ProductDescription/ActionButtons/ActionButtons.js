@@ -82,6 +82,7 @@ const ActionButtons = () => {
 					}
 					: () => {
 						addToFavorites()
+						!isFavorite && snackActions.success('Successfully added to favorites')
 					}
 				}
 			>
