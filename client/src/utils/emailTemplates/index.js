@@ -149,11 +149,12 @@ export const unSubscribeTemlate = (email) => `<!DOCTYPE html>
                           margin-block-end: 1em;text-align: center;
                           background-color: rgba(255,255,255,.5);
                           padding-top: 10px;padding-bottom: 10px;
-                          margin-bottom: 35px;">Good Luck!</h1>
+                          margin-bottom: 35px;">Good Luck!</h2>
                           <h3 style="margin-block-start: 1em;
                           margin-block-end: 1em; text-align: center;
-                          margin-bottom: 30px;"
-                          >You have unsubscribed from our news</h2>
+                          margin-bottom: 30px;
+                          background-color: rgba(255,255,255,.5);"
+                          >You have unsubscribed from our news</h3>
                           
                         </div>
                         <div style="text-align: center; margin-bottom: 20px;">
