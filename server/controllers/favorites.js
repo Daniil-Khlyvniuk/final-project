@@ -19,7 +19,8 @@ exports.toggleProductInFavorites = async (req, res) => {
 
     const fav = await Favorites.findOne({ customerId });
 
-    const { products } = fav;
+
+    const products = fav?.products || []
     const cond = products.some((el) =>
       _.isEqual(el, ObjectId(currentProducts))
     );
