@@ -10,7 +10,6 @@ import Loader from '../UI/Loader/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { filterSelectors } from '../../store/filter'
 
-
 const StyledTypography = styled(Typography)(() => ({
 	fontSize: '32px',
 	textTransform: 'uppercase',
@@ -49,7 +48,7 @@ const Catalog = () => {
 	}
 
 	if (isLoading) {
-		return <BackdropLoader open={ isLoading } />
+		return <BackdropLoader open={ isLoading }/>
 	}
 
 	return (

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 const BackdropLoader = ({open}) => {
 	return (
 		<Backdrop
-			sx={{ color: 'white', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+			sx={{ color: 'white', zIndex: (theme) => theme.zIndex.drawer + 1 } }
 			open={open}>
 			<CircularProgress color="inherit" />
 		</Backdrop>
