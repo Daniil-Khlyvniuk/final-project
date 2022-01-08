@@ -21,7 +21,11 @@ module.exports = async (passport) => {
           }
           return done(null, false);
         })
-        .catch((err) => console.log(err));
+        .catch((err) =>
+          res.status(400).json({
+            message: `Oooops... Server error`,
+          })
+        );
     })
   );
 
@@ -37,7 +41,11 @@ module.exports = async (passport) => {
             message: "You have not enough permissions for this operation",
           });
         })
-        .catch((err) => console.log(err));
+        .catch((err) =>
+          res.status(400).json({
+            message: `Oooops... Server error`,
+          })
+        );
     })
   );
 };
