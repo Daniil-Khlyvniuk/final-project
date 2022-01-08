@@ -4,10 +4,10 @@ const _ = require("lodash");
 
 exports.addShippingMethod = (req, res, next) => {
   ShippingMethod.findOne({ customId: req.body.customId }).then(
-    shippingMethod => {
+    (shippingMethod) => {
       if (shippingMethod) {
         return res.status(400).json({
-          message: `Shipping Method with customId "${shippingMethod.customId}" already exists`
+          message: `Shipping Method with customId "${shippingMethod.customId}" already exists`,
         });
       } else {
         const data = _.cloneDeep(req.body);
@@ -15,10 +15,10 @@ exports.addShippingMethod = (req, res, next) => {
 
         newShippingMethod
           .save()
-          .then(shippingMethod => res.status(200).json(shippingMethod))
-          .catch(err =>
+          .then((shippingMethod) => res.status(200).json(shippingMethod))
+          .catch((err) =>
             res.status(400).json({
-              message: `Error happened on server: "${err}" `
+              message: `Oooops... Server error`,
             })
           );
       }
@@ -28,10 +28,10 @@ exports.addShippingMethod = (req, res, next) => {
 
 exports.updateShippingMethod = (req, res, next) => {
   ShippingMethod.findOne({ customId: req.params.customId })
-    .then(shippingMethod => {
+    .then((shippingMethod) => {
       if (!shippingMethod) {
         return res.status(400).json({
-          message: `Shipping Method with customId "${req.params.customId}" is not found.`
+          message: `Shipping Method with customId "${req.params.customId}" is not found.`,
         });
       } else {
         const data = _.cloneDeep(req.body);
@@ -42,43 +42,43 @@ exports.updateShippingMethod = (req, res, next) => {
           { $set: updatedShippingMethod },
           { new: true }
         )
-          .then(shippingMethod => res.json(shippingMethod))
-          .catch(err =>
+          .then((shippingMethod) => res.json(shippingMethod))
+          .catch((err) =>
             res.status(400).json({
-              message: `Error happened on server: "${err}" `
+              message: `Oooops... Server error`,
             })
           );
       }
     })
-    .catch(err =>
+    .catch((err) =>
       res.status(400).json({
-        message: `Error happened on server: "${err}" `
+        message: `Oooops... Server error`,
       })
     );
 };
 
 exports.deleteShippingMethod = (req, res, next) => {
   ShippingMethod.findOne({ customId: req.params.customId }).then(
-    async shippingMethod => {
+    async (shippingMethod) => {
       if (!shippingMethod) {
         return res.status(400).json({
-          message: `Shipping Method with customId "${req.params.customId}" is not found.`
+          message: `Shipping Method with customId "${req.params.customId}" is not found.`,
         });
       } else {
         const shippingMethodToDelete = await ShippingMethod.findOne({
-          customId: req.params.customId
+          customId: req.params.customId,
         });
 
         ShippingMethod.deleteOne({ customId: req.params.customId })
-          .then(deletedCount =>
+          .then((deletedCount) =>
             res.status(200).json({
               message: `Shipping method witn name "${shippingMethodToDelete.customId}" is successfully deleted from DB `,
-              deletedDocument: shippingMethodToDelete
+              deletedDocument: shippingMethodToDelete,
             })
           )
-          .catch(err =>
+          .catch((err) =>
             res.status(400).json({
-              message: `Error happened on server: "${err}" `
+              message: `Oooops... Server error`,
             })
           );
       }
@@ -88,20 +88,20 @@ exports.deleteShippingMethod = (req, res, next) => {
 
 exports.getShippingMethods = (req, res, next) => {
   ShippingMethod.find()
-    .then(shippingMethods => res.status(200).json(shippingMethods))
-    .catch(err =>
+    .then((shippingMethods) => res.status(200).json(shippingMethods))
+    .catch((err) =>
       res.status(400).json({
-        message: `Error happened on server: "${err}" `
+        message: `Oooops... Server error`,
       })
     );
 };
 
 exports.getShippingMethodById = (req, res, next) => {
   ShippingMethod.findOne({ customId: req.params.customId })
-    .then(shippingMethod => res.status(200).json(shippingMethod))
-    .catch(err =>
+    .then((shippingMethod) => res.status(200).json(shippingMethod))
+    .catch((err) =>
       res.status(400).json({
-        message: `Error happened on server: "${err}" `
+        message: `Oooops... Server error`,
       })
     );
 };

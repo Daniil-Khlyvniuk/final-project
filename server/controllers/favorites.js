@@ -44,7 +44,7 @@ exports.toggleProductInFavorites = async (req, res) => {
     res.json(newFavorites);
   } catch (err) {
     res.status(400).json({
-      message: `Error happened on server: "${err}" `,
+      message: `Oooops... Server error`,
     });
   }
 };
@@ -63,7 +63,7 @@ exports.getFavorites = async (req, res) => {
     res.json(favorites);
   } catch (err) {
     res.status(400).json({
-      message: `Error happened on server: "${err}" `,
+      message: `Oooops... Server error`,
     });
   }
 };
@@ -76,11 +76,7 @@ exports.getFavoritesIds = async (req, res) => {
     res.json(favorites);
   } catch (err) {
     res.status(400).json({
-      message: `Error happened on server: "${err}" `,
+      message: `Oooops... Server error`,
     });
   }
-};
-
-exports.updateFavorites = (req, res) => {
-  const customerId = req.user.id;
 };

@@ -21,7 +21,6 @@ const {
   getSortConditions,
 } = require("../commonHelpers/getFilterConditions");
 
-
 exports.addProduct = async (req, res) => {
   const {
     name,
@@ -36,150 +35,161 @@ exports.addProduct = async (req, res) => {
     color: colorName, // do not touch
     ...variantData
   } = req.body;
-
-  const imageUrls = fileService.saveFile(req?.files?.img, "goods"); // save images
-  variantData.itemNo = rand().toString();
-  variantData.imageUrls = imageUrls;
-
-  const productData = {
-    name: name.toLowerCase().trim().replace(/\s\s+/g, " "),
-    categories,
-    brand,
-    manufacturer,
-    manufacturerCountry,
-    seller,
-    variants,
-    description,
-  };
   try {
-    const category = await Catalog.findOne({
-      name: productData.categories,
-    });
+    const imageUrls = fileService.saveFile(req?.files?.img, "goods"); // save images
+    variantData.itemNo = rand().toString();
+    variantData.imageUrls = imageUrls;
 
-    notFoundError(category, productData.categories);
-    const product = await findOrCreate(
-      Product,
-      {
-        name: productData.name,
-        categories: category._id,
-      },
-      {
-        ...productData,
-        categories: category,
-      }
-    );
+    const productData = {
+      name: name.toLowerCase().trim().replace(/\s\s+/g, " "),
+      categories,
+      brand,
+      manufacturer,
+      manufacturerCountry,
+      seller,
+      variants,
+      description,
+    };
+    try {
+      const category = await Catalog.findOne({
+        name: productData.categories,
+      });
 
-    const color = await Color.findOne({ name: colorName });
-    notFoundError(color, colorName);
+      notFoundError(category, productData.categories);
+      const product = await findOrCreate(
+        Product,
+        {
+          name: productData.name,
+          categories: category._id,
+        },
+        {
+          ...productData,
+          categories: category,
+        }
+      );
 
-    const size = await Size.findOne({ name: sizeName });
-    notFoundError(size, sizeName);
+      const color = await Color.findOne({ name: colorName });
+      notFoundError(color, colorName);
 
-    const isVarExist = await ProductVariant.findOne({
-      product: product._id,
-      color: color._id,
-      size: size._id,
-    });
+      const size = await Size.findOne({ name: sizeName });
+      notFoundError(size, sizeName);
 
-    isExist(isVarExist, "variant");
+      const isVarExist = await ProductVariant.findOne({
+        product: product._id,
+        color: color._id,
+        size: size._id,
+      });
 
-    const newVariant = await ProductVariant.create({
-      ...variantData,
-      size: size,
-      color: color,
-      product,
-    });
+      isExist(isVarExist, "variant");
 
+      const newVariant = await ProductVariant.create({
+        ...variantData,
+        size: size,
+        color: color,
+        product,
+      });
 
-    product.variants.push(newVariant);
-    const updatedProduct = await Product.findByIdAndUpdate(
-      product._id,
-      {
-        ...product,
-        $push: { variants: product.variants },
-      },
-      { new: true }
-    );
-    return res.json(updatedProduct);
+      product.variants.push(newVariant);
+      const updatedProduct = await Product.findByIdAndUpdate(
+        product._id,
+        {
+          ...product,
+          $push: { variants: product.variants },
+        },
+        { new: true }
+      );
+      return res.json(updatedProduct);
+    } catch (err) {
+      res.status(400).json({
+        message: `Oooops... Server error`,
+      });
+    }
   } catch (err) {
     res.status(400).json({
-      message: `Error happened on server: "${err}"`,
+      message: `Oooops... Server error`,
     });
   }
 };
 
 exports.getVariantById = async (req, res, next) => {
   const varId = req.params.varId;
-	const [, projectGroup] = getProductAggregateParams()
-	try {
-		const variant = await Product.aggregate([
-      {
-        $lookup: {
-          from: ProductVariant.collection.name,
-          let: {
-            productId: "$_id",
-          },
-          pipeline: [
-            {
-              $match: {
-                $expr: {
-                  $and: [
-										{ "$eq": [ "$_id", ObjectId(varId) ] },
-	                  { "$eq": [ "$product", "$$productId" ] },
-                  ],
+  const [, projectGroup] = getProductAggregateParams();
+  try {
+    try {
+      const variant = await Product.aggregate([
+        {
+          $lookup: {
+            from: ProductVariant.collection.name,
+            let: {
+              productId: "$_id",
+            },
+            pipeline: [
+              {
+                $match: {
+                  $expr: {
+                    $and: [
+                      { $eq: ["$_id", ObjectId(varId)] },
+                      { $eq: ["$product", "$$productId"] },
+                    ],
+                  },
                 },
               },
-            },
-          ],
-          as: "variants",
+            ],
+            as: "variants",
+          },
         },
-      },
-      {
-        $unwind: {
-          path: "$variants",
+        {
+          $unwind: {
+            path: "$variants",
+          },
         },
-      },
-			...projectGroup
-    ]);
+        ...projectGroup,
+      ]);
 
-    if (!variant)
-      res
-        .status(400)
-        .json({ message: `Variant with id "${varId}" not found ` });
+      if (!variant)
+        res
+          .status(400)
+          .json({ message: `Variant with id "${varId}" not found ` });
 
+      const result = variant[0];
 
-		const result = variant[0]
-
-    res.json(result);
+      res.json(result);
+    } catch (err) {
+      res.status(400).json({
+        message: `Error happened on server: "${err}"`,
+      });
+    }
   } catch (err) {
     res.status(400).json({
-      message: `Error happened on server: "${err}"`,
+      message: `Oooops... Server error`,
     });
   }
 };
 
 exports.decrementVariantQuantity = async (req, res, next) => {
-	const newQuantity = Math.max(0, req.body.quantity)
-	const id = req.params.varId
+  const newQuantity = Math.max(0, req.body.quantity);
+  const id = req.params.varId;
 
+  try {
+    const variant = await ProductVariant.findById(id);
+    if (variant.quantity < newQuantity)
+      throw new Error("insufficient quantity of goods in the store");
 
-	try{
-		const variant = await ProductVariant.findById(id)
-		if (variant.quantity < newQuantity) throw new Error("insufficient quantity of goods in the store")
-
-		const updatedVariant = await ProductVariant.findByIdAndUpdate(
-			id,
-		{
-			quantity: newQuantity,
-				enabled: !!newQuantity
-		},
-		{new: true}
-		)
-		res.json(updatedVariant)
-	}catch (err) {
-		res.status(400).json({ message: `Error happened on server: "${err}"` });
-	}
-}
+    const updatedVariant = await ProductVariant.findByIdAndUpdate(
+      id,
+      {
+        quantity: newQuantity,
+        enabled: !!newQuantity,
+      },
+      { new: true }
+    );
+    res.json(updatedVariant);
+  } catch (err) {
+    res.status(400).json({
+      message: `Oooops... Server error`,
+    });
+  }
+};
 
 exports.getProductsInfo = async (req, res, next) => {
   const { productId, kindOfInfo } = req.params;
@@ -199,96 +209,98 @@ exports.getProductsInfo = async (req, res, next) => {
 
     res.json(infoWithOutRepeats);
   } catch (err) {
-    res.status(400).json({ message: `Error happened on server: "${err}"` });
+    res.status(400).json({
+      message: `Oooops... Server error`,
+    });
   }
 };
 
 exports.getMinMaxPrice = async (req, res, next) => {
-	const mongooseQuery = filterParser(req.query);
-	const { variantQuery, productQuery } = getFilterConditions(mongooseQuery);
+  const mongooseQuery = filterParser(req.query);
+  const { variantQuery, productQuery } = getFilterConditions(mongooseQuery);
   try {
     const minmax = await Product.aggregate([
-			{
-				$lookup: {
-					from: Catalog.collection.name,
-					localField: "categories",
-					foreignField: "_id",
-					as: "categories",
-				},
-			},
-			{
-				$unwind: "$categories",
-			},
-			{
-				$match: {
-					$and: productQuery,
-				},
-			},
-			{
-				$lookup: {
-					from: ProductVariant.collection.name,
-					let: {
-						productId: "$_id",
-					},
-					pipeline: [
-						{
-							$lookup: {
-								from: Color.collection.name,
-								localField: "color",
-								foreignField: "_id",
-								as: "color",
-							},
-						},
-						{
-							$unwind: "$color",
-						},
-						{
-							$lookup: {
-								from: Size.collection.name,
-								localField: "size",
-								foreignField: "_id",
-								as: "size",
-							},
-						},
-						{
-							$unwind: "$size",
-						},
-						{
-							$match: {
-								$and: [
-									...variantQuery,
-									{
-										$expr: {
-											$eq: [ "$product", "$$productId" ],
-										},
-									},
-								]
-							}
-						},
-					],
-					as: "variants",
-				},
-			},
-			{
-				$unwind: {
-					path: "$variants",
-				},
-			},
-			{
-				$project: {
-					_id: 1,
-					name: 1,
-					categories: 1,
-					productUrl: 1,
-					brand: 1,
-					manufacturer: 1,
-					manufacturerCountry: 1,
-					seller: 1,
-					description: 1,
-					date: 1,
-					variants: 1,
-				},
-			},
+      {
+        $lookup: {
+          from: Catalog.collection.name,
+          localField: "categories",
+          foreignField: "_id",
+          as: "categories",
+        },
+      },
+      {
+        $unwind: "$categories",
+      },
+      {
+        $match: {
+          $and: productQuery,
+        },
+      },
+      {
+        $lookup: {
+          from: ProductVariant.collection.name,
+          let: {
+            productId: "$_id",
+          },
+          pipeline: [
+            {
+              $lookup: {
+                from: Color.collection.name,
+                localField: "color",
+                foreignField: "_id",
+                as: "color",
+              },
+            },
+            {
+              $unwind: "$color",
+            },
+            {
+              $lookup: {
+                from: Size.collection.name,
+                localField: "size",
+                foreignField: "_id",
+                as: "size",
+              },
+            },
+            {
+              $unwind: "$size",
+            },
+            {
+              $match: {
+                $and: [
+                  ...variantQuery,
+                  {
+                    $expr: {
+                      $eq: ["$product", "$$productId"],
+                    },
+                  },
+                ],
+              },
+            },
+          ],
+          as: "variants",
+        },
+      },
+      {
+        $unwind: {
+          path: "$variants",
+        },
+      },
+      {
+        $project: {
+          _id: 1,
+          name: 1,
+          categories: 1,
+          productUrl: 1,
+          brand: 1,
+          manufacturer: 1,
+          manufacturerCountry: 1,
+          seller: 1,
+          description: 1,
+          date: 1,
+          variants: 1,
+        },
+      },
       {
         $group: {
           _id: null,
@@ -300,7 +312,9 @@ exports.getMinMaxPrice = async (req, res, next) => {
 
     res.json(minmax);
   } catch (err) {
-    res.status(400).json({ message: `Error happened on server: "${err}"` });
+    res.status(400).json({
+      message: `Oooops... Server error`,
+    });
   }
 };
 
@@ -321,7 +335,9 @@ exports.getFilteredVariants = async (req, res, next) => {
 
     res.json(variant);
   } catch (err) {
-    res.status(400).json({ message: `Error happened on server: "${err}"` });
+    res.status(400).json({
+      message: `Oooops... Server error`,
+    });
   }
 };
 
@@ -338,22 +354,20 @@ exports.getProducts = async (req, res, next) => {
       .populate({
         path: "variants",
         perDocumentLimit: 1,
-      })
+      });
 
-
-    const result = filterOneVariant(products)
+    const result = filterOneVariant(products);
 
     res.json(result);
   } catch (err) {
     res.status(400).json({
-      message: `Error happened on server: "${err}" `,
+      message: `Oooops... Server error`,
     });
   }
 };
 
 exports.getVariantsByProductId = async (req, res, next) => {
   const productId = req.params.productId;
-
 
   try {
     const variant = await ProductVariant.find({ product: productId })
@@ -368,7 +382,7 @@ exports.getVariantsByProductId = async (req, res, next) => {
     res.json(variant);
   } catch (err) {
     res.status(400).json({
-      message: `Error happened on server: "${err}"`,
+      message: `Oooops... Server error`,
     });
   }
 };
@@ -376,27 +390,26 @@ exports.getVariantsByProductId = async (req, res, next) => {
 exports.getProductsFilterParams = async (req, res, next) => {
   const mongooseQuery = filterParser(req.query);
   const matchParams = getFilterConditions(mongooseQuery);
-	const [lookUpParams, projectGroup] = getProductAggregateParams(matchParams)
+  const [lookUpParams, projectGroup] = getProductAggregateParams(matchParams);
   const sortParam = getSortConditions(req.query.sort);
   const perPage = Number(req.query.perPage);
   const startPage = Number(req.query.startPage);
 
-
-	try {
+  try {
     const products = await Product.aggregate([
-			...lookUpParams,
-			...projectGroup,
+      ...lookUpParams,
+      ...projectGroup,
       sortParam,
-			{
-				$skip: startPage * perPage - perPage
-			},
+      {
+        $skip: startPage * perPage - perPage,
+      },
       { $limit: perPage },
     ]);
 
     res.json(products);
   } catch (err) {
     res.status(400).json({
-      message: `Error happened on server: "${err}" `,
+      message: `Oooops... Server error`,
     });
   }
 };
@@ -407,181 +420,177 @@ exports.searchProducts = async (req, res, next) => {
   }
 
   const query = req.body.query.toLowerCase().trim().replace(/\s\s+/g, " ");
-	const [, projectGroup] = getProductAggregateParams()
-	const perPage = Number(req.body.perPage) || 1000;
-	const startPage = Number(req.body.startPage) || 1;
+  const [, projectGroup] = getProductAggregateParams();
+  const perPage = Number(req.body.perPage) || 1000;
+  const startPage = Number(req.body.startPage) || 1;
 
-
-
-	try {
-	const foundProducts = await Product.aggregate([
-		{
-			$search: {
-				index: "productSearch",
-				compound: {
-					should: [
-						{
-							autocomplete: {
-								query: query,
-								path: "name",
-								fuzzy: {
-									maxEdits: 1,
-									prefixLength: 1,
-									maxExpansions: 256,
-								},
-							},
-						},
-						{
-							autocomplete: {
-								query: query,
-								path: "brand",
-								fuzzy: {
-									maxEdits: 1,
-									prefixLength: 1,
-									maxExpansions: 256,
-								},
-							},
-						},
-						{
-							autocomplete: {
-								query: query,
-								path: "description",
-								fuzzy: {
-									maxEdits: 1,
-									prefixLength: 1,
-									maxExpansions: 256,
-								},
-							},
-						},
-					],
-				},
-			},
-		},
-		{
-			$lookup: {
-				from: Catalog.collection.name,
-				localField: "categories",
-				foreignField: "_id",
-				as: "categories",
-			},
-		},
-		{
-			$unwind: "$categories",
-		},
-		{
-			$lookup: {
-				from: ProductVariant.collection.name,
-				let: {
-					productId: "$_id",
-				},
-				pipeline: [
-					{
-						$lookup: {
-							from: Color.collection.name,
-							localField: "color",
-							foreignField: "_id",
-							as: "color",
-						},
-					},
-					{
-						$unwind: "$color",
-					},
-					{
-						$lookup: {
-							from: Size.collection.name,
-							localField: "size",
-							foreignField: "_id",
-							as: "size",
-						},
-					},
-					{
-						$unwind: "$size",
-					},
-					{
-						$match: {
-							$expr: {
-								"$eq": [ "$product", "$$productId" ]
-							},
-						},
-					},
-					{$limit: 1},
-				],
-				as: "variants",
-			},
-		},
-		{
-			$unwind: "$variants",
-		},
-		...projectGroup,
-		{
-			$skip: startPage * perPage - perPage
-		},
-		{ $limit: perPage },
-	]);
-	res.json(foundProducts);
-	} catch (err) {
-		res.status(400).json({
-			message: `Error happened on server: "${err}" `,
-		});
-	}
+  try {
+    const foundProducts = await Product.aggregate([
+      {
+        $search: {
+          index: "productSearch",
+          compound: {
+            should: [
+              {
+                autocomplete: {
+                  query: query,
+                  path: "name",
+                  fuzzy: {
+                    maxEdits: 1,
+                    prefixLength: 1,
+                    maxExpansions: 256,
+                  },
+                },
+              },
+              {
+                autocomplete: {
+                  query: query,
+                  path: "brand",
+                  fuzzy: {
+                    maxEdits: 1,
+                    prefixLength: 1,
+                    maxExpansions: 256,
+                  },
+                },
+              },
+              {
+                autocomplete: {
+                  query: query,
+                  path: "description",
+                  fuzzy: {
+                    maxEdits: 1,
+                    prefixLength: 1,
+                    maxExpansions: 256,
+                  },
+                },
+              },
+            ],
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: Catalog.collection.name,
+          localField: "categories",
+          foreignField: "_id",
+          as: "categories",
+        },
+      },
+      {
+        $unwind: "$categories",
+      },
+      {
+        $lookup: {
+          from: ProductVariant.collection.name,
+          let: {
+            productId: "$_id",
+          },
+          pipeline: [
+            {
+              $lookup: {
+                from: Color.collection.name,
+                localField: "color",
+                foreignField: "_id",
+                as: "color",
+              },
+            },
+            {
+              $unwind: "$color",
+            },
+            {
+              $lookup: {
+                from: Size.collection.name,
+                localField: "size",
+                foreignField: "_id",
+                as: "size",
+              },
+            },
+            {
+              $unwind: "$size",
+            },
+            {
+              $match: {
+                $expr: {
+                  $eq: ["$product", "$$productId"],
+                },
+              },
+            },
+            { $limit: 1 },
+          ],
+          as: "variants",
+        },
+      },
+      {
+        $unwind: "$variants",
+      },
+      ...projectGroup,
+      {
+        $skip: startPage * perPage - perPage,
+      },
+      { $limit: perPage },
+    ]);
+    res.json(foundProducts);
+  } catch (err) {
+    res.status(400).json({
+      message: `Oooops... Server error`,
+    });
+  }
 };
 
 exports.updateProduct = (req, res, next) => {
-	Product.findOne({ _id: req.params.id })
-	.then((product) => {
-		if (!product) {
-			return res.status(400).json({
-				message: `Product with id "${ req.params.id }" is not found.`,
-			});
-		} else {
-			const productFields = _.cloneDeep(req.body);
+  Product.findOne({ _id: req.params.id })
+    .then((product) => {
+      if (!product) {
+        return res.status(400).json({
+          message: `Product with id "${req.params.id}" is not found.`,
+        });
+      } else {
+        const productFields = _.cloneDeep(req.body);
 
-			try {
-				productFields.name = productFields.name
-				.toLowerCase()
-				.trim()
-				.replace(/\s\s+/g, " ");
-			} catch (err) {
-				res.status(400).json({
-					message: `Error happened on server: "${ err }" `,
-				});
-			}
+        try {
+          productFields.name = productFields.name
+            .toLowerCase()
+            .trim()
+            .replace(/\s\s+/g, " ");
+        } catch (err) {
+          res.status(400).json({
+            message: `Oooops... Server error`,
+          });
+        }
 
-			const updatedProduct = queryCreator(productFields);
+        const updatedProduct = queryCreator(productFields);
 
-			Product.findOneAndUpdate(
-				{ _id: req.params.id },
-				{ $set: updatedProduct },
-				{ new: true }
-			)
-			.then((product) => res.json(product))
-			.catch((err) =>
-				res.status(400).json({
-					message: `Error happened on server: "${ err }" `,
-				})
-			);
-		}
-	})
-	.catch((err) =>
-		res.status(400).json({
-			message: `Error happened on server: "${ err }" `,
-		})
-	);
-}
+        Product.findOneAndUpdate(
+          { _id: req.params.id },
+          { $set: updatedProduct },
+          { new: true }
+        )
+          .then((product) => res.json(product))
+          .catch((err) =>
+            res.status(400).json({
+              message: `Oooops... Server error`,
+            })
+          );
+      }
+    })
+    .catch((err) =>
+      res.status(400).json({
+        message: `Oooops... Server error`,
+      })
+    );
+};
 
 exports.getVariants = async (req, res, next) => {
-	try {
-	const parentId = req.params.parentId
-	const variants = await ProductVariant.find({ product: parentId })
-	.populate("color")
+  try {
+    const parentId = req.params.parentId;
+    const variants = await ProductVariant.find({ product: parentId }).populate(
+      "color"
+    );
 
-		res.json(variants)
-
-	}catch (err) {
-		res.status(400).json({
-			message: `Error happened on server: "${ err }" `,
-		})
-	}
-}
-
-
+    res.json(variants);
+  } catch (err) {
+    res.status(400).json({
+      message: `Oooops... Server error`,
+    });
+  }
+};
