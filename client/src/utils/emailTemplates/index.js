@@ -48,17 +48,20 @@ export const subscribeTemlate = (email) => `<!DOCTYPE html>
                           margin-block-end: 1em;text-align: center;
                           background-color: rgba(255,255,255,.5);
                           padding-top: 10px;padding-bottom: 10px;
-                          margin-bottom: 35px;">Thanks for join us!</h1>
+                          margin-bottom: 35px;
+                          color: #2f2936;">Thanks for join us!</h1>
                           <h3 style="margin-block-start: 1em;
                           margin-block-end: 1em; text-align: center;
                           margin-bottom: 30px;
-                          background-color: rgba(255,255,255,.5);"
+                          background-color: rgba(255,255,255,.5);
+                          color: #2f2936;"
                           >You have subscribed to our news</h2>
                           <p style="margin-block-start: 1em;
                           margin-block-end: 1em;
                           padding-top: 10px;padding-bottom: 10px; 
                           text-align: center;
-                          background-color: rgba(255,255,255,.5);"
+                          background-color: rgba(255,255,255,.5);
+                          color: #2f2936;"
                           >Fresh and exclusive offers are now coming your way, 
                           plus a heads up on our
                            <strong>latest arrivals</strong> 
@@ -77,7 +80,8 @@ export const subscribeTemlate = (email) => `<!DOCTYPE html>
                         <div style="text-align: center; margin-bottom: 20px;">
                           <p style="background-color: rgba(255,255,255,.5);
                           padding-top: 10px; padding-bottom: 10px;
-                          text-align: center; margin-bottom: 30px;">
+                          text-align: center; margin-bottom: 30px;
+                          color: #2f2936;">
                             If you want to unsubscribe go to  
                           </p>
                           <a style="text-transform: uppercase; 
