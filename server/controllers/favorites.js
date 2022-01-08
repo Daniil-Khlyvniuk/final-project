@@ -37,7 +37,7 @@ exports.toggleProductInFavorites = async (req, res) => {
     const newFavorites = await Favorites.findOneAndUpdate(
       { customerId },
       {
-        products: [...newData],
+        products: [...( newData ? newData : [])],
       },
       { new: true }
     );
