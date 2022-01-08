@@ -23,6 +23,7 @@ module.exports = async (subscriberMail, letterSubject, letterHtml, res) => {
           : configs.development.email.mailPassword
     },
     host: "smtp.gmail.com",
+    port: 587,
     ignoreTLS: false,
     secure: false
   });
