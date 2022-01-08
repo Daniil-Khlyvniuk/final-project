@@ -1,6 +1,6 @@
 import useHandleShoppingBag from '../customHooks/useHandleShoppingBag'
-const domain = 'http://localhost:3000/'
-
+// const domain = 'http://localhost:3000/'
+const domain = 'https://fp-postil-bedding.herokuapp.com/'
 
 const SubscribeTemlate = (OrderNum) =>{
 	const { totalPrice } = useHandleShoppingBag()
