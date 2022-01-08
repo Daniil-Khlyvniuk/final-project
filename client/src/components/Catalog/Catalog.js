@@ -71,11 +71,11 @@ const Catalog = () => {
 					flexWrap: 'wrap',
 					overflow: 'visible',
 					margin: '15px 0 0 0'
-				} }
+				}}
 				dataLength={ products.length }
 				next={ handleScroll }
-				hasMore={ hasMore }
-				loader={ products.length ? <Loader /> : null }
+				hasMore={ products.length >= 5 ? hasMore : false}
+				loader={ products.length >= 5 ? <Loader /> : null }
 			>
 				<Grid container spacing={ 2 } sx={ { marginBottom: '40px' } }>
 					{
