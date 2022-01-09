@@ -22,6 +22,7 @@ router.put(
 );
 
 router.get("/", passport.authenticate("jwt", { session: false }), getFavorites);
+
 router.get(
   "/ids",
   passport.authenticate("jwt", { session: false }),
