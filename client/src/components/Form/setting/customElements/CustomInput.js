@@ -9,7 +9,7 @@ const CustomInput = ({field, form, ...rest}) => {
 	const classes = useFormStyle()
 	return (
 		<div style={{margin: '15px 0'}}>
-			<TextField className={classes.input} label={placeholder}
+			<TextField  label={placeholder}  //className={classes.input}
 				{...rest}
 				{...field} fullWidth={true}/>
 			<div>

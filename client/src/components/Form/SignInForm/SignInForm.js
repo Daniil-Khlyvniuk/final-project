@@ -57,6 +57,7 @@ const SignInForm = () => {
 								name="firstName"
 								type="text"
 								label="First Name"
+								className={classes.input}
 							/>
 
 							<Field
@@ -65,6 +66,7 @@ const SignInForm = () => {
 								name="lastName"
 								type="text"
 								label="Last Name"
+								className={classes.input}
 							/>
 
 							<Field
@@ -74,6 +76,7 @@ const SignInForm = () => {
 								type="text"
 								label="Login"
 								placeholder="Login"
+								className={classes.input}
 							/>
 
 							<Field
@@ -82,6 +85,7 @@ const SignInForm = () => {
 								name="email"
 								type="email"
 								label="Email"
+								className={classes.input}
 							/>
 
 							<Field
@@ -90,6 +94,7 @@ const SignInForm = () => {
 								name="password"
 								type="password"
 								label="Password"
+								className={classes.input}
 							/>
 
 							<Field
@@ -98,6 +103,7 @@ const SignInForm = () => {
 								name="confirmPass"
 								type="password"
 								label="Confirm Password"
+								className={classes.input}
 							/>
 
 							<Box
