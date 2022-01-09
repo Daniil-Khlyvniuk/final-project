@@ -31,7 +31,7 @@ const ActionButtons = () => {
 
 	const addToFavorites = () => {
 		favoritesAPI.toggleFavorites(activeProduct._id).then(res => {
-			dispatch(favoritesActions.setFavoritesIds(res.data.products))
+			dispatch(favoritesActions.setFavoritesIds(res.data?.products))
 		})
 	}
 

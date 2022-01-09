@@ -46,7 +46,7 @@ const useAuth = () => {
 
 					favoritesAPI.toggleFavorites(location.state.productToFavorite)
 						.then(res => {
-							dispatch(favoritesActions.setFavoritesIds(res.data.products))
+							dispatch(favoritesActions.setFavoritesIds(res.data?.products))
 							location.state.productToFavorite = null
 						})
 				})
