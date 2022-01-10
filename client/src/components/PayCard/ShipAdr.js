@@ -3,17 +3,12 @@ import axios from 'axios'
 import { Field, Form, Formik } from 'formik'
 import { Box, Button, Grid, Typography } from '@mui/material'
 import { border } from './styles'
-// import TextInput from '../UserProfile/UserForm/FormUI/Textfield'
-// import SelectInput from '../UserProfile/UserForm/FormUI/SelectInput'
 import countries from '../UserProfile/UserForm/data/countries.json'
 import { useSelector } from 'react-redux'
 import { userSelectors } from '../../store/user'
-// import * as Yup from 'yup'
-// import { phoneRegExp } from '../UserProfile/UserForm/data/Regex'
 import {CHECKOUT_FORM} from '../Form/setting/Schemes'
 import PropTypes from 'prop-types'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
-// import { IS_REQUIRED, STR_REGEX } from '../Form/setting/regex'
 import CustomInput from '../Form/setting/customElements/CustomInput'
 import CustomAutoComplete from '../Form/setting/customElements/CustomAutoComplete'
 import {snackActions} from '../../utils/customHooks/useSnackBarUtils'
@@ -83,7 +78,7 @@ const ShipAdr = ({ handleNext, handleBack }) => {
 					phone: user?.phone || '',
 					address: user?.address || '',
 					city: user?.city || '',
-					country: user?.country || '',
+					country: '',
 					zip: user?.zip || '',
 				}}
 				validationSchema={CHECKOUT_FORM}
@@ -96,7 +91,7 @@ const ShipAdr = ({ handleNext, handleBack }) => {
 						phone: values.phone,
 						address: values.address,
 						city: values.city,
-						country: values.country,
+						// country: values.country,
 						zip: values.zip,
 
 					}

@@ -8,6 +8,7 @@ import axios from 'axios'
 const Summary = () => {
 	const { shoppingBag, totalPrice } = useHandleShoppingBag()
 	const [parent, setParent] = useState([])
+	console.log(shoppingBag)
 
 	useEffect(() => {
 		Promise.all(

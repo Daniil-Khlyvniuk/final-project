@@ -42,7 +42,7 @@ const CompletePay = () => {
 		letterSubject: 'Thank you for order on Postil!',
 		letterHtml:
 			`<h1>Your order is placed.</h1>
-				${SubscribeTemlate(OrderNumber)}`
+				${SubscribeTemlate()}`
 	}
 
 	const getData = async () => {
@@ -51,25 +51,14 @@ const CompletePay = () => {
 		await handleShoppingBag.afterBuy()
 	}
 
-	// const orderNumber = async () => {
-	// 	await dispatch(userOperations.fetchUserOrders())
-	// }
-
-
 	useEffect( () => {
 		setOrderN(orders[orders.length - 1])
 	})
-
-	// const sendData = async () => {
-	// 	await getData()
-	// 	await orderNumber()
-	// }
 
 
 	useEffect( () => {
 		try {
 			getData()
-			// sendData()
 		}
 		catch (error) {
 			handleSnack({ message: 'Server response error', style: 'warning' })

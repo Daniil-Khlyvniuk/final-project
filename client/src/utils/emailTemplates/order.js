@@ -2,9 +2,16 @@ import useHandleShoppingBag from '../customHooks/useHandleShoppingBag'
 const domain = 'http://localhost:3000/'
 
 
-const SubscribeTemlate = (OrderNum) =>{
-	const { totalPrice } = useHandleShoppingBag()
+const SubscribeTemlate = () =>{
+	const { shoppingBag, totalPrice } = useHandleShoppingBag()
 
+	const goods = shoppingBag.map((elem)=>{ return (`
+<p>${elem.title}</p>
+<p>${elem.color}</p>
+<img src="${elem.imageUrls[0]}">
+<p>${elem.currentPrice}.00$</p>
+<p>${elem.amount}</p>
+`)})
 
 	return (`
 <!DOCTYPE html>
@@ -65,14 +72,16 @@ const SubscribeTemlate = (OrderNum) =>{
                           within<strong>2-3</strong> 
                            days your item will be under your
                             door!                     
-                           always yours<strong>Postil shop</strong>.
+                           always yours <strong>Postil shop</strong>.
                            </p>                                    
                           <p style="background-color: rgb(255 255 255 / 49%); 
                           padding-top: 10px; padding-bottom: 10px; 
-                          text-align: center;">You order number
-                          is<strong>${OrderNum}</strong> 
-                          if you have any questions 
-                          contact us!</p>                    
+                          text-align: center;">We are already 
+                          happy to collect the 
+                          <strong>following products for you:</strong>
+                          </p>    
+                          <div>${goods}</div>    
+                                                                           
                         </div>
                         <p style="background-color: rgb(255 255 255 / 49%); 
                           padding-top: 10px; padding-bottom: 10px; 
@@ -93,6 +102,11 @@ const SubscribeTemlate = (OrderNum) =>{
                           text-align: center; margin-bottom: 30px;">
                             Your purchase history will appear in your Account
                           </p>
+												<p style="background-color: rgb(255 255 255 / 49%);
+                          padding-top: 10px; padding-bottom: 10px;
+                          text-align: center; margin-bottom: 30px;">
+                          if you have any questions 
+                          contact us!</p>  
                           <p style="background-color: rgb(255 255 255 / 49%);
                           padding-top: 10px; padding-bottom: 10px;
                           text-align: center; margin-bottom: 30px;">
