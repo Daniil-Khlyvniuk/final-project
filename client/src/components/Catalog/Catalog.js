@@ -10,7 +10,6 @@ import Loader from '../UI/Loader/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { filterSelectors } from '../../store/filter'
 
-
 const StyledTypography = styled(Typography)(() => ({
 	fontSize: '32px',
 	textTransform: 'uppercase',
@@ -49,7 +48,7 @@ const Catalog = () => {
 	}
 
 	if (isLoading) {
-		return <BackdropLoader open={ isLoading } />
+		return <BackdropLoader open={ isLoading }/>
 	}
 
 	return (
@@ -72,11 +71,11 @@ const Catalog = () => {
 					flexWrap: 'wrap',
 					overflow: 'visible',
 					margin: '15px 0 0 0'
-				} }
+				}}
 				dataLength={ products.length }
 				next={ handleScroll }
-				hasMore={ hasMore }
-				loader={ products.length ? <Loader /> : null }
+				hasMore={ products.length >= 5 ? hasMore : false}
+				loader={ products.length >= 5 ? <Loader /> : null }
 			>
 				<Grid container spacing={ 2 } sx={ { marginBottom: '40px' } }>
 					{

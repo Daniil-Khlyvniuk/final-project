@@ -98,12 +98,6 @@ const LoginForm = () => {
 							</Box>
 						)}
 
-						{serverResult && serverResult.success && (
-							<Box className={classes.formStatusBlock}>
-								<p className={classes.success}>{serverResult.success}</p>
-							</Box>
-						)}
-
 						<Box sx={{ display: 'flex', justifyContent: 'center' }}>
 							<Button
 								data-testid="button"

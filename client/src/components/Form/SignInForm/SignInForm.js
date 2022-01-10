@@ -12,7 +12,6 @@ import useAuth from '../../../utils/customHooks/useAuth'
 const SignInForm = () => {
 	const [serverResult, setServerResult] = useState(null)
 	const { register } = useAuth()
-
 	const classes = useFormStyle()
 
 	return (
@@ -39,7 +38,6 @@ const SignInForm = () => {
 				onSubmit={async (values) => {
 					try {
 						await register(values)
-						setServerResult({ success: 'You successfully registered' })
 					}
 					catch (err) {
 						setServerResult({ error: Object.values(err.response.data)[0] })
@@ -181,11 +179,6 @@ const SignInForm = () => {
 								</Box>
 							)}
 
-							{serverResult && serverResult.success && (
-								<Box className={classes.formStatusBlock}>
-									<p className={classes.success}>{serverResult.success}</p>
-								</Box>
-							)}
 							<Box sx={{ display: 'flex', justifyContent: 'center' }}>
 								<Button
 									data-testid='submit'
