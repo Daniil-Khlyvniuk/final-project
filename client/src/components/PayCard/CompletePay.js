@@ -49,9 +49,9 @@ const CompletePay = () => {
 	const getData = async () => {
 		await cartAPI.addOrder(order)
 		await isLoggedIn ? dispatch(userOperations.fetchUserOrders()) : null
-		const response = await getUserOrders()
-		await setOrderN(response.data[length - 1])
 		await handleShoppingBag.afterBuy()
+		const response = isLoggedIn ? await getUserOrders() : null
+		await isLoggedIn ? setOrderN(response.data[length - 1]) : null
 	}
 
 
