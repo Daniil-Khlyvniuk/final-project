@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { getUserByToken , getUserOrders } from '../../utils/API/userAPI'
+import { snackActions } from '../../utils/customHooks/useSnackBarUtils'
 
 
 const initialState = {
@@ -15,7 +16,7 @@ export const fetchUser = createAsyncThunk(
 	'user/fetchUser',
 	async () => {
 		const response = await getUserByToken()
-		return response.data
+		return response
 	}
 )
 
@@ -61,7 +62,7 @@ const userSlice = createSlice({
 	extraReducers: {
 		[fetchUser.fulfilled]: (state, action) => {
 			delete (action.payload.password)
-			state.data = action.payload
+			state.data = action.payload.data
 			state.isLoading = false
 			state.error = null
 		},
@@ -70,6 +71,7 @@ const userSlice = createSlice({
 			state.error = null
 		},
 		[fetchUser.rejected]: (state) => {
+			snackActions.error('Trouble with auth, relogin please')
 			localStorage.removeItem('userToken')
 			state.isLoading = false
 			state.token = null
