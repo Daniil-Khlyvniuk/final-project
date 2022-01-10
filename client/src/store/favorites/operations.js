@@ -6,7 +6,9 @@ const fetchFavoritesIds = () => dispatch => {
 
 	favoritesAPI.getFavoritesIds()
 		.then(res => {
-			dispatch(favoritesActions.setFavoritesIds(res.data?.products))
+			if (res.data) {
+				dispatch(favoritesActions.setFavoritesIds(res.data.products))
+			}
 			dispatch(favoritesActions.setLoading(false))
 		}
 		)
@@ -17,7 +19,9 @@ const fetchFavorites = () => dispatch => {
 
 	favoritesAPI.getFavorites()
 		.then(res => {
-			dispatch(favoritesActions.setFavorites(res.data?.products))
+			if (res.data) {
+				dispatch(favoritesActions.setFavorites(res.data.products))
+			}
 			dispatch(favoritesActions.setLoading(false))
 		}
 		)

@@ -9,12 +9,13 @@ const ScrollButton = () => {
 	const buttonStyles = makeStyles({
 		button: {
 			position: 'fixed',
-			width: '100%',
 			left: '90%',
 			bottom: '150px',
-			height: '20px',
-			fontSize: '3rem',
-			zIndex: 1,
+			padding: '0 6px',
+			fontSize: '2.8rem',
+			zIndex: 20,
+			borderRadius: '50%',
+			background: 'white',
 			cursor: 'pointer',
 			color:'#373F41',
 			[theme.breakpoints.down('sm')]:{

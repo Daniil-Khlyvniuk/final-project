@@ -16,15 +16,15 @@ const validateRegistrationForm = require("../validation/validationHelper");
 
 // Load helper for creating correct query to save customer to DB
 const queryCreator = require("../commonHelpers/queryCreator");
-const Subscriber = require("../models/Subscriber")
-const sendMail = require("../commonHelpers/mailSender")
+const Subscriber = require("../models/Subscriber");
+const sendMail = require("../commonHelpers/mailSender");
 
 // Controller for creating customer and saving to DB
 exports.createCustomer = (req, res, next) => {
   const { subscribe, ...initialQuery } = _.cloneDeep(req.body);
-	const subscriberMail = initialQuery?.email;
-	const letterSubject = initialQuery?.letterSubject;
-	const letterHtml = initialQuery?.letterHtml;
+  const subscriberMail = initialQuery?.email;
+  const letterSubject = initialQuery?.letterSubject;
+  const letterHtml = initialQuery?.letterHtml;
   initialQuery.customerNo = rand();
 
   // Check Validation
@@ -33,70 +33,72 @@ exports.createCustomer = (req, res, next) => {
   if (!isValid) {
     return res.status(400).json(errors);
   }
-
-  Customer.findOne({
-    $or: [{ email: req.body.email }, { login: req.body.login }],
-  })
-    .then((customer) => {
-      if (customer) {
-        if (customer.email === req.body.email) {
-          return res
-            .status(400)
-            .json({ message: `Email ${customer.email} already exists"` });
-        }
-
-        if (customer.login === req.body.login) {
-          return res
-            .status(400)
-            .json({ message: `Login ${customer.login} already exists` });
-        }
-      }
-
-      // Create query object for qustomer for saving him to DB
-      const newCustomer = new Customer(queryCreator(initialQuery));
-
-      bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(newCustomer.password, salt, (err, hash) => {
-          if (err) {
-            res
+  try {
+    Customer.findOne({
+      $or: [{ email: req.body.email }, { login: req.body.login }],
+    })
+      .then((customer) => {
+        if (customer) {
+          if (customer.email === req.body.email) {
+            return res
               .status(400)
-              .json({ message: `Error happened on server: ${err}` });
-
-            return;
+              .json({ message: `Email ${customer.email} already exists"` });
           }
 
-          newCustomer.password = hash;
-          newCustomer
-            .save()
-            .then((customer) => {
-								if (subscribe) {
-									const newSubscriber = new Subscriber(queryCreator(initialQuery));
-									newSubscriber
-									.save()
-									.then(async subscriber => {
-										const mailResult = await sendMail(
-											subscriberMail,
-											letterSubject,
-											letterHtml,
-											res
-										);
-									})
-								}
-							res.json(customer)
-						})
-            .catch((err) =>
-              res.status(400).json({
-                message: `Error happened on server: "${err}" `,
+          if (customer.login === req.body.login) {
+            return res
+              .status(400)
+              .json({ message: `Login ${customer.login} already exists` });
+          }
+        }
+
+        // Create query object for qustomer for saving him to DB
+        const newCustomer = new Customer(queryCreator(initialQuery));
+
+        bcrypt.genSalt(10, (err, salt) => {
+          bcrypt.hash(newCustomer.password, salt, (err, hash) => {
+            if (err) {
+              res.status(400).json({ message: `Oooops Server error` });
+              return;
+            }
+
+            newCustomer.password = hash;
+            newCustomer
+              .save()
+              .then((customer) => {
+                if (subscribe) {
+                  const newSubscriber = new Subscriber(
+                    queryCreator(initialQuery)
+                  );
+                  newSubscriber.save().then(async (subscriber) => {
+                    const mailResult = await sendMail(
+                      subscriberMail,
+                      letterSubject,
+                      letterHtml,
+                      res
+                    );
+                  });
+                }
+                res.json(customer);
               })
-            );
+              .catch((err) =>
+                res.status(400).json({
+                  message: `Oooops... Server error`,
+                })
+              );
+          });
         });
-      });
-    })
-    .catch((err) =>
-      res.status(400).json({
-        message: `Error happened on server: "${err}" `,
       })
-    );
+      .catch((err) =>
+        res.status(400).json({
+          message: `Oooops... Server error`,
+        })
+      );
+  } catch (err) {
+    res.status(400).json({
+      message: `Oooops... Server error`,
+    });
+  }
 };
 
 // Controller for customer login
@@ -108,55 +110,61 @@ exports.loginCustomer = async (req, res, next) => {
     return res.status(400).json(errors);
   }
 
-	const loginOrEmail = req.body.loginOrEmail;
+  const loginOrEmail = req.body.loginOrEmail;
   const password = req.body.password;
   const configs = await getConfigs();
 
-  // Find customer by email
-  Customer.findOne({
-    $or: [{ email: loginOrEmail }, { login: loginOrEmail }]
-  })
-    .then(customer => {
-      // Check for customer
-      if (!customer) {
-        errors.loginOrEmail = "Customer not found";
-        return res.status(404).json(errors);
-      }
-
-      // Check Password
-      bcrypt.compare(password, customer.password).then(isMatch => {
-        if (isMatch) {
-          // Customer Matched
-          const payload = {
-            id: customer.id,
-            firstName: customer.firstName,
-            lastName: customer.lastName,
-            isAdmin: customer.isAdmin
-          }; // Create JWT Payload
-
-          // Sign Token
-          jwt.sign(
-            payload,
-            keys.secretOrKey,
-            { expiresIn: 36000 },
-            (err, token) => {
-              res.json({
-                success: true,
-                token: "Bearer " + token
-              });
-            }
-          );
-        } else {
-          errors.password = "Password incorrect";
-          return res.status(400).json(errors);
-        }
-      });
+  try {
+    // Find customer by email
+    Customer.findOne({
+      $or: [{ email: loginOrEmail }, { login: loginOrEmail }],
     })
-    .catch(err =>
-      res.status(400).json({
-        message: `Error happened on server: "${err}" `
+      .then((customer) => {
+        // Check for customer
+        if (!customer) {
+          errors.loginOrEmail = "Customer not found";
+          return res.status(404).json(errors);
+        }
+
+        // Check Password
+        bcrypt.compare(password, customer.password).then((isMatch) => {
+          if (isMatch) {
+            // Customer Matched
+            const payload = {
+              id: customer.id,
+              firstName: customer.firstName,
+              lastName: customer.lastName,
+              isAdmin: customer.isAdmin,
+            }; // Create JWT Payload
+
+            // Sign Token
+            jwt.sign(
+              payload,
+              keys.secretOrKey,
+              { expiresIn: 36000 },
+              (err, token) => {
+                res.json({
+                  success: true,
+                  token: "Bearer " + token,
+                });
+              }
+            );
+          } else {
+            errors.password = "Password incorrect";
+            return res.status(400).json(errors);
+          }
+        });
       })
-    );
+      .catch((err) =>
+        res.status(400).json({
+          message: `Oooops... Server error`,
+        })
+      );
+  } catch (err) {
+    res.status(400).json({
+      message: `Oooops... Server error`,
+    });
+  }
 };
 
 // Controller for getting current customer
@@ -175,67 +183,72 @@ exports.editCustomerInfo = (req, res) => {
   if (!isValid) {
     return res.status(400).json(errors);
   }
-
-  Customer.findOne({ _id: req.user.id })
-    .then(customer => {
-      if (!customer) {
-        errors.id = "Customer not found";
-        return res.status(404).json(errors);
-      }
-
-      const currentEmail = customer.email;
-      const currentLogin = customer.login;
-      let newEmail;
-      let newLogin;
-
-      if (req.body.email) {
-        newEmail = req.body.email;
-
-        if (currentEmail !== newEmail) {
-          Customer.findOne({ email: newEmail }).then(customer => {
-            if (customer) {
-              errors.email = `Email ${newEmail} is already exists`;
-              res.status(400).json(errors);
-              return;
-            }
-          });
+  try {
+    Customer.findOne({ _id: req.user.id })
+      .then((customer) => {
+        if (!customer) {
+          errors.id = "Customer not found";
+          return res.status(404).json(errors);
         }
-      }
 
-      if (req.body.login) {
-        newLogin = req.body.login;
+        const currentEmail = customer.email;
+        const currentLogin = customer.login;
+        let newEmail;
+        let newLogin;
 
-        if (currentLogin !== newLogin) {
-          Customer.findOne({ login: newLogin }).then(customer => {
-            if (customer) {
-              errors.login = `Login ${newLogin} is already exists`;
-              res.status(400).json(errors);
-              return;
-            }
-          });
+        if (req.body.email) {
+          newEmail = req.body.email;
+
+          if (currentEmail !== newEmail) {
+            Customer.findOne({ email: newEmail }).then((customer) => {
+              if (customer) {
+                errors.email = `Email ${newEmail} is already exists`;
+                res.status(400).json(errors);
+                return;
+              }
+            });
+          }
         }
-      }
 
-      // Create query object for qustomer for saving him to DB
-      const updatedCustomer = queryCreator(initialQuery);
+        if (req.body.login) {
+          newLogin = req.body.login;
 
-      Customer.findOneAndUpdate(
-        { _id: req.user.id },
-        { $set: updatedCustomer },
-        { new: true }
-      )
-        .then(customer => res.json(customer))
-        .catch(err =>
-          res.status(400).json({
-            message: `Error happened on server: "${err}" `
-          })
-        );
-    })
-    .catch(err =>
-      res.status(400).json({
-        message: `Error happened on server:"${err}" `
+          if (currentLogin !== newLogin) {
+            Customer.findOne({ login: newLogin }).then((customer) => {
+              if (customer) {
+                errors.login = `Login ${newLogin} is already exists`;
+                res.status(400).json(errors);
+                return;
+              }
+            });
+          }
+        }
+
+        // Create query object for qustomer for saving him to DB
+        const updatedCustomer = queryCreator(initialQuery);
+
+        Customer.findOneAndUpdate(
+          { _id: req.user.id },
+          { $set: updatedCustomer },
+          { new: true }
+        )
+          .then((customer) => res.json(customer))
+          .catch((err) =>
+            res.status(400).json({
+              message: `Oooops... Server error`,
+            })
+          );
       })
-    );
+      .catch((err) =>
+        res.status(400).json({
+          message: `Oooops... Server error`,
+        })
+      );
+  } catch (err) {
+    res.status(400).json({
+      message: `Oooops... Server error`,
+    });
+  }
 };
 
 // Controller for editing customer password
@@ -246,45 +259,50 @@ exports.updatePassword = (req, res) => {
   if (!isValid) {
     return res.status(400).json(errors);
   }
+  try {
+    // find our user by ID
+    Customer.findOne({ _id: req.user.id }, (err, customer) => {
+      let oldPassword = req.body.password;
 
-  // find our user by ID
-  Customer.findOne({ _id: req.user.id }, (err, customer) => {
-    let oldPassword = req.body.password;
+      customer.comparePassword(oldPassword, function (err, isMatch) {
+        if (!isMatch) {
+          errors.password = "Password does not match";
+          res.json(errors);
+        } else {
+          let newPassword = req.body.newPassword;
 
-    customer.comparePassword(oldPassword, function(err, isMatch) {
-      if (!isMatch) {
-        errors.password = "Password does not match";
-        res.json(errors);
-      } else {
-        let newPassword = req.body.newPassword;
-
-        bcrypt.genSalt(10, (err, salt) => {
-          bcrypt.hash(newPassword, salt, (err, hash) => {
-            if (err) throw err;
-            newPassword = hash;
-            Customer.findOneAndUpdate(
-              { _id: req.user.id },
-              {
-                $set: {
-                  password: newPassword
-                }
-              },
-              { new: true }
-            )
-              .then(customer => {
-                res.json({
-                  message: "Password successfully changed",
-                  customer: customer
-                });
-              })
-              .catch(err =>
-                res.status(400).json({
-                  message: `Error happened on server: "${err}" `
+          bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(newPassword, salt, (err, hash) => {
+              if (err) throw err;
+              newPassword = hash;
+              Customer.findOneAndUpdate(
+                { _id: req.user.id },
+                {
+                  $set: {
+                    password: newPassword,
+                  },
+                },
+                { new: true }
+              )
+                .then((customer) => {
+                  res.json({
+                    message: "Password successfully changed",
+                    customer: customer,
+                  });
                 })
-              );
+                .catch((err) =>
+                  res.status(400).json({
+                    message: `Oooops... Server error`,
+                  })
+                );
+            });
           });
-        });
-      }
+        }
+      });
     });
-  });
+  } catch (err) {
+    res.status(400).json({
+      message: `Oooops... Server error`,
+    });
+  }
 };

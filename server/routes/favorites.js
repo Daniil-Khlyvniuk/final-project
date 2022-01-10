@@ -4,7 +4,6 @@ const passport = require("passport");
 
 const {
   getFavorites,
-  updateFavorites,
   toggleProductInFavorites,
   getFavoritesIds,
 } = require("../controllers/favorites");
@@ -13,12 +12,6 @@ router.post(
   "/:productId",
   passport.authenticate("jwt", { session: false }),
   toggleProductInFavorites
-);
-
-router.put(
-  "/",
-  passport.authenticate("jwt", { session: false }),
-  updateFavorites
 );
 
 router.get("/", passport.authenticate("jwt", { session: false }), getFavorites);
