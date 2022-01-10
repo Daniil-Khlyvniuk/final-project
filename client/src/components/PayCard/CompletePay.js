@@ -47,7 +47,7 @@ const CompletePay = () => {
 
 	const getData = async () => {
 		await cartAPI.addOrder(order)
-		await dispatch(userOperations.fetchUserOrders())
+		await isLoggedIn ? dispatch(userOperations.fetchUserOrders()) : null
 		await handleShoppingBag.afterBuy()
 	}
 
@@ -79,7 +79,7 @@ const CompletePay = () => {
 				THANKS AND ENJOY!
 				YOU ORDER IS : #{OrderNumber}
 			</Typography>
-			<Link exact to={'/shop/catalog'} style={{ textDecoration: 'none' }}>
+			<Link exact="true" to={'/shop/catalog'} style={{ textDecoration: 'none' }}>
 				<Button
 					variant={'contained'}
 					style={{ marginTop: '2rem' }}
