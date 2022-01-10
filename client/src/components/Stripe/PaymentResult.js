@@ -3,12 +3,13 @@ import { Box } from '@mui/material'
 import BackdropLoader from '../UI/BackdropLoader/BackdropLoader'
 // import { Link } from 'react-router-dom'
 // import Button from '@mui/material/Button'
-// const domain = 'https://fp-postil-bedding.herokuapp.com/'
+const domain = 'https://fp-postil-bedding.herokuapp.com/'
+
 
 const PaymentResult = () => {
 	useEffect(()=> {
 		return 	setTimeout(() => {
-			window.location.href = '/complete-order'
+			window.location.href = `${domain}/complete-order`
 		}, 3000)
 	},[])
 	return (
