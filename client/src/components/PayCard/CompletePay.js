@@ -51,6 +51,7 @@ const CompletePay = () => {
 		await handleShoppingBag.afterBuy()
 	}
 
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect( () => {
 		setOrderN(orders[orders.length - 1])
 	})
@@ -79,7 +80,7 @@ const CompletePay = () => {
 				THANKS AND ENJOY!
 				YOU ORDER IS : #{OrderNumber}
 			</Typography>
-			<Link exact to={'/shop/catalog'} style={{ textDecoration: 'none' }}>
+			<Link exact="true" to={'/shop/catalog'} style={{ textDecoration: 'none' }}>
 				<Button
 					variant={'contained'}
 					style={{ marginTop: '2rem' }}
