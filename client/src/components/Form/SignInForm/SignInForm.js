@@ -12,7 +12,6 @@ import useAuth from '../../../utils/customHooks/useAuth'
 const SignInForm = () => {
 	const [serverResult, setServerResult] = useState(null)
 	const { register } = useAuth()
-
 	const classes = useFormStyle()
 
 	return (
