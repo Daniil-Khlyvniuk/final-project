@@ -3,11 +3,9 @@ import { makeStyles } from '@mui/styles'
 import { Box, Container, Grid, Typography } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
 import { linksSelectors, linksOperations } from '../../store/links'
-import ContactUs from './ContactUs'
 import Subscribe from './Subscribe'
 import Credentials from './Credentials'
 import Loader from '../UI/Loader/Loader'
-
 import PageLinks from './PageLinks'
 
 const useStyles = makeStyles(() => ({
@@ -45,7 +43,6 @@ const Footer = () => {
 						data.map(
 							links => <PageLinks key={links._id} linksArr={links} />)
 					}
-					<ContactUs />
 					<Subscribe />
 				</Grid>
 			</Container>
