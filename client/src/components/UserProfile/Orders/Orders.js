@@ -3,10 +3,8 @@ import { Typography, Box, Chip, Divider } from '@mui/material'
 import { userOperations, userSelectors } from '../../../store/user'
 import { useDispatch, useSelector } from 'react-redux'
 import ShoppingBagCard from '../../ShoppingBagCard/ShoppingBagCard'
-
 import OrderList from './OrderList/OrderList'
 import BackdropLoader from '../../UI/BackdropLoader/BackdropLoader'
-
 
 
 const Orders = () => {
