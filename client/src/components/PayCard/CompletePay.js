@@ -16,7 +16,7 @@ const CompletePay = () => {
 	const { handleSnack } = UseSnack()
 	const Order = JSON.parse(localStorage.getItem('ORDER') || '[]')
 	const dispatch = useDispatch()
-	// const loading = useSelector(userSelectors.getIsLoading())
+	const loading = useSelector(userSelectors.getIsLoading())
 	const user = useSelector(userSelectors.getData())
 	const isLoggedIn = !!user
 
@@ -54,7 +54,16 @@ const CompletePay = () => {
 		await isLoggedIn ? setOrderN(response.data[length - 1]) : null
 	}
 
-	useEffect( () => {
+	const getOrderN = async () => {
+		const response = isLoggedIn ? await getUserOrders() : null
+		await isLoggedIn ? setOrderN(response.data[length - 1]) : null
+	}
+
+	useEffect( ()=> {
+		getOrderN()
+	},[loading])
+
+	useEffect(  () => {
 		try {
 			getData()
 		}
