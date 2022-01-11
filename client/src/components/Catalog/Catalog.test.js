@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import Catalog from './Catalog'
 import * as redux from 'react-redux';
 
+global.scrollTo = jest.fn()
 
 describe('Smoke test render Catalog', () => {
 	it('should render Catalog', () => {
@@ -13,19 +14,20 @@ describe('Smoke test render Catalog', () => {
 			render(
 				<Provider store={store}>
 					<BrowserRouter>
-						<Catalog/>
+						<Catalog />
 					</BrowserRouter>
 				</Provider>
 			)
 
 		expect(container)
 	})
+
 	it('snapshot test Catalog', function () {
 		const container =
 			render(
 				<Provider store={store}>
 					<BrowserRouter>
-						<Catalog/>
+						<Catalog />
 					</BrowserRouter>
 				</Provider>
 			)
@@ -34,4 +36,3 @@ describe('Smoke test render Catalog', () => {
 	})
 
 })
-

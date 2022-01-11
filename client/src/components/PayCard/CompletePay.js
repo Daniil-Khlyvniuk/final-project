@@ -54,8 +54,6 @@ const CompletePay = () => {
 		await isLoggedIn ? setOrderN(response.data[length - 1]) : null
 	}
 
-
-
 	useEffect( () => {
 		try {
 			getData()
