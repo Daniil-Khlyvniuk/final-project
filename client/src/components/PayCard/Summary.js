@@ -9,6 +9,7 @@ const Summary = () => {
 	const { shoppingBag, totalPrice } = useHandleShoppingBag()
 	const [parent, setParent] = useState([])
 
+
 	useEffect(() => {
 		Promise.all(
 			shoppingBag.map(

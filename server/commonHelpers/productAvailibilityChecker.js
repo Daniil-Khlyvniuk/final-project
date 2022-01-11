@@ -9,7 +9,6 @@ module.exports = async (orderProducts) => {
         const dbProduct = await ProductVariant.findOne({
           _id: orderItem.product._id,
         });
-        console.log("dbProduct", dbProduct);
         const orderedQuantity = orderItem.cartQuantity;
         const realQuantity = dbProduct.quantity;
         result.push({

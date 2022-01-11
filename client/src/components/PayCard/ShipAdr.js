@@ -38,8 +38,9 @@ const ShipAdr = ({ handleNext, handleBack }) => {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
+	console.log(BuyGoods)
 	let customer = isLoggedIn ? {...userData} : unregistered
-	let userId = isLoggedIn ? customer._id : '61db3e8460e1606e6481dd52'
+	let userId = isLoggedIn ? customer._id : null
 	const order = {
 		products: [{
 			cartQuantity: BuyGoods.length,
@@ -62,6 +63,7 @@ const ShipAdr = ({ handleNext, handleBack }) => {
 		letterSubject: 'Thank you for order! You are welcome!',
 		letterHtml: null,
 	}
+	console.log(order)
 
 	const sendOrder = () => {
 		localStorage.setItem('ORDER', JSON.stringify(order))

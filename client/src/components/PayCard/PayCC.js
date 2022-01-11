@@ -35,7 +35,7 @@ const PayCc = () => {
 	},[])
 
 	let customer = isLoggedIn ? {...userData} : unregistered
-	let userId = isLoggedIn ? customer._id : '61b8813806744e13c4efc6a0'
+	let userId = isLoggedIn ? customer._id : null
 	const order = {
 		products: [{
 			cartQuantity: BuyGoods.length,

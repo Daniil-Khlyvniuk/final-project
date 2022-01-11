@@ -27,6 +27,7 @@ const CompletePay = () => {
 	const clear = () => {
 		localStorage.setItem('Unregistered', '[]')
 	}
+
 	const order = {
 		products: Order.products,
 		canceled: false,
@@ -43,7 +44,6 @@ const CompletePay = () => {
 			`<h1>Your order is placed.</h1>
 				${SubscribeTemlate()}`
 	}
-
 
 	const getData = async () => {
 		await cartAPI.addOrder(order)
