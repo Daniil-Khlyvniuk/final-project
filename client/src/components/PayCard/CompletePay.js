@@ -7,6 +7,7 @@ import UseSnack from '../../utils/customHooks/useSnack'
 import SubscribeTemlate from '../../utils/emailTemplates/order'
 import { useDispatch, useSelector } from 'react-redux'
 import { userOperations, userSelectors } from '../../store/user'
+import { getUserOrders } from '../../utils/API/userAPI'
 
 
 const CompletePay = () => {
@@ -16,7 +17,6 @@ const CompletePay = () => {
 	const Order = JSON.parse(localStorage.getItem('ORDER') || '[]')
 	const dispatch = useDispatch()
 	// const loading = useSelector(userSelectors.getIsLoading())
-	const orders = useSelector(userSelectors.getUserOrders())
 	const user = useSelector(userSelectors.getData())
 	const isLoggedIn = !!user
 
@@ -45,17 +45,14 @@ const CompletePay = () => {
 				${SubscribeTemlate()}`
 	}
 
+
 	const getData = async () => {
 		await cartAPI.addOrder(order)
-		await dispatch(userOperations.fetchUserOrders())
+		await isLoggedIn ? dispatch(userOperations.fetchUserOrders()) : null
 		await handleShoppingBag.afterBuy()
+		const response = isLoggedIn ? await getUserOrders() : null
+		await isLoggedIn ? setOrderN(response.data[length - 1]) : null
 	}
-
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect( () => {
-		setOrderN(orders[orders.length - 1])
-	})
-
 
 	useEffect( () => {
 		try {
@@ -66,7 +63,6 @@ const CompletePay = () => {
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
-
 
 	const sendOrder = () => {
 		localStorage.setItem('ORDER', JSON.stringify(order))

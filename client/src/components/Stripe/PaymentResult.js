@@ -5,6 +5,7 @@ import BackdropLoader from '../UI/BackdropLoader/BackdropLoader'
 // import Button from '@mui/material/Button'
 const domain = 'https://fp-postil-bedding.herokuapp.com/'
 
+
 const PaymentResult = () => {
 	useEffect(()=> {
 		return 	setTimeout(() => {
