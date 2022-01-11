@@ -3,17 +3,16 @@ import { Box, Button, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
 import cartAPI from '../../utils/API/cartAPI'
-import UseSnack from '../../utils/customHooks/useSnack'
 import SubscribeTemlate from '../../utils/emailTemplates/order'
 import { useDispatch, useSelector } from 'react-redux'
 import { userOperations, userSelectors } from '../../store/user'
 import { getUserOrders } from '../../utils/API/userAPI'
+import { snackActions } from '../../utils/customHooks/useSnackBarUtils'
 
 
 const CompletePay = () => {
 	const [orderN, setOrderN] = useState()
 	const handleShoppingBag = useHandleShoppingBag()
-	const { handleSnack } = UseSnack()
 	const Order = JSON.parse(localStorage.getItem('ORDER') || '[]')
 	const dispatch = useDispatch()
 	const loading = useSelector(userSelectors.getIsLoading())
@@ -59,6 +58,7 @@ const CompletePay = () => {
 
 	useEffect( ()=> {
 		getOrderN()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[loading])
 
 	useEffect(  () => {
@@ -66,7 +66,7 @@ const CompletePay = () => {
 			getData()
 		}
 		catch (error) {
-			handleSnack({ message: 'Server response error', style: 'warning' })
+			snackActions.success('You successfully Logged In')
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])

@@ -9,7 +9,7 @@ const SubscribeTemlate = () =>{
 	const goods = shoppingBag.map((elem)=>{ return (`
 <p>${elem.title}</p>
 <p>${elem.color}</p>
-<img src="${elem.imageUrls[0]}">
+<img src="domain/${elem.imageUrls[0]}">
 <p>${elem.currentPrice}.00$</p>
 <p>${elem.amount}</p>
 `)})
