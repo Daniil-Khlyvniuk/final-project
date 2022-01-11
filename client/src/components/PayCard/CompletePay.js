@@ -16,7 +16,7 @@ const CompletePay = () => {
 	const { handleSnack } = UseSnack()
 	const Order = JSON.parse(localStorage.getItem('ORDER') || '[]')
 	const dispatch = useDispatch()
-	// const loading = useSelector(userSelectors.getIsLoading())
+	const loading = useSelector(userSelectors.getIsLoading())
 	const user = useSelector(userSelectors.getData())
 	const isLoggedIn = !!user
 
@@ -50,11 +50,18 @@ const CompletePay = () => {
 		await cartAPI.addOrder(order)
 		await isLoggedIn ? dispatch(userOperations.fetchUserOrders()) : null
 		await handleShoppingBag.afterBuy()
+	}
+
+	const getOrderN = async () => {
 		const response = isLoggedIn ? await getUserOrders() : null
 		await isLoggedIn ? setOrderN(response.data[length - 1]) : null
 	}
 
-	useEffect( () => {
+	useEffect( ()=> {
+		getOrderN()
+	},[loading])
+
+	useEffect(  () => {
 		try {
 			getData()
 		}
