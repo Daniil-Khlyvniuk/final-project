@@ -46,8 +46,9 @@ exports.placeOrder = async (req, res, next) => {
     );
 
     const productAvailibilityInfo = await productAvailibilityChecker(
-      order.products
+      order.products[0],
     );
+console.log(productAvailibilityInfo)
 
     if (!productAvailibilityInfo.productsAvailibilityStatus) {
       res.json({
@@ -136,6 +137,8 @@ exports.updateOrder = (req, res, next) => {
           .json({ message: `Order with id ${req.params.id} is not found` });
       } else {
         const order = _.cloneDeep(req.body);
+        // const [product] = order.products
+        // *вчера
 
         if (req.body.deliveryAddress) {
           // order.deliveryAddress = JSON.parse(req.body.deliveryAddress);
@@ -162,8 +165,12 @@ exports.updateOrder = (req, res, next) => {
             0
           );
 
+
           const productAvailibilityInfo = await productAvailibilityChecker(
-            order.products
+            order.products,
+            // ...product.product
+            // *вчера
+
           );
 
           if (!productAvailibilityInfo.productsAvailibilityStatus) {

@@ -28,6 +28,7 @@ const CompletePay = () => {
 		localStorage.setItem('Unregistered', '[]')
 	}
 
+
 	const order = {
 		products: Order.products,
 		canceled: false,
