@@ -57,7 +57,7 @@ const HorizontalLinearStepper = () => {
 				})}
 			</Stepper>
 			{activeStep === steps.length && (
-				<React.Fragment>
+				<>
 					<Typography sx={{ mt: 2, mb: 1 }}>
 						All steps completed - you&apos;re finished
 					</Typography>
@@ -65,7 +65,7 @@ const HorizontalLinearStepper = () => {
 						<Box sx={{ flex: '1 1 auto' }} />
 						<Button onClick={handleReset}>Reset</Button>
 					</Box>
-				</React.Fragment>
+				</>
 			)}
 			{activeStep === 0 && (
 				<React.Fragment>
@@ -107,7 +107,7 @@ const HorizontalLinearStepper = () => {
 				</React.Fragment>
 			)}
 			{activeStep === 2 && (
-				<React.Fragment>
+				<>
 					<Box
 						sx={{ mt: 2, mb: 1 }}
 					>
@@ -130,7 +130,7 @@ const HorizontalLinearStepper = () => {
 							/> BACK</Button>
 						<Box sx={{ flex: '1 1 auto' }} />
 					</Box>
-				</React.Fragment>
+				</>
 			)}
 		</Box>
 	)

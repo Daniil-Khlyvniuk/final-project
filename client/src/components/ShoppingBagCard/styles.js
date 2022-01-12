@@ -25,7 +25,7 @@ export const useStyles = makeStyles(() => ({
 		}
 	},
 	cross: {
-		// position: 'absolute',
+		position: 'absolute',
 		top: '20px',
 		right: '20px',
 		cursor: 'pointer'
@@ -49,7 +49,6 @@ export const useStyles = makeStyles(() => ({
 		border: '1px solid #373F41',
 		borderRadius: '2px',
 		width: 'fit-content',
-
 	},
 	quantity: {
 		padding: '0 15px',

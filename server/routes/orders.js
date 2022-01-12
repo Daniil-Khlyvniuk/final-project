@@ -5,7 +5,7 @@ const passport = require("passport");
 //Import controllers
 const {
   placeOrder,
-  updateOrder,
+  // updateOrder,
   cancelOrder,
   deleteOrder,
   getOrders,
@@ -20,11 +20,11 @@ router.post("/", placeOrder);
 // @route   PUT /orders/:id
 // @desc    Update order
 // @access  Private
-router.put(
-  "/:id",
-  passport.authenticate("jwt", { session: false }),
-  updateOrder
-);
+// router.put(
+//   "/:id",
+//   passport.authenticate("jwt", { session: false }),
+//   updateOrder
+// );
 
 // @route   PUT /orders/cancel/:id
 // @desc    Cancel order

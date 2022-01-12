@@ -7,12 +7,13 @@ import axios from 'axios'
 
 const Summary = () => {
 	const { shoppingBag, totalPrice } = useHandleShoppingBag()
-	const [parent, setParent] = useState([])
+	const [parents, setParent] = useState([])
+	console.log(parents)
 
 	useEffect(() => {
 		Promise.all(
 			shoppingBag.map(
-				p => axios(`api/products/${p._id}`)
+				prod => axios(`api/products/${prod.product._id}`)
 			)
 		).then(res => {
 			const products = res.map(({ data }) => data)
@@ -40,36 +41,38 @@ const Summary = () => {
 			>
 				Summary
 			</Typography>
-			<div style={border} />
-			{parent?.map((item, index) => (
-				<Box style={SummCarts} key={index}>
-					<Box style={SummBox}>
-						<img
-							src={item.variants.imageUrls[0]}
-							style={PhotoSumm}
-							alt={'image'}
-						/>
-						<Box style={SummText}>
-							<Typography
-								fontSize={24}
-								sx={{ mb: '14px', mt: '0px' }}
-								variant={'h2'}>{item.name}
-							</Typography>
-							<Typography
-								fontSize={18}
-								sx={{ mb: '14px', mt: '0px' }}
-								variant={'p'}
-							>
-								${item.variants.currentPrice}
-							</Typography>
+			<div style={border}/>
+			{
+				shoppingBag?.map((item, index) => (
+					<Box style={SummCarts} key={index}>
+						<Box style={SummBox}>
+							<img
+								src={item.product.imageUrls[0]}
+								style={PhotoSumm}
+								alt={'image'}
+							/>
+							<Box style={SummText}>
+								<Typography
+									fontSize={24}
+									sx={{ mb: '14px', mt: '0px' }}
+									variant={'h2'}>
+									{parents[index]?.name}
+								</Typography>
+								<Typography
+									fontSize={18}
+									sx={{ mb: '14px', mt: '0px' }}
+									variant={'p'}
+								>
+									${item.product.currentPrice}
+								</Typography>
+							</Box>
 						</Box>
 					</Box>
-				</Box>
-			))}
+				))}
 			<Box>
 			</Box>
 			<Box>
-				<Box style={border} />
+				<Box style={border}/>
 				<Box style={SummTotal}>
 					<Typography
 						fontSize={32}
