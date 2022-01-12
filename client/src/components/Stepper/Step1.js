@@ -1,12 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box, Grid, Typography } from '@mui/material'
 import { useStyles } from './styles'
 import ShoppingBagCard from '../../components/ShoppingBagCard/ShoppingBagCard'
 import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
+import Summary from '../PayCard/Summary'
+import axios from 'axios'
 
 const Step1 = () => {
 	const classes = useStyles()
 	const { shoppingBag, totalPrice } = useHandleShoppingBag()
+	const [ parent, setParent ] = useState([])
+
+	useEffect(() => {
+		Promise.all(
+			shoppingBag.map(
+				prod => axios(`api/products/${prod.product._id}`)
+			)
+		).then(res => {
+			const products = res.map(({ data }) => data)
+			setParent(products)
+		})
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
 
 	return (
@@ -21,8 +36,15 @@ const Step1 = () => {
 						Shopping Bag
 					</Typography>
 					<Box>
-						{shoppingBag
-							?.map((item, key) => <ShoppingBagCard key={key} item={item} />)}
+						{
+							shoppingBag?.map((item, ind) =>
+								<ShoppingBagCard
+									key={ind}
+									storquantity={item.cartQuantity}
+									parent={parent[ind]}
+									item={item.product}/>
+							)
+						}
 					</Box>
 				</>}
 			</Box>
@@ -34,13 +56,7 @@ const Step1 = () => {
 					margin: ' 0px 24px 0px 4rem',
 				}
 			}}>
-				<Typography
-					fontSize={32}
-					variant={'h2'}
-					className={classes.titleStep1}
-				>
-					Summary
-				</Typography>
+				<Summary/>
 				<Typography
 					fontSize={32}
 					variant={'h2'}

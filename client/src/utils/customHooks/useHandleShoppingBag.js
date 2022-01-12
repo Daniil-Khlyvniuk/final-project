@@ -1,69 +1,72 @@
 import { useDispatch, useSelector } from 'react-redux'
-import {shoppingBagSelectors} from '../../store/shoppingBag'
-import * as shoppingBagActions from '../../store/shoppingBag/shoppingBagSlice'
-import cartAPI from '../../utils/API/cartAPI'
+import {shoppingBagSelectors, shoppingBagOperations} from '../../store/shoppingBag'
 import { userSelectors } from '../../store/user'
-// import { ProductSelector } from '../../store/Product'
+import cartAPI from '../../utils/API/cartAPI'
 
 export default function useHandleShoppingBag() {
 	const dispatch = useDispatch()
+	const isLoggedIn = !!useSelector(userSelectors.getData())
 	const shoppingBag = useSelector(shoppingBagSelectors.getShoppingBag())
-	const totalPrice = shoppingBag?.reduce((acc, value)=>acc+value.currentPrice,0)
-	// const activeProduct = useSelector(ProductSelector.getProduct())
-	const user = useSelector(userSelectors.getData())
-	const isLoggedIn = !!user
+	const totalPrice = shoppingBag?.reduce((acc, prodObject) =>
+		acc + (prodObject.product.currentPrice * prodObject.cartQuantity)
+	, 0)
+	const totalProductsQuanity = shoppingBag?.reduce(
+		(acc, prodObject) => acc + prodObject.cartQuantity, 0)
 
-
-	const add =  (product) => {
-		const shoppingBag = JSON.parse(localStorage.getItem('shoppingBag') || '[]') || []
-		const newShoppingBag = [...shoppingBag, ...[product]]
-		localStorage.setItem('shoppingBag', JSON.stringify(newShoppingBag))
-		dispatch(shoppingBagActions.addToShoppingBag(newShoppingBag))
-		{isLoggedIn ? cartAPI.addProductToCart(product._id): null}
+	const add = (product) => {
+		const newProduct = {cartQuantity: 1, product}
+		const bag = shoppingBag.map( prod => prod.product._id === product._id
+			? {
+				...prod,
+				cartQuantity: (prod.cartQuantity + 1 <= prod.product.quantity)
+					? prod.cartQuantity + 1
+					: prod.product.quantity
+			}
+			: prod
+		)
+		if(bag.findIndex(	prod => prod.product._id === product._id ) === -1)
+		{
+			bag.push(newProduct)
+		}
+		dispatch(shoppingBagOperations.setData(bag))
+		cartAPI.addProductToCart(product._id)
 	}
 
-	const remove = async (id) => {
-		const shoppingBag = JSON.parse(localStorage.getItem('shoppingBag'))
-		const newShoppingBag = [
-			...shoppingBag.filter(item => item?._id !== id),
-			...shoppingBag.filter(item => item?._id === id)?.slice(0, -1),
-		]
+	// const remove = async (id) => {
+	const remove = (id) => {
+		const bag = shoppingBag
+			.map( prod => prod.product._id === id
+				? {
+					...prod,
+					cartQuantity: prod.cartQuantity - 1
+				}
+				: prod
+			)
+			.filter(prod => prod.cartQuantity > 0)
 
-		localStorage.setItem('shoppingBag', JSON.stringify(newShoppingBag))
-		dispatch(shoppingBagActions.removeFromShoppingBag(newShoppingBag))
-		{isLoggedIn ? await cartAPI.deleteProductFromCart(id) : null}
+		dispatch(shoppingBagOperations.setData(bag))
 	}
 
 
-	const removeAll = async (id) => {
-		const shoppingBag = JSON.parse(localStorage.getItem('shoppingBag'))
-		const newShoppingBag = shoppingBag.filter(item => item?._id !== id)
-
-		localStorage.setItem('shoppingBag', JSON.stringify(newShoppingBag))
-		dispatch(shoppingBagActions.removeFromShoppingBag(newShoppingBag))
-		{isLoggedIn ? await cartAPI.deleteCart(id) : null}
+	// const removeAll = async (id) => {
+	const removeAll = (id) => {
+		const bag = shoppingBag.filter(prodObject => prodObject.product._id !== id)
+		dispatch(shoppingBagOperations.setData(bag))
 	}
 
-
-	const afterBuy = async () => {
-		{isLoggedIn ? await cartAPI.clearCart() : null}
+	const clearAfterBuy = async () => {
 		localStorage.setItem('shoppingBag', [])
-		dispatch(shoppingBagActions.removeFromShoppingBag([]))
-
+		dispatch(shoppingBagOperations.setData([]))
+		if(isLoggedIn)
+		{
+			await cartAPI.clearCart()
+		}
 	}
 
 	return {
-		add, remove, removeAll, afterBuy,
+		add, remove, removeAll, clearAfterBuy,
 		totalPrice,
-		shoppingBag: shoppingBag
-			?.reduce((acc, val) =>
-				acc.some(item => item?._id === val?._id)
-					? acc
-					: [...acc, ...[{
-						...val, amount: shoppingBag
-							?.filter(item => item?._id === val?._id)
-							?.length
-					}]], [])
-			?.sort((a, b) => b?.currentPrice - a?.currentPrice),
+		totalProductsQuanity,
+		shoppingBag,
 	}
 }
