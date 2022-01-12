@@ -326,6 +326,10 @@ exports.getOrders = (req, res, next) => {
 	try {
 		Order.find({ customerId: req.user.id })
 			.populate({
+				path: 'products.product',
+				model: Size,
+			})
+			.populate({
 				path: 'products.product.size',
 				model: Size,
 			})

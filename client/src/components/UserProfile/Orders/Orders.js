@@ -6,21 +6,18 @@ import ShoppingBagCard from '../../ShoppingBagCard/ShoppingBagCard'
 import OrderList from './OrderList/OrderList'
 import BackdropLoader from '../../UI/BackdropLoader/BackdropLoader'
 
-
 const Orders = () => {
 
 	const dispatch = useDispatch()
 	const loading = useSelector(userSelectors.getIsLoading())
 	const orders = useSelector(userSelectors.getUserOrders())
 
-
 	useEffect(() => {
-		if (!orders) {
+		if (orders === null) {
 			dispatch(userOperations.fetchUserOrders())
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [orders, loading])
-
+	}, [])
 
 	useEffect(() =>
 		() => {
@@ -29,12 +26,11 @@ const Orders = () => {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	[])
 
-
-	if (orders && orders.length === 0 ) {
-		return <OrderList />
+	if (orders && orders.length === 0) {
+		return <OrderList/>
 	}
 	if (loading) {
-		return <BackdropLoader open={loading} />
+		return <BackdropLoader open={loading}/>
 	}
 
 	return (
@@ -46,13 +42,13 @@ const Orders = () => {
 					fontSize={'32px'}
 					color={'primary'}
 					textAlign={'center'}
-					sx={{textTransform: 'uppercase'}}
+					sx={{ textTransform: 'uppercase' }}
 				>
 					My purchases
 				</Typography>
-				<Divider sx={{mt: '15px'}}/>
+				<Divider sx={{ mt: '15px' }}/>
 				{/* eslint-disable-next-line no-unused-vars */}
-				{orders.map((order, index) => {
+				{orders.length > 0 && orders.map((order, index) => {
 					return (
 						<Box key={index}>
 							<Box
@@ -85,7 +81,7 @@ const Orders = () => {
 											fontWeight='600'
 											sx={{
 												textTransform: 'uppercase',
-												fontSize: {xs: '12px', sm: '18px'}
+												fontSize: { xs: '12px', sm: '18px' }
 											}}
 										>
 											Order : #{order.orderNo}
@@ -98,7 +94,7 @@ const Orders = () => {
 											fontWeight='600'
 											sx={{
 												textTransform: 'uppercase',
-												fontSize: {xs: '12px', sm: '18px'}
+												fontSize: { xs: '12px', sm: '18px' }
 											}}
 										>
 											Date : {order.date.toLocaleString().split('T')[0]}
@@ -108,7 +104,7 @@ const Orders = () => {
 									<Chip label="New" variant="outlined"
 										sx={{
 											ml: '18px',
-											display: {xs: 'none', sm: 'inline-block'}
+											display: { xs: 'none', sm: 'inline-block' }
 										}}
 										size="small"
 									/>
@@ -120,26 +116,29 @@ const Orders = () => {
 									fontWeight='600'
 									sx={{
 										textTransform: 'uppercase',
-										fontSize: {xs: '14px', sm: '18px'}
+										fontSize: { xs: '14px', sm: '18px' }
 									}}
 								>
 									Price : ${order.totalSum}
 								</Typography>
 							</Box>
-							<Divider sx={{mt: '10px'}}/>
+							<Divider sx={{ mt: '10px' }}/>
 							{order.products.map((single, index) => {
-								return (<ShoppingBagCard
-									key={index}
-									card item={single}/>)
+								return (
+									<ShoppingBagCard
+										key={index}
+										item={single.product}
+										storquantity={single.cartQuantity}
+									/>
+								)
 							})}
-							<Divider sx={{mt: '20px'}}/>
+							<Divider sx={{ mt: '20px' }}/>
 						</Box>
 					)
 				})}
 			</Box>
 			}
 		</>
-
 
 	)
 }

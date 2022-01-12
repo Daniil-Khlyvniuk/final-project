@@ -12,7 +12,7 @@ const ShoppingBagCard = ({ item, storquantity, parent }) => {
 	return (
 		<Box className={classes.container}>
 			<img className={classes.image}
-				src={storquantity ? item.imageUrls[0] : item?.imageUrls[0]}
+				src={storquantity &&  item?.imageUrls[0]}
 				alt={'image'}/>
 			<Box className={classes.desc}>
 				<Typography

@@ -5,14 +5,16 @@ const domain = 'https://fp-postil-bedding.herokuapp.com/'
 
 const SubscribeTemlate = () =>{
 	const { shoppingBag, totalPrice } = useHandleShoppingBag()
-	console.log(shoppingBag[0])
-	const goods = shoppingBag.map((elem)=>{ return (`
-<p>${elem?.title}</p>
+	const goods = shoppingBag.map(elem =>
+		`
+<p>${elem.product.title}</p>
 <p>${elem.product.color}</p>
 <img src="domain/${elem.product.imageUrls[0]}">
 <p>${elem.product.currentPrice}.00$</p>
 <p>${elem.product.amount}</p>
-`)})
+`
+	)
+
 
 	return (`
 <!DOCTYPE html>

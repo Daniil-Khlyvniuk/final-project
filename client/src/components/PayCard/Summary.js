@@ -8,8 +8,6 @@ import axios from 'axios'
 const Summary = () => {
 	const { shoppingBag, totalPrice } = useHandleShoppingBag()
 	const [parents, setParent] = useState([])
-	console.log(parents)
-
 	useEffect(() => {
 		Promise.all(
 			shoppingBag.map(
@@ -21,6 +19,7 @@ const Summary = () => {
 		})
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
+
 
 	return (
 		<Box sx={{
