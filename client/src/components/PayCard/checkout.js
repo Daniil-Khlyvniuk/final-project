@@ -5,6 +5,8 @@ import PayCc from './PayCC'
 import Summary from './Summary'
 
 const Checkout = () => {
+
+	console.log('zzzzzzz')
 	return (
 		<Box my='15px'>
 			<Grid container style={PayParent} spacing={2}>

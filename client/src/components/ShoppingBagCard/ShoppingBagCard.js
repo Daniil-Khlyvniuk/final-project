@@ -8,7 +8,6 @@ import { useStyles } from './styles'
 const ShoppingBagCard = ({ item, storquantity, parent }) => {
 	const classes = useStyles()
 	const handleShoppingBag = useHandleShoppingBag()
-	console.log(item)
 
 	return (
 		<Box className={classes.container}>
