@@ -60,9 +60,6 @@ export default function Payment() {
 		clientSecret,
 		appearance,
 	}
-
-	console.log('test ')
-
 	return (
 		<Box>
 			{clientSecret && (

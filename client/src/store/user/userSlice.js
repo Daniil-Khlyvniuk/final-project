@@ -78,6 +78,7 @@ const userSlice = createSlice({
 			state.error = 'Error happened while user data loading. Relogin plz'
 		},
 		[fetchUserOrders.fulfilled]: (state, action) => {
+			console.log(action.payload)
 			state.orders = action.payload
 			state.isLoading = false
 			state.error = null

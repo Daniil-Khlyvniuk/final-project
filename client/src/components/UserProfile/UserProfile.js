@@ -29,9 +29,7 @@ const UserProfile = () => {
 					edit your details or manage your returns.
 				</Typography>
 			</Box>
-			<Box
-
-			>
+			<Box>
 				<BasicTabs/>
 			</Box>
 		</Container>
