@@ -1,6 +1,9 @@
 import { makeStyles } from '@mui/styles'
 
 export const useStyles = makeStyles(theme => ({
+	notEnabled: {
+		opacity: .5
+	},
 	container: {
 		minHeight: '200px',
 		position: 'relative',

@@ -35,6 +35,7 @@ const Catalog = () => {
 				title={ item.name }
 				price={ item.variants.currentPrice }
 				color={ item.variants.color }
+				enabled={ item.variants.enabled }
 			/>
 		</Grid>
 	))
