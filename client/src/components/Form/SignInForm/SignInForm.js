@@ -12,7 +12,6 @@ import useAuth from '../../../utils/customHooks/useAuth'
 const SignInForm = () => {
 	const [serverResult, setServerResult] = useState(null)
 	const { register } = useAuth()
-
 	const classes = useFormStyle()
 
 	return (
@@ -39,7 +38,6 @@ const SignInForm = () => {
 				onSubmit={async (values) => {
 					try {
 						await register(values)
-						setServerResult({ success: 'You successfully registered' })
 					}
 					catch (err) {
 						setServerResult({ error: Object.values(err.response.data)[0] })
@@ -57,6 +55,7 @@ const SignInForm = () => {
 								name="firstName"
 								type="text"
 								label="First Name"
+								className={classes.input}
 							/>
 
 							<Field
@@ -65,6 +64,7 @@ const SignInForm = () => {
 								name="lastName"
 								type="text"
 								label="Last Name"
+								className={classes.input}
 							/>
 
 							<Field
@@ -74,6 +74,7 @@ const SignInForm = () => {
 								type="text"
 								label="Login"
 								placeholder="Login"
+								className={classes.input}
 							/>
 
 							<Field
@@ -82,6 +83,7 @@ const SignInForm = () => {
 								name="email"
 								type="email"
 								label="Email"
+								className={classes.input}
 							/>
 
 							<Field
@@ -90,6 +92,7 @@ const SignInForm = () => {
 								name="password"
 								type="password"
 								label="Password"
+								className={classes.input}
 							/>
 
 							<Field
@@ -98,6 +101,7 @@ const SignInForm = () => {
 								name="confirmPass"
 								type="password"
 								label="Confirm Password"
+								className={classes.input}
 							/>
 
 							<Box
@@ -175,11 +179,6 @@ const SignInForm = () => {
 								</Box>
 							)}
 
-							{serverResult && serverResult.success && (
-								<Box className={classes.formStatusBlock}>
-									<p className={classes.success}>{serverResult.success}</p>
-								</Box>
-							)}
 							<Box sx={{ display: 'flex', justifyContent: 'center' }}>
 								<Button
 									data-testid='submit'

@@ -44,6 +44,7 @@ const LoginForm = () => {
 							label="Login or Email"
 							name="loginOrEmail"
 							type="text"
+							className={classes.input}
 						/>
 						<Field
 							data-testid="password"
@@ -51,6 +52,7 @@ const LoginForm = () => {
 							label="Password"
 							name="password"
 							type="password"
+							className={classes.input}
 						/>
 						<Box
 							sx={{
@@ -93,12 +95,6 @@ const LoginForm = () => {
 						{serverResult && serverResult.error && (
 							<Box className={classes.formStatusBlock}>
 								<p className={classes.error}>{serverResult.error}</p>
-							</Box>
-						)}
-
-						{serverResult && serverResult.success && (
-							<Box className={classes.formStatusBlock}>
-								<p className={classes.success}>{serverResult.success}</p>
 							</Box>
 						)}
 

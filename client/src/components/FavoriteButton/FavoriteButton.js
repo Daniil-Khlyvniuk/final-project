@@ -42,6 +42,7 @@ const FavoriteButton = ({ id, dataTestid, children }) => {
 				: () => {
 					addToFavorites()
 					!isFavorite && snackActions.success('Successfully added to favorites')
+					isFavorite && snackActions.warning('Successfully removed from favorites')
 				}
 			}
 			data-testid={dataTestid}

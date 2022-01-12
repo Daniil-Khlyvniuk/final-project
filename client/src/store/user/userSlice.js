@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { getUserByToken , getUserOrders } from '../../utils/API/userAPI'
+import { getUserByToken, getUserOrders } from '../../utils/API/userAPI'
+import { snackActions } from '../../utils/customHooks/useSnackBarUtils'
 
 
 const initialState = {
@@ -8,21 +9,21 @@ const initialState = {
 	error: null,
 	isLoading: false,
 	order: null,
-	orders : [],
+	orders: null,
 }
 
 export const fetchUser = createAsyncThunk(
 	'user/fetchUser',
 	async () => {
 		const response = await getUserByToken()
-		return response.data
+		return response
 	}
 )
 
 
 export const fetchUserOrders = createAsyncThunk(
 	'user/fetchUserOrders',
-	async () =>{
+	async () => {
 		const response = await getUserOrders()
 		return response.data
 	}
@@ -33,11 +34,11 @@ const userSlice = createSlice({
 	initialState,
 	reducers: {
 
-		clearOrder(state){
-			state.orders= []
+		clearOrder(state) {
+			state.orders = null
 		},
 
-		setNewData(state,action){
+		setNewData(state, action) {
 			state.data = action.payload
 		},
 		setToken(state, action) {
@@ -54,14 +55,14 @@ const userSlice = createSlice({
 			return state
 		},
 
-		setOrder(state,action) {
+		setOrder(state, action) {
 			state.order = action.payload
 		}
 	},
 	extraReducers: {
 		[fetchUser.fulfilled]: (state, action) => {
 			delete (action.payload.password)
-			state.data = action.payload
+			state.data = action.payload.data
 			state.isLoading = false
 			state.error = null
 		},
@@ -70,27 +71,28 @@ const userSlice = createSlice({
 			state.error = null
 		},
 		[fetchUser.rejected]: (state) => {
+			snackActions.error('Trouble with auth, relogin please')
 			localStorage.removeItem('userToken')
 			state.isLoading = false
 			state.token = null
 			state.error = 'Error happened while user data loading. Relogin plz'
 		},
-		[fetchUserOrders.fulfilled]:(state,action) => {
+		[fetchUserOrders.fulfilled]: (state, action) => {
 			state.orders = action.payload
 			state.isLoading = false
 			state.error = null
 		},
-		[fetchUserOrders.pending]:(state)=>{
-			state.isLoading =true
+		[fetchUserOrders.pending]: (state) => {
+			state.isLoading = true
 			state.error = null
 		},
-		[fetchUserOrders.rejected]:(state)=>{
+		[fetchUserOrders.rejected]: (state) => {
 			state.isLoading = false
 			state.error = 'Error happened while user data loading. Relogin plz'
 		}
 	}
 })
 
-export const { actions} = userSlice
+export const { actions } = userSlice
 
 export default userSlice.reducer

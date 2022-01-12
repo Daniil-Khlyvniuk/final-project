@@ -1,60 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Form, Formik } from 'formik'
+import { Field, Form, Formik } from 'formik'
 import { Box, Button, Grid, Typography } from '@mui/material'
 import { border } from './styles'
-import TextInput from '../UserProfile/UserForm/FormUI/Textfield'
-import SelectInput from '../UserProfile/UserForm/FormUI/SelectInput'
 import countries from '../UserProfile/UserForm/data/countries.json'
 import { useSelector } from 'react-redux'
 import { userSelectors } from '../../store/user'
-import * as Yup from 'yup'
-import { phoneRegExp } from '../UserProfile/UserForm/data/Regex'
+import {CHECKOUT_FORM} from '../Form/setting/Schemes'
 import PropTypes from 'prop-types'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
-import UseSnack from '../../utils/customHooks/useSnack'
+import CustomInput from '../Form/setting/customElements/CustomInput'
+import CustomAutoComplete from '../Form/setting/customElements/CustomAutoComplete'
+import {snackActions} from '../../utils/customHooks/useSnackBarUtils'
 
-
-
-
-const FORM_VALIDATION = Yup.object().shape({
-	firstName: Yup
-		.string()
-		.min(4, 'Write Real Name')
-		.max(50, 'Too Long')
-		.typeError('Write Real Name')
-		.required('required'),
-	lastName: Yup
-		.string()
-		.min(4, 'Write Real Name')
-		.max(50, 'Too Long')
-		.typeError('Write Real Name')
-		.required('required'),
-	phone: Yup.string()
-		.matches(phoneRegExp, 'Please enter a valid phone number').required('required')
-	,
-	email: Yup
-		.string()
-		.email('Invalid email'),
-	address: Yup
-		.string()
-		.min(10, 'Write Real Address')
-		.max(50, 'Too Long')
-		.required('required'),
-	city: Yup
-		.string()
-		.max(10, 'Write Real city')
-		.required('required'),
-	zip: Yup
-		.string()
-		.matches(/^[0-9]+$/, 'Must be only numbers')
-		.max(6, 'Not valid zip code')
-		.min(4, 'Not valid zip code')
-		.required('required'),
-	country: Yup
-		.string()
-		.required('required'),
-})
 
 const ShipAdr = ({ handleNext, handleBack }) => {
 	const token = useSelector(userSelectors.getToken())
@@ -64,7 +22,6 @@ const ShipAdr = ({ handleNext, handleBack }) => {
 	const [BuyGoods, setBuyGoods] = useState({})
 	const user = useSelector(userSelectors.getData())
 	const isLoggedIn = !!user
-	const { handleSnack } = UseSnack()
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(async () => {
@@ -75,25 +32,14 @@ const ShipAdr = ({ handleNext, handleBack }) => {
 				const data = await res.data
 				await setUserData(data)
 			} catch (e) {
-				handleSnack({ message: 'Price range error', style: 'warning' })
+				snackActions.warning('User Error')
 			}
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
-	const INITIAL_FORM_STATE = {
-		firstName: user?.lastName || '',
-		lastName: user?.lastName || '',
-		email: user?.email || '',
-		phone: user?.phone || '',
-		address: user?.address || '',
-		city: user?.city || '',
-		country: user?.country || '',
-		zip: user?.zip || '',
-	}
-
 	let customer = isLoggedIn ? {...userData} : unregistered
-	let userId = isLoggedIn ? customer._id : '61b8813806744e13c4efc6a0'
+	let userId = isLoggedIn ? customer._id : '61db3e8460e1606e6481dd52'
 	const order = {
 		products: [{
 			cartQuantity: BuyGoods.length,
@@ -124,8 +70,18 @@ const ShipAdr = ({ handleNext, handleBack }) => {
 	return (
 		<div>
 			<Formik
-				initialValues={{ ...INITIAL_FORM_STATE }}
-				validationSchema={FORM_VALIDATION}
+				// initialValues={{ ...INITIAL_FORM_STATE }}
+				initialValues={{
+					firstName: user?.lastName || '',
+					lastName: user?.lastName || '',
+					email: user?.email || '',
+					phone: user?.phone || '',
+					address: user?.address || '',
+					city: user?.city || '',
+					country: '',
+					zip: user?.zip || '',
+				}}
+				validationSchema={CHECKOUT_FORM}
 				onSubmit={(values) => {
 
 					const update = {
@@ -135,7 +91,7 @@ const ShipAdr = ({ handleNext, handleBack }) => {
 						phone: values.phone,
 						address: values.address,
 						city: values.city,
-						country: values.country,
+						// country: values.country,
 						zip: values.zip,
 
 					}
@@ -164,51 +120,91 @@ const ShipAdr = ({ handleNext, handleBack }) => {
 						<div style={border} />
 						<Grid container spacing={2}>
 							<Grid item xs={12} md={6}>
-								<TextInput
+								<Field
+									component={CustomInput}
+									data-testid="firstName"
 									name="firstName"
-									label="First Name *"
-
-
+									type="text"
+									label="First Name"
 								/>
 							</Grid>
 							<Grid item xs={12} md={6}>
-								<TextInput
+								<Field
+									component={CustomInput}
+									data-testid="lastName"
 									name="lastName"
-									label="Last Name *"
+									type="text"
+									label="Last Name"
 								/>
 							</Grid>
 							<Grid item xs={12} >
-								<TextInput name="address" label="Address *" />
+								<Field
+									component={CustomInput}
+									data-testid="address"
+									name="address"
+									type="text"
+									label="Address"
+								/>
 							</Grid>
 							<Grid item xs={6} >
-								<TextInput name="address2" label="Address 2" />
+								<Field
+									component={CustomInput}
+									data-testid="address2"
+									name="address2"
+									type="text"
+									label="Address 2"
+								/>
 							</Grid>
 							<Grid item xs={6} md={6}>
-								<TextInput
+								<Field
+									component={CustomInput}
+									data-testid="email"
 									name="email"
+									type="text"
 									label="Email"
 									options={countries}
 								/>
 							</Grid>
 							<Grid item xs={12} md={6}>
-								<SelectInput
+								<Field
+									sx={{
+										marginTop: '15px',
+									}}
+									component={CustomAutoComplete}
+									data-testid="country"
 									name="country"
-									label="Country *"
-
-									options={countries}
+									label="Country"
+									type="text"
+									options={Object.keys(countries).map((item) =>
+										countries[item])}
 								/>
 							</Grid>
 							<Grid item xs={12} md={6}>
-								<TextInput name="city" label="City *" />
+								<Field
+									component={CustomInput}
+									data-testid="city"
+									name="city"
+									type="text"
+									label="City"
+								/>
 							</Grid>
 							<Grid item xs={12} md={6}>
-								<TextInput
+								<Field
+									component={CustomInput}
+									data-testid="zip"
 									name="zip"
-									label="Zip/Postal Code *"
+									type="text"
+									label="Zip"
 								/>
 							</Grid>
 							<Grid item xs={12} md={6}>
-								<TextInput name="phone" label="Phone number *" />
+								<Field
+									component={CustomInput}
+									data-testid="phone"
+									name="phone"
+									type="text"
+									label="Phone"
+								/>
 							</Grid>
 						</Grid>
 						<Box style={border} />
