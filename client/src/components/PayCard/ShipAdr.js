@@ -39,7 +39,8 @@ const ShipAdr = ({ handleNext, handleBack }) => {
 	}, [])
 
 	let customer = isLoggedIn ? {...userData} : unregistered
-	let userId = isLoggedIn ? customer._id : '61db3e8460e1606e6481dd52'
+
+	let userId = isLoggedIn ? customer._id : null
 	const order = {
 		products: [{
 			cartQuantity: BuyGoods.length,

@@ -7,12 +7,10 @@ import PropTypes from 'prop-types'
 
 
 const CheckoutForm = ({handleNext, handleBack}) => {
-
-
+	console.log('tttttt')
 	return (
 		<Box my='15px'>
 			<Grid container 
-				// style={PayParent}
 				sx={{
 					flexDirection: {lg: 'row', sm: 'column', xs: 'column',}
 				}}

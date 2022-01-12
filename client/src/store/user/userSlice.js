@@ -9,7 +9,7 @@ const initialState = {
 	error: null,
 	isLoading: false,
 	order: null,
-	orders: null,
+	orders: JSON?.parse(localStorage.getItem('ORDER') || '[]') || [],
 }
 
 export const fetchUser = createAsyncThunk(

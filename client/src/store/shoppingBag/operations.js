@@ -1,9 +1,11 @@
-import { createAsyncThunk } from '@reduxjs/toolkit'
+// import {actions} from './shoppingBagSlice'
+//
+// const def = {...actions}
+//
+// export default def
 
-const addToShoppingBag = createAsyncThunk(
-	'shoppingBag/addToShoppingBag',
-)
+import {actions} from './shoppingBagSlice'
 
-export default {
-	addToShoppingBag,
-}
+const def = {...actions}
+
+export default def
