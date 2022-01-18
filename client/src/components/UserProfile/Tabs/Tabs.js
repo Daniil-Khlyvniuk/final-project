@@ -2,6 +2,7 @@ import React, {memo, useEffect, useState} from 'react'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import Box from '@mui/material/Box'
+import Orders from '../Orders/Orders'
 import UserForm from '../UserForm/UserForm'
 import {Link, Route, Switch, useLocation} from 'react-router-dom'
 import Favorites from '../../../pages/Favorites/Favorites'
@@ -54,7 +55,7 @@ const BasicTabs = () => {
 					scrollButtons="auto"
 				>
 					<Tab label="My Profile" component={Link} to={'/user-profile'} {...a11yProps(0)} />
-					{/*<Tab label="My purchases" component={Link} to={'/purchase'} {...a11yProps(1)} />*/}
+					<Tab label="My purchases" component={Link} to={'/purchase'} {...a11yProps(1)} />
 					<Tab label="Favorites" component={Link} to={'/favorites'} {...a11yProps(2)} />
 				</Tabs>
 			</Box>
@@ -62,9 +63,9 @@ const BasicTabs = () => {
 				<Route exact path={'/user-profile'}>
 					<UserForm/>
 				</Route>
-				{/*<Route exact path={'/purchase'}>*/}
-				{/*	<Orders/>*/}
-				{/*</Route>*/}
+				<Route exact path={'/purchase'}>
+					<Orders/>
+				</Route>
 				<Route exact path={'/favorites'}>
 					<Box sx={{display: 'flex',
 						alignItems:'center',

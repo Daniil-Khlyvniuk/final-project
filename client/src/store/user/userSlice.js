@@ -23,11 +23,12 @@ export const fetchUser = createAsyncThunk(
 
 export const fetchUserOrders = createAsyncThunk(
 	'user/fetchUserOrders',
-	async () => {
-		const response = await getUserOrders()
-		return response.data
-	}
-)
+	() => (
+		getUserOrders().then(res => {
+			console.log(res.data)
+			return res.data
+		})
+	))
 
 const userSlice = createSlice({
 	name: 'user',
