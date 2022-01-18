@@ -7,6 +7,7 @@
   "presentation": "https://docs.google.com/presentation/d/1CBFV4Z9PBZjipS-x3z4KodsS_i2IgTSlwFx6lEovX9I/edit?usp=sharing",
   "scripts": {
     "start": "npm-run-all -p start:client start:server",
+    "build": "npm install --prefix client && npm install --prefix server && npm run build --prefix client && rm -rf server/public && cp -a client/build/. server/public/ && rm -rf server/static/static &&  cp -a server/public/. server/static",
     "start:client": "npm start --prefix client",
     "lint:client": "npm run lint --fix --prefix client",
     "start:server": "npm run server --prefix server",

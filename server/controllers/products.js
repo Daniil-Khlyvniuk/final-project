@@ -36,7 +36,8 @@ exports.addProduct = async (req, res) => {
     ...variantData
   } = req.body;
   try {
-    const imageUrls = fileService.saveFile(req?.files?.img, "goods"); // save images
+    const imageUrls = fileService.saveFile(req?.files?.img, "goods"); // save
+    // images
     variantData.itemNo = rand().toString();
     variantData.imageUrls = imageUrls;
 
@@ -405,7 +406,6 @@ exports.getProductsFilterParams = async (req, res, next) => {
       },
       { $limit: perPage },
     ]);
-
     res.json(products);
   } catch (err) {
     res.status(400).json({
