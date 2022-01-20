@@ -9,7 +9,7 @@ import axios from 'axios'
 const Step1 = () => {
 	const classes = useStyles()
 	const { shoppingBag, totalPrice } = useHandleShoppingBag()
-	const [ parent, setParent ] = useState([])
+	const [parent, setParent] = useState([])
 
 	useEffect(() => {
 		Promise.all(
@@ -23,6 +23,9 @@ const Step1 = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
+	useEffect(() => {
+		window.scrollTo(0, 0)
+	}, [])
 
 	return (
 		<Grid className={classes.containerStep1}>
@@ -42,7 +45,7 @@ const Step1 = () => {
 									key={ind}
 									storquantity={item.cartQuantity}
 									parent={parent[ind]}
-									item={item.product}/>
+									item={item.product} />
 							)
 						}
 					</Box>
@@ -56,7 +59,7 @@ const Step1 = () => {
 					margin: ' 0px 24px 0px 4rem',
 				}
 			}}>
-				<Summary/>
+				<Summary />
 				<Typography
 					fontSize={32}
 					variant={'h2'}
