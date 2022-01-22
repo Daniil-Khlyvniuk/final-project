@@ -6,13 +6,12 @@ import {
 } from '@stripe/react-stripe-js'
 import { button, form, textBtn } from './style'
 import Loader from '../UI/Loader/Loader'
-import useSnack from '../../utils/customHooks/useSnack'
+import { snackActions } from '../../utils/customHooks/useSnackBarUtils'
 
 
 export default function CheckoutForm() {
 	const stripe = useStripe()
 	const elements = useElements()
-	const {handleSnack} = useSnack()
 	const [message, setMessage] = useState(null)
 	const [isLoading, setIsLoading] = useState(false)
 	const [disable, setDisable] = useState(false)
@@ -37,19 +36,19 @@ export default function CheckoutForm() {
 		stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
 			switch (paymentIntent.status) {
 			case 'succeeded':
-				handleSnack({message: 'Payment succeeded!', style: 'success'})
+				snackActions.success('Payment succeeded!')
 				setMessage('Payment succeeded!')
 				break
 			case 'processing':
-				handleSnack({message: 'Your payment is processing.', style: 'info'})
+				snackActions.info('Your payment is processing.')
 				setMessage('Your payment is processing.')
 				break
 			case 'requires_payment_method':
-				handleSnack({message: 'Your payment was not successful, please try again.', style: 'warning'})
+				snackActions.warning('Your payment was not successful, please try again.')
 				setMessage('Your payment was not successful, please try again.')
 				break
 			default:
-				handleSnack({message: 'Something went wrong.', style: 'error'})
+				snackActions.warning('Something went wrong.')
 				setMessage('Something went wrong.')
 				break
 			}
@@ -84,10 +83,10 @@ export default function CheckoutForm() {
 		// redirected to the `return_url`.
 		if (error.type === 'card_error' || error.type === 'validation_error') {
 			setMessage(error.message)
-			handleSnack({message: 'Something went wrong.', style: 'error'})
+			snackActions.error('Something went wrong.')
 		} else {
 			setMessage('An unexpected error occured.')
-			handleSnack({message: 'An unexpected error occured.', style: 'error'})
+			snackActions.error('An unexpected error occured.')
 		}
 
 		setIsLoading(false)

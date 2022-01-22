@@ -11,7 +11,7 @@ export const useStyles = makeStyles(() => ({
 		padding: '20px',
 		// borderBottom: '1px solid grey',
 		position: 'relative',
-		gap: '80px',
+		gap: '15px',
 		alignItems: 'center',
 		'& h2': {
 			margin: '0',
@@ -22,12 +22,12 @@ export const useStyles = makeStyles(() => ({
 		['@media(min-width: 600px)']: {
 			flexDirection: 'row',
 			alignItems: 'flex-start',
+			gap: '60px',
 		}
 	},
 	cross: {
-		position: 'absolute',
-		top: '20px',
-		right: '20px',
+		// position: 'absolute',
+		padding: '0 20px',
 		cursor: 'pointer'
 	},
 	crossModal: {
@@ -55,13 +55,12 @@ export const useStyles = makeStyles(() => ({
 	},
 	quantityDown: {
 		padding: '5px 10px',
-		borderLeft: '1px solid #373F41',
 		cursor: 'pointer'
 	},
 	specificationsContainer: {
 		display: 'flex',
 		alignItems: 'center',
-		gap: '85px'
+		justifyContent: 'space-between',
 	},
 	specifications: {
 		display: 'flex',

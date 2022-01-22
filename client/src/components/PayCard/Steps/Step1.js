@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { Box, Grid, Typography } from '@mui/material'
-import { useStyles } from './styles'
-import ShoppingBagCard from '../../components/ShoppingBagCard/ShoppingBagCard'
-import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
-import Summary from '../PayCard/Summary'
+import { useStyles } from '../../Stepper/styles'
+import ShoppingBagCard from '../../ShoppingBagCard/ShoppingBagCard'
+import useHandleShoppingBag from '../../../utils/customHooks/useHandleShoppingBag'
+import Summary from '../Summary'
 import axios from 'axios'
+import { border } from '../style'
 
 const Step1 = () => {
 	const classes = useStyles()
-	const { shoppingBag, totalPrice } = useHandleShoppingBag()
+	const { shoppingBag } = useHandleShoppingBag()
 	const [parent, setParent] = useState([])
 
 	useEffect(() => {
@@ -29,16 +30,28 @@ const Step1 = () => {
 
 	return (
 		<Grid className={classes.containerStep1}>
-			<Box className={classes.cards}>
+			<Box
+				sx={{
+					// width: '70%',
+					marginLeft: '4rem',
+					maxWidth: 1310,
+					margin: '0 auto',
+				}}>
 				{shoppingBag?.length > 0 && <>
 					<Typography
-						fontSize={32}
-						variant={'h2'}
-						className={classes.titleStep1}
+						variant='body1'
+						component={'div'}
+						color='primary'
+						fontSize='40px'
+						fontWeight='700'
+						letterSpacing='3px'
+						sx={{ mb: '25px', mt: '10px' }}
 					>
 						Shopping Bag
 					</Typography>
-					<Box>
+					<Box style={border} />
+					<Box
+						style={border}>
 						{
 							shoppingBag?.map((item, ind) =>
 								<ShoppingBagCard
@@ -51,22 +64,13 @@ const Step1 = () => {
 					</Box>
 				</>}
 			</Box>
-			<Box sx={{
-				['@media(max-width: 1000px)']: {
-					width: '70%',
-					// marginLeft: '4rem',
-					borderBottom: '1px solid grey',
-					margin: ' 0px 24px 0px 4rem',
-				}
-			}}>
+			<Box
+				sx={{
+					['@media(max-width: 1000px)']: {
+						margin: ' 0px 24px 0px 4rem',
+					}
+				}}>
 				<Summary />
-				<Typography
-					fontSize={32}
-					variant={'h2'}
-					className={classes.price}
-				>
-					TOTAL USD ${totalPrice}
-				</Typography>
 			</Box>
 		</Grid>
 	)

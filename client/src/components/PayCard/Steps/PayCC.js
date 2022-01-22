@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { border, checkboxPay, PayCC, PayElem, PayText, PayTextSub, PayCash, CashText, CashTextHead, CashTextSub } from './style'
+import { border, checkboxPay, PayCC, PayElem, PayText, PayTextSub, PayCash, CashText, CashTextHead, CashTextSub } from '../style'
 import { Box, Grid, Radio, Typography } from '@mui/material'
-import Payment from '../Stripe/Payment'
+import Payment from '../../Stripe/Payment'
 import CreditCardIcon from '@mui/icons-material/CreditCard'
 import MoneyIcon from '@mui/icons-material/Money'
 import LocalMallIcon from '@mui/icons-material/LocalMall'
-import Btn from './Btn'
+import Btn from '../Btn'
 import { useSelector } from 'react-redux'
-import { userSelectors } from '../../store/user'
+import { userSelectors } from '../../../store/user'
 import axios from 'axios'
-import UseSnack from '../../utils/customHooks/useSnack'
+import {snackActions} from '../../../utils/customHooks/useSnackBarUtils'
 
 const PayCc = () => {
 	const [selectedValue, setSelectedValue] = useState('a')
@@ -19,7 +19,6 @@ const PayCc = () => {
 	const [BuyGoods, setBuyGoods] = useState({})
 	const user = useSelector(userSelectors.getData())
 	const isLoggedIn = !!user
-	const { handleSnack } = UseSnack()
 
 	useEffect(() => {
 		setBuyGoods(shoppingBag)
@@ -29,15 +28,13 @@ const PayCc = () => {
 					setUserData(res.data)
 				})
 			} catch (e) {
-				handleSnack({ message: 'Server response error', style: 'warning' })
+				snackActions.warning('You successfully bought')
 			}
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
-	useEffect(() => {
-		window.scrollTo(0, 0)
-	}, [])
+
 
 	let customer = isLoggedIn ? { ...userData } : unregistered
 	let userId = isLoggedIn ? customer._id : null
@@ -64,16 +61,16 @@ const PayCc = () => {
 		letterHtml: null,
 	}
 
-
-
-
-
 	const sendOrder = () => {
 		localStorage.setItem('ORDER', JSON.stringify(order))
 	}
 
+	useEffect(() => {
+		window.scrollTo(0, 0)
+		sendOrder()
+	}, [])
 
-	sendOrder()
+
 
 	const handleChange = (event) => {
 		setSelectedValue(event.target.value)

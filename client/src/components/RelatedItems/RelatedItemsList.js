@@ -4,14 +4,13 @@ import productsReducer, { productsSelectors } from '../../store/products'
 import axios from 'axios'
 import Carousel from '../Carousel/Carousel'
 import { ProductSelector } from '../../store/product'
-import UseSnack from '../../utils/customHooks/useSnack'
+import {snackActions} from '../../utils/customHooks/useSnackBarUtils'
 
 
 const RelatedItemsList = () => {
 	const relatedIds = useSelector(productsSelectors.getRelatedIds())
 	let relatedList = useSelector(productsSelectors.getRelatedProductsList())
 	const dispatch = useDispatch()
-	const { handleSnack } = UseSnack()
 
 	const activeProduct = useSelector(ProductSelector.getProduct())
 	const id = activeProduct._id
@@ -28,7 +27,7 @@ const RelatedItemsList = () => {
 			dispatch(productsReducer.setRelatedProductsList(
 				res.map(prod => prod.data)))
 		}).catch(err => {
-			handleSnack({ message: err, style: 'warning' })
+			snackActions.warning(`${err}`)
 		})
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[])

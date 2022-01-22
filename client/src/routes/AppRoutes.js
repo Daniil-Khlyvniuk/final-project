@@ -10,7 +10,7 @@ import HandleSubscribe from '../pages/HandleSubscribe'
 import UserProfilePage from '../pages/UserProfile/UserProfile'
 import Search from '../pages/Search/Search'
 import Checkout from '../components/PayCard/checkout'
-import CompletePay from '../components/PayCard/CompletePay'
+import CompletePay from '../components/PayCard/Steps/CompletePay'
 import StaticPages from '../components/StaticPages/StaticPages'
 import PaymentResult from '../components/Stripe/PaymentResult'
 
