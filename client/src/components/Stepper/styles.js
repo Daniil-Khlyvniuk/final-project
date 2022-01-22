@@ -5,7 +5,8 @@ export const useStyles = makeStyles({
 		marginBottom: '4rem'
 	},
 	containerTitle: {
-		background: '#373F41',
+		// background: '#373F41',
+		// width: '100%',
 		['@media(min-width: 768px)']: {
 			padding: '2rem 4rem'
 		},
