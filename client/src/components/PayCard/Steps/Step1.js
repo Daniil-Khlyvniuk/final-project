@@ -67,7 +67,6 @@ const Step1 = () => {
 			<Box
 				sx={{
 					['@media(max-width: 1000px)']: {
-						width: '70%',
 						margin: ' 0px 24px 0px 4rem',
 					}
 				}}>

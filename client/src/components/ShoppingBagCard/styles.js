@@ -60,7 +60,7 @@ export const useStyles = makeStyles(() => ({
 	specificationsContainer: {
 		display: 'flex',
 		alignItems: 'center',
-		gap: '85px'
+		justifyContent: 'space-between',
 	},
 	specifications: {
 		display: 'flex',
