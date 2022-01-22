@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { border, checkboxPay, PayCC, PayElem, PayText, PayTextSub, PayCash, CashText, CashTextHead, CashTextSub } from './style'
+import { border, checkboxPay, PayCC, PayElem, PayText, PayTextSub, PayCash, CashText, CashTextHead, CashTextSub } from '../style'
 import { Box, Grid, Radio, Typography } from '@mui/material'
-import Payment from '../Stripe/Payment'
+import Payment from '../../Stripe/Payment'
 import CreditCardIcon from '@mui/icons-material/CreditCard'
 import MoneyIcon from '@mui/icons-material/Money'
 import LocalMallIcon from '@mui/icons-material/LocalMall'
-import Btn from './Btn'
+import Btn from '../Btn'
 import { useSelector } from 'react-redux'
-import { userSelectors } from '../../store/user'
+import { userSelectors } from '../../../store/user'
 import axios from 'axios'
-import UseSnack from '../../utils/customHooks/useSnack'
+import UseSnack from '../../../utils/customHooks/useSnack'
 
 const PayCc = () => {
 	const [selectedValue, setSelectedValue] = useState('a')

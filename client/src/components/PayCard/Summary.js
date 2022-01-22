@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Typography, Box } from '@mui/material'
-import { border } from './styles'
 import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
-import { PhotoSumm, SummBox, SummText, SummTotal, SummCarts } from './style'
+import { border, PhotoSumm, SummBox, SummText, SummTotal, SummCarts } from './style'
 import axios from 'axios'
 
 const Summary = () => {
@@ -23,10 +22,8 @@ const Summary = () => {
 
 	return (
 		<Box sx={{
-			['@media(max-width: 1180px)']: {
-				width: '728px',
-				padding: '0 17px 0 17px',
-				marginLeft: '0 4rem',
+			['@media(min-width: 1000px)']: {
+				padding: '0 17px 0 60px',
 			}
 		}}>
 			<Typography

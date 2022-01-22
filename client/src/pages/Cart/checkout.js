@@ -1,8 +1,8 @@
 import React from 'react'
 import { Container, Grid, Box} from '@mui/material'
 import { border, PayParent } from './styles'
-import PayCc from '../../components/PayCard/PayCC'
-import ShipAdr from '../../components/PayCard/ShipAdr'
+import PayCc from '../../components/PayCard/Steps/PayCC'
+import ShipAdr from '../../components/PayCard/Steps/ShipAdr'
 import Summary from '../../components/PayCard/Summary'
 
 const Checkout = () => {
