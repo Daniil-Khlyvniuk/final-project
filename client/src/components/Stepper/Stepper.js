@@ -51,7 +51,7 @@ const HorizontalLinearStepper = () => {
 					activeStep={activeStep}
 					className={classes.containerTitle}
 					sx={{
-						maxWidth: '1280px',
+						maxWidth: '1180px',
 						margin: 'auto',
 					}}
 				>
