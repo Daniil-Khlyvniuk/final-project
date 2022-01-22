@@ -7,7 +7,7 @@ import MoneyIcon from '@mui/icons-material/Money'
 import LocalMallIcon from '@mui/icons-material/LocalMall'
 import Btn from './Btn'
 import { useSelector } from 'react-redux'
-import { userSelectors} from '../../store/user'
+import { userSelectors } from '../../store/user'
 import axios from 'axios'
 import UseSnack from '../../utils/customHooks/useSnack'
 
@@ -20,8 +20,8 @@ const PayCc = () => {
 	const user = useSelector(userSelectors.getData())
 	const isLoggedIn = !!user
 	const { handleSnack } = UseSnack()
-	
-	useEffect( () => {
+
+	useEffect(() => {
 		setBuyGoods(shoppingBag)
 		if (isLoggedIn === true) {
 			try {
@@ -30,11 +30,16 @@ const PayCc = () => {
 				})
 			} catch (e) {
 				handleSnack({ message: 'Server response error', style: 'warning' })
-			}}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	},[])
+			}
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
-	let customer = isLoggedIn ? {...userData} : unregistered
+	useEffect(() => {
+		window.scrollTo(0, 0)
+	}, [])
+
+	let customer = isLoggedIn ? { ...userData } : unregistered
 	let userId = isLoggedIn ? customer._id : null
 	const order = {
 		products: [{
@@ -42,7 +47,7 @@ const PayCc = () => {
 			product: BuyGoods,
 		}],
 		canceled: false,
-		customerId:	userId,
+		customerId: userId,
 		deliveryAddress: {
 			country: customer.country,
 			city: customer.city,
