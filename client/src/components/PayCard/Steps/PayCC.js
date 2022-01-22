@@ -63,11 +63,13 @@ const PayCc = () => {
 
 	const sendOrder = () => {
 		localStorage.setItem('ORDER', JSON.stringify(order))
+		console.log(1)
 	}
+
+	sendOrder()
 
 	useEffect(() => {
 		window.scrollTo(0, 0)
-		sendOrder()
 	}, [])
 
 
