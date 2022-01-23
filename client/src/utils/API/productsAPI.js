@@ -1,9 +1,9 @@
 import axios from 'axios'
 
-const getAllProducts = (params = '') =>
+export const getAllProducts = (params = '') =>
 	axios.get(`/api/products?${params}`).then(res => res.data)
 
-const getOneProduct = (productId) =>
+export const getOneProduct = (productId) =>
 	axios.get(`/api/products/${productId}`)
 
 const getMinMaxPrice = () =>
@@ -42,9 +42,9 @@ const getAllVariantsByProductId = (productId) => (
 )
 
 
+
+
 export default {
-	getAllProducts,
-	getOneProduct,
 	getMinMaxPrice,
 	getProductVariant,
 	addNewProduct,

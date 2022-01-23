@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {shoppingBagSelectors, shoppingBagOperations} from '../../store/shoppingBag'
 import { userSelectors } from '../../store/user'
 import cartAPI from '../../utils/API/cartAPI'
+// import axios from 'axios'
 
 export default function useHandleShoppingBag() {
 	const dispatch = useDispatch()
@@ -62,9 +63,22 @@ export default function useHandleShoppingBag() {
 			await cartAPI.clearCart()
 		}
 	}
+	
+	// const getParent = (kids) => {
+	// 	Promise.all(
+	// 		kids.map(
+	// 			prod => axios(`api/products/${prod.product._id}`)
+	// 		)
+	// 	).then(res => {
+	// 		const ss = res.map(({ data }) => data)
+	// 		console.log(ss)
+	// 	})
+	// }
+
 
 	return {
 		add, remove, removeAll, clearAfterBuy,
+		// getParent,
 		totalPrice,
 		totalProductsQuanity,
 		shoppingBag,

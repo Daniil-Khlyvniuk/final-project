@@ -1,5 +1,9 @@
 import axios from 'axios'
 
+const getAuthHeader = () => ({
+	header: localStorage.getItem('userToken')
+})
+
 const placeOrder = (newOrder) => axios.post('/api/orders', newOrder)
 // please look up in docs what to put in newOrder
 
@@ -17,6 +21,8 @@ const getCustomerOrders = () => axios.get('/orders')
 
 const getOrderByOrderNo = (orderNo) => axios.get(`/orders/${orderNo}`)
 // orderNo is assigned to the order by the system atomatically, when it is created
+
+export const getUserOrders = () => axios.get('/api/orders', getAuthHeader())
 
 export default {
 	placeOrder,

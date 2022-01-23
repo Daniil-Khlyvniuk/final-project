@@ -5,8 +5,11 @@ import {  useSelector } from 'react-redux'
 import ShoppingBagCard from '../../ShoppingBagCard/ShoppingBagCard'
 import BackdropLoader from '../../UI/BackdropLoader/BackdropLoader'
 import {Link} from 'react-router-dom'
-import { getUserOrders } from '../../../utils/API/userAPI'
+import { getUserOrders }  from '../../../utils/API/ordersAPI'
+import { getOneProduct } from '../../../utils/API/productsAPI'
 import { snackActions } from '../../../utils/customHooks/useSnackBarUtils'
+
+
 
 const Orders = () => {
 	const [userOrders, setUserOrder] = useState(null)
@@ -107,7 +110,10 @@ const Orders = () => {
 						</Box>
 						<Divider sx={{mt:'10px'}}/>
 						{order.products.map((single,index) => {
+							// getParent(single.product._id)
+							const parent = getOneProduct(single.product._id)
 							return(<ShoppingBagCard
+								parent={parent}
 								key={index}
 								item={single.product} />)
 						})}

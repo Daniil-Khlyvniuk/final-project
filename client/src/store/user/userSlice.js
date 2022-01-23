@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { getUserByToken, getUserOrders } from '../../utils/API/userAPI'
+import { getUserByToken } from '../../utils/API/userAPI'
 import { snackActions } from '../../utils/customHooks/useSnackBarUtils'
+import { getUserOrders }  from '../../utils/API/ordersAPI'
 
 
 const initialState = {
@@ -78,7 +79,6 @@ const userSlice = createSlice({
 			state.error = 'Error happened while user data loading. Relogin plz'
 		},
 		[fetchUserOrders.fulfilled]: (state, action) => {
-			console.log(action.payload)
 			state.orders = action.payload
 			state.isLoading = false
 			state.error = null

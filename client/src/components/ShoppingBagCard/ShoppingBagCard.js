@@ -1,6 +1,6 @@
 import { Box, Button, ButtonGroup, Typography } from '@mui/material'
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
 import icons from '../../utils/Icons/index'
 import { useStyles } from './styles'
@@ -8,7 +8,18 @@ import { useStyles } from './styles'
 const ShoppingBagCard = ({ item, storquantity, parent }) => {
 	const classes = useStyles()
 	const handleShoppingBag = useHandleShoppingBag()
+	const [infoParent, setInfoParent] = useState([])
 
+	const Doto = async () => {
+		const aga = await parent
+		setInfoParent(aga.data)
+	}
+
+	useEffect(()=>{
+		Doto()
+	},[])
+
+	console.log('SHOPPPPPPP', infoParent)
 	return (
 		<Box className={classes.container}>
 			<img className={classes.image}
@@ -20,6 +31,7 @@ const ShoppingBagCard = ({ item, storquantity, parent }) => {
 					fontSize={24}
 					variant={'h2'}>
 					{ parent?.name}
+					{ infoParent?.name}
 					{storquantity &&
 					<svg onClick={() => handleShoppingBag.removeAll(item?._id)}
 						className={classes.cross} width="20" height="20"
@@ -31,6 +43,7 @@ const ShoppingBagCard = ({ item, storquantity, parent }) => {
 					</svg>}
 				</Typography>
 				{storquantity && <Typography fontSize={14}>
+					{infoParent?.manufacturer}
 					{parent?.manufacturer}
 				</Typography>}
 				<Typography fontSize={18}>
