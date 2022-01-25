@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Box, Button, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
-import cartAPI from '../../utils/API/cartAPI'
-import SubscribeTemlate from '../../utils/emailTemplates/order'
+import cartAPI from '../../../utils/API/cartAPI'
+import SubscribeTemlate from '../../../utils/emailTemplates/order'
 // import { useSelector } from 'react-redux'
 // import { getUserOrders } from '../../utils/API/userAPI'
-import { snackActions } from '../../utils/customHooks/useSnackBarUtils'
+import { snackActions } from '../../../utils/customHooks/useSnackBarUtils'
 // import { userSelectors } from '../../store/user'
-import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
+import useHandleShoppingBag from '../../../utils/customHooks/useHandleShoppingBag'
 
 const CompletePay = () => {
 	const [orderN, setOrderN] = useState()
