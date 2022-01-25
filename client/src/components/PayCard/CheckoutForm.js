@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Grid, Box} from '@mui/material'
-import ShipAdr from '../../components/PayCard/ShipAdr'
-import Summary from '../../components/PayCard/Summary'
+import ShipAdr from './Steps/ShipAdr'
+import Summary from './Summary'
 import PropTypes from 'prop-types'
 
 

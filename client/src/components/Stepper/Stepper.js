@@ -6,10 +6,11 @@ import StepLabel from '@mui/material/StepLabel'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import { useStyles } from './styles'
-import Step1 from './Step1'
+import Step1 from '../PayCard/Steps/Step1'
 import Checkout from '../PayCard/checkout'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import CheckoutForm from '../PayCard/CheckoutForm'
+import { Container } from '@mui/material'
 
 
 const steps = ['Shopping Bag', 'Shipping Details', 'Payment Options']
@@ -43,19 +44,33 @@ const HorizontalLinearStepper = () => {
 
 	return (
 		<Box sx={{ width: '100%' }} className={classes.container}>
-			<Stepper activeStep={activeStep} className={classes.containerTitle}>
-				{steps.map((label) => {
-					const stepProps = {}
-					const labelProps = {}
-					return (
-						<Step key={label} {...stepProps}>
-							<StepLabel {...labelProps} className={classes.title}>
-								{label}
-							</StepLabel>
-						</Step>
-					)
-				})}
-			</Stepper>
+			<Box sx={{
+				backgroundColor: '#373F41',
+			}}>
+				<Stepper
+					activeStep={activeStep}
+					className={classes.containerTitle}
+					sx={{
+						maxWidth: '1180px',
+						margin: 'auto',
+					}}
+				>
+
+					{steps.map((label) => {
+						const stepProps = {}
+						const labelProps = {}
+						return (
+							<Step key={label} {...stepProps}>
+								<StepLabel {...labelProps} className={classes.title}>
+									{label}
+								</StepLabel>
+							</Step>
+						)
+					})}
+
+				</Stepper>
+			</Box>
+
 			{activeStep === steps.length && (
 				<>
 					<Typography sx={{ mt: 2, mb: 1 }}>
@@ -68,7 +83,7 @@ const HorizontalLinearStepper = () => {
 				</>
 			)}
 			{activeStep === 0 && (
-				<React.Fragment>
+				<>
 					<Box
 						sx={{ mt: 2, mb: 1 }}
 					>
@@ -90,10 +105,15 @@ const HorizontalLinearStepper = () => {
 							NEXT
 						</Button>
 					</Box>
-				</React.Fragment>
+				</>
 			)}
 			{activeStep === 1 && (
-				<React.Fragment>
+				<Container
+					sx={{
+						maxWidth: 1310,
+						margin: '0 auto'
+					}}
+				>
 					<Box
 						sx={{ mt: 2, mb: 1 }}
 					>
@@ -104,10 +124,15 @@ const HorizontalLinearStepper = () => {
 					<Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
 						<Box sx={{ flex: '1 1 auto' }} />
 					</Box>
-				</React.Fragment>
+				</Container>
 			)}
 			{activeStep === 2 && (
-				<>
+				<Container
+					sx={{
+						maxWidth: 1310,
+						margin: '0 auto'
+					}}
+				>
 					<Box
 						sx={{ mt: 2, mb: 1 }}
 					>
@@ -130,7 +155,7 @@ const HorizontalLinearStepper = () => {
 							/> BACK</Button>
 						<Box sx={{ flex: '1 1 auto' }} />
 					</Box>
-				</>
+				</Container>
 			)}
 		</Box>
 	)

@@ -12,14 +12,14 @@ const ShoppingBagCard = ({ item, storquantity, parent }) => {
 	return (
 		<Box className={classes.container}>
 			<img className={classes.image}
-				src={storquantity &&  item?.imageUrls[0]}
+				src={item?.imageUrls[0]}
 				alt={'image'}/>
 			<Box className={classes.desc}>
 				<Typography
 					className={classes.textDesc}
 					fontSize={24}
 					variant={'h2'}>
-					{storquantity && parent?.name}
+					{ parent?.name}
 					{storquantity &&
 					<svg onClick={() => handleShoppingBag.removeAll(item?._id)}
 						className={classes.cross} width="20" height="20"

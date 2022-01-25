@@ -2,16 +2,16 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Field, Form, Formik } from 'formik'
 import { Box, Button, Grid, Typography } from '@mui/material'
-import { border } from './styles'
-import countries from '../UserProfile/UserForm/data/countries.json'
+import { border } from '../style'
+import countries from '../../UserProfile/UserForm/data/countries.json'
 import { useSelector } from 'react-redux'
-import { userSelectors } from '../../store/user'
-import {CHECKOUT_FORM} from '../Form/setting/Schemes'
+import { userSelectors } from '../../../store/user'
+import { CHECKOUT_FORM } from '../../Form/setting/Schemes'
 import PropTypes from 'prop-types'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
-import CustomInput from '../Form/setting/customElements/CustomInput'
-import CustomAutoComplete from '../Form/setting/customElements/CustomAutoComplete'
-import {snackActions} from '../../utils/customHooks/useSnackBarUtils'
+import CustomInput from '../../Form/setting/customElements/CustomInput'
+import CustomAutoComplete from '../../Form/setting/customElements/CustomAutoComplete'
+import { snackActions } from '../../../utils/customHooks/useSnackBarUtils'
 
 
 const ShipAdr = ({ handleNext, handleBack }) => {
@@ -35,10 +35,14 @@ const ShipAdr = ({ handleNext, handleBack }) => {
 				snackActions.warning('User Error')
 			}
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
-	let customer = isLoggedIn ? {...userData} : unregistered
+	useEffect(() => {
+		window.scrollTo(0, 0)
+	}, [])
+
+	let customer = isLoggedIn ? { ...userData } : unregistered
 
 	let userId = isLoggedIn ? customer._id : null
 	const order = {
@@ -47,7 +51,7 @@ const ShipAdr = ({ handleNext, handleBack }) => {
 			product: BuyGoods,
 		}],
 		canceled: false,
-		customerId:	userId,
+		customerId: userId,
 		deliveryAddress: {
 			country: customer.country,
 			city: customer.city,
@@ -242,7 +246,7 @@ const ShipAdr = ({ handleNext, handleBack }) => {
 								onClick={async () => {
 									await sendOrder()
 									handleSubmit()
-									{dirty && isValid && handleNext() }
+									{ dirty && isValid && handleNext() }
 								}}
 								variant="contained"
 							>
