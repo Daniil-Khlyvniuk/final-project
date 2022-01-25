@@ -126,6 +126,7 @@ const Orders = () => {
 							{order.products.map((single, index) => {
 								return (
 									<ShoppingBagCard
+										order
 										key={index}
 										item={single.product}
 										storquantity={single.cartQuantity}

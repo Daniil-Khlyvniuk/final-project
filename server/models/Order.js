@@ -5,50 +5,56 @@ const OrderSchema = new Schema(
   {
     orderNo: {
       type: String,
-      required: true
+      required: true,
     },
     customerId: {
       type: Schema.Types.ObjectId,
-      ref: "customers"
+      ref: "customers",
     },
     products: [
       {
-        type: Schema.Types.Mixed,
-        required: true
-      }
+        product: {
+          type: Schema.Types.Mixed,
+          required: true,
+          // size: {
+          //   type: Schema.Types.ObjectId,
+          //   ref: "sizes",
+          // },
+        },
+      },
     ],
     deliveryAddress: {
-      type: Schema.Types.Mixed
+      type: Schema.Types.Mixed,
     },
     shipping: {
-      type: Schema.Types.Mixed
+      type: Schema.Types.Mixed,
     },
     paymentInfo: {
-      type: Schema.Types.Mixed
+      type: Schema.Types.Mixed,
     },
     totalSum: {
       type: Number,
-      required: true
+      required: true,
     },
     canceled: {
       type: Boolean,
-      default: false
+      default: false,
     },
     status: {
-      type: String
+      type: String,
     },
     email: {
       type: String,
-      required: true
+      required: true,
     },
     mobile: {
       type: String,
-      required: true
+      required: true,
     },
     date: {
       type: Date,
-      default: Date.now
-    }
+      default: Date.now,
+    },
   },
   { strict: false }
 );

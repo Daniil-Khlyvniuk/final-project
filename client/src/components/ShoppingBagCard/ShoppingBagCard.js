@@ -5,9 +5,10 @@ import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
 import icons from '../../utils/Icons/index'
 import { useStyles } from './styles'
 
-const ShoppingBagCard = ({ item, storquantity, parent }) => {
+const ShoppingBagCard = ({ item, storquantity, parent}) => {
 	const classes = useStyles()
 	const handleShoppingBag = useHandleShoppingBag()
+	console.log(item)
 
 	return (
 		<Box className={classes.container}>
@@ -99,6 +100,7 @@ const ShoppingBagCard = ({ item, storquantity, parent }) => {
 ShoppingBagCard.propTypes = {
 	item: PropTypes.object,
 	parent: PropTypes.object,
+	order: PropTypes.bool,
 	card: PropTypes.bool,
 	storquantity: PropTypes.number
 }
