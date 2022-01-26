@@ -2,10 +2,10 @@ import React, {memo, useEffect, useState} from 'react'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import Box from '@mui/material/Box'
+import Orders from '../Orders/Orders'
 import UserForm from '../UserForm/UserForm'
 import {Link, Route, Switch, useLocation} from 'react-router-dom'
 import Favorites from '../../../pages/Favorites/Favorites'
-import Orders from '../Orders/Orders'
 
 
 const a11yProps = (index) => {

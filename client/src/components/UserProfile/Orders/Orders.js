@@ -1,7 +1,8 @@
+// eslint-disable-next-line no-unused-vars
 import React, { memo, useEffect, useState } from 'react'
 import { Typography, Box, Button, Divider, Chip } from '@mui/material'
-import {  userSelectors } from '../../../store/user'
-import {  useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { userSelectors } from '../../../store/user'
 import ShoppingBagCard from '../../ShoppingBagCard/ShoppingBagCard'
 import BackdropLoader from '../../UI/BackdropLoader/BackdropLoader'
 import {Link} from 'react-router-dom'
@@ -9,29 +10,31 @@ import { getUserOrders } from '../../../utils/API/userAPI'
 import { snackActions } from '../../../utils/customHooks/useSnackBarUtils'
 
 const Orders = () => {
-	const [userOrders, setUserOrder] = useState(null)
-	const isLoading = useSelector(userSelectors.getIsLoading())
+	const [userOrders, setUserOrder] = useState([])
+	const [isLoading, setIsLoading] = useState(true)
+	const token = useSelector(userSelectors.getToken())
+
+
+
+	useEffect(() => {
+		try {
+			setTimeout(() => {
+				// request for orders must do after the user  and config
+				getUserOrders().then((userOrder) => {
+					setUserOrder(userOrder.data)
+					setIsLoading(false)
+				})
+			}, 300)
+		} catch (e) {
+			snackActions.error(`${e}`)
+		}
+	},[token])
 
 	if(isLoading){
 		return <BackdropLoader/>
 	}
 
-	const fetchOrders = async() => {
-		const userOrder = await getUserOrders()
-		setUserOrder(userOrder.data)
-	}
-
-
-	// eslint-disable-next-line react-hooks/rules-of-hooks
-	useEffect(  () => {
-		try {
-			fetchOrders()
-		} catch (e) {
-			snackActions.error(`${e}`)
-		}
-	},[isLoading])
-
-	if(!userOrders){
+	if(!userOrders.length){
 		return (
 			<Box sx={{textAlign: 'center', margin: '7rem 0'}}>
 				<Typography
@@ -107,9 +110,11 @@ const Orders = () => {
 						</Box>
 						<Divider sx={{mt:'10px'}}/>
 						{order.products.map((single,index) => {
-							return(<ShoppingBagCard
-								key={index}
-								item={single.product} />)
+							return(
+								<ShoppingBagCard
+									key={index}
+									orders
+									item={single.product} />)
 						})}
 						<Divider sx={{mt:'20px'}}/>
 					</Box>

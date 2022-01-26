@@ -1,52 +1,56 @@
-const Product = require('../models/Product')
-const ProductVariant = require('../models/ProductVariant')
+const ProductVariant = require("../models/ProductVariant");
 
 module.exports = async (orderProducts) => {
-	try {
-		const productsAvailibilityDetails = await orderProducts.reduce(
-			async (resultPromise, orderItem) => {
-				const result = await resultPromise
-				const dbProduct = await ProductVariant.findOne({
-					_id: orderItem.product._id,
-				})
+  try {
+    const productsAvailibilityDetails = await orderProducts.reduce(
+      async (resultPromise, orderItem) => {
+        const result = await resultPromise;
+        const id = orderItem.product?._doc?._id ?? orderItem.product._id;
 
-				const orderedQuantity = orderItem.cartQuantity
-				const realQuantity = dbProduct.quantity
-				result.push({
-					productId: dbProduct._id,
-					itemNo: dbProduct.itemNo,
-					color: dbProduct.color,
-					size: dbProduct.size,
-					orderedQuantity,
-					realQuantity,
-					quantity: realQuantity,
-					diff: realQuantity - orderedQuantity,
-					available: realQuantity >= orderedQuantity,
-				})
+        const dbProduct = await ProductVariant.findOne({
+          _id: id,
+        })
+          .populate("product")
+          .populate("color")
+          .populate("size");
+        const orderedQuantity = orderItem.cartQuantity;
+        const realQuantity = dbProduct.quantity;
 
-				return result
-			},
-			Promise.resolve([])
-		)
+        result.push({
+          productId: dbProduct._id,
+          itemNo: dbProduct.itemNo,
+          color: dbProduct.color,
+          size: dbProduct.size,
+          orderedQuantity,
+          realQuantity,
+          quantity: realQuantity,
+          diff: realQuantity - orderedQuantity,
+          available: realQuantity >= orderedQuantity,
+        });
 
-		const unavailableProductIds = productsAvailibilityDetails
-			.filter((item) => !item.available)
-			.map((item) => item.productId)
+        return result;
+      },
+      Promise.resolve([])
+    );
 
-		const unavailableProducts = await ProductVariant.find({
-			_id: { $in: unavailableProductIds },
-		})
+    const unavailableProductIds = productsAvailibilityDetails
+      .filter((item) => !item.available)
+      .map((item) => item.productId);
 
-		return {
-			productsAvailibilityStatus: productsAvailibilityDetails.every(
-				(product) => product.available
-			),
-			productsAvailibilityDetails,
-			unavailableProducts,
-		}
-	} catch (err) {
-		return {
-			message: `Error happened on server: "${err}" `,
-		}
-	}
-}
+    const unavailableProducts = await ProductVariant.find({
+      _id: { $in: unavailableProductIds },
+    });
+
+    return {
+      productsAvailibilityStatus: productsAvailibilityDetails.every(
+        (product) => product.available
+      ),
+      productsAvailibilityDetails,
+      unavailableProducts,
+    };
+  } catch (err) {
+    return {
+      message: `Error happened on server: "${err}" `,
+    };
+  }
+};
