@@ -14,8 +14,6 @@ module.exports = async (customerId) => {
         .populate("color")
         .populate("size");
 
-      console.log(dbProduct);
-
       result.push({
         _id: new mongoose.Types.ObjectId(),
         product: dbProduct,
