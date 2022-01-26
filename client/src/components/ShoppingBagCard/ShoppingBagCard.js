@@ -5,9 +5,18 @@ import useHandleShoppingBag from '../../utils/customHooks/useHandleShoppingBag'
 import icons from '../../utils/Icons/index'
 import { useStyles } from './styles'
 
-const ShoppingBagCard = ({ item, storquantity, parent }) => {
+const ShoppingBagCard = ({ item, storquantity, parent, orders = false}) => {
 	const classes = useStyles()
 	const handleShoppingBag = useHandleShoppingBag()
+	console.log(item)
+
+
+
+
+	const color = orders ? item.color.name : item.color
+	const size = orders ? item.size.name : item.size
+
+	console.log(size)
 
 	return (
 		<Box className={classes.container}>
@@ -19,8 +28,8 @@ const ShoppingBagCard = ({ item, storquantity, parent }) => {
 					className={classes.textDesc}
 					fontSize={24}
 					variant={'h2'}>
-					{ parent?.name}
-					{storquantity &&
+					{ parent?.name || item.product.name}
+					{storquantity  &&
 					<svg onClick={() => handleShoppingBag.removeAll(item?._id)}
 						className={classes.cross} width="20" height="20"
 						viewBox="0 0 20 20" fill="none"
@@ -30,27 +39,28 @@ const ShoppingBagCard = ({ item, storquantity, parent }) => {
 							fill="#373F41"/>
 					</svg>}
 				</Typography>
-				{storquantity && <Typography fontSize={14}>
-					{parent?.manufacturer}
+				{(storquantity || orders) && <Typography fontSize={14}>
+					{parent?.manufacturer || item.product.manufacturer}
 				</Typography>}
 				<Typography fontSize={18}>
 					{`$${item?.currentPrice}`}
 				</Typography>
 
-				{storquantity && <>
+				{(storquantity || orders) && <>
 					<Typography
 						fontSize={12}
 						className={classes.textDesc}>
-						color : {item.color}
+						color: {color}
 					</Typography>
 					<Typography
 						fontSize={12}
 						className={classes.textDesc}>
-						size : {item.size}
+
+						size : {size}
 					</Typography>
 				</>}
 
-				{storquantity && (<>
+				{storquantity  && (<>
 					<Box className={classes.specificationsContainer}>
 						<Box className={classes.specifications}>
 							<Typography
@@ -62,6 +72,7 @@ const ShoppingBagCard = ({ item, storquantity, parent }) => {
 								className={classes.quantity}>
 								{storquantity}
 							</Typography>
+
 							<ButtonGroup
 								orientation="vertical"
 								aria-label="vertical contained button group"
@@ -76,6 +87,8 @@ const ShoppingBagCard = ({ item, storquantity, parent }) => {
 									onClick={() => handleShoppingBag.add(item)}
 									variant="outlined"
 								>{icons.arrowUp()}</Button>
+
+
 								<Button
 									sx={{
 										borderRadius: '0px',
@@ -86,6 +99,7 @@ const ShoppingBagCard = ({ item, storquantity, parent }) => {
 								>
 									{icons.arrowDown()}
 								</Button>
+
 							</ButtonGroup>
 						</Box>
 					</Box>
@@ -99,6 +113,7 @@ const ShoppingBagCard = ({ item, storquantity, parent }) => {
 ShoppingBagCard.propTypes = {
 	item: PropTypes.object,
 	parent: PropTypes.object,
+	orders: PropTypes.bool,
 	card: PropTypes.bool,
 	storquantity: PropTypes.number
 }

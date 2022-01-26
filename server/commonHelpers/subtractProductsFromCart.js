@@ -1,4 +1,3 @@
-const Product = require("../models/Product");
 const ProductVariant = require("../models/ProductVariant");
 const Cart = require("../models/Cart");
 const mongoose = require("mongoose");
@@ -11,8 +10,12 @@ module.exports = async (customerId) => {
       const dbProduct = await ProductVariant.findOne({
         _id: cartItem.product._id,
       })
+        .populate("product")
         .populate("color")
         .populate("size");
+
+      console.log(dbProduct);
+
       result.push({
         _id: new mongoose.Types.ObjectId(),
         product: dbProduct,
