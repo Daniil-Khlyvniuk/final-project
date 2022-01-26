@@ -16,10 +16,6 @@ const OrderSchema = new Schema(
         product: {
           type: Schema.Types.Mixed,
           required: true,
-          // size: {
-          //   type: Schema.Types.ObjectId,
-          //   ref: "sizes",
-          // },
         },
       },
     ],

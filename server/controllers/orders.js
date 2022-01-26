@@ -1,6 +1,4 @@
 const Order = require("../models/Order");
-const Color = require("../models/Color");
-const Size = require("../models/Size");
 const ProductVariant = require("../models/ProductVariant");
 const sendMail = require("../commonHelpers/mailSender");
 const validateOrderForm = require("../validation/validationHelper");
@@ -22,7 +20,6 @@ exports.placeOrder = async (req, res, next) => {
       order.customerId = req.body.customerId;
       cartProducts = await subtractProductsFromCart(order.customerId);
     }
-
     if (
       (!req.body.products || req.body.products.length < 1) &&
       cartProducts.length < 1
@@ -38,11 +35,13 @@ exports.placeOrder = async (req, res, next) => {
       // order.products = JSON.parse(req.body.products);
       order.products = req.body.products;
     }
-    order.totalSum = order.products.reduce(
-      (sum, cartItem) =>
-        sum + cartItem.product.currentPrice * cartItem.cartQuantity,
-      0
-    );
+    order.totalSum = order.products.reduce((sum, cartItem) => {
+      if (order.customerId) {
+        return sum + cartItem.product._doc.currentPrice * cartItem.cartQuantity;
+      } else {
+        return sum + cartItem.product.currentPrice * cartItem.cartQuantity;
+      }
+    }, 0);
     const productAvailibilityInfo = await productAvailibilityChecker(
       order.products
     );
@@ -94,8 +93,9 @@ exports.placeOrder = async (req, res, next) => {
           );
 
           for (let item of order.products) {
-            const id = item.product._id;
-            const { quantity } = item.product;
+            const id = item.product?._doc?._id ?? item.product._id;
+            const quantity =
+              item.product?._doc?.quantity ?? item.product.quantity;
             const { cartQuantity } = item;
             const newQuantity = quantity - cartQuantity;
             const enabled = newQuantity > 0;
@@ -112,122 +112,20 @@ exports.placeOrder = async (req, res, next) => {
 
           res.json({ order, mailResult });
         })
-        .catch((err) =>
-          res.status(400).json({
+        .catch((err) => {
+          console.log(err);
+          return res.status(400).json({
             message: `Oooops... Server error`,
-          })
-        );
+          });
+        });
     }
   } catch (err) {
+    console.log(err);
     res.status(400).json({
       message: `Oooops... Server error`,
     });
   }
 };
-
-// exports.updateOrder = (req, res, next) => {
-//   try {
-//     Order.findOne({ _id: req.params.id }).then(async (currentOrder) => {
-//       if (!currentOrder) {
-//         return res
-//           .status(400)
-//           .json({ message: `Order with id ${req.params.id} is not found` });
-//       } else {
-//         const order = _.cloneDeep(req.body);
-//         // const [product] = order.products
-//         // *вчера
-//
-//         if (req.body.deliveryAddress) {
-//           // order.deliveryAddress = JSON.parse(req.body.deliveryAddress);
-//         }
-//
-//         if (req.body.shipping) {
-//           // order.shipping = JSON.parse(req.body.shipping);
-//         }
-//
-//         if (req.body.paymentInfo) {
-//           // order.paymentInfo = JSON.parse(req.body.paymentInfo);
-//         }
-//
-//         if (req.body.customerId) {
-//           // order.customerId = req.body.customerId;
-//         }
-//
-//         if (req.body.products) {
-//           // order.products = JSON.parse(req.body.products);
-//
-//           order.totalSum = order.products.reduce(
-//             (sum, cartItem) =>
-//               sum + cartItem.product.currentPrice * cartItem.cartQuantity,
-//             0
-//           );
-//
-//
-//           const productAvailibilityInfo = await productAvailibilityChecker(
-//             order.products,
-//             // ...product.product
-//             // *вчера
-//
-//           );
-//
-//           if (!productAvailibilityInfo.productsAvailibilityStatus) {
-//             res.json({
-//               message: "Some of your products are unavailable for now",
-//               productAvailibilityInfo,
-//             });
-//           }
-//         }
-//
-//         const subscriberMail = req.body.email;
-//         const letterSubject = req.body.letterSubject;
-//         const letterHtml = req.body.letterHtml;
-//
-//         const { errors, isValid } = validateOrderForm(req.body);
-//
-//         // Check Validation
-//         if (!isValid) {
-//           return res.status(400).json(errors);
-//         }
-//
-//         if (!letterSubject) {
-//           return res.status(400).json({
-//             message:
-//               "This operation involves sending a letter to the client. Please provide field 'letterSubject' for the letter.",
-//           });
-//         }
-//
-//         if (!letterHtml) {
-//           return res.status(400).json({
-//             message:
-//               "This operation involves sending a letter to the client. Please provide field 'letterHtml' for the letter.",
-//           });
-//         }
-//
-//         Order.findOneAndUpdate({ _id: req.params.id }, order, { new: true })
-//           .populate("customerId")
-//           .then(async (order) => {
-//             const mailResult = await sendMail(
-//               subscriberMail,
-//               letterSubject,
-//               letterHtml,
-//               res
-//             );
-//
-//             res.json({ order, mailResult });
-//           })
-//           .catch((err) =>
-//             res.status(400).json({
-//               message: `Oooops... Server error`,
-//             })
-//           );
-//       }
-//     });
-//   } catch (err) {
-//     res.status(400).json({
-//       message: `Oooops... Server error`,
-//     });
-//   }
-// };
 
 exports.cancelOrder = (req, res, next) => {
   try {
@@ -326,23 +224,6 @@ exports.getOrders = (req, res, next) => {
   try {
     Order.find({ customerId: req.user.id })
       .populate("products.product")
-      // .populate("products.product.size")
-      // .populate("products.product.color")
-      .populate({
-        path: "products",
-        populate: {
-          path: "product",
-          populate: {
-            path: "size",
-            model: Size.collection.name,
-          },
-          // model: Size.collection.name,
-        },
-      })
-      // .populate({
-      //   path: "products.product.color",
-      //   model: Color,
-      // })
       .populate("customerId")
 
       .sort({ date: -1 })
