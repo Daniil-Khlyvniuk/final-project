@@ -1,4 +1,3 @@
-const Product = require("../models/Product");
 const ProductVariant = require("../models/ProductVariant");
 
 module.exports = async (orderProducts) => {
@@ -6,12 +5,17 @@ module.exports = async (orderProducts) => {
     const productsAvailibilityDetails = await orderProducts.reduce(
       async (resultPromise, orderItem) => {
         const result = await resultPromise;
+        const id = orderItem.product?._doc?._id ?? orderItem.product._id;
+
         const dbProduct = await ProductVariant.findOne({
-          _id: orderItem.product._id,
-        });
-        console.log("dbProduct", dbProduct);
+          _id: id,
+        })
+          .populate("product")
+          .populate("color")
+          .populate("size");
         const orderedQuantity = orderItem.cartQuantity;
         const realQuantity = dbProduct.quantity;
+
         result.push({
           productId: dbProduct._id,
           itemNo: dbProduct.itemNo,

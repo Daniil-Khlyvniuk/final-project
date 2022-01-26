@@ -3,8 +3,6 @@ import {Container, Typography, Box} from '@mui/material'
 import BasicTabs from '../../components/UserProfile/Tabs/Tabs'
 
 
-
-
 const UserProfile = () => {
 	return (
 		<Container maxWidth={'lg'}>
@@ -29,9 +27,7 @@ const UserProfile = () => {
 					edit your details or manage your returns.
 				</Typography>
 			</Box>
-			<Box
-
-			>
+			<Box>
 				<BasicTabs/>
 			</Box>
 		</Container>

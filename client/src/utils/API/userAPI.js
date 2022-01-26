@@ -1,5 +1,8 @@
 import axios from 'axios'
 
+const getAuthHeader = () => ({
+	header: localStorage.getItem('userToken')
+})
 
 export const registerUser = (data) => axios.post('/api/customers/', data)
 
@@ -11,5 +14,5 @@ export const updatePassword = (data) => axios.put('/api/customers/password', dat
 
 export const getUserByToken = () => axios('/api/customers/customer')
 
-export const getUserOrders = () => axios('/api/orders')
+export const getUserOrders = () => axios('/api/orders', getAuthHeader())
 

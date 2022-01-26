@@ -15,7 +15,7 @@ Object {
             class="MuiGrid-root MuiGrid-container makeStyles-blockStyle-4 css-11lq3yg-MuiGrid-root"
           >
             <span
-              class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorInherit css-62e83j-MuiCircularProgress-root"
+              class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorInherit css-1hsl1k8-MuiCircularProgress-root"
               role="progressbar"
               style="width: 40px; height: 40px;"
             >
@@ -33,56 +33,6 @@ Object {
                 />
               </svg>
             </span>
-            <div
-              class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-lg-3 css-1eehwzh-MuiGrid-root"
-            >
-              <ul
-                class="MuiList-root MuiList-padding css-h4y409-MuiList-root"
-              >
-                <li
-                  class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-tzvpbd-MuiListItem-root"
-                >
-                  <span
-                    class="MuiTypography-root MuiTypography-menuBold css-37jdci-MuiTypography-root"
-                  >
-                    contact us
-                  </span>
-                </li>
-                <li
-                  class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-tzvpbd-MuiListItem-root"
-                >
-                  <a
-                    capitalize="on"
-                    class="MuiTypography-root MuiTypography-semiBold MuiLink-root MuiLink-underlineAlways css-1iwtne7-MuiTypography-root-MuiLink-root"
-                    href="mailto:hello@gmail.com"
-                    target="_blank"
-                  >
-                    hello@gmail.com
-                  </a>
-                </li>
-                <li
-                  class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-tzvpbd-MuiListItem-root"
-                >
-                  <span
-                    class="MuiTypography-root MuiTypography-footerTextMedium css-1y5ghfm-MuiTypography-root"
-                  >
-                    Studio M, 4th Floor8 Lower Manchester street, M1 5QF
-                  </span>
-                </li>
-                <li
-                  class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-tzvpbd-MuiListItem-root"
-                >
-                  <a
-                    capitalize="on"
-                    class="MuiTypography-root MuiTypography-semiBold MuiLink-root MuiLink-underlineAlways css-1iwtne7-MuiTypography-root-MuiLink-root"
-                    href="tel:380938759922"
-                    target="_blank"
-                  >
-                    +38 093 875 9922
-                  </a>
-                </li>
-              </ul>
-            </div>
             <div
               class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-lg-3 css-1eehwzh-MuiGrid-root"
             >
@@ -292,7 +242,7 @@ Object {
           class="MuiGrid-root MuiGrid-container makeStyles-blockStyle-4 css-11lq3yg-MuiGrid-root"
         >
           <span
-            class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorInherit css-62e83j-MuiCircularProgress-root"
+            class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorInherit css-1hsl1k8-MuiCircularProgress-root"
             role="progressbar"
             style="width: 40px; height: 40px;"
           >
@@ -310,56 +260,6 @@ Object {
               />
             </svg>
           </span>
-          <div
-            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-lg-3 css-1eehwzh-MuiGrid-root"
-          >
-            <ul
-              class="MuiList-root MuiList-padding css-h4y409-MuiList-root"
-            >
-              <li
-                class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-tzvpbd-MuiListItem-root"
-              >
-                <span
-                  class="MuiTypography-root MuiTypography-menuBold css-37jdci-MuiTypography-root"
-                >
-                  contact us
-                </span>
-              </li>
-              <li
-                class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-tzvpbd-MuiListItem-root"
-              >
-                <a
-                  capitalize="on"
-                  class="MuiTypography-root MuiTypography-semiBold MuiLink-root MuiLink-underlineAlways css-1iwtne7-MuiTypography-root-MuiLink-root"
-                  href="mailto:hello@gmail.com"
-                  target="_blank"
-                >
-                  hello@gmail.com
-                </a>
-              </li>
-              <li
-                class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-tzvpbd-MuiListItem-root"
-              >
-                <span
-                  class="MuiTypography-root MuiTypography-footerTextMedium css-1y5ghfm-MuiTypography-root"
-                >
-                  Studio M, 4th Floor8 Lower Manchester street, M1 5QF
-                </span>
-              </li>
-              <li
-                class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-tzvpbd-MuiListItem-root"
-              >
-                <a
-                  capitalize="on"
-                  class="MuiTypography-root MuiTypography-semiBold MuiLink-root MuiLink-underlineAlways css-1iwtne7-MuiTypography-root-MuiLink-root"
-                  href="tel:380938759922"
-                  target="_blank"
-                >
-                  +38 093 875 9922
-                </a>
-              </li>
-            </ul>
-          </div>
           <div
             class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-lg-3 css-1eehwzh-MuiGrid-root"
           >

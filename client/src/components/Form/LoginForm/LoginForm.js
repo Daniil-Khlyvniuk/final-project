@@ -44,6 +44,7 @@ const LoginForm = () => {
 							label="Login or Email"
 							name="loginOrEmail"
 							type="text"
+							className={classes.input}
 						/>
 						<Field
 							data-testid="password"
@@ -51,6 +52,7 @@ const LoginForm = () => {
 							label="Password"
 							name="password"
 							type="password"
+							className={classes.input}
 						/>
 						<Box
 							sx={{

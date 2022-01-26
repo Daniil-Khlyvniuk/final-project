@@ -16,8 +16,9 @@ const Cart = () => {
 				?
 				<EmptyBag />
 				:
-				<Stepper />
+				<Stepper sx={{	maxWidth: '1180px'}} />
 			}
+
 		</>
 	)
 }

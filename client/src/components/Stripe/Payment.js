@@ -60,7 +60,6 @@ export default function Payment() {
 		clientSecret,
 		appearance,
 	}
-
 	return (
 		<Box>
 			{clientSecret && (

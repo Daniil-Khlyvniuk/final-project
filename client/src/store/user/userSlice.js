@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { getUserByToken , getUserOrders } from '../../utils/API/userAPI'
+import { getUserByToken, getUserOrders } from '../../utils/API/userAPI'
 import { snackActions } from '../../utils/customHooks/useSnackBarUtils'
 
 
@@ -9,7 +9,7 @@ const initialState = {
 	error: null,
 	isLoading: false,
 	order: null,
-	orders : [],
+	orders: JSON?.parse(localStorage.getItem('ORDER') || '[]') || [],
 }
 
 export const fetchUser = createAsyncThunk(
@@ -23,22 +23,22 @@ export const fetchUser = createAsyncThunk(
 
 export const fetchUserOrders = createAsyncThunk(
 	'user/fetchUserOrders',
-	async () =>{
-		const response = await getUserOrders()
-		return response.data
-	}
-)
+	() => (
+		getUserOrders().then(res => {
+			return res.data
+		})
+	))
 
 const userSlice = createSlice({
 	name: 'user',
 	initialState,
 	reducers: {
 
-		clearOrder(state){
-			state.orders= []
+		clearOrder(state) {
+			state.orders = null
 		},
 
-		setNewData(state,action){
+		setNewData(state, action) {
 			state.data = action.payload
 		},
 		setToken(state, action) {
@@ -55,7 +55,7 @@ const userSlice = createSlice({
 			return state
 		},
 
-		setOrder(state,action) {
+		setOrder(state, action) {
 			state.order = action.payload
 		}
 	},
@@ -77,22 +77,22 @@ const userSlice = createSlice({
 			state.token = null
 			state.error = 'Error happened while user data loading. Relogin plz'
 		},
-		[fetchUserOrders.fulfilled]:(state,action) => {
+		[fetchUserOrders.fulfilled]: (state, action) => {
 			state.orders = action.payload
 			state.isLoading = false
 			state.error = null
 		},
-		[fetchUserOrders.pending]:(state)=>{
-			state.isLoading =true
+		[fetchUserOrders.pending]: (state) => {
+			state.isLoading = true
 			state.error = null
 		},
-		[fetchUserOrders.rejected]:(state)=>{
+		[fetchUserOrders.rejected]: (state) => {
 			state.isLoading = false
 			state.error = 'Error happened while user data loading. Relogin plz'
 		}
 	}
 })
 
-export const { actions} = userSlice
+export const { actions } = userSlice
 
 export default userSlice.reducer

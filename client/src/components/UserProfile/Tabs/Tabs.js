@@ -2,8 +2,8 @@ import React, {memo, useEffect, useState} from 'react'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import Box from '@mui/material/Box'
-import UserForm from '../UserForm/UserForm'
 import Orders from '../Orders/Orders'
+import UserForm from '../UserForm/UserForm'
 import {Link, Route, Switch, useLocation} from 'react-router-dom'
 import Favorites from '../../../pages/Favorites/Favorites'
 
@@ -17,7 +17,7 @@ const a11yProps = (index) => {
 
 const BasicTabs = () => {
 	const [value, setValue] = useState(0)
-	const {pathname} = useLocation()
+	const { pathname } = useLocation()
 
 	useEffect(() => {
 		if(pathname === '/user-profile'  ) {
@@ -27,7 +27,7 @@ const BasicTabs = () => {
 		else {
 			setValue(0)
 		}
-	},[pathname,value])
+	},[pathname])
 
 	const handleChange = (event, newValue) => {
 		setValue(newValue)

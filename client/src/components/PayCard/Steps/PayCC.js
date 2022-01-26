@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { border, checkboxPay, PayCC, PayElem, PayText, PayTextSub, PayCash, CashText, CashTextHead, CashTextSub } from './style'
+import { border, checkboxPay, PayCC, PayElem, PayText, PayTextSub, PayCash, CashText, CashTextHead, CashTextSub } from '../style'
 import { Box, Grid, Radio, Typography } from '@mui/material'
-import Payment from '../Stripe/Payment'
+import Payment from '../../Stripe/Payment'
 import CreditCardIcon from '@mui/icons-material/CreditCard'
 import MoneyIcon from '@mui/icons-material/Money'
 import LocalMallIcon from '@mui/icons-material/LocalMall'
-import Btn from './Btn'
+import Btn from '../Btn'
 import { useSelector } from 'react-redux'
-import { userSelectors} from '../../store/user'
+import { userSelectors } from '../../../store/user'
 import axios from 'axios'
-import UseSnack from '../../utils/customHooks/useSnack'
+import {snackActions} from '../../../utils/customHooks/useSnackBarUtils'
 
 const PayCc = () => {
 	const [selectedValue, setSelectedValue] = useState('a')
@@ -19,9 +19,8 @@ const PayCc = () => {
 	const [BuyGoods, setBuyGoods] = useState({})
 	const user = useSelector(userSelectors.getData())
 	const isLoggedIn = !!user
-	const { handleSnack } = UseSnack()
-	
-	useEffect( () => {
+
+	useEffect(() => {
 		setBuyGoods(shoppingBag)
 		if (isLoggedIn === true) {
 			try {
@@ -29,20 +28,23 @@ const PayCc = () => {
 					setUserData(res.data)
 				})
 			} catch (e) {
-				handleSnack({ message: 'Server response error', style: 'warning' })
-			}}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	},[])
+				snackActions.warning('You successfully bought')
+			}
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
-	let customer = isLoggedIn ? {...userData} : unregistered
-	let userId = isLoggedIn ? customer._id : '61b8813806744e13c4efc6a0'
+
+
+	let customer = isLoggedIn ? { ...userData } : unregistered
+	let userId = isLoggedIn ? customer._id : null
 	const order = {
 		products: [{
 			cartQuantity: BuyGoods.length,
 			product: BuyGoods,
 		}],
 		canceled: false,
-		customerId:	userId,
+		customerId: userId,
 		deliveryAddress: {
 			country: customer.country,
 			city: customer.city,
@@ -59,16 +61,17 @@ const PayCc = () => {
 		letterHtml: null,
 	}
 
-
-
-
-
 	const sendOrder = () => {
 		localStorage.setItem('ORDER', JSON.stringify(order))
 	}
 
-
 	sendOrder()
+
+	useEffect(() => {
+		window.scrollTo(0, 0)
+	}, [])
+
+
 
 	const handleChange = (event) => {
 		setSelectedValue(event.target.value)

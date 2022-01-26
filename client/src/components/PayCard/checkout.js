@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Grid, Box} from '@mui/material'
-import { PayParent } from './styles'
-import PayCc from './PayCC'
+import { PayParent } from './style'
+import PayCc from './Steps/PayCC'
 import Summary from './Summary'
 
 const Checkout = () => {
@@ -27,7 +27,7 @@ const Checkout = () => {
 						}
 					}}
 				>
-					<Summary/>
+					<Summary />
 				</Grid>
 			</Grid>
 		</Box>

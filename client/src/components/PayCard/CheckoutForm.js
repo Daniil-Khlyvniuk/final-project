@@ -1,18 +1,15 @@
 import React from 'react'
 import { Container, Grid, Box} from '@mui/material'
-import ShipAdr from '../../components/PayCard/ShipAdr'
-import Summary from '../../components/PayCard/Summary'
+import ShipAdr from './Steps/ShipAdr'
+import Summary from './Summary'
 import PropTypes from 'prop-types'
 
 
 
 const CheckoutForm = ({handleNext, handleBack}) => {
-
-
 	return (
 		<Box my='15px'>
 			<Grid container 
-				// style={PayParent}
 				sx={{
 					flexDirection: {lg: 'row', sm: 'column', xs: 'column',}
 				}}
