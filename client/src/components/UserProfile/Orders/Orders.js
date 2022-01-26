@@ -19,11 +19,12 @@ const Orders = () => {
 	useEffect(() => {
 		try {
 			setTimeout(() => {
+				// request for orders must do after the user  and config
 				getUserOrders().then((userOrder) => {
 					setUserOrder(userOrder.data)
 					setIsLoading(false)
 				})
-			}, 500)
+			}, 300)
 		} catch (e) {
 			snackActions.error(`${e}`)
 		}

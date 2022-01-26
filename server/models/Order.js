@@ -16,6 +16,22 @@ const OrderSchema = new Schema(
         product: {
           type: Schema.Types.Mixed,
           required: true,
+          color: {
+            name: {
+              type: String,
+              required: true,
+            },
+            type: Object,
+            required: true,
+          },
+          size: {
+            name: {
+              type: String,
+              required: true,
+            },
+            type: Object,
+            required: true,
+          },
         },
       },
     ],

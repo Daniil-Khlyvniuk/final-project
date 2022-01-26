@@ -14,13 +14,11 @@ module.exports = async (customerId) => {
         .populate("color")
         .populate("size");
 
+      console.log(dbProduct);
+
       result.push({
         _id: new mongoose.Types.ObjectId(),
-        product: {
-          ...dbProduct,
-          color: dbProduct.color.name,
-          size: dbProduct.size.name,
-        },
+        product: dbProduct,
         cartQuantity: cartItem.cartQuantity,
       });
       return result;

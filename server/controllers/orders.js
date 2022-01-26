@@ -36,11 +36,9 @@ exports.placeOrder = async (req, res, next) => {
       order.products = req.body.products;
     }
     order.totalSum = order.products.reduce((sum, cartItem) => {
-      if (order.customerId) {
-        return sum + cartItem.product._doc.currentPrice * cartItem.cartQuantity;
-      } else {
-        return sum + cartItem.product.currentPrice * cartItem.cartQuantity;
-      }
+      const currentPrice =
+        cartItem.product?._doc?.currentPrice || cartItem.product.currentPrice;
+      return sum + currentPrice * cartItem.cartQuantity;
     }, 0);
     const productAvailibilityInfo = await productAvailibilityChecker(
       order.products
@@ -76,10 +74,11 @@ exports.placeOrder = async (req, res, next) => {
             "This operation involves sending a letter to the client. Please provide field 'letterHtml' for the letter.",
         });
       }
+
       const newOrder = new Order(order);
 
       if (order.customerId) {
-        newOrder.populate("customerId").execPopulate();
+        newOrder.populate("products").populate("customerId");
       }
 
       newOrder
@@ -110,7 +109,7 @@ exports.placeOrder = async (req, res, next) => {
             );
           }
 
-          res.json({ order, mailResult });
+          res.json({ order: newOrder, mailResult });
         })
         .catch((err) => {
           console.log(err);
@@ -224,12 +223,23 @@ exports.getOrders = (req, res, next) => {
   try {
     Order.find({ customerId: req.user.id })
       .populate("products.product")
+      .populate({
+        path: "products.product.color",
+        model: "colors",
+      })
+      .populate({
+        path: "products.product.size",
+        model: "sizes",
+      })
+      .populate({
+        path: "products.product.product",
+        model: "Product",
+      })
       .populate("customerId")
 
       .sort({ date: -1 })
 
       .then((orders) => {
-        console.log(orders[0].products);
         return res.status(200).json(orders);
       })
       .catch((err) =>
