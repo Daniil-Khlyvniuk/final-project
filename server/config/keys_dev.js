@@ -1,8 +1,8 @@
 module.exports = {
   mongoURI:
-    "mongodb+srv://FINAL_PROJECT:R$Pm$a$SWH8F.rQ@cluster1.xwkad.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    "mongodb+srv://nikolasdelunko:dfMxQwzYSzsE1Gc4@clusterusa.8a0pm5y.mongodb.net/?retryWrites=true&w=majority",
   secretOrKey: "random very very secret string",
-  NODEMAILER_USER:'finalll.project@gmail.com',
-  NODEMAILER_PASSWORD:'Cactus*96',
-  NODEMAILER_SERVICE:'gmail',
+  NODEMAILER_USER: "finalll.project@gmail.com",
+  NODEMAILER_PASSWORD: "Cactus*96",
+  NODEMAILER_SERVICE: "gmail",
 };
