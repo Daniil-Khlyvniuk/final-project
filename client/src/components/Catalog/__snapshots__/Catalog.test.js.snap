@@ -25,7 +25,6 @@ Object {
               cy="44"
               fill="none"
               r="20.2"
-              stroke-width="3.6"
             />
           </svg>
         </span>
@@ -53,7 +52,7 @@ Object {
             cy="44"
             fill="none"
             r="20.2"
-            stroke-width="3.6"
+          
           />
         </svg>
       </span>
